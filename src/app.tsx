@@ -3,6 +3,6 @@ import * as React from "react";
 
 import { hot } from "react-hot-loader";
 
-import SaveEditor from "./components/SaveEditor";
+import AppRoot from "./components/AppRoot";
 
-export default hot(module)(SaveEditor);
+export default hot(module)(AppRoot);

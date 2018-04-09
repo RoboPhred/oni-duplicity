@@ -32,6 +32,20 @@ export interface MinionIdentityBehavior extends GameObjectBehavior {
 }
 export const MinionIdentityBehavior: BehaviorName<MinionIdentityBehavior> = "MinionIdentity";
 
+
+export interface MinionResumeBehavior extends GameObjectBehavior {
+    parsedData: {
+        ExperienceByRoleID: [string, number][];
+        MasteryByRoleID: [string, boolean][];
+        AptitudeByRoleGroup: [{hash: number}, number][];
+        currentRole: string;
+        targetRole: string;
+    }
+}
+export const MinionResumeBehavior: BehaviorName<MinionResumeBehavior> = "MinionResume";
+
+
+
 export function getBehavior<T>(gameObject: GameObject, name: BehaviorName<T>): T | undefined {
     return gameObject.behaviors.find(x => x.name === name) as T | undefined;
 }

@@ -28,7 +28,7 @@ module.exports = {
     output: {
         filename: "bundle.js",
         path: paths.appBuild,
-        publicPath: paths.publicPath
+        publicPath: isDev ? "/" : paths.publicPath
     },
 
     resolve: {

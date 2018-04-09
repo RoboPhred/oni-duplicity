@@ -24,6 +24,10 @@ body {
     flex-wrap: wrap;
 }
 
+.scrolling-content {
+    overflow: auto;
+}
+
 /* Container for items that can fill up the available space, and optionally be constrained by it. */
 .layout-vertical {
     display: flex;
@@ -43,9 +47,15 @@ body {
     flex: none;
 }
 
-
-.layout-vertical > .layout-item-fill {
+.layout-vertical > .layout-item-fill, .layout-horizontal > .layout-item-fill {
     flex: 1 1 auto;
+}
+
+.layout-vertical > .layout-item-constrain, .layout-horizontal > .layout-item-constrain {
+    flex: 0 1 auto;
+}
+
+.layout-vertical > .layout-item-fill, .layout-vertical > .layout-item-constrain {
     /* Flex sets min-height to auto, we need to allow it to shrink down */
     min-height: 0;
 
@@ -56,8 +66,9 @@ body {
     height: 100%;
 }
 
-.layout-horizontal > .layout-item-fill {
-    flex: 1 1 auto;
+.layout-horizontal > .layout-item-fill, .layout-horizontal > .layout-item-constrain {
     min-width: 0;
     width: 100%;
 }
+
+
