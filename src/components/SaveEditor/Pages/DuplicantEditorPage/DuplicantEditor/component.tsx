@@ -19,10 +19,12 @@ import {
 
 import DuplicantIdentityEditor from "../DuplicantIdentityEditor";
 import DuplicantSkillsEditor from "../DuplicantSkillsEditor";
+import DuplicantTraitEditor from "../DuplicantTraitEditor";
 
 const EDITORS = {
     "identity": DuplicantIdentityEditor,
-    "skills": DuplicantSkillsEditor
+    "skills": DuplicantSkillsEditor,
+    "traits": DuplicantTraitEditor
 };
 
 type EditorName = keyof typeof EDITORS;

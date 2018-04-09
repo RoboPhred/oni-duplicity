@@ -45,6 +45,12 @@ export interface MinionResumeBehavior extends GameObjectBehavior {
 export const MinionResumeBehavior: BehaviorName<MinionResumeBehavior> = "MinionResume";
 
 
+export interface MinionTraitBehavior extends GameObjectBehavior {
+    parsedData: {
+        TraitIds: string[];
+    }
+}
+export const MinionTraitBehavior: BehaviorName<MinionTraitBehavior> = "Klei.AI.Traits";
 
 export function getBehavior<T>(gameObject: GameObject, name: BehaviorName<T>): T | undefined {
     return gameObject.behaviors.find(x => x.name === name) as T | undefined;

@@ -31,6 +31,11 @@ const style_portrait: React.CSSProperties = {
     cursor: "pointer"
 };
 
+const style_portrait_container: React.CSSProperties = {
+    boxSizing: "border-box",
+    // Room for 2 portraits and their margins
+    height: 150*2 + 10*4
+}
 const style_portrait_title: React.CSSProperties = {
     padding: 5
 };
@@ -83,7 +88,7 @@ export default class DupEditorPage extends React.Component<SaveEditorProps, Stat
 
         return (
             <div className="fill-parent layout-vertical">
-                <div className="layout-horizontal">
+                <div style={style_portrait_container} className="layout-horizontal layout-wrap scrolling-content">
                     {minionPortraits}
                 </div>
                 <div className="layout-item-constrain scrolling-content">
