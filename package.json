@@ -5,8 +5,10 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "webpack --config ./config/webpack.config.js",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.config.js"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.config.js",
+    "deploy": "git subtree push --prefix dist origin gh-pages"
   },
+  "private": true,
   "keywords": [
     "ONI",
     "OxygenNotIncluded",
