@@ -6,6 +6,8 @@ import {
     Tab
 } from "material-ui/Tabs";
 
+import { autobind } from "core-decorators";
+
 import { GameObject } from "oni-save-parser";
 
 import {
@@ -15,25 +17,29 @@ import {
 } from '../../../../../behaviors';
 
 
+import DuplicantIdentityEditor from "../DuplicantIdentityEditor";
 import DuplicantSkillsEditor from "../DuplicantSkillsEditor";
 
 const EDITORS = {
+    "identity": DuplicantIdentityEditor,
     "skills": DuplicantSkillsEditor
 };
+
+type EditorName = keyof typeof EDITORS;
 
 export interface DuplicantEditorProps {
     minion: GameObject;
 }
 
 interface State {
-    selectedTab: keyof typeof EDITORS;
+    selectedTab: EditorName;
 }
 
 export default class DuplicantEditor extends React.Component<DuplicantEditorProps, State> {
     constructor(props: DuplicantEditorProps) {
         super(props);
         this.state = {
-            selectedTab: "skills"
+            selectedTab: "identity"
         };
     }
 
@@ -51,13 +57,20 @@ export default class DuplicantEditor extends React.Component<DuplicantEditorProp
             return <div>Error: No MinionIdentity behavior found for dup.</div>;
         }
 
+        const tabs: React.ReactFragment[] = [];
+        for(let key of Object.keys(EDITORS)) {
+            tabs.push(
+                <Tab key={key} label={key} value={key}/>
+            );
+        }
+
         const SelectedComponent = EDITORS[selectedTab];
 
         return (
             <div className="fill-parent layout-vertical">
                 <span className="layout-item">Name: {identBehavior.parsedData.name}</span>
-                <Tabs className="layout-item">
-                    <Tab label="Skills" value="skills"/>
+                <Tabs className="layout-item" value={selectedTab} onChange={this._onTabChange}>
+                    {tabs}
                 </Tabs>
                 {/* 
                     Select the component based on the selected tab.
@@ -69,5 +82,13 @@ export default class DuplicantEditor extends React.Component<DuplicantEditorProp
                 </div>
             </div>
         );
+    }
+
+    @autobind()
+    private _onTabChange(value: string) {
+        this.setState(s => ({
+            ...s,
+            selectedTab: value as EditorName
+        }));
     }
 }

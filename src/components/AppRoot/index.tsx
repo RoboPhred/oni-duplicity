@@ -39,6 +39,7 @@ export default class AppRoot extends React.Component<{}, State> {
     render() {
         const {
             saveFileName,
+            save,
             error
         } = this.state;
 
@@ -51,9 +52,14 @@ export default class AppRoot extends React.Component<{}, State> {
                     <div><code>{error.stack}</code></div>
                 </div>
             );
-        } else if (!saveFileName) {
+        }
+        else if (!saveFileName) {
             frag = this._renderFileChooser();
-        } else {
+        }
+        else if (!save) {
+            frag = <div>Loading save...</div>;
+        }
+        else {
             frag = this._renderEditor();
         }
 
