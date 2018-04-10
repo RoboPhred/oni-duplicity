@@ -13,20 +13,22 @@ const pkg = require(paths.appPackageJson);
 
 module.exports = {
     mode: isDev ? "development" : "production",
-    
-    devtool: isDev ? "source-map" : "cheap-eval-source-map",
+
+    devtool: "source-map",
 
     devServer: {
         contentBase: paths.appDist,
         hot: true
     },
 
-    entry: [
-        path.join(paths.appSrc, "./index.tsx")
-    ].filter(x => x),
+    entry: {
+        client: [
+            path.join(paths.appSrc, "./index.tsx")
+        ].filter(x => x)
+    },
 
     output: {
-        filename: "bundle.js",
+        filename: "[name].bundle.js",
         path: paths.appBuild,
         publicPath: isDev ? "/" : paths.publicPath
     },
@@ -95,4 +97,11 @@ module.exports = {
             template: path.resolve(paths.appSrc, "index.ejs")
         })
     ].filter(x => x),
+
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        },
+        runtimeChunk: true,
+    }
 }
