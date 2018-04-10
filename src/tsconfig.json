@@ -4,6 +4,12 @@
         "jsx": "react",
         "module": "commonjs",
 
+        "lib": [
+            "dom",
+            "es6",
+            "webworker"
+        ],
+
         "strict": true,
 
         "esModuleInterop": true,

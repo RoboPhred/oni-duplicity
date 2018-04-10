@@ -30,7 +30,10 @@ module.exports = {
     output: {
         filename: "[name].bundle.js",
         path: paths.appBuild,
-        publicPath: isDev ? "/" : paths.publicPath
+        publicPath: isDev ? "/" : paths.publicPath,
+
+        // Fix hot-reload interfering with worker-loader
+        globalObject: 'this'
     },
 
     resolve: {
@@ -64,7 +67,26 @@ module.exports = {
                     },
                     "ts-loader",
                 ],
+                exclude: [
+                    /\.worker\.ts$/
+                ]
             },
+
+            {
+                test: /\.worker\.ts$/,
+                use: "ts-loader"
+            },
+
+            // Doesn't seem to take with typescript.  Probably an ordering issue.
+            //  Using prefix form for now, as it plays better with typescript.
+            // {
+            //     test: /\.worker.\.(t|j)s$/,
+            //     use: [
+            //         {
+            //             loader: "worker-loader"
+            //         }
+            //     ]
+            // },
 
             // Resolve url references in css, then inject css into DOM as style tags.
             { test: /\.css$/, loader: ["style-loader", "css-loader"] },

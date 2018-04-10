@@ -3,6 +3,6 @@ import * as React from "react";
 
 import { hot } from "react-hot-loader";
 
-import AppRoot from "./components/AppRoot";
+import App from "./components/App";
 
-export default hot(module)(AppRoot);
+export default hot(module)(App);
