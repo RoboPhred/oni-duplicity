@@ -52,6 +52,28 @@ export interface MinionTraitBehavior extends GameObjectBehavior {
 }
 export const MinionTraitBehavior: BehaviorName<MinionTraitBehavior> = "Klei.AI.Traits";
 
+
+export interface MinionEffectsBehavior extends GameObjectBehavior {
+    parsedData: {
+        saveLoadEffects: EffectInstance[]
+    }
+}
+export interface EffectInstance {
+    id: string;
+    timeRemaining: number;
+}
+export const MinionEffectsBehavior: BehaviorName<MinionEffectsBehavior> = "Klei.AI.Effects";
+
+
+export interface MinionHealthBehavior extends GameObjectBehavior {
+    parsedData: {
+        CanBeIncapacitated: boolean;
+        State: number;
+    }
+}
+export const MinionHealthBehavior: BehaviorName<MinionHealthBehavior> = "Health";
+
+
 export function getBehavior<T>(gameObject: GameObject, name: BehaviorName<T>): T | undefined {
     return gameObject.behaviors.find(x => x.name === name) as T | undefined;
 }

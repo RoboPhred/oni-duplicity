@@ -9,11 +9,11 @@ import {
 } from "oni-save-parser";
 
 
-import DuplicantEditorPage from "../Pages/DuplicantEditorPage";
+import DuplicantsEditorPage from "../Pages/DuplicantsEditorPage";
 
 
 const PAGES = {
-    "duplicants": DuplicantEditorPage
+    "duplicants": DuplicantsEditorPage
 };
 
 interface State {
@@ -48,7 +48,7 @@ export default class SaveEditor extends React.Component<SaveEditorProps, State> 
                     </List>
                 </div>
                 <div className="layout-item-fill scrolling-content">
-                    <DuplicantEditorPage save={save}/>
+                    <DuplicantsEditorPage save={save}/>
                 </div>
             </div>
         )
