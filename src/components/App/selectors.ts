@@ -18,14 +18,14 @@ export interface StateProps {
     loadError: Error | null;
 }
 
-const ownPropSelector = createStructuredSelector<StateProps>({
+const mapStateToProps = createStructuredSelector<StateProps>({
     saveFileName,
     isSaveChosen,
     isSaveLoading,
     isSaveEnabled,
     loadError
 });
-export default ownPropSelector;
+export default mapStateToProps;
 
 // Was pretty sure this used to work, once upon a time.
-//export type StateProps = typeof ownPropSelector;
+//export type StateProps = typeof mapStateToProps;

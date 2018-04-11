@@ -1,9 +1,18 @@
 
 import { applyMiddleware, compose, createStore } from "redux";
-import { devToolsEnhancer } from "redux-devtools-extension";
 
 import reducer from "./reducer";
 import { AppState, defaultState } from "./state";
 
-const store = createStore(reducer, defaultState, devToolsEnhancer({}));
+import sagaMiddleware from "./saga";
+
+const middleware = [
+    sagaMiddleware
+];
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducer, composeEnhancers(
+    applyMiddleware(...middleware)
+));
+
 export default store;

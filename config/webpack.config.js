@@ -91,16 +91,25 @@ module.exports = {
             // Resolve url references in css, then inject css into DOM as style tags.
             { test: /\.css$/, loader: ["style-loader", "css-loader"] },
 
-            // Halfheartedly grabbing stuff that bootstrap wants.
-            //  Should probably refine this modules section to use oneOf and
-            //  fallback file including as create-react-app does.
             {
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-                loader: "url-loader",
-                options: {
-                    limit: 100000
+                test: /\.(woff|woff2)$/,
+                use: {
+                  loader: 'url-loader',
+                  options: {
+                    name: 'fonts/[hash].[ext]',
+                    limit: 5000,
+                    mimetype: 'application/font-woff'
+                  }
                 }
-            },
+              }, {
+                test: /\.(ttf|eot|svg)$/,
+                use: {
+                  loader: 'file-loader',
+                  options: {
+                    name: 'fonts/[hash].[ext]'
+                  }
+                }
+              }
         ]
     },
 

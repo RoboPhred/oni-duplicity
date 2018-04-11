@@ -1,7 +1,7 @@
 
 import * as React from "react";
 import { connect } from "react-redux";
-import { Route, Redirect } from "react-router";
+import { Route, Redirect, Switch, withRouter } from "react-router";
 
 import {
     Navbar,
@@ -15,6 +15,7 @@ import {
 import mapStateToProps, { StateProps } from "./selectors";
 import mapDispatchToProps, { DispatchProps } from "./dispatch";
 
+import ErrorPage from "../../pages/error";
 import NoSaveLoadedPage from "../../pages/NoSaveLoaded";
 import LoadingSaveFilePage from "../../pages/LoadingSaveFile";
 import EditorPage from "../../pages/Editor";
@@ -32,7 +33,13 @@ class AppComponent extends React.Component<OwnProps> {
         } = this.props;
 
         let rootComponent: React.ComponentType;
-        if (!isSaveChosen) {
+        let requireExactPath = true;
+
+        if (loadError) {
+            // Show error screen
+            rootComponent = ErrorPage;
+        }
+        else if (!isSaveChosen) {
             // Show file chooser.
             rootComponent = NoSaveLoadedPage
         }
@@ -40,22 +47,16 @@ class AppComponent extends React.Component<OwnProps> {
             // Show loading screen.
             rootComponent = LoadingSaveFilePage;
         }
-        else if (loadError) {
-            // Show error screen
-            rootComponent = () => <div>
-                <div>TODO error screen</div>
-                <code>{loadError.stack}</code>
-            </div>;
-        }
         else {
             // Show editor
             rootComponent = EditorPage;
+            requireExactPath = false;
         }
 
 
         return (
-            <div className="fill-parent">
-                <Navbar>
+            <div className="fill-parent layout-vertical">
+                <Navbar className="layout-item">
                     <NavbarGroup>
                         <NavbarHeading>ONI Save Editor</NavbarHeading>
                         <Text ellipsize={true}>{saveFileName || ""}</Text>
@@ -64,7 +65,12 @@ class AppComponent extends React.Component<OwnProps> {
                         <Button icon="floppy-disk" disabled={!isSaveEnabled}>Save</Button>
                     </NavbarGroup>
                 </Navbar>
-                <Route path="/" component={rootComponent}/>
+                <div className="layout-item-fill">
+                    <Switch>
+                        <Route exact={requireExactPath} path="/" component={rootComponent}/>
+                        <Redirect to="/"/>
+                    </Switch>
+                </div>
             </div>
         );
     }
