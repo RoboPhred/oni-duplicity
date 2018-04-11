@@ -5,24 +5,31 @@ import { RouteComponentProps, Switch, Route, Redirect, withRouter } from "react-
 import {
     Card,
     Elevation,
-    Menu
+    Menu,
+
+    // FIXME: direct color access.  Use CSS.
+    //  Need to use sass to pull values out of blueprintjs
+    Colors
 } from "@blueprintjs/core";
 
-import MenuItemLink from "../../components/MenuItemLink";
+import ActiveAwareLink from "../../components/ActiveAwareLink";
 
 import DuplicantsPage from "./pages/Duplicants";
 import Error404Page from "./pages/404";
+
+const style_menu_container = {
+    padding: "15px",
+    background: Colors.DARK_GRAY5
+}
 
 class EditorPageComponent extends React.Component {
     render() {
         return (
             <div className="fill-parent layout-horizontal">
-                <Card className="layout-item" elevation={Elevation.TWO}>
-                    <Menu>
-                        <MenuItemLink to="/duplicants" >Duplicants</MenuItemLink>
-                        <MenuItemLink to="/404" >Not Duplicants</MenuItemLink>
-                    </Menu>
-                </Card>
+                <div style={style_menu_container} className="layout-item">
+                    <ActiveAwareLink to="/duplicants" >Duplicants</ActiveAwareLink>
+                    <ActiveAwareLink to="/404" >Not Duplicants</ActiveAwareLink>
+                </div>
                 <div className="layout-item-fill">
                     <Switch>
                         <Redirect exact from="/" to="/duplicants" />

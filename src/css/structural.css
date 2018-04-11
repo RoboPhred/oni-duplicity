@@ -24,9 +24,12 @@ body {
     flex-wrap: wrap;
 }
 
-.scrolling-content {
-    overflow: auto;
-}
+
+/*
+============================================================================
+Horizontal and Vertical Layouts
+============================================================================
+*/
 
 /* Container for items that can fill up the available space, and optionally be constrained by it. */
 .layout-vertical {
@@ -72,3 +75,16 @@ body {
 }
 
 
+/*
+============================================================================
+Content Containers
+============================================================================
+*/
+
+.container-inset {
+    margin: 5px;
+}
+
+.container-scroll {
+    overflow: auto;
+}

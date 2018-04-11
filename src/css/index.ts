@@ -3,4 +3,3 @@
  import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 import "./structural.css";
-import "./ui.css";

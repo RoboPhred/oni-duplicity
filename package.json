@@ -29,6 +29,7 @@
     "@types/redux-devtools-extension": "^2.13.2",
     "@types/redux-saga": "^0.10.5",
     "@types/reselect": "^2.2.0",
+    "@types/uuid": "^3.4.3",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "cross-env": "^5.1.4",
@@ -62,6 +63,7 @@
     "redux-actions": "^2.3.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-saga": "^0.16.0",
-    "reselect": "^3.0.1"
+    "reselect": "^3.0.1",
+    "uuid": "^3.2.1"
   }
 }

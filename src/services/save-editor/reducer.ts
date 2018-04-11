@@ -1,6 +1,8 @@
 
 import { AnyAction } from "redux";
+import uuidV4 from "uuid/v4";
 
+import { getBehavior, MinionIdentityBehavior } from "./utils";
 
 import { SaveEditorState, defaultSaveEditorState } from "./state";
 
@@ -28,11 +30,17 @@ export default function saveEditorReducer(state: SaveEditorState = defaultSaveEd
             const {
                 saveGame
             } = action.payload;
+
+            const minions = saveGame.body.gameObjects.Minion || [];
+
+            // Generate guids to index our minions by, to ease lookup.
+            const duplicantKeyIndexer = minions.map(x => uuidV4());
             
             return {
                 ...state,
                 isLoading: false,
-                saveGame: action.payload.saveGame
+                saveGame: action.payload.saveGame,
+                duplicantKeyIndexer
             };
         }
         default:
