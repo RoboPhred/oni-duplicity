@@ -6,6 +6,7 @@ html, body, #root {
 
 body {
     margin: 0;
+    padding: 0;
 }
 
 .fill-parent, .fill-parent-width, .fill-parent-height {
@@ -80,11 +81,6 @@ Horizontal and Vertical Layouts
 Content Containers
 ============================================================================
 */
-
-.container-inset {
-    margin: 5px;
-}
-
 .container-scroll {
     overflow: auto;
 }

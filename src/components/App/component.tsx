@@ -9,11 +9,7 @@ import {
     NavbarHeading,
     Text,
     Button,
-    Alignment,
-
-    // FIXME: direct color access.  Use CSS.
-    //  Need to use sass to pull values out of blueprintjs
-    Colors
+    Alignment
 } from "@blueprintjs/core";
 
 import mapStateToProps, { StateProps } from "./selectors";
@@ -22,15 +18,7 @@ import mapDispatchToProps, { DispatchProps } from "./dispatch";
 import ErrorPage from "../../pages/error";
 import NoSaveLoadedPage from "../../pages/NoSaveLoaded";
 import LoadingSaveFilePage from "../../pages/LoadingSaveFile";
-import EditorPage from "../../pages/Editor";
-
-const style_container: React.CSSProperties = {
-    background: Colors.DARK_GRAY1
-};
-
-const style_navbar: React.CSSProperties = {
-    background: Colors.COBALT3
-};
+import SaveEditorPage from "../../pages/SaveEditor";
 
 type OwnProps = StateProps & DispatchProps;
 class AppComponent extends React.Component<OwnProps> {
@@ -60,14 +48,14 @@ class AppComponent extends React.Component<OwnProps> {
         }
         else {
             // Show editor
-            rootComponent = EditorPage;
+            rootComponent = SaveEditorPage;
             requireExactPath = false;
         }
 
 
         return (
-            <div style={style_container} className="pt-dark fill-parent layout-vertical">
-                <Navbar style={style_navbar} className="layout-item">
+            <div className="fill-parent layout-vertical pt-dark ui-app-root">
+                <Navbar className="layout-item ui-app-navbar">
                     <NavbarGroup>
                         <NavbarHeading>ONI Save Editor</NavbarHeading>
                         <Text ellipsize={true}>{saveFileName || ""}</Text>

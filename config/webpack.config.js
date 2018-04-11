@@ -43,7 +43,8 @@ module.exports = {
 
     module: {
         rules: [
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+            // Process source maps in input sources
+            //  All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             {
                 enforce: "pre",
                 test: /\.(jsx?|tsx?)$/,
@@ -53,8 +54,7 @@ module.exports = {
                 ]
             },
 
-            // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-            //  Run it through react-hot-loader to rewrite react components for hot loading.
+            //  Run typescript through react-hot-loader to rewrite react components for hot loading.
             {
                 test: /\.tsx?$/,
                 use: [
@@ -88,8 +88,18 @@ module.exports = {
             //     ]
             // },
 
-            // Resolve url references in css, then inject css into DOM as style tags.
-            { test: /\.css$/, loader: ["style-loader", "css-loader"] },
+
+            {
+                test: /\.css$/,
+                loader: ["style-loader", "css-loader"]
+            },
+
+            // blueprintjs uses sass for color data, and we want
+            //  to pull that out for use in our own css.
+            {
+                test: /\.scss$/,
+                loader: ["style-loader", "css-loader", "sass-loader"]
+            },
 
             {
                 test: /\.(woff|woff2)$/,

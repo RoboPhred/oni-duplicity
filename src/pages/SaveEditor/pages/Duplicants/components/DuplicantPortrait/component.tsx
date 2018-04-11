@@ -8,24 +8,10 @@ import { Card } from "@blueprintjs/core";
 import { autobind } from "core-decorators";
 import { getBehavior, MinionIdentityBehavior, MinionResumeBehavior } from "../../../../../../services/save-editor/utils";
 
-import DuplicantPortraitProps from "./props";
 
+import DuplicantPortraitProps from "./props";
 import mapStateToProps, { StateProps } from "./selectors";
 
-const style_portrait: React.CSSProperties = {
-    width: 150,
-    height: 150,
-    margin: 10,
-    cursor: "pointer"
-};
-
-const style_portrait_title: React.CSSProperties = {
-    textAlign: "center"
-};
-
-const style_portrait_role: React.CSSProperties = {
-    textAlign: "center"
-};
 
 type Props = DuplicantPortraitProps & StateProps;
 class DuplicantPortrait extends React.Component<Props> {
@@ -36,7 +22,7 @@ class DuplicantPortrait extends React.Component<Props> {
 
         if (!duplicant) {
             return (
-                <Card interactive={true} style={style_portrait}>
+                <Card className="ui-duplicant-portrait">
                     <div>[dup not found]</div>
                 </Card>
             )
@@ -51,10 +37,10 @@ class DuplicantPortrait extends React.Component<Props> {
         const role = resume ? resume.parsedData.currentRole : "<NO-ROLE>";
 
         return (
-            <Card interactive={true} style={style_portrait} onClick={this._onClick}>
-                <h5 style={style_portrait_title}>{name}</h5>
+            <Card className="ui-duplicant-portrait" interactive={true} onClick={this._onClick}>
+                <h5 className="ui-duplicant-portrait-name">{name}</h5>
                 {/* TODO render a picture.  Plenty of data in identity to do so.  Also see Accessorizer */}
-                <div style={style_portrait_role}>{role}</div>
+                <div className="ui-duplicant-portrait-role">{role}</div>
             </Card>
         );
     }

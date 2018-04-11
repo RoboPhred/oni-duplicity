@@ -2,20 +2,14 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-
 import {
     Tabs,
     Tab,
-    Colors
 } from "@blueprintjs/core";
+
 
 import DuplicantsList from "./components/DuplicantsList";
 
-// FIXME: direct color access.  Use CSS.
-//  Need to use sass to pull values out of blueprintjs
-const style = {
-    background: Colors.DARK_GRAY3
-};
 
 const DummyTab = () => {
     return <div>Dummy Tab</div>;
@@ -38,9 +32,9 @@ class DuplicantsPage extends React.Component<Props, State> {
             selectedTabId
         } = this.state;
         return (
-            <div style={style} className="fill-parent layout-vertical">
+            <div className="ui-page ui-page-duplicants fill-parent layout-vertical">
                 <DuplicantsList className="layout-item"/>
-                <Tabs id="DuplicantFacets" className="layout-item-fill container-inset">
+                <Tabs id="DuplicantEditCategories" className="ui-duplicant-editcategories layout-item-fill">
                     <Tab id="general" title="General" panel={<DummyTab/>}/>
                     <Tab id="skills" title="Skills" panel={<DummyTab/>}/>
                 </Tabs>
