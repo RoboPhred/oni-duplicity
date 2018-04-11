@@ -28,7 +28,7 @@ module.exports = {
     },
 
     output: {
-        filename: "[name].bundle.js",
+        filename: "[name].[chunkhash].bundle.js",
         path: paths.appBuild,
         publicPath: isDev ? "/" : paths.publicPath,
 
