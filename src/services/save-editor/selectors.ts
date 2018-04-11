@@ -1,5 +1,5 @@
 
-import { Selector, createSelector } from "reselect";
+import { Selector, createSelector, ParametricSelector } from "reselect";
 import { GameObject } from "oni-save-parser";
 
 import { AppState } from "../../state";
@@ -24,10 +24,13 @@ export const duplicants = createSelector(
     gameObjects => gameObjects ? gameObjects["Minion"] : []
 );
 
-export function makeGetDuplicantByKey(key: string): Selector<AppState, GameObject | null> {
+export function makeGetDuplicantByKey<Props>(propKey: keyof Props): ParametricSelector<AppState, Props, GameObject | null> {
     return createSelector(
-        [duplicants, duplicantKeys],
-        (duplicants, keys) => {
+        duplicants,
+        duplicantKeys,
+        // We know the type of Props, but we need to have TS validate it as a string somehow...
+        (_: AppState, props: any) => props[propKey],
+        (duplicants, keys, key) => {
             const index = keys.indexOf(key);
             if (index === -1) return null;
             return duplicants[index];

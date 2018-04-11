@@ -31,7 +31,7 @@
 }
 
 .ui-page.ui-page-duplicants {
-    .ui-duplicant-portrait-list {
+    .ui-duplicant-list {
         background-color: $gray5;
         // Room for 2 portraits and their margins
         height: 150px * 2 + 10px * 4;
@@ -42,17 +42,22 @@
             margin: 10px;
             cursor: pointer;
 
-            .ui-duplicant-portrait-name {
+            .ui-duplicant-name {
                 text-align: center;
             }
 
-            .ui-duplicant-portrait-role {
+            .ui-duplicant-role {
                 text-align: center;
             }
         }
+
+        .ui-duplicant-portrait.pt-active {
+            background-color: $orange4;
+        }
     }
 
-    .ui-duplicant-editcategories {
-        margin: 5px;
+    .ui-duplicant-editor {
+        box-sizing: border-box;
+        padding: 5px;
     }
 }

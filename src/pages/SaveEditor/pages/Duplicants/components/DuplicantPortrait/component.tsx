@@ -17,12 +17,15 @@ type Props = DuplicantPortraitProps & StateProps;
 class DuplicantPortrait extends React.Component<Props> {
     render() {
         const {
+            className,
             duplicant
         } = this.props;
 
+        let outerClassName = `ui-duplicant-portrait ${className}`;
+
         if (!duplicant) {
             return (
-                <Card className="ui-duplicant-portrait">
+                <Card className={outerClassName}>
                     <div>[dup not found]</div>
                 </Card>
             )
@@ -37,10 +40,10 @@ class DuplicantPortrait extends React.Component<Props> {
         const role = resume ? resume.parsedData.currentRole : "<NO-ROLE>";
 
         return (
-            <Card className="ui-duplicant-portrait" interactive={true} onClick={this._onClick}>
-                <h5 className="ui-duplicant-portrait-name">{name}</h5>
+            <Card className={outerClassName} interactive={true} onClick={this._onClick}>
+                <h5 className="ui-duplicant-name">{name}</h5>
                 {/* TODO render a picture.  Plenty of data in identity to do so.  Also see Accessorizer */}
-                <div className="ui-duplicant-portrait-role">{role}</div>
+                <div className="ui-duplicant-role">{role}</div>
             </Card>
         );
     }

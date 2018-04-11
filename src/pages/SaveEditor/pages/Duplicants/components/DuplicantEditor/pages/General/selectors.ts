@@ -1,9 +1,9 @@
 
 import { GameObject } from "oni-save-parser";
 
-import { createStructuredSelector } from "../../../../../../state/utils";
+import { createStructuredSelector } from "../../../../../../../../state/utils";
 
-import { makeGetDuplicantByKey } from "../../../../../../services/save-editor/selectors";
+import { makeGetDuplicantByKey } from "../../../../../../../../services/save-editor/selectors";
 
 import Props from "./props";
 
