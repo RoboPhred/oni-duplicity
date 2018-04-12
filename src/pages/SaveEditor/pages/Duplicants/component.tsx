@@ -12,25 +12,25 @@ import DuplicantEditor from "./components/DuplicantEditor";
 
 type Props = {};
 interface State {
-    selectedDuplicantKey: string | null;
+    selectedDuplicantID: number | null;
 }
 class DuplicantsPage extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
         this.state = {
-            selectedDuplicantKey: null
+            selectedDuplicantID: null
         };
     }
 
     render() {
         const {
-            selectedDuplicantKey
+            selectedDuplicantID
         } = this.state;
 
         let content: React.ReactFragment;
-        if (selectedDuplicantKey) {
-            content = <DuplicantEditor className="fill-parent" duplicantKey={selectedDuplicantKey}/>
+        if (selectedDuplicantID != null) {
+            content = <DuplicantEditor className="fill-parent" duplicantID={selectedDuplicantID}/>
         }
         else {
             content = (
@@ -42,7 +42,7 @@ class DuplicantsPage extends React.Component<Props, State> {
 
         return (
             <div className="ui-page ui-page-duplicants fill-parent layout-vertical">
-                <DuplicantsList className="layout-item" selectedDuplicantKey={selectedDuplicantKey} onDuplicantClick={this._onDuplicantSelected} />
+                <DuplicantsList className="layout-item" selectedDuplicantID={selectedDuplicantID} onDuplicantClick={this._onDuplicantSelected} />
                 <div className="layout-item-fill">
                     {content}
                 </div>
@@ -51,10 +51,10 @@ class DuplicantsPage extends React.Component<Props, State> {
     }
 
     @autobind()
-    private _onDuplicantSelected(duplicantKey: string) {
+    private _onDuplicantSelected(duplicantID: number) {
         this.setState(s => ({
             ...s,
-            selectedDuplicantKey: duplicantKey
+            selectedDuplicantID: duplicantID
         }));
     }
 }

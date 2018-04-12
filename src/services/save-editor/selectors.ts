@@ -1,39 +1,40 @@
 
 import { Selector, createSelector, ParametricSelector } from "reselect";
-import { GameObject } from "oni-save-parser";
+import { GameObject, GameObjectBehavior } from "oni-save-parser";
 
 import { AppState } from "../../state";
 
-export const isSaveChosen = (state: AppState) => Boolean(state.saveEditor.fileName != null);
-export const saveFileName = (state: AppState) => state.saveEditor.fileName;
-export const isSaveLoaded = (state: AppState) => Boolean(state.saveEditor.fileName != null && !state.saveEditor.isLoading);
-export const isSaveLoading = (state: AppState) => state.saveEditor.isLoading;
-export const isSaveEnabled = (state: AppState) => Boolean(state.saveEditor.fileName && state.saveEditor.isLoading == false);
-export const loadError = (state: AppState) => state.saveEditor.loadError;
-export const saveGame = (state: AppState) => state.saveEditor.saveGame;
-export const duplicantKeys = (state: AppState) => state.saveEditor.duplicantKeyIndexer;
+import { BehaviorName, getBehavior, MinionIdentityBehavior, KPrefabIDBehavior } from "./behaviors";
 
 
-export const gameObjects = createSelector(
-    saveGame,
-    game => game ? game.body.gameObjects : null
-);
+export const saveEditor = (state: AppState) => state.saveEditor;
 
-export const duplicants = createSelector(
-    gameObjects,
-    gameObjects => gameObjects ? gameObjects["Minion"] : []
-);
+// TODO: Lots of data can be precalculated here, but then we have to update
+//  it when the game objects are modified.
+// May want to investigate normalizing the save file then de-normalizing it
+//  to save.  This is blocked currently by needing a very deeply nested value (KPrefabID) as the
+//  ID to the game object.
 
-export function makeGetDuplicantByKey<Props>(propKey: keyof Props): ParametricSelector<AppState, Props, GameObject | null> {
+const saveGame = createSelector(saveEditor, saveEditor => saveEditor.saveGame);
+
+export const gameObjects = createSelector(saveGame, saveGame => saveGame ? saveGame.body.gameObjects : null);
+
+export function makeGetGameObjectsByType(type: string): Selector<AppState, GameObject[]> {
     return createSelector(
-        duplicants,
-        duplicantKeys,
-        // We know the type of Props, but we need to have TS validate it as a string somehow...
-        (_: AppState, props: any) => props[propKey],
-        (duplicants, keys, key) => {
-            const index = keys.indexOf(key);
-            if (index === -1) return null;
-            return duplicants[index];
-        }
+        gameObjects,
+        gameObjects => gameObjects ? gameObjects[type] || [] : []
     );
-};
+}
+
+// We can handle parametric or non-parametric input selectors.  We do not use the parameter, but createSelector will pass the params as required.
+export function makeGetBehaviorByName<T extends GameObjectBehavior>(gameObjectSelector: Selector<AppState, GameObject | null>, behaviorName: BehaviorName<T>): Selector<AppState, T | null>;
+export function makeGetBehaviorByName<Props, T extends GameObjectBehavior>(gameObjectSelector: ParametricSelector<AppState, Props, GameObject | null>, behaviorName: BehaviorName<T>): ParametricSelector<AppState, Props, T | null>;
+export function makeGetBehaviorByName<T extends GameObjectBehavior>(
+    gameObjectSelector: (Selector<AppState, GameObject | null> | ParametricSelector<AppState, any, GameObject | null>),
+    behaviorName: BehaviorName<T>
+): ParametricSelector<AppState, any, T | null> {
+    return createSelector(
+        gameObjectSelector,
+        (gameObject) => (gameObject && gameObject.behaviors.find(x => x.name === behaviorName) as T) || null
+    );
+}

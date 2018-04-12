@@ -59,5 +59,10 @@
     .ui-duplicant-editor {
         box-sizing: border-box;
         padding: 5px;
+
+        .ui-title {
+            display: inline-block;
+            width: auto;
+        }
     }
 }

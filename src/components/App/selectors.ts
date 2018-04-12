@@ -5,15 +5,17 @@ import {
     saveFileName,
     isSaveChosen,
     isSaveLoading,
+    isSaveSaving,
     isSaveEnabled,
     loadError
-} from "../../services/save-editor/selectors";
+} from "../../services/save-editor/savefile/selectors";
 
 
 export interface StateProps {
     saveFileName: string | null;
     isSaveChosen: boolean;
-    isSaveLoading: boolean
+    isSaveLoading: boolean;
+    isSaveSaving: boolean;
     isSaveEnabled: boolean;
     loadError: Error | null;
 }
@@ -22,6 +24,7 @@ const mapStateToProps = createStructuredSelector<StateProps>({
     saveFileName,
     isSaveChosen,
     isSaveLoading,
+    isSaveSaving,
     isSaveEnabled,
     loadError
 });

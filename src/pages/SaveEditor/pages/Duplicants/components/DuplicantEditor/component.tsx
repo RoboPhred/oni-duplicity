@@ -1,48 +1,95 @@
 
 import * as React from "react";
 import { connect } from "react-redux";
+import { autobind } from "core-decorators";
 
 import {
+    EditableText,
     Tabs,
     Tab,
+    NonIdealState
 } from "@blueprintjs/core";
 
-import { getBehavior, MinionIdentityBehavior } from "../../../../../../services/save-editor/utils";
+import { error, FAILURE_TYPE } from "../../../../../../logging";
 
 
 import DuplicantEditorProps from "./props";
 import mapStateToProps, { StateProps } from "./selectors";
+import mapDispatchToProps, { DispatchProps } from "./dispatch";
 
 
-import GeneralPage from "./pages/General";
+import AppearancePage from "./pages/Appearance";
 import SkillsPage from "./pages/Skills";
 
 
-type Props = DuplicantEditorProps & StateProps;
-class DuplicantEditor extends React.Component<Props> {
+type Props = DuplicantEditorProps & StateProps & DispatchProps;
+interface State {
+    rename: string | null;
+}
+class DuplicantEditor extends React.Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+
+        this.state = {
+            rename: null
+        };
+    }
+
     render() {
         const {
             className,
-            duplicant
+            identityBehavior
         } = this.props;
 
-        if (!duplicant) return <div>Error: specified duplicant does not exist.</div>;
+        const {
+            rename
+        } = this.state;
 
-        // TODO: Get these from a selector.
-        //  Trouble is, we do not have a unique key to ID these guys off of.  Everything
-        //  is in a game behavior, and that's an array we need to scan through.
-        const identity = getBehavior(duplicant, MinionIdentityBehavior);
-        const name = identity ? identity.parsedData.name : "<NO-IDENTITY>";
-
+        if (!identityBehavior) {
+            error("Duplicant identity behavior missing", FAILURE_TYPE.MISSING_BEHAVIOR);
+            return (
+                <NonIdealState visual="error">
+                    Duplicant has no identity behavior.
+                </NonIdealState>
+            )
+        }
+        
+        const name = rename || identityBehavior.parsedData.name;
+        
         return (
             <div className={`ui-duplicant-editor ${className}`}>
-                <h2 className="ui-title">{name}</h2>
+                <h1 className="ui-title">
+                    <EditableText
+                        value={name}
+                        onChange={this._onNameChange}
+                        onConfirm={this._onRename}
+                    />
+                </h1> <span className="pt-text-muted">(click to edit)</span>
                 <Tabs id="DuplicantEditCategories" className="ui-category-tabs layout-item-fill">
-                    <Tab id="general" title="General" panel={<GeneralPage />} />
+                    <Tab id="appearance" title="Appearance" panel={<AppearancePage />} />
                     <Tab id="skills" title="Skills" panel={<SkillsPage />} />
                 </Tabs>
             </div>
         );
     }
+
+    @autobind()
+    private _onNameChange(str: string) {
+        this.setState(s => ({
+            ...s,
+            rename: str
+        }));
+    }
+
+    @autobind()
+    private _onRename() {
+        const name = this.state.rename;
+        if (!name) return;
+        this.props.renameDuplicant({prefabID: this.props.duplicantID, name});
+        this.setState(s => ({
+            ...s,
+            rename: null
+        }));
+    }
 }
-export default connect(mapStateToProps)(DuplicantEditor);
+export default connect(mapStateToProps, mapDispatchToProps)(DuplicantEditor);

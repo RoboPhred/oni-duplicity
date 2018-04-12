@@ -11,8 +11,8 @@ import mapStateToProps, { StateProps } from "./selectors";
 
 export interface DuplicantsListProps {
     className?: string;
-    selectedDuplicantKey?: string | null;
-    onDuplicantClick?(duplicantKey: string): void;
+    selectedDuplicantID?: number | null;
+    onDuplicantClick?(duplicantID: number): void;
 }
 
 type Props = DuplicantsListProps & StateProps;
@@ -20,11 +20,11 @@ class DuplicantsList extends React.Component<Props> {
     render() {
         const {
             className,
-            duplicantKeys,
-            selectedDuplicantKey
+            duplicantsIDs,
+            selectedDuplicantID
         } = this.props;
 
-        const elements = duplicantKeys.map(x => <DuplicantPortrait key={x} className={x === selectedDuplicantKey ? "pt-active" : ""} duplicantKey={x} onClick={this._onDuplicantClick} />);
+        const elements = duplicantsIDs.map(x => <DuplicantPortrait key={x} className={x === selectedDuplicantID ? "pt-active" : ""} duplicantID={x} onClick={this._onDuplicantClick} />);
 
         return (
             <div className={`${className || ''} ui-duplicant-list`}>
@@ -36,13 +36,13 @@ class DuplicantsList extends React.Component<Props> {
     }
 
     @autobind()
-    private _onDuplicantClick(duplicantKey: string) {
+    private _onDuplicantClick(duplicantID: number) {
         const {
             onDuplicantClick
         } = this.props;
 
         if (onDuplicantClick) {
-            onDuplicantClick(duplicantKey);
+            onDuplicantClick(duplicantID);
         }
     }
 }

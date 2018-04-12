@@ -1,4 +1,4 @@
 
 export default interface DuplicantGeneralPageProps {
-    duplicantKey: string;
+    duplicantID: number;
 };

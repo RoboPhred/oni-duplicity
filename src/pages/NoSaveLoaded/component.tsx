@@ -59,7 +59,7 @@ class NoSaveLoadedPageComponent extends React.Component<Props> {
     private _onLoadFile(change: React.ChangeEvent<HTMLInputElement>) {
         const files = change.target.files;
         if (!files || files.length === 0) return;
-        this.props.loadSavefile(files[0]);
+        this.props.loadSavefile({file: files[0]});
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NoSaveLoadedPageComponent);

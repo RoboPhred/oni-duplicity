@@ -2,14 +2,18 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Route, Redirect, Switch, withRouter } from "react-router";
+import { autobind } from "core-decorators";
 
 import {
     Navbar,
     NavbarGroup,
     NavbarHeading,
     Text,
+    Dialog,
     Button,
-    Alignment
+    Alignment,
+    Spinner,
+    NonIdealState
 } from "@blueprintjs/core";
 
 import mapStateToProps, { StateProps } from "./selectors";
@@ -28,6 +32,7 @@ class AppComponent extends React.Component<OwnProps> {
             isSaveEnabled,
             isSaveChosen,
             isSaveLoading,
+            isSaveSaving,
             loadError
         } = this.props;
 
@@ -52,7 +57,6 @@ class AppComponent extends React.Component<OwnProps> {
             requireExactPath = false;
         }
 
-
         return (
             <div className="fill-parent layout-vertical pt-dark ui-app-root">
                 <Navbar className="layout-item ui-app-navbar">
@@ -61,7 +65,7 @@ class AppComponent extends React.Component<OwnProps> {
                         <Text ellipsize={true}>{saveFileName || ""}</Text>
                     </NavbarGroup>
                     <NavbarGroup align={Alignment.RIGHT}>
-                        <Button icon="floppy-disk" disabled={!isSaveEnabled}>Save</Button>
+                        <Button icon="floppy-disk" disabled={!isSaveEnabled} onClick={this._onSaveClick}>Save</Button>
                     </NavbarGroup>
                 </Navbar>
                 <div className="layout-item-fill">
@@ -70,8 +74,23 @@ class AppComponent extends React.Component<OwnProps> {
                         <Redirect to="/"/>
                     </Switch>
                 </div>
+                <Dialog isOpen={isSaveSaving} title="Saving File" icon="saved" isCloseButtonShown={false}>
+                    <NonIdealState>
+                        <div>
+                            <Spinner large={true}/>
+                        </div>
+                        <div>
+                            Saving <code>{saveFileName}</code>
+                        </div>
+                    </NonIdealState>
+                </Dialog>
             </div>
         );
+    }
+
+    @autobind()
+    private _onSaveClick() {
+        this.props.saveSavefile({});
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AppComponent);

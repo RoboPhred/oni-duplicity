@@ -18,16 +18,23 @@ class DuplicantGeneralPage extends React.Component<Props, State> {
             editingName: null
         };
     }
+    
+    componentWillUpdate(nextProps: Props) {
+        
+    }
 
     render() {
+        const {
+            editingName
+        } = this.state;
+
         return (
-            <div className="ui-duplicant-edit-general fill-parent">
-                <label className="pt-label">
-                    Name <span className="pt-text-muted">(required)</span>
-                    <input className="pt-input" type="text" placeholder="Name is required" dir="auto"/>
-                </label>
+            <div className="fill-parent">
+                Appearance (TODO)
             </div>
         );
     }
+
+    
 }
 export default DuplicantGeneralPage;

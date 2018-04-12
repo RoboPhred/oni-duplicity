@@ -3,13 +3,13 @@ import { GameObject } from "oni-save-parser";
 
 import { createStructuredSelector } from "../../../../../../state/utils";
 
-import { duplicantKeys } from "../../../../../../services/save-editor/selectors";
+import { duplicantsIDs } from "../../../../../../services/save-editor/duplicants/selectors";
 
 export interface StateProps {
-    duplicantKeys: string[];
+    duplicantsIDs: number[];
 }
 
 const mapStateToProps = createStructuredSelector<StateProps>({
-    duplicantKeys
+    duplicantsIDs
 });
 export default mapStateToProps;

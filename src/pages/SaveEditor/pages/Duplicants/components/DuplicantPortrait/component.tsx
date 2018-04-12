@@ -6,7 +6,9 @@ import { GameObject } from "oni-save-parser";
 
 import { Card } from "@blueprintjs/core";
 import { autobind } from "core-decorators";
-import { getBehavior, MinionIdentityBehavior, MinionResumeBehavior } from "../../../../../../services/save-editor/utils";
+
+import { error, FAILURE_TYPE } from "../../../../../../logging";
+
 
 
 import DuplicantPortraitProps from "./props";
@@ -18,26 +20,30 @@ class DuplicantPortrait extends React.Component<Props> {
     render() {
         const {
             className,
-            duplicant
+            identityBehavior,
+            resumeBehavior
         } = this.props;
 
         let outerClassName = `ui-duplicant-portrait ${className}`;
 
-        if (!duplicant) {
-            return (
-                <Card className={outerClassName}>
-                    <div>[dup not found]</div>
-                </Card>
-            )
+        let name: string;
+        let role: string;
+
+        if (identityBehavior) {
+            name = identityBehavior.parsedData.name;
+        }
+        else {
+            error("Duplicant not found or identity behavior missing.", FAILURE_TYPE.MISSING_BEHAVIOR);
+            name = "[IDENTITY MISSING]";
         }
 
-        // TODO: Get these from a selector.
-        //  Trouble is, we do not have a unique key to ID these guys off of.  Everything
-        //  is in a game behavior, and that's an array we need to scan through.
-        const identity = getBehavior(duplicant, MinionIdentityBehavior);
-        const name = identity ? identity.parsedData.name : "<NO-IDENTITY>";
-        const resume = getBehavior(duplicant, MinionResumeBehavior);
-        const role = resume ? resume.parsedData.currentRole : "<NO-ROLE>";
+        if (resumeBehavior) {
+            role = resumeBehavior.parsedData.currentRole
+        }
+        else {
+            error("resume behavior missing.", FAILURE_TYPE.MISSING_BEHAVIOR);
+            role = "[RESUME MISSING]";
+        }
 
         return (
             <Card className={outerClassName} interactive={true} onClick={this._onClick}>
@@ -51,10 +57,10 @@ class DuplicantPortrait extends React.Component<Props> {
     @autobind()
     private _onClick() {
         const {
-            duplicantKey,
+            duplicantID,
             onClick
         } = this.props;
-        if (onClick) onClick(duplicantKey);
+        if (onClick) onClick(duplicantID);
     }
 }
 export default connect(mapStateToProps)(DuplicantPortrait);
