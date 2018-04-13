@@ -15,6 +15,7 @@ import {
     Spinner,
     NonIdealState
 } from "@blueprintjs/core";
+import { IconNames } from "@blueprintjs/icons";
 
 import mapStateToProps, { StateProps } from "./selectors";
 import mapDispatchToProps, { DispatchProps } from "./dispatch";
@@ -65,7 +66,7 @@ class AppComponent extends React.Component<OwnProps> {
                         <Text ellipsize={true}>{saveFileName || ""}</Text>
                     </NavbarGroup>
                     <NavbarGroup align={Alignment.RIGHT}>
-                        <Button icon="floppy-disk" disabled={!isSaveEnabled} onClick={this._onSaveClick}>Save</Button>
+                        <Button icon={IconNames.FLOPPY_DISK} disabled={!isSaveEnabled} onClick={this._onSaveClick}>Save</Button>
                     </NavbarGroup>
                 </Navbar>
                 <div className="layout-item-fill">
@@ -74,7 +75,7 @@ class AppComponent extends React.Component<OwnProps> {
                         <Redirect to="/"/>
                     </Switch>
                 </div>
-                <Dialog isOpen={isSaveSaving} title="Saving File" icon="saved" isCloseButtonShown={false}>
+                <Dialog isOpen={isSaveSaving} title="Saving File" icon={IconNames.SAVED} isCloseButtonShown={false}>
                     <NonIdealState>
                         <div>
                             <Spinner large={true}/>

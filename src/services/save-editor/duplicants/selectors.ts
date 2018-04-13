@@ -2,9 +2,17 @@
 import { GameObject } from "oni-save-parser";
 import { createSelector, ParametricSelector } from "reselect";
 
-import { makeGetGameObjectsByType } from "../selectors";
-import { KPrefabIDBehavior, getBehavior } from "../behaviors";
 import { AppState } from "../../../state";
+
+import { makeGetGameObjectsByType, makeGetBehaviorByName } from "../selectors";
+
+import {
+    getBehavior,
+    KPrefabIDBehavior,
+    AIAttributeLevelsBehavior,
+    AttributeLevel,
+    AITraitsBehavior
+} from "../behaviors";
 
 
 export const duplicants = makeGetGameObjectsByType("Minion");
@@ -49,3 +57,17 @@ export function makeGetDuplicantByID<Props>(propKey: keyof Props): ParametricSel
         }
     );
 };
+
+export function makeGetDuplicantSkillsByID<Props>(propKey: keyof Props): ParametricSelector<AppState, Props, AttributeLevel[]> {
+    return createSelector(
+        makeGetBehaviorByName(makeGetDuplicantByID(propKey), AIAttributeLevelsBehavior),
+        levelBehavior => levelBehavior ? levelBehavior.parsedData.saveLoadLevels : []
+    );
+}
+
+export function makeGetDuplicantTraitsByID<Props>(propKey: keyof Props): ParametricSelector<AppState, Props, string[]> {
+    return createSelector(
+        makeGetBehaviorByName(makeGetDuplicantByID(propKey), AITraitsBehavior),
+        traitsBehavior => traitsBehavior ? traitsBehavior.parsedData.TraitIds : []
+    );
+}

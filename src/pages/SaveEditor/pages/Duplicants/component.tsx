@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { autobind } from "core-decorators";
 
 import { NonIdealState } from "@blueprintjs/core";
+import { IconNames } from "@blueprintjs/icons";
 
 
 import DuplicantsList from "./components/DuplicantsList";
@@ -34,7 +35,7 @@ class DuplicantsPage extends React.Component<Props, State> {
         }
         else {
             content = (
-                <NonIdealState visual="mugshot">
+                <NonIdealState visual={IconNames.MUGSHOT}>
                     Select a duplicant to edit
                 </NonIdealState>
             );

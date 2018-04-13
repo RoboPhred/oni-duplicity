@@ -9,6 +9,7 @@ import {
     Tab,
     NonIdealState
 } from "@blueprintjs/core";
+import { IconNames } from "@blueprintjs/icons";
 
 import { error, FAILURE_TYPE } from "../../../../../../logging";
 
@@ -20,6 +21,7 @@ import mapDispatchToProps, { DispatchProps } from "./dispatch";
 
 import AppearancePage from "./pages/Appearance";
 import SkillsPage from "./pages/Skills";
+import TraitsPage from "./pages/Traits";
 
 
 type Props = DuplicantEditorProps & StateProps & DispatchProps;
@@ -38,6 +40,7 @@ class DuplicantEditor extends React.Component<Props, State> {
     render() {
         const {
             className,
+            duplicantID,
             identityBehavior
         } = this.props;
 
@@ -48,7 +51,7 @@ class DuplicantEditor extends React.Component<Props, State> {
         if (!identityBehavior) {
             error("Duplicant identity behavior missing", FAILURE_TYPE.MISSING_BEHAVIOR);
             return (
-                <NonIdealState visual="error">
+                <NonIdealState visual={IconNames.ERROR}>
                     Duplicant has no identity behavior.
                 </NonIdealState>
             )
@@ -57,18 +60,23 @@ class DuplicantEditor extends React.Component<Props, State> {
         const name = rename || identityBehavior.parsedData.name;
         
         return (
-            <div className={`ui-duplicant-editor ${className}`}>
-                <h1 className="ui-title">
-                    <EditableText
-                        value={name}
-                        onChange={this._onNameChange}
-                        onConfirm={this._onRename}
-                    />
-                </h1> <span className="pt-text-muted">(click to edit)</span>
-                <Tabs id="DuplicantEditCategories" className="ui-category-tabs layout-item-fill">
-                    <Tab id="appearance" title="Appearance" panel={<AppearancePage />} />
-                    <Tab id="skills" title="Skills" panel={<SkillsPage />} />
-                </Tabs>
+            <div className={`ui-duplicant-editor layout-vertical ${className}`}>
+                <div className="layout-item">
+                    <h1 className="ui-title">
+                        <EditableText
+                            value={name}
+                            onChange={this._onNameChange}
+                            onConfirm={this._onRename}
+                        />
+                    </h1> <span className="pt-text-muted">(click to edit)</span>
+                </div>
+                <div className="layout-item-fill">
+                    <Tabs id="DuplicantEditCategories" className="ui-category-tabs fill-parent layout-vertical" renderActiveTabPanelOnly={true}>
+                        <Tab className="layout-item-fill" id="appearance" title="Appearance" panel={<AppearancePage />} />
+                        <Tab className="layout-item-fill" id="skills" title="Skills" panel={<SkillsPage duplicantID={duplicantID}/>} />
+                        <Tab className="layout-item-fill" id="traits" title="Traits" panel={<TraitsPage duplicantID={duplicantID}/>} />
+                    </Tabs>
+                </div>
             </div>
         );
     }
@@ -85,7 +93,7 @@ class DuplicantEditor extends React.Component<Props, State> {
     private _onRename() {
         const name = this.state.rename;
         if (!name) return;
-        this.props.renameDuplicant({prefabID: this.props.duplicantID, name});
+        this.props.renameDuplicant({duplicantID: this.props.duplicantID, name});
         this.setState(s => ({
             ...s,
             rename: null

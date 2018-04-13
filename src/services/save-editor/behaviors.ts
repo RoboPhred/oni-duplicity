@@ -47,10 +47,10 @@ export const AIAttributeLevelsBehavior: BehaviorName<AIAttributeLevelsBehavior> 
 export interface AIAttributeLevelsBehavior extends GameObjectBehavior {
     name: "Klei.AI.AttributeLevels";
     parsedData: {
-        saveLoadLevels: AttributeSaveLoadLevel[];
+        saveLoadLevels: AttributeLevel[];
     };
 }
-export interface AttributeSaveLoadLevel {
+export interface AttributeLevel {
     attributeId: string;
     experience: number;
     level: number;

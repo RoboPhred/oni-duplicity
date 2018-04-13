@@ -1,5 +1,4 @@
 
-import { createSelector } from "reselect";
 import { createStructuredSelector } from "../../../../../../state/utils";
 
 import { MinionIdentityBehavior } from "../../../../../../services/save-editor/behaviors";

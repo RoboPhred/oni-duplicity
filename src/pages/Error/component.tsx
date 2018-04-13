@@ -6,7 +6,7 @@ import {
     NonIdealState,
     Text
 } from "@blueprintjs/core";
-
+import { IconNames } from "@blueprintjs/icons";
 
 import mapStateToProps, { StateProps } from "./selectors";
 import mapDispatchToProps, { DispatchProps } from "./dispatch";
@@ -25,7 +25,7 @@ class ErrorPageComponent extends React.Component<Props> {
         }
 
         return (
-            <NonIdealState visual="error" description="An Error Occurred">
+            <NonIdealState visual={IconNames.ERROR} description="An Error Occurred">
                 <Text>{loadError.message}</Text>
                 <div>
                     <code>{loadError.stack}</code>

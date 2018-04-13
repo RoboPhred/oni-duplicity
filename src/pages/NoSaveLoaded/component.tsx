@@ -9,7 +9,7 @@ import {
     Button,
     Intent
 } from "@blueprintjs/core";
-
+import { IconNames } from "@blueprintjs/icons";
 
 import mapStateToProps, { StateProps } from "./selectors";
 import mapDispatchToProps, { DispatchProps } from "./dispatch";
@@ -30,7 +30,7 @@ class NoSaveLoadedPageComponent extends React.Component<Props> {
         } = this.props;
         return (
             <NonIdealState
-                visual="floppy-disk"
+                visual={IconNames.FLOPPY_DISK}
                 action={
                     <Button intent={Intent.PRIMARY} onClick={this._onLoadClick}>Load a .sav file</Button>
                 }
