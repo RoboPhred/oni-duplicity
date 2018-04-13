@@ -19,8 +19,7 @@ class SaveEditorPageComponent extends React.Component {
         return (
             <div className="ui-page ui-page-saveeditor fill-parent layout-horizontal">
                 <div className="ui-nav-menu layout-item">
-                    <ActiveAwareLink to="/duplicants" >Duplicants</ActiveAwareLink>
-                    <ActiveAwareLink to="/404" >Not Duplicants</ActiveAwareLink>
+                    <ActiveAwareLink className="pt-menu-item" to="/duplicants" >Duplicants</ActiveAwareLink>
                 </div>
                 <div className="layout-item-fill">
                     <Switch>

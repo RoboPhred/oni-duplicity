@@ -29,10 +29,10 @@ class ActiveAwareLink extends React.Component<Props> {
         else match = pathName.startsWith(to.toString());
 
         if (match) {
-            return <span className={`pt-menu-item pt-active pt-intent-primary ${className || ''}`}>{children}</span>;
+            return <span className={`pt-active pt-intent-primary ${className || ''}`}>{children}</span>;
         }
 
-        return <Link to={to} className={`pt-menu-item ${className || ''}`} {...other} onClick={this._onClick}>{children}</Link>;
+        return <Link to={to} className={`${className || ''}`} {...other} onClick={this._onClick}>{children}</Link>;
     }
 
     @autobind()
