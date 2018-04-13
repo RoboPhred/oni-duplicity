@@ -4,5 +4,6 @@
         "**/bower_components": true,
         "lib/**": true,
         "dist/**": true
-    }
+    },
+    "emmet.showExpandedAbbreviation": "never"
 }
