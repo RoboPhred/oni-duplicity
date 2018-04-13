@@ -29,8 +29,8 @@ class DuplicantSkills extends React.Component<Props> {
         />);
 
         return (
-            <div className={`fill-parent container-scroll ${className}`}>
-                <table className="fill-parent pt-html-table pt-html-table-striped">
+            <div className={`ui-duplicant-skills fill-parent container-scroll ${className}`}>
+                <table className="pt-html-table pt-html-table-striped">
                     <thead>
                         <tr>
                             <th>Skill</th>
@@ -76,15 +76,6 @@ interface DuplicantSkillRowProps {
 }
 
 class DuplicantSkillRow extends React.Component<DuplicantSkillRowProps> {
-    constructor(props: DuplicantSkillRowProps) {
-        super(props);
-
-        this.state = {
-            editLevel: null,
-            editExperience: null
-        };
-    }
-
     render() {
         const {
             id,
@@ -113,14 +104,30 @@ class DuplicantSkillRow extends React.Component<DuplicantSkillRowProps> {
 
     @autobind()
     private _onLevelChange(value: number) {
+        const {
+            id,
+            onChangeLevel
+        } = this.props;
+
         value = Math.round(value);
-        if (value < 0 || isNaN(value)) value = 0;
-        this.props.onChangeLevel(this.props.id, value);
+        if (value < 0 || isNaN(value)) {
+            value = 0;
+        }
+        
+        onChangeLevel(id, value);
     }
 
     @autobind()
     private _onExperienceChange(value: number) {
-        if (value < 0 || isNaN(value)) value = 0;
-        this.props.onChangeExperience(this.props.id, value);
+        const {
+            id,
+            onChangeExperience
+        } = this.props;
+
+        if (value < 0 || isNaN(value)) {
+            value = 0;
+        }
+
+        onChangeExperience(id, value);
     }
 }

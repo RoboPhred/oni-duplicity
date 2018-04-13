@@ -26,8 +26,9 @@ class DuplicantTraits extends React.Component<Props> {
 
 
         return (
-            <div className={`fill-parent ${className}`}>
+            <div className={`fill-parent ui-duplicant-traits ${className}`}>
                 <TraitMultiSelect
+                    className="fill-parent-width"
                     items={TRAITS}
                     selectedItems={traits}
                     onItemSelect={this._onTagSelected}

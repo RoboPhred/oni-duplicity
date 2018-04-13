@@ -20,7 +20,7 @@ import { IconNames } from "@blueprintjs/icons";
 import mapStateToProps, { StateProps } from "./selectors";
 import mapDispatchToProps, { DispatchProps } from "./dispatch";
 
-import ErrorPage from "../../pages/error";
+import ErrorPage from "../../pages/Error";
 import NoSaveLoadedPage from "../../pages/NoSaveLoaded";
 import LoadingSaveFilePage from "../../pages/LoadingSaveFile";
 import SaveEditorPage from "../../pages/SaveEditor";
@@ -59,7 +59,7 @@ class AppComponent extends React.Component<OwnProps> {
         }
 
         return (
-            <div className="fill-parent layout-vertical pt-dark ui-app-root">
+            <div className="ui-app-root pt-app pt-dark fill-parent layout-vertical">
                 <Navbar className="layout-item ui-app-navbar">
                     <NavbarGroup>
                         <NavbarHeading>ONI Save Editor</NavbarHeading>

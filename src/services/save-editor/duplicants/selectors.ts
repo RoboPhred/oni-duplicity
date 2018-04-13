@@ -11,8 +11,12 @@ import {
     KPrefabIDBehavior,
     AIAttributeLevelsBehavior,
     AttributeLevel,
-    AITraitsBehavior
+    AITraitsBehavior,
+    AIEffectsBehavior,
+    EffectInstance,
+    HealthBehavior
 } from "../behaviors";
+import { Vector3 } from "oni-save-parser/dts/interfaces";
 
 
 export const duplicants = makeGetGameObjectsByType("Minion");
@@ -57,17 +61,74 @@ export function makeGetDuplicantByID<Props>(propKey: keyof Props): ParametricSel
         }
     );
 };
+export type DuplicantByIDSelector<Props> = ParametricSelector<AppState, Props, GameObject | null>;
 
-export function makeGetDuplicantSkillsByID<Props>(propKey: keyof Props): ParametricSelector<AppState, Props, AttributeLevel[]> {
+export function makeGetDuplicantSkillsByID<Props>(source: (keyof Props) | DuplicantByIDSelector<Props>): ParametricSelector<AppState, Props, AttributeLevel[]> {
+    let selector: DuplicantByIDSelector<Props>;
+    if (typeof source === "function") {
+        selector = source;
+    }
+    else {
+        selector = makeGetDuplicantByID<Props>(source);
+    }
     return createSelector(
-        makeGetBehaviorByName(makeGetDuplicantByID(propKey), AIAttributeLevelsBehavior),
+        makeGetBehaviorByName(selector, AIAttributeLevelsBehavior),
         levelBehavior => levelBehavior ? levelBehavior.parsedData.saveLoadLevels : []
     );
 }
 
-export function makeGetDuplicantTraitsByID<Props>(propKey: keyof Props): ParametricSelector<AppState, Props, string[]> {
+export function makeGetDuplicantTraitsByID<Props>(source: (keyof Props) | DuplicantByIDSelector<Props>): ParametricSelector<AppState, Props, string[]> {
+    let selector: DuplicantByIDSelector<Props>;
+    if (typeof source === "function") {
+        selector = source;
+    }
+    else {
+        selector = makeGetDuplicantByID<Props>(source);
+    }
     return createSelector(
-        makeGetBehaviorByName(makeGetDuplicantByID(propKey), AITraitsBehavior),
+        makeGetBehaviorByName(selector, AITraitsBehavior),
         traitsBehavior => traitsBehavior ? traitsBehavior.parsedData.TraitIds : []
+    );
+}
+
+export function makeGetDuplicantEffectsByID<Props>(source: (keyof Props) | DuplicantByIDSelector<Props>): ParametricSelector<AppState, Props, EffectInstance[]> {
+    let selector: DuplicantByIDSelector<Props>;
+    if (typeof source === "function") {
+        selector = source;
+    }
+    else {
+        selector = makeGetDuplicantByID<Props>(source);
+    }
+    return createSelector(
+        makeGetBehaviorByName(selector, AIEffectsBehavior),
+        effectsBehavior => effectsBehavior ? effectsBehavior.parsedData.saveLoadEffects : []
+    );
+}
+
+export function makeGetDuplicantHealthStateByID<Props>(source: (keyof Props) | DuplicantByIDSelector<Props>): ParametricSelector<AppState, Props, number | null> {
+    let selector: DuplicantByIDSelector<Props>;
+    if (typeof source === "function") {
+        selector = source;
+    }
+    else {
+        selector = makeGetDuplicantByID<Props>(source);
+    }
+    return createSelector(
+        makeGetBehaviorByName(selector, HealthBehavior),
+        healthBehavior => healthBehavior ? healthBehavior.parsedData.State : null
+    );
+}
+
+export function makeGetDuplicantScaleByID<Props>(source: (keyof Props) | DuplicantByIDSelector<Props>): ParametricSelector<AppState, Props, Vector3 | null> {
+    let selector: DuplicantByIDSelector<Props>;
+    if (typeof source === "function") {
+        selector = source;
+    }
+    else {
+        selector = makeGetDuplicantByID<Props>(source);
+    }
+    return createSelector(
+        selector,
+        gameObject => gameObject ? gameObject.scale : null
     );
 }

@@ -19,9 +19,11 @@ import mapStateToProps, { StateProps } from "./selectors";
 import mapDispatchToProps, { DispatchProps } from "./dispatch";
 
 
+import GeneralPage from "./pages/General";
 import AppearancePage from "./pages/Appearance";
 import SkillsPage from "./pages/Skills";
 import TraitsPage from "./pages/Traits";
+import EffectsPage from "./pages/Effects";
 
 
 type Props = DuplicantEditorProps & StateProps & DispatchProps;
@@ -68,13 +70,15 @@ class DuplicantEditor extends React.Component<Props, State> {
                             onChange={this._onNameChange}
                             onConfirm={this._onRename}
                         />
-                    </h1> <span className="pt-text-muted">(click to edit)</span>
+                    </h1> <span className="pt-text-muted">(click to edit name)</span>
                 </div>
                 <div className="layout-item-fill">
                     <Tabs id="DuplicantEditCategories" className="ui-category-tabs fill-parent layout-vertical" renderActiveTabPanelOnly={true}>
-                        <Tab className="layout-item-fill" id="appearance" title="Appearance" panel={<AppearancePage />} />
+                        <Tab className="layout-item-fill" id="general" title="General" panel={<GeneralPage duplicantID={duplicantID} />} />
+                        <Tab className="layout-item-fill" id="appearance" title="Appearance" panel={<AppearancePage />} disabled />
                         <Tab className="layout-item-fill" id="skills" title="Skills" panel={<SkillsPage duplicantID={duplicantID}/>} />
                         <Tab className="layout-item-fill" id="traits" title="Traits" panel={<TraitsPage duplicantID={duplicantID}/>} />
+                        <Tab className="layout-item-fill" id="effects" title="Effects" panel={<EffectsPage duplicantID={duplicantID}/>} />
                     </Tabs>
                 </div>
             </div>

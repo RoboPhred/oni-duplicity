@@ -1,16 +1,18 @@
 
 import { AnyAction } from "redux";
-import { GameObjectBehavior } from "oni-save-parser";
+import { GameObjectBehavior, GameObject } from "oni-save-parser";
 
 import { error, FAILURE_TYPE } from "../../../logging";
 
-import { SaveEditorState, defaultSaveEditorState } from "../state";
+import { SaveEditorState, defaultSaveEditorState, NormalizedID } from "../state";
 
 import {
     MinionIdentityBehavior,
     AIAttributeLevelsBehavior,
     BehaviorName,
-    AITraitsBehavior
+    AITraitsBehavior,
+    AIEffectsBehavior,
+    HealthBehavior
 } from "../behaviors";
 
 import {
@@ -18,14 +20,18 @@ import {
     ACTION_DUPLICANT_SKILL_SET_LEVEL,
     ACTION_DUPLICANT_SKILL_SET_EXPERIENCE,
     ACTION_DUPLICANT_TRAITS_SET,
+    ACTION_DUPLICANT_EFFECTS_ADD,
+    ACTION_DUPLICANT_EFFECTS_SETTIME,
+    ACTION_DUPLICANT_EFFECTS_REMOVE,
+    ACTION_DUPLICANT_HEALTH_STATE_SET,
+    ACTION_DUPLICANT_SCALE_SET,
     DuplicantActions
 } from "./actions";
-import { Behavior } from "popper.js";
 
 
 export default function duplicantsReducer(state: SaveEditorState = defaultSaveEditorState, _action: AnyAction) {
     const action = _action as DuplicantActions;
-    switch(action.type) {
+    switch (action.type) {
         case ACTION_DUPLICANT_RENAME: {
             const {
                 duplicantID,
@@ -37,7 +43,7 @@ export default function duplicantsReducer(state: SaveEditorState = defaultSaveEd
                 action,
                 duplicantID,
                 MinionIdentityBehavior,
-                (behavior, gameObjectIndex) => {
+                (behavior) => {
                     const newBehavior: MinionIdentityBehavior = {
                         ...behavior,
                         parsedData: {
@@ -61,15 +67,15 @@ export default function duplicantsReducer(state: SaveEditorState = defaultSaveEd
                 action,
                 duplicantID,
                 AIAttributeLevelsBehavior,
-                (behavior, gameObjectIndex) => {
+                (behavior, normalizedId) => {
                     const levels = behavior.parsedData.saveLoadLevels;
 
                     const skillIndex = levels.findIndex(x => x.attributeId === skillId);
                     if (skillIndex === -1) {
-                        error(`Action "${action.type}" prefabID ${duplicantID} prefab "Minion":${gameObjectIndex} behavior "${AIAttributeLevelsBehavior}" does not have skill ID ${skillId}.`, FAILURE_TYPE.SAVEFILE_CORRUPT);
+                        error(`Action "${action.type}" prefabID ${duplicantID} prefab "${normalizedId.type}":${normalizedId.index} behavior "${AIAttributeLevelsBehavior}" does not have skill ID ${skillId}.`, FAILURE_TYPE.ACTION_INVALID);
                         return behavior;
                     }
-        
+
                     const newBehavior: AIAttributeLevelsBehavior = {
                         ...behavior,
                         parsedData: {
@@ -100,15 +106,15 @@ export default function duplicantsReducer(state: SaveEditorState = defaultSaveEd
                 action,
                 duplicantID,
                 AIAttributeLevelsBehavior,
-                (behavior, gameObjectIndex) => {
+                (behavior, normalizedId) => {
                     const levels = behavior.parsedData.saveLoadLevels;
 
                     const skillIndex = levels.findIndex(x => x.attributeId === skillId);
                     if (skillIndex === -1) {
-                        error(`Action "${action.type}" prefabID ${duplicantID} prefab "Minion":${gameObjectIndex} behavior "${AIAttributeLevelsBehavior}" does not have skill ID ${skillId}.`, FAILURE_TYPE.SAVEFILE_CORRUPT);
+                        error(`Action "${action.type}" prefabID ${duplicantID} prefab "${normalizedId.type}":${normalizedId.index} behavior "${AIAttributeLevelsBehavior}" does not have skill ID ${skillId}.`, FAILURE_TYPE.ACTION_INVALID);
                         return behavior;
                     }
-        
+
                     const newBehavior: AIAttributeLevelsBehavior = {
                         ...behavior,
                         parsedData: {
@@ -150,18 +156,167 @@ export default function duplicantsReducer(state: SaveEditorState = defaultSaveEd
                 }
             );
         }
+        case ACTION_DUPLICANT_EFFECTS_ADD: {
+            const {
+                duplicantID,
+                effectID,
+                timeRemaining
+            } = action.payload;
+
+            return modifyBehavior(
+                state,
+                action,
+                duplicantID,
+                AIEffectsBehavior,
+                (behavior, gameObjectIndex) => {
+                    const effects = behavior.parsedData.saveLoadEffects;
+
+                    const effectIndex = effects.findIndex(x => x.id === effectID);
+                    if (effectIndex !== -1) {
+                        return behavior;
+                    }
+
+                    const newBehavior: AIEffectsBehavior = {
+                        ...behavior,
+                        parsedData: {
+                            saveLoadEffects: [
+                                ...effects,
+                                {
+                                    id: effectID,
+                                    timeRemaining
+                                }
+                            ]
+                        }
+                    }
+
+                    return newBehavior;
+                }
+            );
+        }
+        case ACTION_DUPLICANT_EFFECTS_SETTIME: {
+            const {
+                duplicantID,
+                effectID,
+                timeRemaining
+            } = action.payload;
+
+            return modifyBehavior(
+                state,
+                action,
+                duplicantID,
+                AIEffectsBehavior,
+                (behavior, normalizedId) => {
+                    const effects = behavior.parsedData.saveLoadEffects;
+
+                    const effectIndex = effects.findIndex(x => x.id === effectID);
+                    if (effectIndex === -1) {
+                        error(`Action "${action.type}" prefabID ${duplicantID} prefab "${normalizedId.type}":${normalizedId.index} behavior "${AIEffectsBehavior}" does not have effect ID ${effectID}.`, FAILURE_TYPE.ACTION_INVALID);
+                        return behavior;
+                    }
+
+                    const newBehavior: AIEffectsBehavior = {
+                        ...behavior,
+                        parsedData: {
+                            saveLoadEffects: [
+                                ...effects.slice(0, effectIndex),
+                                {
+                                    ...effects[effectIndex],
+                                    timeRemaining
+                                },
+                                ...effects.slice(effectIndex + 1)
+                            ]
+                        }
+                    }
+
+                    return newBehavior;
+                }
+            );
+        }
+        case ACTION_DUPLICANT_EFFECTS_REMOVE: {
+            const {
+                duplicantID,
+                effectID
+            } = action.payload;
+
+            return modifyBehavior(
+                state,
+                action,
+                duplicantID,
+                AIEffectsBehavior,
+                (behavior) => {
+                    const effects = behavior.parsedData.saveLoadEffects;
+
+                    const effectIndex = effects.findIndex(x => x.id === effectID);
+                    if (effectIndex === -1) {
+                        return behavior;
+                    }
+
+                    const newBehavior: AIEffectsBehavior = {
+                        ...behavior,
+                        parsedData: {
+                            saveLoadEffects: [
+                                ...effects.slice(0, effectIndex),
+                                ...effects.slice(effectIndex + 1)
+                            ]
+                        }
+                    }
+
+                    return newBehavior;
+                }
+            );
+        }
+        case ACTION_DUPLICANT_HEALTH_STATE_SET: {
+            const {
+                duplicantID,
+                healthState
+            } = action.payload;
+
+            return modifyBehavior(
+                state,
+                action,
+                duplicantID,
+                HealthBehavior,
+                (behavior) => ({
+                    ...behavior,
+                    parsedData: {
+                        ...behavior.parsedData,
+                        State: healthState
+                    }
+                })
+            );
+        }
+        case ACTION_DUPLICANT_SCALE_SET: {
+            const {
+                duplicantID,
+                scaleX,
+                scaleY
+            } = action.payload;
+
+            return modifyGameObject(
+                state,
+                action,
+                duplicantID,
+                (gameObject) => ({
+                    ...gameObject,
+                    scale: {
+                        ...gameObject.scale,
+                        x: scaleX || gameObject.scale.x,
+                        y: scaleY || gameObject.scale.y
+                    }
+                })
+            );
+        }
         default:
             return state;
     }
 }
 
-function modifyBehavior<T extends GameObjectBehavior>(
+function modifyGameObject(
     state: SaveEditorState,
     action: AnyAction,
     prefabID: number,
-    behaviorName: BehaviorName<T>,
-    modifier: (behavior: T, gameObjectIndex: number) => T
-): SaveEditorState {
+    modifier: (gameObject: GameObject, normalizedId: NormalizedID) => GameObject
+) {
     const saveGame = state.saveGame;
     if (!saveGame) {
         error(`Action "${action.type}" called before a save game is available.`, FAILURE_TYPE.ACTION_INVALID);
@@ -190,14 +345,7 @@ function modifyBehavior<T extends GameObjectBehavior>(
         return state;
     }
 
-    const behaviorIndex = gameObject.behaviors.findIndex(x => x.name === behaviorName);
-    if (behaviorIndex === -1) {
-        error(`Action "${action.type}" prefabID ${prefabID} prefab "${type}":${index} does not have behavior "${behaviorName}".`, FAILURE_TYPE.SAVEFILE_CORRUPT);
-        return state;
-    }
-    const behavior = gameObject.behaviors[behaviorIndex] as T;
-
-    const newBehavior = modifier(behavior, index);
+    const newGameObject = modifier(gameObject, location);
 
     // Aarrrgggh, normalize!
     return {
@@ -210,19 +358,46 @@ function modifyBehavior<T extends GameObjectBehavior>(
                     ...saveGame.body.gameObjects,
                     [type]: [
                         ...saveGame.body.gameObjects[type].slice(0, index),
-                        {
-                            ...gameObject,
-                            behaviors: [
-                                ...gameObject.behaviors.slice(0, behaviorIndex),
-                                newBehavior,
-                                ...gameObject.behaviors.slice(behaviorIndex + 1)
-
-                            ]
-                        },
+                        newGameObject,
                         ...saveGame.body.gameObjects[type].slice(index + 1)
                     ]
                 }
             }
         }
     }
+}
+
+function modifyBehavior<T extends GameObjectBehavior>(
+    state: SaveEditorState,
+    action: AnyAction,
+    prefabID: number,
+    behaviorName: BehaviorName<T>,
+    modifier: (behavior: T, normalizedId: NormalizedID) => T
+): SaveEditorState {
+    return modifyGameObject(
+        state,
+        action,
+        prefabID,
+        (gameObject, normalizedId) => {
+            const behaviorIndex = gameObject.behaviors.findIndex(x => x.name === behaviorName);
+            if (behaviorIndex === -1) {
+                error(`Action "${action.type}" prefabID ${prefabID} prefab "${normalizedId.type}":${normalizedId.index} does not have behavior "${behaviorName}".`, FAILURE_TYPE.SAVEFILE_CORRUPT);
+                return gameObject;
+            }
+            const behavior = gameObject.behaviors[behaviorIndex] as T;
+
+            const newBehavior = modifier(behavior, normalizedId);
+
+            const newGameObject: GameObject = {
+                ...gameObject,
+                behaviors: [
+                    ...gameObject.behaviors.slice(0, behaviorIndex),
+                    newBehavior,
+                    ...gameObject.behaviors.slice(behaviorIndex + 1)
+
+                ]
+            }
+            return newGameObject
+        }
+    );
 }
