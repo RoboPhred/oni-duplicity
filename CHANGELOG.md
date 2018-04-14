@@ -1,5 +1,5 @@
 
-### vNEXT
+### v1.1.0
 
 - Edit Duplicants
     - Gender (data only; no visual effect)
