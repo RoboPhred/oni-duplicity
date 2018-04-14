@@ -13,3 +13,8 @@ declare module "worker-loader!*" {
 interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: any;
 }
+
+declare module "raw-loader!*" {
+    const data: string;
+    export = data;
+}

@@ -1,4 +1,5 @@
 
+// TODO: move to oni-save-parser
 const TRAITS: string[] = [
     "None",
     "Stinky",

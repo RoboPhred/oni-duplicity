@@ -104,22 +104,27 @@ module.exports = {
             {
                 test: /\.(woff|woff2)$/,
                 use: {
-                  loader: 'url-loader',
-                  options: {
-                    name: 'fonts/[hash].[ext]',
-                    limit: 5000,
-                    mimetype: 'application/font-woff'
-                  }
+                    loader: 'url-loader',
+                    options: {
+                        name: 'fonts/[hash].[ext]',
+                        limit: 5000,
+                        mimetype: 'application/font-woff'
+                    }
                 }
-              }, {
+            }, {
                 test: /\.(ttf|eot|svg)$/,
                 use: {
-                  loader: 'file-loader',
-                  options: {
-                    name: 'fonts/[hash].[ext]'
-                  }
+                    loader: 'file-loader',
+                    options: {
+                        name: 'fonts/[hash].[ext]'
+                    }
                 }
-              }
+            },
+
+            {
+                test: /\.(txt|md)$/,
+                loader: "raw-loader"
+            }
         ]
     },
 

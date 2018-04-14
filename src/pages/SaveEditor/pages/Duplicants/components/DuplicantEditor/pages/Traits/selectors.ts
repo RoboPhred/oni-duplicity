@@ -1,7 +1,7 @@
 
 import { createStructuredSelector } from "../../../../../../../../state/utils";
 
-import { makeGetDuplicantTraitsByID } from "../../../../../../../../services/save-editor/duplicants/selectors";
+import { makeGetDuplicantTraits } from "../../../../../../../../services/save-editor/duplicants/selectors";
 
 import Props from "./props";
 
@@ -10,6 +10,6 @@ export interface StateProps {
 }
 
 const mapStateToProps = () => createStructuredSelector<Props, StateProps>({
-    traits: makeGetDuplicantTraitsByID<Props>("duplicantID")
+    traits: makeGetDuplicantTraits<Props>("duplicantID")
 });
 export default mapStateToProps;

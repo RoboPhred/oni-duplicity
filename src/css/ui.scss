@@ -7,6 +7,12 @@
 
 .pt-navbar.ui-app-navbar {
     background-color: $cobalt3;
+
+    .pt-navbar-group {
+        .pt-button {
+            margin: 0 4px;
+        }
+    }
 }
 
 .ui-page.ui-page-404 {
@@ -79,6 +85,10 @@
             max-height: 100%;
         }
     }
+}
+
+.ui-page.ui-page-changelog {
+    padding: 15px;
 }
 
 .pt-multi-select-popover, .pt-select-popover {

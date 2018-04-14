@@ -6,13 +6,16 @@ import { autobind } from "core-decorators";
 import { Button, MenuItem, NumericInput } from "@blueprintjs/core";
 import { Select, IItemRendererProps } from "@blueprintjs/select";
 const StringSelect = Select.ofType<string>();
+const NumberSelect = Select.ofType<number>();
 
 
 import DuplicantGeneralProps from "./props";
 import mapStateToProps, { StateProps } from "./selectors";
 import mapDispatchToProps, { DispatchProps } from "./dispatch";
+import { Gender } from "../../../../../../../../services/save-editor/duplicants/interfaces";
 
 
+// TODO: export from oni-save-parser
 const HEALTH_STATE: string[] = [
     // The order of these is important!
     //  The value is stored in-game as an int32 enum,
@@ -36,8 +39,10 @@ type Props = DuplicantGeneralProps & StateProps & DispatchProps;
 class DuplicantGeneralPage extends React.Component<Props> {
     render() {
         const {
+            gender,
+            scale,
             healthState,
-            scale
+            voiceIdx
         } = this.props;
 
         const scaleX = scale ? scale.x : 1;
@@ -55,6 +60,44 @@ class DuplicantGeneralPage extends React.Component<Props> {
             <div className="fill-parent">
                 <div className="pt-form-group pt-inline">
                     <label className="pt-label">
+                        Gender
+                    </label>
+                    <div className="pt-form-content">
+                        <StringSelect
+                            // TODO: Export from oni-save-parser
+                            items={["MALE", "FEMALE", "NB"]}
+                            itemRenderer={this._renderItem}
+                            onItemSelect={this._onGenderSelected}
+                            filterable={false}
+                            resetOnClose={true}
+                            resetOnSelect={true}
+                            popoverProps={{ minimal: true }}
+                        >
+                            <Button rightIcon="caret-down" text={gender || "MALE"} />
+                        </StringSelect>
+                    </div>
+                </div>
+                <div className="pt-form-group pt-inline">
+                    <label className="pt-label">
+                        Voice
+                    </label>
+                    <div className="pt-form-content">
+                        <NumberSelect
+                            // TODO: get from oni-save-parser
+                            items={[0, 1, 2, 3, 4]}
+                            itemRenderer={this._renderItem}
+                            onItemSelect={this._onVoiceSelected}
+                            filterable={false}
+                            resetOnClose={true}
+                            resetOnSelect={true}
+                            popoverProps={{ minimal: true }}
+                        >
+                            <Button rightIcon="caret-down" text={`Voice ${voiceIdx || 0}`} />
+                        </NumberSelect>
+                    </div>
+                </div>
+                <div className="pt-form-group pt-inline">
+                    <label className="pt-label">
                         Scale
                     </label>
                     <div className="pt-form-content">
@@ -64,7 +107,7 @@ class DuplicantGeneralPage extends React.Component<Props> {
                         </div>
                         <div className="pt-input-group">
                             <span>Vertical</span>
-                            <NumericInput min={MIN_SCALE} clampValueOnBlur={true} value={scaleY} onValueChange={this._onScaleY}/>
+                            <NumericInput min={MIN_SCALE} clampValueOnBlur={true} value={scaleY} onValueChange={this._onScaleY} />
                         </div>
                     </div>
                 </div>
@@ -84,7 +127,7 @@ class DuplicantGeneralPage extends React.Component<Props> {
                         >
                             <Button rightIcon="caret-down" text={healthStateStr} />
                         </StringSelect>
-                        <div className="pt-form-helper-text">State affects the duplicant's behavior, but not their health points.</div>
+                        <div className="pt-form-helper-text">The duplicant's current overall health condition.</div>
                     </div>
                 </div>
             </div>
@@ -92,7 +135,7 @@ class DuplicantGeneralPage extends React.Component<Props> {
     }
 
     @autobind()
-    private _renderItem(effect: string, itemProps: IItemRendererProps) {
+    private _renderItem(effect: string | number, itemProps: IItemRendererProps) {
         const {
             modifiers,
             handleClick
@@ -129,6 +172,24 @@ class DuplicantGeneralPage extends React.Component<Props> {
     }
 
     @autobind()
+    private _onGenderSelected(gender: string) {
+        const {
+            duplicantID,
+            setGender
+        } = this.props;
+        setGender({duplicantID, gender: gender as Gender});
+    }
+
+    @autobind()
+    private _onVoiceSelected(voiceIdx: number) {
+        const {
+            duplicantID,
+            setVoice
+        } = this.props;
+        setVoice({duplicantID, voiceIdx});
+    }
+
+    @autobind()
     private _onScaleX(value: number) {
         const {
             duplicantID,
@@ -141,7 +202,7 @@ class DuplicantGeneralPage extends React.Component<Props> {
             value = 1;
         }
 
-        setScale({duplicantID, scaleX: value});
+        setScale({ duplicantID, scaleX: value });
     }
 
     @autobind()
@@ -157,7 +218,7 @@ class DuplicantGeneralPage extends React.Component<Props> {
             value = 1;
         }
 
-        setScale({duplicantID, scaleY: value});
+        setScale({ duplicantID, scaleY: value });
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DuplicantGeneralPage);

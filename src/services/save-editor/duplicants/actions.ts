@@ -1,6 +1,8 @@
 
 import { createAction } from "../../../action-utils";
 
+import { Gender } from "./interfaces";
+
 
 export const ACTION_DUPLICANT_RENAME = "@save-editor/duplicants/rename";
 export const renameDuplicant = createAction(ACTION_DUPLICANT_RENAME, (x: {duplicantID: number, name: string}) => x);
@@ -44,6 +46,18 @@ export const setDuplicantScale = createAction(ACTION_DUPLICANT_SCALE_SET, (x: {d
 export type SetDuplicantScaleAction = ReturnType<typeof setDuplicantScale>;
 
 
+export const ACTION_DUPLICANT_GENDER_SET = "@save-editor/duplicants/gender/set";
+export const setDuplicantGender = createAction(ACTION_DUPLICANT_GENDER_SET, (x: {duplicantID: number, gender: Gender}) => x);
+export type SetDuplicantGenderAction = ReturnType<typeof setDuplicantGender>;
+
+
+export const ACTION_DUPLICANT_VOICE_SET = "@save-editor/duplicants/voice/set";
+export const setDuplicantVoice = createAction(ACTION_DUPLICANT_VOICE_SET, (x: {duplicantID: number, voiceIdx: number}) => x);
+export type SetDuplicantVoiceAction = ReturnType<typeof setDuplicantVoice>;
+
+
+
+
 export type DuplicantActions =
     RenameDuplicantAction
     | SetDuplicantSkillLevelAction
@@ -53,4 +67,6 @@ export type DuplicantActions =
     | SetDuplicantEffectTimeAction
     | RemoveDuplicantEffectAction
     | SetDuplicantHealthStateAction
-    | SetDuplicantScaleAction;
+    | SetDuplicantScaleAction
+    | SetDuplicantGenderAction
+    | SetDuplicantVoiceAction;

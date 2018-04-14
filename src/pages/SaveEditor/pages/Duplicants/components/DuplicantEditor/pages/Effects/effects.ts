@@ -1,4 +1,5 @@
 
+// TODO: move to oni-save-parser
 const EFFECTS: string[] = [
     "UncomfortableSleep",
     "Sleep",
@@ -31,6 +32,9 @@ const EFFECTS: string[] = [
     "WarmAir",
     "ColdAir",
     "Hypothermia",
-    "Hyperthermia"
+    "Hyperthermia",
+
+    // Found in DB.cs
+    "CenterOfAttention"
 ];
 export default EFFECTS;

@@ -4,7 +4,7 @@ import {
     GameObjectBehavior
 } from "oni-save-parser";
 
-export type BehaviorName<T extends GameObjectBehavior> = string & { __behaviorTypeMetadata?: T & never};
+export type BehaviorName<T extends GameObjectBehavior> = string & { __behaviorTypeMetadata?: T & never };
 
 
 export const KPrefabIDBehavior: BehaviorName<KPrefabIDBehavior> = "KPrefabID";
@@ -20,12 +20,65 @@ export const MinionIdentityBehavior: BehaviorName<MinionIdentityBehavior> = "Min
 export interface MinionIdentityBehavior extends GameObjectBehavior {
     name: "MinionIdentity";
     parsedData: {
-        arrivalTime: number;
-        bodyShape: any;
-        gender: "MALE" | "FEMALE";
-        genderStringKey: "MALE" | "FEMALE";
         name: string;
         nameStringKey: string;
+
+        gender: "MALE" | "FEMALE" | "NB";
+        genderStringKey: "MALE" | "FEMALE" | "NB";
+
+        arrivalTime: number;
+
+        voiceIdx: number;
+
+        bodyData: {
+            headShape: {
+                hash: number;
+            },
+            mouth: {
+                hash: number;
+            },
+            neck: {
+                hash: number;
+            },
+            eyes: {
+                hash: number;
+            },
+            hair: {
+                hash: number;
+            },
+            body: {
+                hash: number;
+            },
+            arms: {
+                hash: number;
+            },
+            hat: {
+                hash: number;
+            },
+            hatHair: {
+                hash: number;
+            },
+            hairAlways: {
+                hash: number;
+            }
+        };
+    };
+}
+
+export const AccessorizerBehavior: BehaviorName<AccessorizerBehavior> = "Accessorizer";
+export interface Accessory {
+    guid: {
+        /**
+         * Note: Not an actual guid!  This is a string name of a nested resource,
+         * such as ```Root.Accessories.eyes_003```.
+         */
+        Guid: string;
+    }
+};
+export interface AccessorizerBehavior extends GameObjectBehavior {
+    name: "Accessorizer",
+    parsedData: {
+        accessories: Accessory[];
     };
 }
 
@@ -36,7 +89,7 @@ export interface MinionResumeBehavior extends GameObjectBehavior {
     parsedData: {
         ExperienceByRoleID: [string, number][];
         MasteryByRoleID: [string, boolean][];
-        AptitudeByRoleGroup: [{hash: number}, number][];
+        AptitudeByRoleGroup: [{ hash: number }, number][];
         currentRole: string;
         targetRole: string;
     };
@@ -89,7 +142,7 @@ export interface HealthBehavior extends GameObjectBehavior {
 }
 
 
-export type KnownBehavior = 
+export type KnownBehavior =
     KPrefabIDBehavior
     | MinionIdentityBehavior
     | MinionResumeBehavior

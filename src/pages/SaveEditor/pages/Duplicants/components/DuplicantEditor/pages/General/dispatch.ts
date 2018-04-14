@@ -4,18 +4,24 @@ import { bindActionCreators } from "redux";
 import { Dispatch } from "../../../../../../../../state/utils";
 
 import {
+    setDuplicantGender,
+    setDuplicantVoice,
+    setDuplicantScale,
     setDuplicantHealthState,
-    setDuplicantScale
 } from "../../../../../../../../services/save-editor/duplicants/actions";
 
 export interface DispatchProps {
-    setHealthState: typeof setDuplicantHealthState;
+    setGender: typeof setDuplicantGender;
+    setVoice: typeof setDuplicantVoice;
     setScale: typeof setDuplicantScale;
+    setHealthState: typeof setDuplicantHealthState;
 }
 
 export default function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
     return bindActionCreators({
-        setHealthState: setDuplicantHealthState,
-        setScale: setDuplicantScale
+        setGender: setDuplicantGender,
+        setVoice: setDuplicantVoice,
+        setScale: setDuplicantScale,
+        setHealthState: setDuplicantHealthState
     }, dispatch);
 }

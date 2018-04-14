@@ -37,8 +37,8 @@ class DuplicantEffects extends React.Component<Props> {
 
         return (
             <div className={`ui-duplicant-effects fill-parent layout-vertical ${className}`}>
-                <div className="container-scroll">
-                    <table className="pt-html-table pt-html-table-striped">
+                <div className="container-scroll layout-item-fill">
+                    <table className="pt-html-table pt-html-table-striped fill-parent-width">
                         <thead>
                             <tr>
                                 <th>Effect</th>

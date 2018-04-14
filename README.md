@@ -5,7 +5,15 @@ An Oxygen Not Included duplicant editor.
 
 # Features
 
-- Change the skills or experience of your dups
+- Edit Duplicants
+    - Name
+    - Gender
+    - Voice
+    - Size (width and height)
+    - Health Status (healthy, critical, incapacitated, invulnurable, ...)
+    - Skills (level and experience)
+    - Traits
+    - Status Effects
 
 *more comming soon*
 

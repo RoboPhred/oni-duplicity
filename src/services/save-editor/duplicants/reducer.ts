@@ -2,9 +2,11 @@
 import { AnyAction } from "redux";
 import { GameObjectBehavior, GameObject } from "oni-save-parser";
 
-import { error, FAILURE_TYPE } from "../../../logging";
+import { error, FAILURE_TYPE, warning } from "../../../logging";
 
 import { SaveEditorState, defaultSaveEditorState, NormalizedID } from "../state";
+
+import { modifyGameObject, modifyBehavior } from "../reducer-utils";
 
 import {
     MinionIdentityBehavior,
@@ -12,7 +14,8 @@ import {
     BehaviorName,
     AITraitsBehavior,
     AIEffectsBehavior,
-    HealthBehavior
+    HealthBehavior,
+    AccessorizerBehavior
 } from "../behaviors";
 
 import {
@@ -25,11 +28,20 @@ import {
     ACTION_DUPLICANT_EFFECTS_REMOVE,
     ACTION_DUPLICANT_HEALTH_STATE_SET,
     ACTION_DUPLICANT_SCALE_SET,
+    ACTION_DUPLICANT_GENDER_SET,
+    ACTION_DUPLICANT_VOICE_SET,
     DuplicantActions
 } from "./actions";
 
+import duplicantAppearanceReducer from "./appearance/reducer";
 
-export default function duplicantsReducer(state: SaveEditorState = defaultSaveEditorState, _action: AnyAction) {
+export default function duplicantsReducer(state: SaveEditorState = defaultSaveEditorState, action: AnyAction): SaveEditorState {
+    state = duplicantsRootReducer(state, action);
+    state = duplicantAppearanceReducer(state, action);
+    return state;
+}
+
+function duplicantsRootReducer(state: SaveEditorState = defaultSaveEditorState, _action: AnyAction) {
     const action = _action as DuplicantActions;
     switch (action.type) {
         case ACTION_DUPLICANT_RENAME: {
@@ -48,7 +60,10 @@ export default function duplicantsReducer(state: SaveEditorState = defaultSaveEd
                         ...behavior,
                         parsedData: {
                             ...behavior.parsedData,
-                            name
+                            name,
+                            // Not sure about this.  This is used to select the duplicant biography flavor text.
+                            //  If the value is null, it is set to NB
+                            // nameStringKey: "NB"
                         }
                     };
                     return newBehavior;
@@ -306,98 +321,60 @@ export default function duplicantsReducer(state: SaveEditorState = defaultSaveEd
                 })
             );
         }
+        case ACTION_DUPLICANT_GENDER_SET: {
+            const {
+                duplicantID,
+                gender
+            } = action.payload;
+
+            return modifyBehavior(
+                state,
+                action,
+                duplicantID,
+                MinionIdentityBehavior,
+                (behavior) => {
+                    const newBehavior: MinionIdentityBehavior = {
+                        ...behavior,
+                        parsedData: {
+                            ...behavior.parsedData,
+                            gender,
+                            // Update the string key, so the UI shows the appropriate value.
+                            genderStringKey: gender
+                        }
+                    };
+                    return newBehavior;
+                }
+            );
+        }
+        case ACTION_DUPLICANT_VOICE_SET: {
+            const {
+                duplicantID,
+                voiceIdx
+            } = action.payload;
+
+            // TODO: Export this range from oni-save-parser
+            if (voiceIdx < 0 || voiceIdx > 4) {
+                warning(`Action "${ACTION_DUPLICANT_VOICE_SET}" has invalid voice id ${voiceIdx}: must be between 0 and 4.`);
+            }
+
+            return modifyBehavior(
+                state,
+                action,
+                duplicantID,
+                MinionIdentityBehavior,
+                (behavior) => {
+                    const newBehavior: MinionIdentityBehavior = {
+                        ...behavior,
+                        parsedData: {
+                            ...behavior.parsedData,
+                            voiceIdx
+                        }
+                    };
+                    return newBehavior;
+                }
+            );
+        }
         default:
             return state;
     }
-}
-
-function modifyGameObject(
-    state: SaveEditorState,
-    action: AnyAction,
-    prefabID: number,
-    modifier: (gameObject: GameObject, normalizedId: NormalizedID) => GameObject
-) {
-    const saveGame = state.saveGame;
-    if (!saveGame) {
-        error(`Action "${action.type}" called before a save game is available.`, FAILURE_TYPE.ACTION_INVALID);
-        return state;
-    }
-
-    const location = state.normalizedIDs[prefabID];
-    if (!location) {
-        error(`Action "${action.type}" requested prefabID ${prefabID}, which is not in the normalized ID table.`, FAILURE_TYPE.ACTION_INVALID);
-        return state;
-    }
-
-    const {
-        type,
-        index
-    } = location;
-
-    if (type !== "Minion") {
-        error(`Action "${action.type}" requested prefabID ${prefabID}, which is not a duplicant.`, FAILURE_TYPE.ACTION_INVALID);
-        return state;
-    }
-
-    const gameObject = saveGame.body.gameObjects[type][index];
-    if (!gameObject) {
-        error(`Action "${action.type}" prefabID ${prefabID} mapped to prefab "${type}":${index}, which does not exist.`, FAILURE_TYPE.STATE_CORRUPT);
-        return state;
-    }
-
-    const newGameObject = modifier(gameObject, location);
-
-    // Aarrrgggh, normalize!
-    return {
-        ...state,
-        saveGame: {
-            ...saveGame,
-            body: {
-                ...saveGame.body,
-                gameObjects: {
-                    ...saveGame.body.gameObjects,
-                    [type]: [
-                        ...saveGame.body.gameObjects[type].slice(0, index),
-                        newGameObject,
-                        ...saveGame.body.gameObjects[type].slice(index + 1)
-                    ]
-                }
-            }
-        }
-    }
-}
-
-function modifyBehavior<T extends GameObjectBehavior>(
-    state: SaveEditorState,
-    action: AnyAction,
-    prefabID: number,
-    behaviorName: BehaviorName<T>,
-    modifier: (behavior: T, normalizedId: NormalizedID) => T
-): SaveEditorState {
-    return modifyGameObject(
-        state,
-        action,
-        prefabID,
-        (gameObject, normalizedId) => {
-            const behaviorIndex = gameObject.behaviors.findIndex(x => x.name === behaviorName);
-            if (behaviorIndex === -1) {
-                error(`Action "${action.type}" prefabID ${prefabID} prefab "${normalizedId.type}":${normalizedId.index} does not have behavior "${behaviorName}".`, FAILURE_TYPE.SAVEFILE_CORRUPT);
-                return gameObject;
-            }
-            const behavior = gameObject.behaviors[behaviorIndex] as T;
-
-            const newBehavior = modifier(behavior, normalizedId);
-
-            const newGameObject: GameObject = {
-                ...gameObject,
-                behaviors: [
-                    ...gameObject.behaviors.slice(0, behaviorIndex),
-                    newBehavior,
-                    ...gameObject.behaviors.slice(behaviorIndex + 1)
-
-                ]
-            }
-            return newGameObject
-        }
-    );
 }

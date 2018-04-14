@@ -75,7 +75,7 @@ class DuplicantEditor extends React.Component<Props, State> {
                 <div className="layout-item-fill">
                     <Tabs id="DuplicantEditCategories" className="ui-category-tabs fill-parent layout-vertical" renderActiveTabPanelOnly={true}>
                         <Tab className="layout-item-fill" id="general" title="General" panel={<GeneralPage duplicantID={duplicantID} />} />
-                        <Tab className="layout-item-fill" id="appearance" title="Appearance" panel={<AppearancePage />} disabled />
+                        <Tab className="layout-item-fill" id="appearance" title="Appearance" panel={<AppearancePage duplicantID={duplicantID} />} />
                         <Tab className="layout-item-fill" id="skills" title="Skills" panel={<SkillsPage duplicantID={duplicantID}/>} />
                         <Tab className="layout-item-fill" id="traits" title="Traits" panel={<TraitsPage duplicantID={duplicantID}/>} />
                         <Tab className="layout-item-fill" id="effects" title="Effects" panel={<EffectsPage duplicantID={duplicantID}/>} />

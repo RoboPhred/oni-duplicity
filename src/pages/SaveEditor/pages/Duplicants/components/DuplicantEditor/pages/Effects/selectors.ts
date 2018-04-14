@@ -1,8 +1,8 @@
 
 import { createStructuredSelector } from "../../../../../../../../state/utils";
 
-import { AttributeLevel, EffectInstance } from "../../../../../../../../services/save-editor/behaviors";
-import { makeGetDuplicantEffectsByID } from "../../../../../../../../services/save-editor/duplicants/selectors";
+import { EffectInstance } from "../../../../../../../../services/save-editor/behaviors";
+import { makeGetDuplicantEffects } from "../../../../../../../../services/save-editor/duplicants/selectors";
 
 import Props from "./props";
 
@@ -11,6 +11,6 @@ export interface StateProps {
 }
 
 const mapStateToProps = () => createStructuredSelector<Props, StateProps>({
-    effects: makeGetDuplicantEffectsByID("duplicantID")
+    effects: makeGetDuplicantEffects("duplicantID")
 });
 export default mapStateToProps;
