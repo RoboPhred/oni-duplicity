@@ -1,5 +1,5 @@
 
-### vNext
+### v1.2.0
 
 - Edit Duplicants
     - Current Job
