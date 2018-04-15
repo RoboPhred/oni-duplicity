@@ -85,6 +85,12 @@
             max-height: 100%;
         }
     }
+
+    .ui-duplicant-jobs {
+        .ui-current-role, .ui-target-role {
+            padding: 5px;
+        }
+    }
 }
 
 .ui-page.ui-page-changelog {

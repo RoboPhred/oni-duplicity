@@ -22,7 +22,7 @@ class DuplicantRolesPage extends React.Component<Props> {
             <div className="ui-duplicant-roles fill-parent">
                 <Tabs className="fill-parent layout-horizontal" vertical={true} renderActiveTabPanelOnly={true} id="DuplicantRolePages">
                     <Tab className="layout-item-fill" id="roles" title="Roles" panel={<RolesPage duplicantID={duplicantID} />} />
-                    <Tab id="aptitudes" title="Aptitudes"/>
+                    <Tab id="aptitudes" title="Aptitudes" disabled/>
                 </Tabs>
             </div>
         )

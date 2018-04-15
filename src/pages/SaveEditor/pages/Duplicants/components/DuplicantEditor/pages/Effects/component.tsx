@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import { autobind } from "core-decorators";
 
 import { NumericInput, MenuItem, Button } from "@blueprintjs/core";
-import { Select, IItemRendererProps } from "@blueprintjs/select";
 import { IconNames } from "@blueprintjs/icons";
+import { Select, IItemRendererProps } from "@blueprintjs/select";
+const StringSelect = Select.ofType<string>();
 
 
 import EFFECTS from "./effects";
@@ -15,8 +16,6 @@ import DuplicantEffectsProps from "./props";
 import mapStateToProps, { StateProps } from "./selectors";
 import mapDispatchToProps, { DispatchProps } from "./dispatch";
 
-
-const EffectsSelect = Select.ofType<string>();
 
 type Props = DuplicantEffectsProps & StateProps & DispatchProps;
 class DuplicantEffects extends React.Component<Props> {
@@ -51,7 +50,7 @@ class DuplicantEffects extends React.Component<Props> {
                     </table>
                 </div>
                 <div>
-                    <EffectsSelect
+                    <StringSelect
                         items={EFFECTS}
                         itemPredicate={this._filterItem}
                         itemRenderer={this._renderItem}
@@ -62,14 +61,14 @@ class DuplicantEffects extends React.Component<Props> {
                         popoverProps={{ minimal: true }}
                     >
                         <Button rightIcon="caret-down" text="Add a new Effect" />
-                    </EffectsSelect>
+                    </StringSelect>
                 </div>
             </div>
         )
     }
 
-    private _filterItem(query: string, trait: string) {
-        return trait.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+    private _filterItem(query: string, item: string) {
+        return item.toLowerCase().indexOf(query.toLowerCase()) !== -1;
     }
 
     @autobind()

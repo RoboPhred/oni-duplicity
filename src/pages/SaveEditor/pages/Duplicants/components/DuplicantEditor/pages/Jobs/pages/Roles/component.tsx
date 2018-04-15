@@ -1,15 +1,19 @@
 
 import * as React from "react";
 import { connect } from "react-redux";
-import { NumericInput } from "@blueprintjs/core";
+import { NumericInput, Button, MenuItem } from "@blueprintjs/core";
+import { Select, IItemRendererProps } from "@blueprintjs/select";
+const StringSelect = Select.ofType<string>();
+
 import { autobind } from "core-decorators";
 
 
 import DuplicantJobsPageProps from "./props";
 import mapStateToProps, { StateProps } from "./selectors";
+import mapDispatchToProps, { DispatchProps } from "./dispatch";
 
 
-type Props = DuplicantJobsPageProps & StateProps;
+type Props = DuplicantJobsPageProps & StateProps & DispatchProps;
 class DuplicantJobsPage extends React.Component<Props> {
     render() {
         const {
@@ -17,18 +21,55 @@ class DuplicantJobsPage extends React.Component<Props> {
             targetRole,
             roles
         } = this.props;
+
+        // Might want to make a constant for this, but this is better for future compatibility.
+        const knownRoles = Array.from(new Set(roles.map(x => x.name)));
+
         const rows = roles.map(x => (
             <JobRow key={x.name} jobID={x.name} mastery={x.mastery} experience={x.experience} setMastery={this._setMastery} setExperience={this._setExperience} />
         ));
+
         return (
             <div className={`ui-duplicant-jobs fill-parent container-scroll`}>
                 <div className="layout-vertical">
                     <div className="layout-horizontal">
-                        <div className="layout-item-fill">
-                            Current Role: {currentRole}
+                        <div className="ui-current-role pt-form-group pt-inline">
+                            <label className="pt-label">
+                                Current Role
+                            </label>
+                            <div className="pt-form-content">
+                                <StringSelect
+                                    items={knownRoles}
+                                    itemPredicate={this._filterItem}
+                                    itemRenderer={this._renderItem}
+                                    onItemSelect={this._onCurrentRoleSelected}
+                                    filterable={true}
+                                    resetOnClose={true}
+                                    resetOnSelect={true}
+                                    popoverProps={{ minimal: true }}
+                                >
+                                    <Button rightIcon="caret-down" text={currentRole || "[Unknown]"} />
+                                </StringSelect>
+                            </div>
                         </div>
-                        <div className="layout-item-fill">
-                            Target Role: {targetRole}
+                        <div className="ui-target-role pt-form-group pt-inline">
+                            <label className="pt-label">
+                                Target Role
+                            </label>
+                            <div className="pt-form-content">
+                                <StringSelect
+                                    items={knownRoles}
+                                    itemPredicate={this._filterItem}
+                                    itemRenderer={this._renderItem}
+                                    onItemSelect={this._onTargetRoleSelected}
+                                    filterable={true}
+                                    resetOnClose={true}
+                                    resetOnSelect={true}
+                                    popoverProps={{ minimal: true }}
+                                >
+                                    <Button rightIcon="caret-down" text={targetRole || "[Unknown]"} />
+                                </StringSelect>
+                            </div>
                         </div>
                     </div>
                     <table className="pt-html-table pt-html-table-striped fill-parent-width layout-item">
@@ -48,17 +89,68 @@ class DuplicantJobsPage extends React.Component<Props> {
         );
     }
 
-    @autobind()
-    private _setMastery(jobID: string, mastery: boolean) {
-
+    private _filterItem(query: string, item: string) {
+        return item.toLowerCase().indexOf(query.toLowerCase()) !== -1;
     }
 
     @autobind()
-    private _setExperience(jobID: string, experience: number) {
+    private _renderItem(effect: string, itemProps: IItemRendererProps) {
+        const {
+            modifiers,
+            handleClick
+        } = itemProps;
 
+        if (!modifiers.matchesPredicate) {
+            return null;
+        }
+
+        return (
+            <MenuItem
+                active={modifiers.active}
+                key={effect}
+                onClick={handleClick}
+                text={effect}
+            />
+        );
+    };
+
+    @autobind()
+    private _onCurrentRoleSelected(roleID: string) {
+        const {
+            duplicantID,
+            setCurrentRole
+        } = this.props;
+        setCurrentRole({ duplicantID, roleID });
+    }
+
+    @autobind()
+    private _onTargetRoleSelected(roleID: string) {
+        const {
+            duplicantID,
+            setTargetRole
+        } = this.props;
+        setTargetRole({ duplicantID, roleID });
+    }
+
+    @autobind()
+    private _setMastery(roleID: string, mastery: boolean) {
+        const {
+            duplicantID,
+            setMastery
+        } = this.props;
+        setMastery({ duplicantID, roleID, mastery });
+    }
+
+    @autobind()
+    private _setExperience(roleID: string, experience: number) {
+        const {
+            duplicantID,
+            setExperience
+        } = this.props;
+        setExperience({ duplicantID, roleID, experience });
     }
 }
-export default connect(mapStateToProps)(DuplicantJobsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(DuplicantJobsPage);
 
 
 interface JobRowProps {

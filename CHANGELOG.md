@@ -2,7 +2,10 @@
 ### vNext
 
 - Edit Duplicants
-    - Job
+    - Current Job
+    - Target Job
+    - Job Experience
+    - Job Mastery
 
 ### v1.1.0
 

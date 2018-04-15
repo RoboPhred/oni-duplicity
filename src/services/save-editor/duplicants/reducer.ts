@@ -34,10 +34,12 @@ import {
 } from "./actions";
 
 import duplicantAppearanceReducer from "./appearance/reducer";
+import duplicantResumeReducer from "./resume/reducer";
 
 export default function duplicantsReducer(state: SaveEditorState = defaultSaveEditorState, action: AnyAction): SaveEditorState {
     state = duplicantsRootReducer(state, action);
     state = duplicantAppearanceReducer(state, action);
+    state = duplicantResumeReducer(state, action);
     return state;
 }
 
