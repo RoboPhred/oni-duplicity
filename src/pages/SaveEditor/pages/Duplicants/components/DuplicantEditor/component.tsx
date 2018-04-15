@@ -23,6 +23,7 @@ import GeneralPage from "./pages/General";
 import AppearancePage from "./pages/Appearance";
 import SkillsPage from "./pages/Skills";
 import TraitsPage from "./pages/Traits";
+import JobsPage from "./pages/Jobs";
 import EffectsPage from "./pages/Effects";
 
 
@@ -78,6 +79,7 @@ class DuplicantEditor extends React.Component<Props, State> {
                         <Tab className="layout-item-fill" id="appearance" title="Appearance" panel={<AppearancePage duplicantID={duplicantID} />} />
                         <Tab className="layout-item-fill" id="skills" title="Skills" panel={<SkillsPage duplicantID={duplicantID}/>} />
                         <Tab className="layout-item-fill" id="traits" title="Traits" panel={<TraitsPage duplicantID={duplicantID}/>} />
+                        <Tab className="layout-item-fill" id="jobs" title="Jobs" panel={<JobsPage duplicantID={duplicantID}/>} />
                         <Tab className="layout-item-fill" id="effects" title="Effects" panel={<EffectsPage duplicantID={duplicantID}/>} />
                     </Tabs>
                 </div>

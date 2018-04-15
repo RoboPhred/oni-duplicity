@@ -1,4 +1,9 @@
 
+### vNext
+
+- Edit Duplicants
+    - Job
+
 ### v1.1.0
 
 - Edit Duplicants

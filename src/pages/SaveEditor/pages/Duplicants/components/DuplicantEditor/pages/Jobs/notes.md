@@ -4,6 +4,8 @@ RoleManager.cs
 
 
 
+// AptitudeByRoleID is hashed string of these keyes.
+// value is experience scale (multiplied by 50)
 
 public Dictionary<HashedString, RoleGroup> RoleGroups = new Dictionary<HashedString, RoleGroup>()
   {
@@ -116,11 +118,11 @@ public Dictionary<HashedString, RoleGroup> RoleGroups = new Dictionary<HashedStr
       "hat_role_rancher2"
     },
     {
-      JuniorResearcher.ID,
+      JuniorResearcher.ID, // JuniorResearcher
       "hat_role_research1"
     },
     {
-      Researcher.ID,
+      Researcher.ID, // Researcher
       "hat_role_research2"
     },
     {
@@ -128,7 +130,7 @@ public Dictionary<HashedString, RoleGroup> RoleGroups = new Dictionary<HashedStr
       "hat_role_research3"
     },
     {
-      JuniorMiner.ID,
+      JuniorMiner.ID, // "SeniorMiner "
       "hat_role_mining1"
     },
     {

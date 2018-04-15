@@ -20,13 +20,12 @@ type Props = DuplicantTraitsProps & StateProps & DispatchProps;
 class DuplicantTraits extends React.Component<Props> {
     render() {
         const {
-            className,
             traits
         } = this.props;
 
 
         return (
-            <div className={`fill-parent ui-duplicant-traits ${className}`}>
+            <div className={`fill-parent ui-duplicant-traits`}>
                 <TraitMultiSelect
                     className="fill-parent-width"
                     items={TRAITS}

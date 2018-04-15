@@ -22,7 +22,6 @@ type Props = DuplicantEffectsProps & StateProps & DispatchProps;
 class DuplicantEffects extends React.Component<Props> {
     render() {
         const {
-            className,
             effects
         } = this.props;
 
@@ -36,7 +35,7 @@ class DuplicantEffects extends React.Component<Props> {
             />);
 
         return (
-            <div className={`ui-duplicant-effects fill-parent layout-vertical ${className}`}>
+            <div className={`ui-duplicant-effects fill-parent layout-vertical`}>
                 <div className="container-scroll layout-item-fill">
                     <table className="pt-html-table pt-html-table-striped fill-parent-width">
                         <thead>

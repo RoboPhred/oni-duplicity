@@ -14,7 +14,6 @@ type Props = DuplicantSkillsProps & StateProps & DispatchProps;
 class DuplicantSkills extends React.Component<Props> {
     render() {
         const {
-            className,
             skills
         } = this.props;
 
@@ -29,7 +28,7 @@ class DuplicantSkills extends React.Component<Props> {
         />);
 
         return (
-            <div className={`ui-duplicant-skills fill-parent container-scroll ${className}`}>
+            <div className={`ui-duplicant-skills fill-parent container-scroll`}>
                 <table className="pt-html-table pt-html-table-striped">
                     <thead>
                         <tr>

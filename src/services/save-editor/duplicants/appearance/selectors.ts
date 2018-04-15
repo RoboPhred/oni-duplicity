@@ -1,7 +1,7 @@
 import { ParametricSelector, createSelector } from "reselect";
 
 import { AppState } from "../../../../state";
-import { Accessory, AccessorizerBehavior } from "../../behaviors";
+import { AccessorizerBehavior } from "../../behaviors";
 
 import { makeGetBehaviorByName } from "../../selectors";
 import { DuplicantByIDSelector, makeGetDuplicantByID } from "../selectors";

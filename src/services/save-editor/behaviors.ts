@@ -87,9 +87,10 @@ export const MinionResumeBehavior: BehaviorName<MinionResumeBehavior> = "MinionR
 export interface MinionResumeBehavior extends GameObjectBehavior {
     name: "MinionResume";
     parsedData: {
-        ExperienceByRoleID: [string, number][];
-        MasteryByRoleID: [string, boolean][];
-        AptitudeByRoleGroup: [{ hash: number }, number][];
+        ExperienceByRoleID: Map<string, number>;
+        MasteryByRoleID: Map<string, boolean>;
+        AptitudeByRoleGroup: Map<{hash: number}, number>;
+
         currentRole: string;
         targetRole: string;
     };
