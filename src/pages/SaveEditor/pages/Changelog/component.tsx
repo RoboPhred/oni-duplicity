@@ -2,7 +2,7 @@
 import * as React from "react";
 import Markdown from "react-markdown";
 
-const changelog = require("../../../../../CHANGELOG.md");
+const changelog = require("@/../CHANGELOG.md");
 
 export default class ChangelogPage extends React.Component {
     render() {

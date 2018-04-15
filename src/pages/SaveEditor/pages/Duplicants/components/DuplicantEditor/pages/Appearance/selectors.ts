@@ -1,14 +1,14 @@
 
-import { createStructuredSelector } from "../../../../../../../../state/utils";
+import { createStructuredSelector } from "@/state/utils";
 
-import { makeGetDuplicantByID } from "../../../../../../../../services/save-editor/duplicants/selectors";
+import { makeGetDuplicantByID } from "@/services/save-editor/duplicants/selectors";
 import {
     makeGetDuplicantEyes,
     makeGetDuplicantHair,
     makeGetDuplicantHead,
     makeGetDuplicantMouth,
     makeGetDuplicantBody
-} from "../../../../../../../../services/save-editor/duplicants/appearance/selectors";
+} from "@/services/save-editor/duplicants/appearance/selectors";
 
 import Props from "./props";
 

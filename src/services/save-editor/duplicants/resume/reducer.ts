@@ -1,4 +1,5 @@
 import { AnyAction } from "redux";
+import { MinionResumeBehavior } from "oni-save-parser";
 
 import { SaveEditorState, defaultSaveEditorState } from "../../state";
 
@@ -11,7 +12,6 @@ import {
     ACTION_DUPLICANT_ROLE_TARGET_SET,
     ACTION_DUPLICANT_ROLE_CURRENT_SET
 } from "./actions";
-import { MinionResumeBehavior } from "../../behaviors";
 
 
 export default function duplicantAccessoriesReducer(state: SaveEditorState = defaultSaveEditorState, _action: AnyAction): SaveEditorState {

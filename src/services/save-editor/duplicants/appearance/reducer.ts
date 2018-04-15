@@ -5,9 +5,13 @@ import { SaveEditorState, defaultSaveEditorState } from "../../state";
 
 import { modifyBehavior } from "../../reducer-utils";
 
-import { AccessorizerBehavior, Accessory } from "../../behaviors";
-
-import { getIndexOfType, getAccessoryOrdinal, makeAccessoryID } from "./utils";
+import {
+    AccessorizerBehavior,
+    Accessory,
+    getIndexOfAccessoryType,
+    getAccessoryOrdinal,
+    makeAccessoryID
+} from "oni-save-parser";
 
 import {
     ACTION_DUPLICANT_APPEARANCE_EYES_SET,
@@ -136,7 +140,7 @@ function modifyAccessory(
         AccessorizerBehavior,
         behavior => {
             const oldAccessories = behavior.parsedData!.accessories;
-            const accIndex = getIndexOfType(oldAccessories, accessoryType);
+            const accIndex = getIndexOfAccessoryType(oldAccessories, accessoryType);
             const newAccessory: Accessory = {
                 guid: {
                     Guid: accessoryID

@@ -1,7 +1,7 @@
 import { ParametricSelector, createSelector } from "reselect";
+import { MinionResumeBehavior } from "oni-save-parser";
 
-import { AppState } from "../../../../state";
-import { MinionResumeBehavior } from "../../behaviors";
+import { AppState } from "@/state";
 
 import { makeGetBehaviorByName } from "../../selectors";
 import { DuplicantByIDSelector, makeGetDuplicantByID } from "../selectors";

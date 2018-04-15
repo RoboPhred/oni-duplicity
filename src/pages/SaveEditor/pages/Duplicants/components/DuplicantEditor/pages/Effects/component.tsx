@@ -2,14 +2,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { autobind } from "core-decorators";
+import { AI_EFFECT_IDS } from "oni-save-parser";
 
 import { NumericInput, MenuItem, Button } from "@blueprintjs/core";
 import { IconNames } from "@blueprintjs/icons";
 import { Select, IItemRendererProps } from "@blueprintjs/select";
 const StringSelect = Select.ofType<string>();
 
-
-import EFFECTS from "./effects";
 
 
 import DuplicantEffectsProps from "./props";
@@ -51,7 +50,7 @@ class DuplicantEffects extends React.Component<Props> {
                 </div>
                 <div>
                     <StringSelect
-                        items={EFFECTS}
+                        items={AI_EFFECT_IDS}
                         itemPredicate={this._filterItem}
                         itemRenderer={this._renderItem}
                         onItemSelect={this._onEffectSelected}

@@ -1,6 +1,9 @@
 
 import { AnyAction } from "redux";
 import uuidV4 from "uuid/v4";
+import { getBehavior, KPrefabIDBehavior } from "oni-save-parser";
+
+import { warning, error, FAILURE_TYPE } from "@/logging";
 
 import { SaveEditorState, defaultSaveEditorState, NormalizedID } from "../state";
 
@@ -11,10 +14,6 @@ import {
     ACTION_SAVEFILE_SAVE_START,
     ACTION_SAVEFILE_SAVE_END
 } from "./actions";
-
-import { getBehavior, KPrefabIDBehavior } from "./../behaviors";
-import { warning, error, FAILURE_TYPE } from "../../../logging";
-
 
 export default function saveFileReducer(state: SaveEditorState = defaultSaveEditorState, _action: AnyAction): SaveEditorState {
     const action = _action as SavefileActions;

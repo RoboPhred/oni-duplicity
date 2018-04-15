@@ -1,8 +1,8 @@
 
-import { createStructuredSelector } from "../../../../../../../../state/utils";
+import { AttributeLevel } from "oni-save-parser";
 
-import { AttributeLevel } from "../../../../../../../../services/save-editor/behaviors";
-import { makeGetDuplicantSkills } from "../../../../../../../../services/save-editor/duplicants/selectors";
+import { createStructuredSelector } from "@/state/utils";
+import { makeGetDuplicantSkills } from "@/services/save-editor/duplicants/selectors";
 
 import Props from "./props";
 

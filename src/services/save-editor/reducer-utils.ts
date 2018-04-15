@@ -1,9 +1,10 @@
 
+import { BehaviorName } from "oni-save-parser";
+
 import { SaveEditorState, NormalizedID } from "./state";
 import { AnyAction } from "redux";
 import { GameObject, GameObjectBehavior } from "oni-save-parser";
 import { error, FAILURE_TYPE } from "../../logging";
-import { BehaviorName } from "./behaviors";
 
 
 export function modifyGameObject(

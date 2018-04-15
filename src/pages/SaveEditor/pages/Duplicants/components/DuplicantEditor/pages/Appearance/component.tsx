@@ -9,12 +9,12 @@ import { Select, IItemRendererProps } from "@blueprintjs/select";
 const StringSelect = Select.ofType<string>();
 
 import { 
-    EYES,
-    HAIRS,
-    HEADS,
-    MOUTHS,
-    BODIES
-} from "../../../../../../../../services/save-editor/duplicants/appearance/accessories";
+    ACCESSORIZER_EYE_GUIDS,
+    ACCESSORIZER_HAIR_GUIDS,
+    ACCESSORIZER_HEAD_GUIDS,
+    ACCESSORIZER_MOUTH_GUIDS,
+    ACCESSORIZER_BODY_GUIDS
+} from "oni-save-parser";
 
 
 import DuplicantAccessoryPageProps from "./props";
@@ -45,11 +45,11 @@ class DuplicantAccessoryPage extends React.Component<Props> {
 
         return (
             <div className={`ui-duplicant-accessories fill-parent layout-vertical container-scroll`}>
-                <AppearanceGroup name="Eyes" duplicantID={duplicantID} value={eyes} accessories={EYES} onSet={setEyes}/>
-                <AppearanceGroup name="Head" duplicantID={duplicantID} value={head} accessories={HEADS} onSet={setHead}/>
-                <AppearanceGroup name="Hair" duplicantID={duplicantID} value={hair} accessories={HAIRS} onSet={setHair}/>
-                <AppearanceGroup name="Mouth" duplicantID={duplicantID} value={mouth} accessories={MOUTHS} onSet={setMouth}/>
-                <AppearanceGroup name="Body" duplicantID={duplicantID} value={body} accessories={BODIES} onSet={setBody}/>
+                <AppearanceGroup name="Eyes" duplicantID={duplicantID} value={eyes} accessories={ACCESSORIZER_EYE_GUIDS} onSet={setEyes}/>
+                <AppearanceGroup name="Head" duplicantID={duplicantID} value={head} accessories={ACCESSORIZER_HEAD_GUIDS} onSet={setHead}/>
+                <AppearanceGroup name="Hair" duplicantID={duplicantID} value={hair} accessories={ACCESSORIZER_HAIR_GUIDS} onSet={setHair}/>
+                <AppearanceGroup name="Mouth" duplicantID={duplicantID} value={mouth} accessories={ACCESSORIZER_MOUTH_GUIDS} onSet={setMouth}/>
+                <AppearanceGroup name="Body" duplicantID={duplicantID} value={body} accessories={ACCESSORIZER_BODY_GUIDS} onSet={setBody}/>
             </div>
         );
     }

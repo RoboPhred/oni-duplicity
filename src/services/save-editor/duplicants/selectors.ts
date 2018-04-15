@@ -1,14 +1,9 @@
 
 import { GameObject } from "oni-save-parser";
 import { createSelector, ParametricSelector } from "reselect";
-import { Vector3 } from "oni-save-parser/dts/interfaces";
-
-import { AppState } from "../../../state";
-
-import { makeGetGameObjectsByType, makeGetBehaviorByName } from "../selectors";
-
 import {
-    getBehavior,
+    MinionGender,
+    Vector3,
     KPrefabIDBehavior,
     MinionIdentityBehavior,
     AIAttributeLevelsBehavior,
@@ -18,9 +13,15 @@ import {
     EffectInstance,
     HealthBehavior,
     AccessorizerBehavior,
-    Accessory
-} from "../behaviors";
-import { Gender } from "./interfaces";
+    Accessory,
+    getBehavior,
+} from "oni-save-parser";
+
+import { AppState } from "../../../state";
+
+import { makeGetGameObjectsByType, makeGetBehaviorByName } from "../selectors";
+
+
 
 
 export const duplicants = makeGetGameObjectsByType("Minion");
@@ -137,7 +138,7 @@ export function makeGetDuplicantScale<Props>(source: (keyof Props) | DuplicantBy
     );
 }
 
-export function makeGetDuplicantGender<Props>(source: (keyof Props) | DuplicantByIDSelector<Props>): ParametricSelector<AppState, Props, Gender | null> {
+export function makeGetDuplicantGender<Props>(source: (keyof Props) | DuplicantByIDSelector<Props>): ParametricSelector<AppState, Props, MinionGender | null> {
     let selector: DuplicantByIDSelector<Props>;
     if (typeof source === "function") {
         selector = source;

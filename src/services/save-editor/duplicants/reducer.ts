@@ -1,14 +1,8 @@
 
 import { AnyAction } from "redux";
-import { GameObjectBehavior, GameObject } from "oni-save-parser";
-
-import { error, FAILURE_TYPE, warning } from "../../../logging";
-
-import { SaveEditorState, defaultSaveEditorState, NormalizedID } from "../state";
-
-import { modifyGameObject, modifyBehavior } from "../reducer-utils";
-
 import {
+    GameObjectBehavior,
+    GameObject,
     MinionIdentityBehavior,
     AIAttributeLevelsBehavior,
     BehaviorName,
@@ -16,7 +10,13 @@ import {
     AIEffectsBehavior,
     HealthBehavior,
     AccessorizerBehavior
-} from "../behaviors";
+} from "oni-save-parser";
+
+import { error, FAILURE_TYPE, warning } from "../../../logging";
+
+import { SaveEditorState, defaultSaveEditorState, NormalizedID } from "../state";
+
+import { modifyGameObject, modifyBehavior } from "../reducer-utils";
 
 import {
     ACTION_DUPLICANT_RENAME,

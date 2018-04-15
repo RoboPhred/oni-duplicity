@@ -2,6 +2,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { autobind } from "core-decorators";
+import { HEALTH_STATE_NAMES, MINION_IDENTITY_GENDERS, MinionGender } from "oni-save-parser";
 
 import { Button, MenuItem, NumericInput } from "@blueprintjs/core";
 import { Select, IItemRendererProps } from "@blueprintjs/select";
@@ -12,24 +13,6 @@ const NumberSelect = Select.ofType<number>();
 import DuplicantGeneralProps from "./props";
 import mapStateToProps, { StateProps } from "./selectors";
 import mapDispatchToProps, { DispatchProps } from "./dispatch";
-import { Gender } from "../../../../../../../../services/save-editor/duplicants/interfaces";
-
-
-// TODO: export from oni-save-parser
-const HEALTH_STATE: string[] = [
-    // The order of these is important!
-    //  The value is stored in-game as an int32 enum,
-    //  and the order of these correspond to the
-    //  enum's integer value.
-    "Perfect",
-    "Alright",
-    "Scuffed",
-    "Injured",
-    "Critical",
-    "Incapacited",
-    "Dead",
-    "Invincible"
-];
 
 
 // We only care about > 0
@@ -49,8 +32,8 @@ class DuplicantGeneralPage extends React.Component<Props> {
         const scaleY = scale ? scale.y : 1;
 
         let healthStateStr: string;
-        if (healthState != null && healthState >= 0 && healthState < HEALTH_STATE.length) {
-            healthStateStr = HEALTH_STATE[healthState];
+        if (healthState != null && healthState >= 0 && healthState < HEALTH_STATE_NAMES.length) {
+            healthStateStr = HEALTH_STATE_NAMES[healthState];
         }
         else {
             healthStateStr = `<Unknown Health State ${healthState}>`;
@@ -65,7 +48,7 @@ class DuplicantGeneralPage extends React.Component<Props> {
                     <div className="pt-form-content">
                         <StringSelect
                             // TODO: Export from oni-save-parser
-                            items={["MALE", "FEMALE", "NB"]}
+                            items={MINION_IDENTITY_GENDERS}
                             itemRenderer={this._renderItem}
                             onItemSelect={this._onGenderSelected}
                             filterable={false}
@@ -117,7 +100,7 @@ class DuplicantGeneralPage extends React.Component<Props> {
                     </label>
                     <div className="pt-form-content">
                         <StringSelect
-                            items={HEALTH_STATE}
+                            items={HEALTH_STATE_NAMES}
                             itemRenderer={this._renderItem}
                             onItemSelect={this._onHealthStateSelected}
                             filterable={false}
@@ -163,7 +146,7 @@ class DuplicantGeneralPage extends React.Component<Props> {
         } = this.props;
 
         // Need to get the enum value of the display text.
-        const stateIndex = HEALTH_STATE.indexOf(healthState);
+        const stateIndex = HEALTH_STATE_NAMES.indexOf(healthState);
         if (stateIndex === -1) {
             return;
         }
@@ -177,7 +160,7 @@ class DuplicantGeneralPage extends React.Component<Props> {
             duplicantID,
             setGender
         } = this.props;
-        setGender({duplicantID, gender: gender as Gender});
+        setGender({duplicantID, gender: gender as MinionGender});
     }
 
     @autobind()

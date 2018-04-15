@@ -1,10 +1,15 @@
 
 import { Selector, createSelector, ParametricSelector } from "reselect";
-import { GameObject, GameObjectBehavior } from "oni-save-parser";
+import {
+    GameObject,
+    GameObjectBehavior,
+    BehaviorName,
+    MinionIdentityBehavior,
+    KPrefabIDBehavior,
+    getBehavior    
+} from "oni-save-parser";
 
 import { AppState } from "../../state";
-
-import { BehaviorName, getBehavior, MinionIdentityBehavior, KPrefabIDBehavior } from "./behaviors";
 
 
 export const saveEditor = (state: AppState) => state.saveEditor;

@@ -1,13 +1,10 @@
 import { ParametricSelector, createSelector } from "reselect";
+import { AccessorizerBehavior, getAccessoryOfType } from "oni-save-parser";
 
-import { AppState } from "../../../../state";
-import { AccessorizerBehavior } from "../../behaviors";
+import { AppState } from "@/state";
 
 import { makeGetBehaviorByName } from "../../selectors";
 import { DuplicantByIDSelector, makeGetDuplicantByID } from "../selectors";
-
-import { getAccessoryOfType } from "./utils";
-
 
 export const makeGetDuplicantEyes = makeGetDuplicantAppearanceMaker("eyes");
 export const makeGetDuplicantHair = makeGetDuplicantAppearanceMaker("hair");

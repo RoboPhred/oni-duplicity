@@ -1,9 +1,10 @@
 
-import { createStructuredSelector } from "../../../../../../state/utils";
+import { MinionIdentityBehavior } from "oni-save-parser";
 
-import { MinionIdentityBehavior } from "../../../../../../services/save-editor/behaviors";
-import { makeGetBehaviorByName } from "../../../../../../services/save-editor/selectors";
-import { makeGetDuplicantByID } from "../../../../../../services/save-editor/duplicants/selectors";
+import { createStructuredSelector } from "@/state/utils";
+
+import { makeGetBehaviorByName } from "@/services/save-editor/selectors";
+import { makeGetDuplicantByID } from "@/services/save-editor/duplicants/selectors";
 
 import Props from "./props";
 
