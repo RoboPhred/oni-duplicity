@@ -26,13 +26,13 @@ class ActiveAwareLink extends React.Component<Props> {
         let match: boolean;
         
         if (exact) match = to === pathName;
-        else match = pathName.startsWith(to.toString());
+        else match = matchPartialPath(pathName, to.toString());
 
         if (match) {
-            return <span className={`pt-active pt-intent-primary ${className || ''}`}>{children}</span>;
+            return <span className={`pt-active pt-intent-primary ${className || ""}`}>{children}</span>;
         }
 
-        return <Link to={to} className={`${className || ''}`} {...other} onClick={this._onClick}>{children}</Link>;
+        return <Link to={to} className={className || ""} {...other} onClick={this._onClick}>{children}</Link>;
     }
 
     @autobind()
@@ -47,7 +47,7 @@ class ActiveAwareLink extends React.Component<Props> {
 
         let match: boolean;
         if (exact) match = to === pathName;
-        else match = pathName.startsWith(to.toString());
+        else match = matchPartialPath(pathName, to.toString());
 
         if (match) {
             event.preventDefault();
@@ -60,3 +60,13 @@ class ActiveAwareLink extends React.Component<Props> {
     }
 }
 export default withRouter(ActiveAwareLink);
+
+function matchPartialPath(pathName: string, to: string): boolean {
+    if (pathName === to) return true;
+
+    if (!pathName.startsWith(to)) return false;
+
+    // Need to make sure we matched up to a path seperator.
+    if (pathName[to.length] !== '/') return false;
+    return true;
+}

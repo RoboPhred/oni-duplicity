@@ -18,21 +18,25 @@ import {
 import { IconNames } from "@blueprintjs/icons";
 
 import mapStateToProps, { StateProps } from "./selectors";
-import mapDispatchToProps, { DispatchProps } from "./dispatch";
 
-import ErrorPage from "../../pages/Error";
+import AppNavBar from "../AppNavBar";
+import AppNavMenu from "../AppNavMenu";
+
 import NoSaveLoadedPage from "../../pages/NoSaveLoaded";
 import LoadingSaveFilePage from "../../pages/LoadingSaveFile";
 import SaveEditorPage from "../../pages/SaveEditor";
+import ChangelogPage from "../../pages/Changelog";
+import ErrorPage from "../../pages/Error";
+import Error404Page from "../../pages/404";
+import { NavMenuEntry } from "../AppNavMenu/interfaces";
 
-type OwnProps = StateProps & DispatchProps;
+type OwnProps = StateProps;
 class AppComponent extends React.Component<OwnProps> {
     private _input: HTMLInputElement | null = null;
 
     render() {
         const {
             saveFileName,
-            isSaveEnabled,
             isSaveChosen,
             isSaveLoading,
             isSaveSaving,
@@ -41,7 +45,11 @@ class AppComponent extends React.Component<OwnProps> {
 
         let rootComponent: React.ComponentType;
         let requireExactPath = true;
+        let redirectOn404: string | null = null;
 
+        // TODO: Load from somewhere
+        let navMenuEntries: NavMenuEntry[] = [];
+        
         if (loadError) {
             // Show error screen
             rootComponent = ErrorPage;
@@ -49,6 +57,7 @@ class AppComponent extends React.Component<OwnProps> {
         else if (!isSaveChosen) {
             // Show file chooser.
             rootComponent = NoSaveLoadedPage
+            redirectOn404 = "/editor";
         }
         else if (isSaveLoading) {
             // Show loading screen.
@@ -58,33 +67,28 @@ class AppComponent extends React.Component<OwnProps> {
             // Show editor
             rootComponent = SaveEditorPage;
             requireExactPath = false;
+            navMenuEntries = [
+                {
+                    path: "/editor/duplicants",
+                    name: "Duplicants"
+                }
+            ];
         }
 
         return (
             <div className="ui-app-root pt-app pt-dark fill-parent layout-vertical">
-                <Navbar className="layout-item ui-app-navbar">
-                    <NavbarGroup>
-                        <NavbarHeading>ONI Save Editor</NavbarHeading>
-                        <Text ellipsize={true}>{saveFileName || ""}</Text>
-                    </NavbarGroup>
-                    <NavbarGroup align={Alignment.RIGHT}>
-                        <Button icon={IconNames.UPLOAD} onClick={this._onLoadClick}>Load</Button>
-                        <Button icon={IconNames.FLOPPY_DISK} disabled={!isSaveEnabled} onClick={this._onSaveClick}>Save</Button>
-                        <input
-                            ref={el => this._input = el}
-                            style={{display: "none"}}
-                            className="pt-button pt-intent-primary"
-                            type="file"
-                            accept=".sav"
-                            onChange={this._onLoadFile}
-                        />
-                    </NavbarGroup>
-                </Navbar>
-                <div className="layout-item-fill">
-                    <Switch>
-                        <Route exact={requireExactPath} path="/" component={rootComponent}/>
-                        <Redirect to="/"/>
-                    </Switch>
+                <AppNavBar className="layout-item"/>
+                <div className="layout-item-fill layout-horizontal">
+                    <AppNavMenu className="layout-item" entries={navMenuEntries} />
+                    <div className="layout-item-fill">
+                        <Switch>
+                            <Route exact={requireExactPath} path="/editor" component={rootComponent}/>
+                            <Route exact path="/404" component={Error404Page}/>
+                            <Route exact path="/changelog" component={ChangelogPage} />
+                            <Redirect exact from="/" to="/editor"/>
+                            { redirectOn404 ? <Redirect to={redirectOn404}/> : <Route component={Error404Page}/> }
+                        </Switch>
+                    </div>
                 </div>
                 <Dialog isOpen={isSaveSaving} title="Saving File" icon={IconNames.SAVED} isCloseButtonShown={false}>
                     <NonIdealState>
@@ -100,22 +104,6 @@ class AppComponent extends React.Component<OwnProps> {
         );
     }
 
-    @autobind()
-    private _onSaveClick() {
-        this.props.saveSavefile({});
-    }
 
-    @autobind()
-    private _onLoadClick() {
-        if (!this._input) return;
-        this._input.click();
-    }
-
-    @autobind()
-    private _onLoadFile(change: React.ChangeEvent<HTMLInputElement>) {
-        const files = change.target.files;
-        if (!files || files.length === 0) return;
-        this.props.loadSavefile({file: files[0]});
-    }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(AppComponent);
+export default connect(mapStateToProps)(AppComponent);

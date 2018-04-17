@@ -15,7 +15,7 @@
     }
 }
 
-.ui-page.ui-page-404 {
+.ui-page-404 {
     .ui-title {
         font-size: 20pt;
     }
@@ -29,14 +29,12 @@
     }
 }
 
-.ui-page.ui-page-saveeditor {
-    .ui-nav-menu {
-        padding: 15px;
-        background-color: $dark-gray5;
-    }
+.ui-nav-menu {
+    padding: 15px;
+    background-color: $dark-gray5;
 }
 
-.ui-page.ui-page-duplicants {
+.ui-page-duplicants {
     .ui-duplicant-list {
         background-color: $gray5;
         // Room for 2 portraits and their margins
@@ -93,7 +91,7 @@
     }
 }
 
-.ui-page.ui-page-changelog {
+.ui-page-changelog {
     padding: 15px;
 }
 
