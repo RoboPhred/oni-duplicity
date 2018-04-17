@@ -57,7 +57,7 @@
     "@blueprintjs/select": "^2.0.0",
     "core-decorators": "^0.20.0",
     "file-saver": "^1.3.8",
-    "oni-save-parser": "git+https://github.com/RoboPhred/oni-save-parser.git#develop",
+    "oni-save-parser": "^1.2.0",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-files": "^2.4.5",

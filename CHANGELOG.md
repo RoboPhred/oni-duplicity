@@ -1,3 +1,5 @@
+### v1.2.1
+- Fix save corruption when text with multi-byte accents are encountered.
 
 ### v1.2.0
 
