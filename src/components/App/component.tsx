@@ -69,11 +69,33 @@ class AppComponent extends React.Component<OwnProps> {
             requireExactPath = false;
             navMenuEntries = [
                 {
-                    path: "/editor/duplicants",
-                    name: "Duplicants"
+                    // Save Editor items
+                    type: "group",
+                    entries: [
+                        {
+                            type: "link",
+                            path: "/editor/duplicants",
+                            name: "Duplicants"
+                        }
+                    ]
                 }
             ];
         }
+
+        navMenuEntries.push(
+            {
+                // Utility items
+                type: "group",
+                entries: [
+                    
+                ]
+            },
+            {
+                type: "link",
+                path: "/changelog",
+                name: "Duplicity Changelog"
+            }
+        );
 
         return (
             <div className="ui-app-root pt-app pt-dark fill-parent layout-vertical">
