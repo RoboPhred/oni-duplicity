@@ -1,5 +1,6 @@
 ### v1.2.1
 - Fix save corruption when text with multi-byte accents are encountered.
+- Refactor URL layout to make way for future utilities.
 
 ### v1.2.0
 
