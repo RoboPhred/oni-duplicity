@@ -3,6 +3,7 @@ import { AnyAction } from "redux";
 import { SaveEditorState, defaultSaveEditorState } from "./state";
 
 import saveFileReducer from "./savefile/reducer";
+import generalReducer from "./general/reducer";
 import duplicantsReducer from "./duplicants/reducer";
 
 /**
@@ -16,6 +17,7 @@ import duplicantsReducer from "./duplicants/reducer";
  */
 const reducers = [
     saveFileReducer,
+    generalReducer,
     duplicantsReducer
 ];
 

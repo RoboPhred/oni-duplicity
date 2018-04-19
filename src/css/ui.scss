@@ -15,6 +15,12 @@
     }
 }
 
+.ui-nav-menu {
+    padding: 15px;
+    background-color: $dark-gray5;
+}
+
+
 .ui-page-404 {
     .ui-title {
         font-size: 20pt;
@@ -29,9 +35,9 @@
     }
 }
 
-.ui-nav-menu {
+
+.ui-page-general {
     padding: 15px;
-    background-color: $dark-gray5;
 }
 
 .ui-page-duplicants {
@@ -94,6 +100,8 @@
 .ui-page-changelog {
     padding: 15px;
 }
+
+
 
 .pt-multi-select-popover, .pt-select-popover {
     .pt-menu {

@@ -1,9 +1,9 @@
 
 import { bindActionCreators } from "redux";
 
-import { Dispatch } from "../../../../../../state/utils";
+import { Dispatch } from "@/state/utils";
 
-import { renameDuplicant } from "../../../../../../services/save-editor/duplicants/actions";
+import { renameDuplicant } from "@/services/save-editor/duplicants/actions";
 
 export interface DispatchProps {
     renameDuplicant: typeof renameDuplicant;

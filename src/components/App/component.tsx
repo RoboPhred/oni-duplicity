@@ -40,10 +40,16 @@ class AppComponent extends React.Component<OwnProps> {
         const navMenuEntries: NavMenuEntry[] = [
             {
                 // Save Editor
+                //  TODO: have save editor itself define these.
                 type: "link",
                 path: "/editor",
                 name: "Save Editor",
                 subEntries: [
+                    {
+                        type: "link",
+                        path: "/editor/general",
+                        name: "General"
+                    },
                     {
                         type: "link",
                         path: "/editor/duplicants",

@@ -17,6 +17,7 @@ import NoSaveLoadedPage from "./components/NoSaveLoaded";
 import ErrorPage from "./components/Error";
 import LoadingSaveFilePage from "./components/LoadingSaveFile";
 
+import GeneralPage from "./pages/General";
 import DuplicantsPage from "./pages/Duplicants";
 
 import Error404Page from "../404";
@@ -34,23 +35,24 @@ class SaveEditorPageComponent extends React.Component<Props> {
 
         if (loadError) {
             // Show error screen
-            return <ErrorPage/>;
+            return <ErrorPage />;
         }
 
         if (!isSaveChosen) {
-            return <NoSaveLoadedPage/>
+            return <NoSaveLoadedPage />
         }
 
         else if (isSaveLoading) {
-            return <LoadingSaveFilePage/>;
+            return <LoadingSaveFilePage />;
         }
 
         return (
             <div className="ui-page ui-page-saveeditor fill-parent">
                 <Switch>
                     <Redirect exact from="/editor" to="/editor/duplicants" />
+                    <Route exact path="/editor/general" component={GeneralPage} />
                     <Route exact path="/editor/duplicants" component={DuplicantsPage} />
-                    <Route component={Error404Page}/>
+                    <Route component={Error404Page} />
                 </Switch>
             </div>
         )

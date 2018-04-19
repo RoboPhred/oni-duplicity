@@ -1,7 +1,7 @@
 
 import { KPrefabID, MinionGender } from "oni-save-parser";
 
-import { createAction } from "../../../action-utils";
+import { createAction } from "@/action-utils";
 
 
 export const ACTION_DUPLICANT_RENAME = "@save-editor/duplicants/rename";
