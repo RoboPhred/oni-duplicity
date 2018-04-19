@@ -1,9 +1,7 @@
 
-import { createStructuredSelector } from "../../state/utils";
+import { createStructuredSelector } from "@/state/utils";
 
-import {
-    loadError
-} from "../../services/save-editor/savefile/selectors";
+import { loadError } from "@/services/save-editor/savefile/selectors";
 
 
 export interface StateProps {

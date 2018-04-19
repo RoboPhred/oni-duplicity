@@ -3,6 +3,7 @@ export interface NavMenuLink {
     type: "link";
     path: string;
     name: string;
+    collapse?: boolean;
     subEntries?: NavMenuEntry[];
 }
 

@@ -1,5 +1,5 @@
 
-import { Dispatch } from "../../state/utils";
+import { Dispatch } from "@/state/utils";
 
 export interface DispatchProps { }
 

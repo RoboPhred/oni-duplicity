@@ -43,7 +43,7 @@ class AppNavMenu extends React.Component<AppNavMenuProps & RouteComponentProps<a
 
             if (Array.isArray(rendered)) {
                 fragments.push(...rendered);
-                previousWasGroup = true;
+                previousWasGroup = rendered.length > 0;
             }
             else {
                 fragments.push(rendered);
@@ -69,10 +69,11 @@ class AppNavMenu extends React.Component<AppNavMenuProps & RouteComponentProps<a
                 const {
                     name,
                     path,
-                    subEntries
+                    subEntries,
+                    collapse
                 } = entry;
                 const primaryLink = <ActiveAwareLink key={key} exact={subEntries != null} className="pt-menu-item" to={path}>{name}</ActiveAwareLink>;
-                if (!subEntries || !matchPartialPath(pathName, path)) {
+                if (!subEntries || (collapse && !matchPartialPath(pathName, path))) {
                     return primaryLink;
                 }
                 else {

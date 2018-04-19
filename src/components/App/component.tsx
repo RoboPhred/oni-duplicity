@@ -22,11 +22,8 @@ import mapStateToProps, { StateProps } from "./selectors";
 import AppNavBar from "../AppNavBar";
 import AppNavMenu from "../AppNavMenu";
 
-import NoSaveLoadedPage from "../../pages/NoSaveLoaded";
-import LoadingSaveFilePage from "../../pages/LoadingSaveFile";
 import SaveEditorPage from "../../pages/SaveEditor";
 import ChangelogPage from "../../pages/Changelog";
-import ErrorPage from "../../pages/Error";
 import Error404Page from "../../pages/404";
 import { NavMenuEntry } from "../AppNavMenu/interfaces";
 
@@ -37,52 +34,23 @@ class AppComponent extends React.Component<OwnProps> {
     render() {
         const {
             saveFileName,
-            isSaveChosen,
-            isSaveLoading,
-            isSaveSaving,
-            loadError
+            isSaveSaving
         } = this.props;
 
-        let rootComponent: React.ComponentType;
-        let requireExactPath = true;
-        let redirectOn404: string | null = null;
-
-        // TODO: Load from somewhere
-        let navMenuEntries: NavMenuEntry[] = [];
-        
-        if (loadError) {
-            // Show error screen
-            rootComponent = ErrorPage;
-        }
-        else if (!isSaveChosen) {
-            // Show file chooser.
-            rootComponent = NoSaveLoadedPage
-            redirectOn404 = "/editor";
-        }
-        else if (isSaveLoading) {
-            // Show loading screen.
-            rootComponent = LoadingSaveFilePage;
-        }
-        else {
-            // Show editor
-            rootComponent = SaveEditorPage;
-            requireExactPath = false;
-            navMenuEntries = [
-                {
-                    // Save Editor items
-                    type: "group",
-                    entries: [
-                        {
-                            type: "link",
-                            path: "/editor/duplicants",
-                            name: "Duplicants"
-                        }
-                    ]
-                }
-            ];
-        }
-
-        navMenuEntries.push(
+        const navMenuEntries: NavMenuEntry[] = [
+            {
+                // Save Editor
+                type: "link",
+                path: "/editor",
+                name: "Save Editor",
+                subEntries: [
+                    {
+                        type: "link",
+                        path: "/editor/duplicants",
+                        name: "Duplicants"
+                    }
+                ]
+            },
             {
                 // Utility items
                 type: "group",
@@ -95,7 +63,7 @@ class AppComponent extends React.Component<OwnProps> {
                 path: "/changelog",
                 name: "Duplicity Changelog"
             }
-        );
+        ];
 
         return (
             <div className="ui-app-root pt-app pt-dark fill-parent layout-vertical">
@@ -104,11 +72,11 @@ class AppComponent extends React.Component<OwnProps> {
                     <AppNavMenu className="layout-item" entries={navMenuEntries} />
                     <div className="layout-item-fill">
                         <Switch>
-                            <Route exact={requireExactPath} path="/editor" component={rootComponent}/>
+                            <Route path="/editor" component={SaveEditorPage}/>
                             <Route exact path="/404" component={Error404Page}/>
                             <Route exact path="/changelog" component={ChangelogPage} />
                             <Redirect exact from="/" to="/editor"/>
-                            { redirectOn404 ? <Redirect to={redirectOn404}/> : <Route component={Error404Page}/> }
+                            <Route component={Error404Page}/>
                         </Switch>
                     </div>
                 </div>

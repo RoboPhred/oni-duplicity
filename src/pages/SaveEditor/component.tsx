@@ -1,6 +1,7 @@
 
 import * as React from "react";
-import { RouteComponentProps, Switch, Route, Redirect, withRouter } from "react-router";
+import { connect } from "react-redux";
+import { Switch, Route, Redirect } from "react-router";
 
 import {
     Card,
@@ -9,13 +10,41 @@ import {
     MenuDivider
 } from "@blueprintjs/core";
 
-import ActiveAwareLink from "../../components/ActiveAwareLink";
+import mapStateToProps, { StateProps } from "./selectors";
+
+
+import NoSaveLoadedPage from "./components/NoSaveLoaded";
+import ErrorPage from "./components/Error";
+import LoadingSaveFilePage from "./components/LoadingSaveFile";
 
 import DuplicantsPage from "./pages/Duplicants";
+
 import Error404Page from "../404";
 
-class SaveEditorPageComponent extends React.Component {
+type Props = StateProps;
+class SaveEditorPageComponent extends React.Component<Props> {
     render() {
+        const {
+            loadError,
+            isSaveChosen,
+            isSaveLoading
+        } = this.props;
+
+        let rootComponent: React.ReactChild;
+
+        if (loadError) {
+            // Show error screen
+            return <ErrorPage/>;
+        }
+
+        if (!isSaveChosen) {
+            return <NoSaveLoadedPage/>
+        }
+
+        else if (isSaveLoading) {
+            return <LoadingSaveFilePage/>;
+        }
+
         return (
             <div className="ui-page ui-page-saveeditor fill-parent">
                 <Switch>
@@ -28,4 +57,4 @@ class SaveEditorPageComponent extends React.Component {
     }
 }
 
-export default SaveEditorPageComponent;
+export default connect(mapStateToProps)(SaveEditorPageComponent);
