@@ -1,27 +1,32 @@
 
 import * as React from "react";
-import { connect } from "react-redux";
+import { action } from "mobx";
+import { observer } from "mobx-react";
 import { autobind } from "core-decorators";
-import { AI_EFFECT_IDS } from "oni-save-parser";
+import { AI_EFFECT_IDS, AIEffectsBehavior } from "oni-save-parser";
 
 import { NumericInput, MenuItem, Button } from "@blueprintjs/core";
 import { IconNames } from "@blueprintjs/icons";
 import { Select, IItemRendererProps } from "@blueprintjs/select";
 const StringSelect = Select.ofType<string>();
 
+import { GameObjectModel } from "@/services/save-editor";
 
 
-import DuplicantEffectsProps from "./props";
-import mapStateToProps, { StateProps } from "./selectors";
-import mapDispatchToProps, { DispatchProps } from "./dispatch";
+export interface DuplicantEffectsProps {
+    duplicant: GameObjectModel
+};
 
 
-type Props = DuplicantEffectsProps & StateProps & DispatchProps;
+type Props = DuplicantEffectsProps;
+@observer
 class DuplicantEffects extends React.Component<Props> {
     render() {
-        const {
-            effects
-        } = this.props;
+        const { duplicant } = this.props;
+
+        const effectsBehavior = duplicant.getBehavior(AIEffectsBehavior);
+        if (!effectsBehavior) return <div>Error: No AIEffectsBehavior found.</div>;
+        const effects = effectsBehavior.templateData.saveLoadEffects;
 
         const rows = effects.map(x =>
             <DuplicantEffectRow
@@ -30,7 +35,8 @@ class DuplicantEffects extends React.Component<Props> {
                 timeRemaining={x.timeRemaining}
                 onChangeTime={this._onEffectChangeTime}
                 onRemove={this._onEffectRemoved}
-            />);
+            />
+        );
 
         return (
             <div className={`ui-duplicant-effects fill-parent layout-vertical`}>
@@ -91,34 +97,47 @@ class DuplicantEffects extends React.Component<Props> {
         );
     };
 
-    @autobind()
+    @action.bound
     private _onEffectSelected(effectID: string) {
-        const {
-            duplicantID,
-            addEffect
-        } = this.props;
-        addEffect({ duplicantID, effectID, timeRemaining: 5000 });
+        const { duplicant } = this.props;
+        const effectsBehavior = duplicant.getBehavior(AIEffectsBehavior);
+        if (!effectsBehavior) return;
+        const effects = effectsBehavior.templateData.saveLoadEffects;
+
+        if (effects.findIndex(x => x.id === effectID) !== -1) return;
+
+        effects.push({
+            id: effectID,
+            timeRemaining: 5000
+        });
     }
 
-    @autobind()
+    @action.bound
     private _onEffectChangeTime(effectID: string, timeRemaining: number) {
-        const {
-            duplicantID,
-            setEffectTime
-        } = this.props;
-        setEffectTime({ duplicantID, effectID, timeRemaining });
+        const { duplicant } = this.props;
+        const effectsBehavior = duplicant.getBehavior(AIEffectsBehavior);
+        if (!effectsBehavior) return;
+        const effects = effectsBehavior.templateData.saveLoadEffects;
+
+        const effect = effects.find(x => x.id === effectID);
+        if (!effect) return;
+
+        effect.timeRemaining = timeRemaining;
     }
 
-    @autobind()
+    @action.bound
     private _onEffectRemoved(effectID: string) {
-        const {
-            duplicantID,
-            removeEffect
-        } = this.props;
-        removeEffect({ duplicantID, effectID });
+        const { duplicant } = this.props;
+        const effectsBehavior = duplicant.getBehavior(AIEffectsBehavior);
+        if (!effectsBehavior) return;
+        const effects = effectsBehavior.templateData.saveLoadEffects;
+
+        const index = effects.findIndex(x => x.id === effectID);
+        if (index === -1) return;
+        effects.splice(index, 1);
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(DuplicantEffects);
+export default DuplicantEffects;
 
 
 interface DuplicantEffectRowProps {

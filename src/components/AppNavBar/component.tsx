@@ -1,7 +1,8 @@
 
 import * as React from "react";
-import { connect } from "react-redux";
+import { observer } from "mobx-react";
 import { autobind } from "core-decorators";
+
 import {
     Navbar,
     NavbarGroup,
@@ -10,32 +11,36 @@ import {
     Button,
     Alignment
 } from "@blueprintjs/core";
+
 import { IconNames } from "@blueprintjs/icons";
 
-import { AppNavBarProps } from "./props";
-import mapDispatchToProps, { DispatchProps } from "./dispatch";
-import mapStateToProps, { StateProps } from "./selectors";
+import { SaveEditorProps, withSaveEditor } from "@/services/save-editor";
 
-type Props = AppNavBarProps & StateProps & DispatchProps;
+import { AppNavBarProps } from "./props";
+
+type Props = AppNavBarProps & SaveEditorProps;
+@observer
 class AppNavBar extends React.Component<Props> {
     private _input: HTMLElement | null = null;
 
     render() {
         const {
             className,
-            saveFileName,
-            isSaveEnabled
+            saveEditor: {
+                saveName,
+                isSaveLoaded
+            }
         } = this.props;
 
         return (
             <Navbar className={`ui-app-navbar ${className || ""}`}>
                 <NavbarGroup>
                     <NavbarHeading>ONI Save Editor</NavbarHeading>
-                    <Text ellipsize={true}>{saveFileName || ""}</Text>
+                    <Text ellipsize={true}>{saveName || ""}</Text>
                 </NavbarGroup>
                 <NavbarGroup align={Alignment.RIGHT}>
                     <Button icon={IconNames.UPLOAD} onClick={this._onLoadClick}>Load</Button>
-                    <Button icon={IconNames.FLOPPY_DISK} disabled={!isSaveEnabled} onClick={this._onSaveClick}>Save</Button>
+                    <Button icon={IconNames.FLOPPY_DISK} disabled={!isSaveLoaded} onClick={this._onSaveClick}>Save</Button>
                     <input
                         ref={el => this._input = el}
                         style={{ display: "none" }}
@@ -51,7 +56,7 @@ class AppNavBar extends React.Component<Props> {
 
     @autobind()
     private _onSaveClick() {
-        this.props.saveSavefile({});
+        this.props.saveEditor.save();
     }
 
     @autobind()
@@ -64,7 +69,7 @@ class AppNavBar extends React.Component<Props> {
     private _onLoadFile(change: React.ChangeEvent<HTMLInputElement>) {
         const files = change.target.files;
         if (!files || files.length === 0) return;
-        this.props.loadSavefile({file: files[0]});
+        this.props.saveEditor.load(files[0]);
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(AppNavBar);
+export default withSaveEditor(AppNavBar);

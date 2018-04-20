@@ -1,20 +1,30 @@
 
 import * as React from "react";
-import { connect } from "react-redux";
-import { autobind } from "core-decorators";
+import { action } from "mobx";
+import { observer } from "mobx-react";
 import { NumericInput } from "@blueprintjs/core";
 
-import mapStateToProps, { StateProps } from "./selectors";
-import mapDispatchToProps, { DispatchProps } from "./dispatch";
+import { SaveEditorProps, withSaveEditor, GameObjectBehaviorModel } from "@/services/save-editor";
+import { GameObjectBehavior } from "oni-save-parser";
 
-type Props = StateProps & DispatchProps;
+type Props = SaveEditorProps;
 class GeneralPage extends React.Component<Props> {
     render() {
         const {
-            cycles,
-            nextSpawn,
-            isSpawnReady
+            saveEditor
         } = this.props;
+
+        const clockBehavior = this._getClockBehavior();
+        if (!clockBehavior) return <div>Error: No GameClock behavior present in SaveGame object.</div>;
+        const cycle = clockBehavior.templateData.cycle;
+
+        const immigrationBehavior = this._getImmigrationBehavior();
+        if (!immigrationBehavior) return <div>Error: No Immigration behavior present in SaveGame object.</div>;
+        const {
+            timeBeforeSpawn,
+            bImmigrantAvailable
+        } = immigrationBehavior.templateData;
+
         return (
             <div className="ui-page ui-page-general fill-parent layout-vertical">
                 <div className="pt-form-group">
@@ -24,7 +34,7 @@ class GeneralPage extends React.Component<Props> {
                     <div className="pt-form-content">
                         <div className="pt-input-group">
                             <span>Cycles</span>
-                            <NumericInput min={0} value={cycles} onValueChange={this._onCycleChange} clampValueOnBlur={true} />
+                            <NumericInput min={0} value={cycle} onValueChange={this._onCycleChange} clampValueOnBlur={true} />
                         </div>
                     </div>
                 </div>
@@ -35,11 +45,11 @@ class GeneralPage extends React.Component<Props> {
                     <div className="pt-form-content">
                         <div className="pt-input-group">
                             <span>Next Spawn</span>
-                            <NumericInput min={0} clampValueOnBlur={true} value={nextSpawn} onValueChange={this._nextSpawnChange} />
+                            <NumericInput min={0} clampValueOnBlur={true} value={timeBeforeSpawn} onValueChange={this._nextSpawnChange} />
                         </div>
                         <div className="pt-input-group">
                             <label className="pt-control pt-checkbox">
-                                <input type="checkbox" checked={isSpawnReady} onChange={this._spawnReadyChange} />
+                                <input type="checkbox" checked={bImmigrantAvailable} onChange={this._spawnReadyChange} />
                                 <span className="pt-control-indicator"></span>
                                 Spawn Ready
                             </label>
@@ -50,21 +60,57 @@ class GeneralPage extends React.Component<Props> {
         );
     }
 
-    @autobind()
+    @action.bound
     private _onCycleChange(cycle: number) {
-        this.props.setCycle({cycle});
+        const behavior = this._getClockBehavior();
+        if (!behavior) return;
+        behavior.templateData.cycle = cycle;
     }
 
-    @autobind()
+    @action.bound
     private _nextSpawnChange(time: number) {
-        this.props.setImmigrationTimer({time});
+        const behavior = this._getImmigrationBehavior();
+        if (!behavior) return;
+        behavior.templateData.timeBeforeSpawn = time;
     }
 
-    @autobind()
+    @action.bound
     private _spawnReadyChange(change: React.ChangeEvent<HTMLInputElement>) {
-        const ready = change.target.checked;
-        this.props.setImmigrationReady({ready});
+        const behavior = this._getImmigrationBehavior();
+        if (!behavior) return;
+        behavior.templateData.bImmigrantAvailable = change.target.checked;
+    }
+
+    private _getClockBehavior(): GameObjectBehaviorModel<GameClockBehavior> | undefined {
+        const { saveEditor } = this.props;
+        const saveGame = saveEditor.getGameObjects("SaveGame")[0];
+        if (!saveGame) return undefined;
+
+        return saveGame.getBehavior("GameClock");
+    }
+
+    private _getImmigrationBehavior(): GameObjectBehaviorModel<ImmigrationBehavior> | undefined {
+        const { saveEditor } = this.props;
+        const saveGame = saveEditor.getGameObjects("SaveGame")[0];
+        if (!saveGame) return undefined;
+
+        return saveGame.getBehavior("Immigration");
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GeneralPage);
+export default withSaveEditor(GeneralPage);
+
+// TODO: move to oni-save-parser
+interface GameClockBehavior extends GameObjectBehavior {
+    name: "GameClock";
+    parsedData: {
+        cycle: number;
+    }
+}
+interface ImmigrationBehavior extends GameObjectBehavior {
+    name: "Immigration";
+    parsedData: {
+        timeBeforeSpawn: number;
+        bImmigrantAvailable: boolean;
+    }
+}

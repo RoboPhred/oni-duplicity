@@ -1,30 +1,35 @@
 
 import * as React from "react";
-import { connect } from "react-redux";
+import { observer } from "mobx-react";
 import { autobind } from "core-decorators";
+
+import { GameObjectModel } from "@/services/save-editor";
 
 import DuplicantPortrait from "../DuplicantPortrait";
 
 
-import mapStateToProps, { StateProps } from "./selectors";
-
-
 export interface DuplicantsListProps {
     className?: string;
-    selectedDuplicantID?: number | null;
-    onDuplicantClick?(duplicantID: number): void;
+    duplicants: GameObjectModel[];
+    selectedDuplicant?: number | GameObjectModel | null;
+    onDuplicantClick?(duplicant: GameObjectModel): void;
 }
 
-type Props = DuplicantsListProps & StateProps;
+type Props = DuplicantsListProps;
+@observer
 class DuplicantsList extends React.Component<Props> {
     render() {
         const {
             className,
-            duplicantsIDs,
-            selectedDuplicantID
+            duplicants
         } = this.props;
 
-        const elements = duplicantsIDs.map(x => <DuplicantPortrait key={x} className={x === selectedDuplicantID ? "pt-active" : ""} duplicantID={x} onClick={this._onDuplicantClick} />);
+        let selectedDuplicant = this.props.selectedDuplicant;
+        if (typeof selectedDuplicant === "number") {
+            selectedDuplicant = duplicants.find(x => x.kPrefabID === selectedDuplicant);
+        }
+
+        const elements = duplicants.map(x => <DuplicantPortrait key={x.kPrefabID} className={x === selectedDuplicant ? "pt-active" : ""} duplicant={x} onClick={this._onDuplicantClick} />);
 
         return (
             <div className={`${className || ''} ui-duplicant-list`}>
@@ -36,14 +41,14 @@ class DuplicantsList extends React.Component<Props> {
     }
 
     @autobind()
-    private _onDuplicantClick(duplicantID: number) {
+    private _onDuplicantClick(duplicant: GameObjectModel) {
         const {
             onDuplicantClick
         } = this.props;
 
         if (onDuplicantClick) {
-            onDuplicantClick(duplicantID);
+            onDuplicantClick(duplicant);
         }
     }
 }
-export default connect(mapStateToProps)(DuplicantsList);
+export default DuplicantsList;

@@ -1,37 +1,43 @@
 
 import * as React from "react";
-import { connect } from "react-redux";
 import { autobind } from "core-decorators";
 
 import { NonIdealState } from "@blueprintjs/core";
 import { IconNames } from "@blueprintjs/icons";
+
+import { SaveEditorProps, withSaveEditor, GameObjectModel } from "@/services/save-editor";
 
 
 import DuplicantsList from "./components/DuplicantsList";
 import DuplicantEditor from "./components/DuplicantEditor";
 
 
-type Props = {};
+type Props = SaveEditorProps;
 interface State {
-    selectedDuplicantID: number | null;
+    selectedDuplicant: GameObjectModel | null;
 }
 class DuplicantsPage extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
         this.state = {
-            selectedDuplicantID: null
+            selectedDuplicant: null
         };
     }
 
     render() {
         const {
-            selectedDuplicantID
+            selectedDuplicant
         } = this.state;
+        const {
+            saveEditor
+        } = this.props;
+
+        const duplicants = saveEditor.getGameObjects("Minion");
 
         let content: React.ReactFragment;
-        if (selectedDuplicantID != null) {
-            content = <DuplicantEditor className="fill-parent" duplicantID={selectedDuplicantID}/>
+        if (selectedDuplicant != null) {
+            content = <DuplicantEditor className="fill-parent" duplicant={selectedDuplicant}/>
         }
         else {
             content = (
@@ -43,7 +49,7 @@ class DuplicantsPage extends React.Component<Props, State> {
 
         return (
             <div className="ui-page ui-page-duplicants fill-parent layout-vertical">
-                <DuplicantsList className="layout-item" selectedDuplicantID={selectedDuplicantID} onDuplicantClick={this._onDuplicantSelected} />
+                <DuplicantsList className="layout-item" duplicants={duplicants} selectedDuplicant={selectedDuplicant} onDuplicantClick={this._onDuplicantSelected} />
                 <div className="layout-item-fill">
                     {content}
                 </div>
@@ -52,13 +58,12 @@ class DuplicantsPage extends React.Component<Props, State> {
     }
 
     @autobind()
-    private _onDuplicantSelected(duplicantID: number) {
+    private _onDuplicantSelected(duplicant: GameObjectModel) {
         this.setState(s => ({
             ...s,
-            selectedDuplicantID: duplicantID
+            selectedDuplicant: duplicant
         }));
     }
 }
 
-export default DuplicantsPage
-
+export default withSaveEditor(DuplicantsPage);

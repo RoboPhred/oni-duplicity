@@ -1,35 +1,47 @@
 
 import * as React from "react";
-import { connect } from "react-redux";
+import { action } from "mobx";
+import { observer } from "mobx-react";
 import { autobind } from "core-decorators";
-import { HEALTH_STATE_NAMES, MINION_IDENTITY_GENDERS, MinionGender } from "oni-save-parser";
+import { HEALTH_STATE_NAMES, MINION_IDENTITY_GENDERS, MinionGender, HealthBehavior, MinionIdentityBehavior } from "oni-save-parser";
 
 import { Button, MenuItem, NumericInput } from "@blueprintjs/core";
 import { Select, IItemRendererProps } from "@blueprintjs/select";
+
+const GenderSelect = Select.ofType<MinionGender>();
 const StringSelect = Select.ofType<string>();
 const NumberSelect = Select.ofType<number>();
 
+import { GameObjectModel } from "@/services/save-editor";
 
-import DuplicantGeneralProps from "./props";
-import mapStateToProps, { StateProps } from "./selectors";
-import mapDispatchToProps, { DispatchProps } from "./dispatch";
+
+export interface DuplicantGeneralProps {
+    duplicant: GameObjectModel;
+};
 
 
 // We only care about > 0
 const MIN_SCALE = Number.EPSILON;
 
-type Props = DuplicantGeneralProps & StateProps & DispatchProps;
+type Props = DuplicantGeneralProps;
+@observer
 class DuplicantGeneralPage extends React.Component<Props> {
     render() {
+        const { duplicant } = this.props;
+
+        const scaleX = duplicant.scale.x;
+        const scaleY = duplicant.scale.y;
+
+        const healthBehavior = duplicant.getBehavior(HealthBehavior);
+        if (!healthBehavior) return <div>Error: HealthBehavior not found</div>;
+        const healthState = healthBehavior.templateData.State;
+
+        const identityBehavior = duplicant.getBehavior(MinionIdentityBehavior);
+        if (!identityBehavior) return <div>Error: MinionIdentityBehavior not found</div>;
         const {
             gender,
-            scale,
-            healthState,
             voiceIdx
-        } = this.props;
-
-        const scaleX = scale ? scale.x : 1;
-        const scaleY = scale ? scale.y : 1;
+        } = identityBehavior.templateData;
 
         let healthStateStr: string;
         if (healthState != null && healthState >= 0 && healthState < HEALTH_STATE_NAMES.length) {
@@ -46,7 +58,7 @@ class DuplicantGeneralPage extends React.Component<Props> {
                         Gender
                     </label>
                     <div className="pt-form-content">
-                        <StringSelect
+                        <GenderSelect
                             // TODO: Export from oni-save-parser
                             items={MINION_IDENTITY_GENDERS}
                             itemRenderer={this._renderItem}
@@ -57,7 +69,7 @@ class DuplicantGeneralPage extends React.Component<Props> {
                             popoverProps={{ minimal: true }}
                         >
                             <Button rightIcon="caret-down" text={gender || "MALE"} />
-                        </StringSelect>
+                        </GenderSelect>
                     </div>
                 </div>
                 <div className="pt-form-group pt-inline">
@@ -138,12 +150,12 @@ class DuplicantGeneralPage extends React.Component<Props> {
         );
     };
 
-    @autobind()
+    @action.bound
     private _onHealthStateSelected(healthState: string) {
-        const {
-            duplicantID,
-            setHealthState
-        } = this.props;
+        const { duplicant } = this.props;
+
+        const healthBehavior = duplicant.getBehavior(HealthBehavior);
+        if (!healthBehavior) return;
 
         // Need to get the enum value of the display text.
         const stateIndex = HEALTH_STATE_NAMES.indexOf(healthState);
@@ -151,33 +163,29 @@ class DuplicantGeneralPage extends React.Component<Props> {
             return;
         }
 
-        setHealthState({ duplicantID, healthState: stateIndex });
+        healthBehavior.templateData.State = stateIndex;
     }
 
-    @autobind()
-    private _onGenderSelected(gender: string) {
-        const {
-            duplicantID,
-            setGender
-        } = this.props;
-        setGender({duplicantID, gender: gender as MinionGender});
+    @action.bound
+    private _onGenderSelected(gender: MinionGender) {
+        const { duplicant } = this.props;
+        const identityBehavior = duplicant.getBehavior(MinionIdentityBehavior);
+        if (!identityBehavior) return;
+        identityBehavior.templateData.gender = gender;
+        identityBehavior.templateData.genderStringKey = gender;
     }
 
-    @autobind()
+    @action.bound
     private _onVoiceSelected(voiceIdx: number) {
-        const {
-            duplicantID,
-            setVoice
-        } = this.props;
-        setVoice({duplicantID, voiceIdx});
+        const { duplicant } = this.props;
+        const identityBehavior = duplicant.getBehavior(MinionIdentityBehavior);
+        if (!identityBehavior) return;
+        identityBehavior.templateData.voiceIdx = voiceIdx;
     }
 
-    @autobind()
+    @action.bound
     private _onScaleX(value: number) {
-        const {
-            duplicantID,
-            setScale
-        } = this.props;
+        const { duplicant } = this.props;
 
         // Negative numbers dont render; probably because sprite normal faces
         //  away from game camera.
@@ -185,23 +193,20 @@ class DuplicantGeneralPage extends React.Component<Props> {
             value = 1;
         }
 
-        setScale({ duplicantID, scaleX: value });
+        duplicant.scale.x = value;
     }
 
-    @autobind()
+    @action.bound
     private _onScaleY(value: number) {
-        const {
-            duplicantID,
-            setScale
-        } = this.props;
+        const { duplicant } = this.props;
 
         // Negative numbers dont render; probably because sprite normal faces
         //  away from game camera.
-        if (value <= 0 || isNaN(value)) {
+        if (value === 0 || isNaN(value)) {
             value = 1;
         }
 
-        setScale({ duplicantID, scaleY: value });
+        duplicant.scale.y = value;
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(DuplicantGeneralPage);
+export default DuplicantGeneralPage;

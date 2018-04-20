@@ -1,28 +1,33 @@
 
 import * as React from "react";
-import { connect } from "react-redux";
+import { action } from "mobx";
+import { observer } from "mobx-react";
 import { autobind } from "core-decorators";
 
 import { MenuItem, Intent } from "@blueprintjs/core";
 import { IconNames } from "@blueprintjs/icons";
 import { MultiSelect, ItemRenderer, IItemRendererProps } from "@blueprintjs/select";
-
-import DuplicantTraitsProps from "./props";
-import mapStateToProps, { StateProps } from "./selectors";
-import mapDispatchToProps, { DispatchProps } from "./dispatch";
-
-import TRAITS from "./traits";
-
-
 const TraitMultiSelect = MultiSelect.ofType<string>();
 
-type Props = DuplicantTraitsProps & StateProps & DispatchProps;
+import { GameObjectModel } from "@/services/save-editor";
+
+import TRAITS from "./traits";
+import { AITraitsBehavior } from "oni-save-parser";
+
+export interface DuplicantTraitsProps {
+    duplicant: GameObjectModel;
+};
+
+
+type Props = DuplicantTraitsProps;
+@observer
 class DuplicantTraits extends React.Component<Props> {
     render() {
-        const {
-            traits
-        } = this.props;
+        const { duplicant } = this.props;
 
+        const traitsBehavior = duplicant.getBehavior(AITraitsBehavior);
+        if (!traitsBehavior) return <div>Error: Game object lacks a AITraitsBehavior.</div>;
+        const traits = traitsBehavior.templateData.TraitIds;
 
         return (
             <div className={`fill-parent ui-duplicant-traits`}>
@@ -42,38 +47,31 @@ class DuplicantTraits extends React.Component<Props> {
         )
     }
 
-    @autobind()
+    @action.bound
     private _onTagSelected(tag: string) {
-        const {
-            duplicantID,
-            traits,
-            setTraits
-        } = this.props;
+        const { duplicant } = this.props;
+        const traitsBehavior = duplicant.getBehavior(AITraitsBehavior);
+        if (!traitsBehavior) return;
+        const traits = traitsBehavior.templateData.TraitIds;
 
         if (traits.indexOf(tag) !== -1) {
             return;
         }
 
-        setTraits({ duplicantID, traitIDs: traits.concat(tag) });
+        traits.push(tag);
     }
 
     @autobind()
     private _onTagRemoved(tag: string) {
-        const {
-            duplicantID,
-            traits,
-            setTraits
-        } = this.props;
+        const { duplicant } = this.props;
+        const traitsBehavior = duplicant.getBehavior(AITraitsBehavior);
+        if (!traitsBehavior) return;
+        const traits = traitsBehavior.templateData.TraitIds;
 
         const index = traits.indexOf(tag);
-        if (index === -1) {
-            return;
-        }
+        if (index === -1) return;
 
-        const newTraits = traits.slice();
-        newTraits.splice(index, 1);
-
-        setTraits({ duplicantID, traitIDs: newTraits });
+        traits.splice(index, 1);
     }
 
     private _filterItem(query: string, trait: string) {
@@ -91,11 +89,14 @@ class DuplicantTraits extends React.Component<Props> {
             return null;
         }
 
-        const {
-            traits
-        } = this.props;
-
-        const isSelected = traits.indexOf(trait) !== -1;
+        let isSelected = false;
+        
+        // TODO: Ensure that mobx is caching this stuff, as this is called for every item.
+        const traitsBehavior = this.props.duplicant.getBehavior(AITraitsBehavior);
+        if (traitsBehavior) {
+            const traits = traitsBehavior.templateData.TraitIds;
+            isSelected = traits.indexOf(trait) !== -1;
+        }
 
         return (
             <MenuItem
@@ -110,4 +111,4 @@ class DuplicantTraits extends React.Component<Props> {
     };
 
 }
-export default connect(mapStateToProps, mapDispatchToProps)(DuplicantTraits);
+export default DuplicantTraits;

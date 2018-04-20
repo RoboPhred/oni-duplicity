@@ -1,7 +1,8 @@
 
 import * as React from "react";
-import { connect } from "react-redux";
+import { action } from "mobx";
 import { autobind } from "core-decorators";
+import { MinionIdentityBehavior } from "oni-save-parser";
 
 import {
     EditableText,
@@ -11,12 +12,14 @@ import {
 } from "@blueprintjs/core";
 import { IconNames } from "@blueprintjs/icons";
 
-import { error, FAILURE_TYPE } from "../../../../../../logging";
+import { GameObjectModel } from "@/services/save-editor";
+import { error, FAILURE_TYPE } from "@/logging";
 
 
-import DuplicantEditorProps from "./props";
-import mapStateToProps, { StateProps } from "./selectors";
-import mapDispatchToProps, { DispatchProps } from "./dispatch";
+export interface DuplicantEditorProps {
+    className?: string;
+    duplicant: GameObjectModel;
+};
 
 
 import GeneralPage from "./pages/General";
@@ -27,7 +30,7 @@ import JobsPage from "./pages/Jobs";
 import EffectsPage from "./pages/Effects";
 
 
-type Props = DuplicantEditorProps & StateProps & DispatchProps;
+type Props = DuplicantEditorProps;
 interface State {
     rename: string | null;
 }
@@ -43,13 +46,14 @@ class DuplicantEditor extends React.Component<Props, State> {
     render() {
         const {
             className,
-            duplicantID,
-            identityBehavior
+            duplicant,
         } = this.props;
 
         const {
             rename
         } = this.state;
+
+        const identityBehavior = duplicant.getBehavior(MinionIdentityBehavior);
 
         if (!identityBehavior) {
             error("Duplicant identity behavior missing", FAILURE_TYPE.MISSING_BEHAVIOR);
@@ -60,7 +64,7 @@ class DuplicantEditor extends React.Component<Props, State> {
             )
         }
         
-        const name = rename || identityBehavior.parsedData.name;
+        const name = rename || identityBehavior.templateData.name;
         
         return (
             <div className={`ui-duplicant-editor layout-vertical ${className}`}>
@@ -75,12 +79,12 @@ class DuplicantEditor extends React.Component<Props, State> {
                 </div>
                 <div className="layout-item-fill">
                     <Tabs id="DuplicantEditCategories" className="ui-category-tabs fill-parent layout-vertical" renderActiveTabPanelOnly={true}>
-                        <Tab className="layout-item-fill" id="general" title="General" panel={<GeneralPage duplicantID={duplicantID} />} />
-                        <Tab className="layout-item-fill" id="appearance" title="Appearance" panel={<AppearancePage duplicantID={duplicantID} />} />
-                        <Tab className="layout-item-fill" id="skills" title="Skills" panel={<SkillsPage duplicantID={duplicantID}/>} />
-                        <Tab className="layout-item-fill" id="traits" title="Traits" panel={<TraitsPage duplicantID={duplicantID}/>} />
-                        <Tab className="layout-item-fill" id="jobs" title="Jobs" panel={<JobsPage duplicantID={duplicantID}/>} />
-                        <Tab className="layout-item-fill" id="effects" title="Effects" panel={<EffectsPage duplicantID={duplicantID}/>} />
+                        <Tab className="layout-item-fill" id="general" title="General" panel={<GeneralPage duplicant={duplicant} />} />
+                        <Tab className="layout-item-fill" id="appearance" title="Appearance" panel={<AppearancePage duplicant={duplicant} />} />
+                        <Tab className="layout-item-fill" id="skills" title="Skills" panel={<SkillsPage duplicant={duplicant}/>} />
+                        <Tab className="layout-item-fill" id="traits" title="Traits" panel={<TraitsPage duplicant={duplicant}/>} />
+                        <Tab className="layout-item-fill" id="jobs" title="Jobs" panel={<JobsPage duplicant={duplicant}/>} />
+                        <Tab className="layout-item-fill" id="effects" title="Effects" panel={<EffectsPage duplicant={duplicant}/>} />
                     </Tabs>
                 </div>
             </div>
@@ -95,15 +99,19 @@ class DuplicantEditor extends React.Component<Props, State> {
         }));
     }
 
-    @autobind()
+    @action.bound
     private _onRename() {
+        const { duplicant } = this.props;
         const name = this.state.rename;
-        if (!name) return;
-        this.props.renameDuplicant({duplicantID: this.props.duplicantID, name});
+        if (!name || name === "") return;
+        const identityBehavior = duplicant.getBehavior(MinionIdentityBehavior);
+        if (!identityBehavior) return;
+
+        identityBehavior.templateData.name = name;
         this.setState(s => ({
             ...s,
             rename: null
         }));
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(DuplicantEditor);
+export default DuplicantEditor;

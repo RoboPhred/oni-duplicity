@@ -1,8 +1,7 @@
 
 import * as React from "react";
-
+import { observer } from "mobx-react";
 import { autobind } from "core-decorators";
-import { connect } from "react-redux";
 
 import {
     NonIdealState,
@@ -11,23 +10,20 @@ import {
 } from "@blueprintjs/core";
 import { IconNames } from "@blueprintjs/icons";
 
-import mapStateToProps, { StateProps } from "./selectors";
-import mapDispatchToProps, { DispatchProps } from "./dispatch";
+
+import { SaveEditorProps, withSaveEditor } from "@/services/save-editor";
 
 
 const saveDescription = "Oxygen Not Included saves can be found in your documents folder under";
-
 // TODO: Show correct path based on user's OS.
 const savePath = "Klei/OxygenNotIncluded/save_files";
 
-type Props = StateProps & DispatchProps;
+type Props = SaveEditorProps;
+@observer
 class NoSaveLoadedPageComponent extends React.Component<Props> {
     private _input: HTMLInputElement | null = null;
     
     render() {
-        const {
-            loadSavefile
-        } = this.props;
         return (
             <NonIdealState
                 visual={IconNames.FLOPPY_DISK}
@@ -59,7 +55,7 @@ class NoSaveLoadedPageComponent extends React.Component<Props> {
     private _onLoadFile(change: React.ChangeEvent<HTMLInputElement>) {
         const files = change.target.files;
         if (!files || files.length === 0) return;
-        this.props.loadSavefile({file: files[0]});
+        this.props.saveEditor.load(files[0]);
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(NoSaveLoadedPageComponent);
+export default withSaveEditor(NoSaveLoadedPageComponent);

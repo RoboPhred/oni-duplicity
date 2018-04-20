@@ -1,25 +1,18 @@
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Provider } from "mobx-react";
 
-import { Provider } from "react-redux";
 import { HashRouter } from "react-router-dom";
 
 import "./css";
-
-
 import App from "./app";
-
-import store from "./state/store";
-
-import { runSaga } from "./state/saga";
-runSaga();
-
+import { createStores } from "./store";
 
 const rootEl = document.getElementById("root");
 
 ReactDOM.render(
-    <Provider store={store}>
+    <Provider {...createStores()}>
         <HashRouter>
             <App />
         </HashRouter>

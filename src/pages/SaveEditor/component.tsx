@@ -1,7 +1,7 @@
 
 import * as React from "react";
-import { connect } from "react-redux";
-import { Switch, Route, Redirect } from "react-router";
+import { observer } from "mobx-react";
+import { Switch, Route, Redirect, RouteComponentProps, withRouter } from "react-router";
 
 import {
     Card,
@@ -10,35 +10,37 @@ import {
     MenuDivider
 } from "@blueprintjs/core";
 
-import mapStateToProps, { StateProps } from "./selectors";
-
+import { withSaveEditor, SaveEditorProps } from "@/services/save-editor";
 
 import NoSaveLoadedPage from "./components/NoSaveLoaded";
-import ErrorPage from "./components/Error";
 import LoadingSaveFilePage from "./components/LoadingSaveFile";
 
 import GeneralPage from "./pages/General";
 import DuplicantsPage from "./pages/Duplicants";
 
+import ErrorPage from "../Error";
 import Error404Page from "../404";
 
-type Props = StateProps;
+type Props = SaveEditorProps & RouteComponentProps<any>;
+@observer
 class SaveEditorPageComponent extends React.Component<Props> {
     render() {
         const {
-            loadError,
-            isSaveChosen,
-            isSaveLoading
+            saveEditor: {
+                loadError,
+                saveName,
+                isSaveLoading
+            }
         } = this.props;
 
         let rootComponent: React.ReactChild;
 
         if (loadError) {
             // Show error screen
-            return <ErrorPage />;
+            return <ErrorPage error={loadError} />;
         }
 
-        if (!isSaveChosen) {
+        if (!saveName) {
             return <NoSaveLoadedPage />
         }
 
@@ -58,5 +60,4 @@ class SaveEditorPageComponent extends React.Component<Props> {
         )
     }
 }
-
-export default connect(mapStateToProps)(SaveEditorPageComponent);
+export default withRouter(withSaveEditor(SaveEditorPageComponent));

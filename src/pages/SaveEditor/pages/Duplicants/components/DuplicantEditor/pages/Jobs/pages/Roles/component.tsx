@@ -1,33 +1,45 @@
 
 import * as React from "react";
-import { connect } from "react-redux";
+import { action } from "mobx";
+import { observer } from "mobx-react";
+import { autobind } from "core-decorators";
+
 import { NumericInput, Button, MenuItem } from "@blueprintjs/core";
 import { Select, IItemRendererProps } from "@blueprintjs/select";
 const StringSelect = Select.ofType<string>();
 
-import { autobind } from "core-decorators";
+import { GameObjectModel } from "@/services/save-editor";
+import { MinionResumeBehavior } from "oni-save-parser";
 
 
-import DuplicantJobsPageProps from "./props";
-import mapStateToProps, { StateProps } from "./selectors";
-import mapDispatchToProps, { DispatchProps } from "./dispatch";
+export interface DuplicantJobsPageProps {
+    duplicant: GameObjectModel;
+}
 
-
-type Props = DuplicantJobsPageProps & StateProps & DispatchProps;
+type Props = DuplicantJobsPageProps;
+@observer
 class DuplicantJobsPage extends React.Component<Props> {
     render() {
+        const { duplicant } = this.props;
+
+        const resumeBehavior = duplicant.getBehavior(MinionResumeBehavior);
+        if (!resumeBehavior) return <div>Error: GameObject lacks a MinionResumeBehavior.</div>;
+
         const {
             currentRole,
             targetRole,
-            roles
-        } = this.props;
+            ExperienceByRoleID,
+            MasteryByRoleID
+        } = resumeBehavior.templateData;
 
         // Might want to make a constant for this, but this is better for future compatibility.
-        const knownRoles = Array.from(new Set(roles.map(x => x.name)));
+        const knownRoles = Array.from(ExperienceByRoleID.keys());
 
-        const rows = roles.map(x => (
-            <JobRow key={x.name} jobID={x.name} mastery={x.mastery} experience={x.experience} setMastery={this._setMastery} setExperience={this._setExperience} />
-        ));
+        const rows = knownRoles.map(x => {
+            const experience = ExperienceByRoleID.get(x) || 0;
+            const mastery = MasteryByRoleID.get(x) || false;
+            return <JobRow key={x} jobID={x} mastery={mastery} experience={experience} setMastery={this._setMastery} setExperience={this._setExperience} />
+        });
 
         return (
             <div className={`ui-duplicant-jobs fill-parent container-scroll`}>
@@ -114,43 +126,39 @@ class DuplicantJobsPage extends React.Component<Props> {
         );
     };
 
-    @autobind()
+    @action.bound
     private _onCurrentRoleSelected(roleID: string) {
-        const {
-            duplicantID,
-            setCurrentRole
-        } = this.props;
-        setCurrentRole({ duplicantID, roleID });
+        const { duplicant } = this.props;
+        const resumeBehavior = duplicant.getBehavior(MinionResumeBehavior);
+        if (!resumeBehavior) return;
+        resumeBehavior.templateData.currentRole = roleID;
     }
 
-    @autobind()
+    @action.bound
     private _onTargetRoleSelected(roleID: string) {
-        const {
-            duplicantID,
-            setTargetRole
-        } = this.props;
-        setTargetRole({ duplicantID, roleID });
+        const { duplicant } = this.props;
+        const resumeBehavior = duplicant.getBehavior(MinionResumeBehavior);
+        if (!resumeBehavior) return;
+        resumeBehavior.templateData.targetRole = roleID;
     }
 
-    @autobind()
+    @action.bound
     private _setMastery(roleID: string, mastery: boolean) {
-        const {
-            duplicantID,
-            setMastery
-        } = this.props;
-        setMastery({ duplicantID, roleID, mastery });
+        const { duplicant } = this.props;
+        const resumeBehavior = duplicant.getBehavior(MinionResumeBehavior);
+        if (!resumeBehavior) return;
+        resumeBehavior.templateData.MasteryByRoleID.set(roleID, mastery);
     }
 
-    @autobind()
+    @action.bound
     private _setExperience(roleID: string, experience: number) {
-        const {
-            duplicantID,
-            setExperience
-        } = this.props;
-        setExperience({ duplicantID, roleID, experience });
+        const { duplicant } = this.props;
+        const resumeBehavior = duplicant.getBehavior(MinionResumeBehavior);
+        if (!resumeBehavior) return;
+        resumeBehavior.templateData.ExperienceByRoleID.set(roleID, experience);
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(DuplicantJobsPage);
+export default DuplicantJobsPage;
 
 
 interface JobRowProps {
