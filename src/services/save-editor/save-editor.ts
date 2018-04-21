@@ -1,6 +1,5 @@
 
-import { observable, action, flow, computed } from "mobx";
-import { createTransformer } from "mobx-utils";
+import { observable, action, flow, computed, toJS } from "mobx";
 import { saveAs } from "file-saver";
 import { SaveGame } from "oni-save-parser";
 

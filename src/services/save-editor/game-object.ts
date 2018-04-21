@@ -19,7 +19,7 @@ export class GameObjectModelImpl implements GameObjectModel {
 
     readonly kPrefabID: number;
 
-    @observable
+    // Already observable, as gameObject is deeply observable.
     readonly scale: Vector3;
 
     private _gameObject: GameObject;
@@ -50,8 +50,6 @@ export class GameObjectModelImpl implements GameObjectModel {
         else {
             this.kPrefabID = NaN;
         }
-
-
     }
 
     // TODO: Look at why this is generating new objects every time.  Might be because the source object isnt observable?
