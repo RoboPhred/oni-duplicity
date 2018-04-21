@@ -35,12 +35,12 @@ export class SaveEditorImpl implements SaveEditor {
     /**
      * Map of game object types to GameObjectModels in index order.
      */
-    private _modelCache = new Map<string, GameObjectModelImpl[]>();
+    private _gameObjects = new Map<string, GameObjectModelImpl[]>();
 
     load: SaveEditor["load"] = flow(function* (this: SaveEditorImpl, file: File) {
         this.isSaveLoaded = false;
         this.isSaveLoading = true;
-        this._modelCache.clear();
+        this._gameObjects.clear();
         this.saveName = file.name;
         try {
             const data = yield readFile(file);
@@ -48,7 +48,7 @@ export class SaveEditorImpl implements SaveEditor {
             this._saveGame = saveGame;
             for (let type of typedKeys(this._saveGame.body.gameObjects)) {
                 const models = this._saveGame.body.gameObjects[type].map(x => new GameObjectModelImpl(type, x));
-                this._modelCache.set(type, models);
+                this._gameObjects.set(type, models);
             }
             this.isSaveLoaded = true;
         }
@@ -66,6 +66,9 @@ export class SaveEditorImpl implements SaveEditor {
         if (!this._saveGame) return;
         this.isSaveSaving = true;
         try {
+            for (let [_, value] of this._gameObjects) {
+                value.forEach(x => x.syncChanges());
+            }
             const data = yield writeSave(this._saveGame)
             const blob = new Blob([data]);
 
@@ -83,7 +86,7 @@ export class SaveEditorImpl implements SaveEditor {
     // TODO: Look at why this is generating new objects every time.  Might be because the source object isnt observable?
     // getGameObjects: SaveEditor["getGameObjects"] = createTransformer((type: string) => ((this._saveGame && this._saveGame.body.gameObjects[type]) || []).map(x => new GameObjectModelImpl(type, x)));
     getGameObjects(type: string): GameObjectModel[] {
-        return this._modelCache.get(type) || [];
+        return this._gameObjects.get(type) || [];
     }
 }
 

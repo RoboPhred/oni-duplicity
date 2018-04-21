@@ -9,10 +9,14 @@ export class GameObjectBehaviorModelImpl implements GameObjectBehaviorModel {
         return this._behavior.name;
     }
 
-    // Already observable; set to ref of observable.
-    readonly templateData: any | null;
+    @observable.deep
+    templateData: any | null;
 
     constructor(private _behavior: GameObjectBehavior) {
         this.templateData = _behavior.parsedData || null;
+    }
+
+    syncChanges() {
+        this._behavior.parsedData = toJS(this.templateData);
     }
 }

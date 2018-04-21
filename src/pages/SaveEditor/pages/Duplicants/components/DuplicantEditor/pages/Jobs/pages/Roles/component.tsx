@@ -32,6 +32,10 @@ class DuplicantJobsPage extends React.Component<Props> {
             MasteryByRoleID
         } = resumeBehavior.templateData;
 
+        if (!ExperienceByRoleID || !MasteryByRoleID || !currentRole) {
+            return <div>Error: Empty MinionResume behavior data.</div>;
+        }
+
         // Might want to make a constant for this, but this is better for future compatibility.
         const knownRoles = Array.from(ExperienceByRoleID.keys());
 
@@ -147,7 +151,7 @@ class DuplicantJobsPage extends React.Component<Props> {
         const { duplicant } = this.props;
         const resumeBehavior = duplicant.getBehavior(MinionResumeBehavior);
         if (!resumeBehavior) return;
-        resumeBehavior.templateData.MasteryByRoleID.set(roleID, mastery);
+        resumeBehavior.templateData.MasteryByRoleID!.set(roleID, mastery);
     }
 
     @action.bound
@@ -155,7 +159,7 @@ class DuplicantJobsPage extends React.Component<Props> {
         const { duplicant } = this.props;
         const resumeBehavior = duplicant.getBehavior(MinionResumeBehavior);
         if (!resumeBehavior) return;
-        resumeBehavior.templateData.ExperienceByRoleID.set(roleID, experience);
+        resumeBehavior.templateData.ExperienceByRoleID!.set(roleID, experience);
     }
 }
 export default DuplicantJobsPage;

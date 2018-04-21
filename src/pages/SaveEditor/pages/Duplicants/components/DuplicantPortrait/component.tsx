@@ -44,8 +44,8 @@ class DuplicantPortrait extends React.Component<Props> {
             name = "[IDENTITY MISSING]";
         }
 
-        if (resume) {
-            role = resume.templateData.currentRole
+        if (resume && resume.templateData.currentRole) {
+            role = resume.templateData.currentRole;
         }
         else {
             error("resume behavior missing.", FAILURE_TYPE.MISSING_BEHAVIOR);

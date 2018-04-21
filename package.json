@@ -54,7 +54,7 @@
     "mobx": "^4.2.0",
     "mobx-react": "^5.0.0",
     "mobx-utils": "^4.0.0",
-    "oni-save-parser": "^1.2.0",
+    "oni-save-parser": "^1.2.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.1",
     "react-files": "^2.4.5",

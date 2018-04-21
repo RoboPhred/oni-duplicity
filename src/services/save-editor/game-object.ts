@@ -1,5 +1,5 @@
 
-import { observable } from "mobx";
+import { observable, toJS } from "mobx";
 import { createTransformer } from "mobx-utils";
 
 import {
@@ -19,12 +19,12 @@ export class GameObjectModelImpl implements GameObjectModel {
 
     readonly kPrefabID: number;
 
-    // Already observable, as gameObject is deeply observable.
-    readonly scale: Vector3;
+    @observable
+    scale: Vector3;
 
     private _gameObject: GameObject;
 
-    private _behaviorCache = new Map<string, GameObjectBehaviorModel[]>();
+    private _behaviors = new Map<string, GameObjectBehaviorModelImpl[]>();
 
     constructor(type: string, gameObject: GameObject) {
         this.type = type;
@@ -35,10 +35,10 @@ export class GameObjectModelImpl implements GameObjectModel {
         this.scale = gameObject.scale;
 
         for (let behavior of gameObject.behaviors) {
-            let array = this._behaviorCache.get(behavior.name);
+            let array = this._behaviors.get(behavior.name);
             if (!array) {
                 array = [];
-                this._behaviorCache.set(behavior.name, array);
+                this._behaviors.set(behavior.name, array);
             }
             array.push(new GameObjectBehaviorModelImpl(behavior));
         }
@@ -61,7 +61,7 @@ export class GameObjectModelImpl implements GameObjectModel {
     });
     */
     getBehavior<TBehavior extends GameObjectBehavior>(behaviorName: BehaviorName<TBehavior>): GameObjectBehaviorModel<TBehavior> | undefined {
-        const entries = this._behaviorCache.get(behaviorName);
+        const entries = this._behaviors.get(behaviorName);
         if (entries) return entries[0] as any;
         return undefined;
     }
@@ -73,6 +73,16 @@ export class GameObjectModelImpl implements GameObjectModel {
     */
 
     getAllBehaviors<TBehavior extends GameObjectBehavior>(behaviorName: BehaviorName<TBehavior>): GameObjectBehaviorModel<TBehavior>[] {
-        return this._behaviorCache.get(behaviorName) || [] as any;
+        return this._behaviors.get(behaviorName) || [] as any;
+    }
+
+    syncChanges() {
+        this._gameObject.scale.x = this.scale.x;
+        this._gameObject.scale.y = this.scale.y;
+        this._gameObject.scale.z = this.scale.z;
+
+        for (let [_, values] of this._behaviors) {
+            values.forEach(x => x.syncChanges());
+        }
     }
 }
