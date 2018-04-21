@@ -17,6 +17,8 @@ export class GameObjectBehaviorModelImpl implements GameObjectBehaviorModel {
     }
 
     syncChanges() {
-        this._behavior.parsedData = toJS(this.templateData);
+        this._behavior.parsedData = toJS(this.templateData, {
+            exportMapsAsObjects: false
+        });
     }
 }
