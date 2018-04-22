@@ -37,6 +37,15 @@ class GeysersPage extends React.Component<Props, State> {
 
         const geysers = saveEditor.gameObjects.filter(isGeyser);
 
+        if (geysers.length === 0) {
+            return (
+                <NonIdealState visual={IconNames.SEARCH_AROUND}>
+                    <div>No geysers found.</div>
+                    <div>Geysers are not spawned into the game until they are discovered.</div>
+                </NonIdealState>
+            );
+        }
+
         let content: React.ReactFragment;
         if (selectedGeyser != null) {
             content = <GeyserEditor className="fill-parent" gameObject={selectedGeyser} />

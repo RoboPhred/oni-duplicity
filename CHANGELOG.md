@@ -1,4 +1,7 @@
 
+### v1.4.0
+- View geysers
+
 ### v1.3.0
 - Edit current cycle.
 - Edit duplicant printer
