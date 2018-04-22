@@ -45,9 +45,9 @@ export default class GeyserEditor extends React.Component<GeyserEditorProps> {
                         <div className="pt-input-group">
                             <StringSelect
                                 items={GEYSER_TYPE_NAMES}
-                                itemRenderer={this._renderMaterialItem}
+                                itemRenderer={this._renderGeyserTypeItem}
                                 itemPredicate={this._filterItem}
-                                onItemSelect={this._onMaterialSelect}
+                                onItemSelect={this._onGeyserTypeSelect}
                                 filterable={true}
                                 popoverProps={{ minimal: true }}
                             >
@@ -67,35 +67,70 @@ export default class GeyserEditor extends React.Component<GeyserEditorProps> {
                     </div>
                     <label className="pt-label">Emit Rate Factor</label>
                     <div className="pt-form-content ui-slider-inset">
-                        <Slider value={config.rateRoll} min={0} max={1} stepSize={0.001} labelRenderer={this._percentageRenderer} />
+                        <Slider
+                            value={config.rateRoll}
+                            min={0}
+                            max={1}
+                            stepSize={0.001}
+                            labelRenderer={this._percentageRenderer}
+                            onChange={this._setRateRoll}
+                        />
                         <div className="pt-form-helper-text">Mass per cycle</div>
                     </div>
                 </div>
                 <div className="pt-form-group">
                     <label className="pt-label">Active Cycle Length Factor</label>
                     <div className="pt-form-content ui-slider-inset">
-                        <Slider value={config.iterationLengthRoll} min={0} max={1} stepSize={0.001} labelRenderer={this._percentageRenderer} />
+                        <Slider
+                            value={config.iterationLengthRoll}
+                            min={0}
+                            max={1}
+                            stepSize={0.001}
+                            labelRenderer={this._percentageRenderer}
+                            onChange={this._setIterationLengthRoll}
+                        />
                         <div className="pt-form-helper-text">The total length of the active (emit and idle) stage.</div>
                     </div>
                 </div>
                 <div className="pt-form-group">
                     <label className="pt-label">Active Emitting Percentage Factor</label>
                     <div className="pt-form-content ui-slider-inset">
-                        <Slider value={config.iterationPercentRoll} min={0} max={1} stepSize={0.001} labelRenderer={this._percentageRenderer} />
+                        <Slider
+                            value={config.iterationPercentRoll}
+                            min={0}
+                            max={1}
+                            stepSize={0.001}
+                            labelRenderer={this._percentageRenderer}
+                            onChange={this._setIterationPercentRoll}
+                        />
                         <div className="pt-form-helper-text">The percentage of the active stage that is spent emitting material.</div>
                     </div>
                 </div>
                 <div className="pt-form-group">
                     <label className="pt-label">Lifecycle Length Factor</label>
                     <div className="pt-form-content ui-slider-inset">
-                        <Slider value={config.yearLengthRoll} min={0} max={1} stepSize={0.001} labelRenderer={this._percentageRenderer} />
+                        <Slider
+                            value={config.yearLengthRoll}
+                            min={0}
+                            max={1}
+                            stepSize={0.001}
+                            labelRenderer={this._percentageRenderer}
+                            onChange={this._setYearLengthRoll}
+                        />
                         <div className="pt-form-helper-text">The total length of its active/dormant cycle.</div>
                     </div>
                 </div>
                 <div className="pt-form-group">
                     <label className="pt-label">Lifecycle Active Percentage Factor</label>
                     <div className="pt-form-content ui-slider-inset">
-                        <Slider value={config.yearPercentRoll} min={0} max={1} stepSize={0.001} labelRenderer={this._percentageRenderer} />
+                        <Slider
+                            value={config.yearPercentRoll}
+                            min={0}
+                            max={1}
+                            stepSize={0.001}
+                            labelRenderer={this._percentageRenderer}
+                            onChange={this._setYearPercentRoll}
+                        />
                         <div className="pt-form-helper-text">The percentage of its lifecycle that is spent in an active (not dormant) state.</div>
                     </div>
                 </div>
@@ -103,16 +138,12 @@ export default class GeyserEditor extends React.Component<GeyserEditorProps> {
         );
     }
 
-    private _percentageRenderer(value: number): string {
-        return `${(value * 100).toFixed(1)}%`;
-    }
-
     private _filterItem(query: string, value: string) {
         return value.indexOf(query) !== -1;
     }
 
     @action.bound
-    private _onMaterialSelect(typeName: string) {
+    private _onGeyserTypeSelect(typeName: string) {
         const { gameObject } = this.props;
         const behavior = gameObject.getBehavior(GeyserBehavior);
         const config = behavior && behavior.templateData.configuration;
@@ -121,7 +152,7 @@ export default class GeyserEditor extends React.Component<GeyserEditorProps> {
         if (hash != null) config.typeId.hash = hash;
     }
 
-    private _renderMaterialItem(value: string, itemProps: IItemRendererProps) {
+    private _renderGeyserTypeItem(value: string, itemProps: IItemRendererProps) {
         const {
             modifiers,
             handleClick
@@ -138,5 +169,54 @@ export default class GeyserEditor extends React.Component<GeyserEditorProps> {
                 text={value}
             />
         );
+    }
+
+    private _percentageRenderer(value: number): string {
+        return `${(value * 100).toFixed(1)}%`;
+    }
+
+    @action.bound
+    private _setRateRoll(value: number) {
+        const { gameObject } = this.props;
+        const behavior = gameObject.getBehavior(GeyserBehavior);
+        const config = behavior && behavior.templateData.configuration;
+        if (!config) return;
+        config.rateRoll = value;
+    }
+
+    @action.bound
+    private _setIterationLengthRoll(value: number) {
+        const { gameObject } = this.props;
+        const behavior = gameObject.getBehavior(GeyserBehavior);
+        const config = behavior && behavior.templateData.configuration;
+        if (!config) return;
+        config.iterationLengthRoll = value;
+    }
+
+    @action.bound
+    private _setIterationPercentRoll(value: number) {
+        const { gameObject } = this.props;
+        const behavior = gameObject.getBehavior(GeyserBehavior);
+        const config = behavior && behavior.templateData.configuration;
+        if (!config) return;
+        config.iterationPercentRoll = value;
+    }
+
+    @action.bound
+    private _setYearLengthRoll(value: number) {
+        const { gameObject } = this.props;
+        const behavior = gameObject.getBehavior(GeyserBehavior);
+        const config = behavior && behavior.templateData.configuration;
+        if (!config) return;
+        config.yearLengthRoll = value;
+    }
+
+    @action.bound
+    private _setYearPercentRoll(value: number) {
+        const { gameObject } = this.props;
+        const behavior = gameObject.getBehavior(GeyserBehavior);
+        const config = behavior && behavior.templateData.configuration;
+        if (!config) return;
+        config.yearPercentRoll = value;
     }
 }
