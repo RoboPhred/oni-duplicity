@@ -22,12 +22,12 @@ export interface DuplicantEditorProps {
 };
 
 
-import GeneralPage from "./pages/General";
-import AppearancePage from "./pages/Appearance";
-import SkillsPage from "./pages/Skills";
-import TraitsPage from "./pages/Traits";
-import JobsPage from "./pages/Jobs";
-import EffectsPage from "./pages/Effects";
+import GeneralPage from "../../pages/General";
+import AppearancePage from "../../pages/Appearance";
+import SkillsPage from "../../pages/Skills";
+import TraitsPage from "../../pages/Traits";
+import JobsPage from "../../pages/Jobs";
+import EffectsPage from "../../pages/Effects";
 
 
 type Props = DuplicantEditorProps;
