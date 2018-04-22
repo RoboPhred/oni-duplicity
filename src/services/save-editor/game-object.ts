@@ -19,7 +19,10 @@ export class GameObjectModelImpl implements GameObjectModel {
 
     readonly kPrefabID: number;
 
-    @observable
+    @observable.deep
+    position: Vector3;
+
+    @observable.deep
     scale: Vector3;
 
     private _gameObject: GameObject;
@@ -30,8 +33,7 @@ export class GameObjectModelImpl implements GameObjectModel {
         this.type = type;
         this._gameObject = gameObject;
 
-        // Set scale to the ref of the game object scale, so
-        //  changing it will apply directly.
+        this.position = gameObject.position;
         this.scale = gameObject.scale;
 
         for (let behavior of gameObject.behaviors) {
@@ -77,6 +79,11 @@ export class GameObjectModelImpl implements GameObjectModel {
     }
 
     syncChanges() {
+        // Sigh...
+        this._gameObject.position.x = this.position.x;
+        this._gameObject.position.y = this.position.y;
+        this._gameObject.position.z = this.position.z;
+
         this._gameObject.scale.x = this.scale.x;
         this._gameObject.scale.y = this.scale.y;
         this._gameObject.scale.z = this.scale.z;

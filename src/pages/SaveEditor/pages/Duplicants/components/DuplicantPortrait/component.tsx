@@ -10,6 +10,7 @@ import { autobind } from "core-decorators";
 import { error, FAILURE_TYPE } from "@/logging";
 import { MinionIdentityBehavior, MinionResumeBehavior } from "oni-save-parser";
 
+import "./style.scss";
 
 
 export interface DuplicantPortraitProps {

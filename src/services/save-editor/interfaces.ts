@@ -10,6 +10,8 @@ export interface SaveEditor {
 
     readonly isSaveSaving: boolean;
 
+    readonly gameObjects: GameObjectModel[];
+
     load(file: File): void;
     save(): void;
 
@@ -20,6 +22,7 @@ export interface GameObjectModel {
     readonly kPrefabID: number;
     readonly type: string;
     
+    position: Vector3;
     scale: Vector3;
 
     getBehavior<TBehavior extends GameObjectBehavior>(behaviorName: BehaviorName<TBehavior>): GameObjectBehaviorModel<TBehavior> | undefined;

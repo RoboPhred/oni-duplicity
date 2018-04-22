@@ -7,6 +7,8 @@ import {
 } from "@blueprintjs/core";
 import { IconNames } from "@blueprintjs/icons";
 
+import "./style.scss";
+
 class DuplicantsPage extends React.Component {
     render() {
         return (

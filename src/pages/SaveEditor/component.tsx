@@ -17,6 +17,7 @@ import LoadingSaveFilePage from "./components/LoadingSaveFile";
 
 import GeneralPage from "./pages/General";
 import DuplicantsPage from "./pages/Duplicants";
+import GeysersPage from "./pages/Geysers";
 
 import ErrorPage from "../Error";
 import Error404Page from "../404";
@@ -54,6 +55,7 @@ class SaveEditorPageComponent extends React.Component<Props> {
                     <Redirect exact from="/editor" to="/editor/duplicants" />
                     <Route exact path="/editor/general" component={GeneralPage} />
                     <Route exact path="/editor/duplicants" component={DuplicantsPage} />
+                    <Route exact path="/editor/geysers" component={GeysersPage} />
                     <Route component={Error404Page} />
                 </Switch>
             </div>

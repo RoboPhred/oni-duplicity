@@ -5,67 +5,8 @@
     background-color: $dark-gray1;
 }
 
-.pt-navbar.ui-app-navbar {
-    background-color: $cobalt3;
-
-    .pt-navbar-group {
-        .pt-button {
-            margin: 0 4px;
-        }
-    }
-}
-
-.ui-nav-menu {
-    padding: 15px;
-    background-color: $dark-gray5;
-}
-
-
-.ui-page-404 {
-    .ui-title {
-        font-size: 20pt;
-    }
-
-    .ui-title-secondary {
-        font-size: 12pt;
-    }
-
-    .ui-body {
-        margin-top: 8px;
-    }
-}
-
-
-.ui-page-general {
-    padding: 15px;
-}
 
 .ui-page-duplicants {
-    .ui-duplicant-list {
-        background-color: $gray5;
-        // Room for 2 portraits and their margins
-        height: 150px * 2 + 10px * 4;
-
-        .ui-duplicant-portrait {
-            width: 150px;
-            height: 150px;
-            margin: 10px;
-            cursor: pointer;
-
-            .ui-duplicant-name {
-                text-align: center;
-            }
-
-            .ui-duplicant-role {
-                text-align: center;
-            }
-        }
-
-        .ui-duplicant-portrait.pt-active {
-            background-color: $orange4;
-        }
-    }
-
     .ui-duplicant-editor {
         box-sizing: border-box;
         padding: 5px;
@@ -96,12 +37,6 @@
         }
     }
 }
-
-.ui-page-changelog {
-    padding: 15px;
-}
-
-
 
 .pt-multi-select-popover, .pt-select-popover {
     .pt-menu {

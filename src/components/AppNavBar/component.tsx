@@ -16,6 +16,8 @@ import { IconNames } from "@blueprintjs/icons";
 
 import { SaveEditorProps, withSaveEditor } from "@/services/save-editor";
 
+import "./style.scss";
+
 import { AppNavBarProps } from "./props";
 
 type Props = AppNavBarProps & SaveEditorProps;

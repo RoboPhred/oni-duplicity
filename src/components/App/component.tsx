@@ -53,6 +53,11 @@ class AppComponent extends React.Component<Props> {
                         type: "link",
                         path: "/editor/duplicants",
                         name: "Duplicants"
+                    },
+                    {
+                        type: "link",
+                        path: "/editor/geysers",
+                        name: "Geysers"
                     }
                 ]
             },

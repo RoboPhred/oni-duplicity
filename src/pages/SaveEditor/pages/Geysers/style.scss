@@ -1,0 +1,26 @@
+@import "~@blueprintjs/core/lib/scss/variables.scss";
+
+.ui-geyser-list {
+    background-color: $gray5;
+    // Room for 2 portraits and their margins
+    height: 150px * 2 + 10px * 4;
+
+    .ui-geyser-portrait {
+        width: 150px;
+        height: 150px;
+        margin: 10px;
+        cursor: pointer;
+
+        .ui-geyser-type {
+            text-align: center;
+        }
+
+        .ui-geyser-position {
+            text-align: center;
+        }
+    }
+
+    .ui-geyser-portrait.pt-active {
+        background-color: $orange4;
+    }
+}

@@ -37,6 +37,11 @@ export class SaveEditorImpl implements SaveEditor {
      */
     private _gameObjects = new Map<string, GameObjectModelImpl[]>();
 
+    get gameObjects(): GameObjectModel[] {
+        const objectModelArrays = Array.from(this._gameObjects.values());
+        return ([] as GameObjectModel[]).concat(...objectModelArrays);
+    }
+
     load: SaveEditor["load"] = flow(function* (this: SaveEditorImpl, file: File) {
         this.isSaveLoaded = false;
         this.isSaveLoading = true;

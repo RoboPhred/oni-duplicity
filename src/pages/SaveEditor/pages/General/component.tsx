@@ -3,9 +3,11 @@ import * as React from "react";
 import { action } from "mobx";
 import { observer } from "mobx-react";
 import { NumericInput } from "@blueprintjs/core";
+import { GameObjectBehavior } from "oni-save-parser";
 
 import { SaveEditorProps, withSaveEditor, GameObjectBehaviorModel } from "@/services/save-editor";
-import { GameObjectBehavior } from "oni-save-parser";
+
+import "./style.scss";
 
 type Props = SaveEditorProps;
 class GeneralPage extends React.Component<Props> {

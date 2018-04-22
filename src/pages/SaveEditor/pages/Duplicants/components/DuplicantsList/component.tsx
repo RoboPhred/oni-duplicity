@@ -7,6 +7,7 @@ import { GameObjectModel } from "@/services/save-editor";
 
 import DuplicantPortrait from "../DuplicantPortrait";
 
+import "./style.scss";
 
 export interface DuplicantsListProps {
     className?: string;

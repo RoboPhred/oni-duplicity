@@ -1,5 +1,6 @@
 
 import * as React from "react";
+import { autobind } from "core-decorators";
 import { RouteComponentProps, withRouter } from "react-router";
 
 import {
@@ -10,7 +11,9 @@ import ActiveAwareLink from "../ActiveAwareLink";
 
 import { AppNavMenuProps } from "./props";
 import { NavMenuEntry } from "./interfaces";
-import { autobind } from "core-decorators";
+
+import "./style.scss";
+
 
 class AppNavMenu extends React.Component<AppNavMenuProps & RouteComponentProps<any>> {
     render() {

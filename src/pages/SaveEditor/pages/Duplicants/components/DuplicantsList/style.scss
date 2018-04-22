@@ -1,0 +1,17 @@
+
+@import "~@blueprintjs/core/lib/scss/variables.scss";
+
+.ui-duplicant-list {
+    background-color: $gray5;
+    // Room for 2 portraits and their margins
+    height: 150px * 2 + 10px * 4;
+
+    .ui-duplicant-portrait {
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    .ui-duplicant-portrait.pt-active {
+        background-color: $orange4;
+    }
+}

@@ -1,0 +1,12 @@
+
+@import "~@blueprintjs/core/lib/scss/variables.scss";
+
+.pt-navbar.ui-app-navbar {
+    background-color: $cobalt3;
+
+    .pt-navbar-group {
+        .pt-button {
+            margin: 0 4px;
+        }
+    }
+}
