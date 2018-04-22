@@ -7,9 +7,10 @@ import {
     Navbar,
     NavbarGroup,
     NavbarHeading,
-    Text,
+    EditableText,
     Button,
-    Alignment
+    Alignment,
+    Icon
 } from "@blueprintjs/core";
 
 import { IconNames } from "@blueprintjs/icons";
@@ -38,7 +39,23 @@ class AppNavBar extends React.Component<Props> {
             <Navbar className={`ui-app-navbar ${className || ""}`}>
                 <NavbarGroup>
                     <NavbarHeading>ONI Save Editor</NavbarHeading>
-                    <Text ellipsize={true}>{saveName || ""}</Text>
+                        <EditableText
+                            onConfirm={this._onRename}
+                            disabled={!isSaveLoaded}
+                            placeholder={!isSaveLoaded ? "No save loaded" : "Click to edit save name"}
+                            value={saveName || ""}
+                        />
+                        {
+                            isSaveLoaded ?
+                                <span className="ui-savename-editbadge">
+                                    <Icon
+                                        icon={IconNames.EDIT}
+                                        iconSize={10}
+                                        title="Click on the save name to edit"
+                                    />
+                                </span>
+                            : undefined
+                        }
                 </NavbarGroup>
                 <NavbarGroup align={Alignment.RIGHT}>
                     <Button icon={IconNames.UPLOAD} onClick={this._onLoadClick}>Load</Button>
@@ -72,6 +89,12 @@ class AppNavBar extends React.Component<Props> {
         const files = change.target.files;
         if (!files || files.length === 0) return;
         this.props.saveEditor.load(files[0]);
+    }
+
+    @autobind()
+    private _onRename(name: string) {
+        const { saveEditor } = this.props;
+        saveEditor.renameSave(name);
     }
 }
 export default withSaveEditor(AppNavBar);

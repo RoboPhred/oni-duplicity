@@ -29,8 +29,8 @@ class SaveEditorPageComponent extends React.Component<Props> {
         const {
             saveEditor: {
                 loadError,
-                saveName,
-                isSaveLoading
+                isSaveLoading,
+                isSaveLoaded
             }
         } = this.props;
 
@@ -40,13 +40,11 @@ class SaveEditorPageComponent extends React.Component<Props> {
             // Show error screen
             return <ErrorPage error={loadError} />;
         }
-
-        if (!saveName) {
-            return <NoSaveLoadedPage />
-        }
-
         else if (isSaveLoading) {
             return <LoadingSaveFilePage />;
+        }
+        else if (!isSaveLoaded) {
+            return <NoSaveLoadedPage />
         }
 
         return (

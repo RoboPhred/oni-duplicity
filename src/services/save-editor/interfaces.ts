@@ -13,6 +13,9 @@ export interface SaveEditor {
     readonly gameObjects: GameObjectModel[];
 
     load(file: File): void;
+
+    renameSave(name: string): void;
+
     save(): void;
 
     getGameObjects(type: string): GameObjectModel[];

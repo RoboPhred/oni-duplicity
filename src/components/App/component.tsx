@@ -17,6 +17,7 @@ import { SaveEditorProps, withSaveEditor } from "@/services/save-editor";
 
 import AppNavBar from "../AppNavBar";
 import AppNavMenu from "../AppNavMenu";
+import SavingDialog from "../SavingDialog";
 
 import SaveEditorPage from "../../pages/SaveEditor";
 import ChangelogPage from "../../pages/Changelog";
@@ -65,7 +66,7 @@ class AppComponent extends React.Component<Props> {
                 // Utility items
                 type: "group",
                 entries: [
-                    
+
                 ]
             },
             {
@@ -77,29 +78,22 @@ class AppComponent extends React.Component<Props> {
 
         return (
             <div className="ui-app-root pt-app pt-dark fill-parent layout-vertical">
-                <AppNavBar className="layout-item"/>
+                <AppNavBar className="layout-item" />
                 <div className="layout-item-fill layout-horizontal">
                     <AppNavMenu className="layout-item" entries={navMenuEntries} />
                     <div className="layout-item-fill">
                         <Switch>
-                            <Route path="/editor" component={SaveEditorPage}/>
-                            <Route exact path="/404" component={Error404Page}/>
+                            <Route path="/editor" component={SaveEditorPage} />
+                            <Route exact path="/404" component={Error404Page} />
                             <Route exact path="/changelog" component={ChangelogPage} />
-                            <Redirect exact from="/" to="/editor"/>
-                            <Route component={Error404Page}/>
+                            <Redirect exact from="/" to="/editor" />
+                            <Route component={Error404Page} />
                         </Switch>
                     </div>
-                    { process.env.NODE_ENV === "development" ? <DevTools/> : undefined }
+                    {process.env.NODE_ENV === "development" ? <DevTools /> : undefined}
                 </div>
                 <Dialog isOpen={isSaveSaving} title="Saving File" icon={IconNames.SAVED} isCloseButtonShown={false}>
-                    <NonIdealState>
-                        <div>
-                            <Spinner large={true}/>
-                        </div>
-                        <div>
-                            Saving <code>{saveName}</code>
-                        </div>
-                    </NonIdealState>
+                    <SavingDialog />
                 </Dialog>
             </div>
         );
