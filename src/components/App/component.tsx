@@ -89,9 +89,7 @@ class AppComponent extends React.Component<Props> {
                             <Route component={Error404Page}/>
                         </Switch>
                     </div>
-                    <div>
-                        <DevTools/>
-                    </div>
+                    { process.env.NODE_ENV === "development" ? <DevTools/> : undefined }
                 </div>
                 <Dialog isOpen={isSaveSaving} title="Saving File" icon={IconNames.SAVED} isCloseButtonShown={false}>
                     <NonIdealState>

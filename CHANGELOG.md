@@ -1,6 +1,10 @@
 
 ### v1.4.0
-- View geysers
+- Edit geysers
+    - Type
+    - Cycle time factor
+    - Active time factor
+    - Dormant time factor
 
 ### v1.3.0
 - Edit current cycle.
