@@ -5,6 +5,7 @@
     - Cycle time factor
     - Active time factor
     - Dormant time factor
+- Ability to rename file on download.
 
 ### v1.3.0
 - Edit current cycle.
