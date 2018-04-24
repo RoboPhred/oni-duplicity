@@ -1,5 +1,7 @@
 
 ### v1.4.0
+- Edit duplicant
+    - Interests (aptitudes)
 - Edit geysers
     - Type
     - Cycle time factor
