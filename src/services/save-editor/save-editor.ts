@@ -46,9 +46,7 @@ export class SaveEditorImpl implements SaveEditor {
         this.isSaveLoaded = false;
         this.isSaveLoading = true;
         this._gameObjects.clear();
-        console.log("Setting name to", file.name);
         this.saveName = file.name;
-        console.log("Name set to", this.saveName)
         try {
             const data = yield readFile(file);
             const saveGame: SaveGame = yield parseSave(data);
@@ -64,7 +62,6 @@ export class SaveEditorImpl implements SaveEditor {
             this.loadError = e;
         }
         finally {
-            console.log("Load done.  Still", this.saveName)
             this.isSaveLoading = false;
         }
     });
@@ -73,7 +70,6 @@ export class SaveEditorImpl implements SaveEditor {
     renameSave(name: string) {
         if (!this.isSaveLoaded) return;
         if (name == null || name === "") return;
-        console.log("Setting save name to", name);
         this.saveName = name;
     }
 
