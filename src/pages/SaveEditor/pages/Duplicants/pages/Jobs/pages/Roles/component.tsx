@@ -11,6 +11,7 @@ const StringSelect = Select.ofType<string>();
 import { GameObjectModel } from "@/services/save-editor";
 import { MinionResumeBehavior } from "oni-save-parser";
 
+import "./style.scss";
 
 export interface DuplicantJobsPageProps {
     duplicant: GameObjectModel;
@@ -18,7 +19,7 @@ export interface DuplicantJobsPageProps {
 
 type Props = DuplicantJobsPageProps;
 @observer
-class DuplicantJobsPage extends React.Component<Props> {
+class DuplicantRolesPage extends React.Component<Props> {
     render() {
         const { duplicant } = this.props;
 
@@ -42,11 +43,11 @@ class DuplicantJobsPage extends React.Component<Props> {
         const rows = knownRoles.map(x => {
             const experience = ExperienceByRoleID.get(x) || 0;
             const mastery = MasteryByRoleID.get(x) || false;
-            return <JobRow key={x} jobID={x} mastery={mastery} experience={experience} setMastery={this._setMastery} setExperience={this._setExperience} />
+            return <RoleRow key={x} roleID={x} mastery={mastery} experience={experience} setMastery={this._setMastery} setExperience={this._setExperience} />
         });
 
         return (
-            <div className={`ui-duplicant-jobs fill-parent container-scroll`}>
+            <div className={`ui-duplicant-roles fill-parent container-scroll`}>
                 <div className="layout-vertical">
                     <div className="layout-horizontal">
                         <div className="ui-current-role pt-form-group pt-inline">
@@ -162,27 +163,27 @@ class DuplicantJobsPage extends React.Component<Props> {
         resumeBehavior.templateData.ExperienceByRoleID!.set(roleID, experience);
     }
 }
-export default DuplicantJobsPage;
+export default DuplicantRolesPage;
 
 
 interface JobRowProps {
-    jobID: string;
+    roleID: string;
     mastery: boolean;
     experience: number;
-    setMastery(jobID: string, mastery: boolean): void;
-    setExperience(jobID: string, experience: number): void;
+    setMastery(roleID: string, mastery: boolean): void;
+    setExperience(roleID: string, experience: number): void;
 }
-class JobRow extends React.Component<JobRowProps> {
+class RoleRow extends React.Component<JobRowProps> {
     render() {
         const {
-            jobID,
+            roleID,
             mastery,
             experience
         } = this.props;
 
         return (
             <tr>
-                <td>{jobID}</td>
+                <td>{roleID}</td>
                 <td>
                     <label className="pt-control pt-checkbox">
                         <input type="checkbox" checked={mastery} onChange={this._onSetMastery} />
@@ -205,10 +206,10 @@ class JobRow extends React.Component<JobRowProps> {
     _onSetMastery(change: React.ChangeEvent<HTMLInputElement>) {
         const checked = change.target.checked;
         const {
-            jobID,
+            roleID,
             setMastery
         } = this.props;
-        setMastery(jobID, checked);
+        setMastery(roleID, checked);
     }
 
     @autobind()
@@ -218,9 +219,9 @@ class JobRow extends React.Component<JobRowProps> {
         }
 
         const {
-            jobID,
+            roleID,
             setExperience
         } = this.props;
-        setExperience(jobID, value);
+        setExperience(roleID, value);
     }
 }

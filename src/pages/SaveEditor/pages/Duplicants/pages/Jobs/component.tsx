@@ -9,6 +9,7 @@ import {
 import { GameObjectModel } from "@/services/save-editor";
 
 import RolesPage from "./pages/Roles";
+import AptitudePage from "./pages/Aptitudes";
 
 export interface DuplicantRolesPageProps {
     duplicant: GameObjectModel;
@@ -22,7 +23,7 @@ class DuplicantRolesPage extends React.Component<Props> {
             <div className="ui-duplicant-roles fill-parent">
                 <Tabs className="fill-parent layout-horizontal" vertical={true} renderActiveTabPanelOnly={true} id="DuplicantRolePages">
                     <Tab className="layout-item-fill" id="roles" title="Roles" panel={<RolesPage duplicant={duplicant} />} />
-                    <Tab id="aptitudes" title="Aptitudes" disabled/>
+                    <Tab className="layout-item-fill" id="aptitudes" title="Aptitudes" panel={<AptitudePage duplicant={duplicant} />} />
                 </Tabs>
             </div>
         )
