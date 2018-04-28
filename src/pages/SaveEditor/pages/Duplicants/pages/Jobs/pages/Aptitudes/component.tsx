@@ -6,7 +6,13 @@ import { autobind } from "core-decorators";
 import { observer } from "mobx-react";
 import { action } from "mobx";
 
-import { APTITUDE_NAMES, APTITUDE_HASH_NAMES, APTITUDE_NAME_HASHES, AptitudeName, MinionResumeBehavior } from "oni-save-parser";
+import {
+    APTITUDE_NAMES,
+    APTITUDE_HASH_NAMES,
+    APTITUDE_NAME_HASHES,
+    AptitudeName,
+    MinionResumeBehavior
+} from "oni-save-parser";
 
 import { GameObjectModel, GameObjectBehaviorModel } from "@/services/save-editor";
 

@@ -12,17 +12,15 @@ import { IconNames } from "@blueprintjs/icons";
 
 import DevTools from "mobx-react-devtools";
 
-
 import { SaveEditorProps, withSaveEditor } from "@/services/save-editor";
+
+import SiteSwitch from "@/site-graph/components/SiteSwitch";
+import siteRoot from "@/site-graph/root";
 
 import AppNavBar from "../AppNavBar";
 import AppNavMenu from "../AppNavMenu";
 import SavingDialog from "../SavingDialog";
 
-import SaveEditorPage from "../../pages/SaveEditor";
-import ChangelogPage from "../../pages/Changelog";
-import Error404Page from "../../pages/404";
-import { NavMenuEntry } from "../AppNavMenu/interfaces";
 
 type Props = SaveEditorProps & RouteComponentProps<any>;
 @observer
@@ -37,58 +35,16 @@ class AppComponent extends React.Component<Props> {
             }
         } = this.props;
 
-        // TODO: This should be defined elsewhere, probably alongside static route configuration.
-        const navMenuEntries: NavMenuEntry[] = [
-            {
-                // Save Editor
-                type: "link",
-                path: "/editor",
-                name: "Save Editor",
-                subEntries: [
-                    {
-                        type: "link",
-                        path: "/editor/general",
-                        name: "General"
-                    },
-                    {
-                        type: "link",
-                        path: "/editor/duplicants",
-                        name: "Duplicants"
-                    },
-                    {
-                        type: "link",
-                        path: "/editor/geysers",
-                        name: "Geysers"
-                    }
-                ]
-            },
-            {
-                // Utility items
-                type: "group",
-                entries: [
-
-                ]
-            },
-            {
-                type: "link",
-                path: "/changelog",
-                name: "Duplicity Changelog"
-            }
-        ];
-
         return (
             <div className="ui-app-root pt-app pt-dark fill-parent layout-vertical">
                 <AppNavBar className="layout-item" />
                 <div className="layout-item-fill layout-horizontal">
-                    <AppNavMenu className="layout-item" entries={navMenuEntries} />
+                    <AppNavMenu className="layout-item" siteGraph={siteRoot.subEntries!} />
                     <div className="layout-item-fill">
-                        <Switch>
-                            <Route path="/editor" component={SaveEditorPage} />
-                            <Route exact path="/404" component={Error404Page} />
-                            <Route exact path="/changelog" component={ChangelogPage} />
+                        <SiteSwitch siteGraph={siteRoot.subEntries!}>
+                            { /* TODO: Use an index path concept for site graph. */}
                             <Redirect exact from="/" to="/editor" />
-                            <Route component={Error404Page} />
-                        </Switch>
+                        </SiteSwitch>
                     </div>
                     {process.env.NODE_ENV === "development" ? <DevTools /> : undefined}
                 </div>
