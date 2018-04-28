@@ -61,11 +61,13 @@ class AppNavMenu extends React.Component<AppNavMenuProps & RouteComponentProps<a
 
     private _renderEntry(entry: SiteGraphEntry, key: any): React.ReactChild | React.ReactChild[] {
         switch(entry.type) {
+            case "path":
             case "group": {
-                const rendered = this._renderLinks(entry.entries, key);
-                if (entry.name) {
+                const rendered = this._renderLinks(entry.children, key);
+                const menuName = entry.navMenu && (entry.navMenu === "string" && entry.navMenu) || entry.name;
+                if (menuName && menuName !== "") {
                     rendered.unshift(
-                        <div key={`${key}-header`} className="pt-menu-header"><h6>{entry.name}</h6></div>
+                        <div key={`${key}-header`} className="pt-menu-header"><h6>{menuName}</h6></div>
                     );
                 }
                 return rendered;
@@ -75,18 +77,18 @@ class AppNavMenu extends React.Component<AppNavMenuProps & RouteComponentProps<a
                 const {
                     name,
                     path,
-                    subEntries,
+                    children,
                     navMenuCollapse
                 } = entry;
-                const primaryLink = <ActiveAwareLink key={key} exact={subEntries != null} className="pt-menu-item" to={path}>{name}</ActiveAwareLink>;
-                if (!subEntries || (navMenuCollapse && !matchPartialPath(pathName, path))) {
+                const primaryLink = <ActiveAwareLink key={key} exact={children != null} className="pt-menu-item" to={path}>{name}</ActiveAwareLink>;
+                if (!children || (navMenuCollapse && !matchPartialPath(pathName, path))) {
                     return primaryLink;
                 }
                 else {
                     return [
                         primaryLink,
                         <ul key={`${key}-list`}>
-                            {this._renderLinks(subEntries).map((x, i) => <li key={`${key}-${i}`}>{x}</li>)}
+                            {this._renderLinks(children).map((x, i) => <li key={`${key}-${i}`}>{x}</li>)}
                         </ul>
                     ];
                 }

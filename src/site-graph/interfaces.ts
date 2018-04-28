@@ -1,7 +1,24 @@
 import { RouteComponentProps } from "react-router-dom";
 
+export interface NavMenuItem {
+    /**
+     * The fallback name to use for the NavMenu, if navMenu is true and not a string.
+     * This is usually present for other constructs, such as the display name for
+     * a page or path.
+     */
+    name?: string;
+    
+    /**
+     * Whether or not this item should generate a nav menu.
+     * If set to a string, a nav menu will be generated and named
+     * by the string.
+     */
+    navMenu: boolean | string;
+    navMenuCollapse?: boolean;
+}
+type Optional<T> = Partial<T>;
 
-export interface SitePage {
+export interface SitePage extends Optional<NavMenuItem> {
     type: "page";
     name: string;
     path: string;
@@ -12,21 +29,24 @@ export interface SitePage {
      * Additional nav groups or pages contained in
      * this page.
      */
-    subEntries?: SiteGraphEntry[];
-
-    /**
-     * If sub entries are present, whether the sub entry items for this page
-     * should collapse when not active.
-     * Default: ```false```.
-     */
-    navMenuCollapse?: boolean;
+    children?: SiteGraphEntry[];
 }
 
-export interface NavGroup {
-    type: "group";
+export interface SitePath extends Optional<NavMenuItem> {
+    type: "path",
     name?: string;
-    entries: SiteGraphEntry[];
+    path: string;
+    children: SiteGraphEntry[];
 }
 
-export type SiteGraphEntry = SitePage | NavGroup;
+/**
+ * A group of related items.  The items will be rendered
+ * by the first non-group ancestor.
+ */
+export interface NavGroup extends NavMenuItem {
+    type: "group";
+    children: SiteGraphEntry[];
+}
+
+export type SiteGraphEntry = SitePage | SitePath | NavGroup;
 export type SiteGraph = SiteGraphEntry[];

@@ -39,9 +39,9 @@ class AppComponent extends React.Component<Props> {
             <div className="ui-app-root pt-app pt-dark fill-parent layout-vertical">
                 <AppNavBar className="layout-item" />
                 <div className="layout-item-fill layout-horizontal">
-                    <AppNavMenu className="layout-item" siteGraph={siteRoot.subEntries!} />
+                    <AppNavMenu className="layout-item" siteGraph={siteRoot.children!} />
                     <div className="layout-item-fill">
-                        <SiteSwitch siteGraph={siteRoot.subEntries!}>
+                        <SiteSwitch siteGraph={siteRoot.children!}>
                             { /* TODO: Use an index path concept for site graph. */}
                             <Redirect exact from="/" to="/editor" />
                         </SiteSwitch>

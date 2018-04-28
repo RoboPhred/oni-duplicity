@@ -10,7 +10,7 @@ const siteGraph: SitePage = {
     name: "Duplicity",
     path: "/",
     component: App,
-    subEntries: [
+    children: [
         {
             // Save Editor
             type: "page",
@@ -18,7 +18,7 @@ const siteGraph: SitePage = {
             name: "Save Editor",
             component: SaveEditor,
             navMenuCollapse: true,
-            subEntries: saveEditorPages
+            children: saveEditorPages
         },
         {
             type: "page",
