@@ -1,5 +1,11 @@
 
-import { observable, action, flow, computed, toJS } from "mobx";
+import {
+    observable,
+    action,
+    flow,
+    runInAction
+} from "mobx";
+
 import { saveAs } from "file-saver";
 import { SaveGame } from "oni-save-parser";
 
@@ -10,7 +16,7 @@ import { SaveEditor, GameObjectModel } from "./interfaces";
 import { GameObjectModelImpl } from "./game-object";
 
 import SaveLoadWorker from "worker-loader!./save-loader.worker";
-import { LoadCommandData, SaveCommandData } from "./save-loader.worker";
+import { LoadCommandData, SaveCommandData, SaveLoaderEvents } from "./save-loader.worker";
 const worker = new SaveLoadWorker();
 
 
@@ -29,6 +35,9 @@ export class SaveEditorImpl implements SaveEditor {
 
     @observable
     loadError: Error | null = null;
+
+    @observable
+    saveLoadParseStep: string | null = null;
 
     private _saveGame: SaveGame | null = null;
 
@@ -49,7 +58,7 @@ export class SaveEditorImpl implements SaveEditor {
         this.saveName = file.name;
         try {
             const data = yield readFile(file);
-            const saveGame: SaveGame = yield parseSave(data);
+            const saveGame: SaveGame = yield this._parseSave(data);
             this._saveGame = saveGame;
             for (let type of typedKeys(this._saveGame.body.gameObjects)) {
                 const models = this._saveGame.body.gameObjects[type].map(x => new GameObjectModelImpl(type, x));
@@ -80,7 +89,7 @@ export class SaveEditorImpl implements SaveEditor {
             for (let [_, value] of this._gameObjects) {
                 value.forEach(x => x.syncChanges());
             }
-            const data = yield writeSave(this._saveGame)
+            const data = yield this._writeSave(this._saveGame)
             const blob = new Blob([data]);
 
             saveAs(blob, withExtension(this.saveName || "my-file", ".sav"));
@@ -99,6 +108,64 @@ export class SaveEditorImpl implements SaveEditor {
     getGameObjects(type: string): GameObjectModel[] {
         return this._gameObjects.get(type) || [];
     }
+
+    private _parseSave(buffer: ArrayBuffer): Promise<SaveGame> {
+        return new Promise<SaveGame>((accept, reject) => {
+            worker.onerror = (e: ErrorEvent) => { reject(e.error) };
+            worker.onmessage = action("parse-save-worker-message", (e: MessageEvent) => {
+                const event = e.data as SaveLoaderEvents;
+                switch(event.type) {
+                    case "progress": {
+                        this.saveLoadParseStep = event.name;
+                        return;
+                    };
+                    case "loaded": {
+                        worker.onmessage = null;
+                        this.saveLoadParseStep = null;
+                        const {error, saveGame} = event;
+                        if (error) reject(error);
+                        else accept(saveGame!);
+                        return;
+                    };
+                }
+            });
+    
+            const cmd: LoadCommandData = {
+                command: "load",
+                buffer: buffer
+            };
+            worker.postMessage(cmd);
+        });
+    }
+    
+    private _writeSave(saveGame: SaveGame): Promise<ArrayBuffer> {
+        return new Promise<ArrayBuffer>((accept, reject) => {
+            worker.onerror = (e: ErrorEvent) => { reject(e.error) };
+            worker.onmessage = action("parse-save-worker-message", (e: MessageEvent) => {
+                const event = e.data as SaveLoaderEvents;
+                switch(event.type) {
+                    case "progress": {
+                        this.saveLoadParseStep = event.name;
+                        return;
+                    };
+                    case "saved": {
+                        worker.onmessage = null;
+                        this.saveLoadParseStep = null;
+                        const {error, buffer} = event;
+                        if (error) reject(error);
+                        else accept(buffer!);
+                        return;
+                    };
+                }
+            });
+    
+            const cmd: SaveCommandData = {
+                command: "save",
+                save: saveGame
+            };
+            worker.postMessage(cmd);
+        });
+    }
 }
 
 
@@ -112,46 +179,6 @@ function readFile(file: File): Promise<ArrayBuffer> {
             reject(reader.error);
         };
         reader.readAsArrayBuffer(file);
-    });
-}
-
-function parseSave(buffer: ArrayBuffer): Promise<SaveGame> {
-    return new Promise<SaveGame>((accept, reject) => {
-        worker.onerror = (e: ErrorEvent) => { reject(e.error) };
-        worker.onmessage = (e: MessageEvent) => {
-            const {
-                saveGame,
-                error
-            } = e.data;
-            if (error) reject(error);
-            else accept(saveGame);
-        };
-
-        const cmd: LoadCommandData = {
-            command: "load",
-            buffer: buffer
-        };
-        worker.postMessage(cmd);
-    });
-}
-
-function writeSave(saveGame: SaveGame): Promise<ArrayBuffer> {
-    return new Promise<ArrayBuffer>((accept, reject) => {
-        worker.onerror = (e: ErrorEvent) => { reject(e.error) };
-        worker.onmessage = (e: MessageEvent) => {
-            const {
-                buffer,
-                error
-            } = e.data;
-            if (error) reject(error);
-            else accept(buffer);
-        };
-
-        const cmd: SaveCommandData = {
-            command: "save",
-            save: saveGame
-        };
-        worker.postMessage(cmd);
     });
 }
 

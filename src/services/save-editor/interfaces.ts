@@ -10,6 +10,8 @@ export interface SaveEditor {
 
     readonly isSaveSaving: boolean;
 
+    readonly saveLoadParseStep: string | null;
+
     readonly gameObjects: GameObjectModel[];
 
     load(file: File): void;

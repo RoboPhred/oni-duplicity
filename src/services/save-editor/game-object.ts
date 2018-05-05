@@ -1,6 +1,6 @@
 
 import { observable, toJS } from "mobx";
-import { createTransformer } from "mobx-utils";
+// import { createTransformer } from "mobx-utils";
 
 import {
     GameObject,
