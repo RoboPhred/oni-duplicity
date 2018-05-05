@@ -35,7 +35,8 @@ export interface DataSavedEvent {
 
 export interface ProgressEvent {
     type: "progress";
-    name: string;
+    event: "start" | "progress" | "end";
+    e: ParseStepEventArgs;
 }
 
 export type SaveLoaderCommands = LoadCommandData | SaveCommandData;
@@ -100,7 +101,6 @@ function doSave(data: SaveCommandData) {
 @injectable(ParseStepListener)
 class ProgressReporter implements ParseStepListener {
     private _depth: number = 0;
-    private _stack: string[] = [];
 
     private _lastAnnounce: number = 0;
 
@@ -108,49 +108,35 @@ class ProgressReporter implements ParseStepListener {
         this._depth++;
 
         if (this._depth <= 4) {
-            if (e.max) {
-                this._stack.push(`${e.name} (${e.current} of ${e.max})`);
-            }
-            else {
-                this._stack.push(e.name)
-            }
-            this._announce();
+            const msg: ProgressEvent = {
+                type: "progress",
+                event: "start",
+                e
+            };
+            postMessage(msg);
         }
     }
 
     onProgress(e: ParseStepEventArgs) {
-        if (this._depth <= 4 && e.max) {
-            this._stack.pop();
-            if (e.max) {
-                this._stack.push(`${e.name} (${e.current} of ${e.max})`);
-            }
-            else {
-                this._stack.push(e.name)
-            }
-            this._announce();
+        if (this._depth <= 4) {
+            const msg: ProgressEvent = {
+                type: "progress",
+                event: "progress",
+                e
+            };
+            postMessage(msg);
         }
     }
 
-    onEnd() {
+    onEnd(e: ParseStepEventArgs) {
         if (this._depth <= 4) {
-            this._stack.pop();
-            this._announce();
+            const msg: ProgressEvent = {
+                type: "progress",
+                event: "end",
+                e
+            };
+            postMessage(msg);
         }
         this._depth--;
-    }
-
-    private _announce() {
-        const now = Date.now();
-        const elapsed = now - this._lastAnnounce;
-        if (elapsed < 500) {
-            return;
-        }
-
-        this._lastAnnounce = now;
-        const msg: ProgressEvent = {
-            type: "progress",
-            name: this._stack.join(" > ")
-        }
-        postMessage(msg);
     }
 }

@@ -2,8 +2,7 @@
 import {
     observable,
     action,
-    flow,
-    runInAction
+    flow
 } from "mobx";
 
 import { saveAs } from "file-saver";
@@ -16,7 +15,7 @@ import { SaveEditor, GameObjectModel } from "./interfaces";
 import { GameObjectModelImpl } from "./game-object";
 
 import SaveLoadWorker from "worker-loader!./save-loader.worker";
-import { LoadCommandData, SaveCommandData, SaveLoaderEvents } from "./save-loader.worker";
+import { LoadCommandData, SaveCommandData, SaveLoaderEvents, ProgressEvent } from "./save-loader.worker";
 const worker = new SaveLoadWorker();
 
 
@@ -40,6 +39,9 @@ export class SaveEditorImpl implements SaveEditor {
     saveLoadParseStep: string | null = null;
 
     private _saveGame: SaveGame | null = null;
+
+    private _parseStepStack: string[] = [];
+    private _parseStepUpdateQueued: boolean = false;
 
     /**
      * Map of game object types to GameObjectModels in index order.
@@ -109,26 +111,58 @@ export class SaveEditorImpl implements SaveEditor {
         return this._gameObjects.get(type) || [];
     }
 
+    @action("write-saveload-progress")
+    private _writeProgress(event: ProgressEvent, force: boolean = false) {
+        switch(event.event) {
+            case "start": {
+                const str = event.e.max ?
+                    `${event.e.name} (${event.e.current} of ${event.e.max})`
+                    : event.e.name;
+                this._parseStepStack.push(str);
+                break;
+            }
+            case "progress": {
+                const str = event.e.max ?
+                    `${event.e.name} (${event.e.current} of ${event.e.max})`
+                    : event.e.name;
+                this._parseStepStack[this._parseStepStack.length - 1] = str;
+                break;
+            }
+            case "end": {
+                this._parseStepStack.pop();
+                break;
+            }
+        }
+
+        console.log(this._parseStepStack.join(" > "));
+        
+        if (this._parseStepUpdateQueued) return;
+        this._parseStepUpdateQueued = true;
+        setTimeout(action(() => {
+            this._parseStepUpdateQueued = false;
+            this.saveLoadParseStep = this._parseStepStack.join(" > ");
+        }), 200);
+    }
+
     private _parseSave(buffer: ArrayBuffer): Promise<SaveGame> {
         return new Promise<SaveGame>((accept, reject) => {
             worker.onerror = (e: ErrorEvent) => { reject(e.error) };
-            worker.onmessage = action("parse-save-worker-message", (e: MessageEvent) => {
+            worker.onmessage = (e: MessageEvent) => {
                 const event = e.data as SaveLoaderEvents;
                 switch(event.type) {
                     case "progress": {
-                        this.saveLoadParseStep = event.name;
+                        this._writeProgress(event);
                         return;
                     };
                     case "loaded": {
                         worker.onmessage = null;
-                        this.saveLoadParseStep = null;
                         const {error, saveGame} = event;
                         if (error) reject(error);
                         else accept(saveGame!);
                         return;
                     };
                 }
-            });
+            };
     
             const cmd: LoadCommandData = {
                 command: "load",
@@ -141,23 +175,22 @@ export class SaveEditorImpl implements SaveEditor {
     private _writeSave(saveGame: SaveGame): Promise<ArrayBuffer> {
         return new Promise<ArrayBuffer>((accept, reject) => {
             worker.onerror = (e: ErrorEvent) => { reject(e.error) };
-            worker.onmessage = action("parse-save-worker-message", (e: MessageEvent) => {
+            worker.onmessage = (e: MessageEvent) => {
                 const event = e.data as SaveLoaderEvents;
                 switch(event.type) {
                     case "progress": {
-                        this.saveLoadParseStep = event.name;
+                        this._writeProgress(event);
                         return;
                     };
                     case "saved": {
                         worker.onmessage = null;
-                        this.saveLoadParseStep = null;
                         const {error, buffer} = event;
                         if (error) reject(error);
                         else accept(buffer!);
                         return;
                     };
                 }
-            });
+            };
     
             const cmd: SaveCommandData = {
                 command: "save",
