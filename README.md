@@ -1,23 +1,13 @@
-
 # Duplicity
 
-An Oxygen Not Included duplicant editor.
+A web-based Oxygen Not Included save editor.
 
-# Features
+You can find the editor at [https://robophred.github.io/oni-duplicity/](https://robophred.github.io/oni-duplicity/).
 
-- Edit Duplicants
-    - Name
-    - Gender
-    - Voice
-    - Size (width and height)
-    - Health Status (healthy, critical, incapacitated, invulnurable, ...)
-    - Skills (level and experience)
-    - Traits
-    - Status Effects
+# Compatibility
 
-*more comming soon*
+Supports Cosmic Update (save file version 7.4). Future versions may not be compatible until the editor is updated. Previous versions may need to be updated by re-saving them in the newest version of the game.
 
-## Current Status
+# Implementation
 
-This is a very, very, very early prototype.
-The UI needs to be completely reworked.
+The actual save serialization is done by the [oni-save-parser](https://github.com/RoboPhred/oni-save-parser) library. Feel free to use this library in your own projects.
