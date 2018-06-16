@@ -1,43 +1,49 @@
 import { Vector3, BehaviorName, GameObjectBehavior } from "oni-save-parser";
 
 export interface SaveEditor {
-    readonly saveName: string | null;
+  readonly saveName: string | null;
 
-    readonly isSaveLoading: boolean;
-    readonly isSaveLoaded: boolean;
+  readonly isSaveLoading: boolean;
+  readonly isSaveLoaded: boolean;
 
-    readonly loadError: Error | null;
+  readonly loadError: Error | null;
 
-    readonly isSaveSaving: boolean;
+  readonly isSaveSaving: boolean;
 
-    readonly saveLoadParseStep: string | null;
+  readonly saveLoadParseStep: string | null;
 
-    readonly gameObjects: GameObjectModel[];
+  readonly gameObjects: GameObjectModel[];
 
-    load(file: File): void;
+  load(file: File): void;
 
-    renameSave(name: string): void;
+  renameSave(name: string): void;
 
-    save(): void;
+  save(): void;
 
-    getGameObjects(type: string): GameObjectModel[];
+  getGameObjects(type: string): GameObjectModel[];
 }
 
 export interface GameObjectModel {
-    readonly kPrefabID: number;
-    readonly type: string;
-    
-    position: Vector3;
-    scale: Vector3;
+  readonly kPrefabID: number;
+  readonly type: string;
 
-    getBehavior<TBehavior extends GameObjectBehavior>(behaviorName: BehaviorName<TBehavior>): GameObjectBehaviorModel<TBehavior> | undefined;
-    getAllBehaviors<TBehavior extends GameObjectBehavior>(behaviorName: BehaviorName<TBehavior>): GameObjectBehaviorModel<TBehavior>[];
+  position: Vector3;
+  scale: Vector3;
+
+  getBehavior<TBehavior extends GameObjectBehavior>(
+    behaviorName: BehaviorName<TBehavior>
+  ): GameObjectBehaviorModel<TBehavior> | undefined;
+  getAllBehaviors<TBehavior extends GameObjectBehavior>(
+    behaviorName: BehaviorName<TBehavior>
+  ): GameObjectBehaviorModel<TBehavior>[];
 }
 
-// Flatten parsedData into the model proper.
+// Flatten templateData into the model proper.
 //  TODO: revisit when further in with mobx; might not be possible.
 //  Replace with func getter/setter with path if needed.
-export interface GameObjectBehaviorModel<TBehavior extends GameObjectBehavior = GameObjectBehavior> {
-    readonly name: string;
-    templateData: TBehavior["parsedData"];
-};
+export interface GameObjectBehaviorModel<
+  TBehavior extends GameObjectBehavior = GameObjectBehavior
+> {
+  readonly name: string;
+  templateData: TBehavior["templateData"];
+}

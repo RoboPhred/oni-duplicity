@@ -1,9 +1,4 @@
-
-import {
-    observable,
-    action,
-    flow
-} from "mobx";
+import { observable, action, flow } from "mobx";
 
 import { saveAs } from "file-saver";
 import { SaveGame } from "oni-save-parser";
@@ -15,207 +10,162 @@ import { SaveEditor, GameObjectModel } from "./interfaces";
 import { GameObjectModelImpl } from "./game-object";
 
 import SaveLoadWorker from "worker-loader!./save-loader.worker";
-import { LoadCommandData, SaveCommandData, SaveLoaderEvents, ProgressEvent } from "./save-loader.worker";
+import {
+  LoadCommandData,
+  SaveCommandData,
+  SaveLoaderEvents
+} from "./save-loader.worker";
 const worker = new SaveLoadWorker();
 
-
 export class SaveEditorImpl implements SaveEditor {
-    @observable
-    saveName: string | null = null;
+  @observable saveName: string | null = null;
 
-    @observable
-    isSaveLoading: boolean = false;
+  @observable isSaveLoading: boolean = false;
 
-    @observable
-    isSaveLoaded: boolean = false;
+  @observable isSaveLoaded: boolean = false;
 
-    @observable
-    isSaveSaving: boolean = false;
+  @observable isSaveSaving: boolean = false;
 
-    @observable
-    loadError: Error | null = null;
+  @observable loadError: Error | null = null;
 
-    @observable
-    saveLoadParseStep: string | null = null;
+  @observable saveLoadParseStep: string | null = null;
 
-    private _saveGame: SaveGame | null = null;
+  private _saveGame: SaveGame | null = null;
 
-    private _parseStepStack: string[] = [];
-    private _parseStepUpdateQueued: boolean = false;
+  /**
+   * Map of game object types to GameObjectModels in index order.
+   */
+  private _gameObjects = new Map<string, GameObjectModelImpl[]>();
 
-    /**
-     * Map of game object types to GameObjectModels in index order.
-     */
-    private _gameObjects = new Map<string, GameObjectModelImpl[]>();
+  get gameObjects(): GameObjectModel[] {
+    const objectModelArrays = Array.from(this._gameObjects.values());
+    return ([] as GameObjectModel[]).concat(...objectModelArrays);
+  }
 
-    get gameObjects(): GameObjectModel[] {
-        const objectModelArrays = Array.from(this._gameObjects.values());
-        return ([] as GameObjectModel[]).concat(...objectModelArrays);
+  load: SaveEditor["load"] = flow(function*(this: SaveEditorImpl, file: File) {
+    this.isSaveLoaded = false;
+    this.isSaveLoading = true;
+    this._gameObjects.clear();
+    this.saveName = file.name;
+    try {
+      const data = yield readFile(file);
+      const saveGame: SaveGame = yield this._parseSave(data);
+      this._saveGame = saveGame;
+      const { gameObjects } = saveGame;
+      for (let objectSet of gameObjects) {
+        const models = objectSet.gameObjects.map(
+          x => new GameObjectModelImpl(objectSet.name, x)
+        );
+        this._gameObjects.set(objectSet.name, models);
+      }
+      this.isSaveLoaded = true;
+    } catch (e) {
+      error("Failed to load file: " + e.message);
+      this.loadError = e;
+    } finally {
+      this.isSaveLoading = false;
     }
+  });
 
-    load: SaveEditor["load"] = flow(function* (this: SaveEditorImpl, file: File) {
-        this.isSaveLoaded = false;
-        this.isSaveLoading = true;
-        this._gameObjects.clear();
-        this.saveName = file.name;
-        try {
-            const data = yield readFile(file);
-            const saveGame: SaveGame = yield this._parseSave(data);
-            this._saveGame = saveGame;
-            for (let type of typedKeys(this._saveGame.body.gameObjects)) {
-                const models = this._saveGame.body.gameObjects[type].map(x => new GameObjectModelImpl(type, x));
-                this._gameObjects.set(type, models);
-            }
-            this.isSaveLoaded = true;
+  @action
+  renameSave(name: string) {
+    if (!this.isSaveLoaded) return;
+    if (name == null || name === "") return;
+    this.saveName = name;
+  }
+
+  save: SaveEditor["save"] = flow(function*(this: SaveEditorImpl) {
+    if (!this._saveGame) return;
+    this.isSaveSaving = true;
+    try {
+      for (let [_, value] of this._gameObjects) {
+        value.forEach(x => x.syncChanges());
+      }
+      const data = yield this._writeSave(this._saveGame);
+      const blob = new Blob([data]);
+
+      saveAs(blob, withExtension(this.saveName || "my-file", ".sav"));
+    } catch (e) {
+      error("Failed to save file: " + e.message);
+      this.loadError = e;
+    } finally {
+      this.isSaveSaving = false;
+    }
+  });
+
+  // TODO: Look at why this is generating new objects every time.  Might be because the source object isnt observable?
+  // getGameObjects: SaveEditor["getGameObjects"] = createTransformer((type: string) => ((this._saveGame && this._saveGame.body.gameObjects[type]) || []).map(x => new GameObjectModelImpl(type, x)));
+  getGameObjects(type: string): GameObjectModel[] {
+    return this._gameObjects.get(type) || [];
+  }
+
+  private _parseSave(buffer: ArrayBuffer): Promise<SaveGame> {
+    return new Promise<SaveGame>((accept, reject) => {
+      worker.onerror = (e: ErrorEvent) => {
+        reject(e.error);
+      };
+      worker.onmessage = (e: MessageEvent) => {
+        const event = e.data as SaveLoaderEvents;
+        switch (event.type) {
+          case "loaded": {
+            worker.onmessage = null;
+            const { error, saveGame } = event;
+            if (error) reject(error);
+            else accept(saveGame!);
+            return;
+          }
         }
-        catch (e) {
-            error("Failed to load file: " + e.message);
-            this.loadError = e;
-        }
-        finally {
-            this.isSaveLoading = false;
-        }
+      };
+
+      const cmd: LoadCommandData = {
+        command: "load",
+        buffer: buffer
+      };
+      worker.postMessage(cmd);
     });
+  }
 
-    @action
-    renameSave(name: string) {
-        if (!this.isSaveLoaded) return;
-        if (name == null || name === "") return;
-        this.saveName = name;
-    }
+  private _writeSave(saveGame: SaveGame): Promise<ArrayBuffer> {
+    return new Promise<ArrayBuffer>((accept, reject) => {
+      worker.onerror = (e: ErrorEvent) => {
+        reject(e.error);
+      };
+      worker.onmessage = (e: MessageEvent) => {
+        const event = e.data as SaveLoaderEvents;
+        switch (event.type) {
+          case "saved": {
+            worker.onmessage = null;
+            const { error, buffer } = event;
+            if (error) reject(error);
+            else accept(buffer!);
+            return;
+          }
+        }
+      };
 
-    save: SaveEditor["save"] = flow(function*(this: SaveEditorImpl) {
-        if (!this._saveGame) return;
-        this.isSaveSaving = true;
-        try {
-            for (let [_, value] of this._gameObjects) {
-                value.forEach(x => x.syncChanges());
-            }
-            const data = yield this._writeSave(this._saveGame)
-            const blob = new Blob([data]);
-
-            saveAs(blob, withExtension(this.saveName || "my-file", ".sav"));
-        }
-        catch (e) {
-            error("Failed to save file: " + e.message);
-            this.loadError = e;
-        }
-        finally {
-            this.isSaveSaving = false;
-        }
+      const cmd: SaveCommandData = {
+        command: "save",
+        save: saveGame
+      };
+      worker.postMessage(cmd);
     });
-
-    // TODO: Look at why this is generating new objects every time.  Might be because the source object isnt observable?
-    // getGameObjects: SaveEditor["getGameObjects"] = createTransformer((type: string) => ((this._saveGame && this._saveGame.body.gameObjects[type]) || []).map(x => new GameObjectModelImpl(type, x)));
-    getGameObjects(type: string): GameObjectModel[] {
-        return this._gameObjects.get(type) || [];
-    }
-
-    @action("write-saveload-progress")
-    private _writeProgress(event: ProgressEvent, force: boolean = false) {
-        switch(event.event) {
-            case "start": {
-                const str = event.e.max ?
-                    `${event.e.name} (${event.e.current} of ${event.e.max})`
-                    : event.e.name;
-                this._parseStepStack.push(str);
-                break;
-            }
-            case "progress": {
-                const str = event.e.max ?
-                    `${event.e.name} (${event.e.current} of ${event.e.max})`
-                    : event.e.name;
-                this._parseStepStack[this._parseStepStack.length - 1] = str;
-                break;
-            }
-            case "end": {
-                this._parseStepStack.pop();
-                break;
-            }
-        }
-
-        // console.log(this._parseStepStack.join(" > "));
-        
-        if (this._parseStepUpdateQueued) return;
-        this._parseStepUpdateQueued = true;
-        setTimeout(action(() => {
-            this._parseStepUpdateQueued = false;
-            this.saveLoadParseStep = this._parseStepStack.join(" > ");
-        }), 1000);
-    }
-
-    private _parseSave(buffer: ArrayBuffer): Promise<SaveGame> {
-        return new Promise<SaveGame>((accept, reject) => {
-            worker.onerror = (e: ErrorEvent) => { reject(e.error) };
-            worker.onmessage = (e: MessageEvent) => {
-                const event = e.data as SaveLoaderEvents;
-                switch(event.type) {
-                    case "progress": {
-                        this._writeProgress(event);
-                        return;
-                    };
-                    case "loaded": {
-                        worker.onmessage = null;
-                        const {error, saveGame} = event;
-                        if (error) reject(error);
-                        else accept(saveGame!);
-                        return;
-                    };
-                }
-            };
-    
-            const cmd: LoadCommandData = {
-                command: "load",
-                buffer: buffer
-            };
-            worker.postMessage(cmd);
-        });
-    }
-    
-    private _writeSave(saveGame: SaveGame): Promise<ArrayBuffer> {
-        return new Promise<ArrayBuffer>((accept, reject) => {
-            worker.onerror = (e: ErrorEvent) => { reject(e.error) };
-            worker.onmessage = (e: MessageEvent) => {
-                const event = e.data as SaveLoaderEvents;
-                switch(event.type) {
-                    case "progress": {
-                        this._writeProgress(event);
-                        return;
-                    };
-                    case "saved": {
-                        worker.onmessage = null;
-                        const {error, buffer} = event;
-                        if (error) reject(error);
-                        else accept(buffer!);
-                        return;
-                    };
-                }
-            };
-    
-            const cmd: SaveCommandData = {
-                command: "save",
-                save: saveGame
-            };
-            worker.postMessage(cmd);
-        });
-    }
+  }
 }
 
-
 function readFile(file: File): Promise<ArrayBuffer> {
-    const reader = new FileReader();
-    return new Promise<ArrayBuffer>((accept, reject) => {
-        reader.onload = () => {
-            accept(reader.result);
-        };
-        reader.onerror = () => {
-            reject(reader.error);
-        };
-        reader.readAsArrayBuffer(file);
-    });
+  const reader = new FileReader();
+  return new Promise<ArrayBuffer>((accept, reject) => {
+    reader.onload = () => {
+      accept(reader.result);
+    };
+    reader.onerror = () => {
+      reject(reader.error);
+    };
+    reader.readAsArrayBuffer(file);
+  });
 }
 
 function withExtension(name: string, ext: string): string {
-    if (name.endsWith(ext)) return name;
-    return name + ext;
+  if (name.endsWith(ext)) return name;
+  return name + ext;
 }
