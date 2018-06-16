@@ -134,14 +134,14 @@ export class SaveEditorImpl implements SaveEditor {
             }
         }
 
-        console.log(this._parseStepStack.join(" > "));
+        // console.log(this._parseStepStack.join(" > "));
         
         if (this._parseStepUpdateQueued) return;
         this._parseStepUpdateQueued = true;
         setTimeout(action(() => {
             this._parseStepUpdateQueued = false;
             this.saveLoadParseStep = this._parseStepStack.join(" > ");
-        }), 200);
+        }), 1000);
     }
 
     private _parseSave(buffer: ArrayBuffer): Promise<SaveGame> {
