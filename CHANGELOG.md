@@ -1,3 +1,7 @@
+### v1.4.2
+
+Wallpaper over more bugs due to oni-save-parser@2 save object differences.
+
 ### v1.4.1
 
 Slash and burn conversion to support oni-save-parser@2 and the Cosmic Update version of ONI (save version 7.4).
