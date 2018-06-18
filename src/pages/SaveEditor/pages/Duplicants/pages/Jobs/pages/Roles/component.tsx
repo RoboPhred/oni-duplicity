@@ -41,10 +41,10 @@ class DuplicantRolesPage extends React.Component<Props> {
     const knownRoles = Array.from(ExperienceByRoleID.map(x => x[0]));
 
     const rows = knownRoles.map(x => {
-      const experiencePair = ExperienceByRoleID.find(e => e[0] === x[0]);
+      const experiencePair = ExperienceByRoleID.find(e => e[0] === x);
       const experience = (experiencePair && experiencePair[1]) || 0;
 
-      const masteryPair = MasteryByRoleID.find(m => m[0] === x[0]);
+      const masteryPair = MasteryByRoleID.find(m => m[0] === x);
       const mastery = (masteryPair && masteryPair[1]) || false;
       return (
         <RoleRow
