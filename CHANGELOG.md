@@ -1,3 +1,7 @@
+### v1.4.3
+
+Fix all job mastery and experiences displayed as unmastered / 0.
+
 ### v1.4.2
 
 Wallpaper over more bugs due to oni-save-parser@2 save object differences.
