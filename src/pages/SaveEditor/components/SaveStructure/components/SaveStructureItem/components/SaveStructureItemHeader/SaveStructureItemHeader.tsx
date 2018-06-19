@@ -2,7 +2,8 @@ import * as React from "react";
 
 import styled from "styled-components";
 
-import Expander from "./SaveStructureItemExpander";
+import Expander from "./components/Expander";
+import ItemText from "./components/ItemText";
 
 export interface SaveStructureItemHeaderProps {
   expandable: boolean;
@@ -16,8 +17,13 @@ const SaveStructureItemHeader: React.SFC<
   SaveStructureItemHeaderProps & { className?: string }
 > = ({ className, expandable, expanded, header, onClick, onExpandToggle }) => (
   <span className={className}>
-    {expandable && <Expander expanded={expanded} onClick={onExpandToggle} />}
-    <span onClick={onClick}>{header}</span>
+    {expandable && (
+      <Expander
+        expanded={expanded}
+        onClick={expandable ? onExpandToggle : undefined}
+      />
+    )}
+    <ItemText onClick={onClick}>{header}</ItemText>
   </span>
 );
 export default styled(SaveStructureItemHeader)`
