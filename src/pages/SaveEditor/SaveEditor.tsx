@@ -12,6 +12,7 @@ import testData from "@/__mocks__/save-game.json";
 import SaveEditorContainer from "./components/SaveEditorContainer";
 import SidebarContainer from "./components/SidebarContainer";
 import ContentContainer from "./components/ContentContainer";
+import ContentSeparator from "./components/ContentSeparator";
 
 import SaveStructure from "./components/SaveStructure";
 import ObjectEditor from "./components/ObjectEditor";
@@ -53,9 +54,13 @@ export default class SaveEditor extends React.Component<Props, State> {
               onSelected={this._onPathSelected}
             />
           </SidebarContainer>
+          <ContentSeparator />
           <ContentContainer>
             {selectedPath && (
-              <ObjectEditor value={get(saveGame, selectedPath)} />
+              <ObjectEditor
+                path={selectedPath}
+                value={get(saveGame, selectedPath)}
+              />
             )}
           </ContentContainer>
         </SaveEditorContainer>

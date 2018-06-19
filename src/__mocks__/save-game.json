@@ -2,7 +2,11 @@
   "objectKey": {
     "numberKey": 42,
     "booleanKey": true,
-    "stringKey": "hello world"
+    "stringKey": "hello world",
+    "subObject": {
+      "subA": { "foo": 42 },
+      "subB": { "foo": 64 }
+    }
   },
   "arrays": {
     "numbers": [1, 2, 3, 4, 5],
