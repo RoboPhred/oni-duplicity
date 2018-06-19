@@ -1,20 +1,11 @@
-
-declare module "react-files";
-
-
 declare module "worker-loader!*" {
-    class WebpackWorker extends Worker {
-        constructor();
-    }
+  class WebpackWorker extends Worker {
+    constructor();
+  }
 
-    export = WebpackWorker;
+  export = WebpackWorker;
 }
 
 interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: any;
-}
-
-declare module "raw-loader!*" {
-    const data: string;
-    export = data;
+  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: any;
 }
