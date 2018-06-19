@@ -1,0 +1,11 @@
+{
+  "objectKey": {
+    "numberKey": 42,
+    "booleanKey": true,
+    "stringKey": "hello world"
+  },
+  "arrays": {
+    "numbers": [1, 2, 3, 4, 5],
+    "strings": ["up", "down", "left", "vanilla"]
+  }
+}

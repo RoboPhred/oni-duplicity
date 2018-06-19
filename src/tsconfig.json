@@ -1,25 +1,24 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "jsx": "react",
-        "module": "commonjs",
+  "compilerOptions": {
+    "target": "es6",
+    "jsx": "react",
+    "module": "commonjs",
 
-        "lib": [
-            "dom",
-            "es6",
-            "webworker"
-        ],
+    // Cannot use until https://github.com/Microsoft/TypeScript/pull/24959 is released.
+    //"resolveJsonModule": true,
 
-        "strict": true,
+    "lib": ["dom", "es6", "webworker"],
 
-        "esModuleInterop": true,
-        "experimentalDecorators": true,
+    "strict": true,
 
-        "baseUrl": ".",
-        "paths": {
-            "@/*": ["./*"]
-        },
-        
-        "sourceMap": true
-    }
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
+
+    "sourceMap": true
+  }
 }

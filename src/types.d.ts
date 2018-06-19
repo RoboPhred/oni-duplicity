@@ -26,3 +26,7 @@ declare module "react-files" {
   const Files: React.ComponentClass<FilesProps>;
   export default Files;
 }
+
+// TODO: Remove and replace with tsconfig.json compolerOptions.resolveJsonModule when
+//  https://github.com/Microsoft/TypeScript/pull/24959 is released.
+declare module "*.json";
