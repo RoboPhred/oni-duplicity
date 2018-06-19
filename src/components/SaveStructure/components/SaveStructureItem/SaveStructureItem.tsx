@@ -3,9 +3,9 @@ import * as React from "react";
 import { autobind } from "core-decorators";
 import { isObject } from "lodash-es";
 
-import SaveStructureItemContainer from "./SaveStructureItemContainer";
-import SaveStructureItemHeader from "./SaveStructureItemHeader";
-import SaveStructureItemContent from "./SaveStructureItemContent";
+import SaveStructureItemContainer from "./components/SaveStructureItemContainer";
+import SaveStructureItemHeader from "./components/SaveStructureItemHeader";
+import SaveStructureItemContent from "./components/SaveStructureItemContent";
 
 export interface SaveStructureItemProps {
   title?: string;
@@ -30,8 +30,10 @@ export default class SaveStructureItem extends React.Component<Props, State> {
     const { title, propKey, propValue } = this.props;
     const { isExpanded } = this.state;
 
+    const expandable = isObject(propValue);
+
     let valueElement: React.ReactNode | null = null;
-    if (isExpanded && isObject(propValue)) {
+    if (expandable && isExpanded) {
       const isArray = Array.isArray(propValue);
       valueElement = Object.keys(propValue)
         .sort()
@@ -42,6 +44,7 @@ export default class SaveStructureItem extends React.Component<Props, State> {
             : undefined;
           return (
             <SaveStructureItem
+              key={valueKey}
               title={valueTitle}
               propKey={valueKey}
               propValue={value}
@@ -53,9 +56,13 @@ export default class SaveStructureItem extends React.Component<Props, State> {
 
     return (
       <SaveStructureItemContainer>
-        <SaveStructureItemHeader onClick={this._onClick}>
-          {title || propKey}
-        </SaveStructureItemHeader>
+        <SaveStructureItemHeader
+          expandable={expandable}
+          expanded={isExpanded}
+          header={title || propKey}
+          onClick={this._onClick}
+          onExpandToggle={this._onExpandToggle}
+        />
         <SaveStructureItemContent>{valueElement}</SaveStructureItemContent>
       </SaveStructureItemContainer>
     );
@@ -68,6 +75,13 @@ export default class SaveStructureItem extends React.Component<Props, State> {
       isExpanded: true
     });
     onSelected([propKey]);
+  }
+
+  @autobind()
+  private _onExpandToggle() {
+    this.setState({
+      isExpanded: !this.state.isExpanded
+    });
   }
 
   @autobind()

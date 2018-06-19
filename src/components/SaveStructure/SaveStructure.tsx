@@ -1,10 +1,10 @@
 import * as React from "react";
 
+import { autobind } from "core-decorators";
 import { SaveGame } from "oni-save-parser";
 
 import SaveStructureContainer from "./components/SaveStructureContainer";
 import SaveStructureItem from "./components/SaveStructureItem";
-import { autobind } from "core-decorators";
 
 export interface SaveStructureProps {
   saveGame: SaveGame;

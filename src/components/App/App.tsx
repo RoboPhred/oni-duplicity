@@ -9,11 +9,12 @@ import { SaveGame, parseSaveGame } from "oni-save-parser";
 
 import testData from "@/__mocks__/save-game.json";
 
-import SaveStructure from "./SaveStructure";
-import AppContainer from "./AppContainer";
-import AppSidebarContainer from "./AppSidebarContainer";
-import AppContentContainer from "./AppContentContainer";
-import ObjectEditor from "./ObjectEditor";
+import AppContainer from "./components/AppContainer";
+import AppSidebarContainer from "./components/AppSidebarContainer";
+import AppContentContainer from "./components/AppContentContainer";
+
+import SaveStructure from "../SaveStructure";
+import ObjectEditor from "../ObjectEditor";
 
 type Props = {};
 interface State {
