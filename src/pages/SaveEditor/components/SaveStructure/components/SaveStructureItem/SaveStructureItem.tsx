@@ -46,9 +46,14 @@ export default class SaveStructureItem extends React.Component<Props, State> {
       const isArray = Array.isArray(propValue);
       valueElement = expandableKeys.map(valueKey => {
         const value = propValue[valueKey];
-        const valueTitle = isArray
-          ? `${valueKey}: ${String(value)}`
-          : undefined;
+        let valueTitle = extractObjectName(value);
+        if (isArray) {
+          if (valueTitle) {
+            valueTitle = `${valueKey}: ${valueTitle}`;
+          } else {
+            valueTitle = valueKey;
+          }
+        }
         return (
           <SaveStructureItem
             key={valueKey}
@@ -96,4 +101,18 @@ export default class SaveStructureItem extends React.Component<Props, State> {
     const { propKey, onSelected } = this.props;
     onSelected([propKey, ...path]);
   }
+}
+
+function extractObjectName(obj: any) {
+  if (Array.isArray(obj) && obj.length === 2 && typeof obj[0] === "string") {
+    // A tuple.  Probably.
+    return obj[0];
+  }
+
+  if (isObject(obj)) {
+    // A behavior.  With any luck.
+    return obj.name || obj.type || undefined;
+  }
+
+  return String(obj);
 }
