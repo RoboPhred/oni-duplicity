@@ -49,9 +49,9 @@
     "raw-loader": "^0.5.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-files": "^2.4.6",
     "react-markdown": "^3.3.3",
     "string-natural-compare": "^2.0.2",
-    "styled-components": "^3.3.2"
+    "styled-components": "^3.3.2",
+    "styled-system-html": "^1.0.3"
   }
 }

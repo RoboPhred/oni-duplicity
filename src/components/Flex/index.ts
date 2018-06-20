@@ -3,7 +3,7 @@ import _FlexItem from "./FlexItem";
 
 export default {
   Container: _FlexContainer,
-  item: _FlexItem
+  Item: _FlexItem
 };
 
 export const FlexContainer = _FlexContainer;
