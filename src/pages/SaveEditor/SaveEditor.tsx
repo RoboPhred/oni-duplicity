@@ -14,7 +14,7 @@ import SidebarContainer from "./components/SidebarContainer";
 import ContentContainer from "./components/ContentContainer";
 import ContentSeparator from "./components/ContentSeparator";
 
-import SaveStructure from "./components/SaveStructure";
+import SaveStructureTree from "./components/SaveStructureTree";
 import ObjectEditor from "./components/ObjectEditor";
 
 type Props = {};
@@ -49,7 +49,7 @@ export default class SaveEditor extends React.Component<Props, State> {
       return (
         <SaveEditorContainer>
           <SidebarContainer>
-            <SaveStructure
+            <SaveStructureTree
               saveGame={saveGame}
               onSelected={this._onPathSelected}
             />
