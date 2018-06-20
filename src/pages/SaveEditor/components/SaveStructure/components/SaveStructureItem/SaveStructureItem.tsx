@@ -30,28 +30,33 @@ export default class SaveStructureItem extends React.Component<Props, State> {
     const { title, propKey, propValue } = this.props;
     const { isExpanded } = this.state;
 
-    const expandable = isObject(propValue);
+    let expandableKeys: string[] = [];
+    if (isObject(propValue)) {
+      expandableKeys = Object.keys(propValue)
+        .filter(valueKey => isObject(propValue[valueKey]))
+        .sort();
+    }
+
+    const expandable = expandableKeys.length > 0;
 
     let valueElement: React.ReactNode | null = null;
     if (expandable && isExpanded) {
       const isArray = Array.isArray(propValue);
-      valueElement = Object.keys(propValue)
-        .sort()
-        .map(valueKey => {
-          const value = propValue[valueKey];
-          const valueTitle = isArray
-            ? `${valueKey}: ${String(value)}`
-            : undefined;
-          return (
-            <SaveStructureItem
-              key={valueKey}
-              title={valueTitle}
-              propKey={valueKey}
-              propValue={value}
-              onSelected={this._onChildSelected}
-            />
-          );
-        });
+      valueElement = expandableKeys.map(valueKey => {
+        const value = propValue[valueKey];
+        const valueTitle = isArray
+          ? `${valueKey}: ${String(value)}`
+          : undefined;
+        return (
+          <SaveStructureItem
+            key={valueKey}
+            title={valueTitle}
+            propKey={valueKey}
+            propValue={value}
+            onSelected={this._onChildSelected}
+          />
+        );
+      });
     }
 
     return (

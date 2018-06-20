@@ -9,12 +9,13 @@ import { SaveGame, parseSaveGame } from "oni-save-parser";
 
 import testData from "@/__mocks__/save-game.json";
 
-import AppContainer from "./components/AppContainer";
-import AppSidebarContainer from "./components/AppSidebarContainer";
-import AppContentContainer from "./components/AppContentContainer";
+import SaveEditorContainer from "./components/SaveEditorContainer";
+import SidebarContainer from "./components/SidebarContainer";
+import ContentContainer from "./components/ContentContainer";
+import ContentSeparator from "./components/ContentSeparator";
 
-import SaveStructure from "../SaveStructure";
-import ObjectEditor from "../ObjectEditor";
+import SaveStructure from "./components/SaveStructure";
+import ObjectEditor from "./components/ObjectEditor";
 
 type Props = {};
 interface State {
@@ -22,7 +23,7 @@ interface State {
   saveGame: SaveGame | null;
   selectedPath: string[] | null;
 }
-export default class App extends React.Component<Props, State> {
+export default class SaveEditor extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -32,6 +33,7 @@ export default class App extends React.Component<Props, State> {
       selectedPath: null
     };
   }
+
   render() {
     const { error, saveGame, selectedPath } = this.state;
 
@@ -45,19 +47,23 @@ export default class App extends React.Component<Props, State> {
     }
     if (saveGame) {
       return (
-        <AppContainer>
-          <AppSidebarContainer>
+        <SaveEditorContainer>
+          <SidebarContainer>
             <SaveStructure
               saveGame={saveGame}
               onSelected={this._onPathSelected}
             />
-          </AppSidebarContainer>
-          <AppContentContainer>
+          </SidebarContainer>
+          <ContentSeparator />
+          <ContentContainer>
             {selectedPath && (
-              <ObjectEditor value={get(saveGame, selectedPath)} />
+              <ObjectEditor
+                path={selectedPath}
+                value={get(saveGame, selectedPath)}
+              />
             )}
-          </AppContentContainer>
-        </AppContainer>
+          </ContentContainer>
+        </SaveEditorContainer>
       );
     } else {
       return (

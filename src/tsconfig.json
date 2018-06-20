@@ -14,9 +14,9 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
 
-    "baseUrl": ".",
+    "baseUrl": "../node_modules",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["../src/*"]
     },
 
     "sourceMap": true
