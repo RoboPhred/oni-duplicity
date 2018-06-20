@@ -3,6 +3,8 @@ import * as React from "react";
 import { autobind } from "core-decorators";
 import { isObject } from "lodash-es";
 
+import naturalCompare from "string-natural-compare";
+
 import SaveStructureItemContainer from "./components/SaveStructureItemContainer";
 import SaveStructureItemHeader from "./components/SaveStructureItemHeader";
 import SaveStructureItemContent from "./components/SaveStructureItemContent";
@@ -34,7 +36,7 @@ export default class SaveStructureItem extends React.Component<Props, State> {
     if (isObject(propValue)) {
       expandableKeys = Object.keys(propValue)
         .filter(valueKey => isObject(propValue[valueKey]))
-        .sort();
+        .sort(naturalCompare);
     }
 
     const expandable = expandableKeys.length > 0;
