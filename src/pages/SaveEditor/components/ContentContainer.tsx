@@ -15,4 +15,7 @@ const ContentContainer: React.SFC<{ className?: string }> = ({
 );
 export default styled(ContentContainer)`
   padding: ${props => getTheme(props).space[1]}px;
+  box-sizing: border-box;
+  height: 100%;
+  overflow: auto;
 `;
