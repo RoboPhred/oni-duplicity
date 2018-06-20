@@ -59,7 +59,7 @@ export default class SaveEditor extends React.Component<Props, State> {
             {selectedPath && (
               <ObjectEditor
                 path={selectedPath}
-                value={get(saveGame, selectedPath)}
+                obj={get(saveGame, selectedPath) || {}}
               />
             )}
           </ContentContainer>
