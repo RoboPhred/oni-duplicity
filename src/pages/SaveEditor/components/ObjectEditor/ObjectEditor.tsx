@@ -71,6 +71,9 @@ class ObjectEditorField extends React.Component<ObjectEditorFieldProps> {
   private _onChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { propKey, onChange } = this.props;
     const value = e.target.value;
-    onChange(propKey, value);
+    try {
+      const parsedValue = JSON.parse(value);
+      onChange(propKey, parsedValue);
+    } catch {}
   }
 }
