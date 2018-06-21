@@ -20,6 +20,7 @@ import ContentSeparator from "./components/ContentSeparator";
 
 import SaveStructureTree from "./components/SaveStructureTree";
 import ObjectEditor from "./components/ObjectEditor";
+import ResizePanel from "@/components/ResizePanel";
 
 type Props = StateProps & DispatchProps;
 interface State {
@@ -91,7 +92,6 @@ class SaveEditor extends React.Component<Props, State> {
                   />
                 </SidebarContainer>
               </Flex.Item>
-              <ContentSeparator />
               <Flex.Item grow shrink>
                 <ContentContainer>
                   {selectedPath && (
