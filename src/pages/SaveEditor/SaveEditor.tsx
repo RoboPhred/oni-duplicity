@@ -6,8 +6,6 @@ import { get } from "lodash-es";
 
 import Modal from "react-modal";
 
-import testData from "@/__mocks__/save-game.json";
-
 import Flex from "@/components/Flex";
 
 import mapStateToProps, { StateProps } from "./derived-state";
@@ -16,11 +14,9 @@ import mapDispatchToProps, { DispatchProps } from "./events";
 import SaveEditorContainer from "./components/SaveEditorContainer";
 import SidebarContainer from "./components/SidebarContainer";
 import ContentContainer from "./components/ContentContainer";
-import ContentSeparator from "./components/ContentSeparator";
 
 import SaveStructureTree from "./components/SaveStructureTree";
 import ObjectEditor from "./components/ObjectEditor";
-import ResizePanel from "@/components/ResizePanel";
 
 type Props = StateProps & DispatchProps;
 interface State {
@@ -38,7 +34,7 @@ class SaveEditor extends React.Component<Props, State> {
   }
 
   render() {
-    const { error, oniSave, loadingState } = this.props;
+    const { error, oniSave, loadingState, onLoadTestData } = this.props;
     const { selectedPath } = this.state;
 
     switch (loadingState) {
@@ -77,7 +73,7 @@ class SaveEditor extends React.Component<Props, State> {
               onChange={this._onLoadFile}
             />
             <button onClick={this._onLoadFileClick}>Load File</button>
-            {/* <button onClick={this._loadTestData}>Load Test Data</button> */}
+            <button onClick={onLoadTestData}>Load Test Data</button>
             {oniSave && (
               <button onClick={this._onSaveFileClick}>Save File</button>
             )}

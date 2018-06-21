@@ -29,8 +29,8 @@ export default class ResizePanel extends React.Component<Props, State> {
     //  Provide a way to apply flex to an existing item.
     return (
       <Flex.Container className={className} direction="row">
-        <Flex.Item>
-          <div style={{ width, height: "100%" }}>{children}</div>
+        <Flex.Item style={{ width }} height="100%">
+          {children}
         </Flex.Item>
         <Flex.Item>
           <ResizeHandle onResize={this._onResize} />
