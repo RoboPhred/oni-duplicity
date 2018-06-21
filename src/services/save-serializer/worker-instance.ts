@@ -3,7 +3,8 @@ import { SaveGame } from "oni-save-parser";
 import {
   SaveEditorResultEvent,
   parseSave as parseSaveCommand,
-  writeSave as writeSaveCommand
+  writeSave as writeSaveCommand,
+  jsonToError
 } from "./worker-messages";
 
 import SaveLoadWorker from "worker-loader!./save-serializer.worker";
@@ -27,7 +28,7 @@ export function parseSave(data: ArrayBuffer): Promise<SaveGame> {
           break;
         case "parse-save:error":
           unhook();
-          reject(data.error);
+          reject(jsonToError(data.error));
       }
     };
   });
@@ -54,7 +55,7 @@ export function writeSave(saveGame: SaveGame): Promise<ArrayBuffer> {
           break;
         case "write-save:error":
           unhook();
-          reject(data.error);
+          reject(jsonToError(data.error));
       }
     };
   });

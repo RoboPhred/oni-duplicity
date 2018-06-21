@@ -17,7 +17,7 @@ export type ParseSaveSuccessResult = ReturnType<typeof parseSaveSuccess>;
 const RESULT_SAVE_ERROR = "parse-save:error";
 export const parseSaveError = (error: Error) => ({
   type: RESULT_SAVE_ERROR as typeof RESULT_SAVE_ERROR,
-  error
+  error: errorToJson(error)
 });
 export type ParseSaveErrorResult = ReturnType<typeof parseSaveError>;
 
@@ -40,7 +40,7 @@ export type WriteSaveSuccessResult = ReturnType<typeof writeSaveSuccess>;
 const RESULT_WRITE_ERROR = "write-save:error";
 export const writeSaveError = (error: Error) => ({
   type: RESULT_WRITE_ERROR as typeof RESULT_WRITE_ERROR,
-  error
+  error: errorToJson(error)
 });
 export type WriteSaveErrorResult = ReturnType<typeof writeSaveError>;
 
@@ -55,4 +55,23 @@ export interface SaveEditorCommandEvent extends MessageEvent {
 
 export interface SaveEditorResultEvent extends MessageEvent {
   data: SaveEditorResult;
+}
+
+export interface ErrorJson {
+  name: string;
+  message: string;
+  stack?: string;
+}
+export function errorToJson(e: Error): ErrorJson {
+  return {
+    name: e.name,
+    message: e.message,
+    stack: e.stack
+  };
+}
+export function jsonToError(obj: ErrorJson): Error {
+  const e = new Error(obj.message);
+  e.name = obj.name;
+  e.stack = obj.stack;
+  return e;
 }
