@@ -1,13 +1,14 @@
+import { AppState, defaultAppState } from "@/store";
+
 import {
   ReceiveOniSaveAction,
   ACTION_RECEIVE_ONISAVE_BEGIN,
   ACTION_RECEIVE_ONISAVE_ERROR,
   ACTION_RECEIVE_ONISAVE_SUCCESS
 } from "../actions/receive-onisave";
-import { AppState } from "@/store";
 
 export default function receiveOniSaveReducer(
-  state: AppState,
+  state: AppState = defaultAppState,
   action: ReceiveOniSaveAction
 ): AppState {
   let saveEditorState = state.pages.saveEditor;

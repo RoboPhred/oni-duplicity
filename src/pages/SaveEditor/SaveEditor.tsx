@@ -34,7 +34,13 @@ class SaveEditor extends React.Component<Props, State> {
   }
 
   render() {
-    const { error, oniSave, loadingState, onLoadTestData } = this.props;
+    const {
+      error,
+      oniSave,
+      loadingState,
+      onDismissError,
+      onLoadTestData
+    } = this.props;
     const { selectedPath } = this.state;
 
     switch (loadingState) {
@@ -54,10 +60,17 @@ class SaveEditor extends React.Component<Props, State> {
 
     if (error) {
       return (
-        <div>
-          <h2>Error</h2>
-          <code>{error.stack || error.message || String(error)}</code>
-        </div>
+        <Modal isOpen={true} onRequestClose={onDismissError}>
+          <Flex.Container direction="column" width="100%" height="100%">
+            <Flex.Item grow>
+              <h2>Error</h2>
+              <code>{error.stack || error.message || String(error)}</code>
+            </Flex.Item>
+            <Flex.Item>
+              <button onClick={onDismissError}>Close</button>
+            </Flex.Item>
+          </Flex.Container>
+        </Modal>
       );
     }
 

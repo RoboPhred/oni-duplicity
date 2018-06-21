@@ -8,6 +8,7 @@ import ResizeHandle from "./components/ResizeHandle";
 
 export interface ResizePanelProps {
   className?: string;
+  defaultWidth?: number;
 }
 interface State {
   width: number;
@@ -18,7 +19,7 @@ export default class ResizePanel extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      width: 300
+      width: props.defaultWidth || 300
     };
   }
 
