@@ -1,3 +1,9 @@
+type StructuredStateProps<T> = {
+  [K in keyof T]: T[K] extends (...args: any[]) => any
+    ? ReturnType<T[K]>
+    : never
+};
+
 declare module "worker-loader!*" {
   class WebpackWorker extends Worker {
     constructor();

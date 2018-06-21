@@ -4,9 +4,9 @@ import {
   SaveEditorResultEvent,
   parseSave as parseSaveCommand,
   writeSave as writeSaveCommand
-} from "@/services/save-editor/worker-messages";
+} from "./worker-messages";
 
-import SaveLoadWorker from "worker-loader!./save-loader.worker";
+import SaveLoadWorker from "worker-loader!./save-serializer.worker";
 
 const worker = new SaveLoadWorker();
 

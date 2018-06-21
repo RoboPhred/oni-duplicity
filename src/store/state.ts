@@ -1,2 +1,15 @@
-export interface AppState {}
-export const defaultAppState: AppState = Object.freeze({});
+import {
+  SaveEditorPageState,
+  defaultSaveEditorPageState
+} from "@/pages/SaveEditor/state";
+
+export interface AppState {
+  pages: {
+    saveEditor: SaveEditorPageState;
+  };
+}
+export const defaultAppState: AppState = Object.freeze({
+  pages: {
+    saveEditor: defaultSaveEditorPageState
+  }
+});

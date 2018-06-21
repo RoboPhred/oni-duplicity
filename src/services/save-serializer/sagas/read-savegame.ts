@@ -4,7 +4,7 @@ import { SaveGame } from "oni-save-parser";
 
 import { parseSave } from "../worker-instance";
 
-export function* loadSaveGame(file: File) {
+export function* readSaveGame(file: File) {
   const data: ArrayBuffer = yield call(readFile, file);
   const saveGame: SaveGame = yield call(parseSave, data);
   return saveGame;

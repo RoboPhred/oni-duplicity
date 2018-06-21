@@ -1,4 +1,5 @@
 import * as React from "react";
+import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
 import { get } from "lodash-es";
@@ -10,6 +11,9 @@ import testData from "@/__mocks__/save-game.json";
 
 import Flex from "@/components/Flex";
 
+import mapStateToProps, { StateProps } from "./derived-state";
+import mapDispatchToProps, { DispatchProps } from "./events";
+
 import SaveEditorContainer from "./components/SaveEditorContainer";
 import SidebarContainer from "./components/SidebarContainer";
 import ContentContainer from "./components/ContentContainer";
@@ -18,27 +22,24 @@ import ContentSeparator from "./components/ContentSeparator";
 import SaveStructureTree from "./components/SaveStructureTree";
 import ObjectEditor from "./components/ObjectEditor";
 
-type Props = {};
+type Props = StateProps & DispatchProps;
 interface State {
-  error: Error | null;
-  saveGame: SaveGame | null;
   selectedPath: string[] | null;
 }
-export default class SaveEditor extends React.Component<Props, State> {
+class SaveEditor extends React.Component<Props, State> {
   private _input: HTMLElement | null = null;
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      error: null,
-      saveGame: null,
       selectedPath: null
     };
   }
 
   render() {
-    const { error, saveGame, selectedPath } = this.state;
+    const { error, oniSave } = this.props;
+    const { selectedPath } = this.state;
 
     if (error) {
       return (
@@ -62,17 +63,17 @@ export default class SaveEditor extends React.Component<Props, State> {
               onChange={this._onLoadFile}
             />
             <button onClick={this._onLoadFileClick}>Load File</button>
-            <button onClick={this._loadTestData}>Load Test Data</button>
-            {saveGame && (
+            {/* <button onClick={this._loadTestData}>Load Test Data</button> */}
+            {oniSave && (
               <button onClick={this._onSaveFileClick}>Save File</button>
             )}
           </Flex.Item>
-          {saveGame && (
+          {oniSave && (
             <Flex.Container direction="row" width="100%" height="100%">
               <Flex.Item>
                 <SidebarContainer>
                   <SaveStructureTree
-                    saveGame={saveGame}
+                    saveGame={oniSave}
                     onSelected={this._onPathSelected}
                   />
                 </SidebarContainer>
@@ -83,7 +84,7 @@ export default class SaveEditor extends React.Component<Props, State> {
                   {selectedPath && (
                     <ObjectEditor
                       path={selectedPath}
-                      obj={get(saveGame, selectedPath) || {}}
+                      obj={get(oniSave, selectedPath) || {}}
                     />
                   )}
                 </ContentContainer>
@@ -116,54 +117,31 @@ export default class SaveEditor extends React.Component<Props, State> {
     if (!files || files.length === 0) {
       return;
     }
+    const file = files[0];
 
-    readFile(files[0])
-      .then(data => parseSaveGame(data))
-      .then(saveGame => {
-        this.setState({
-          saveGame
-        });
-      })
-      .catch(error => {
-        this.setState({
-          error
-        });
-      });
+    const { onLoad } = this.props;
+    onLoad(file);
   }
 
-  @autobind()
-  private _loadTestData() {
-    this.setState({
-      error: null,
-      saveGame: testData as any
-    });
-  }
+  // @autobind()
+  // private _loadTestData() {
+  //   this.setState({
+  //     error: null,
+  //     saveGame: testData as any
+  //   });
+  // }
 
   @autobind()
   private _onSaveFileClick() {
-    const { saveGame } = this.state;
-    if (!saveGame) {
-      return;
-    }
-
-    const data = writeSaveGame(saveGame);
-    const blob = new Blob([data]);
-    saveAs(blob, withExtension("my-file", ".sav"));
+    const { onSave } = this.props;
+    const fileName = withExtension("my-file", ".sav");
+    onSave(fileName);
   }
 }
-
-function readFile(file: File): Promise<ArrayBuffer> {
-  const reader = new FileReader();
-  return new Promise<ArrayBuffer>((accept, reject) => {
-    reader.onload = () => {
-      accept(reader.result);
-    };
-    reader.onerror = () => {
-      reject(reader.error);
-    };
-    reader.readAsArrayBuffer(file);
-  });
-}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SaveEditor);
 
 function withExtension(name: string, ext: string): string {
   if (name.endsWith(ext)) return name;

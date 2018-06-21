@@ -1,11 +1,31 @@
-import { createStore as createReduxStore } from "redux";
+import {
+  compose,
+  createStore as createReduxStore,
+  applyMiddleware
+} from "redux";
+
+import createSagaMiddleware from "redux-saga";
 
 import reducer from "./reducer";
+import rootSaga from "./saga";
+
+import { actionSanitizer, stateSanitizer } from "./devtool-sanitizer";
 
 export function createStore() {
+  const composeEnhancers =
+    (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+        actionSanitizer,
+        stateSanitizer
+      })) ||
+    compose;
+
+  const sagaMiddleware = createSagaMiddleware();
+
   const store = createReduxStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeEnhancers(applyMiddleware(sagaMiddleware))
   );
+  sagaMiddleware.run(rootSaga);
   return store;
 }
