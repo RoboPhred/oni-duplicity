@@ -1,7 +1,7 @@
 import { AnyAction } from "redux";
 import { AppState } from "./state";
 import { ACTION_RECEIVE_ONISAVE_SUCCESS } from "@/pages/SaveEditor/actions/receive-onisave";
-import { SaveGame } from "../../node_modules/oni-save-parser";
+import { SaveGame } from "oni-save-parser";
 
 export function actionSanitizer(action: AnyAction): AnyAction {
   if (action.type === ACTION_RECEIVE_ONISAVE_SUCCESS) {

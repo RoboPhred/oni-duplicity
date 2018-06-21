@@ -1,5 +1,3 @@
-import produce from "immer";
-
 import {
   ReceiveOniSaveAction,
   ACTION_RECEIVE_ONISAVE_BEGIN,
@@ -18,8 +16,8 @@ export default function receiveOniSaveReducer(
       saveEditorState = {
         ...saveEditorState,
         error: null,
-        loadingState: "loading",
-        oniSave: action.payload.reset ? null : saveEditorState.oniSave
+        loadingState: action.payload.operation,
+        oniSave: action.payload.clearExisting ? null : saveEditorState.oniSave
       };
       break;
     case ACTION_RECEIVE_ONISAVE_ERROR:

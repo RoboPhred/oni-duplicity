@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import { autobind } from "core-decorators";
 import { get } from "lodash-es";
 
-import { saveAs } from "file-saver";
-import { SaveGame, parseSaveGame, writeSaveGame } from "oni-save-parser";
+import Modal from "react-modal";
 
 import testData from "@/__mocks__/save-game.json";
 
@@ -38,8 +37,23 @@ class SaveEditor extends React.Component<Props, State> {
   }
 
   render() {
-    const { error, oniSave } = this.props;
+    const { error, oniSave, loadingState } = this.props;
     const { selectedPath } = this.state;
+
+    switch (loadingState) {
+      case "loading":
+        return (
+          <Modal isOpen={true} contentLabel="Loading">
+            <p>Loading File</p>
+          </Modal>
+        );
+      case "saving":
+        return (
+          <Modal isOpen={true} contentLabel="Saving">
+            <p>Saving File</p>
+          </Modal>
+        );
+    }
 
     if (error) {
       return (
@@ -57,7 +71,6 @@ class SaveEditor extends React.Component<Props, State> {
             <input
               ref={el => (this._input = el)}
               style={{ display: "none" }}
-              className="pt-button pt-intent-primary"
               type="file"
               accept=".sav"
               onChange={this._onLoadFile}

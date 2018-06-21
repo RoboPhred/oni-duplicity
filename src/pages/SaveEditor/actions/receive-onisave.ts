@@ -2,9 +2,12 @@ import { SaveGame } from "../../../../node_modules/oni-save-parser";
 
 export const ACTION_RECEIVE_ONISAVE_BEGIN =
   "@/pages/SaveEditor/onisave/receive:begin";
-export const receiveOniSaveBegin = (reset: boolean) => ({
+export const receiveOniSaveBegin = (
+  operation: "loading" | "saving",
+  clearExisting?: boolean
+) => ({
   type: ACTION_RECEIVE_ONISAVE_BEGIN as typeof ACTION_RECEIVE_ONISAVE_BEGIN,
-  payload: { reset }
+  payload: { operation, clearExisting }
 });
 export type ReceiveOniSaveBeginAction = ReturnType<typeof receiveOniSaveBegin>;
 
