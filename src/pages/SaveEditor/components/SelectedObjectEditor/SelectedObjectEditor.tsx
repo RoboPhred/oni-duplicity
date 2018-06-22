@@ -5,11 +5,15 @@ import { autobind } from "core-decorators";
 
 import extractObjectName from "@/pages/SaveEditor/utils/extract-object-name";
 
-import mapStateToProps, { StateProps } from "./derived-state";
-import mapDispatchToProps, { DispatchProps } from "./events";
+import SelectedObjectEditorContainer from "./components/SelectedObjectEditorContainer";
+
+import SelectPathBreadcrumb from "@/pages/SaveEditor/components/SelectedPathBreadcrumb";
 
 import EditorField from "./components/EditorField";
 import EditorLink from "./components/EditorLink";
+
+import mapStateToProps, { StateProps } from "./derived-state";
+import mapDispatchToProps, { DispatchProps } from "./events";
 
 type Props = StateProps & DispatchProps;
 class SelectedObjectEditor extends React.Component<Props> {
@@ -25,10 +29,10 @@ class SelectedObjectEditor extends React.Component<Props> {
     );
 
     return (
-      <div>
-        <h3>{selectedPath.join(".")}</h3>
+      <SelectedObjectEditorContainer>
+        <SelectPathBreadcrumb />
         {fields}
-      </div>
+      </SelectedObjectEditorContainer>
     );
   }
 
