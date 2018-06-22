@@ -16,13 +16,10 @@ import SidebarContainer from "./components/SidebarContainer";
 import ContentContainer from "./components/ContentContainer";
 
 import SaveStructureTree from "./components/SaveStructureTree";
-import ObjectEditor from "./components/ObjectEditor";
+import SelectedObjectEditor from "./components/SelectedObjectEditor";
 
 type Props = StateProps & DispatchProps;
-interface State {
-  selectedPath: string[] | null;
-}
-class SaveEditor extends React.Component<Props, State> {
+class SaveEditor extends React.Component<Props> {
   private _input: HTMLElement | null = null;
 
   constructor(props: Props) {
@@ -41,7 +38,6 @@ class SaveEditor extends React.Component<Props, State> {
       onDismissError,
       onLoadTestData
     } = this.props;
-    const { selectedPath } = this.state;
 
     switch (loadingState) {
       case "loading":
@@ -103,12 +99,7 @@ class SaveEditor extends React.Component<Props, State> {
               </Flex.Item>
               <Flex.Item grow shrink>
                 <ContentContainer>
-                  {selectedPath && (
-                    <ObjectEditor
-                      path={selectedPath}
-                      obj={get(oniSave, selectedPath) || {}}
-                    />
-                  )}
+                  <SelectedObjectEditor />
                 </ContentContainer>
               </Flex.Item>
             </Flex.Container>
@@ -120,9 +111,8 @@ class SaveEditor extends React.Component<Props, State> {
 
   @autobind()
   private _onPathSelected(path: string[]) {
-    this.setState({
-      selectedPath: path
-    });
+    const { onSelectPath } = this.props;
+    onSelectPath(path);
   }
 
   @autobind()
@@ -144,14 +134,6 @@ class SaveEditor extends React.Component<Props, State> {
     const { onLoad } = this.props;
     onLoad(file);
   }
-
-  // @autobind()
-  // private _loadTestData() {
-  //   this.setState({
-  //     error: null,
-  //     saveGame: testData as any
-  //   });
-  // }
 
   @autobind()
   private _onSaveFileClick() {
