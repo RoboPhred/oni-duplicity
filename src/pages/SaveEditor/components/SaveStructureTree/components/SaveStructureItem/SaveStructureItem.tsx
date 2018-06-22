@@ -5,6 +5,8 @@ import { isObject } from "lodash-es";
 
 import naturalCompare from "string-natural-compare";
 
+import extractObjectName from "@/pages/SaveEditor/utils/extract-object-name";
+
 import SaveStructureItemContainer from "./components/SaveStructureItemContainer";
 import SaveStructureItemHeader from "./components/SaveStructureItemHeader";
 import SaveStructureItemContent from "./components/SaveStructureItemContent";
@@ -101,18 +103,4 @@ export default class SaveStructureItem extends React.Component<Props, State> {
     const { propKey, onSelected } = this.props;
     onSelected([propKey, ...path]);
   }
-}
-
-function extractObjectName(obj: any) {
-  if (Array.isArray(obj) && obj.length === 2 && typeof obj[0] === "string") {
-    // A tuple.  Probably.
-    return obj[0];
-  }
-
-  if (isObject(obj)) {
-    // A behavior.  With any luck.
-    return obj.name || obj.type || undefined;
-  }
-
-  return String(obj);
 }

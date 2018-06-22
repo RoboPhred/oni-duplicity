@@ -2,12 +2,14 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
-import { isObject } from "lodash-es";
+
+import extractObjectName from "@/pages/SaveEditor/utils/extract-object-name";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";
 
 import EditorField from "./components/EditorField";
+import EditorLink from "./components/EditorLink";
 
 type Props = StateProps & DispatchProps;
 class SelectedObjectEditor extends React.Component<Props> {
@@ -17,11 +19,10 @@ class SelectedObjectEditor extends React.Component<Props> {
 
   render() {
     const { selectedPath, selectedValue } = this.props;
-    const primitiveKeys = Object.keys(selectedValue).filter(
-      key => !isObject(selectedValue[key])
-    );
 
-    const fields = primitiveKeys.map(key => this._renderField(key));
+    const fields = Object.keys(selectedValue).map(key =>
+      this._renderField(key)
+    );
 
     return (
       <div>
@@ -33,16 +34,37 @@ class SelectedObjectEditor extends React.Component<Props> {
 
   private _renderField(key: string) {
     const { selectedValue } = this.props;
-    return (
-      <div key={key}>
-        <span>{key}</span>
-        <EditorField
-          propKey={key}
-          value={selectedValue[key]}
-          onChange={this._onFieldChange}
-        />
-      </div>
-    );
+    const value = selectedValue[key];
+    if (isEditableValue(value)) {
+      return (
+        <div key={key}>
+          <span>{key}</span>
+          <EditorField
+            propKey={key}
+            value={value}
+            onChange={this._onFieldChange}
+          />
+        </div>
+      );
+    } else {
+      const { selectedPath, onPathSelected } = this.props;
+      let objectName = extractObjectName(value);
+      if (objectName == null) {
+        if (value == null) {
+          objectName = "[null]";
+        } else {
+          objectName = Array.isArray(value) ? "[array]" : `[${typeof value}]`;
+        }
+      }
+      return (
+        <EditorLink
+          key={key}
+          onClick={onPathSelected.bind(null, [...selectedPath, key])}
+        >
+          {key}: {objectName}
+        </EditorLink>
+      );
+    }
   }
 
   @autobind()
@@ -55,3 +77,9 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SelectedObjectEditor);
+
+const primitiveTypes = ["string", "number", "boolean"];
+function isEditableValue(val: any) {
+  const valType = typeof val;
+  return primitiveTypes.indexOf(valType) !== -1;
+}
