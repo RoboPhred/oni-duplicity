@@ -27,5 +27,7 @@ export default connect(
 )(SaveStructureLink);
 
 const Link = styled.span`
+  color: blue;
+  text-decoration: underline;
   cursor: pointer;
 `;

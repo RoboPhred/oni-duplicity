@@ -5,12 +5,12 @@ import { autobind } from "core-decorators";
 
 import extractObjectName from "@/pages/SaveEditor/utils/extract-object-name";
 
-import SelectedObjectEditorContainer from "./components/SelectedObjectEditorContainer";
+import SelectedObjectEditorContainer from "./components/Container";
 
+import SaveStructureLink from "@/pages/SaveEditor/components/SaveStructureLink";
 import SelectPathBreadcrumb from "@/pages/SaveEditor/components/SelectedPathBreadcrumb";
 
 import EditorField from "./components/EditorField";
-import EditorLink from "./components/EditorLink";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";
@@ -25,33 +25,43 @@ class SelectedObjectEditor extends React.Component<Props> {
     const { selectedValue } = this.props;
 
     const fields = Object.keys(selectedValue).map(key =>
-      this._renderField(key)
+      this._renderFieldRow(key)
     );
 
     return (
       <SelectedObjectEditorContainer>
         <SelectPathBreadcrumb />
-        {fields}
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>{fields}</tbody>
+        </table>
       </SelectedObjectEditorContainer>
     );
   }
 
-  private _renderField(key: string) {
+  private _renderFieldRow(key: string) {
     const { selectedValue } = this.props;
     const value = selectedValue[key];
     if (isEditableValue(value)) {
       return (
-        <div key={key}>
-          <span>{key}</span>
-          <EditorField
-            propKey={key}
-            value={value}
-            onChange={this._onFieldChange}
-          />
-        </div>
+        <tr key={key}>
+          <td>{key}</td>
+          <td>
+            <EditorField
+              propKey={key}
+              value={value}
+              onChange={this._onFieldChange}
+            />
+          </td>
+        </tr>
       );
-    } else {
-      const { selectedPath, onPathSelected } = this.props;
+    } else if (value != null) {
+      const { selectedPath } = this.props;
       let objectName = extractObjectName(value);
       if (objectName == null) {
         if (value == null) {
@@ -61,12 +71,21 @@ class SelectedObjectEditor extends React.Component<Props> {
         }
       }
       return (
-        <EditorLink
-          key={key}
-          onClick={onPathSelected.bind(null, [...selectedPath, key])}
-        >
-          {key}: {objectName}
-        </EditorLink>
+        <tr key={key}>
+          <td>{key}</td>
+          <td>
+            <SaveStructureLink path={[...selectedPath, key]}>
+              {objectName}
+            </SaveStructureLink>
+          </td>
+        </tr>
+      );
+    } else {
+      return (
+        <tr key={key}>
+          <td>{key}</td>
+          <td>[null]</td>
+        </tr>
       );
     }
   }
