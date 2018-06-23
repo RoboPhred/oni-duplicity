@@ -16,7 +16,9 @@ class SelectedPathBreadcrumb extends React.Component<Props> {
       // Create a new path at each juncture so that the data is not mutated.
       path = [...path, pathPart];
       elements.push(
-        <SaveStructureLink path={path}>{pathPart}</SaveStructureLink>
+        <SaveStructureLink key={pathPart} path={path}>
+          {pathPart}
+        </SaveStructureLink>
       );
       elements.push(".");
     }
