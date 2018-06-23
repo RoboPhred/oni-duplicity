@@ -1,28 +1,22 @@
 import * as React from "react";
+import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
-import { isObject } from "lodash-es";
 
-import naturalCompare from "string-natural-compare";
-
-import extractObjectName from "@/pages/SaveEditor/utils/extract-object-name";
+import { SaveStructureItemProps } from "./props";
+import mapStateToProps, { StateProps } from "./derived-state";
+import mapDispatchToProps, { DispatchProps } from "./events";
 
 import SaveStructureItemContainer from "./components/SaveStructureItemContainer";
 import SaveStructureItemHeader from "./components/SaveStructureItemHeader";
 import SaveStructureItemContent from "./components/SaveStructureItemContent";
 
-export interface SaveStructureItemProps {
-  title?: string;
-  propKey: string;
-  propValue: any;
-  onSelected(path: string[]): void;
-}
 interface State {
   isExpanded: boolean;
 }
 
-type Props = SaveStructureItemProps;
-export default class SaveStructureItem extends React.Component<Props, State> {
+type Props = SaveStructureItemProps & StateProps & DispatchProps;
+class SaveStructureItemComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -31,49 +25,25 @@ export default class SaveStructureItem extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    const { title, propKey, propValue } = this.props;
+    const { title, childPaths } = this.props;
     const { isExpanded } = this.state;
 
-    let expandableKeys: string[] = [];
-    if (isObject(propValue)) {
-      expandableKeys = Object.keys(propValue)
-        .filter(valueKey => isObject(propValue[valueKey]))
-        .sort(naturalCompare);
-    }
-
-    const expandable = expandableKeys.length > 0;
+    const isExpandable = childPaths.length > 0;
 
     let valueElement: React.ReactNode | null = null;
-    if (expandable && isExpanded) {
-      const isArray = Array.isArray(propValue);
-      valueElement = expandableKeys.map(valueKey => {
-        const value = propValue[valueKey];
-        let valueTitle = extractObjectName(value);
-        if (isArray) {
-          if (valueTitle) {
-            valueTitle = `${valueKey}: ${valueTitle}`;
-          } else {
-            valueTitle = valueKey;
-          }
-        }
-        return (
-          <SaveStructureItem
-            key={valueKey}
-            title={valueTitle}
-            propKey={valueKey}
-            propValue={value}
-            onSelected={this._onChildSelected}
-          />
-        );
+    if (isExpandable && isExpanded) {
+      valueElement = childPaths.map(childPath => {
+        const key = childPath[childPath.length - 1];
+        return <SaveStructureItem key={key} saveItemPath={childPath} />;
       });
     }
 
     return (
       <SaveStructureItemContainer>
         <SaveStructureItemHeader
-          expandable={expandable}
+          expandable={isExpandable}
           expanded={isExpanded}
-          header={title || propKey}
+          header={title}
           onClick={this._onClick}
           onExpandToggle={this._onExpandToggle}
         />
@@ -84,11 +54,11 @@ export default class SaveStructureItem extends React.Component<Props, State> {
 
   @autobind()
   private _onClick() {
-    const { propKey, onSelected } = this.props;
+    const { saveItemPath, onClick } = this.props;
     this.setState({
       isExpanded: true
     });
-    onSelected([propKey]);
+    onClick(saveItemPath);
   }
 
   @autobind()
@@ -97,10 +67,9 @@ export default class SaveStructureItem extends React.Component<Props, State> {
       isExpanded: !this.state.isExpanded
     });
   }
-
-  @autobind()
-  private _onChildSelected(path: string[]) {
-    const { propKey, onSelected } = this.props;
-    onSelected([propKey, ...path]);
-  }
 }
+const SaveStructureItem = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SaveStructureItemComponent);
+export default SaveStructureItem;

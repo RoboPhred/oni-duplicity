@@ -90,10 +90,7 @@ class SaveEditor extends React.Component<Props> {
             <Flex.Container direction="row" width="100%" height="100%">
               <Flex.Item>
                 <SidebarContainer>
-                  <SaveStructureTree
-                    saveGame={oniSave}
-                    onSelected={this._onPathSelected}
-                  />
+                  <SaveStructureTree />
                 </SidebarContainer>
               </Flex.Item>
               <Flex.Item grow shrink>
