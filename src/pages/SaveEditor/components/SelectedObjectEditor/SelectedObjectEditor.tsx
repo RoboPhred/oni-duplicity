@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
 
-import extractObjectName from "@/pages/SaveEditor/utils/extract-object-name";
+import { getSaveItemTitle } from "@/services/save-structure";
 
 import SelectedObjectEditorContainer from "./components/Container";
 
@@ -62,7 +62,7 @@ class SelectedObjectEditor extends React.Component<Props> {
       );
     } else if (value != null) {
       const { selectedPath } = this.props;
-      let objectName = extractObjectName(value);
+      let objectName = getSaveItemTitle(value, selectedPath);
       if (objectName == null) {
         if (value == null) {
           objectName = "[null]";

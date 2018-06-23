@@ -1,12 +1,13 @@
-import { createStructuredSelector } from "reselect";
 import createCachedSelector from "re-reselect";
 
 import { get, isObject } from "lodash-es";
-import naturalCompare from "string-natural-compare";
 
 import { AppState } from "@/store";
 
-import extractObjectName from "@/pages/SaveEditor/utils/extract-object-name";
+import {
+  getSaveItemTitle,
+  getSaveItemChildPaths
+} from "@/services/save-structure";
 
 import oniSaveSelector from "@/pages/SaveEditor/selectors/oni-save-selector";
 
@@ -36,7 +37,7 @@ const title = (state: AppState, props: SaveStructureItemProps) => {
   }
 
   const value = saveItemValue(state, props);
-  let title = extractObjectName(value);
+  let title = getSaveItemTitle(value, path, state.pages.saveEditor.oniSave);
   if (!title) {
     // Couldn't figure out name.  Use key.
     title = path[path.length - 1];
@@ -48,13 +49,7 @@ const childPaths = createCachedSelector(
   saveItemValue,
   saveItemPath,
   (value, path): string[][] => {
-    if (!isObject(value)) {
-      return [];
-    }
-    const expandableKeys = Object.keys(value)
-      .filter(valueKey => isObject(value[valueKey]))
-      .sort(naturalCompare);
-    return expandableKeys.map(x => [...path, x]);
+    return getSaveItemChildPaths(value, path);
   }
 )((_: AppState, props: SaveStructureItemProps) => props.saveItemPath.join("."));
 
