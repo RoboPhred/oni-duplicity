@@ -22,7 +22,7 @@ class SelectedObjectEditor extends React.Component<Props> {
   }
 
   render() {
-    const { selectedPath, selectedValue } = this.props;
+    const { selectedValue } = this.props;
 
     const fields = Object.keys(selectedValue).map(key =>
       this._renderField(key)
