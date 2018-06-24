@@ -15,7 +15,7 @@ import SidebarContainer from "./components/SidebarContainer";
 import ContentContainer from "./components/ContentContainer";
 
 import SaveStructureTree from "./components/SaveStructureTree";
-import SelectedObjectEditor from "./components/SelectedObjectEditor";
+import SelectedItemEditor from "./components/SelectedItemEditor";
 
 type Props = StateProps & DispatchProps;
 class SaveEditor extends React.Component<Props> {
@@ -95,7 +95,7 @@ class SaveEditor extends React.Component<Props> {
               </Flex.Item>
               <Flex.Item grow shrink>
                 <ContentContainer>
-                  <SelectedObjectEditor />
+                  <SelectedItemEditor />
                 </ContentContainer>
               </Flex.Item>
             </Flex.Container>

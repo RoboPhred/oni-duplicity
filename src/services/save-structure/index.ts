@@ -38,6 +38,7 @@ export function getSaveItemTitle(
     return value.name || value.type || undefined;
   }
 
+  // A primitive
   return String(value);
 }
 

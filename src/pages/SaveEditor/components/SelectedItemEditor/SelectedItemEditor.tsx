@@ -16,7 +16,7 @@ import mapStateToProps, { StateProps } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";
 
 type Props = StateProps & DispatchProps;
-class SelectedObjectEditor extends React.Component<Props> {
+class SelectedItemEditor extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
   }
@@ -99,7 +99,7 @@ class SelectedObjectEditor extends React.Component<Props> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SelectedObjectEditor);
+)(SelectedItemEditor);
 
 const primitiveTypes = ["string", "number", "boolean"];
 function isEditableValue(val: any) {

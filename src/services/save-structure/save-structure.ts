@@ -34,7 +34,6 @@ const minionGameObject: any /*SaveStructureItem*/ = {
   // Only apply this rule to minion game object groups.
   $match: gameObjectIs("Minion"),
 
-  //  or when displaying in the simple-mode tree.
   $select: ["gameObjects"],
 
   // gameObjects in a gameObject group is an array of GameObject
