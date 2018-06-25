@@ -2,7 +2,8 @@ import {
   SaveGame,
   GameObject,
   getBehavior,
-  MinionIdentityBehavior
+  MinionIdentityBehavior,
+  GameObjectGroup
 } from "oni-save-parser";
 
 import { isObject } from "lodash-es";
@@ -17,7 +18,7 @@ import { isObject } from "lodash-es";
 export type SaveStructureItemCore = {
   $match?(obj: any): boolean;
   $title?(obj: any): string;
-  $select?: string[];
+  $selectChildRoot?: string[];
   $variants?: SaveStructureItem[];
 };
 export interface SaveStructureItemKeys {
@@ -33,8 +34,6 @@ export type SaveStructureItem = SaveStructureItemKeys & SaveStructureItemCore;
 const minionGameObject: any /*SaveStructureItem*/ = {
   // Only apply this rule to minion game object groups.
   $match: gameObjectIs("Minion"),
-
-  $select: ["gameObjects"],
 
   // gameObjects in a gameObject group is an array of GameObject
   gameObjects: {
@@ -53,6 +52,12 @@ const minionGameObject: any /*SaveStructureItem*/ = {
 };
 
 const gameObjectGroupsStructure: any /*SaveStructureItem*/ = {
+  $title(group: GameObjectGroup) {
+    return group.name;
+  },
+
+  $selectChildRoot: ["gameObjects"],
+
   // We want to handle each game object type uniquely,
   //  but their uniqueness is keyed off the name of this group.
   // To handle this, we provide variants that match off the group's name.
@@ -101,10 +106,13 @@ export function getSaveStructureItem(
         x => (x.$match && x.$match(value)) || false
       );
       if (variant) {
+        // TS bug: adding $variants freaks out the type system,
+        //  even though TS knows it is in there due to ...subStructure
         subStructure = {
           ...subStructure,
+          $variants: undefined,
           ...variant
-        };
+        } as SaveStructureItem;
       }
     }
 

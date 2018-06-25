@@ -1,6 +1,5 @@
+import { SaveGame } from "oni-save-parser";
 import createCachedSelector from "re-reselect";
-
-import { get, isObject } from "lodash-es";
 
 import { AppState } from "@/store";
 
@@ -13,63 +12,49 @@ import oniSaveSelector from "@/pages/SaveEditor/selectors/oni-save-selector";
 
 import { SaveStructureItemProps } from "./props";
 
-const saveItemPath = (_: AppState, props: SaveStructureItemProps) =>
+const cacheKeyGenerator = (_: AppState, props: SaveStructureItemProps) =>
+  props.saveItemPath.join(".");
+
+const itemPathSelector = (_: AppState, props: SaveStructureItemProps) =>
   props.saveItemPath;
 
-const saveItemValue = createCachedSelector(
+const title = createCachedSelector<
+  AppState,
+  SaveStructureItemProps,
+  string[],
+  SaveGame | null,
+  string
+>(
+  itemPathSelector,
   oniSaveSelector,
-  saveItemPath,
-  (save, path) => {
-    if (!save) {
-      return undefined;
-    }
-    if (path.length === 0) {
-      return save;
-    }
-    return get(save, path);
-  }
-)((_: AppState, props: SaveStructureItemProps) => props.saveItemPath.join("."));
+  (path, saveGame) =>
+    saveGame ? getSaveItemTitle(path, saveGame) : "[undefined]"
+)(cacheKeyGenerator);
 
-const title = (state: AppState, props: SaveStructureItemProps) => {
-  const path = props.saveItemPath;
-  if (path.length === 0) {
-    return "SaveGame";
-  }
+const childPaths = createCachedSelector<
+  AppState,
+  SaveStructureItemProps,
+  string[],
+  SaveGame | null,
+  string[][]
+>(
+  itemPathSelector,
+  oniSaveSelector,
+  (path, saveGame) => (saveGame ? getSaveItemChildPaths(path, saveGame) : [])
+)(cacheKeyGenerator);
 
-  const value = saveItemValue(state, props);
-  let title = getSaveItemTitle(value, path, state.pages.saveEditor.oniSave);
-  if (!title) {
-    // Couldn't figure out name.  Use key.
-    title = path[path.length - 1];
-  }
-  return title;
-};
-
-const childPaths = createCachedSelector(
-  saveItemValue,
-  saveItemPath,
-  (value, path): string[][] => {
-    return getSaveItemChildPaths(value, path);
-  }
-)((_: AppState, props: SaveStructureItemProps) => props.saveItemPath.join("."));
-
-const structuredSelector = {
-  title,
-  childPaths
-};
-export type StateProps = StructuredStateProps<typeof structuredSelector>;
-// const mapStateToProps = createStructuredSelector<
-//   AppState,
-//   SaveStructureItemProps,
-//   StateProps
-// >(structuredSelector);
-function mapStateToProps(
+const mapStateToProps = function(
   state: AppState,
   props: SaveStructureItemProps
-): StateProps {
-  return {
+) {
+  // Do not use createStructuredSelector here, as that itself
+  //  creates a selector that will go nuts over our multi instance props.
+  const stateProps = {
     title: title(state, props),
     childPaths: childPaths(state, props)
   };
-}
+
+  return stateProps;
+};
+export type StateProps = ReturnType<typeof mapStateToProps>;
 export default mapStateToProps;
