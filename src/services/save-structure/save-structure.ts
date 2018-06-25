@@ -3,7 +3,8 @@ import {
   GameObject,
   getBehavior,
   MinionIdentityBehavior,
-  GameObjectGroup
+  GameObjectGroup,
+  KPrefabIDBehavior
 } from "oni-save-parser";
 
 import { isObject } from "lodash-es";
@@ -45,7 +46,26 @@ const minionGameObject: any /*SaveStructureItem*/ = {
             identityBehavior.templateData &&
             identityBehavior.templateData.name) ||
           "[malformed]";
-        return `${name} (Duplicant)`;
+        return name;
+      }
+    }
+  }
+};
+
+const fallbackGameObject: any = {
+  gameObjects: {
+    "*": {
+      $title: (obj: GameObject) => {
+        const idBehavior = getBehavior(obj, KPrefabIDBehavior);
+        const id =
+          (idBehavior &&
+            idBehavior.templateData &&
+            idBehavior.templateData.InstanceID) ||
+          "[malformed]";
+        const pos = `(${obj.position.x.toFixed(0)}, ${obj.position.y.toFixed(
+          0
+        )})`;
+        return `#${id} ${pos}`;
       }
     }
   }
@@ -61,7 +81,7 @@ const gameObjectGroupsStructure: any /*SaveStructureItem*/ = {
   // We want to handle each game object type uniquely,
   //  but their uniqueness is keyed off the name of this group.
   // To handle this, we provide variants that match off the group's name.
-  $variants: [minionGameObject]
+  $variants: [minionGameObject, fallbackGameObject]
 };
 
 const saveStructure: any /*SaveStructureItem*/ = {
@@ -103,7 +123,7 @@ export function getSaveStructureItem(
     // Try to pick a variant if possible.
     if (subStructure.$variants) {
       const variant = subStructure.$variants.find(
-        x => (x.$match && x.$match(value)) || false
+        x => !x.$match || x.$match(value)
       );
       if (variant) {
         // TS bug: adding $variants freaks out the type system,
