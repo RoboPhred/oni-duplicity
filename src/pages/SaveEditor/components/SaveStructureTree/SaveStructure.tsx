@@ -1,33 +1,17 @@
 import * as React from "react";
 
-import { autobind } from "core-decorators";
 import { SaveGame } from "oni-save-parser";
 
 import SaveStructureContainer from "./components/SaveStructureContainer";
 import SaveStructureItem from "./components/SaveStructureItem";
 
-export interface SaveStructureProps {
-  saveGame: SaveGame;
-  onSelected(path: string[]): void;
-}
-type Props = SaveStructureProps;
+type Props = {};
 export default class SaveStructure extends React.Component<Props> {
   render() {
-    const { saveGame } = this.props;
     return (
       <SaveStructureContainer>
-        <SaveStructureItem
-          propKey="SaveGame"
-          propValue={saveGame}
-          onSelected={this._onSavePropSelected}
-        />
+        <SaveStructureItem saveItemPath={[]} />
       </SaveStructureContainer>
     );
-  }
-
-  @autobind()
-  private _onSavePropSelected(path: string[]) {
-    const { onSelected } = this.props;
-    onSelected(path.slice(1));
   }
 }

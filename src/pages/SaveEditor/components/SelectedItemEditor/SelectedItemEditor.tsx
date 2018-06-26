@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
 
-import extractObjectName from "@/pages/SaveEditor/utils/extract-object-name";
+import { getSaveItemTitle } from "@/services/save-structure";
 
 import SelectedObjectEditorContainer from "./components/Container";
 
@@ -12,21 +12,19 @@ import SelectPathBreadcrumb from "@/pages/SaveEditor/components/SelectedPathBrea
 
 import EditorField from "./components/EditorField";
 
-import mapStateToProps, { StateProps } from "./derived-state";
+import mapStateToProps, { StateProps, FieldRow } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";
 
 type Props = StateProps & DispatchProps;
-class SelectedObjectEditor extends React.Component<Props> {
+class SelectedItemEditor extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
   }
 
   render() {
-    const { selectedValue } = this.props;
+    const { fields } = this.props;
 
-    const fields = Object.keys(selectedValue).map(key =>
-      this._renderFieldRow(key)
-    );
+    const fieldElements = fields.map(field => this._renderFieldRow(field));
 
     return (
       <SelectedObjectEditorContainer>
@@ -38,19 +36,18 @@ class SelectedObjectEditor extends React.Component<Props> {
               <th>Value</th>
             </tr>
           </thead>
-          <tbody>{fields}</tbody>
+          <tbody>{fieldElements}</tbody>
         </table>
       </SelectedObjectEditorContainer>
     );
   }
 
-  private _renderFieldRow(key: string) {
-    const { selectedValue } = this.props;
-    const value = selectedValue[key];
-    if (isEditableValue(value)) {
+  private _renderFieldRow(field: FieldRow) {
+    if (field.fieldType === "editable") {
+      const { title, key, value } = field;
       return (
         <tr key={key}>
-          <td>{key}</td>
+          <td>{title}</td>
           <td>
             <EditorField
               propKey={key}
@@ -60,34 +57,18 @@ class SelectedObjectEditor extends React.Component<Props> {
           </td>
         </tr>
       );
-    } else if (value != null) {
-      const { selectedPath } = this.props;
-      let objectName = extractObjectName(value);
-      if (objectName == null) {
-        if (value == null) {
-          objectName = "[null]";
-        } else {
-          objectName = Array.isArray(value) ? "[array]" : `[${typeof value}]`;
-        }
-      }
+    } else if (field.fieldType === "link") {
+      const { key, title, linkTitle, path } = field;
       return (
         <tr key={key}>
-          <td>{key}</td>
+          <td>{title}</td>
           <td>
-            <SaveStructureLink path={[...selectedPath, key]}>
-              {objectName}
-            </SaveStructureLink>
+            <SaveStructureLink path={path}>{linkTitle}</SaveStructureLink>
           </td>
         </tr>
       );
-    } else {
-      return (
-        <tr key={key}>
-          <td>{key}</td>
-          <td>[null]</td>
-        </tr>
-      );
     }
+    return undefined;
   }
 
   @autobind()
@@ -99,10 +80,4 @@ class SelectedObjectEditor extends React.Component<Props> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SelectedObjectEditor);
-
-const primitiveTypes = ["string", "number", "boolean"];
-function isEditableValue(val: any) {
-  const valType = typeof val;
-  return primitiveTypes.indexOf(valType) !== -1;
-}
+)(SelectedItemEditor);

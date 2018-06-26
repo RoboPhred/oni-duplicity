@@ -15,7 +15,7 @@ import SidebarContainer from "./components/SidebarContainer";
 import ContentContainer from "./components/ContentContainer";
 
 import SaveStructureTree from "./components/SaveStructureTree";
-import SelectedObjectEditor from "./components/SelectedObjectEditor";
+import SelectedItemEditor from "./components/SelectedItemEditor";
 
 type Props = StateProps & DispatchProps;
 class SaveEditor extends React.Component<Props> {
@@ -90,15 +90,12 @@ class SaveEditor extends React.Component<Props> {
             <Flex.Container direction="row" width="100%" height="100%">
               <Flex.Item>
                 <SidebarContainer>
-                  <SaveStructureTree
-                    saveGame={oniSave}
-                    onSelected={this._onPathSelected}
-                  />
+                  <SaveStructureTree />
                 </SidebarContainer>
               </Flex.Item>
               <Flex.Item grow shrink>
                 <ContentContainer>
-                  <SelectedObjectEditor />
+                  <SelectedItemEditor />
                 </ContentContainer>
               </Flex.Item>
             </Flex.Container>

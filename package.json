@@ -51,6 +51,7 @@
     "lodash-es": "^4.17.10",
     "oni-save-parser": "^2.1.5",
     "raw-loader": "^0.5.1",
+    "re-reselect": "^2.1.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-draggable": "^3.0.5",
