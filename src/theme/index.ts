@@ -1,11 +1,16 @@
 export namespace Intent {
   export const Primary = "primary";
   export const Default = "default";
+  export const Dangerous = "dangerous";
+  export const Hint = "hint";
 }
 
+// https://coolors.co/33658a-ffb238-86bbd8-f34213-758e4f
 const intentColors: Record<Indexer<typeof Intent>, string> = {
-  default: "#5C6672",
-  primary: "#137cbd"
+  default: "#FFB238",
+  primary: "#758E4F",
+  dangerous: "#F34213",
+  hint: "#86BBD8"
 };
 
 // https://coolors.co/313e50-3a435e-455561-5c6672-6c6f7f

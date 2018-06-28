@@ -2,9 +2,11 @@ import * as React from "react";
 
 import NavBarContainer from "./components/NavBarContainer";
 
+import NavBarTitleText from "./components/NavBarTitleText";
+
 const NavBar: React.SFC = () => (
   <NavBarContainer>
-    <h1>Duplicity</h1>
+    <NavBarTitleText>Duplicity</NavBarTitleText>
   </NavBarContainer>
 );
 export default NavBar;
