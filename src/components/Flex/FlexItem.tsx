@@ -14,4 +14,5 @@ const FlexItem = styled<FlexItemProps, "div">("div")`
   ${height};
   ${width};
 `;
+FlexItem.displayName = "FlexItem";
 export default FlexItem;

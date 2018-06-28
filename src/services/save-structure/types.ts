@@ -1,14 +1,4 @@
 /**
- * Utility type returning the unioned values of the object or array index.
- * This will effectively flatten an object, as {foo: string, bar: number} becomes (string | number).
- *
- * Arrays are treated to avoid capturing the "length" and other non-indexer properties.
- */
-export type Indexer<T> = T extends (infer V)[]
-  ? V
-  : T extends { [key: string]: infer V } ? V : never;
-
-/**
  * Data properties describing the save structure item at this point.
  */
 export type SaveStructureItemCore<T> = {

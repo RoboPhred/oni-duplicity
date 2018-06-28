@@ -1,8 +1,5 @@
 import * as React from "react";
 
-import styled from "styled-components";
-import { getTheme } from "@/theme";
-
 const ICON_SIZE = 10;
 const ICON_EXPANDED = "M 0 .25 L .5 .75 L 1 .25 z";
 const ICON_COLLAPSED = "M .5 0 L 1 .5 L .5 1 z";
