@@ -6,10 +6,13 @@ import {
   SaveGame
 } from "oni-save-parser";
 
-import minionGameObjectGroup from "./minion";
-import { SaveStructureItem } from "@/services/save-structure/types";
+import { SaveStructureItem } from "../../types";
 
-const fallbackGameObjectGroup: SaveStructureItem<GameObjectGroup> = {
+import minionGameObjectGroup from "./minion";
+
+import { defaultBehavior } from "./behaviors/default";
+
+const defaultGameObjectGroup: SaveStructureItem<GameObjectGroup> = {
   gameObjects: {
     "*": {
       $title: (obj: GameObject) => {
@@ -23,6 +26,9 @@ const fallbackGameObjectGroup: SaveStructureItem<GameObjectGroup> = {
           0
         )})`;
         return `#${id} ${pos}`;
+      },
+      behaviors: {
+        "*": defaultBehavior
       }
     }
   }
@@ -38,7 +44,7 @@ const gameObjectGroupsStructure: SaveStructureItem<GameObjectGroup> = {
   // We want to handle each game object type uniquely,
   //  but their uniqueness is keyed off the name of this group.
   // To handle this, we provide variants that match off the group's name.
-  $variants: [minionGameObjectGroup, fallbackGameObjectGroup]
+  $variants: [minionGameObjectGroup, defaultGameObjectGroup]
 };
 
 const gameObjectsStructure: SaveStructureItem<SaveGame["gameObjects"]> = {
