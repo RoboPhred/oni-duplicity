@@ -1,20 +1,18 @@
 import * as React from "react";
 
-import Flex from "@/components/Flex";
-
+import AppContainer from "./components/AppContainer";
+import AppContent from "./components/AppContent";
 import NavBarContainer from "./components/NavBar";
 
 import SaveEditor from "@/pages/SaveEditor";
 
 const App: React.SFC = () => (
-  <Flex.Container width="100%" height="100%" bg="bg.default" direction="column">
-    <Flex.Item>
-      <NavBarContainer />
-    </Flex.Item>
-    <Flex.Item grow shrink>
+  <AppContainer>
+    <NavBarContainer />
+    <AppContent>
       <SaveEditor />
-    </Flex.Item>
-  </Flex.Container>
+    </AppContent>
+  </AppContainer>
 );
 
 App.displayName = "App";

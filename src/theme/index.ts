@@ -1,12 +1,12 @@
-export namespace Intent {
-  export const Primary = "primary";
-  export const Default = "default";
-  export const Dangerous = "dangerous";
-  export const Hint = "hint";
+export enum Intent {
+  Primary = "primary",
+  Default = "default",
+  Dangerous = "dangerous",
+  Hint = "hint"
 }
 
 // https://coolors.co/33658a-ffb238-86bbd8-f34213-758e4f
-const intentColors: Record<Indexer<typeof Intent>, string> = {
+const intentColors: Record<Intent, string> = {
   default: "#FFB238",
   primary: "#758E4F",
   dangerous: "#F34213",
@@ -27,9 +27,19 @@ const colors = {
 
 const space = [0, 4];
 
+const fontSizes = [12, 14, 16, 20, 24, 32, 48, 64, 96, 128];
+
+// border-radius
+const radii = [0, 2, 4, 8];
+
+const borders = [0, "1px solid", "2px solid"];
+
 const theme = {
   colors,
-  space
+  space,
+  fontSizes,
+  radii,
+  borders
 };
 
 export type Theme = typeof theme;

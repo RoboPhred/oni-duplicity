@@ -1,8 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { autobind } from "core-decorators";
-
 import Modal from "react-modal";
 
 import Flex from "@/components/Flex";
@@ -19,8 +17,6 @@ import SelectedItemEditor from "./components/SelectedItemEditor";
 
 type Props = StateProps & DispatchProps;
 class SaveEditor extends React.Component<Props> {
-  private _input: HTMLElement | null = null;
-
   constructor(props: Props) {
     super(props);
 
@@ -30,13 +26,7 @@ class SaveEditor extends React.Component<Props> {
   }
 
   render() {
-    const {
-      error,
-      oniSave,
-      loadingState,
-      onDismissError,
-      onLoadTestData
-    } = this.props;
+    const { error, oniSave, loadingState, onDismissError } = this.props;
 
     switch (loadingState) {
       case "loading":
@@ -71,79 +61,25 @@ class SaveEditor extends React.Component<Props> {
 
     return (
       <SaveEditorContainer>
-        <Flex.Container direction="column" width="100%" height="100%">
-          <Flex.Item>
-            <input
-              ref={el => (this._input = el)}
-              style={{ display: "none" }}
-              type="file"
-              accept=".sav"
-              onChange={this._onLoadFile}
-            />
-            <button onClick={this._onLoadFileClick}>Load File</button>
-            <button onClick={onLoadTestData}>Load Test Data</button>
-            {oniSave && (
-              <button onClick={this._onSaveFileClick}>Save File</button>
-            )}
-          </Flex.Item>
-          {oniSave && (
-            <Flex.Container direction="row" width="100%" height="100%">
-              <Flex.Item>
-                <SidebarContainer>
-                  <SaveStructureTree />
-                </SidebarContainer>
-              </Flex.Item>
-              <Flex.Item grow shrink>
-                <ContentContainer>
-                  <SelectedItemEditor />
-                </ContentContainer>
-              </Flex.Item>
-            </Flex.Container>
-          )}
-        </Flex.Container>
+        {oniSave && (
+          <Flex.Container direction="row" width="100%" height="100%">
+            <Flex.Item>
+              <SidebarContainer>
+                <SaveStructureTree />
+              </SidebarContainer>
+            </Flex.Item>
+            <Flex.Item grow shrink>
+              <ContentContainer>
+                <SelectedItemEditor />
+              </ContentContainer>
+            </Flex.Item>
+          </Flex.Container>
+        )}
       </SaveEditorContainer>
     );
-  }
-
-  @autobind()
-  private _onPathSelected(path: string[]) {
-    const { onSelectPath } = this.props;
-    onSelectPath(path);
-  }
-
-  @autobind()
-  private _onLoadFileClick() {
-    if (!this._input) {
-      return;
-    }
-    this._input.click();
-  }
-
-  @autobind()
-  private _onLoadFile(e: React.ChangeEvent<HTMLInputElement>) {
-    const files = e.target.files;
-    if (!files || files.length === 0) {
-      return;
-    }
-    const file = files[0];
-
-    const { onLoad } = this.props;
-    onLoad(file);
-  }
-
-  @autobind()
-  private _onSaveFileClick() {
-    const { onSave } = this.props;
-    const fileName = withExtension("my-file", ".sav");
-    onSave(fileName);
   }
 }
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SaveEditor);
-
-function withExtension(name: string, ext: string): string {
-  if (name.endsWith(ext)) return name;
-  return name + ext;
-}
