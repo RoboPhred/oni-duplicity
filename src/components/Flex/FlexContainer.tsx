@@ -1,13 +1,14 @@
-import styled, { Styles } from "styled-components";
-import { HeightProps, WidthProps, height, width } from "styled-system";
+import styled from "styled-components";
 
-export interface FlexContainerProps extends HeightProps, WidthProps {
+import Box, { BoxProps } from "../Box";
+
+export interface FlexContainerProps extends BoxProps {
   direction: "row" | "column";
 }
-const FlexContainer = styled<FlexContainerProps, "div">("div")`
+const FlexContainer = styled<FlexContainerProps, any>(Box)`
   display: flex;
   flex-direction: ${props => props.direction};
-  ${height};
-  ${width};
+  align-items: stretch;
 `;
+FlexContainer.displayName = "FlexContainer";
 export default FlexContainer;

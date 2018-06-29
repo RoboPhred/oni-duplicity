@@ -5,6 +5,10 @@ const webpack = require("webpack");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const createStyledComponentsTransformer = require("typescript-plugin-styled-components")
+  .default;
+const styledComponentsTransformer = createStyledComponentsTransformer();
+
 const isDev = process.env["NODE_ENV"] === "development";
 
 const paths = require("./paths");
@@ -58,11 +62,18 @@ module.exports = {
           {
             loader: "babel-loader",
             options: {
-              babelrc: true,
+              babelrc: false,
               plugins: ["react-hot-loader/babel"]
             }
           },
-          "ts-loader"
+          {
+            loader: "ts-loader",
+            options: {
+              getCustomTransformers: () => ({
+                before: [styledComponentsTransformer]
+              })
+            }
+          }
         ],
         exclude: [/\.worker\.ts$/]
       },

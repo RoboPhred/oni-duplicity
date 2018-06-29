@@ -1,9 +1,8 @@
-import styled from "styled-components";
-import { getTheme } from "@/theme";
+import * as React from "react";
+import Box from "@/components/Box";
 
-const ContentSeparator = styled.div`
-  width: 1px;
-  height: 100%;
-  background: ${props => getTheme(props).colors.bgSeparator};
-`;
+const ContentSeparator: React.SFC = () => (
+  <Box width={1} height="100%" bg="bg.separator" />
+);
+
 export default ContentSeparator;

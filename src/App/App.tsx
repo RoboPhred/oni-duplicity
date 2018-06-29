@@ -1,12 +1,19 @@
 import * as React from "react";
 
-import SaveEditor from "@/pages/SaveEditor";
-
 import AppContainer from "./components/AppContainer";
+import AppContent from "./components/AppContent";
+import NavBarContainer from "./components/NavBar";
+
+import SaveEditor from "@/pages/SaveEditor";
 
 const App: React.SFC = () => (
   <AppContainer>
-    <SaveEditor />
+    <NavBarContainer />
+    <AppContent>
+      <SaveEditor />
+    </AppContent>
   </AppContainer>
 );
+
+App.displayName = "App";
 export default App;
