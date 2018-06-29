@@ -1,6 +1,7 @@
-import * as React from "react";
+import styled from "styled-components";
 
-const SaveStructureItemContainer: React.SFC = ({ children }) => (
-  <div>{children}</div>
-);
+const SaveStructureItemContainer = styled.div`
+  width: 100%;
+`;
+SaveStructureItemContainer.displayName = "SaveStructureItemContainer";
 export default SaveStructureItemContainer;
