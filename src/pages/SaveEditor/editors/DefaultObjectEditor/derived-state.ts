@@ -1,5 +1,7 @@
 import { createSelector, createStructuredSelector } from "reselect";
 
+import { isObject } from "lodash-es";
+
 import { AppState } from "@/state";
 
 import oniSave from "@/selectors/oni-save-selector";
@@ -20,7 +22,13 @@ export interface FieldLink {
   linkTitle: string;
   path: string[];
 }
-export type FieldRow = FieldEditable | FieldLink;
+export interface FieldUnknown {
+  title: string;
+  key: string;
+  fieldType: "unknown";
+  value: any;
+}
+export type FieldRow = FieldEditable | FieldLink | FieldUnknown;
 
 const fields = createSelector(
   selectedPath,
@@ -46,7 +54,7 @@ const fields = createSelector(
           value
         };
         return editable;
-      } else {
+      } else if (isObject(value)) {
         const link: FieldLink = {
           title: key,
           key,
@@ -55,6 +63,14 @@ const fields = createSelector(
           path: [...path, key]
         };
         return link;
+      } else {
+        const unknown: FieldUnknown = {
+          title: key,
+          key,
+          fieldType: "unknown",
+          value: value === null ? "[null]" : "[undefined]"
+        };
+        return unknown;
       }
     });
   }
