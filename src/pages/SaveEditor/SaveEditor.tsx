@@ -5,8 +5,12 @@ import Modal from "react-modal";
 
 import Flex from "@/components/Flex";
 
+import { getSaveItemEditor } from "@/services/save-structure";
+
 import mapStateToProps, { StateProps } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";
+
+import { getEditor } from "./editors";
 
 import SaveEditorContainer from "./components/SaveEditorContainer";
 import SidebarContainer from "./components/SidebarContainer";
@@ -14,7 +18,6 @@ import ContentContainer from "./components/ContentContainer";
 
 import SaveStructureTree from "./components/SaveStructureTree";
 import SelectPathBreadcrumb from "./components/SelectedPathBreadcrumb";
-import DefaultObjectEditor from "./pages/DefaultObjectEditor";
 
 type Props = StateProps & DispatchProps;
 class SaveEditor extends React.Component<Props> {
@@ -27,7 +30,13 @@ class SaveEditor extends React.Component<Props> {
   }
 
   render() {
-    const { error, oniSave, loadingState, onDismissError } = this.props;
+    const {
+      error,
+      oniSave,
+      loadingState,
+      selectedPath,
+      onDismissError
+    } = this.props;
 
     switch (loadingState) {
       case "loading":
@@ -60,6 +69,11 @@ class SaveEditor extends React.Component<Props> {
       );
     }
 
+    const editorType =
+      (oniSave && getSaveItemEditor(selectedPath, oniSave)) || null;
+
+    const ObjectEditor = getEditor(editorType);
+
     return (
       <SaveEditorContainer>
         {oniSave && (
@@ -72,7 +86,7 @@ class SaveEditor extends React.Component<Props> {
             <Flex.Item grow shrink>
               <ContentContainer>
                 <SelectPathBreadcrumb />
-                <DefaultObjectEditor />
+                <ObjectEditor />
               </ContentContainer>
             </Flex.Item>
           </Flex.Container>

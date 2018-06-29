@@ -57,6 +57,14 @@ export function getSaveItemChildPaths(
     .map(x => [...path, x]);
 }
 
+export function getSaveItemEditor(
+  path: string[],
+  saveGame: SaveGame
+): string | null {
+  const structure = getSaveStructureItem(path, saveGame);
+  return (structure && structure.$editor) || null;
+}
+
 function getFallbackTitle(value: any, key: string): string {
   if (value === undefined) {
     return "[no data]";
