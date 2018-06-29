@@ -1,13 +1,11 @@
 import { createSelector, createStructuredSelector } from "reselect";
 
-import { get } from "lodash-es";
+import { AppState } from "@/state";
 
-import { AppState } from "@/store";
+import oniSave from "@/selectors/oni-save-selector";
+import selectedPath from "@/selectors/selected-path";
 
 import { getSaveItemValue } from "@/services/save-structure";
-
-import oniSave from "@/pages/SaveEditor/selectors/oni-save-selector";
-import selectedPath from "@/pages/SaveEditor/selectors/selected-path";
 
 export interface FieldEditable {
   title: string;

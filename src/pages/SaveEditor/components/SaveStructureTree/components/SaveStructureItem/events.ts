@@ -1,4 +1,4 @@
-import { selectPath } from "@/pages/SaveEditor/actions/select-path";
+import { selectPath } from "@/actions/select-path";
 
 const mapDispatchToProps = {
   onClick: selectPath

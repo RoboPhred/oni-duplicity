@@ -1,8 +1,8 @@
 import { createStructuredSelector } from "reselect";
 
-import { AppState } from "@/store";
+import { AppState } from "@/state";
 
-import selectedPath from "@/pages/SaveEditor/selectors/selected-path";
+import selectedPath from "@/selectors/selected-path";
 
 const structuredSelector = {
   selectedPath

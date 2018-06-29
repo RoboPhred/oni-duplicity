@@ -2,7 +2,7 @@ import produce from "immer";
 
 import { set } from "lodash-es";
 
-import { AppState } from "@/store";
+import { AppState } from "@/state";
 
 import {
   ACTION_ONISAVE_MODIFY,
@@ -17,13 +17,14 @@ export default function modifyOniSaveReducer(
     return state;
   }
 
-  const { loadingState, oniSave } = state.pages.saveEditor;
+  const { loadingState, oniSave } = state;
   if (loadingState !== "ready" || !oniSave) {
     return state;
   }
 
   const { path, value } = action.payload;
+
   return produce(state, draft => {
-    set(draft.pages.saveEditor.oniSave!, path, value);
+    set(draft.oniSave!, path, value);
   });
 }

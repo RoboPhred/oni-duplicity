@@ -1,15 +1,15 @@
 import { SaveGame } from "oni-save-parser";
 
-export interface SaveEditorPageState {
+export interface AppState {
   loadingState: "idle" | "loading" | "saving" | "ready";
   error: Error | null;
   oniSave: SaveGame | null;
   selectedPath: string[];
 }
-export const defaultSaveEditorPageState: Readonly<SaveEditorPageState> = {
+export const defaultAppState: Readonly<AppState> = {
   loadingState: "idle" as "idle",
   error: null,
   oniSave: null,
   selectedPath: []
 };
-Object.freeze(defaultSaveEditorPageState);
+Object.freeze(defaultAppState);

@@ -1,4 +1,4 @@
-import { SaveGame } from "../../../../node_modules/oni-save-parser";
+import { SaveGame } from "oni-save-parser";
 
 export const ACTION_RECEIVE_ONISAVE_BEGIN =
   "@/pages/SaveEditor/onisave/receive:begin";

@@ -4,17 +4,17 @@ import { Provider } from "react-redux";
 
 import { ThemeProvider } from "styled-components";
 
-import { createStore } from "./store";
+import store from "./store";
 import theme from "./theme";
 
 import App from "./App";
 
 const Root: React.SFC = () => (
-  <ThemeProvider theme={theme}>
-    <Provider store={createStore()}>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
       <App />
-    </Provider>
-  </ThemeProvider>
+    </ThemeProvider>
+  </Provider>
 );
 
 export default hot(module)(Root);

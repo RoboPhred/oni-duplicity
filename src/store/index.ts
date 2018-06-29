@@ -1,2 +1,4 @@
-export * from "./state";
-export * from "./store";
+import { createStore } from "./store";
+
+const store = createStore();
+export default store;

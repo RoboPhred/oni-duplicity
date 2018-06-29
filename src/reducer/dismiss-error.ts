@@ -1,11 +1,9 @@
-import produce from "immer";
-
-import { AppState, defaultAppState } from "@/store";
+import { AppState, defaultAppState } from "@/state";
 
 import {
   ACTION_DISMISS_ERROR,
   DismissErrorAction
-} from "../actions/dismiss-error";
+} from "@/actions/dismiss-error";
 
 export default function dismissErrorReducer(
   state: AppState = defaultAppState,
@@ -15,7 +13,8 @@ export default function dismissErrorReducer(
     return state;
   }
 
-  return produce(state, draft => {
-    draft.pages.saveEditor.error = null;
-  });
+  return {
+    ...state,
+    error: null
+  };
 }

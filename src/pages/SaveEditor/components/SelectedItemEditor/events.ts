@@ -1,4 +1,4 @@
-import { modifyOniSave } from "@/pages/SaveEditor/actions/modify-onisave";
+import { modifyOniSave } from "@/actions/modify-onisave";
 
 const mapDispatchToProps = {
   onModify: modifyOniSave

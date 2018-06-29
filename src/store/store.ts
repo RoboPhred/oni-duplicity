@@ -6,8 +6,8 @@ import {
 
 import createSagaMiddleware from "redux-saga";
 
-import reducer from "./reducer";
-import rootSaga from "./saga";
+import reducer from "@/reducer";
+import saga from "@/saga";
 
 import { actionSanitizer, stateSanitizer } from "./devtool-sanitizer";
 
@@ -26,6 +26,6 @@ export function createStore() {
     reducer,
     composeEnhancers(applyMiddleware(sagaMiddleware))
   );
-  sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(saga);
   return store;
 }

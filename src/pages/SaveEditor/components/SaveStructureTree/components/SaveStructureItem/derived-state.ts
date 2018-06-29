@@ -1,14 +1,14 @@
 import { SaveGame } from "oni-save-parser";
 import createCachedSelector from "re-reselect";
 
-import { AppState } from "@/store";
+import { AppState } from "@/state";
 
 import {
   getSaveItemTitle,
   getSaveItemChildPaths
 } from "@/services/save-structure";
 
-import oniSaveSelector from "@/pages/SaveEditor/selectors/oni-save-selector";
+import oniSaveSelector from "@/selectors/oni-save-selector";
 
 import { SaveStructureItemProps } from "./props";
 

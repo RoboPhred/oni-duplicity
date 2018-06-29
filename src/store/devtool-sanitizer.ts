@@ -1,7 +1,9 @@
 import { AnyAction } from "redux";
-import { AppState } from "./state";
-import { ACTION_RECEIVE_ONISAVE_SUCCESS } from "@/pages/SaveEditor/actions/receive-onisave";
+
 import { SaveGame } from "oni-save-parser";
+
+import { ACTION_RECEIVE_ONISAVE_SUCCESS } from "@/actions/receive-onisave";
+import { AppState } from "@/state";
 
 export function actionSanitizer(action: AnyAction): AnyAction {
   if (action.type === ACTION_RECEIVE_ONISAVE_SUCCESS) {
@@ -16,15 +18,7 @@ export function actionSanitizer(action: AnyAction): AnyAction {
 export function stateSanitizer(state: AppState): any {
   return {
     ...state,
-    pages: {
-      ...state.pages,
-      saveEditor: {
-        ...state.pages.saveEditor,
-        oniSave: state.pages.saveEditor.oniSave
-          ? sanitizeSave(state.pages.saveEditor.oniSave)
-          : null
-      }
-    }
+    oniSave: state.oniSave ? sanitizeSave(state.oniSave) : null
   };
 }
 

@@ -1,5 +1,5 @@
-import { dismissError } from "./actions/dismiss-error";
-import { selectPath } from "./actions/select-path";
+import { dismissError } from "@/actions/dismiss-error";
+import { selectPath } from "@/actions/select-path";
 
 const mapDispatchToProps = {
   onDismissError: dismissError,
