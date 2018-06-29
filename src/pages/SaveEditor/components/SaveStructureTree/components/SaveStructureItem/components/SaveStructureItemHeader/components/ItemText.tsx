@@ -1,6 +1,8 @@
-import styled from "styled-components";
+import { getTheme } from "@/theme";
 
-const ItemText = styled.span`
-  margin-left: 2px;
+import Text from "@/components/Text";
+
+const ItemText = Text.extend`
+  margin-left: ${props => getTheme(props).space[1]}px;
 `;
 export default ItemText;

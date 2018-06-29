@@ -5,14 +5,20 @@ import { autobind } from "core-decorators";
 
 import styled from "styled-components";
 
+import { LinkProps, link } from "@/theme";
+
 import { SaveStructureLinkProps } from "./props";
 import mapDispatchToProps, { DispatchProps } from "./events";
 
 type Props = SaveStructureLinkProps & DispatchProps;
 class SaveStructureLink extends React.Component<Props> {
   render() {
-    const { children } = this.props;
-    return <Link onClick={this._onClick}>{children}</Link>;
+    const { intent, children } = this.props;
+    return (
+      <Link intent={intent} onClick={this._onClick}>
+        {children}
+      </Link>
+    );
   }
 
   @autobind()
@@ -26,8 +32,6 @@ export default connect(
   mapDispatchToProps
 )(SaveStructureLink);
 
-const Link = styled.span`
-  color: blue;
-  text-decoration: underline;
-  cursor: pointer;
+const Link = styled<LinkProps, "span">("span")`
+  ${link};
 `;

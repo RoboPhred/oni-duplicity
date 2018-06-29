@@ -3,20 +3,22 @@ import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
 
-import { getSaveItemTitle } from "@/services/save-structure";
+import { Intent } from "@/theme";
+import Text from "@/components/Text";
+import SaveStructureLink from "@/components/SaveStructureLink";
 
 import SelectedObjectEditorContainer from "./components/Container";
-
-import SaveStructureLink from "@/pages/SaveEditor/components/SaveStructureLink";
-import SelectPathBreadcrumb from "@/pages/SaveEditor/components/SelectedPathBreadcrumb";
 
 import EditorField from "./components/EditorField";
 
 import mapStateToProps, { StateProps, FieldRow } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";
 
+const TH = Text.withComponent("th");
+const TD = Text.withComponent("td");
+
 type Props = StateProps & DispatchProps;
-class SelectedItemEditor extends React.Component<Props> {
+class DefaultObjectEditor extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
   }
@@ -28,12 +30,11 @@ class SelectedItemEditor extends React.Component<Props> {
 
     return (
       <SelectedObjectEditorContainer>
-        <SelectPathBreadcrumb />
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Value</th>
+              <TH>Name</TH>
+              <TH>Value</TH>
             </tr>
           </thead>
           <tbody>{fieldElements}</tbody>
@@ -47,23 +48,25 @@ class SelectedItemEditor extends React.Component<Props> {
       const { title, key, value } = field;
       return (
         <tr key={key}>
-          <td>{title}</td>
-          <td>
+          <TD>{title}</TD>
+          <TD>
             <EditorField
               propKey={key}
               value={value}
               onChange={this._onFieldChange}
             />
-          </td>
+          </TD>
         </tr>
       );
     } else if (field.fieldType === "link") {
       const { key, title, linkTitle, path } = field;
       return (
         <tr key={key}>
-          <td>{title}</td>
+          <TD>{title}</TD>
           <td>
-            <SaveStructureLink path={path}>{linkTitle}</SaveStructureLink>
+            <SaveStructureLink intent={Intent.Primary} path={path}>
+              {linkTitle}
+            </SaveStructureLink>
           </td>
         </tr>
       );
@@ -80,4 +83,4 @@ class SelectedItemEditor extends React.Component<Props> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SelectedItemEditor);
+)(DefaultObjectEditor);

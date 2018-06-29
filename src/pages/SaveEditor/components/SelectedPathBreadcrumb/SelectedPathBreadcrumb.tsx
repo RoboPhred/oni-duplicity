@@ -1,7 +1,9 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import SaveStructureLink from "@/pages/SaveEditor/components/SaveStructureLink";
+import { Intent } from "@/theme";
+
+import SaveStructureLink from "@/components/SaveStructureLink";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 
@@ -12,19 +14,23 @@ class SelectedPathBreadcrumb extends React.Component<Props> {
 
     let path: string[] = [];
     let elements: React.ReactChild[] = [];
-    for (const pathPart of selectedPath) {
-      // Create a new path at each juncture so that the data is not mutated.
+    for (let i = 0; i < selectedPath.length; i++) {
+      const isLast = i + 1 === selectedPath.length;
+      const pathPart = selectedPath[i];
+
       path = [...path, pathPart];
       elements.push(
-        <SaveStructureLink key={path.join(".")} path={path}>
+        <SaveStructureLink
+          intent={isLast ? Intent.Primary : Intent.Default}
+          key={path.join(".")}
+          path={path}
+        >
           {pathPart}
         </SaveStructureLink>
       );
-      elements.push(".");
-    }
-    if (elements.length > 0) {
-      // Remove final seperator dot.
-      elements.pop();
+      if (!isLast) {
+        elements.push(".");
+      }
     }
 
     return <span>{elements}</span>;

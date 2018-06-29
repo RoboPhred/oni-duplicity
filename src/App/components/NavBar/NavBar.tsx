@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
 
+import { Intent } from "@/theme";
+
 import Button from "@/components/Button";
 
 import mapDispatchToProps, { DispatchProps } from "./events";
@@ -31,7 +33,9 @@ class NavBar extends React.Component<Props> {
           />
           <Button onClick={this._onLoadFileClick}>Load</Button>
           <Button onClick={onLoadTestData}>Test</Button>
-          <Button onClick={this._onSaveFileClick}>Save</Button>
+          <Button intent={Intent.Primary} onClick={this._onSaveFileClick}>
+            Save
+          </Button>
         </NavBarGroup>
       </NavBarContainer>
     );

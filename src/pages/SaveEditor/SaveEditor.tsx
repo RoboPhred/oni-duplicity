@@ -13,7 +13,8 @@ import SidebarContainer from "./components/SidebarContainer";
 import ContentContainer from "./components/ContentContainer";
 
 import SaveStructureTree from "./components/SaveStructureTree";
-import SelectedItemEditor from "./components/SelectedItemEditor";
+import SelectPathBreadcrumb from "./components/SelectedPathBreadcrumb";
+import DefaultObjectEditor from "./pages/DefaultObjectEditor";
 
 type Props = StateProps & DispatchProps;
 class SaveEditor extends React.Component<Props> {
@@ -70,7 +71,8 @@ class SaveEditor extends React.Component<Props> {
             </Flex.Item>
             <Flex.Item grow shrink>
               <ContentContainer>
-                <SelectedItemEditor />
+                <SelectPathBreadcrumb />
+                <DefaultObjectEditor />
               </ContentContainer>
             </Flex.Item>
           </Flex.Container>
