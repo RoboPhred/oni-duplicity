@@ -3,6 +3,7 @@ import { SaveGame } from "oni-save-parser";
 import naturalCompare from "string-natural-compare";
 
 import { getSaveStructureItem } from "./save-structure";
+import { SaveStructureItem } from "@/services/save-structure/types";
 
 export function getSaveItemTitle(path: string[], saveGame: SaveGame): string {
   const key = path.length === 0 ? "saveGame" : path[path.length - 1];
@@ -52,7 +53,7 @@ export function getSaveItemChildPaths(
   }
 
   const expandableKeys = Object.keys(value).filter(valueKey =>
-    isObject(value[valueKey])
+    isExpandableChild(valueKey, value[valueKey], structure)
   );
 
   const keyTitles = mapValues(expandableKeys, key =>
@@ -62,6 +63,23 @@ export function getSaveItemChildPaths(
   return expandableKeys
     .sort((a: string, b: string) => naturalCompare(keyTitles[a], keyTitles[b]))
     .map(x => [...path, x]);
+}
+
+function isExpandableChild(
+  key: string,
+  value: any,
+  parent: SaveStructureItem | null
+) {
+  if (!isObject(value)) {
+    return false;
+  }
+
+  if (parent && parent[key] && parent[key]!.$advanced) {
+    // TODO: advanced mode toggle.
+    return false;
+  }
+
+  return true;
 }
 
 export function getSaveItemEditor(
