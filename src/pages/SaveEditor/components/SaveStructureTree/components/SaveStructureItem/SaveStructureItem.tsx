@@ -25,7 +25,7 @@ class SaveStructureItemComponent extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    const { title, childPaths } = this.props;
+    const { title, titleIntent, childPaths } = this.props;
     const { isExpanded } = this.state;
 
     const isExpandable = childPaths.length > 0;
@@ -44,6 +44,7 @@ class SaveStructureItemComponent extends React.Component<Props, State> {
           expandable={isExpandable}
           expanded={isExpanded}
           header={title}
+          intent={titleIntent}
           onClick={this._onClick}
           onExpandToggle={this._onExpandToggle}
         />

@@ -4,18 +4,28 @@ import styled from "styled-components";
 
 import Expander from "./components/Expander";
 import ItemText from "./components/ItemText";
+import { Intent } from "@/theme";
 
 export interface SaveStructureItemHeaderProps {
   expandable: boolean;
   expanded: boolean;
   header: string;
+  intent: Intent;
   onClick(): void;
   onExpandToggle(): void;
 }
 
 const SaveStructureItemHeader: React.SFC<
   SaveStructureItemHeaderProps & { className?: string }
-> = ({ className, expandable, expanded, header, onClick, onExpandToggle }) => (
+> = ({
+  className,
+  expandable,
+  expanded,
+  header,
+  intent,
+  onClick,
+  onExpandToggle
+}) => (
   <span className={className}>
     {expandable && (
       <Expander
@@ -23,7 +33,9 @@ const SaveStructureItemHeader: React.SFC<
         onClick={expandable ? onExpandToggle : undefined}
       />
     )}
-    <ItemText onClick={onClick}>{header}</ItemText>
+    <ItemText intent={intent} onClick={onClick}>
+      {header}
+    </ItemText>
   </span>
 );
 export default styled(SaveStructureItemHeader)`
