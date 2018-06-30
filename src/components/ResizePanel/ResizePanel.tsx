@@ -1,12 +1,15 @@
 import * as React from "react";
 
+import { HeightProps, height } from "styled-system";
+
 import { autobind } from "core-decorators";
 
 import Flex from "@/components/Flex";
 
 import ResizeHandle from "./components/ResizeHandle";
+import styled from "styled-components";
 
-export interface ResizePanelProps {
+export interface ResizePanelProps extends HeightProps {
   className?: string;
   defaultWidth?: number;
 }
@@ -14,7 +17,7 @@ interface State {
   width: number;
 }
 type Props = ResizePanelProps;
-export default class ResizePanel extends React.Component<Props, State> {
+class ResizePanel extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -45,3 +48,7 @@ export default class ResizePanel extends React.Component<Props, State> {
     }));
   }
 }
+
+export default styled(ResizePanel)`
+  ${height};
+`;

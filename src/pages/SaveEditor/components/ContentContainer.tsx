@@ -7,5 +7,6 @@ const ContentContainer = styled.div`
   box-sizing: border-box;
   height: 100%;
   overflow: auto;
+  flex: 1 1 auto;
 `;
 export default ContentContainer;

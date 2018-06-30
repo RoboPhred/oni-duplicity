@@ -1,9 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import Flex from "@/components/Flex";
-
-import { getSaveItemEditor } from "@/services/save-structure";
+import ResizePanel from "@/components/ResizePanel";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 
@@ -14,7 +12,6 @@ import SidebarContainer from "./components/SidebarContainer";
 import ContentContainer from "./components/ContentContainer";
 
 import SaveStructureTree from "./components/SaveStructureTree";
-import SelectPathBreadcrumb from "./components/SelectedPathBreadcrumb";
 
 type Props = StateProps;
 class SaveEditor extends React.Component<Props> {
@@ -27,30 +24,20 @@ class SaveEditor extends React.Component<Props> {
   }
 
   render() {
-    const { oniSave, selectedPath } = this.props;
-
-    const editorType =
-      (oniSave && getSaveItemEditor(selectedPath, oniSave)) || null;
+    const { editorType } = this.props;
 
     const ObjectEditor = getEditor(editorType);
 
     return (
       <SaveEditorContainer>
-        {oniSave && (
-          <Flex.Container direction="row" width="100%" height="100%">
-            <Flex.Item>
-              <SidebarContainer>
-                <SaveStructureTree />
-              </SidebarContainer>
-            </Flex.Item>
-            <Flex.Item grow shrink>
-              <ContentContainer>
-                <SelectPathBreadcrumb />
-                <ObjectEditor />
-              </ContentContainer>
-            </Flex.Item>
-          </Flex.Container>
-        )}
+        <ResizePanel>
+          <SidebarContainer>
+            <SaveStructureTree />
+          </SidebarContainer>
+        </ResizePanel>
+        <ContentContainer>
+          <ObjectEditor />
+        </ContentContainer>
       </SaveEditorContainer>
     );
   }
