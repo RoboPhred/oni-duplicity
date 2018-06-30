@@ -5,6 +5,7 @@ export type SaveStructureItemCore<T> = {
   $match?(obj: any): boolean;
   $title?(obj: any): string;
   $editor?: string;
+  $selectEditorValue?: string[];
   $selectChildRoot?: string[];
   $variants?: SaveStructureItem<T>[];
 };

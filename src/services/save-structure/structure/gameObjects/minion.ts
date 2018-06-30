@@ -9,6 +9,8 @@ import { SaveStructureItem } from "@/services/save-structure/types";
 
 import { gameObjectIs } from "../utils";
 
+import { defaultGameObject } from "./default";
+
 const minionGameObject: SaveStructureItem<GameObjectGroup> = {
   // Only apply this rule to minion game object groups.
   $match: gameObjectIs("Minion"),
@@ -16,6 +18,8 @@ const minionGameObject: SaveStructureItem<GameObjectGroup> = {
   // gameObjects in a gameObject group is an array of GameObject
   gameObjects: {
     "*": {
+      ...defaultGameObject,
+
       $title: (obj: GameObject) => {
         const identityBehavior = getBehavior(obj, MinionIdentityBehavior);
         const name =
