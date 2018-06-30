@@ -31,6 +31,11 @@ const fields = createSelector(
     }
 
     const obj = getSaveItemEditValue(path, saveGame);
+
+    if (!obj) {
+      return [];
+    }
+
     if (isPrimitive(obj)) {
       // Cannot edit things in a primitive.
       return [];
