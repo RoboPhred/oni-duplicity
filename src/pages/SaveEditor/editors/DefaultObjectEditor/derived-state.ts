@@ -5,7 +5,7 @@ import { AppState } from "@/state";
 import oniSave from "@/selectors/oni-save-selector";
 import selectedPath from "@/selectors/selected-path";
 
-import { getSaveItemValue } from "@/services/save-structure";
+import { getSaveItemEditValue } from "@/services/save-structure";
 
 export interface FieldEditable {
   title: string;
@@ -30,7 +30,7 @@ const fields = createSelector(
       return [];
     }
 
-    const obj = getSaveItemValue(path, saveGame);
+    const obj = getSaveItemEditValue(path, saveGame);
     if (isPrimitive(obj)) {
       // Cannot edit things in a primitive.
       return [];

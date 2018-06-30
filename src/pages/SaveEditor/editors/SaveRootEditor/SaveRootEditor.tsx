@@ -10,7 +10,7 @@ import mapStateToProps, { StateProps } from "./derived-state";
 
 import SaveRootEditorContainer from "./components/SaveRootEditorContainer";
 
-const H3 = Text.withComponent("h3");
+import SaveGameTitle from "./components/SaveGameTitle";
 
 type Props = StateProps;
 class SaveRootEditor extends React.Component<Props> {
@@ -35,7 +35,9 @@ class SaveRootEditor extends React.Component<Props> {
     );
     return (
       <React.Fragment>
-        <H3 intent={Intent.Primary}>{oniSave.header.gameInfo.baseName}</H3>
+        <SaveGameTitle intent={Intent.Primary}>
+          {oniSave.header.gameInfo.baseName}
+        </SaveGameTitle>
         <InfoText value={oniSave.header.gameInfo.numberOfCycles}>
           cycles
         </InfoText>
