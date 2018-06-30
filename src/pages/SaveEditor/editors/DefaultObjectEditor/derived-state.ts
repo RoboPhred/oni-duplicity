@@ -25,7 +25,7 @@ const fields = createSelector(
     }
 
     return Object.keys(selectedValue)
-      .filter(isPrimitive)
+      .filter(key => isPrimitive(selectedValue[key]))
       .map(key => {
         const value = selectedValue[key];
         const editable: FieldEditable = {

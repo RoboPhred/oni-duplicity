@@ -20,6 +20,8 @@ const minionGameObject: SaveStructureItem<GameObjectGroup> = {
     "*": {
       ...defaultGameObject,
 
+      $editor: "minion",
+
       $title: (obj: GameObject) => {
         const identityBehavior = getBehavior(obj, MinionIdentityBehavior);
         const name =
