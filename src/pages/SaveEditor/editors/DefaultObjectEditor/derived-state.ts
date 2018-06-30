@@ -2,66 +2,39 @@ import { createSelector, createStructuredSelector } from "reselect";
 
 import { AppState } from "@/state";
 
-import oniSave from "@/selectors/oni-save-selector";
-import selectedPath from "@/selectors/selected-path";
-
-import { getSaveItemEditValue } from "@/services/save-structure";
+import selectedPath from "@/selectors/selected-path-selector";
+import selectedValue from "@/selectors/selected-value-selector";
 
 export interface FieldEditable {
   title: string;
   key: string;
-  fieldType: "editable";
   value: any;
 }
-export interface FieldLink {
-  title: string;
-  key: string;
-  fieldType: "link";
-  linkTitle: string;
-  path: string[];
-}
-export type FieldRow = FieldEditable | FieldLink;
+export type FieldRow = FieldEditable;
 
 const fields = createSelector(
-  selectedPath,
-  oniSave,
-  (path, saveGame): FieldRow[] => {
-    if (!saveGame) {
+  selectedValue,
+  (selectedValue): FieldRow[] => {
+    if (!selectedValue) {
       return [];
     }
 
-    const obj = getSaveItemEditValue(path, saveGame);
-
-    if (!obj) {
-      return [];
-    }
-
-    if (isPrimitive(obj)) {
+    if (isPrimitive(selectedValue)) {
       // Cannot edit things in a primitive.
       return [];
     }
 
-    return Object.keys(obj).map(key => {
-      const value = obj[key];
-      if (isPrimitive(value)) {
+    return Object.keys(selectedValue)
+      .filter(isPrimitive)
+      .map(key => {
+        const value = selectedValue[key];
         const editable: FieldEditable = {
           title: key,
           key,
-          fieldType: "editable",
           value
         };
         return editable;
-      } else {
-        const link: FieldLink = {
-          title: key,
-          key,
-          fieldType: "link",
-          linkTitle: `[${value ? typeof value : "null"}]`,
-          path: [...path, key]
-        };
-        return link;
-      }
-    });
+      });
   }
 );
 

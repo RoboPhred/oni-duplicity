@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
 
-import { Intent } from "@/theme";
 import Text from "@/components/Text";
-import SaveStructureLink from "@/components/SaveStructureLink";
 
 import SelectedObjectEditorContainer from "./components/Container";
 
@@ -44,34 +42,19 @@ class DefaultObjectEditor extends React.Component<Props> {
   }
 
   private _renderFieldRow(field: FieldRow) {
-    if (field.fieldType === "editable") {
-      const { title, key, value } = field;
-      return (
-        <tr key={key}>
-          <TD>{title}</TD>
-          <TD>
-            <EditorField
-              propKey={key}
-              value={value}
-              onChange={this._onFieldChange}
-            />
-          </TD>
-        </tr>
-      );
-    } else if (field.fieldType === "link") {
-      const { key, title, linkTitle, path } = field;
-      return (
-        <tr key={key}>
-          <TD>{title}</TD>
-          <td>
-            <SaveStructureLink intent={Intent.Primary} path={path}>
-              {linkTitle}
-            </SaveStructureLink>
-          </td>
-        </tr>
-      );
-    }
-    return undefined;
+    const { title, key, value } = field;
+    return (
+      <tr key={key}>
+        <TD>{title}</TD>
+        <TD>
+          <EditorField
+            propKey={key}
+            value={value}
+            onChange={this._onFieldChange}
+          />
+        </TD>
+      </tr>
+    );
   }
 
   @autobind()

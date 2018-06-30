@@ -9,7 +9,7 @@ import {
 } from "@/services/save-structure";
 
 import oniSaveSelector from "@/selectors/oni-save-selector";
-import selectedPathSelector from "@/selectors/selected-path";
+import selectedPathSelector from "@/selectors/selected-path-selector";
 
 import { SaveStructureItemProps } from "./props";
 import { Intent } from "@/theme";
