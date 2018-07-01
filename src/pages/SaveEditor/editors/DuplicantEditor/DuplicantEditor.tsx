@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 
 import { Intent } from "@/theme";
 
+import HintText from "@/components/HintText";
+
 import mapStateToProps, { StateProps } from "./derived-state";
 
 import EditorContainer from "../components/EditorContainer";
@@ -24,6 +26,7 @@ class DuplicantEditor extends React.Component<Props> {
             intent={Intent.Primary}
             saveItemPath={minionNamePath}
           />
+          <HintText> - click to edit</HintText>
         </EditorHeader>
       </EditorContainer>
     );

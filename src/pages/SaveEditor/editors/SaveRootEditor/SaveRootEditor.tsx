@@ -11,6 +11,7 @@ import mapStateToProps, { StateProps } from "./derived-state";
 import SaveRootEditorContainer from "./components/SaveRootEditorContainer";
 
 import SaveGameTitle from "./components/SaveGameTitle";
+import DuplicantsList from "./components/DuplicantsList";
 
 type Props = StateProps;
 class SaveRootEditor extends React.Component<Props> {
@@ -45,6 +46,7 @@ class SaveRootEditor extends React.Component<Props> {
           duplicants
         </InfoText>
         <InfoText value={numGameObjects}>game objects</InfoText>
+        <DuplicantsList />
       </React.Fragment>
     );
   }
