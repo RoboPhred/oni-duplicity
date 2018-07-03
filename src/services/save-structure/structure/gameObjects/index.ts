@@ -1,44 +1,17 @@
-import {
-  GameObject,
-  GameObjectGroup,
-  KPrefabIDBehavior,
-  getBehavior,
-  SaveGame
-} from "oni-save-parser";
+import { GameObjectGroup, SaveGame } from "oni-save-parser";
 
 import { SaveStructureItem } from "../../types";
 
 import minionGameObjectGroup from "./minion";
 
-import { defaultBehavior } from "./behaviors/default";
-
-const defaultGameObjectGroup: SaveStructureItem<GameObjectGroup> = {
-  gameObjects: {
-    "*": {
-      $title: (obj: GameObject) => {
-        const idBehavior = getBehavior(obj, KPrefabIDBehavior);
-        const id =
-          (idBehavior &&
-            idBehavior.templateData &&
-            idBehavior.templateData.InstanceID) ||
-          "[malformed]";
-        const pos = `(${obj.position.x.toFixed(0)}, ${obj.position.y.toFixed(
-          0
-        )})`;
-        return `#${id} ${pos}`;
-      },
-      behaviors: {
-        "*": defaultBehavior
-      }
-    }
-  }
-};
+import defaultGameObjectGroup from "./default";
 
 const gameObjectGroupsStructure: SaveStructureItem<GameObjectGroup> = {
   $title(group: GameObjectGroup) {
     return group.name;
   },
 
+  $selectEditorValue: ["gameObjects"],
   $selectChildRoot: ["gameObjects"],
 
   // We want to handle each game object type uniquely,

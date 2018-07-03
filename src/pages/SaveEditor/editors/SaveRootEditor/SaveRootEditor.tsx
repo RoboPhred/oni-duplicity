@@ -10,7 +10,8 @@ import mapStateToProps, { StateProps } from "./derived-state";
 
 import SaveRootEditorContainer from "./components/SaveRootEditorContainer";
 
-const H3 = Text.withComponent("h3");
+import SaveGameTitle from "./components/SaveGameTitle";
+import DuplicantsList from "./components/DuplicantsList";
 
 type Props = StateProps;
 class SaveRootEditor extends React.Component<Props> {
@@ -35,7 +36,9 @@ class SaveRootEditor extends React.Component<Props> {
     );
     return (
       <React.Fragment>
-        <H3 intent={Intent.Primary}>{oniSave.header.gameInfo.baseName}</H3>
+        <SaveGameTitle intent={Intent.Primary}>
+          {oniSave.header.gameInfo.baseName}
+        </SaveGameTitle>
         <InfoText value={oniSave.header.gameInfo.numberOfCycles}>
           cycles
         </InfoText>
@@ -43,6 +46,7 @@ class SaveRootEditor extends React.Component<Props> {
           duplicants
         </InfoText>
         <InfoText value={numGameObjects}>game objects</InfoText>
+        <DuplicantsList />
       </React.Fragment>
     );
   }

@@ -1,13 +1,19 @@
-import { createStructuredSelector } from "reselect";
+import { createStructuredSelector, createSelector } from "reselect";
 
 import { AppState } from "@/state";
 
+import { getSaveItemEditor } from "@/services/save-structure";
+
 import oniSave from "@/selectors/oni-save-selector";
-import selectedPath from "@/selectors/selected-path";
+import selectedPath from "@/selectors/selected-path-selector";
 
 const stateSelectors = {
-  oniSave,
-  selectedPath
+  editorType: createSelector(
+    oniSave,
+    selectedPath,
+    (oniSave, selectedPath) =>
+      (oniSave && getSaveItemEditor(selectedPath, oniSave)) || null
+  )
 };
 export type StateProps = StructuredStateProps<typeof stateSelectors>;
 const mapStateToProps = createStructuredSelector<AppState, StateProps>(

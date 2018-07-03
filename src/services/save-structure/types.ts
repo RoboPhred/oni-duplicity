@@ -4,10 +4,17 @@
 export type SaveStructureItemCore<T> = {
   $match?(obj: any): boolean;
   $title?(obj: any): string;
+  $advanced?: boolean;
   $editor?: string;
+  $selectEditorValue?: string[];
   $selectChildRoot?: string[];
   $variants?: SaveStructureItem<T>[];
 };
+
+export type SaveStructureItemProps<T> = Exclude<
+  keyof T,
+  keyof SaveStructureItemCore<T>
+>;
 
 /**
  * Type describing the properties of T as SaveStructureItems,
@@ -15,16 +22,8 @@ export type SaveStructureItemCore<T> = {
  *
  * It also provides a catch-all "any property or index" under the "*" key.
  */
-// Note: We used to check for array as a special case, but it
-//  makes life difficult whenusing untyped SaveStructureItem,
-//  as 'any' extends any[]
-/*T extends any[]
-   ? { [P: number]: SaveStructureItem<Indexer<T>> }
-  : */
 export type SaveStructurePropIndexer<T> = {
-  [P in Exclude<keyof T, keyof SaveStructureItemCore<T>>]?: SaveStructureItem<
-    T[P]
-  >
+  [P in SaveStructureItemProps<T>]?: SaveStructureItem<T[P]>
 } & { "*"?: SaveStructureItem<Indexer<T>> };
 
 /**
