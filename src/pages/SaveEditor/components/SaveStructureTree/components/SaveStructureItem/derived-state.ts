@@ -33,23 +33,23 @@ const title = createCachedSelector<
     saveGame ? getSaveItemTitle(path, saveGame) : "[undefined]"
 )(cacheKeyGenerator);
 
-const titleIntent = createCachedSelector<
+const selectionStatus = createCachedSelector<
   AppState,
   SaveStructureItemProps,
   string[],
   string[],
-  Intent
+  "unselected" | "in-path" | "selected"
 >(itemPathSelector, selectedPathSelector, (itemPath, selectedPath) => {
   const isSelected = itemPath.every((x, i) => selectedPath[i] == x);
   if (!isSelected) {
-    return Intent.Default;
+    return "unselected";
   }
 
   if (itemPath.length === selectedPath.length) {
-    return Intent.Primary;
+    return "selected";
   }
 
-  return Intent.Secondary;
+  return "in-path";
 })(cacheKeyGenerator);
 
 const childPaths = createCachedSelector<
@@ -72,7 +72,7 @@ const mapStateToProps = function(
   //  creates a selector that will go nuts over our multi instance props.
   const stateProps = {
     title: title(state, props),
-    titleIntent: titleIntent(state, props),
+    selectionStatus: selectionStatus(state, props),
     childPaths: childPaths(state, props)
   };
 

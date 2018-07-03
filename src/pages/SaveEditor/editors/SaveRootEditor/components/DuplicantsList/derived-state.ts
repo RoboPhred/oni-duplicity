@@ -14,7 +14,7 @@ const duplicantsSetPath = createSelector(oniSave, oniSave => {
   if (index === -1) {
     return null;
   }
-  return ["gameObjects", `${index}`, "gameObjects"];
+  return ["gameObjects", `${index}`];
 });
 
 const duplicantIndexes = createSelector(oniSave, oniSave => {

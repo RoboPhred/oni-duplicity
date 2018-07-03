@@ -11,9 +11,15 @@ export interface SaveStructureItemHeaderProps {
   expanded: boolean;
   header: string;
   intent: Intent;
+  innerRef?: React.RefObject<HTMLDivElement>;
   onClick(): void;
   onExpandToggle(): void;
 }
+
+const SaveStructureItemContainer = styled.span`
+  cursor: pointer;
+`;
+SaveStructureItemContainer.displayName = "SaveStructureItemContainer";
 
 const SaveStructureItemHeader: React.SFC<
   SaveStructureItemHeaderProps & { className?: string }
@@ -24,9 +30,10 @@ const SaveStructureItemHeader: React.SFC<
   header,
   intent,
   onClick,
-  onExpandToggle
+  onExpandToggle,
+  innerRef
 }) => (
-  <span className={className}>
+  <SaveStructureItemContainer innerRef={innerRef} className={className}>
     {expandable && (
       <Expander
         expanded={expanded}
@@ -36,8 +43,7 @@ const SaveStructureItemHeader: React.SFC<
     <ItemText intent={intent} onClick={onClick}>
       {header}
     </ItemText>
-  </span>
+  </SaveStructureItemContainer>
 );
-export default styled(SaveStructureItemHeader)`
-  cursor: pointer;
-`;
+SaveStructureItemHeader.displayName = "SaveStructureItemHeader";
+export default SaveStructureItemHeader;

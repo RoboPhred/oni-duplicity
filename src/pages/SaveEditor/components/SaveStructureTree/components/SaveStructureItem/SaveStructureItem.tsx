@@ -1,7 +1,10 @@
 import * as React from "react";
+
 import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
+
+import { Intent } from "@/theme";
 
 import { SaveStructureItemProps } from "./props";
 import mapStateToProps, { StateProps } from "./derived-state";
@@ -17,18 +20,52 @@ interface State {
 
 type Props = SaveStructureItemProps & StateProps & DispatchProps;
 class SaveStructureItemComponent extends React.Component<Props, State> {
+  private _ref: React.RefObject<HTMLDivElement>;
+
   constructor(props: Props) {
     super(props);
+
+    this._ref = React.createRef();
+
     this.state = {
       isExpanded: false
     };
   }
 
+  componentDidMount() {
+    if (this.props.selectionStatus === "selected") {
+      this._scrollIntoView();
+    }
+  }
+
+  componentDidUpdate(oldProps: Props) {
+    if (
+      oldProps.selectionStatus !== "selected" &&
+      this.props.selectionStatus === "selected"
+    ) {
+      this._scrollIntoView();
+    }
+  }
+
   render(): JSX.Element {
-    const { title, titleIntent, childPaths } = this.props;
-    const { isExpanded } = this.state;
+    const { title, selectionStatus, childPaths } = this.props;
+    let { isExpanded } = this.state;
 
     const isExpandable = childPaths.length > 0;
+
+    let titleIntent: Intent;
+    switch (selectionStatus) {
+      default:
+        titleIntent = Intent.Default;
+        break;
+      case "in-path":
+        titleIntent = Intent.Secondary;
+        isExpanded = isExpandable;
+        break;
+      case "selected":
+        titleIntent = Intent.Primary;
+        break;
+    }
 
     let valueElement: React.ReactNode | null = null;
     if (isExpandable && isExpanded) {
@@ -41,6 +78,7 @@ class SaveStructureItemComponent extends React.Component<Props, State> {
     return (
       <SaveStructureItemContainer>
         <SaveStructureItemHeader
+          innerRef={this._ref}
           expandable={isExpandable}
           expanded={isExpanded}
           header={title}
@@ -51,6 +89,18 @@ class SaveStructureItemComponent extends React.Component<Props, State> {
         <SaveStructureItemContent>{valueElement}</SaveStructureItemContent>
       </SaveStructureItemContainer>
     );
+  }
+
+  private _scrollIntoView() {
+    if (this._ref.current) {
+      const { childPaths } = this.props;
+      this._ref.current.scrollIntoView();
+      if (childPaths.length > 0) {
+        this.setState({
+          isExpanded: true
+        });
+      }
+    }
   }
 
   @autobind()
