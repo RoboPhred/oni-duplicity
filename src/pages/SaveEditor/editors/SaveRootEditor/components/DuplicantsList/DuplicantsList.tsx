@@ -5,12 +5,11 @@ import { Intent } from "@/theme";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 
-import Text from "@/components/Text";
 import SaveStructureLink from "@/components/SaveStructureLink";
+import DuplicantPortrait from "@/pages/SaveEditor/editors/components/DuplicantPortrait";
 
 import DuplicantsListContainer from "./components/DuplicantsListContainer";
 import DuplicantsListContent from "./components/DuplicantsListContent";
-import DuplicantPortrait from "./components/DuplicantPortrait";
 
 type Props = StateProps;
 class DuplicantsList extends React.Component<Props> {
@@ -26,11 +25,9 @@ class DuplicantsList extends React.Component<Props> {
 
     return (
       <DuplicantsListContainer>
-        <Text intent={Intent.Primary}>
-          <SaveStructureLink path={duplicantsSetPath}>
-            Duplicants
-          </SaveStructureLink>
-        </Text>
+        <SaveStructureLink intent={Intent.Primary} path={duplicantsSetPath}>
+          Duplicants
+        </SaveStructureLink>
         <DuplicantsListContent>{duplicantPortraits}</DuplicantsListContent>
       </DuplicantsListContainer>
     );

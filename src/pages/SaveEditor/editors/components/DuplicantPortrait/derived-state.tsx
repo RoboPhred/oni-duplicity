@@ -39,6 +39,19 @@ const duplicantIdentity = createCachedSelector(gameObject, gameObject => {
   return identBehavior.templateData;
 })(generateCacheKey);
 
+const path = (state: AppState, props: DuplicantPortraitProps) => {
+  const gameSave = oniSave(state);
+  if (!gameSave) {
+    return null;
+  }
+  const groupIndex = gameSave.gameObjects.findIndex(x => x.name === "Minion");
+  if (groupIndex === -1) {
+    return null;
+  }
+  const index = gameObjectIndex(state, props);
+  return ["gameObjects", `${groupIndex}`, "gameObjects", `${index}`];
+};
+
 const name = (state: AppState, props: DuplicantPortraitProps) => {
   const ident = duplicantIdentity(state, props);
   return (ident && ident.name) || null;
@@ -56,6 +69,7 @@ const arrivalCycle = (state: AppState, props: DuplicantPortraitProps) => {
 
 function mapStateToProps(state: AppState, props: DuplicantPortraitProps) {
   return {
+    path: path(state, props),
     name: name(state, props),
     gender: gender(state, props),
     arrivalCycle: arrivalCycle(state, props)
