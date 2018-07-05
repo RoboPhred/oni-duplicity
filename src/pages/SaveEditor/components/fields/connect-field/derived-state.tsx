@@ -20,9 +20,7 @@ const itemValue = createCachedSelector(
     if (path.length === 0) {
       return oniSave;
     }
-    const val = get(oniSave, path);
-    console.log("itemValue on path", path, "of", oniSave, "is", val);
-    return val;
+    return get(oniSave, path);
   }
 )(cacheKeyGenerator);
 

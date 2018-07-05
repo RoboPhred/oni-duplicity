@@ -3,7 +3,7 @@ import { createStructuredSelector, createSelector } from "reselect";
 import { AppState } from "@/state";
 
 import oniSave from "@/selectors/oni-save-selector";
-import selectedValue from "@/selectors/selected-value-selector";
+import selectedPath from "@/selectors/selected-path-selector";
 
 import { TemplateObjectEditorProps } from "./props";
 
@@ -24,7 +24,7 @@ const template = createSelector(
 
 const structuredSelector = {
   template,
-  value: selectedValue
+  selectedPath
 };
 export type StateProps = StructuredStateProps<typeof structuredSelector>;
 const mapStateToProps = createStructuredSelector<
