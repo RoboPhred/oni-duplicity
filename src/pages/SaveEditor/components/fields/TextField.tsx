@@ -38,9 +38,9 @@ class TextField extends React.Component<Props, State> {
     const currentValue = editValue || value;
     return (
       <Input
-        type="number"
-        min={minLength}
-        max={maxLength}
+        type="text"
+        minLength={minLength}
+        maxLength={maxLength}
         value={currentValue !== undefined ? currentValue : null}
         onChange={this._onValueChange}
         onKeyPress={this._onInputKeyPress}
