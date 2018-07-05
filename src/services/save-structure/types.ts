@@ -1,3 +1,5 @@
+import { SaveGame } from "oni-save-parser";
+
 /**
  * Data properties describing the save structure item at this point.
  */
@@ -6,6 +8,11 @@ export type SaveStructureItemCore<T> = {
   $title?(obj: any): string;
   $advanced?: boolean;
   $editor?: string;
+  $editorProps?(
+    value: any,
+    path: string[],
+    saveGame: SaveGame
+  ): Record<string, any>;
   $selectEditorValue?: string[];
   $selectChildRoot?: string[];
   $variants?: SaveStructureItem<T>[];

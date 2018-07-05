@@ -24,7 +24,7 @@ class SaveEditor extends React.Component<Props> {
   }
 
   render() {
-    const { editorType } = this.props;
+    const { editorType, editorProps } = this.props;
 
     const ObjectEditor = getEditor(editorType);
 
@@ -36,7 +36,7 @@ class SaveEditor extends React.Component<Props> {
           </SidebarContainer>
         </ResizePanel>
         <ContentContainer>
-          <ObjectEditor />
+          <ObjectEditor {...editorProps} />
         </ContentContainer>
       </SaveEditorContainer>
     );

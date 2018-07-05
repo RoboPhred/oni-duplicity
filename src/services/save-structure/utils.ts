@@ -5,6 +5,10 @@ import naturalCompare from "string-natural-compare";
 import { getSaveStructureItem } from "./save-structure";
 import { SaveStructureItem } from "@/services/save-structure/types";
 
+// TODO: Clean up this mess.
+//  Are paths always absolute?  No, but sometimes yes.  getSaveItemEditValue is required some times and breaks other times because of this.
+//  Lots of redundant lookups.  Need to memoize getSaveStructureItem.
+
 export function getSaveItemTitle(path: string[], saveGame: SaveGame): string {
   const key = path.length === 0 ? "saveGame" : path[path.length - 1];
   const value = path.length === 0 ? saveGame : get(saveGame, path);
@@ -88,6 +92,19 @@ export function getSaveItemEditor(
 ): string | null {
   const structure = getSaveStructureItem(path, saveGame);
   return (structure && structure.$editor) || null;
+}
+
+export function getSaveItemEditorProps(
+  path: string[],
+  saveGame: SaveGame
+): Record<string, any> {
+  const value = getSaveItemEditValue(path, saveGame);
+  const structure = getSaveStructureItem(path, saveGame);
+  const propCreator = (structure && structure.$editorProps) || null;
+  if (propCreator) {
+    return propCreator(value, path, saveGame);
+  }
+  return {};
 }
 
 function getFallbackTitle(value: any, key: string): string {
