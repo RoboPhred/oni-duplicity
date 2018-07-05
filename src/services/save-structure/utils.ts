@@ -78,10 +78,10 @@ function isExpandableChild(
     return false;
   }
 
-  // if (parent && parent[key] && parent[key]!.$advanced) {
-  //   // TODO: advanced mode toggle.
-  //   return false;
-  // }
+  if (parent && parent[key] && parent[key]!.$advanced) {
+    // TODO: advanced mode toggle.
+    return false;
+  }
 
   return true;
 }
