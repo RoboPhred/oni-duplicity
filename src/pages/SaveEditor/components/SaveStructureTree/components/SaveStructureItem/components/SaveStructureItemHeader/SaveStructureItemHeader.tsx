@@ -16,10 +16,11 @@ export interface SaveStructureItemHeaderProps {
   onExpandToggle(): void;
 }
 
-const SaveStructureItemContainer = styled.span`
+const SaveStructureItemHeaderContainer = styled.span`
+  white-space: nowrap;
   cursor: pointer;
 `;
-SaveStructureItemContainer.displayName = "SaveStructureItemContainer";
+SaveStructureItemHeaderContainer.displayName = "SaveStructureItemContainer";
 
 const SaveStructureItemHeader: React.SFC<
   SaveStructureItemHeaderProps & { className?: string }
@@ -33,7 +34,7 @@ const SaveStructureItemHeader: React.SFC<
   onExpandToggle,
   innerRef
 }) => (
-  <SaveStructureItemContainer innerRef={innerRef} className={className}>
+  <SaveStructureItemHeaderContainer innerRef={innerRef} className={className}>
     {expandable && (
       <Expander
         expanded={expanded}
@@ -43,7 +44,7 @@ const SaveStructureItemHeader: React.SFC<
     <ItemText intent={intent} onClick={onClick}>
       {header}
     </ItemText>
-  </SaveStructureItemContainer>
+  </SaveStructureItemHeaderContainer>
 );
 SaveStructureItemHeader.displayName = "SaveStructureItemHeader";
 export default SaveStructureItemHeader;
