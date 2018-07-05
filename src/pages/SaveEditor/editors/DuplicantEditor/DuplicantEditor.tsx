@@ -9,7 +9,8 @@ import mapStateToProps, { StateProps } from "./derived-state";
 
 import EditorContainer from "../components/EditorContainer";
 import EditorHeader from "../components/EditorHeader";
-import ItemEditableText from "../components/ItemEditableText";
+
+import ItemEditableText from "../components/fields/ItemEditableText";
 
 type Props = StateProps;
 class DuplicantEditor extends React.Component<Props> {
@@ -22,10 +23,7 @@ class DuplicantEditor extends React.Component<Props> {
     return (
       <EditorContainer>
         <EditorHeader>
-          <ItemEditableText
-            intent={Intent.Primary}
-            saveItemPath={minionNamePath}
-          />
+          <ItemEditableText intent={Intent.Primary} path={minionNamePath} />
           <HintText> - click to edit</HintText>
         </EditorHeader>
       </EditorContainer>

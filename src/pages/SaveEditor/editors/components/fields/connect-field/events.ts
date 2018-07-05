@@ -1,12 +1,12 @@
 import { modifyOniSave } from "@/actions/modify-onisave";
 
-import { ItemEditableTextProps } from "./props";
+import { EditorFieldProps } from "./props";
 import { Dispatch } from "redux";
 
-function mapDispatchToProps(dispatch: Dispatch, props: ItemEditableTextProps) {
+function mapDispatchToProps(dispatch: Dispatch, props: EditorFieldProps) {
   return {
     onChange(value: string) {
-      dispatch(modifyOniSave(props.saveItemPath, value));
+      dispatch(modifyOniSave(props.path, value));
     }
   };
 }
