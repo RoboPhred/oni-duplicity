@@ -55,6 +55,13 @@ const saveStructure: SaveStructureItem<SaveGame> = {
    * Another blob of generalized non-object-specific game data
    */
   gameData: {
+    $editor: "template-object",
+    $editorProps() {
+      return {
+        templateName: "Game+GameSaveData"
+      };
+    },
+
     /**
      * Presumably tracks the flow of material through the gas conduits.
      * I am reasonably sure this also ties into native game data,
