@@ -94,7 +94,8 @@ class SaveStructureItemComponent extends React.Component<Props, State> {
   private _scrollIntoView() {
     if (this._ref.current) {
       const { childPaths } = this.props;
-      this._ref.current.scrollIntoView();
+      // Scrolls into view regardless.  Need to not scroll if already visible.
+      // this._ref.current.scrollIntoView();
       if (childPaths.length > 0) {
         this.setState({
           isExpanded: true
