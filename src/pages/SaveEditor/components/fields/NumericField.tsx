@@ -11,18 +11,20 @@ import connectEditorField, {
   InjectedProps
 } from "./connect-field";
 
-export interface NumericEditorFieldProps extends EditorFieldProps {
+import Input from "./components/Input";
+
+export interface NumericFieldProps extends EditorFieldProps {
   minValue?: number;
   maxValue?: number;
   precision?: NumberPrecision;
 }
 
-type Props = NumericEditorFieldProps & InjectedProps;
+type Props = NumericFieldProps & InjectedProps;
 interface State {
   editValue: string | null;
   isValid: boolean;
 }
-class NumericTemplateField extends React.Component<Props, State> {
+class NumericField extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -38,7 +40,7 @@ class NumericTemplateField extends React.Component<Props, State> {
 
     const currentValue = editValue || value;
     return (
-      <input
+      <Input
         type="number"
         min={minValue}
         max={maxValue}
@@ -54,9 +56,11 @@ class NumericTemplateField extends React.Component<Props, State> {
   private _onValueChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.valueAsNumber;
     const clampValue = this._clamp(value);
+    const isValid = e.target.valueAsNumber === clampValue;
+    e.target.setCustomValidity(isValid ? "" : "Value out of range");
     this.setState({
       editValue: e.target.value,
-      isValid: e.target.valueAsNumber === clampValue
+      isValid
     });
   }
 
@@ -99,4 +103,4 @@ class NumericTemplateField extends React.Component<Props, State> {
     return value;
   }
 }
-export default connectEditorField()(NumericTemplateField);
+export default connectEditorField()(NumericField);

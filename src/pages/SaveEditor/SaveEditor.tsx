@@ -5,7 +5,7 @@ import ResizePanel from "@/components/ResizePanel";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 
-import { getEditor } from "./editors";
+import { getEditor } from "./components/editors";
 
 import SaveEditorContainer from "./components/SaveEditorContainer";
 import SidebarContainer from "./components/SidebarContainer";

@@ -6,8 +6,8 @@ import { Intent } from "@/theme";
 import mapStateToProps, { StateProps } from "./derived-state";
 
 import SaveStructureLink from "@/components/SaveStructureLink";
-import DuplicantPortrait from "@/pages/SaveEditor/editors/components/DuplicantPortrait";
 
+import DuplicantPortrait from "./components/DuplicantPortrait";
 import DuplicantsListContainer from "./components/DuplicantsListContainer";
 import DuplicantsListContent from "./components/DuplicantsListContent";
 
