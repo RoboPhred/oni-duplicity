@@ -9,28 +9,32 @@ import mapStateToProps, { StateProps } from "./derived-state";
 
 import Text from "@/components/Text";
 import SaveStructureLink from "@/components/SaveStructureLink";
-
-import DuplicantPortraitContainer from "./components/DuplicantPortraitContainer";
-
-const H4 = Text.withComponent("h4");
-const DivText = Text.withComponent("div");
+import Portrait from "@/components/Portrait";
 
 type Props = DuplicantPortraitProps & StateProps;
 class DuplicantPortrait extends React.Component<Props> {
   render() {
     const { path, name, gender, arrivalCycle } = this.props;
     return (
-      <DuplicantPortraitContainer>
-        <H4 intent={Intent.Primary}>
+      <Portrait>
+        <Portrait.Header>
           {path ? (
-            <SaveStructureLink path={path}>{name}</SaveStructureLink>
+            <SaveStructureLink intent={Intent.Primary} path={path}>
+              {name}
+            </SaveStructureLink>
           ) : (
             "Invalid Object"
           )}
-        </H4>
-        <DivText intent={Intent.Secondary}>{gender}</DivText>
-        <DivText intent={Intent.Secondary}>{arrivalCycle} cycles old</DivText>
-      </DuplicantPortraitContainer>
+        </Portrait.Header>
+        <Portrait.Footer>
+          <div>
+            <Text intent={Intent.Secondary}>{gender}</Text>
+          </div>
+          <div>
+            <Text intent={Intent.Secondary}>{arrivalCycle} cycles old</Text>
+          </div>
+        </Portrait.Footer>
+      </Portrait>
     );
   }
 }
