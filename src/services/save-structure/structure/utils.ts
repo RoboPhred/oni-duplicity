@@ -77,8 +77,8 @@ export function* walkSaveStructurePath(
   return structure;
 }
 
-export function getChildStructures(def: SaveStructureDef): SaveStructureDef[] {
-  return Object.keys(def)
-    .filter(x => x[0] !== "$")
-    .map(x => def[x]) as SaveStructureDef[];
-}
+// export function getChildStructures(def: SaveStructureDef): SaveStructureDef[] {
+//   return Object.keys(def)
+//     .filter(x => x[0] !== "$")
+//     .map(x => def[x]) as SaveStructureDef[];
+// }

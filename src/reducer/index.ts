@@ -4,12 +4,14 @@ import dismissErrorReducer from "./dismiss-error";
 import modifyOniSave from "./modify-onisave";
 import receiveOniSaveReducer from "./receive-onisave";
 import selectPathReducer from "./select-path";
+import setEditModeReducer from "./set-editmode";
 
 const reducers = [
   dismissErrorReducer,
   modifyOniSave,
   receiveOniSaveReducer,
-  selectPathReducer
+  selectPathReducer,
+  setEditModeReducer
 ];
 
 // @ts-ignore: We need to tell the reducers thay may receive a non-matching item.

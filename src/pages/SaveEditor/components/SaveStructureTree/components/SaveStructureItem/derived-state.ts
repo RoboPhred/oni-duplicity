@@ -5,14 +5,15 @@ import { AppState } from "@/state";
 
 import {
   getSaveItemTitle,
-  getSaveItemChildPaths
+  getSaveItemChildPaths,
+  EditMode
 } from "@/services/save-structure";
 
 import oniSaveSelector from "@/selectors/oni-save-selector";
 import selectedPathSelector from "@/selectors/selected-path-selector";
+import editModeSelector from "@/selectors/edit-mode-selector";
 
 import { SaveStructureItemProps } from "./props";
-import { Intent } from "@/theme";
 
 const cacheKeyGenerator = (_: AppState, props: SaveStructureItemProps) =>
   props.saveItemPath.join(".");
@@ -57,11 +58,14 @@ const childPaths = createCachedSelector<
   SaveStructureItemProps,
   string[],
   SaveGame | null,
+  EditMode,
   string[][]
 >(
   itemPathSelector,
   oniSaveSelector,
-  (path, saveGame) => (saveGame ? getSaveItemChildPaths(path, saveGame) : [])
+  editModeSelector,
+  (path, saveGame, editMode) =>
+    saveGame ? getSaveItemChildPaths(path, saveGame, editMode) : []
 )(cacheKeyGenerator);
 
 const mapStateToProps = function(

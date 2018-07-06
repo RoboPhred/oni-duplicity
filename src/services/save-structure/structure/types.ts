@@ -36,13 +36,6 @@ export type SaveStructureDefCore<T> = {
   $editor?: string;
 
   /**
-   * If set, keep using the editor for sub-paths until a deeper editor
-   * is found.
-   * Each new sub-path will re-invoke $editorProps.
-   */
-  $editDeep?: boolean;
-
-  /**
    * A function to generate the props to pass to the editor
    * when an item of this def is selected.
    */

@@ -9,7 +9,7 @@ import connectEditorField, {
   InjectedProps
 } from "./connect-field";
 
-import Input from "./components/Input";
+import Input from "../../../../components/Input";
 
 export interface TextFieldProps extends EditorFieldProps {
   minLength?: number;

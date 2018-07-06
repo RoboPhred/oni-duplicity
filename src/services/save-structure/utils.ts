@@ -10,9 +10,6 @@ import {
   walkSaveStructurePath
 } from "./structure";
 
-//===============================================================
-// -- Old functions
-
 export function getSaveItemTitle(path: string[], saveGame: SaveGame): string {
   const def = getSaveStructureDef(path, saveGame);
   let nameSource: string | false | undefined;
@@ -70,14 +67,12 @@ export function getSaveItemEditValue(path: string[], saveGame: SaveGame) {
 
 export function getSaveItemChildPaths(
   path: string[],
-  saveGame: SaveGame
+  saveGame: SaveGame,
+  editMode: EditMode
 ): string[][] {
-  const editMode = "advanced";
   const def = getSaveStructureDef(path, saveGame);
-  const childPaths = def
-    ? collectChildPaths(path, saveGame, def, editMode)
-    : collectAutoChildPaths(path, saveGame, editMode);
-  return childPaths || [];
+  const childPaths = collectChildPaths(path, saveGame, def, editMode);
+  return childPaths;
 }
 
 export function getSaveItemEditor(
@@ -105,40 +100,6 @@ export function getSaveItemEditorProps(
   const value = path.length > 0 ? get(saveGame, path) : saveGame;
   return propFactory(value, path, saveGame);
 }
-//===============================================================
-
-// function resolveUiPath(uiPath: string[], saveGame: SaveGame): string[] {
-//   let currentDef: SaveStructureDef = saveStructure;
-//   let currentValue: any = null;
-//   let saveItemPath: string[] = [];
-
-//   const rootUiName = resolveUiName(currentDef, "saveGame", saveGame);
-//   if (rootUiName !== uiPath[0]) {
-//     return [];
-//   }
-
-//   currentValue = saveGame;
-//   // Do not push to saveItemPath, as it is relative to the saveGame directly.
-//   //  This contrasts with uiPath, which has a first element indicating the save game.
-
-//   for (const pathPart of uiPath.slice(1)) {
-//     // TODO: some weird deep search, where paths
-//     //  might be $uiPathName values or might be keys in the saveGame path.
-//     const childPaths = collectChildPaths
-//   }
-// }
-
-// function resolveUiName(def: SaveStructureDef, saveItemKey: string, value: any) {
-//   const uiPathName = def.$uiPathName;
-//   // Should be a switch statement; typescript says no.
-//   if (typeof uiPathName === "function") {
-//     return uiPathName(value);
-//   } else if (typeof uiPathName === "string") {
-//     return uiPathName;
-//   } else {
-//     return saveItemKey;
-//   }
-// }
 
 /**
  * Determine the child values for the given value.
@@ -151,56 +112,82 @@ export function getSaveItemEditorProps(
 function collectChildPaths(
   saveGamePath: string[],
   oniSave: SaveGame,
-  def: SaveStructureDef,
+  def: SaveStructureDef | null,
   editMode: EditMode
-): string[][] | null {
-  let uiChildren = def.$uiChildren;
+): string[][] {
+  let uiChildren = def ? def.$uiChildren : null;
+
+  const value = saveGamePath.length > 0 ? get(oniSave, saveGamePath) : oniSave;
 
   if (typeof uiChildren === "function") {
-    const value =
-      saveGamePath.length > 0 ? get(oniSave, saveGamePath) : oniSave;
     uiChildren = uiChildren(value);
   }
 
   if (uiChildren === false) {
     // Explicitly no children.
-    return null;
+    return [];
   }
 
+  if (uiChildren == null) {
+    // TODO: Not sure if this is a good idea, trying it out.
+    // Explicit structure children are candidates for children.
+
+    // Only process def if it is not advanced, or we are in advanced mode.
+    if (def) {
+      // Determine the save structure keys we can work off of.
+      const enabledDefKeys: string[] = Object.keys(def)
+        .filter(x => x[0] !== "$")
+        .filter(x => allowDef(def[x]!, editMode));
+      if (enabledDefKeys.indexOf("*") !== -1) {
+        // Def knows about all child keys.  Probably an array or map.
+        uiChildren = Object.keys(value).map(x => [x]);
+      } else if (enabledDefKeys.length > 0) {
+        // We have known child keys, offer them up.
+        uiChildren = enabledDefKeys.map(x => [x]);
+      }
+    }
+  }
+
+  // Failed to find any children, attempt to auto-determine them.
   if (uiChildren == null) {
     return collectAutoChildPaths(saveGamePath, oniSave, editMode);
   }
 
-  return uiChildren.map(x => [...saveGamePath, ...x]);
+  return uiChildren ? uiChildren.map(x => [...saveGamePath, ...x]) : [];
+}
+
+function allowDef(def: SaveStructureDef, editMode: EditMode): boolean {
+  return !def.$advanced || editMode === "advanced";
 }
 
 function collectAutoChildPaths(
   saveGamePath: string[],
   oniSave: SaveGame,
   editMode: EditMode
-): string[][] | null {
-  // Children unspecified.
+): string[][] {
   if (editMode !== "advanced") {
-    // Only show auto-children in advanced mode.
-    return null;
+    // Do not auto-determine anything when not in advanced mode.
+    return [];
   }
 
   const value = saveGamePath.length > 0 ? get(oniSave, saveGamePath) : oniSave;
   let uiChildren: string[][] | null = null;
   if (isObject(value)) {
-    // automatically determine all child objects.
+    // Target is an object, offer up all child objects.
     uiChildren = Object.keys(value)
       .filter(x => isImplicitChild(value[x]))
       .map(x => [x]);
   } else if (Array.isArray(value)) {
+    // Target is an array, offer up all array items.
     uiChildren = value.filter(isImplicitChild).map((_, i) => [`${i}`]);
   }
 
   if (uiChildren) {
+    // We found some items, convert the map to absolute paths
     return uiChildren.map(x => [...saveGamePath, ...x]);
   }
 
-  return null;
+  return [];
 }
 
 function isImplicitChild(value: any): boolean {

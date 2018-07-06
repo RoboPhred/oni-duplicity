@@ -1,11 +1,17 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import ResizePanel from "@/components/ResizePanel";
+import { autobind } from "core-decorators";
+
+import { Intent } from "@/theme";
 
 import mapStateToProps, { StateProps } from "./derived-state";
+import mapDispatchToProps, { DispatchProps } from "./events";
 
 import SelectedPathBreadcrumb from "@/components/SelectedPathBreadcrumb";
+import Text from "@/components/Text";
+import Input from "@/components/Input";
+import ResizePanel from "@/components/ResizePanel";
 
 import { getEditor } from "./components/editors";
 
@@ -16,7 +22,7 @@ import EditorContainer from "./components/EditorContainer";
 
 import SaveStructureTree from "./components/SaveStructureTree";
 
-type Props = StateProps;
+type Props = StateProps & DispatchProps;
 class SaveEditor extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
@@ -35,6 +41,16 @@ class SaveEditor extends React.Component<Props> {
       <SaveEditorContainer>
         <ResizePanel>
           <SidebarContainer>
+            <div>
+              <Text.Label htmlFor="advanced_mode" intent={Intent.Secondary}>
+                Advanced Mode
+              </Text.Label>
+              <Input
+                id="advanced_mode"
+                type="checkbox"
+                onChange={this._onAdvancedModeChange}
+              />
+            </div>
             <SaveStructureTree />
           </SidebarContainer>
         </ResizePanel>
@@ -47,5 +63,14 @@ class SaveEditor extends React.Component<Props> {
       </SaveEditorContainer>
     );
   }
+
+  @autobind()
+  private _onAdvancedModeChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { setEditMode } = this.props;
+    setEditMode(e.target.checked ? "advanced" : "normal");
+  }
 }
-export default connect(mapStateToProps)(SaveEditor);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SaveEditor);

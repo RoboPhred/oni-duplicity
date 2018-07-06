@@ -11,10 +11,15 @@ export const defaultBehavior: SaveStructureDef<GameObjectBehavior> = {
 
   $uiChildren(behavior: GameObjectBehavior) {
     const children: string[][] = [];
-    if (behavior.templateData) {
-      forEach(behavior.templateData, (_, key) => {
-        children.push(["templateData", key]);
-      });
+    if (
+      behavior.templateData &&
+      Object.keys(behavior.templateData).length > 0
+    ) {
+      // TODO: Enable when template editor is established on templateData '*' children (recursively).
+      // forEach(behavior.templateData, (_, key) => {
+      //   children.push(["templateData", key]);
+      // });
+      children.push(["templateData"]);
     }
     if (behavior.extraData) {
       children.push(["extraData"]);
@@ -24,8 +29,12 @@ export const defaultBehavior: SaveStructureDef<GameObjectBehavior> = {
 
   templateData: {
     $editor: "template-object",
-    // TODO: set $editorDeep and pass a TypeInfo object as props.
-    //  or have templateObject resolve it with a templateSubPath
+    $uiPathName: false,
+
+    // TODO: Handle '*' with an object that gets the template editor
+    //  set up with the correct template path, and references itself
+    //  for its own '*' recursively.
+
     $editorProps(_: any, path: string[], saveGame: SaveGame) {
       // 'gameObjects', '1', 'gameObjects', '6', 'behaviors', '4'
       // 6 items deep
