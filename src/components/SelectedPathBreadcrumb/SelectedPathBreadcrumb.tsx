@@ -8,6 +8,8 @@ import { Intent } from "@/theme";
 import Text from "@/components/Text";
 import SaveStructureLink from "@/components/SaveStructureLink";
 
+import BreadcrumbContainer from "./components/BreadcrumbContainer";
+
 type Props = StateProps;
 class SelectedPathBreadcrumb extends React.Component<Props> {
   render() {
@@ -30,7 +32,7 @@ class SelectedPathBreadcrumb extends React.Component<Props> {
         links.push(<Text key={`${key}:sep`}>{" > "}</Text>);
       }
     }
-    return <div>{links}</div>;
+    return <BreadcrumbContainer>{links}</BreadcrumbContainer>;
   }
 }
 export default connect(mapStateToProps)(SelectedPathBreadcrumb);

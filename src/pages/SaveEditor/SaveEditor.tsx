@@ -1,8 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import styled from "styled-components";
-
 import ResizePanel from "@/components/ResizePanel";
 
 import mapStateToProps, { StateProps } from "./derived-state";
@@ -14,6 +12,7 @@ import { getEditor } from "./components/editors";
 import SaveEditorContainer from "./components/SaveEditorContainer";
 import SidebarContainer from "./components/SidebarContainer";
 import ContentContainer from "./components/ContentContainer";
+import EditorContainer from "./components/EditorContainer";
 
 import SaveStructureTree from "./components/SaveStructureTree";
 
@@ -30,9 +29,7 @@ class SaveEditor extends React.Component<Props> {
   render() {
     const { editorType, editorProps } = this.props;
 
-    const ObjectEditor = styled(getEditor(editorType))`
-      flex: 1 1 auto;
-    `;
+    const ObjectEditor = getEditor(editorType);
 
     return (
       <SaveEditorContainer>
@@ -43,7 +40,9 @@ class SaveEditor extends React.Component<Props> {
         </ResizePanel>
         <ContentContainer>
           <SelectedPathBreadcrumb />
-          <ObjectEditor {...editorProps} />
+          <EditorContainer>
+            <ObjectEditor {...editorProps} />
+          </EditorContainer>
         </ContentContainer>
       </SaveEditorContainer>
     );
