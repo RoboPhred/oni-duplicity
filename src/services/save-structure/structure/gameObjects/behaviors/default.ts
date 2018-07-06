@@ -31,7 +31,7 @@ export const defaultBehavior: SaveStructureDef<GameObjectBehavior> = {
     const { templateData, extraData } = behavior;
     const hasTemplateData =
       templateData && Object.keys(templateData).length > 0;
-    const hasExtraData = extraData;
+    const hasExtraData = extraData != null;
     const hasData = hasTemplateData || hasExtraData;
     // We are only 'advanced' (hidden) if we do not have any data to show
     return !hasData;

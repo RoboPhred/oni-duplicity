@@ -9,8 +9,8 @@ import { SaveStructureDef } from "../types";
 
 import { defaultBehavior } from "./behaviors/default";
 
-export const defaultGameObject = {
-  $uiPathName: (obj: GameObject) => {
+export const defaultGameObject: SaveStructureDef<GameObject> = {
+  $uiPathName(obj: GameObject) {
     const idBehavior = getBehavior(obj, KPrefabIDBehavior);
     const id =
       (idBehavior &&
@@ -21,7 +21,14 @@ export const defaultGameObject = {
     return `#${id} ${pos}`;
   },
 
-  $selectChildRoot: ["behaviors"],
+  $uiChildren(gameObject: GameObject) {
+    const { behaviors } = gameObject;
+    if (!behaviors) {
+      return [];
+    }
+
+    return behaviors.map((_, i) => ["behaviors", `${i}`]);
+  },
 
   behaviors: {
     "*": defaultBehavior

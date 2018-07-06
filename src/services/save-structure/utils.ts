@@ -128,49 +128,53 @@ function collectChildPaths(
     return [];
   }
 
-  if (uiChildren == null) {
+  if (uiChildren == null && def) {
     // TODO: Not sure if this is a good idea, trying it out.
     // Explicit structure children are candidates for children.
 
     // Only process def if it is not advanced, or we are in advanced mode.
-    if (def) {
-      // Determine the save structure keys we can work off of.
-      const defKeys: string[] = Object.keys(def).filter(x => x[0] !== "$");
-      if (defKeys.indexOf("*") !== -1) {
-        // Def knows about all child keys.  Probably an array or map.
-        uiChildren = Object.keys(value)
-          .filter(x => allowDef(value[x], def["*"]!, editMode))
-          .map(x => [x]);
-      } else {
-        // We have known child keys, offer them up.
-        const allowedKeys = defKeys.filter(x =>
-          allowDef(value[x], def[x]!, editMode)
-        );
-        if (allowedKeys.length > 0) {
-          uiChildren = allowedKeys.map(x => [x]);
-        }
-      }
+    // Determine the save structure keys we can work off of.
+    const defKeys: string[] = Object.keys(def).filter(x => x[0] !== "$");
+    if (defKeys.indexOf("*") !== -1) {
+      // Def knows about all child keys.  Probably an array or map.
+      uiChildren = Object.keys(value).map(x => [x]);
+    } else if (defKeys.length > 0) {
+      // We have known child keys, offer them up.
+      uiChildren = defKeys.map(x => [x]);
     }
   }
 
   // Failed to find any children, attempt to auto-determine them.
   if (uiChildren == null) {
-    return collectAutoChildPaths(saveGamePath, oniSave, editMode);
+    uiChildren = collectAutoChildPaths(saveGamePath, oniSave, editMode);
   }
 
-  return uiChildren ? uiChildren.map(x => [...saveGamePath, ...x]) : [];
+  // Make the path absolute
+  uiChildren = uiChildren ? uiChildren.map(x => [...saveGamePath, ...x]) : [];
+
+  if (uiChildren) {
+    // Check for editMode visibility.
+    uiChildren = uiChildren.filter(path => {
+      const childValue = get(oniSave, path);
+      const childDef = getSaveStructureDef(path, oniSave);
+      return checkEditMode(childValue, childDef, editMode);
+    });
+  }
+
+  return uiChildren;
 }
 
-function allowDef(
+function checkEditMode(
   value: any,
-  def: SaveStructureDef,
+  def: SaveStructureDef | null,
   editMode: EditMode
 ): boolean {
   if (editMode === "advanced") {
     return true;
   }
 
-  let advancedProducer = def.$advanced;
+  // Unknown objects are implicitly advanced.
+  let advancedProducer = def ? def.$advanced : true;
   let advanced: boolean;
   if (typeof advancedProducer === "boolean") {
     advanced = advancedProducer;
@@ -205,12 +209,7 @@ function collectAutoChildPaths(
     uiChildren = value.filter(isImplicitChild).map((_, i) => [`${i}`]);
   }
 
-  if (uiChildren) {
-    // We found some items, convert the map to absolute paths
-    return uiChildren.map(x => [...saveGamePath, ...x]);
-  }
-
-  return [];
+  return uiChildren || [];
 }
 
 function isImplicitChild(value: any): boolean {
