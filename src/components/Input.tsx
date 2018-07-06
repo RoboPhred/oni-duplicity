@@ -10,6 +10,7 @@ const Input = styled.input`
   border-color: ${props => getTheme(props).colors.intent.secondary};
   &:focus {
     border-color: ${props => getTheme(props).colors.intent.primary};
+    outline: none;
   }
   &:invalid {
     border-color: ${props => getTheme(props).colors.intent.dangerous};

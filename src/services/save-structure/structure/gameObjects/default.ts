@@ -36,6 +36,8 @@ export const defaultGameObject: SaveStructureDef<GameObject> = {
 };
 
 const defaultGameObjectGroup: SaveStructureDef<GameObjectGroup> = {
+  $editor: "game-object-list",
+
   gameObjects: {
     $uiPathName: false,
     "*": defaultGameObject

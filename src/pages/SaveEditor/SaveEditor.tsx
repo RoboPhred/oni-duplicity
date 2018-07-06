@@ -13,6 +13,7 @@ import ContentContainer from "./components/ContentContainer";
 import EditorContainer from "./components/EditorContainer";
 
 import Sidebar from "./components/Sidebar";
+import Separator from "@/components/Separator";
 
 type Props = StateProps;
 class SaveEditor extends React.Component<Props> {
@@ -36,6 +37,7 @@ class SaveEditor extends React.Component<Props> {
         </ResizePanel>
         <ContentContainer>
           <SelectedPathBreadcrumb />
+          <Separator width="100%" />
           <EditorContainer>
             <ObjectEditor {...editorProps} />
           </EditorContainer>

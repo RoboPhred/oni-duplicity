@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-const GameObjectGroupsContent = styled.div`
+const GroupListContent = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: baseline;
 `;
-GameObjectGroupsContent.displayName = "GameObjectGroupsContent";
-export default GameObjectGroupsContent;
+GroupListContent.displayName = "GroupListContent";
+export default GroupListContent;

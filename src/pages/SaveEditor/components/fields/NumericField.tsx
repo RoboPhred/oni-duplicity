@@ -6,12 +6,12 @@ import Keycodes from "@/keycodes";
 
 import { NumberPrecision, clamp } from "@/math";
 
+import Input from "@/components/Input";
+
 import connectEditorField, {
   EditorFieldProps,
   InjectedProps
 } from "./connect-field";
-
-import Input from "../../../../components/Input";
 
 export interface NumericFieldProps extends EditorFieldProps {
   minValue?: number;

@@ -22,7 +22,7 @@ const gameObjectGroupsStructure: SaveStructureDef<GameObjectGroup> = {
 };
 
 const gameObjectsStructure: SaveStructureDef<SaveGame["gameObjects"]> = {
-  $editor: "game-object-groups",
+  $editor: "game-object-group-list",
 
   // gameObjects is an array, so we use the fallback key to
   //  handle all items.

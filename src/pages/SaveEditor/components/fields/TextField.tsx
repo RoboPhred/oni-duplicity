@@ -4,12 +4,12 @@ import { autobind } from "core-decorators";
 
 import Keycodes from "@/keycodes";
 
+import Input from "@/components/Input";
+
 import connectEditorField, {
   EditorFieldProps,
   InjectedProps
 } from "./connect-field";
-
-import Input from "../../../../components/Input";
 
 export interface TextFieldProps extends EditorFieldProps {
   minLength?: number;
