@@ -2,7 +2,7 @@ import { GameObjectBehavior, SaveGame } from "oni-save-parser";
 
 import { get, forEach } from "lodash-es";
 
-import { SaveStructureDef } from "@/services/save-structure/types";
+import { SaveStructureDef } from "../../types";
 
 export const defaultBehavior: SaveStructureDef<GameObjectBehavior> = {
   $uiPathName(behavior: GameObjectBehavior) {

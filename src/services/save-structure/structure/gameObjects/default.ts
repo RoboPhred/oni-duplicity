@@ -5,12 +5,12 @@ import {
   KPrefabIDBehavior
 } from "oni-save-parser";
 
-import { SaveStructureDef } from "../../types";
+import { SaveStructureDef } from "../types";
 
 import { defaultBehavior } from "./behaviors/default";
 
 export const defaultGameObject = {
-  $title: (obj: GameObject) => {
+  $uiPathName: (obj: GameObject) => {
     const idBehavior = getBehavior(obj, KPrefabIDBehavior);
     const id =
       (idBehavior &&
@@ -30,6 +30,7 @@ export const defaultGameObject = {
 
 const defaultGameObjectGroup: SaveStructureDef<GameObjectGroup> = {
   gameObjects: {
+    $uiPathName: false,
     "*": defaultGameObject
   }
 };

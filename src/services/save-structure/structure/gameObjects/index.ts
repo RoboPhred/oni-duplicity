@@ -1,6 +1,6 @@
 import { GameObjectGroup, SaveGame } from "oni-save-parser";
 
-import { SaveStructureDef } from "../../types";
+import { SaveStructureDef } from "../types";
 
 import minionGameObjectGroup from "./minion";
 

@@ -5,24 +5,28 @@ import {
   GameObjectGroup
 } from "oni-save-parser";
 
-import { SaveStructureDef } from "@/services/save-structure/types";
+import { SaveStructureDef } from "@/services/save-structure/structure/types";
 
-import { gameObjectIs } from "../utils";
+import { gameObjectIs } from "../matchers";
 
-import { defaultGameObject } from "./default";
+import defaultGameObjectGroup, { defaultGameObject } from "./default";
 
 const minionGameObject: SaveStructureDef<GameObjectGroup> = {
+  ...defaultGameObjectGroup,
+
   // Only apply this rule to minion game object groups.
   $match: gameObjectIs("Minion"),
 
   // gameObjects in a gameObject group is an array of GameObject
   gameObjects: {
+    ...defaultGameObjectGroup.gameObjects,
+
     "*": {
       ...defaultGameObject,
 
       $editor: "minion",
 
-      $title: (obj: GameObject) => {
+      $uiPathName: (obj: GameObject) => {
         const identityBehavior = getBehavior(obj, MinionIdentityBehavior);
         const name =
           (identityBehavior &&

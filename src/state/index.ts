@@ -1,7 +1,7 @@
 import { SaveGame } from "oni-save-parser";
+import { EditMode } from "@/services/save-structure";
 
 export type LoadingState = "idle" | "loading" | "saving" | "ready";
-export type EditMode = "normal" | "advanced";
 
 export interface AppState {
   loadingState: LoadingState;

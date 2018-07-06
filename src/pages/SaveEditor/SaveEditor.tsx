@@ -1,9 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
+import styled from "styled-components";
+
 import ResizePanel from "@/components/ResizePanel";
 
 import mapStateToProps, { StateProps } from "./derived-state";
+
+import SelectedPathBreadcrumb from "@/components/SelectedPathBreadcrumb";
 
 import { getEditor } from "./components/editors";
 
@@ -26,7 +30,9 @@ class SaveEditor extends React.Component<Props> {
   render() {
     const { editorType, editorProps } = this.props;
 
-    const ObjectEditor = getEditor(editorType);
+    const ObjectEditor = styled(getEditor(editorType))`
+      flex: 1 1 auto;
+    `;
 
     return (
       <SaveEditorContainer>
@@ -36,6 +42,7 @@ class SaveEditor extends React.Component<Props> {
           </SidebarContainer>
         </ResizePanel>
         <ContentContainer>
+          <SelectedPathBreadcrumb />
           <ObjectEditor {...editorProps} />
         </ContentContainer>
       </SaveEditorContainer>
