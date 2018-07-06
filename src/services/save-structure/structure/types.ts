@@ -28,7 +28,7 @@ export type SaveStructureDefCore<T> = {
   /**
    * Whether this item should only show up in advanced edit mode.
    */
-  $advanced?: boolean;
+  $advanced?: ((value: any) => boolean) | boolean;
 
   /**
    * The name of the editor to use when an item of this def is selected.

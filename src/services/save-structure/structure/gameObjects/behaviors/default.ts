@@ -27,6 +27,16 @@ export const defaultBehavior: SaveStructureDef<GameObjectBehavior> = {
     return children.length > 0 ? children : false;
   },
 
+  $advanced(behavior: GameObjectBehavior) {
+    const { templateData, extraData } = behavior;
+    const hasTemplateData =
+      templateData && Object.keys(templateData).length > 0;
+    const hasExtraData = extraData;
+    const hasData = hasTemplateData || hasExtraData;
+    // We are only 'advanced' (hidden) if we do not have any data to show
+    return !hasData;
+  },
+
   templateData: {
     $editor: "template-object",
     $uiPathName: false,

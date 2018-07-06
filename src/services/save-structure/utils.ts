@@ -135,15 +135,20 @@ function collectChildPaths(
     // Only process def if it is not advanced, or we are in advanced mode.
     if (def) {
       // Determine the save structure keys we can work off of.
-      const enabledDefKeys: string[] = Object.keys(def)
-        .filter(x => x[0] !== "$")
-        .filter(x => allowDef(def[x]!, editMode));
-      if (enabledDefKeys.indexOf("*") !== -1) {
+      const defKeys: string[] = Object.keys(def).filter(x => x[0] !== "$");
+      if (defKeys.indexOf("*") !== -1) {
         // Def knows about all child keys.  Probably an array or map.
-        uiChildren = Object.keys(value).map(x => [x]);
-      } else if (enabledDefKeys.length > 0) {
+        uiChildren = Object.keys(value)
+          .filter(x => allowDef(value[x], def["*"]!, editMode))
+          .map(x => [x]);
+      } else {
         // We have known child keys, offer them up.
-        uiChildren = enabledDefKeys.map(x => [x]);
+        const allowedKeys = defKeys.filter(x =>
+          allowDef(value[x], def[x]!, editMode)
+        );
+        if (allowedKeys.length > 0) {
+          uiChildren = defKeys.map(x => [x]);
+        }
       }
     }
   }
@@ -156,8 +161,26 @@ function collectChildPaths(
   return uiChildren ? uiChildren.map(x => [...saveGamePath, ...x]) : [];
 }
 
-function allowDef(def: SaveStructureDef, editMode: EditMode): boolean {
-  return !def.$advanced || editMode === "advanced";
+function allowDef(
+  value: any,
+  def: SaveStructureDef,
+  editMode: EditMode
+): boolean {
+  if (editMode === "advanced") {
+    return true;
+  }
+
+  let advancedProducer = def.$advanced;
+  let advanced: boolean;
+  if (!advancedProducer) {
+    advanced = false;
+  } else if (typeof advancedProducer === "function") {
+    advanced = advancedProducer(value);
+  } else {
+    advanced = false;
+  }
+
+  return !advanced;
 }
 
 function collectAutoChildPaths(
