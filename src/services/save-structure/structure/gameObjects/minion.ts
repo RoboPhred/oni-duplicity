@@ -5,13 +5,13 @@ import {
   GameObjectGroup
 } from "oni-save-parser";
 
-import { SaveStructureItem } from "@/services/save-structure/types";
+import { SaveStructureDef } from "@/services/save-structure/types";
 
 import { gameObjectIs } from "../utils";
 
 import { defaultGameObject } from "./default";
 
-const minionGameObject: SaveStructureItem<GameObjectGroup> = {
+const minionGameObject: SaveStructureDef<GameObjectGroup> = {
   // Only apply this rule to minion game object groups.
   $match: gameObjectIs("Minion"),
 

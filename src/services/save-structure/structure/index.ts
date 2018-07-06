@@ -1,15 +1,15 @@
 import gameObjectsStructure from "./gameObjects";
-import { SaveStructureItem } from "../types";
+import { SaveStructureDef } from "../types";
 import { SaveGame } from "oni-save-parser";
 
 // The default 'any' makes this useful for variables, but useless for asignment.
 //  This is because type 'any' includes all fields, and overrides our selective
 //  exclusion of $-prefix fields
-const defaultAdvancedField: SaveStructureItem<{}> = { $advanced: true };
+const defaultAdvancedField: SaveStructureDef<{}> = { $advanced: true };
 
-const saveStructure: SaveStructureItem<SaveGame> = {
+const saveStructure: SaveStructureDef<SaveGame> = {
   $editor: "save-root",
-  $title: (obj: SaveGame) => `${obj.header.gameInfo.baseName} [save file]`,
+  $uiPathName: (obj: SaveGame) => obj.header.gameInfo.baseName || "Save Game",
 
   /**
    * Version info and precalculated values.
@@ -100,9 +100,7 @@ const saveStructure: SaveStructureItem<SaveGame> = {
      */
     worldDetail: defaultAdvancedField,
 
-    customGameSettings: {
-      $selectChildRoot: ["CurrentQualityLevelsBySetting"]
-    } as SaveStructureItem
+    customGameSettings: defaultAdvancedField
   }
 };
 export default saveStructure;

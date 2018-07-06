@@ -3,16 +3,16 @@ import { SaveGame } from "oni-save-parser";
 import { isObject } from "lodash-es";
 
 import saveStructure from "./structure";
-import { SaveStructureItem } from "./types";
+import { SaveStructureDef } from "./types";
 
 export function getSaveStructureItem(
-  path: string[],
+  saveGamePath: string[],
   save: SaveGame
-): SaveStructureItem | null {
-  let structure: SaveStructureItem = saveStructure;
+): SaveStructureDef | null {
+  let structure: SaveStructureDef = saveStructure;
   let value: any = save;
-  for (let key of path) {
-    let subStructure: SaveStructureItem | undefined;
+  for (let key of saveGamePath) {
+    let subStructure: SaveStructureDef | undefined;
     if (isObject(structure)) {
       subStructure =
         Object.keys(structure).indexOf(key) !== -1
@@ -33,13 +33,10 @@ export function getSaveStructureItem(
         x => !x.$match || x.$match(value)
       );
       if (variant) {
-        // TS bug: adding $variants freaks out the type system,
-        //  even though TS knows it is in there due to ...subStructure
         subStructure = {
           ...subStructure,
-          $variants: undefined,
           ...variant
-        } as SaveStructureItem;
+        } as SaveStructureDef;
       }
     }
 
@@ -47,4 +44,10 @@ export function getSaveStructureItem(
   }
 
   return structure;
+}
+
+export function getChildStructures(def: SaveStructureDef): SaveStructureDef[] {
+  return Object.keys(def)
+    .filter(x => x[0] !== "$")
+    .map(x => def[x]) as SaveStructureDef[];
 }

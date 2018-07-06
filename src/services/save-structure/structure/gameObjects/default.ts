@@ -5,7 +5,7 @@ import {
   KPrefabIDBehavior
 } from "oni-save-parser";
 
-import { SaveStructureItem } from "../../types";
+import { SaveStructureDef } from "../../types";
 
 import { defaultBehavior } from "./behaviors/default";
 
@@ -28,7 +28,7 @@ export const defaultGameObject = {
   }
 };
 
-const defaultGameObjectGroup: SaveStructureItem<GameObjectGroup> = {
+const defaultGameObjectGroup: SaveStructureDef<GameObjectGroup> = {
   gameObjects: {
     "*": defaultGameObject
   }

@@ -1,135 +1,100 @@
-import { get, isObject, mapValues } from "lodash-es";
+import createCachedSelector from "re-reselect";
+
 import { SaveGame } from "oni-save-parser";
-import naturalCompare from "string-natural-compare";
 
-import { getSaveStructureItem } from "./save-structure";
-import { SaveStructureItem } from "@/services/save-structure/types";
+import { get, isObject } from "lodash-es";
 
-// TODO: Clean up this mess.
-//  Are paths always absolute?  No, but sometimes yes.  getSaveItemEditValue is required some times and breaks other times because of this.
-//  Lots of redundant lookups.  Need to memoize getSaveStructureItem.
+import { AppState, EditMode } from "@/state";
 
-export function getSaveItemTitle(path: string[], saveGame: SaveGame): string {
-  const key = path.length === 0 ? "saveGame" : path[path.length - 1];
-  const value = path.length === 0 ? saveGame : get(saveGame, path);
+import oniSaveSelector from "@/selectors/oni-save-selector";
+import editModeSelector from "@/selectors/edit-mode-selector";
 
-  const structure = getSaveStructureItem(path, saveGame);
+import { SaveStructureDef } from "./types";
 
-  return structure && structure.$title
-    ? structure.$title(value)
-    : getFallbackTitle(value, key);
+import saveStructure from "./structure";
+import { getChildStructures } from "@/services/save-structure/save-structure";
+
+export interface SaveStructureItemData {
+  uiPath: string[];
+  saveGamePath: string[];
+
+  value: any;
+
+  childUiPaths?: string[][] | undefined;
+
+  editorType?: string | null;
+  editorProps?: Record<string, any> | undefined;
 }
 
-export function getSaveItemEditValue(path: string[], saveGame: SaveGame) {
-  let value = path.length === 0 ? saveGame : get(saveGame, path);
+const saveItemByUiPath = createCachedSelector<
+  AppState,
+  string[],
+  SaveGame | null,
+  string[],
+  EditMode,
+  SaveStructureItemData | null
+>(
+  oniSaveSelector,
+  (_: AppState, uiPath: string[]) => uiPath,
+  editModeSelector,
+  (oniSave, uiPath, editMode: EditMode) => {
+    if (!oniSave) {
+      return null;
+    }
 
-  if (!value) {
-    return value;
+    const saveGamePath = resolveUiPath(uiPath);
+    const def = resolveStructureDef(saveGamePath);
+
+    const childUiPaths = collectChildUiPaths(def);
+
+    const data: SaveStructureItemData = {
+      uiPath,
+      saveGamePath,
+      value: uiPath.length > 0 ? get(oniSave, uiPath) : oniSave,
+
+      childUiPaths
+    };
+
+    return data;
   }
+)((_: AppState, uiPath: string[]) => uiPath.join("."));
 
-  const structure = getSaveStructureItem(path, saveGame);
-  if (!structure || !structure.$selectEditorValue) {
-    return value;
-  }
+function resolveUiPath(uiPath: string[], saveGame: SaveGame): string[] {
+  let currentDef: SaveStructureDef = saveStructure;
+  let currentValue: any = null;
+  let saveItemPath: string[] = [];
 
-  const selectEditorValue = structure.$selectEditorValue;
-  if (selectEditorValue.length === 0) {
-    return value;
-  }
-
-  return get(value, selectEditorValue);
-}
-
-export function getSaveItemChildPaths(
-  path: string[],
-  saveGame: SaveGame
-): string[][] {
-  let value = path.length === 0 ? saveGame : get(saveGame, path);
-
-  if (!isObject(value)) {
+  const rootUiName = resolveUiName(currentDef, "saveGame", saveGame);
+  if (rootUiName !== uiPath[0]) {
     return [];
   }
 
-  const structure = getSaveStructureItem(path, saveGame);
-  if (structure && structure.$selectChildRoot) {
-    value = get(value, structure.$selectChildRoot);
-    path = [...path, ...structure.$selectChildRoot];
+  currentValue = saveGame;
+  // Do not push to saveItemPath, as it is relative to the saveGame directly.
+  //  This contrasts with uiPath, which has a first element indicating the save game.
+
+  for (const pathPart of uiPath.slice(1)) {
+    // TODO: some weird deep search, where paths
+    //  might be $uiPathName values or might be keys in the saveGame path.
   }
-
-  const expandableKeys = Object.keys(value).filter(valueKey =>
-    isExpandableChild(valueKey, value[valueKey], structure)
-  );
-
-  const keyTitles = mapValues(expandableKeys, key =>
-    getSaveItemTitle([...path, key], saveGame)
-  );
-
-  return expandableKeys
-    .sort((a: string, b: string) => naturalCompare(keyTitles[a], keyTitles[b]))
-    .map(x => [...path, x]);
 }
 
-function isExpandableChild(
-  key: string,
-  value: any,
-  parent: SaveStructureItem | null
-) {
-  if (!isObject(value)) {
-    return false;
+function resolveUiName(def: SaveStructureDef, saveItemKey: string, value: any) {
+  const uiPathName = def.$uiPathName;
+  // Should be a switch statement; typescript says no.
+  if (typeof uiPathName === "function") {
+    return uiPathName(value);
+  } else if (typeof uiPathName === "string") {
+    return uiPathName;
+  } else {
+    return saveItemKey;
   }
-
-  if (parent && parent[key] && parent[key]!.$advanced) {
-    // TODO: advanced mode toggle.
-    return false;
-  }
-
-  return true;
 }
 
-export function getSaveItemEditor(
-  path: string[],
-  saveGame: SaveGame
-): string | null {
-  const structure = getSaveStructureItem(path, saveGame);
-  return (structure && structure.$editor) || null;
-}
+function resolveStructureDef(saveGamePath: string[]): SaveStructureDef | null;
 
-export function getSaveItemEditorProps(
-  path: string[],
-  saveGame: SaveGame
-): Record<string, any> {
-  const value = getSaveItemEditValue(path, saveGame);
-  const structure = getSaveStructureItem(path, saveGame);
-  const propCreator = (structure && structure.$editorProps) || null;
-  if (propCreator) {
-    return propCreator(value, path, saveGame);
-  }
-  return {};
-}
-
-function getFallbackTitle(value: any, key: string): string {
-  if (value === undefined) {
-    return "[no data]";
-  }
-
-  if (value === null) {
-    return "[null]";
-  }
-
-  if (
-    Array.isArray(value) &&
-    value.length === 2 &&
-    typeof value[0] === "string"
-  ) {
-    // A tuple.  Probably.
-    return value[0];
-  }
-
-  if (isObject(value)) {
-    // A behavior.  With any luck.
-    return value.name || value.type || `${key} [${typeof value}]`;
-  }
-
-  // A primitive
-  return String(value);
-}
+function collectChildUiPaths(
+  oniSave: SaveGame,
+  saveGamePath: string[],
+  def: SaveStructureDef
+): string[][] | undefined {}

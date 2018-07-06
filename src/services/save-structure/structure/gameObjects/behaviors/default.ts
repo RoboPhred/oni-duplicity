@@ -1,18 +1,35 @@
 import { GameObjectBehavior, SaveGame } from "oni-save-parser";
 
-import { get } from "lodash-es";
+import { get, forEach } from "lodash-es";
 
-import { SaveStructureItem } from "@/services/save-structure/types";
+import { SaveStructureDef } from "@/services/save-structure/types";
 
-export const defaultBehavior: SaveStructureItem<GameObjectBehavior> = {
-  $title(behavior: GameObjectBehavior) {
+export const defaultBehavior: SaveStructureDef<GameObjectBehavior> = {
+  $uiPathName(behavior: GameObjectBehavior) {
     return behavior.name;
+  },
+
+  $uiChildren(behavior: GameObjectBehavior) {
+    const children: string[][] = [];
+    if (behavior.templateData) {
+      forEach(behavior.templateData, (_, key) => {
+        children.push(["templateData", key]);
+      });
+    }
+    if (behavior.extraData) {
+      children.push(["extraData"]);
+    }
+    return children.length > 0 ? children : false;
   },
 
   templateData: {
     $editor: "template-object",
+    // TODO: set $editorDeep and pass a TypeInfo object as props.
+    //  or have templateObject resolve it with a templateSubPath
     $editorProps(_: any, path: string[], saveGame: SaveGame) {
-      const behavior = get(saveGame, path.slice(0, path.length - 1));
+      // 'gameObjects', '1', 'gameObjects', '6', 'behaviors', '4'
+      // 6 items deep
+      const behavior = get(saveGame, path.slice(0, 6));
       if (!behavior) {
         return {};
       }
@@ -20,5 +37,5 @@ export const defaultBehavior: SaveStructureItem<GameObjectBehavior> = {
         templateName: behavior.name
       };
     }
-  } as SaveStructureItem<{}>
+  } as SaveStructureDef<{}>
 };
