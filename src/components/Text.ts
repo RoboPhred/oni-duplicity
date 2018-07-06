@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 import { TextProps as ThemeTextProps, text } from "@/theme";
 
 export type TextProps = ThemeTextProps;
