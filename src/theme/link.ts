@@ -1,7 +1,5 @@
 import { css } from "styled-components";
 
-import { Intent, getTheme } from "./theme";
-
 import { TextProps, text } from "./text";
 
 export interface LinkProps extends TextProps {}

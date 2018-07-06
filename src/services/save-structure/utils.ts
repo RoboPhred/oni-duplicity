@@ -147,7 +147,7 @@ function collectChildPaths(
           allowDef(value[x], def[x]!, editMode)
         );
         if (allowedKeys.length > 0) {
-          uiChildren = defKeys.map(x => [x]);
+          uiChildren = allowedKeys.map(x => [x]);
         }
       }
     }
@@ -172,8 +172,8 @@ function allowDef(
 
   let advancedProducer = def.$advanced;
   let advanced: boolean;
-  if (!advancedProducer) {
-    advanced = false;
+  if (typeof advancedProducer === "boolean") {
+    advanced = advancedProducer;
   } else if (typeof advancedProducer === "function") {
     advanced = advancedProducer(value);
   } else {
