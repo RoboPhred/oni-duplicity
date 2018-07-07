@@ -1,9 +1,5 @@
 import { createStructuredSelector, createSelector } from "reselect";
-import {
-  MinionIdentityBehavior,
-  getBehavior,
-  GameObject
-} from "oni-save-parser";
+import { MinionIdentityBehavior, GameObject } from "oni-save-parser";
 
 import { AppState } from "@/state";
 
@@ -13,6 +9,7 @@ import { get } from "lodash-es";
 
 const structuredSelector = {
   selectedPath,
+  minionGameObjectPath: selectedPath,
   minionNamePath: createSelector(selectedPath, oniSave, (path, oniSave) => {
     const gameObject: GameObject = get(oniSave, path);
     if (!gameObject) {

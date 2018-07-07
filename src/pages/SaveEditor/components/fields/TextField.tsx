@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { autobind } from "core-decorators";
 
-import Keycodes from "@/keycodes";
+import Keys from "@/keys";
 
 import Input from "@/components/Input";
 
@@ -63,7 +63,7 @@ class TextField extends React.Component<Props, State> {
 
   @autobind()
   private _onInputKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.charCode === Keycodes.Enter) {
+    if (e.key === Keys.Enter) {
       this._commitEdit();
     }
   }
@@ -75,7 +75,7 @@ class TextField extends React.Component<Props, State> {
 
   private _commitEdit() {
     const { editValue, isValid } = this.state;
-    const { onChange } = this.props;
+    const { onCommit } = this.props;
 
     this.setState({
       editValue: null
@@ -85,7 +85,7 @@ class TextField extends React.Component<Props, State> {
       return;
     }
 
-    onChange(editValue);
+    onCommit(editValue);
   }
 
   private _validate(value: string): string | null {

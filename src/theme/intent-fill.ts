@@ -1,4 +1,5 @@
 import { css } from "styled-components";
+
 import { Intent, getTheme } from "./theme";
 
 export interface IntentFillProps {

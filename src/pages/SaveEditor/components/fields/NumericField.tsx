@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { autobind } from "core-decorators";
 
-import Keycodes from "@/keycodes";
+import Keys from "@/keys";
 
 import { NumberPrecision, clamp } from "@/math";
 
@@ -66,7 +66,7 @@ class NumericField extends React.Component<Props, State> {
 
   @autobind()
   private _onInputKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.charCode === Keycodes.Enter) {
+    if (e.key === Keys.Enter) {
       this._commitEdit();
     }
   }
@@ -78,7 +78,7 @@ class NumericField extends React.Component<Props, State> {
 
   private _commitEdit() {
     const { editValue, isValid } = this.state;
-    const { onChange } = this.props;
+    const { onCommit } = this.props;
 
     this.setState({
       editValue: null
@@ -88,7 +88,7 @@ class NumericField extends React.Component<Props, State> {
       return;
     }
 
-    onChange(editValue);
+    onCommit(editValue);
   }
 
   private _clamp(value: number): number {

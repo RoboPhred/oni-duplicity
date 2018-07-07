@@ -23,8 +23,8 @@ class BooleanField extends React.Component<Props> {
   @autobind()
   private _onValueChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.checked;
-    const { onChange } = this.props;
-    onChange(value);
+    const { onCommit } = this.props;
+    onCommit(value);
   }
 }
 export default connectEditorField()(BooleanField);

@@ -5,7 +5,7 @@ import { Dispatch } from "redux";
 
 function mapDispatchToProps(dispatch: Dispatch, props: EditorFieldProps) {
   return {
-    onChange(value: any) {
+    onCommit(value: any) {
       dispatch(modifyOniSave(props.path, value));
     }
   };
