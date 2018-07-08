@@ -18,6 +18,7 @@ const FormGroup = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  margin-bottom: ${props => getTheme(props).space[1]}px;
 `;
 FormGroup.displayName = "FormGroup";
 

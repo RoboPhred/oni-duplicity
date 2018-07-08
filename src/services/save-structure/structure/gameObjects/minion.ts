@@ -11,7 +11,7 @@ import { gameObjectIs } from "../matchers";
 
 import defaultGameObjectGroup, { defaultGameObject } from "./default";
 
-const minionGameObject: SaveStructureDef<GameObjectGroup> = {
+const minionGameObjectGroup: SaveStructureDef<GameObjectGroup> = {
   ...defaultGameObjectGroup,
 
   // Only apply this rule to minion game object groups.
@@ -24,7 +24,7 @@ const minionGameObject: SaveStructureDef<GameObjectGroup> = {
     "*": {
       ...defaultGameObject,
 
-      $editor: "minion",
+      $editor: "game-object-minion",
 
       $uiPathName: (obj: GameObject) => {
         const identityBehavior = getBehavior(obj, MinionIdentityBehavior);
@@ -38,4 +38,4 @@ const minionGameObject: SaveStructureDef<GameObjectGroup> = {
     }
   }
 };
-export default minionGameObject;
+export default minionGameObjectGroup;

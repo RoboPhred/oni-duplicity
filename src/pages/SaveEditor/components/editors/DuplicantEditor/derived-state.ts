@@ -8,8 +8,7 @@ import oniSave from "@/selectors/oni-save-selector";
 import { get } from "lodash-es";
 
 const structuredSelector = {
-  selectedPath,
-  minionGameObjectPath: selectedPath,
+  gameObjectPath: selectedPath,
   minionNamePath: createSelector(selectedPath, oniSave, (path, oniSave) => {
     const gameObject: GameObject = get(oniSave, path);
     if (!gameObject) {

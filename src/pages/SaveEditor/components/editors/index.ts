@@ -1,17 +1,19 @@
 import DefaultObjectEditor from "./DefaultObjectEditor";
 
-import DuplicantEditor from "./DuplicantEditor";
-import GameObjectGroupList from "./GameObjectGroupList";
-import GameObjectList from "./GameObjectList";
 import SaveRootEditor from "./SaveRootEditor";
 import TemplateObjectEditor from "./TemplateObjectEditor";
+import GameObjectGroupList from "./GameObjectGroupList";
+import GameObjectList from "./GameObjectList";
+import GameObjectEditor from "./GameObjectEditor";
+import DuplicantEditor from "./DuplicantEditor";
 
 const editors: Record<string, React.ComponentClass<any>> = {
   "save-root": SaveRootEditor,
   "game-object-group-list": GameObjectGroupList,
   "game-object-list": GameObjectList,
   "template-object": TemplateObjectEditor,
-  minion: DuplicantEditor
+  "game-object-default": GameObjectEditor,
+  "game-object-minion": DuplicantEditor
 };
 
 export function getEditor(

@@ -30,6 +30,8 @@ export const defaultGameObject: SaveStructureDef<GameObject> = {
     return behaviors.map((_, i) => ["behaviors", `${i}`]);
   },
 
+  $editor: "game-object-default",
+
   behaviors: {
     "*": defaultBehavior
   }
