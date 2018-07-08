@@ -1,8 +1,38 @@
 import { GameObjectBehavior, SaveGame } from "oni-save-parser";
 
-import { get, forEach } from "lodash-es";
+import { get, forEach, isObject } from "lodash-es";
 
 import { SaveStructureDef } from "../../types";
+
+const defaultTemplateDataObj: SaveStructureDef<{}> = {
+  $editor: "template-object",
+  $uiPathName: false,
+
+  $uiChildren(value: any) {
+    let keys = (isObject(value) && Object.keys(value)) || [];
+    keys = keys.filter(x => isObject(value[x]));
+    if (keys.length === 0) {
+      return false;
+    }
+    return keys.map(x => [x]);
+  },
+
+  $editorProps(_: any, path: string[], saveGame: SaveGame) {
+    // 'gameObjects', '1', 'gameObjects', '6', 'behaviors', '4'
+    // 6 items deep
+    const behavior = get(saveGame, path.slice(0, 6));
+    const templatePath = path.slice(7);
+    if (!behavior) {
+      return {};
+    }
+    return {
+      templateName: behavior.name,
+      templatePath,
+      valuePathHack: path
+    };
+  }
+};
+defaultTemplateDataObj["*"] = defaultTemplateDataObj;
 
 export const defaultBehavior: SaveStructureDef<GameObjectBehavior> = {
   $uiPathName(behavior: GameObjectBehavior) {
@@ -15,11 +45,12 @@ export const defaultBehavior: SaveStructureDef<GameObjectBehavior> = {
       behavior.templateData &&
       Object.keys(behavior.templateData).length > 0
     ) {
-      // TODO: Enable when template editor is established on templateData '*' children (recursively).
-      // forEach(behavior.templateData, (_, key) => {
-      //   children.push(["templateData", key]);
-      // });
-      children.push(["templateData"]);
+      // children.push(["templateData"]);
+      forEach(behavior.templateData, (_, key) => {
+        if (isObject(behavior.templateData[key])) {
+          children.push(["templateData", key]);
+        }
+      });
     }
     if (behavior.extraData) {
       children.push(["extraData"]);
@@ -37,24 +68,28 @@ export const defaultBehavior: SaveStructureDef<GameObjectBehavior> = {
     return !hasData;
   },
 
+  $editor: "template-object",
+  $editorProps(_: any, path: string[], saveGame: SaveGame) {
+    // 'gameObjects', '1', 'gameObjects', '6', 'behaviors', '4'
+    // 6 items deep
+    const behavior = get(saveGame, path);
+    if (!behavior) {
+      return {};
+    }
+    return {
+      templateName: behavior.name,
+      templatePath: [],
+      valuePathHack: [...path, "templateData"]
+    };
+  },
+
   templateData: {
-    $editor: "template-object",
     $uiPathName: false,
+
+    "*": defaultTemplateDataObj
 
     // TODO: Handle '*' with an object that gets the template editor
     //  set up with the correct template path, and references itself
     //  for its own '*' recursively.
-
-    $editorProps(_: any, path: string[], saveGame: SaveGame) {
-      // 'gameObjects', '1', 'gameObjects', '6', 'behaviors', '4'
-      // 6 items deep
-      const behavior = get(saveGame, path.slice(0, 6));
-      if (!behavior) {
-        return {};
-      }
-      return {
-        templateName: behavior.name
-      };
-    }
   } as SaveStructureDef<{}>
 };
