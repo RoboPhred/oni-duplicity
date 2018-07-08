@@ -49,15 +49,6 @@ class DuplicantEditor extends React.Component<Props> {
                 />
               </FormGroup.Content>
             </FormGroup>
-            <FormGroup>
-              <FormGroup.Label>Z</FormGroup.Label>
-              <FormGroup.Content>
-                <NumericField
-                  precision="single"
-                  path={[...gameObjectPath, "position", "z"]}
-                />
-              </FormGroup.Content>
-            </FormGroup>
           </FormGroup.Content>
         </FormGroup>
         <FormGroup>

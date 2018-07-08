@@ -14,8 +14,7 @@ import NumericField from "./NumericField";
 import TextField from "./TextField";
 
 export default function getFieldElementClass(
-  typeInfo: TypeInfo,
-  fieldName: string
+  typeInfo: TypeInfo
 ): React.ComponentType<EditorFieldProps> {
   const code = getTypeCode(typeInfo.info);
   switch (code) {
