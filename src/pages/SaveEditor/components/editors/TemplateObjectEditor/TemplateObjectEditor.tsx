@@ -21,7 +21,7 @@ class TemplateObjectEditor extends React.Component<Props> {
 
     const fieldRows =
       template &&
-      template.fields.map(x => {
+      [...(template.fields || []), ...(template.properties || [])].map(x => {
         const FieldEditor = getTypeInfoFieldComponent(x.type);
         return (
           <tr key={x.name}>

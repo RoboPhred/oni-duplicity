@@ -38,7 +38,11 @@ export default function getFieldElementClass(
         <NumericField {...props} precision="double" />
       );
     case SerializationTypeCode.Enumeration:
-      return () => <Text intent={Intent.Dangerous}>TODO Enumeration</Text>;
+      return () => (
+        <Text intent={Intent.Dangerous}>
+          TODO Enumeration({typeInfo.templateName})
+        </Text>
+      );
     case SerializationTypeCode.HashSet:
       return () => <Text intent={Intent.Dangerous}>TODO HashSet</Text>;
     case SerializationTypeCode.Int16:
@@ -78,7 +82,7 @@ export default function getFieldElementClass(
     case SerializationTypeCode.UserDefined:
       return (props: EditorFieldProps) => (
         <SaveStructureLink intent={Intent.Primary} path={props.path}>
-          [Edit]
+          [{typeInfo.templateName || "Edit"}]
         </SaveStructureLink>
       );
     case SerializationTypeCode.Vector2:
