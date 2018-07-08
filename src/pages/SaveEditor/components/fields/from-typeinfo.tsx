@@ -12,6 +12,9 @@ import { EditorFieldProps } from "./connect-field";
 import BooleanField from "./BooleanField";
 import NumericField from "./NumericField";
 import TextField from "./TextField";
+import Vector2Field from "./Vector2Field";
+import Vector2IField from "./Vector2IField";
+import Vector3Field from "./Vector3Field";
 
 export default function getFieldElementClass(
   typeInfo: TypeInfo
@@ -79,11 +82,11 @@ export default function getFieldElementClass(
         </SaveStructureLink>
       );
     case SerializationTypeCode.Vector2:
-      return () => <Text intent={Intent.Dangerous}>TODO Vector2</Text>;
+      return Vector2Field;
     case SerializationTypeCode.Vector2I:
-      return () => <Text intent={Intent.Dangerous}>TODO Vector2I</Text>;
+      return Vector2IField;
     case SerializationTypeCode.Vector3:
-      return () => <Text intent={Intent.Dangerous}>TODO Vector3</Text>;
+      return Vector3Field;
     default:
       return handleUnknownType(code);
   }
