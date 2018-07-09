@@ -10,6 +10,8 @@ import { defaultBehavior } from "./default";
 export const storageBehavior: SaveStructureDef<StorageBehavior> = {
   ...(defaultBehavior as any),
 
+  $advanced: false,
+
   $match: behaviorIs(StorageBehavior),
 
   $uiChildren(behavior: StorageBehavior) {
