@@ -1,13 +1,8 @@
-import {
-  GameObjectGroup,
-  GameObject,
-  getBehavior,
-  KPrefabIDBehavior
-} from "oni-save-parser";
+import { GameObject, KPrefabIDBehavior, getBehavior } from "oni-save-parser";
 
-import { SaveStructureDef } from "../types";
+import { SaveStructureDef } from "../../types";
 
-import behavior from "./behaviors";
+import behavior from "../behaviors";
 
 export const defaultGameObject: SaveStructureDef<GameObject> = {
   $uiPathName(obj: GameObject) {
@@ -36,15 +31,3 @@ export const defaultGameObject: SaveStructureDef<GameObject> = {
     "*": behavior
   }
 };
-
-const defaultGameObjectGroup: SaveStructureDef<GameObjectGroup> = {
-  $advanced: true,
-
-  $editor: "game-object-list",
-
-  gameObjects: {
-    $uiPathName: false,
-    "*": defaultGameObject
-  }
-};
-export default defaultGameObjectGroup;

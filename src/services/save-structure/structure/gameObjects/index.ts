@@ -2,9 +2,7 @@ import { GameObjectGroup, SaveGame } from "oni-save-parser";
 
 import { SaveStructureDef } from "../types";
 
-import minionGameObjectGroup from "./minion";
-
-import defaultGameObjectGroup from "./default";
+import { createGameObjectVariants } from "./gameObjectTypes";
 
 const gameObjectGroupsStructure: SaveStructureDef<GameObjectGroup> = {
   $uiPathName(group: GameObjectGroup) {
@@ -15,10 +13,12 @@ const gameObjectGroupsStructure: SaveStructureDef<GameObjectGroup> = {
     return group.gameObjects.map((_, i) => ["gameObjects", `${i}`]);
   },
 
+  $editor: "game-object-list",
+
   // We want to handle each game object type uniquely,
   //  but their uniqueness is keyed off the name of this group.
   // To handle this, we provide variants that match off the group's name.
-  $variants: [minionGameObjectGroup, defaultGameObjectGroup]
+  $variants: createGameObjectVariants(["gameObjects", "*"])
 };
 
 const gameObjectsStructure: SaveStructureDef<SaveGame["gameObjects"]> = {

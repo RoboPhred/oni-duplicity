@@ -5,8 +5,6 @@ import { forEach, isObject } from "lodash-es";
 import { SaveStructureDef } from "../../types";
 import { behaviorIs } from "../../matchers";
 
-import { defaultGameObject } from "../default";
-
 import { defaultBehavior } from "./default";
 
 export const storageBehavior: SaveStructureDef<StorageBehavior> = {
@@ -45,18 +43,13 @@ export const storageBehavior: SaveStructureDef<StorageBehavior> = {
   extraData: {
     $uiPathName: null,
 
-    // TODO: Need to select off game objects, but using local value name
     "*": {
-      // This spread does not work, probably because of circular references.
-      // ...defaultGameObject,
       $uiPathName(obj: StoredGameObject, path: string[]) {
         const index = path[path.length - 1];
         return `${index}: ${obj.name}`;
       }
 
-      // TODO: Need to make a $ref key and flatten the structure to enable cross-references.
-      // This was a hack to try and avoid circular refs.
-      //  However, defaultGameObject is null at this point during initialization.
+      // TODO: Select variants from gameObjects with local name key.
       // $variants: [defaultGameObject]
     }
   }
