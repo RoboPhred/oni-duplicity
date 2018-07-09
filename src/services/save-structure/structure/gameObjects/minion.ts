@@ -11,8 +11,26 @@ import { gameObjectIs } from "../matchers";
 
 import defaultGameObjectGroup, { defaultGameObject } from "./default";
 
+const minionGameObject: SaveStructureDef<GameObject> = {
+  ...defaultGameObject,
+
+  $editor: "game-object-minion",
+
+  $uiPathName: (obj: GameObject) => {
+    const identityBehavior = getBehavior(obj, MinionIdentityBehavior);
+    const name =
+      (identityBehavior &&
+        identityBehavior.templateData &&
+        identityBehavior.templateData.name) ||
+      "[malformed]";
+    return name;
+  }
+};
+
 const minionGameObjectGroup: SaveStructureDef<GameObjectGroup> = {
   ...defaultGameObjectGroup,
+
+  $advanced: false,
 
   // Only apply this rule to minion game object groups.
   $match: gameObjectIs("Minion"),
@@ -21,21 +39,7 @@ const minionGameObjectGroup: SaveStructureDef<GameObjectGroup> = {
   gameObjects: {
     ...defaultGameObjectGroup.gameObjects,
 
-    "*": {
-      ...defaultGameObject,
-
-      $editor: "game-object-minion",
-
-      $uiPathName: (obj: GameObject) => {
-        const identityBehavior = getBehavior(obj, MinionIdentityBehavior);
-        const name =
-          (identityBehavior &&
-            identityBehavior.templateData &&
-            identityBehavior.templateData.name) ||
-          "[malformed]";
-        return name;
-      }
-    }
+    "*": minionGameObject
   }
 };
 export default minionGameObjectGroup;

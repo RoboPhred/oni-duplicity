@@ -13,7 +13,10 @@ export type SaveStructureDefCore<T> = {
    * path item.  Child items (if any) will flatten to the parent
    * in this case.
    */
-  $uiPathName?: ((value: any) => string | false) | string | false;
+  $uiPathName?:
+    | ((value: any, path: string[], oniSave: SaveGame) => string | false)
+    | string
+    | false;
 
   /**
    * Defines the child items under this item for the ui.

@@ -17,7 +17,7 @@ export function getSaveItemTitle(path: string[], saveGame: SaveGame): string {
     const nameProducer = def.$uiPathName;
     if (typeof nameProducer === "function") {
       const value = path.length > 0 ? get(saveGame, path) : saveGame;
-      nameSource = nameProducer(value);
+      nameSource = nameProducer(value, path, saveGame);
     } else if (typeof nameProducer === "string") {
       nameSource = nameProducer;
     }
@@ -40,7 +40,7 @@ export function getSaveItemBreadcrumb(
     const nameProducer = def.$uiPathName;
     if (typeof nameProducer === "function") {
       const value = defPath.length > 0 ? get(saveGame, defPath) : saveGame;
-      title = nameProducer(value) || false;
+      title = nameProducer(value, defPath, saveGame) || false;
     } else if (typeof nameProducer === "string") {
       title = nameProducer;
     } else if (nameProducer === false) {

@@ -7,7 +7,7 @@ import {
 
 import { SaveStructureDef } from "../types";
 
-import { defaultBehavior } from "./behaviors/default";
+import behavior from "./behaviors";
 
 export const defaultGameObject: SaveStructureDef<GameObject> = {
   $uiPathName(obj: GameObject) {
@@ -33,11 +33,13 @@ export const defaultGameObject: SaveStructureDef<GameObject> = {
   $editor: "game-object-default",
 
   behaviors: {
-    "*": defaultBehavior
+    "*": behavior
   }
 };
 
 const defaultGameObjectGroup: SaveStructureDef<GameObjectGroup> = {
+  $advanced: true,
+
   $editor: "game-object-list",
 
   gameObjects: {
