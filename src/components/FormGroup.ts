@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from "@/theme";
 
 import { TextProps, text, getTheme } from "@/theme";
 
-import { attachSubComponents } from "@/component-utils";
+import { attachProps } from "@/utils";
 
 export type FormLabelProps = TextProps;
 const Label = styled<FormLabelProps, "label">("label")`
@@ -22,7 +22,7 @@ const FormGroup = styled.div`
 `;
 FormGroup.displayName = "FormGroup";
 
-export default attachSubComponents(FormGroup, {
+export default attachProps(FormGroup, {
   Label,
   Content
 });

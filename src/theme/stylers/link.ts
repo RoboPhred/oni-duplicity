@@ -1,5 +1,4 @@
-import { css } from "styled-components";
-
+import { css } from "../styled";
 import { TextProps, text } from "./text";
 
 export interface LinkProps extends TextProps {}

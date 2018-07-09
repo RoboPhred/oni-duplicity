@@ -1,9 +1,7 @@
-import getTheme from "./theme";
-export default getTheme;
+import styled from "./styled";
+export default styled;
+export { ThemeProvider, injectGlobal } from "./styled";
 
 export * from "./theme";
 
-export * from "./text";
-export * from "./link";
-export * from "./intent-color";
-export * from "./intent-fill";
+export * from "./stylers";

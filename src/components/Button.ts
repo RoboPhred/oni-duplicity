@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import styled from "styled-components";
+import styled from "@/theme";
 
 import { Intent, getTheme, intentFill } from "@/theme";
 

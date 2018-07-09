@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@/theme";
 import { WidthProps, HeightProps, width, height } from "styled-system";
 import { getTheme } from "@/theme";
 

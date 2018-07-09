@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
 
-import styled from "styled-components";
+import styled from "@/theme";
 
 import { LinkProps, link } from "@/theme";
 

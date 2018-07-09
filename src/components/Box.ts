@@ -1,18 +1,22 @@
-import styled from "styled-components";
-import {
-  BgColorProps,
-  WidthProps,
-  HeightProps,
-  bgColor,
-  width,
-  height
-} from "styled-system";
+import styled, {
+  BackgroundProps,
+  IntentProps,
+  background,
+  intent
+} from "@/theme";
 
-export type BoxProps = BgColorProps & WidthProps & HeightProps;
+import { WidthProps, HeightProps, width, height } from "styled-system";
+
+export type BoxProps = WidthProps & HeightProps & BackgroundProps & IntentProps;
 
 const Box = styled<BoxProps, "div">("div")`
-  ${bgColor}
-  ${width}
-  ${height}
+  ${width};
+  ${height};
+  ${background};
+  ${intent.withDefault(null)};
 `;
+Box.displayName = "Box";
+Box.defaultProps = {
+  intentIsBg: true
+};
 export default Box;

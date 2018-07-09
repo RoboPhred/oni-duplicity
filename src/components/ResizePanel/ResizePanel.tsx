@@ -7,7 +7,7 @@ import { autobind } from "core-decorators";
 import Flex from "@/components/Flex";
 
 import ResizeHandle from "./components/ResizeHandle";
-import styled from "styled-components";
+import styled from "@/theme";
 
 export interface ResizePanelProps extends HeightProps {
   className?: string;
@@ -32,12 +32,12 @@ class ResizePanel extends React.Component<Props, State> {
     // TODO: too many wrapping divs.
     //  Provide a way to apply flex to an existing item.
     return (
-      <Flex.Container className={className} direction="row">
+      <Flex className={className} direction="row">
         <Flex.Item style={{ width }}>{children}</Flex.Item>
         <Flex.Item>
           <ResizeHandle onResize={this._onResize} />
         </Flex.Item>
-      </Flex.Container>
+      </Flex>
     );
   }
 

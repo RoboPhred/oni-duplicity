@@ -1,12 +1,20 @@
-import styled from "styled-components";
-import { getTheme } from "@/theme";
+import styled, { Background, Intent, background, intentFill } from "@/theme";
 
-const ResizeHandleVisual = styled.div`
+export interface ResizeHandleVisualProps {
+  isResizing: boolean;
+}
+const ResizeHandleVisual = styled<ResizeHandleVisualProps, "div">("div")`
   width: 4px;
-  margin-left: 2px;
   height: 100%;
-  background: ${props => getTheme(props).colors.bg.separator};
+  ${props =>
+    props.isResizing
+      ? intentFill.of(Intent.Primary)
+      : background.of(Background.Separator)};
   flex: none;
   cursor: ew-resize;
+
+  :hover {
+    ${intentFill.of(Intent.Primary)};
+  }
 `;
 export default ResizeHandleVisual;

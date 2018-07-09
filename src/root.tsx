@@ -2,10 +2,9 @@ import * as React from "react";
 import { hot } from "react-hot-loader";
 import { Provider } from "react-redux";
 
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider, theme } from "@/theme";
 
 import store from "./store";
-import theme from "./theme";
 
 import App from "./App";
 

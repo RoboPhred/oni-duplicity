@@ -1,9 +1,28 @@
+import { includes } from "lodash-es";
+
 export enum Intent {
   Primary = "primary",
   Secondary = "secondary",
   Default = "default",
   Dangerous = "dangerous",
   Hint = "hint"
+}
+
+export function isIntent(str: string | null | undefined): str is Intent {
+  return includes(Intent, str);
+}
+
+export enum Background {
+  Default = "default",
+  Navbar = "navbar",
+  Panel = "panel",
+  Separator = "separator"
+}
+
+export function isBackground(
+  str: string | null | undefined
+): str is Background {
+  return includes(Background, str);
 }
 
 // https://coolors.co/33658a-ffb238-86bbd8-f34213-758e4f
@@ -18,7 +37,7 @@ const intentColors: Record<Intent, string> = {
 /**
  * Colors to use when the background is an intent.
  */
-const textIntentColors: Record<Intent, string> = {
+const textIntentContrastColors: Record<Intent, string> = {
   default: "black",
   primary: "black",
   secondary: "black",
@@ -27,7 +46,7 @@ const textIntentColors: Record<Intent, string> = {
 };
 
 // https://coolors.co/313e50-3a435e-455561-5c6672-6c6f7f
-const backgroundColors = {
+const backgroundColors: Record<Background, string> = {
   default: "#3A435E",
   navbar: "#313E50",
   panel: "#455561",
@@ -37,7 +56,7 @@ const backgroundColors = {
 const colors = {
   text: intentColors.default,
   intent: intentColors,
-  textIntent: textIntentColors,
+  textIntentContrast: textIntentContrastColors,
   bg: backgroundColors
 };
 
@@ -50,7 +69,7 @@ const radii = [0, 2, 4, 8];
 
 const borders = [0, "1px solid", "2px solid"];
 
-const theme = {
+export const theme = {
   colors,
   space,
   fontSizes,
@@ -59,7 +78,6 @@ const theme = {
 };
 
 export type Theme = typeof theme;
-export default theme;
 
 export function getTheme(props: any): Theme {
   return props.theme || theme;

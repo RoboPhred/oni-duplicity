@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@/theme";
 
 const GameObjectGroupListContent = styled.div`
   display: flex;

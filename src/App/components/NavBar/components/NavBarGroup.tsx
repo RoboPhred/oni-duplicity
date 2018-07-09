@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@/theme";
 
 const NavBarGroup = styled.div`
   margin-left: auto;

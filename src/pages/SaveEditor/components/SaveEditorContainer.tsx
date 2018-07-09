@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@/theme";
 
 const SaveEditorContainer = styled.div`
   width: 100%;

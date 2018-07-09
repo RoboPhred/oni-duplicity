@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@/theme";
 import { WidthProps, width } from "styled-system";
 
 import ReactSelect, { ReactSelectProps } from "react-select";

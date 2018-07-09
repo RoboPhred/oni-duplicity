@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from "@/theme";
 
-import { attachSubComponents } from "@/component-utils";
+import { attachProps } from "@/utils";
 
 import { getTheme } from "@/theme";
 
@@ -8,7 +8,7 @@ import Header from "./PortraitHeader";
 import Footer from "./PortraitFooter";
 
 const Portrait = styled.div`
-  border-radius: ${props => getTheme(props).radii[1]}
+  border-radius: ${props => getTheme(props).radii[1]};
   background-color: ${props => getTheme(props).colors.bg.panel};
   width: 150px;
   height: 150px;
@@ -19,7 +19,7 @@ const Portrait = styled.div`
 `;
 Portrait.displayName = "Portrait";
 
-export default attachSubComponents(Portrait, {
+export default attachProps(Portrait, {
   Header,
   Footer
 });

@@ -1,5 +1,6 @@
 import * as CSS from "csstype";
-import { css } from "styled-components";
+
+import { css } from "../styled";
 
 import { IntentColorProps, intentColor } from "./intent-color";
 
