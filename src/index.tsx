@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 
 import Modal from "react-modal";
 
-import "./style.css";
+import "./style";
 
 import Root from "./root";
 

@@ -10,6 +10,7 @@ import SaveStructureLink from "@/components/SaveStructureLink";
 import { EditorFieldProps } from "./connect-field";
 
 import BooleanField from "./BooleanField";
+import EnumerationField from "./EnumerationField";
 import NumericField from "./NumericField";
 import TextField from "./TextField";
 import Vector2Field from "./Vector2Field";
@@ -38,10 +39,8 @@ export default function getFieldElementClass(
         <NumericField {...props} precision="double" />
       );
     case SerializationTypeCode.Enumeration:
-      return () => (
-        <Text intent={Intent.Dangerous}>
-          TODO Enumeration({typeInfo.templateName})
-        </Text>
+      return (props: EditorFieldProps) => (
+        <EnumerationField {...props} enumerationName={typeInfo.templateName!} />
       );
     case SerializationTypeCode.HashSet:
       return () => <Text intent={Intent.Dangerous}>TODO HashSet</Text>;
