@@ -35,14 +35,14 @@ const ArrayLikeField: React.SFC<ArrayLikeFieldProps & InjectedProps> = ({
   return (
     <table>
       <thead>
-        <th>
-          <td>
+        <tr>
+          <th>
             <Text intent={Intent.Primary}>Key</Text>
-          </td>
-          <td>
+          </th>
+          <th>
             <Text intent={Intent.Primary}>Value</Text>
-          </td>
-        </th>
+          </th>
+        </tr>
       </thead>
       <tbody>{elements}</tbody>
     </table>

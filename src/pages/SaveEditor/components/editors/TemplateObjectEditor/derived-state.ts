@@ -28,7 +28,9 @@ const template = createSelector(
 
     let template = oniSave.templates.find(x => x.name === templateName);
 
-    for (const part of templatePath) {
+    for (let i = 0; i < templatePath.length; i++) {
+      const part = templatePath[i];
+
       if (template == null) {
         return null;
       }
@@ -39,9 +41,26 @@ const template = createSelector(
       if (!member) {
         return null;
       }
-      if (getTypeCode(member.type.info) === SerializationTypeCode.UserDefined) {
+
+      const typeCode = getTypeCode(member.type.info);
+
+      if (typeCode === SerializationTypeCode.UserDefined) {
         template = oniSave.templates.find(
           x => x.name === member.type.templateName!
+        );
+      } else if (
+        LIST_TYPES.indexOf(typeCode) !== -1 &&
+        getTypeCode(member.type.subTypes![0].info) ===
+          SerializationTypeCode.UserDefined
+      ) {
+        i++;
+        if (i === templatePath.length) {
+          // Targeting an array but no index yet.
+          return null;
+        }
+
+        template = oniSave.templates.find(
+          x => x.name === member.type.subTypes![0].templateName
         );
       } else {
         return null;
@@ -51,6 +70,13 @@ const template = createSelector(
     return template;
   }
 );
+
+// TODO: replace with oni-save-parser LIST_TYPES when released.
+const LIST_TYPES = [
+  SerializationTypeCode.Array,
+  SerializationTypeCode.List,
+  SerializationTypeCode.HashSet
+];
 
 const structuredSelector = {
   template,
