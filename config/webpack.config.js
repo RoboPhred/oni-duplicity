@@ -5,9 +5,11 @@ const webpack = require("webpack");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const createStyledComponentsTransformer = require("typescript-plugin-styled-components")
-  .default;
-const styledComponentsTransformer = createStyledComponentsTransformer();
+// Chokes on template strings at runtime (???)
+// Maybe related: https://github.com/Igorbek/typescript-plugin-styled-components/issues/13
+// const createStyledComponentsTransformer = require("typescript-plugin-styled-components")
+//   .default;
+// const styledComponentsTransformer = createStyledComponentsTransformer();
 
 const isDev = process.env["NODE_ENV"] === "development";
 
@@ -69,9 +71,9 @@ module.exports = {
           {
             loader: "ts-loader",
             options: {
-              getCustomTransformers: () => ({
-                before: [styledComponentsTransformer]
-              })
+              // getCustomTransformers: () => ({
+              //   before: [styledComponentsTransformer]
+              // })
             }
           }
         ],

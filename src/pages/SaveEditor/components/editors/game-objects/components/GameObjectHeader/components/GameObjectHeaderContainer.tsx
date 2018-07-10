@@ -1,7 +1,5 @@
 import Box from "@/components/Box";
 
-const GameObjectHeaderContainer = Box.extend.attrs({
-  mb: 2
-})``;
+const GameObjectHeaderContainer = Box;
 GameObjectHeaderContainer.displayName = "GameObjectHeaderContainer";
 export default GameObjectHeaderContainer;

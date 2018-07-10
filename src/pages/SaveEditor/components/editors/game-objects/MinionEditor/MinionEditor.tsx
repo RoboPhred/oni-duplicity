@@ -5,15 +5,16 @@ import { Intent } from "@/theme";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 
-import FormGroup from "@/components/FormGroup";
+import VerticalTabs from "@/components/VerticalTabs";
 
-import EditableTextField from "@/pages/SaveEditor/components/fields/EditableTextField";
-import NumericField from "@/pages/SaveEditor/components/fields/NumericField";
+import EditableTextField from "../../../fields/EditableTextField";
 
 import EditorContainer from "../../components/EditorContainer";
 import EditorHeader from "../../components/EditorHeader";
 
 import GameObjectHeader from "../components/GameObjectHeader";
+
+import MinionPositionTab from "./components/MinionPositionTab";
 
 type Props = StateProps;
 class DuplicantEditor extends React.Component<Props> {
@@ -31,52 +32,21 @@ class DuplicantEditor extends React.Component<Props> {
             <EditableTextField intent={Intent.Primary} path={minionNamePath} />
           </EditorHeader>
         </GameObjectHeader>
-        <FormGroup>
-          <FormGroup.Label>Position</FormGroup.Label>
-          <FormGroup.Content>
-            <FormGroup>
-              <FormGroup.Label>X</FormGroup.Label>
-              <FormGroup.Content>
-                <NumericField
-                  precision="single"
-                  path={[...gameObjectPath, "position", "x"]}
-                />
-              </FormGroup.Content>
-            </FormGroup>
-            <FormGroup>
-              <FormGroup.Label>Y</FormGroup.Label>
-              <FormGroup.Content>
-                <NumericField
-                  precision="single"
-                  path={[...gameObjectPath, "position", "y"]}
-                />
-              </FormGroup.Content>
-            </FormGroup>
-          </FormGroup.Content>
-        </FormGroup>
-        <FormGroup>
-          <FormGroup.Label>Scale</FormGroup.Label>
-          <FormGroup.Content>
-            <FormGroup>
-              <FormGroup.Label>X</FormGroup.Label>
-              <FormGroup.Content>
-                <NumericField
-                  precision="single"
-                  path={[...gameObjectPath, "scale", "x"]}
-                />
-              </FormGroup.Content>
-            </FormGroup>
-            <FormGroup>
-              <FormGroup.Label>Y</FormGroup.Label>
-              <FormGroup.Content>
-                <NumericField
-                  precision="single"
-                  path={[...gameObjectPath, "scale", "y"]}
-                />
-              </FormGroup.Content>
-            </FormGroup>
-          </FormGroup.Content>
-        </FormGroup>
+
+        <VerticalTabs width="100%">
+          <VerticalTabs.Tab tabKey="position" header="Position">
+            <MinionPositionTab gameObjectPath={gameObjectPath} />
+          </VerticalTabs.Tab>
+          <VerticalTabs.Tab tabKey="test2" header="Test 2">
+            This is Test 2
+          </VerticalTabs.Tab>
+          <VerticalTabs.Tab tabKey="test3" header="Test 3">
+            This is Test 3
+          </VerticalTabs.Tab>
+          <VerticalTabs.Tab tabKey="test4" header="Test 4">
+            This is Test 4
+          </VerticalTabs.Tab>
+        </VerticalTabs>
       </EditorContainer>
     );
   }

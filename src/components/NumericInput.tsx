@@ -21,7 +21,7 @@ interface State {
   editValue: number | null;
   isValid: boolean;
 }
-export default class NumericField extends React.Component<Props, State> {
+export default class NumericInput extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 

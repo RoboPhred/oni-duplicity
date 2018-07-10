@@ -25,5 +25,8 @@ const Text = styled<TextProps, "span">("span")`
 `;
 Text.displayName = "Text";
 export default attachProps(Text, {
-  Label: Text.withComponent("label") as StyledWithComponent<"label", TextProps>
+  Label: Text.withComponent("label") as StyledWithComponentTag<
+    "label",
+    TextProps
+  >
 });

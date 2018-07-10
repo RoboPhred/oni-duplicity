@@ -8,7 +8,7 @@ type StyledComponentClass<
   O
 > = import("styled-components").StyledComponentClass<P, T, O>;
 
-declare type StyledWithComponent<
+declare type StyledWithComponentTag<
   TTag extends keyof JSX.IntrinsicElements,
   TProps
 > = StyledComponentClass<

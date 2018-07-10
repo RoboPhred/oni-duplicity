@@ -1,5 +1,3 @@
-import styled from "@/theme";
-
 import { attachProps } from "@/utils";
 
 import Box, { BoxProps } from "./Box";
@@ -9,7 +7,7 @@ export interface FlexItemProps extends BoxProps {
   shrink?: boolean;
 }
 
-const FlexItem = styled<FlexItemProps, "div">("div")`
+const FlexItem = Box.extend<FlexItemProps>`
   flex-grow: ${props => (props.grow ? 1 : 0)};
   flex-shrink: ${props => (props.shrink ? 1 : 0)};
   flex-basis: auto;
@@ -20,6 +18,7 @@ FlexItem.displayName = "FlexItem";
 export interface FlexProps extends BoxProps {
   direction: "row" | "column";
 }
+
 const Flex = Box.extend<FlexProps>`
   display: flex;
   flex-direction: ${props => props.direction};
