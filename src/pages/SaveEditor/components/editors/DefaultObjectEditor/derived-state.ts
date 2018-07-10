@@ -2,8 +2,8 @@ import { createSelector, createStructuredSelector } from "reselect";
 
 import { AppState } from "@/state";
 
-import selectedPath from "@/selectors/selected-path-selector";
-import selectedValue from "@/selectors/selected-value-selector";
+import selectedPath from "@/selectors/selected-path";
+import selectedValue from "@/selectors/selected-value";
 
 export interface FieldEditable {
   title: string;

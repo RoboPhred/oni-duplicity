@@ -6,9 +6,9 @@ import { AppState } from "@/state";
 
 import { getPathGameObjectGroup } from "@/services/save-structure";
 
-import selectedValue from "@/selectors/selected-value-selector";
-import selectedPath from "@/selectors/selected-path-selector";
-import oniSave from "@/selectors/oni-save-selector";
+import selectedValue from "@/selectors/selected-value";
+import selectedPath from "@/selectors/selected-path";
+import oniSave from "@/selectors/oni-save";
 
 const structuredSelector = {
   gameObjectPath: selectedPath,

@@ -17,7 +17,7 @@ import {
   receiveOniSaveSuccess
 } from "../actions/receive-onisave";
 
-import oniSaveSelector from "../selectors/oni-save-selector";
+import oniSaveSelector from "../selectors/oni-save";
 
 export default function* saveEditorSaga() {
   yield takeEvery(ACTION_ONISAVE_SAVE, handleOniSaveLoad);

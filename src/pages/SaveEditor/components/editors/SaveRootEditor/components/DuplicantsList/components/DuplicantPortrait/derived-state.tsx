@@ -3,7 +3,7 @@ import { MinionIdentityBehavior, getBehavior } from "oni-save-parser";
 
 import { AppState } from "@/state";
 
-import oniSave from "@/selectors/oni-save-selector";
+import oniSave from "@/selectors/oni-save";
 
 import { DuplicantPortraitProps } from "./props";
 

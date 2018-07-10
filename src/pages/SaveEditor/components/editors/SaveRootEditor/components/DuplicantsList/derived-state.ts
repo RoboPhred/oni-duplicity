@@ -4,7 +4,7 @@ import { range } from "lodash-es";
 
 import { AppState } from "@/state";
 
-import oniSave from "@/selectors/oni-save-selector";
+import oniSave from "@/selectors/oni-save";
 
 const duplicantsSetPath = createSelector(oniSave, oniSave => {
   if (!oniSave) {

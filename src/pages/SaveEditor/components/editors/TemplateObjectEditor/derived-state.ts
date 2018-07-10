@@ -2,8 +2,8 @@ import { createStructuredSelector, createSelector } from "reselect";
 
 import { AppState } from "@/state";
 
-import oniSave from "@/selectors/oni-save-selector";
-import selectedPath from "@/selectors/selected-path-selector";
+import oniSave from "@/selectors/oni-save";
+import selectedPath from "@/selectors/selected-path";
 
 import { TemplateObjectEditorProps } from "./props";
 import { getTypeCode, SerializationTypeCode } from "oni-save-parser";

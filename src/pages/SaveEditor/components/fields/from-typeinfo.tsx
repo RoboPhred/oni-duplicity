@@ -9,6 +9,7 @@ import SaveStructureLink from "@/components/SaveStructureLink";
 
 import { EditorFieldProps } from "./connect-field";
 
+import ArrayLikeField from "./ArrayLikeField";
 import BooleanField from "./BooleanField";
 import EnumerationField from "./EnumerationField";
 import NumericField from "./NumericField";
@@ -23,7 +24,9 @@ export default function getFieldElementClass(
   const code = getTypeCode(typeInfo.info);
   switch (code) {
     case SerializationTypeCode.Array:
-      return () => <Text intent={Intent.Dangerous}>TODO Array</Text>;
+      return (props: EditorFieldProps) => (
+        <ArrayLikeField {...props} subType={typeInfo.subTypes![0]} />
+      );
     case SerializationTypeCode.Boolean:
       return (props: EditorFieldProps) => <BooleanField {...props} />;
     case SerializationTypeCode.Byte:
@@ -43,7 +46,9 @@ export default function getFieldElementClass(
         <EnumerationField {...props} enumerationName={typeInfo.templateName!} />
       );
     case SerializationTypeCode.HashSet:
-      return () => <Text intent={Intent.Dangerous}>TODO HashSet</Text>;
+      return (props: EditorFieldProps) => (
+        <ArrayLikeField {...props} subType={typeInfo.subTypes![0]} />
+      );
     case SerializationTypeCode.Int16:
       return (props: EditorFieldProps) => (
         <NumericField {...props} precision="int16" />
@@ -55,7 +60,9 @@ export default function getFieldElementClass(
     case SerializationTypeCode.Int64:
       return () => <Text intent={Intent.Dangerous}>TODO Int64</Text>;
     case SerializationTypeCode.List:
-      return () => <Text intent={Intent.Dangerous}>TODO List</Text>;
+      return (props: EditorFieldProps) => (
+        <ArrayLikeField {...props} subType={typeInfo.subTypes![0]} />
+      );
     case SerializationTypeCode.Pair:
       return () => <Text intent={Intent.Dangerous}>TODO Pair</Text>;
     case SerializationTypeCode.SByte:

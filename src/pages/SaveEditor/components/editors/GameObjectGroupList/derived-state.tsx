@@ -2,7 +2,7 @@ import { createStructuredSelector, createSelector } from "reselect";
 
 import { AppState } from "@/state";
 
-import oniSave from "@/selectors/oni-save-selector";
+import oniSave from "@/selectors/oni-save";
 
 export interface GroupItem {
   name: string;

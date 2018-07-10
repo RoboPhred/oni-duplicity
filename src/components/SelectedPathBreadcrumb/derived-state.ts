@@ -2,7 +2,7 @@ import { createStructuredSelector } from "reselect";
 
 import { AppState } from "@/state";
 
-import breadcrumb from "@/selectors/selected-path-breadcrumb-selector";
+import breadcrumb from "@/selectors/selected-path-breadcrumb";
 
 const structuredSelector = {
   breadcrumb

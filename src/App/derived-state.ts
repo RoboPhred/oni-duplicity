@@ -2,8 +2,8 @@ import { createStructuredSelector } from "reselect";
 
 import { AppState } from "@/state";
 
-import error from "@/selectors/error-selector";
-import loadingState from "@/selectors/loading-state-selector";
+import error from "@/selectors/error";
+import loadingState from "@/selectors/loading-state";
 
 const stateSelectors = {
   loadingState,

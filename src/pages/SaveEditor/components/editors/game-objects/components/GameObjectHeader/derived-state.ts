@@ -8,7 +8,7 @@ import {
 
 import { AppState } from "@/state";
 
-import selectedValue from "@/selectors/selected-value-selector";
+import selectedValue from "@/selectors/selected-value";
 
 const position = createSelector(
   selectedValue,

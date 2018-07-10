@@ -4,7 +4,7 @@ import { get } from "lodash-es";
 
 import { AppState } from "@/state";
 
-import oniSave from "@/selectors/oni-save-selector";
+import oniSave from "@/selectors/oni-save";
 
 import { EditorFieldProps } from "./props";
 

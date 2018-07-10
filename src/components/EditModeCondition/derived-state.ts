@@ -2,7 +2,7 @@ import { createStructuredSelector } from "reselect";
 
 import { AppState } from "@/state";
 
-import editMode from "@/selectors/edit-mode-selector";
+import editMode from "@/selectors/edit-mode";
 
 const structuredSelector = {
   currentEditMode: editMode

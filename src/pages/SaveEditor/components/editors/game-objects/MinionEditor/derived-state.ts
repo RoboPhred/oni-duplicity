@@ -3,8 +3,8 @@ import { MinionIdentityBehavior, GameObject } from "oni-save-parser";
 
 import { AppState } from "@/state";
 
-import selectedPath from "@/selectors/selected-path-selector";
-import oniSave from "@/selectors/oni-save-selector";
+import selectedPath from "@/selectors/selected-path";
+import oniSave from "@/selectors/oni-save";
 import { get } from "lodash-es";
 
 const structuredSelector = {

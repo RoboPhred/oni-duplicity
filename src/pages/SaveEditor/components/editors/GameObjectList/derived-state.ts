@@ -6,8 +6,8 @@ import { get } from "lodash-es";
 
 import { AppState } from "@/state";
 
-import oniSave from "@/selectors/oni-save-selector";
-import selectedPath from "@/selectors/selected-path-selector";
+import oniSave from "@/selectors/oni-save";
+import selectedPath from "@/selectors/selected-path";
 
 import { getSaveItemTitle } from "@/services/save-structure";
 

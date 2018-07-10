@@ -7,8 +7,8 @@ import {
   getSaveItemEditorProps
 } from "@/services/save-structure";
 
-import oniSave from "@/selectors/oni-save-selector";
-import selectedPath from "@/selectors/selected-path-selector";
+import oniSave from "@/selectors/oni-save";
+import selectedPath from "@/selectors/selected-path";
 
 const stateSelectors = {
   editorType: createSelector(

@@ -2,8 +2,8 @@ import { createSelector } from "reselect";
 
 import { getSaveItemBreadcrumb } from "@/services/save-structure";
 
-import selectedPath from "./selected-path-selector";
-import oniSave from "./oni-save-selector";
+import selectedPath from "./selected-path";
+import oniSave from "./oni-save";
 
 const selectedPathBreadcrumbSelector = createSelector(
   selectedPath,

@@ -9,9 +9,9 @@ import {
   EditMode
 } from "@/services/save-structure";
 
-import oniSaveSelector from "@/selectors/oni-save-selector";
-import selectedPathSelector from "@/selectors/selected-path-selector";
-import editModeSelector from "@/selectors/edit-mode-selector";
+import oniSaveSelector from "@/selectors/oni-save";
+import selectedPathSelector from "@/selectors/selected-path";
+import editModeSelector from "@/selectors/edit-mode";
 
 import { SaveStructureItemProps } from "./props";
 

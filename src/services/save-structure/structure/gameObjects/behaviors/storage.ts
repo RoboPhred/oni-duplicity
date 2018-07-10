@@ -30,9 +30,6 @@ const storageBehaviorExtraData: SaveStructureDef<
 export const storageBehavior: SaveStructureDef<StorageBehavior> = {
   ...(defaultBehavior as any),
 
-  // TODO: Get behavior recursion working and set this to false.
-  $advanced: true,
-
   $match: behaviorIs(StorageBehavior),
 
   $uiChildren(behavior: StorageBehavior) {
