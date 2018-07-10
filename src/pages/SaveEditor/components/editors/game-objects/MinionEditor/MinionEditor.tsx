@@ -11,6 +11,7 @@ import GameObjectHeader from "../components/GameObjectHeader";
 
 import MinionHeader from "./components/MinionEditableName";
 import MinionPositionTab from "./components/MinionPositionTab";
+import TemplateObjectEditor from "@/pages/SaveEditor/components/editors/TemplateObjectEditor";
 
 type Props = StateProps;
 class DuplicantEditor extends React.Component<Props> {
@@ -27,17 +28,18 @@ class DuplicantEditor extends React.Component<Props> {
         </GameObjectHeader>
 
         <VerticalTabs width="100%">
+          <VerticalTabs.Tab tabKey="appearance" header="Appearance">
+            TODO appearance with preview<br />
+            TODO scale
+          </VerticalTabs.Tab>
+
+          <VerticalTabs.Tab tabKey="health" header="Health">
+            TODO health status<br />
+            TODO health points, stanima, diseases (surface and ingested), so on.
+          </VerticalTabs.Tab>
+
           <VerticalTabs.Tab tabKey="position" header="Position">
             <MinionPositionTab gameObjectPath={gameObjectPath} />
-          </VerticalTabs.Tab>
-          <VerticalTabs.Tab tabKey="test2" header="Test 2">
-            This is Test 2
-          </VerticalTabs.Tab>
-          <VerticalTabs.Tab tabKey="test3" header="Test 3">
-            This is Test 3
-          </VerticalTabs.Tab>
-          <VerticalTabs.Tab tabKey="test4" header="Test 4">
-            This is Test 4
           </VerticalTabs.Tab>
         </VerticalTabs>
       </EditorContainer>
