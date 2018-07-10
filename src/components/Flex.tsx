@@ -20,12 +20,13 @@ FlexItem.displayName = "FlexItem";
 export interface FlexProps extends BoxProps {
   direction: "row" | "column";
 }
-const Flex = styled<FlexProps, any>(Box)`
+const Flex = Box.extend<FlexProps>`
   display: flex;
   flex-direction: ${props => props.direction};
   align-items: stretch;
 `;
 Flex.displayName = "Flex";
+
 export default attachProps(Flex, {
   Item: FlexItem
 });
