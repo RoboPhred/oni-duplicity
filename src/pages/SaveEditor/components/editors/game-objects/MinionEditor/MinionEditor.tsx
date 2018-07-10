@@ -1,19 +1,15 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { Intent } from "@/theme";
-
 import mapStateToProps, { StateProps } from "./derived-state";
 
 import VerticalTabs from "@/components/VerticalTabs";
 
-import EditableTextField from "../../../fields/EditableTextField";
-
 import EditorContainer from "../../components/EditorContainer";
-import EditorHeader from "../../components/EditorHeader";
 
 import GameObjectHeader from "../components/GameObjectHeader";
 
+import MinionHeader from "./components/MinionEditableName";
 import MinionPositionTab from "./components/MinionPositionTab";
 
 type Props = StateProps;
@@ -27,10 +23,7 @@ class DuplicantEditor extends React.Component<Props> {
     return (
       <EditorContainer>
         <GameObjectHeader>
-          <EditorHeader>
-            Name:&nbsp;
-            <EditableTextField intent={Intent.Primary} path={minionNamePath} />
-          </EditorHeader>
+          <MinionHeader minionNamePath={minionNamePath} />
         </GameObjectHeader>
 
         <VerticalTabs width="100%">

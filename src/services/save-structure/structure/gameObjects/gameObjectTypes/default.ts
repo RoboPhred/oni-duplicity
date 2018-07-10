@@ -28,6 +28,7 @@ export const defaultGameObject: SaveStructureDef<GameObject> = {
   $editor: "game-object-default",
 
   behaviors: {
+    $uiPathName: false,
     "*": behavior
   }
 };

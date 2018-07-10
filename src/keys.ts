@@ -1,6 +1,6 @@
 const Keys = {
-  Enter: "enter",
-  Esc: "escape"
+  Enter: "Enter",
+  Esc: "Escape"
 };
 
 export default Keys;

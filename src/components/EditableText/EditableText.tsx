@@ -40,7 +40,7 @@ export default class EditableText extends React.Component<Props, State> {
           intent={intent}
           value={editValue}
           onChange={this._onEditableChange}
-          onKeyPress={this._onEditableKeyPress}
+          onKeyUp={this._onEditableKeyUp}
           onFocus={this._onEditableFocus}
           onBlur={this._onEditableBlur}
         />
@@ -70,7 +70,7 @@ export default class EditableText extends React.Component<Props, State> {
   }
 
   @autobind()
-  private _onEditableKeyPress(e: React.KeyboardEvent) {
+  private _onEditableKeyUp(e: React.KeyboardEvent) {
     switch (e.key) {
       case Keys.Enter:
         this._commit();

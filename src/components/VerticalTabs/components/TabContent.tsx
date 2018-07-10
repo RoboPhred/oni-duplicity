@@ -3,7 +3,7 @@ import * as React from "react";
 import Flex from "@/components/Flex";
 
 const TabContent: React.SFC = ({ children }) => (
-  <Flex.Item grow shrink pl={1}>
+  <Flex.Item grow shrink pl={1} p={3}>
     {children}
   </Flex.Item>
 );
