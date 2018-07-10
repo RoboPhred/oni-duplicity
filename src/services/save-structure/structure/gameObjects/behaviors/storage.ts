@@ -7,10 +7,31 @@ import { behaviorIs } from "../../matchers";
 
 import { defaultBehavior } from "./default";
 
+const storageBehaviorExtraData: SaveStructureDef<
+  StorageBehavior["extraData"]
+> = {
+  $uiPathName: false,
+
+  $editor: "game-object-list",
+
+  "*": {
+    $editor: "game-object-default",
+    $uiPathName(obj: StoredGameObject, path: string[]) {
+      const index = path[path.length - 1];
+      return `${index}: ${obj.name}`;
+    },
+    $variants: []
+  }
+};
+// TODO: Recurse into behavior editors.
+//  Cannot do this currently because we are executing this file to build behaviors for initializing the createGameObjectVariants file.
+// storageBehaviorExtraData["*"]!.$variants = createGameObjectVariants(null);
+
 export const storageBehavior: SaveStructureDef<StorageBehavior> = {
   ...(defaultBehavior as any),
 
-  $advanced: false,
+  // TODO: Get behavior recursion working and set this to false.
+  $advanced: true,
 
   $match: behaviorIs(StorageBehavior),
 
@@ -42,17 +63,5 @@ export const storageBehavior: SaveStructureDef<StorageBehavior> = {
     return children.length > 0 ? children : false;
   },
 
-  extraData: {
-    $uiPathName: null,
-
-    "*": {
-      $uiPathName(obj: StoredGameObject, path: string[]) {
-        const index = path[path.length - 1];
-        return `${index}: ${obj.name}`;
-      }
-
-      // TODO: Select variants from gameObjects with local name key.
-      // $variants: [defaultGameObject]
-    }
-  }
+  extraData: storageBehaviorExtraData
 };

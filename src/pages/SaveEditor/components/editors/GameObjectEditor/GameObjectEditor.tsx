@@ -5,13 +5,13 @@ import { Intent } from "@/theme";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 
-import Text from "@/components/Text";
 import FormGroup from "@/components/FormGroup";
 
 import NumericField from "@/pages/SaveEditor/components/fields/NumericField";
 
 import EditorContainer from "../components/EditorContainer";
 import EditorHeader from "../components/EditorHeader";
+import GameObjectHeader from "../components/GameObjectHeader";
 
 type Props = StateProps;
 class GameObjectEditor extends React.Component<Props> {
@@ -23,9 +23,9 @@ class GameObjectEditor extends React.Component<Props> {
 
     return (
       <EditorContainer>
-        <EditorHeader>
-          <Text intent={Intent.Primary}>{gameObjectName}</Text>
-        </EditorHeader>
+        <GameObjectHeader>
+          <EditorHeader intent={Intent.Primary}>{gameObjectName}</EditorHeader>
+        </GameObjectHeader>
         <FormGroup>
           <FormGroup.Label>Position</FormGroup.Label>
           <FormGroup.Content>

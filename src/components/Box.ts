@@ -5,14 +5,25 @@ import styled, {
   intent
 } from "@/theme";
 
-import { WidthProps, HeightProps, width, height } from "styled-system";
+import {
+  WidthProps,
+  HeightProps,
+  SpaceProps,
+  width,
+  height,
+  space
+} from "styled-system";
 
-export type BoxProps = WidthProps & HeightProps & BackgroundProps & IntentProps;
+export type BoxProps = WidthProps &
+  HeightProps &
+  SpaceProps &
+  BackgroundProps &
+  IntentProps;
 
 const Box = styled<BoxProps, "div">("div")`
   ${width};
   ${height};
-  ${background};
+  ${space} ${background};
   ${intent.withDefault(null)};
 `;
 Box.displayName = "Box";

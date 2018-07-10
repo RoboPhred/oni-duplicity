@@ -36,6 +36,10 @@ function setStructure(
   structure: SaveStructureDef
 ) {
   if (path && path.length > 0) {
+    // Collapse the intermediate paths.
+    for (let i = 1; i < path.length; i++) {
+      set(obj, [...path.slice(0, i), "$uiPathName"], false);
+    }
     set(obj, path, structure);
   } else {
     // Use a one-value rootVariant to ensure we get a reference,

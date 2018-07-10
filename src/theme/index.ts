@@ -1,6 +1,6 @@
 import styled from "./styled";
 export default styled;
-export { ThemeProvider, injectGlobal } from "./styled";
+export { ThemeProvider, injectGlobal, css } from "./styled";
 
 export * from "./theme";
 

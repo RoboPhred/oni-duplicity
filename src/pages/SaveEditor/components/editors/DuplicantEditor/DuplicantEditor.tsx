@@ -5,7 +5,6 @@ import { Intent } from "@/theme";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 
-import Text from "@/components/Text";
 import FormGroup from "@/components/FormGroup";
 
 import EditableTextField from "@/pages/SaveEditor/components/fields/EditableTextField";
@@ -13,6 +12,7 @@ import NumericField from "@/pages/SaveEditor/components/fields/NumericField";
 
 import EditorContainer from "../components/EditorContainer";
 import EditorHeader from "../components/EditorHeader";
+import GameObjectHeader from "../components/GameObjectHeader";
 
 type Props = StateProps;
 class DuplicantEditor extends React.Component<Props> {
@@ -24,10 +24,12 @@ class DuplicantEditor extends React.Component<Props> {
 
     return (
       <EditorContainer>
-        <EditorHeader>
-          <Text>Name: </Text>
-          <EditableTextField intent={Intent.Primary} path={minionNamePath} />
-        </EditorHeader>
+        <GameObjectHeader>
+          <EditorHeader>
+            Name:&nbsp;
+            <EditableTextField intent={Intent.Primary} path={minionNamePath} />
+          </EditorHeader>
+        </GameObjectHeader>
         <FormGroup>
           <FormGroup.Label>Position</FormGroup.Label>
           <FormGroup.Content>

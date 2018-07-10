@@ -1,4 +1,9 @@
-import { SaveGame } from "oni-save-parser";
+import {
+  SaveGame,
+  GameObjectBehavior,
+  GameObject,
+  GameObjectGroup
+} from "oni-save-parser";
 
 import { get, isObject } from "lodash-es";
 
@@ -9,6 +14,79 @@ import {
   getSaveStructureDef,
   walkSaveStructurePath
 } from "./structure";
+
+const GAME_OBJECT_GROUP_PATH_ROOT = ["gameObjects", "*"];
+export function getPathGameObjectGroup(
+  path: string[],
+  saveGame: SaveGame
+): GameObjectGroup | null {
+  if (path.length < GAME_OBJECT_GROUP_PATH_ROOT.length) {
+    return null;
+  }
+
+  path = path.slice(0, GAME_OBJECT_GROUP_PATH_ROOT.length);
+
+  if (
+    !path.every((x, i) => comparePathMatch(x, i, GAME_OBJECT_GROUP_PATH_ROOT))
+  ) {
+    return null;
+  }
+
+  return get(saveGame, path);
+}
+
+const GAME_OBJECT_PATH_ROOT = ["gameObjects", "*", "gameObject", "*"];
+export function getPathGameObject(
+  path: string[],
+  saveGame: SaveGame
+): GameObject | null {
+  if (path.length < GAME_OBJECT_PATH_ROOT.length) {
+    return null;
+  }
+
+  path = path.slice(0, GAME_OBJECT_PATH_ROOT.length);
+
+  if (!path.every((x, i) => comparePathMatch(x, i, GAME_OBJECT_PATH_ROOT))) {
+    return null;
+  }
+
+  return get(saveGame, path);
+}
+
+const GAME_OBJECT_BEHAVIOR_PATH_ROOT = [
+  "gameObjects",
+  "*",
+  "gameObject",
+  "*",
+  "behaviors",
+  "*"
+];
+export function getPathBehavior(
+  path: string[],
+  saveGame: SaveGame
+): GameObjectBehavior | null {
+  if (path.length < GAME_OBJECT_BEHAVIOR_PATH_ROOT.length) {
+    return null;
+  }
+
+  path = path.slice(0, GAME_OBJECT_BEHAVIOR_PATH_ROOT.length);
+
+  if (
+    !path.every((x, i) =>
+      comparePathMatch(x, i, GAME_OBJECT_BEHAVIOR_PATH_ROOT)
+    )
+  ) {
+    return null;
+  }
+
+  return get(saveGame, path);
+}
+
+function comparePathMatch(part: string, index: number, match: string[]) {
+  if (match[index] === "*") return true;
+  if (part === match[index]) return true;
+  return false;
+}
 
 export function getSaveItemTitle(path: string[], saveGame: SaveGame): string {
   const def = getSaveStructureDef(path, saveGame);
