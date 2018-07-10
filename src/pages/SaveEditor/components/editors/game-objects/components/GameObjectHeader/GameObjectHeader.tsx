@@ -21,13 +21,13 @@ class GameObjectHeader extends React.Component<Props> {
         <Toolbar>
           <Toolbar.Label>{this.props.children}</Toolbar.Label>
 
-          <Toolbar.Group align="center">
+          <Toolbar.Group align="center" alignContent="center">
             <Text intent={Intent.Secondary} mr={1} whiteSpace="nowrap">
               {position ? formatPosition(position) : "(no object selected)"}
             </Text>
           </Toolbar.Group>
 
-          <Toolbar.Group align="right">
+          <Toolbar.Group align="right" alignContent="center">
             {primaryElement && (
               <Text intent={Intent.Secondary} mr={1}>
                 {formatSimHash(primaryElement)}

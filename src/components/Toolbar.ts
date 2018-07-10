@@ -1,3 +1,5 @@
+import * as CSS from "csstype";
+
 import styled, {
   Background,
   BackgroundProps,
@@ -9,29 +11,30 @@ import styled, {
 
 import { attachProps } from "@/utils";
 
-export interface ToolbarAlignProps {
+export interface ToolbarItemProps {
   align?: "left" | "center" | "right";
+  alignContent?: CSS.AlignContentProperty;
 }
-const toolbarAlign = css<ToolbarAlignProps>`
+const toolbarItem = css<ToolbarItemProps>`
   grid-area: ${props => props.align};
   justify-self: ${props => props.align};
+  align-self: ${props => props.alignContent || "baseline"};
 `;
 
-export type ToolbarLabelProps = ToolbarAlignProps & TextProps;
+export type ToolbarLabelProps = ToolbarItemProps & TextProps;
 const ToolbarLabel = styled<ToolbarLabelProps, "label">("label")`
   ${text};
-  ${toolbarAlign};
+  ${toolbarItem};
 `;
 ToolbarLabel.defaultProps = {
   align: "left"
 };
 ToolbarLabel.displayName = "ToolbarLabel";
 
-export type ToolbarGroupProps = ToolbarAlignProps;
+export type ToolbarGroupProps = ToolbarItemProps;
 const ToolbarGroup = styled<ToolbarGroupProps, "div">("div")`
   display: inline-block;
-  ${toolbarAlign};
-  align-self: baseline;
+  ${toolbarItem};
 `;
 ToolbarGroup.defaultProps = {
   align: "right"
