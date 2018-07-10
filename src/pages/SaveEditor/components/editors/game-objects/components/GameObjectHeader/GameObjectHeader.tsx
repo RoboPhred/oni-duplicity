@@ -15,14 +15,14 @@ import GameObjectHeaderContainer from "./components/GameObjectHeaderContainer";
 type Props = StateProps;
 class GameObjectHeader extends React.Component<Props> {
   render() {
-    const { position, primaryElement, diseaseId } = this.props;
+    const { position, primaryElement } = this.props;
     return (
       <GameObjectHeaderContainer>
         <Toolbar>
           <Toolbar.Label>{this.props.children}</Toolbar.Label>
 
           <Toolbar.Group align="center">
-            <Text intent={Intent.Secondary} mr={1}>
+            <Text intent={Intent.Secondary} mr={1} whiteSpace="nowrap">
               {position ? formatPosition(position) : "(no object selected)"}
             </Text>
           </Toolbar.Group>
@@ -31,11 +31,6 @@ class GameObjectHeader extends React.Component<Props> {
             {primaryElement && (
               <Text intent={Intent.Secondary} mr={1}>
                 {formatSimHash(primaryElement)}
-              </Text>
-            )}
-            {diseaseId && (
-              <Text intent={Intent.Secondary} mr={1}>
-                {formatDisease(diseaseId)}
               </Text>
             )}
           </Toolbar.Group>

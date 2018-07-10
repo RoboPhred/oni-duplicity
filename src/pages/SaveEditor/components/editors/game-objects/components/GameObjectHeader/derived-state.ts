@@ -31,18 +31,9 @@ const primaryElement = createSelector(primaryElementBehavior, behavior => {
   return behavior.templateData.ElementID;
 });
 
-const diseaseId = createSelector(primaryElementBehavior, behavior => {
-  if (!behavior) {
-    return null;
-  }
-
-  return behavior.templateData.diseaseID;
-});
-
 const structuredSelector = {
   position,
-  primaryElement,
-  diseaseId
+  primaryElement
 };
 export type StateProps = StructuredStateProps<typeof structuredSelector>;
 const mapStateToProps = createStructuredSelector<AppState, StateProps>(
