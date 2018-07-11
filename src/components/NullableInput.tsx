@@ -23,7 +23,7 @@ export default class NullableInput extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      isNotNull: this.props.value === null
+      isNotNull: this.props.value !== null
     };
   }
 
