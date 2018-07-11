@@ -19,6 +19,8 @@ interface State {
   isValid: boolean;
 }
 export default class TextInput extends React.Component<Props, State> {
+  private _inputRef = React.createRef<HTMLInputElement>();
+
   constructor(props: Props) {
     super(props);
 
@@ -36,6 +38,7 @@ export default class TextInput extends React.Component<Props, State> {
 
     return (
       <Input
+        innerRef={this._inputRef}
         type="text"
         minLength={minLength}
         maxLength={maxLength}
@@ -50,13 +53,7 @@ export default class TextInput extends React.Component<Props, State> {
   @autobind()
   private _onValueChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
-    const validation = this._validate(value);
-    const isValid = !validation;
-    e.target.setCustomValidity(validation || "");
-    this.setState({
-      editValue: e.target.value,
-      isValid
-    });
+    this._setEditValue(value);
   }
 
   @autobind()
@@ -69,6 +66,20 @@ export default class TextInput extends React.Component<Props, State> {
   @autobind()
   private _onInputBlur() {
     this._commitEdit();
+  }
+
+  private _setEditValue(value: string) {
+    const validation = this._validate(value);
+    const isValid = !validation;
+
+    if (this._inputRef.current) {
+      this._inputRef.current.setCustomValidity(validation || "");
+    }
+
+    this.setState({
+      editValue: value,
+      isValid
+    });
   }
 
   private _commitEdit() {

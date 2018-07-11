@@ -11,6 +11,7 @@ export interface InputCompatibleProps<T = any> {
 export interface NullableInputProps<T = any> {
   className?: string;
   renderInput(props: InputCompatibleProps<T>): React.ReactNode;
+  renderNull?: React.ReactNode | (() => React.ReactNode);
   value: T | null;
   defaultValue: T | (() => T);
   onCommit(value: T | null): void;
@@ -38,13 +39,15 @@ export default class NullableInput extends React.Component<Props, State> {
 
   render() {
     const { isNotNull } = this.state;
-    const { className } = this.props;
+    const { className, renderNull } = this.props;
 
     let element: React.ReactNode | null = null;
     if (isNotNull) {
       const { renderInput, onCommit, defaultValue } = this.props;
-      const value = this.props.value || resolveDefault(defaultValue);
+      const value = this.props.value || resolve(defaultValue);
       element = renderInput({ value, onCommit });
+    } else if (renderNull) {
+      element = resolve(renderNull);
     }
 
     return (
@@ -61,13 +64,19 @@ export default class NullableInput extends React.Component<Props, State> {
 
   @autobind()
   private _onNotNullChecked(value: boolean) {
+    const { defaultValue, onCommit } = this.props;
     this.setState({
       isNotNull: value
     });
+    if (value) {
+      onCommit(defaultValue);
+    } else {
+      onCommit(null);
+    }
   }
 }
 
-function resolveDefault<T>(value: T | (() => T)): T {
+function resolve<T>(value: T | (() => T)): T {
   if (typeof value === "function") {
     return value();
   }

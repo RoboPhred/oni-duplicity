@@ -32,7 +32,7 @@ export default function setAccessoryReducer(
       return;
     }
 
-    const { gameObjectPath, accessoryName } = action.payload;
+    const { gameObjectPath, type, name } = action.payload;
 
     const gameObject: GameObject = get(oniSave, gameObjectPath);
     if (!gameObject) {
@@ -45,14 +45,15 @@ export default function setAccessoryReducer(
     }
     const { accessories } = behavior.templateData;
 
-    const type = getAccessoryType(accessoryName);
-    if (!type) {
+    const accessoryIndex = getIndexOfAccessoryType(accessories, type);
+
+    if (name === null) {
+      // Remove
+      accessories.splice(accessoryIndex, 1);
       return;
     }
 
-    const accessoryIndex = getIndexOfAccessoryType(accessories, type);
-
-    const newAccessory = Accessory(accessoryName);
+    const newAccessory = Accessory(name);
 
     if (accessoryIndex === -1) {
       // Add

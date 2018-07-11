@@ -4,9 +4,10 @@ export const ACTION_SET_ACCESSORY =
   "@/pages/SaveEditor/oni-save/behaviors/accessorizer/set-accessory";
 export const setAccessory = (
   gameObjectPath: string[],
-  accessoryName: string
+  type: AccessoryType,
+  name: string | null
 ) => ({
   type: ACTION_SET_ACCESSORY as typeof ACTION_SET_ACCESSORY,
-  payload: { gameObjectPath, accessoryName }
+  payload: { gameObjectPath, type, name }
 });
 export type SetAccessoryAction = ReturnType<typeof setAccessory>;
