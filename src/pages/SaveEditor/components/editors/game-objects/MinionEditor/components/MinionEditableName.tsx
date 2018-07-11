@@ -15,7 +15,7 @@ const MinionHeader: React.SFC<MinionHeaderProps> = ({ minionNamePath }) => (
   <React.Fragment>
     <EditorHeader>
       <Flex direction="row">
-        <Flex.Item mr={1}>Name</Flex.Item>
+        <Flex.Item mr={1}>Name:</Flex.Item>
         <Flex.Item grow shrink>
           <EditableTextField intent={Intent.Primary} path={minionNamePath} />
         </Flex.Item>

@@ -10,8 +10,9 @@ import EditorContainer from "../../components/EditorContainer";
 import GameObjectHeader from "../components/GameObjectHeader";
 
 import MinionHeader from "./components/MinionEditableName";
+
+import MinionAppearanceTab from "./components/MinionAppearanceTab";
 import MinionPositionTab from "./components/MinionPositionTab";
-import TemplateObjectEditor from "@/pages/SaveEditor/components/editors/TemplateObjectEditor";
 
 type Props = StateProps;
 class DuplicantEditor extends React.Component<Props> {
@@ -29,7 +30,8 @@ class DuplicantEditor extends React.Component<Props> {
 
         <VerticalTabs width="100%">
           <VerticalTabs.Tab tabKey="appearance" header="Appearance">
-            TODO appearance with preview<br />
+            <MinionAppearanceTab gameObjectPath={gameObjectPath} />
+            <br />
             TODO scale
           </VerticalTabs.Tab>
 
