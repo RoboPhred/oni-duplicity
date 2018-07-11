@@ -5,23 +5,18 @@ import { get } from "lodash-es";
 import {
   GameObject,
   AccessorizerBehavior,
+  Accessory,
   getIndexOfAccessoryType,
   getBehavior,
-  AccessoryType,
-  Accessory
+  getAccessoryType
 } from "oni-save-parser";
-
-// TODO: update oni-save-parser to use names, not ordinals
-function makeAccessory(type: AccessoryType, name: string): Accessory {
-  return Accessory(`Root.Accessories.${type}_${name}`);
-}
 
 import { AppState } from "@/state";
 
 import {
   ACTION_SET_ACCESSORY,
   SetAccessoryAction
-} from "../actions/set-accessory";
+} from "@/actions/set-accessory";
 
 export default function setAccessoryReducer(
   state: AppState,
@@ -37,7 +32,7 @@ export default function setAccessoryReducer(
       return;
     }
 
-    const { gameObjectPath, type, name } = action.payload;
+    const { gameObjectPath, accessoryName } = action.payload;
 
     const gameObject: GameObject = get(oniSave, gameObjectPath);
     if (!gameObject) {
@@ -50,9 +45,14 @@ export default function setAccessoryReducer(
     }
     const { accessories } = behavior.templateData;
 
+    const type = getAccessoryType(accessoryName);
+    if (!type) {
+      return;
+    }
+
     const accessoryIndex = getIndexOfAccessoryType(accessories, type);
 
-    const newAccessory = makeAccessory(type, name);
+    const newAccessory = Accessory(accessoryName);
 
     if (accessoryIndex === -1) {
       // Add

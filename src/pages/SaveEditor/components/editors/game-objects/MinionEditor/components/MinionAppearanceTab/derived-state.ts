@@ -5,20 +5,10 @@ import {
   AccessorizerBehavior,
   GameObject,
   AccessoryType,
-  Accessory,
-  getAccessoryType,
+  getAccessoryName,
   getAccessoryOfType,
   getBehavior
 } from "oni-save-parser";
-
-// TODO Fix oni save parser assumption of ordinal accessories
-const ACCESSORY_ROOT = "Root.Accessories.";
-function getAccessoryName(accessory: Accessory) {
-  const id = accessory.guid.Guid;
-  const type = getAccessoryType(id) || "";
-  // +1 for dash.
-  return id.substr(ACCESSORY_ROOT.length + type.length + 1);
-}
 
 import { AppState } from "@/state";
 
