@@ -1,7 +1,6 @@
 import { SaveGame } from "oni-save-parser";
 
-export const ACTION_RECEIVE_ONISAVE_BEGIN =
-  "@/pages/SaveEditor/onisave/receive:begin";
+export const ACTION_RECEIVE_ONISAVE_BEGIN = "oni-save/receive:begin";
 export const receiveOniSaveBegin = (
   operation: "loading" | "saving",
   clearExisting?: boolean
@@ -11,16 +10,14 @@ export const receiveOniSaveBegin = (
 });
 export type ReceiveOniSaveBeginAction = ReturnType<typeof receiveOniSaveBegin>;
 
-export const ACTION_RECEIVE_ONISAVE_ERROR =
-  "@/pages/SaveEditor/onisave/receive:error";
+export const ACTION_RECEIVE_ONISAVE_ERROR = "oni-save/receive:error";
 export const receiveOniSaveError = (error: Error) => ({
   type: ACTION_RECEIVE_ONISAVE_ERROR as typeof ACTION_RECEIVE_ONISAVE_ERROR,
   payload: error
 });
 export type ReceiveOniSaveErrorAction = ReturnType<typeof receiveOniSaveError>;
 
-export const ACTION_RECEIVE_ONISAVE_SUCCESS =
-  "@/pages/SaveEditor/onisave/receive:success";
+export const ACTION_RECEIVE_ONISAVE_SUCCESS = "oni-save/receive:success";
 export const receiveOniSaveSuccess = (oniSave: SaveGame) => ({
   type: ACTION_RECEIVE_ONISAVE_SUCCESS as typeof ACTION_RECEIVE_ONISAVE_SUCCESS,
   payload: oniSave

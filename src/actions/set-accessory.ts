@@ -1,7 +1,6 @@
 import { AccessoryType } from "oni-save-parser";
 
-export const ACTION_SET_ACCESSORY =
-  "@/pages/SaveEditor/oni-save/behaviors/accessorizer/set-accessory";
+export const ACTION_SET_ACCESSORY = "editor/accessorizer/set-accessory";
 export const setAccessory = (
   gameObjectPath: string[],
   type: AccessoryType,
