@@ -8,7 +8,8 @@ import mapDispatchToProps, { DispatchProps } from "./events";
 
 import FormGroup from "@/components/FormGroup";
 
-import NumericInput from "@/components/NumericInput";
+import NullableInput from "@/components/NullableInput";
+import TextInput from "@/components/TextInput";
 
 export interface MinionAppearanceTabProps {
   gameObjectPath: string[];
@@ -27,12 +28,13 @@ class MinionAppearanceTab extends React.Component<Props> {
     // FIXME: Code smell: pulling in a state prop just to pass to dispatch.
     const { onSetAccessory, selectedPath } = this.props;
     return (
-      <FormGroup>
+      <FormGroup key={type}>
         <FormGroup.Label>{type}</FormGroup.Label>
         <FormGroup.Content>
-          <NumericInput
+          <NullableInput
+            renderInput={props => <TextInput {...props} />}
             value={this.props[type]}
-            minValue={1}
+            defaultValue=""
             onCommit={onSetAccessory.bind(this, selectedPath, type)}
           />
         </FormGroup.Content>

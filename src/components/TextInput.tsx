@@ -18,7 +18,7 @@ interface State {
   editValue: string | null;
   isValid: boolean;
 }
-export default class TextField extends React.Component<Props, State> {
+export default class TextInput extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 

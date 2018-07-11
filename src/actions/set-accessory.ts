@@ -5,9 +5,9 @@ export const ACTION_SET_ACCESSORY =
 export const setAccessory = (
   gameObjectPath: string[],
   type: AccessoryType,
-  ordinal: number
+  name: string
 ) => ({
   type: ACTION_SET_ACCESSORY as typeof ACTION_SET_ACCESSORY,
-  payload: { gameObjectPath, type, ordinal }
+  payload: { gameObjectPath, type, name }
 });
 export type SetAccessoryAction = ReturnType<typeof setAccessory>;

@@ -1,4 +1,4 @@
-declare type StructuredStateProps<T> = {
+type StructuredStateProps<T> = {
   [K in keyof T]: T[K] extends (...args: any[]) => any
     ? ReturnType<T[K]>
     : never
@@ -12,7 +12,7 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
  *
  * Arrays are treated to avoid capturing the "length" and other non-indexer properties.
  */
-declare type Indexer<T> = T extends (infer V)[]
+type Indexer<T> = T extends (infer V)[]
   ? V
   : T extends { [key: string]: infer V } ? V : never;
 

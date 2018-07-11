@@ -2,13 +2,23 @@ import { Selector, createStructuredSelector, createSelector } from "reselect";
 
 import {
   ACCESSORY_TYPES,
-  GameObject,
   AccessorizerBehavior,
-  getBehavior,
+  GameObject,
   AccessoryType,
+  Accessory,
+  getAccessoryType,
   getAccessoryOfType,
-  getAccessoryOrdinal
+  getBehavior
 } from "oni-save-parser";
+
+// TODO Fix oni save parser assumption of ordinal accessories
+const ACCESSORY_ROOT = "Root.Accessories.";
+function getAccessoryName(accessory: Accessory) {
+  const id = accessory.guid.Guid;
+  const type = getAccessoryType(id) || "";
+  // +1 for dash.
+  return id.substr(ACCESSORY_ROOT.length + type.length + 1);
+}
 
 import { AppState } from "@/state";
 
@@ -24,7 +34,7 @@ const behavior = createSelector(selectedValue, (gameObject: GameObject) => {
 
 function createAccessorySelector(
   accessoryType: AccessoryType
-): Selector<AppState, number | null> {
+): Selector<AppState, string | null> {
   return createSelector(behavior, behavior => {
     if (!behavior) {
       return null;
@@ -37,7 +47,7 @@ function createAccessorySelector(
       return null;
     }
 
-    return getAccessoryOrdinal(accessory);
+    return getAccessoryName(accessory);
   });
 }
 

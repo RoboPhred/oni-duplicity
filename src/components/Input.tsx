@@ -1,7 +1,6 @@
-import styled from "@/theme";
+import styled, { getTheme, text } from "@/theme";
 
-import { getTheme, text } from "@/theme";
-
+export interface InputProps {}
 const Input = styled.input`
   ${text};
   padding: 2px;
