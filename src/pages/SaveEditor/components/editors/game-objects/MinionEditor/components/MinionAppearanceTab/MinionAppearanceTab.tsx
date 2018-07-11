@@ -3,17 +3,22 @@ import { connect } from "react-redux";
 
 import { AccessoryType, ACCESSORY_TYPES } from "oni-save-parser";
 
+import ACCESSORIES_BY_TYPE from "./accessories-by-type";
+
 import { Intent } from "@/theme";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";
 
 import FormGroup from "@/components/FormGroup";
-import NullableInput from "@/components/NullableInput";
+import NullableInput, {
+  InputCompatibleProps
+} from "@/components/NullableInput";
 import TextInput from "@/components/TextInput";
 import EditModeCondition from "@/components/EditModeCondition";
 import NumericField from "@/pages/SaveEditor/components/fields/NumericField";
 import Text from "@/components/Text";
+import TextAutocompleteInput from "@/components/TextAutocompleteInput";
 
 export interface MinionAppearanceTabProps {
   gameObjectPath: string[];
@@ -65,10 +70,10 @@ class MinionAppearanceTab extends React.Component<Props> {
         <TDText>{type}</TDText>
         <td>
           <NullableInput
-            renderInput={props => <TextInput {...props} minLength={1} />}
+            renderInput={props => this._renderAccessorySelector(type, props)}
             renderNull={type !== "mouth" ? NoAccessory : NoAccessoryMouth}
             value={this.props[type]}
-            defaultValue=""
+            defaultValue={(ACCESSORIES_BY_TYPE[type] || [])[0] || ""}
             onCommit={onSetAccessory.bind(this, selectedPath, type)}
           />
         </td>
@@ -84,6 +89,24 @@ class MinionAppearanceTab extends React.Component<Props> {
     }
 
     return editGroup;
+  }
+
+  private _renderAccessorySelector(
+    type: AccessoryType,
+    props: InputCompatibleProps<string>
+  ) {
+    const accessoryNames = ACCESSORIES_BY_TYPE[type];
+    if (!accessoryNames || accessoryNames.length === 0) {
+      return <TextInput {...props} minLength={1} />;
+    } else {
+      return (
+        <TextAutocompleteInput
+          value={props.value}
+          items={accessoryNames}
+          onCommit={props.onCommit}
+        />
+      );
+    }
   }
 }
 export default connect(

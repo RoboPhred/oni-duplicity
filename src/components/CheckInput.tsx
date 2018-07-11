@@ -4,12 +4,12 @@ import { autobind } from "core-decorators";
 
 import Input from "@/components/Input";
 
-export interface TextInputProps {
+export interface CheckInputProps {
   value: boolean;
   onCommit(value: boolean): void;
 }
 
-type Props = TextInputProps;
+type Props = CheckInputProps;
 export default class CheckInput extends React.Component<Props> {
   render() {
     const { value } = this.props;
