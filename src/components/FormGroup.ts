@@ -4,6 +4,8 @@ import { TextProps, text, getTheme } from "@/theme";
 
 import { attachProps } from "@/utils";
 
+import Box, { BoxProps } from "@/components/Box";
+
 export type FormLabelProps = TextProps;
 const Label = styled<FormLabelProps, "label">("label")`
   ${text};
@@ -11,7 +13,12 @@ const Label = styled<FormLabelProps, "label">("label")`
 `;
 Label.displayName = "FormGroup.Label";
 
-const Content = styled.div``;
+export type FormContentProps = BoxProps;
+const Content = Box.extend`
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+`;
 Content.displayName = "FormGroup.Content";
 
 const FormGroup = styled.div`

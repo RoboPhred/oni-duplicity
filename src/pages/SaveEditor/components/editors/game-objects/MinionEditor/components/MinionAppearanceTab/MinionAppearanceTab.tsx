@@ -20,19 +20,15 @@ import NumericField from "@/pages/SaveEditor/components/fields/NumericField";
 import Text from "@/components/Text";
 import TextAutocompleteInput from "@/components/TextAutocompleteInput";
 
-export interface MinionAppearanceTabProps {
-  gameObjectPath: string[];
-}
-
 const TDText = Text.withComponent("td");
 
 const NoAccessory = <Text intent={Intent.Secondary}>None</Text>;
 const NoAccessoryMouth = <Text intent={Intent.Dangerous}>I Must Scream</Text>;
 
-type Props = MinionAppearanceTabProps & StateProps & DispatchProps;
+type Props = StateProps & DispatchProps;
 class MinionAppearanceTab extends React.Component<Props> {
   render() {
-    const { gameObjectPath } = this.props;
+    const { selectedPath } = this.props;
     const fields = ACCESSORY_TYPES.map(type =>
       this._renderAccessoryField(type)
     );
@@ -47,13 +43,13 @@ class MinionAppearanceTab extends React.Component<Props> {
             <FormGroup>
               <FormGroup.Label>X</FormGroup.Label>
               <FormGroup.Content>
-                <NumericField path={[...gameObjectPath, "scale", "x"]} />
+                <NumericField path={[...selectedPath, "scale", "x"]} />
               </FormGroup.Content>
             </FormGroup>
             <FormGroup>
               <FormGroup.Label>Y</FormGroup.Label>
               <FormGroup.Content>
-                <NumericField path={[...gameObjectPath, "scale", "y"]} />
+                <NumericField path={[...selectedPath, "scale", "y"]} />
               </FormGroup.Content>
             </FormGroup>
           </FormGroup.Content>

@@ -7,7 +7,7 @@ import { Intent } from "@/theme";
 
 import Text from "@/components/Text";
 import NumericInput from "@/components/NumericInput";
-import Select, { Option } from "@/components/select";
+import Select, { Option } from "@/components/Select";
 
 import connectEditorField, {
   EditorFieldProps,

@@ -23,6 +23,8 @@ const Creatable = styled<SelectCreatableProps>(ReactSelectCreatable)`
 Creatable.displayName = "Select.Creatable";
 
 export interface SelectProps extends ReactSelectProps, WidthProps, TextProps {}
+// TODO: We need to pass the generated className to the specific className structure
+//  for the various sub-components of Select.
 const Select = styled<SelectProps>(ReactSelect)`
   ${text};
   ${width};
