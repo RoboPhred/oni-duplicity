@@ -13,6 +13,8 @@ import { Intent } from "@/theme";
 
 import getFieldElementClass from "./from-typeinfo";
 
+const TD = Text.withComponent("td");
+
 export interface ArrayLikeFieldProps extends EditorFieldProps {
   subType: TypeInfo;
 }
@@ -25,7 +27,7 @@ const ArrayLikeField: React.SFC<ArrayLikeFieldProps & InjectedProps> = ({
   const elements = (value as any[]).map((value, i) => {
     return (
       <tr key={i}>
-        <td>{i}</td>
+        <TD>{i}</TD>
         <td>
           <ValueElement path={[...path, `${i}`]} />
         </td>

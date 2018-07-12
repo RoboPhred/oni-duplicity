@@ -2,6 +2,7 @@ import reduceReducers from "reduce-reducers";
 
 import dismissErrorReducer from "./dismiss-error";
 import modifyOniSave from "./modify-onisave";
+import modifyOniSaveArray from "./modify-onisave-array";
 import receiveOniSaveReducer from "./receive-onisave";
 import selectPathReducer from "./select-path";
 import setAccessoryReducer from "./set-accessory";
@@ -10,6 +11,7 @@ import setEditModeReducer from "./set-editmode";
 const reducers = [
   dismissErrorReducer,
   modifyOniSave,
+  modifyOniSaveArray,
   receiveOniSaveReducer,
   selectPathReducer,
   setAccessoryReducer,
