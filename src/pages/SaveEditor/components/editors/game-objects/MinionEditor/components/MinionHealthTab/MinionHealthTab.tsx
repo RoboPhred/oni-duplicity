@@ -1,24 +1,26 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
+import { autobind } from "core-decorators";
+
+import { HealthState } from "oni-save-parser";
+
 import mapStateToProps, { StateProps } from "./derived-state";
+import mapDispatchToProps, { DispatchProps } from "./events";
 
 import FormGroup from "@/components/FormGroup";
-import SelectField from "@/pages/SaveEditor/components/fields/SelectField";
-import { HealthState } from "oni-save-parser";
-import NumericField from "@/pages/SaveEditor/components/fields/NumericField";
+import SelectInput from "@/components/SelectInput";
+import NumericInput from "@/components/NumericInput";
 
-type Props = StateProps;
+type Props = StateProps & DispatchProps;
 class MinionHealthTab extends React.Component<Props> {
   render() {
-    const { healthDataPath, primaryElementDataPath } = this.props;
-    if (!healthDataPath) {
-      return "No Health Data";
-    }
-
-    if (!primaryElementDataPath) {
-      return "No Primary Element";
-    }
+    const {
+      healthState,
+      onHealthStatusChanged,
+      surfaceDiseaseId,
+      surfaceDiseaseCount
+    } = this.props;
 
     const options = Object.keys(HealthState)
       .filter(x => isNaN(parseInt(x)))
@@ -30,12 +32,17 @@ class MinionHealthTab extends React.Component<Props> {
     return (
       <React.Fragment>
         <FormGroup label="Status">
-          <SelectField path={[...healthDataPath, "State"]} options={options} />
+          <SelectInput
+            value={healthState || HealthState.Perfect}
+            options={options}
+            onCommit={onHealthStatusChanged}
+          />
         </FormGroup>
         <FormGroup label="Germs">
           <FormGroup label="DiseaseID">
-            <NumericField
-              path={[...primaryElementDataPath, "diseaseID", "hash"]}
+            <NumericInput
+              value={surfaceDiseaseId ? surfaceDiseaseId.hash : 0}
+              onCommit={this._onSurfaceDiseaseIdCommit}
             />
             <div>
               TODO: selector for disease type hashes with advanced mode custom
@@ -43,12 +50,30 @@ class MinionHealthTab extends React.Component<Props> {
             </div>
           </FormGroup>
           <FormGroup label="Count">
-            <NumericField path={[...primaryElementDataPath, "diseaseCount"]} />
+            <NumericInput
+              minValue={0}
+              value={surfaceDiseaseCount || 0}
+              onCommit={this._onSurfaceDiseaseCountCommit}
+            />
           </FormGroup>
         </FormGroup>
         TODO health points, stanima, internal disease, so on.
       </React.Fragment>
     );
   }
+
+  @autobind()
+  private _onSurfaceDiseaseIdCommit(value: number) {
+    const { onSurfaceDiseaseChanged } = this.props;
+    onSurfaceDiseaseChanged({ hash: value }, 0);
+  }
+
+  private _onSurfaceDiseaseCountCommit(value: number) {
+    const { surfaceDiseaseId, onSurfaceDiseaseChanged } = this.props;
+    onSurfaceDiseaseChanged(surfaceDiseaseId || { hash: 0 }, value);
+  }
 }
-export default connect(mapStateToProps)(MinionHealthTab);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MinionHealthTab);

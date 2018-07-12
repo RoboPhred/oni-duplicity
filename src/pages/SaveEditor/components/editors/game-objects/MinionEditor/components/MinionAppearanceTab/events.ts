@@ -1,4 +1,4 @@
-import { setAccessory } from "@/actions/set-accessory";
+import { setAccessory } from "@/actions/behaviors/set-accessory";
 
 const mapDispatchToProps = {
   onSetAccessory: setAccessory

@@ -2,7 +2,7 @@ import produce from "immer";
 
 import { set } from "lodash-es";
 
-import { AppState } from "@/state";
+import { AppState, defaultAppState } from "@/state";
 
 import {
   ACTION_ONISAVE_MODIFY,
@@ -10,7 +10,7 @@ import {
 } from "../actions/modify-onisave";
 
 export default function modifyOniSaveReducer(
-  state: AppState,
+  state: AppState = defaultAppState,
   action: ModifyOniSaveAction
 ): AppState {
   if (action.type !== ACTION_ONISAVE_MODIFY) {

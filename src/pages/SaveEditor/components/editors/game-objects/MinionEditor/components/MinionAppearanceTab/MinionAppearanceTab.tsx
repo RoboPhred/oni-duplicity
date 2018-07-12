@@ -78,8 +78,7 @@ class MinionAppearanceTab extends React.Component<Props> {
   }
 
   private _renderAccessoryField(type: AccessoryType) {
-    // FIXME: Code smell: pulling in a state prop just to pass to dispatch.
-    const { onSetAccessory, selectedPath } = this.props;
+    const { onSetAccessory } = this.props;
     let editGroup = (
       <tr key={type}>
         <TDText>{type}</TDText>
@@ -89,7 +88,7 @@ class MinionAppearanceTab extends React.Component<Props> {
             renderNull={type !== "mouth" ? NoAccessory : NoAccessoryMouth}
             value={this.props[type]}
             defaultValue={(ACCESSORIES_BY_TYPE[type] || [])[0] || ""}
-            onCommit={onSetAccessory.bind(this, selectedPath, type)}
+            onCommit={onSetAccessory.bind(this, type)}
           />
         </td>
       </tr>

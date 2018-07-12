@@ -48,11 +48,9 @@ class DuplicantEditor extends React.Component<Props> {
 
           <VerticalTabs.Tab tabKey="aptitude" header="Aptitude" />
 
-          <EditModeCondition editMode="advanced">
-            <VerticalTabs.Tab tabKey="position" header="Position">
-              <MinionPositionTab gameObjectPath={gameObjectPath} />
-            </VerticalTabs.Tab>
-          </EditModeCondition>
+          <VerticalTabs.Tab tabKey="position" header="Position">
+            <MinionPositionTab gameObjectPath={gameObjectPath} />
+          </VerticalTabs.Tab>
         </VerticalTabs>
       </EditorContainer>
     );
