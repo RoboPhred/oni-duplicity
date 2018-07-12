@@ -68,6 +68,7 @@ class MinionHealthTab extends React.Component<Props> {
     onSurfaceDiseaseChanged({ hash: value }, 0);
   }
 
+  @autobind()
   private _onSurfaceDiseaseCountCommit(value: number) {
     const { surfaceDiseaseId, onSurfaceDiseaseChanged } = this.props;
     onSurfaceDiseaseChanged(surfaceDiseaseId || { hash: 0 }, value);
