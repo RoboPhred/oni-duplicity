@@ -1,5 +1,7 @@
 import { createSelector } from "reselect";
 
+import { GameObject } from "oni-save-parser";
+
 import { get } from "lodash-es";
 
 import selectedPath from "./selected-path";
@@ -39,7 +41,17 @@ export const getSelectedGameObject = createSelector(
       return null;
     }
 
-    return get(oniSave, path);
+    return get(oniSave, path) as GameObject;
+  }
+);
+
+export const getSelectedGameObjectScale = createSelector(
+  getSelectedGameObject,
+  gameObject => {
+    if (!gameObject) {
+      return null;
+    }
+    return gameObject.scale;
   }
 );
 

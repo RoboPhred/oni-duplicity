@@ -1,5 +1,6 @@
 import { createSelector } from "reselect";
-import { GameObject, HealthBehavior, getBehavior } from "oni-save-parser";
+
+import { HealthBehavior, getBehavior } from "oni-save-parser";
 
 import { AppState } from "@/state";
 
@@ -7,7 +8,7 @@ import { getSelectedGameObject } from "../game-object";
 
 export const getSelectedGameObjectHealthBehavior = createSelector(
   getSelectedGameObject,
-  (gameObject: GameObject) => {
+  gameObject => {
     if (!gameObject) {
       return null;
     }

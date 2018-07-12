@@ -1,6 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
+import { autobind } from "core-decorators";
+
 import {
   AccessoryType,
   ACCESSORY_TYPES,
@@ -25,6 +27,8 @@ import Text from "@/components/Text";
 import TextAutocompleteInput from "@/components/TextAutocompleteInput";
 import SelectField from "@/pages/SaveEditor/components/fields/SelectField";
 import { Option } from "@/components/Select";
+import NumericInput from "@/components/NumericInput";
+import SelectInput from "@/components/SelectInput";
 
 const TDText = Text.withComponent("td");
 
@@ -34,10 +38,7 @@ const NoAccessoryMouth = <Text intent={Intent.Dangerous}>I Must Scream</Text>;
 type Props = StateProps & DispatchProps;
 class MinionAppearanceTab extends React.Component<Props> {
   render() {
-    const { selectedPath, identityDataPath } = this.props;
-    if (!identityDataPath) {
-      return "No MinionIdentity Behavior";
-    }
+    const { gender, onSetGender, scale } = this.props;
 
     const fields = ACCESSORY_TYPES.map(type =>
       this._renderAccessoryField(type)
@@ -51,13 +52,10 @@ class MinionAppearanceTab extends React.Component<Props> {
     return (
       <React.Fragment>
         <FormGroup label="Gender">
-          <SelectField
-            path={[...identityDataPath, "gender"]}
-            writeTo={[
-              [...identityDataPath, "gender"],
-              [...identityDataPath, "genderStringKey"]
-            ]}
+          <SelectInput
+            value={gender || MINION_IDENTITY_GENDERS[0]}
             options={genderOpts}
+            onCommit={onSetGender}
           />
         </FormGroup>
         <FormGroup label="Appearance">
@@ -67,14 +65,42 @@ class MinionAppearanceTab extends React.Component<Props> {
         </FormGroup>
         <FormGroup label="Scale">
           <FormGroup label="X">
-            <NumericField path={[...selectedPath, "scale", "x"]} />
+            <NumericInput
+              value={scale ? scale.x : 1}
+              precision="single"
+              onCommit={this._setScaleX}
+            />
           </FormGroup>
           <FormGroup label="Y">
-            <NumericField path={[...selectedPath, "scale", "y"]} />
+            <NumericInput
+              value={scale ? scale.y : 1}
+              precision="single"
+              onCommit={this._setScaleY}
+            />
           </FormGroup>
         </FormGroup>
       </React.Fragment>
     );
+  }
+
+  @autobind()
+  private _setScaleX(value: number) {
+    const { scale, onSetScale } = this.props;
+    onSetScale({
+      x: value,
+      y: scale ? scale.y : 1,
+      z: scale ? scale.z : 1
+    });
+  }
+
+  @autobind()
+  private _setScaleY(value: number) {
+    const { scale, onSetScale } = this.props;
+    onSetScale({
+      x: scale ? scale.x : 1,
+      y: value,
+      z: scale ? scale.z : 1
+    });
   }
 
   private _renderAccessoryField(type: AccessoryType) {

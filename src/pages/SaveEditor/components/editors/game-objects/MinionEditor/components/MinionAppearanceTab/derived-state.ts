@@ -7,26 +7,31 @@ import {
   AccessoryType,
   getAccessoryName,
   getAccessoryOfType,
-  getBehavior,
-  MinionIdentityBehavior
+  getBehavior
 } from "oni-save-parser";
 
 import { AppState } from "@/state";
 
+import { getSelectedGameObjectIdentityGender } from "@/selectors/behaviors/identity";
+import { getSelectedGameObjectScale } from "@/selectors/game-object";
+
 import selectedValue from "@/selectors/selected-value";
 import selectedPath from "@/selectors/selected-path";
 
-const behavior = createSelector(selectedValue, (gameObject: GameObject) => {
-  if (!gameObject) {
-    return null;
+const accessorizerBehavior = createSelector(
+  selectedValue,
+  (gameObject: GameObject) => {
+    if (!gameObject) {
+      return null;
+    }
+    return getBehavior(gameObject, AccessorizerBehavior);
   }
-  return getBehavior(gameObject, AccessorizerBehavior);
-});
+);
 
 function createAccessorySelector(
   accessoryType: AccessoryType
 ): Selector<AppState, string | null> {
-  return createSelector(behavior, behavior => {
+  return createSelector(accessorizerBehavior, behavior => {
     if (!behavior) {
       return null;
     }
@@ -42,32 +47,10 @@ function createAccessorySelector(
   });
 }
 
-const identityDataPath = createSelector(
-  selectedValue,
-  selectedPath,
-  (gameObject: GameObject, selectedPath) => {
-    if (!gameObject) {
-      return;
-    }
-
-    const healthBehaviorIndex = gameObject.behaviors.findIndex(
-      x => x.name === MinionIdentityBehavior
-    );
-    if (healthBehaviorIndex === -1) {
-      return null;
-    }
-    return [
-      ...selectedPath,
-      "behaviors",
-      `${healthBehaviorIndex}`,
-      "templateData"
-    ];
-  }
-);
-
 const structuredSelector = {
   selectedPath,
-  identityDataPath
+  gender: getSelectedGameObjectIdentityGender,
+  scale: getSelectedGameObjectScale
 };
 ACCESSORY_TYPES.forEach(x => {
   (structuredSelector as any)[x] = createAccessorySelector(x);

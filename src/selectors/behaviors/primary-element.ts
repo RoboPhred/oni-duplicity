@@ -1,16 +1,14 @@
 import { createSelector } from "reselect";
-import {
-  GameObject,
-  PrimaryElementBehavior,
-  getBehavior
-} from "oni-save-parser";
+
+import { PrimaryElementBehavior, getBehavior } from "oni-save-parser";
+
+import { AppState } from "@/state";
 
 import getSelectedGameObject from "../game-object";
-import { AppState } from "@/state";
 
 export const getSelectedGameObjectElementBehavior = createSelector(
   getSelectedGameObject,
-  (gameObject: GameObject) => {
+  gameObject => {
     if (!gameObject) {
       return null;
     }
