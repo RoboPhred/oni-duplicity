@@ -18,7 +18,6 @@ export default function receiveOniSaveReducer(
         loadingState: action.payload.operation,
         oniSave: action.payload.clearExisting ? null : state.oniSave
       };
-      break;
     case ACTION_RECEIVE_ONISAVE_ERROR:
       state = {
         ...state,
