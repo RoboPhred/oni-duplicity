@@ -5,11 +5,22 @@ import Box, { BoxProps } from "./Box";
 export interface FlexItemProps extends BoxProps {
   grow?: boolean;
   shrink?: boolean;
+  fillParent?: boolean;
+  constrain?: "row" | "column";
 }
 
 const FlexItem = Box.extend<FlexItemProps>`
-  flex-grow: ${props => (props.grow ? 1 : 0)};
-  flex-shrink: ${props => (props.shrink ? 1 : 0)};
+  ${props => props.grow && "flex-grow: 1"};
+  ${props => props.shrink && "flex-shrink: 1"};
+  ${props =>
+    props.fillParent &&
+    (props.constrain ? "flex: 0 1 auto" : "flex: 1 1 auto")};
+  ${props =>
+    props.constrain &&
+    (props.constrain === "row"
+      ? ["min-width: 0;", "width: 100%;"]
+      : ["min-height: 0;", "height: 100%;"])};
+  ${props => props.shrink && "min-height: 0;"};
   flex-basis: auto;
   box-sizing: border-box;
 `;

@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
 
+import scrollIntoView from "dom-scroll-into-view";
+
 import { Intent } from "@/theme";
 
 import { SaveStructureItemProps } from "./props";
@@ -48,7 +50,7 @@ class SaveStructureItemComponent extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    const { title, selectionStatus, childPaths } = this.props;
+    const { title, selectionStatus, childPaths, scrollContainer } = this.props;
     let { isExpanded } = this.state;
 
     const isExpandable = childPaths.length > 0;
@@ -71,7 +73,13 @@ class SaveStructureItemComponent extends React.Component<Props, State> {
     if (isExpandable && isExpanded) {
       valueElement = childPaths.map(childPath => {
         const key = childPath[childPath.length - 1];
-        return <SaveStructureItem key={key} saveItemPath={childPath} />;
+        return (
+          <SaveStructureItem
+            key={key}
+            saveItemPath={childPath}
+            scrollContainer={scrollContainer}
+          />
+        );
       });
     }
 
@@ -92,15 +100,22 @@ class SaveStructureItemComponent extends React.Component<Props, State> {
   }
 
   private _scrollIntoView() {
-    if (this._ref.current) {
-      const { childPaths } = this.props;
-      // Scrolls into view regardless.  Need to not scroll if already visible.
-      // this._ref.current.scrollIntoView();
-      if (childPaths.length > 0) {
-        this.setState({
-          isExpanded: true
-        });
-      }
+    const htmlElement = this._ref.current;
+    const { childPaths, scrollContainer } = this.props;
+
+    if (childPaths.length > 0) {
+      this.setState({
+        isExpanded: true
+      });
+    }
+
+    if (htmlElement && scrollContainer.current) {
+      scrollIntoView(htmlElement, scrollContainer.current, {
+        allowHorizontalScroll: true,
+        onlyScrollIfNeeded: true,
+        offsetBottom: 125,
+        offsetTop: 125
+      });
     }
   }
 

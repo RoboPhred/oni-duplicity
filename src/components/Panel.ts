@@ -8,7 +8,6 @@ const Panel = styled<BoxProps, "div">("div")`
   ${width};
   ${height};
   background-color: ${props => getTheme(props).colors.bg.panel};
-  overflow: auto;
 `;
 Panel.displayName = "Panel";
 export default Panel;
