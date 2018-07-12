@@ -32,13 +32,10 @@ class DuplicantEditor extends React.Component<Props> {
         <VerticalTabs width="100%">
           <VerticalTabs.Tab tabKey="appearance" header="Appearance">
             <MinionAppearanceTab />
-            <br />
-            TODO scale
           </VerticalTabs.Tab>
 
           <VerticalTabs.Tab tabKey="health" header="Health">
             <MinionHealthTab />
-            TODO health points, stanima, diseases (surface and ingested), so on.
           </VerticalTabs.Tab>
 
           <VerticalTabs.Tab tabKey="position" header="Position">

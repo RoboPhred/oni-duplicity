@@ -8,23 +8,14 @@ import NumericField from "./NumericField";
 
 const Vector3Field: React.SFC<EditorFieldProps> = ({ path }) => (
   <div>
-    <FormGroup>
-      <FormGroup.Label>X</FormGroup.Label>
-      <FormGroup.Content>
-        <NumericField precision="single" path={[...path, "x"]} />
-      </FormGroup.Content>
+    <FormGroup label="X">
+      <NumericField precision="single" path={[...path, "x"]} />
     </FormGroup>
-    <FormGroup>
-      <FormGroup.Label>Y</FormGroup.Label>
-      <FormGroup.Content>
-        <NumericField precision="single" path={[...path, "y"]} />
-      </FormGroup.Content>
+    <FormGroup label="Y">
+      <NumericField precision="single" path={[...path, "y"]} />
     </FormGroup>
-    <FormGroup>
-      <FormGroup.Label>Z</FormGroup.Label>
-      <FormGroup.Content>
-        <NumericField precision="single" path={[...path, "z"]} />
-      </FormGroup.Content>
+    <FormGroup label="Z">
+      <NumericField precision="single" path={[...path, "z"]} />
     </FormGroup>
   </div>
 );

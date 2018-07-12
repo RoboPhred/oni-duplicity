@@ -7,7 +7,8 @@ import {
   AccessoryType,
   getAccessoryName,
   getAccessoryOfType,
-  getBehavior
+  getBehavior,
+  MinionIdentityBehavior
 } from "oni-save-parser";
 
 import { AppState } from "@/state";
@@ -41,8 +42,32 @@ function createAccessorySelector(
   });
 }
 
+const identityDataPath = createSelector(
+  selectedValue,
+  selectedPath,
+  (gameObject: GameObject, selectedPath) => {
+    if (!gameObject) {
+      return;
+    }
+
+    const healthBehaviorIndex = gameObject.behaviors.findIndex(
+      x => x.name === MinionIdentityBehavior
+    );
+    if (healthBehaviorIndex === -1) {
+      return null;
+    }
+    return [
+      ...selectedPath,
+      "behaviors",
+      `${healthBehaviorIndex}`,
+      "templateData"
+    ];
+  }
+);
+
 const structuredSelector = {
-  selectedPath
+  selectedPath,
+  identityDataPath
 };
 ACCESSORY_TYPES.forEach(x => {
   (structuredSelector as any)[x] = createAccessorySelector(x);

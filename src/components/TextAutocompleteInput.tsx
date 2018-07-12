@@ -2,8 +2,6 @@ import * as React from "react";
 
 import { autobind } from "core-decorators";
 
-import Keys from "@/keys";
-
 import Autocomplete from "@/components/Autocomplete";
 
 export interface TextAutocompleteInputProps {

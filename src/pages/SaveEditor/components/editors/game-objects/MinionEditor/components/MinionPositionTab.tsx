@@ -11,33 +11,24 @@ const MinionPositionTab: React.SFC<PositionTabContentProps> = ({
   gameObjectPath
 }) => (
   <React.Fragment>
-    <FormGroup>
-      <FormGroup.Label>X</FormGroup.Label>
-      <FormGroup.Content>
-        <NumericField
-          precision="single"
-          path={[...gameObjectPath, "position", "x"]}
-        />
-      </FormGroup.Content>
+    <FormGroup label="X">
+      <NumericField
+        precision="single"
+        path={[...gameObjectPath, "position", "x"]}
+      />
     </FormGroup>
-    <FormGroup>
-      <FormGroup.Label>Y</FormGroup.Label>
-      <FormGroup.Content>
-        <NumericField
-          precision="single"
-          path={[...gameObjectPath, "position", "y"]}
-        />
-      </FormGroup.Content>
+    <FormGroup label="Y">
+      <NumericField
+        precision="single"
+        path={[...gameObjectPath, "position", "y"]}
+      />
     </FormGroup>
     <EditModeCondition editMode="advanced">
-      <FormGroup>
-        <FormGroup.Label>Z</FormGroup.Label>
-        <FormGroup.Content>
-          <NumericField
-            precision="single"
-            path={[...gameObjectPath, "position", "z"]}
-          />
-        </FormGroup.Content>
+      <FormGroup label="Z">
+        <NumericField
+          precision="single"
+          path={[...gameObjectPath, "position", "z"]}
+        />
       </FormGroup>
     </EditModeCondition>
   </React.Fragment>

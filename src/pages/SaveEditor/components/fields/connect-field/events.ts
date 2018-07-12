@@ -6,7 +6,13 @@ import { Dispatch } from "redux";
 function mapDispatchToProps(dispatch: Dispatch, props: EditorFieldProps) {
   return {
     onCommit(value: any) {
-      dispatch(modifyOniSave(props.path, value));
+      if (props.writeTo) {
+        props.writeTo.forEach(path => {
+          dispatch(modifyOniSave(props.path, value));
+        });
+      } else {
+        dispatch(modifyOniSave(props.path, value));
+      }
     }
   };
 }

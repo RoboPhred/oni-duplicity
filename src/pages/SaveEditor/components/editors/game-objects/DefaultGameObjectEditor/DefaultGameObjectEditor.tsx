@@ -6,6 +6,7 @@ import { Intent } from "@/theme";
 import mapStateToProps, { StateProps } from "./derived-state";
 
 import FormGroup from "@/components/FormGroup";
+import EditModeCondition from "@/components/EditModeCondition";
 
 import NumericField from "@/pages/SaveEditor/components/fields/NumericField";
 
@@ -26,60 +27,41 @@ class DefaultGameObjectEditor extends React.Component<Props> {
         <GameObjectHeader>
           <EditorHeader intent={Intent.Primary}>{gameObjectName}</EditorHeader>
         </GameObjectHeader>
-        <FormGroup>
-          <FormGroup.Label>Position</FormGroup.Label>
-          <FormGroup.Content>
-            <FormGroup>
-              <FormGroup.Label>X</FormGroup.Label>
-              <FormGroup.Content>
-                <NumericField
-                  precision="single"
-                  path={[...gameObjectPath, "position", "x"]}
-                />
-              </FormGroup.Content>
+        <FormGroup label="Position">
+          <FormGroup label="X">
+            <NumericField
+              precision="single"
+              path={[...gameObjectPath, "position", "x"]}
+            />
+          </FormGroup>
+          <FormGroup label="Y">
+            <NumericField
+              precision="single"
+              path={[...gameObjectPath, "position", "y"]}
+            />
+          </FormGroup>
+          <EditModeCondition editMode="advanced">
+            <FormGroup label="Z">
+              <NumericField
+                precision="single"
+                path={[...gameObjectPath, "position", "z"]}
+              />
             </FormGroup>
-            <FormGroup>
-              <FormGroup.Label>Y</FormGroup.Label>
-              <FormGroup.Content>
-                <NumericField
-                  precision="single"
-                  path={[...gameObjectPath, "position", "y"]}
-                />
-              </FormGroup.Content>
-            </FormGroup>
-            <FormGroup>
-              <FormGroup.Label>Z</FormGroup.Label>
-              <FormGroup.Content>
-                <NumericField
-                  precision="single"
-                  path={[...gameObjectPath, "position", "z"]}
-                />
-              </FormGroup.Content>
-            </FormGroup>
-          </FormGroup.Content>
+          </EditModeCondition>
         </FormGroup>
-        <FormGroup>
-          <FormGroup.Label>Scale</FormGroup.Label>
-          <FormGroup.Content>
-            <FormGroup>
-              <FormGroup.Label>X</FormGroup.Label>
-              <FormGroup.Content>
-                <NumericField
-                  precision="single"
-                  path={[...gameObjectPath, "scale", "x"]}
-                />
-              </FormGroup.Content>
-            </FormGroup>
-            <FormGroup>
-              <FormGroup.Label>Y</FormGroup.Label>
-              <FormGroup.Content>
-                <NumericField
-                  precision="single"
-                  path={[...gameObjectPath, "scale", "y"]}
-                />
-              </FormGroup.Content>
-            </FormGroup>
-          </FormGroup.Content>
+        <FormGroup label="Scale">
+          <FormGroup label="X">
+            <NumericField
+              precision="single"
+              path={[...gameObjectPath, "scale", "x"]}
+            />
+          </FormGroup>
+          <FormGroup label="Y">
+            <NumericField
+              precision="single"
+              path={[...gameObjectPath, "scale", "y"]}
+            />
+          </FormGroup>
         </FormGroup>
       </EditorContainer>
     );

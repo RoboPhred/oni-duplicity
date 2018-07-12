@@ -6,13 +6,18 @@ import mapStateToProps, { StateProps } from "./derived-state";
 import FormGroup from "@/components/FormGroup";
 import SelectField from "@/pages/SaveEditor/components/fields/SelectField";
 import { HealthState } from "oni-save-parser";
+import NumericField from "@/pages/SaveEditor/components/fields/NumericField";
 
 type Props = StateProps;
 class MinionHealthTab extends React.Component<Props> {
   render() {
-    const { healthStatePath } = this.props;
-    if (!healthStatePath) {
-      return null;
+    const { healthDataPath, primaryElementDataPath } = this.props;
+    if (!healthDataPath) {
+      return "No Health Data";
+    }
+
+    if (!primaryElementDataPath) {
+      return "No Primary Element";
     }
 
     const options = Object.keys(HealthState)
@@ -24,12 +29,24 @@ class MinionHealthTab extends React.Component<Props> {
 
     return (
       <React.Fragment>
-        <FormGroup>
-          <FormGroup.Label>Status</FormGroup.Label>
-          <FormGroup.Content width="100%">
-            <SelectField path={healthStatePath} options={options} />
-          </FormGroup.Content>
+        <FormGroup label="Status">
+          <SelectField path={[...healthDataPath, "State"]} options={options} />
         </FormGroup>
+        <FormGroup label="Germs">
+          <FormGroup label="DiseaseID">
+            <NumericField
+              path={[...primaryElementDataPath, "diseaseID", "hash"]}
+            />
+            <div>
+              TODO: selector for disease type hashes with advanced mode custom
+              string.
+            </div>
+          </FormGroup>
+          <FormGroup label="Count">
+            <NumericField path={[...primaryElementDataPath, "diseaseCount"]} />
+          </FormGroup>
+        </FormGroup>
+        TODO health points, stanima, internal disease, so on.
       </React.Fragment>
     );
   }
