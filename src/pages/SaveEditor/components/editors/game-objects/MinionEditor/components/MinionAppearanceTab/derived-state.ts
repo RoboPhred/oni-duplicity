@@ -12,7 +12,7 @@ import {
 
 import { AppState } from "@/state";
 
-import { getSelectedGameObjectIdentityGender } from "@/selectors/behaviors/identity";
+import { getSelectedGameObjectGender } from "@/selectors/behaviors/minion-identity";
 import { getSelectedGameObjectScale } from "@/selectors/game-object";
 
 import selectedValue from "@/selectors/selected-value";
@@ -49,7 +49,7 @@ function createAccessorySelector(
 
 const structuredSelector = {
   selectedPath,
-  gender: getSelectedGameObjectIdentityGender,
+  gender: getSelectedGameObjectGender,
   scale: getSelectedGameObjectScale
 };
 ACCESSORY_TYPES.forEach(x => {

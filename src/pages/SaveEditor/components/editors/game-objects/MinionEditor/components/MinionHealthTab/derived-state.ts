@@ -15,10 +15,13 @@ import {
   getSelectedGameObjectElementDiseaseCount
 } from "@/selectors/behaviors/primary-element";
 
+import { getSelectedGameObjectHitPoints } from "@/selectors/behaviors/minion-modifiers";
+
 const structuredSelector = {
   healthState: getSelectedGameObjectHealthState,
   surfaceDiseaseId: getSelectedGameObjectElementDiseaseId,
-  surfaceDiseaseCount: getSelectedGameObjectElementDiseaseCount
+  surfaceDiseaseCount: getSelectedGameObjectElementDiseaseCount,
+  hitpoints: getSelectedGameObjectHitPoints
 };
 export type StateProps = StructuredStateProps<typeof structuredSelector>;
 const mapStateToProps = createStructuredSelector<AppState, StateProps>(

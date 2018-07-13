@@ -4,12 +4,11 @@ import { connect } from "react-redux";
 import { autobind } from "core-decorators";
 
 import {
-  AccessoryType,
+  ACCESSORIES_BY_TYPE,
   ACCESSORY_TYPES,
-  MINION_IDENTITY_GENDERS
+  MINION_IDENTITY_GENDERS,
+  AccessoryType
 } from "oni-save-parser";
-
-import ACCESSORIES_BY_TYPE from "./accessories-by-type";
 
 import { Intent } from "@/theme";
 
@@ -22,10 +21,8 @@ import NullableInput, {
 } from "@/components/NullableInput";
 import TextInput from "@/components/TextInput";
 import EditModeCondition from "@/components/EditModeCondition";
-import NumericField from "@/pages/SaveEditor/components/fields/NumericField";
 import Text from "@/components/Text";
 import TextAutocompleteInput from "@/components/TextAutocompleteInput";
-import SelectField from "@/pages/SaveEditor/components/fields/SelectField";
 import { Option } from "@/components/Select";
 import NumericInput from "@/components/NumericInput";
 import SelectInput from "@/components/SelectInput";

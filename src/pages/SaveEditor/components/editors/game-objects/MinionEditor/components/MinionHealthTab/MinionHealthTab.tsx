@@ -18,6 +18,8 @@ class MinionHealthTab extends React.Component<Props> {
     const {
       healthState,
       onHealthStatusChanged,
+      hitpoints,
+      onHitpointsChanged,
       surfaceDiseaseId,
       surfaceDiseaseCount
     } = this.props;
@@ -36,6 +38,13 @@ class MinionHealthTab extends React.Component<Props> {
             value={healthState || HealthState.Perfect}
             options={options}
             onCommit={onHealthStatusChanged}
+          />
+        </FormGroup>
+        <FormGroup label="HitPoints">
+          <NumericInput
+            value={hitpoints || 0}
+            onCommit={onHitpointsChanged}
+            minValue={0}
           />
         </FormGroup>
         <FormGroup label="Germs">

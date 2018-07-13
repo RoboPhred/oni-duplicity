@@ -17,7 +17,7 @@ export const getSelectedGameObjectIdentityBehavior = createSelector(
   }
 );
 
-export const getSelectedGameObjectIdentityGender = (state: AppState) => {
+export const getSelectedGameObjectGender = (state: AppState) => {
   const behavior = getSelectedGameObjectIdentityBehavior(state);
   if (!behavior) {
     return null;
