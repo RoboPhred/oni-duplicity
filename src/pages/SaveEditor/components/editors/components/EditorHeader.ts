@@ -1,7 +1,8 @@
 import Text from "@/components/Text";
+import { FontSize } from "@/theme";
 
 const EditorHeader = Text.extend.attrs({
-  fontSize: 4,
+  fontSize: FontSize.Heading,
   fontWeight: "bold"
 })`
   align-self: baseline;

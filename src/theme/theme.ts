@@ -69,13 +69,26 @@ export const enum Space {
 const space = [0, 4, 8, 12];
 
 export const enum FontSize {
+  Hint = 0,
+  Small = 0,
+
+  Button = 1,
+
   Default = 2,
   HeadingMinor = 3,
   Heading = 4
 }
 const fontSizes = [12, 14, 16, 20, 24, 32, 48, 64, 96, 128];
 
-// border-radius
+export const enum Radii {
+  None = 0,
+
+  Small = 1,
+  Button = 1,
+
+  Medium = 2,
+  Large = 3
+}
 const radii = [0, 2, 4, 8];
 
 const borders = [0, "1px solid", "2px solid"];
