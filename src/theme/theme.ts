@@ -60,8 +60,19 @@ const colors = {
   bg: backgroundColors
 };
 
+export const enum Space {
+  None,
+  Small,
+  Medium,
+  Large
+}
 const space = [0, 4, 8, 12];
 
+export const enum FontSize {
+  Default = 2,
+  HeadingMinor = 3,
+  Heading = 4
+}
 const fontSizes = [12, 14, 16, 20, 24, 32, 48, 64, 96, 128];
 
 // border-radius

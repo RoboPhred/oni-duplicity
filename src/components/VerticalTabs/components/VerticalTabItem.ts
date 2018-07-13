@@ -1,4 +1,4 @@
-import styled, { getTheme, intent, Intent } from "@/theme";
+import styled, { getTheme, intent, Intent, Space } from "@/theme";
 
 export interface TabProps {
   isSelected?: boolean;
@@ -7,7 +7,7 @@ export interface TabProps {
 const VerticalTabItem = styled<TabProps, "div">("div")`
   cursor: pointer;
 
-  padding: ${props => getTheme(props).space[1]}px;
+  padding: ${props => getTheme(props).space[Space.Small]}px;
 
   color: ${props =>
     props.isSelected ? intent.of(Intent.Primary) : intent.of(Intent.Secondary)}

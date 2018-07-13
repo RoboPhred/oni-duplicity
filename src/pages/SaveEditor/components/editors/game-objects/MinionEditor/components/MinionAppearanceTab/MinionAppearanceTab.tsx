@@ -61,14 +61,14 @@ class MinionAppearanceTab extends React.Component<Props> {
           </table>
         </FormGroup>
         <FormGroup label="Scale">
-          <FormGroup label="X">
+          <FormGroup label="X" inline>
             <NumericInput
               value={scale ? scale.x : 1}
               precision="single"
               onCommit={this._setScaleX}
             />
           </FormGroup>
-          <FormGroup label="Y">
+          <FormGroup label="Y" inline>
             <NumericInput
               value={scale ? scale.y : 1}
               precision="single"
