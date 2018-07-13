@@ -40,7 +40,7 @@ class MinionHealthTab extends React.Component<Props> {
             onCommit={onHealthStatusChanged}
           />
         </FormGroup>
-        <FormGroup label="HitPoints">
+        <FormGroup label="HitPoints" inline>
           <NumericInput
             value={hitpoints || 0}
             onCommit={onHitpointsChanged}
@@ -48,7 +48,7 @@ class MinionHealthTab extends React.Component<Props> {
           />
         </FormGroup>
         <FormGroup label="Germs">
-          <FormGroup label="DiseaseID">
+          <FormGroup label="DiseaseID" inline>
             <NumericInput
               value={surfaceDiseaseId ? surfaceDiseaseId.hash : 0}
               onCommit={this._onSurfaceDiseaseIdCommit}
@@ -58,7 +58,7 @@ class MinionHealthTab extends React.Component<Props> {
               string.
             </div>
           </FormGroup>
-          <FormGroup label="Count">
+          <FormGroup label="Count" inline>
             <NumericInput
               minValue={0}
               value={surfaceDiseaseCount || 0}

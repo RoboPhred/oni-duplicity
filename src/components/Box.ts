@@ -6,21 +6,25 @@ import styled, {
 } from "@/theme";
 
 import {
+  AlignSelfProps,
   WidthProps,
   HeightProps,
   SpaceProps,
+  alignSelf,
   width,
   height,
   space
 } from "styled-system";
 
-export type BoxProps = WidthProps &
+export type BoxProps = AlignSelfProps &
+  WidthProps &
   HeightProps &
   SpaceProps &
   BackgroundProps &
   IntentProps;
 
 const Box = styled<BoxProps, "div">("div")`
+  ${alignSelf};
   ${width};
   ${height};
   ${space} ${background};
