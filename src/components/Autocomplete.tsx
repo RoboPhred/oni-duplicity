@@ -2,7 +2,7 @@ import * as React from "react";
 
 import ReactAutocomplete from "react-autocomplete";
 
-import styled, { Intent, Background, getTheme } from "@/theme";
+import styled, { Intent, Background, getTheme, Space } from "@/theme";
 
 import Input, { InputProps } from "@/components/Input";
 import Box from "@/components/Box";
@@ -17,6 +17,7 @@ export type AutocompleteProps = Omit<ReactAutocomplete.Props, "renderItem"> & {
 
 const AutocompleteItem = Text.withComponent("div").extend`
   width: 100%;
+  margin: 0 ${props => getTheme(props).space[Space.Small]}px;
 `;
 
 const Autocomplete: React.SFC<AutocompleteProps> = props => (

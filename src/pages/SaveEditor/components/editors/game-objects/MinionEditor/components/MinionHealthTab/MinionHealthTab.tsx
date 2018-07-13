@@ -11,6 +11,7 @@ import mapDispatchToProps, { DispatchProps } from "./events";
 import FormGroup from "@/components/FormGroup";
 import SelectInput from "@/components/SelectInput";
 import NumericInput from "@/components/NumericInput";
+import { FontSize } from "@/theme";
 
 type Props = StateProps & DispatchProps;
 class MinionHealthTab extends React.Component<Props> {
@@ -30,6 +31,9 @@ class MinionHealthTab extends React.Component<Props> {
         label: x,
         value: HealthState[x as any]
       }));
+
+    // TODO: selector for disease type hashes with advanced mode custom
+    // string.
 
     return (
       <React.Fragment>
@@ -53,10 +57,6 @@ class MinionHealthTab extends React.Component<Props> {
               value={surfaceDiseaseId ? surfaceDiseaseId.hash : 0}
               onCommit={this._onSurfaceDiseaseIdCommit}
             />
-            <div>
-              TODO: selector for disease type hashes with advanced mode custom
-              string.
-            </div>
           </FormGroup>
           <FormGroup label="Count" inline>
             <NumericInput

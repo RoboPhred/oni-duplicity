@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FontSizeProps } from "styled-system";
 
-import { Intent, Space, FontSize } from "@/theme";
+import { Intent, Space } from "@/theme";
 
 import Flex from "@/components/Flex";
 import Box from "@/components/Box";
@@ -15,19 +15,25 @@ export interface FormGroupProps extends FontSizeProps {
 type Props = FormGroupProps;
 export default class FormGroup extends React.Component<Props> {
   render() {
-    const { label, intent, inline, children, fontSize } = this.props;
+    const { label, intent, inline, fontSize } = this.props;
+
+    let children = this.props.children;
 
     return (
       <Flex direction={inline ? "row" : "column"} mb={Space.Small}>
         <Text.Label
           alignSelf="baseline"
-          fontSize={fontSize != null ? fontSize : FontSize.HeadingMinor}
+          fontSize={fontSize}
           mr={inline ? Space.Small : Space.None}
           intent={intent}
         >
           {label}
         </Text.Label>
-        <Box alignSelf="baseline" px={inline ? Space.None : Space.Medium}>
+        <Box
+          width="100%"
+          alignSelf="baseline"
+          px={inline ? Space.None : Space.Medium}
+        >
           {children}
         </Box>
       </Flex>

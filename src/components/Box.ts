@@ -29,6 +29,7 @@ const Box = styled<BoxProps, "div">("div")`
   ${height};
   ${space} ${background};
   ${intent.withDefault(null)};
+  box-sizing: border-box;
 `;
 Box.displayName = "Box";
 Box.defaultProps = {
