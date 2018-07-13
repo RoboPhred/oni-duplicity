@@ -3,9 +3,10 @@ import { FontSize } from "@/theme";
 
 const EditorHeader = Text.extend.attrs({
   fontSize: FontSize.Heading,
-  fontWeight: "bold"
+  fontWeight: "bold",
+  alignSelf: "baseline"
 })`
-  align-self: baseline;
+  width: 100%;
 `;
 EditorHeader.displayName = "EditorHeader";
 export default EditorHeader;

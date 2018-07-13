@@ -6,6 +6,7 @@ import { AppState } from "@/state";
 
 import selectedPath from "@/selectors/selected-path";
 import selectedValue from "@/selectors/selected-value";
+import { getSelectedGameObjectTraits } from "@/selectors/behaviors/ai-traits";
 
 const traitsDataPath = createSelector(
   selectedValue,
@@ -31,8 +32,8 @@ const traitsDataPath = createSelector(
 );
 
 const structuredSelector = {
-  selectedPath,
-  traitsDataPath
+  traitsDataPath,
+  traits: getSelectedGameObjectTraits
 };
 export type StateProps = StructuredStateProps<typeof structuredSelector>;
 const mapStateToProps = createStructuredSelector<AppState, StateProps>(

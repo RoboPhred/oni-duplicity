@@ -11,7 +11,6 @@ import EditModeCondition from "@/components/EditModeCondition";
 import NumericField from "@/pages/SaveEditor/components/fields/NumericField";
 
 import EditorContainer from "../../components/EditorContainer";
-import EditorHeader from "../../components/EditorHeader";
 import GameObjectHeader from "../components/GameObjectHeader";
 
 type Props = StateProps;
@@ -23,10 +22,9 @@ class DefaultGameObjectEditor extends React.Component<Props> {
     }
 
     return (
-      <EditorContainer>
-        <GameObjectHeader>
-          <EditorHeader intent={Intent.Primary}>{gameObjectName}</EditorHeader>
-        </GameObjectHeader>
+      <EditorContainer
+        header={<GameObjectHeader>{gameObjectName}</GameObjectHeader>}
+      >
         <FormGroup label="Position">
           <FormGroup label="X">
             <NumericField

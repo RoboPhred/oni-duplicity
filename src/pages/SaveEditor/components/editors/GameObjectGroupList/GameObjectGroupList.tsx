@@ -31,8 +31,7 @@ class GameObjectGroupList extends React.Component<Props> {
       </Portrait>
     ));
     return (
-      <EditorContainer>
-        <EditorHeader>GameObject Types</EditorHeader>
+      <EditorContainer header="GameObject Types">
         <GameObjectGroupListContent>{portraits}</GameObjectGroupListContent>
       </EditorContainer>
     );

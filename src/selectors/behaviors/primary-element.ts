@@ -1,20 +1,11 @@
-import { createSelector } from "reselect";
-
-import { PrimaryElementBehavior, getBehavior } from "oni-save-parser";
+import { PrimaryElementBehavior } from "oni-save-parser";
 
 import { AppState } from "@/state";
 
-import getSelectedGameObject from "../game-object";
+import { getCurrentGameObjectBehaviorSelector } from "@/selectors/behaviors/utils";
 
-export const getSelectedGameObjectElementBehavior = createSelector(
-  getSelectedGameObject,
-  gameObject => {
-    if (!gameObject) {
-      return null;
-    }
-
-    return getBehavior(gameObject, PrimaryElementBehavior);
-  }
+export const getSelectedGameObjectElementBehavior = getCurrentGameObjectBehaviorSelector(
+  PrimaryElementBehavior
 );
 
 export const getSelectedGameObjectElementDiseaseId = (state: AppState) => {

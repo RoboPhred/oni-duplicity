@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { Intent } from "@/theme";
+import { Intent, FontSize } from "@/theme";
 
 import { formatPosition, formatSimHash, formatDisease } from "@/format";
 
@@ -22,14 +22,23 @@ class GameObjectHeader extends React.Component<Props> {
           <Toolbar.Label>{this.props.children}</Toolbar.Label>
 
           <Toolbar.Group align="center" alignContent="center">
-            <Text intent={Intent.Secondary} mr={1} whiteSpace="nowrap">
+            <Text
+              intent={Intent.Secondary}
+              mr={1}
+              whiteSpace="nowrap"
+              fontSize={FontSize.Default}
+            >
               {position ? formatPosition(position) : "(no object selected)"}
             </Text>
           </Toolbar.Group>
 
           <Toolbar.Group align="right" alignContent="center">
             {primaryElement && (
-              <Text intent={Intent.Secondary} mr={1}>
+              <Text
+                intent={Intent.Secondary}
+                mr={1}
+                fontSize={FontSize.Default}
+              >
                 {formatSimHash(primaryElement)}
               </Text>
             )}

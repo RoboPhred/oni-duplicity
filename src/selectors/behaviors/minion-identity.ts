@@ -1,20 +1,11 @@
-import { createSelector } from "reselect";
-
-import { MinionIdentityBehavior, getBehavior } from "oni-save-parser";
+import { MinionIdentityBehavior } from "oni-save-parser";
 
 import { AppState } from "@/state";
 
-import getSelectedGameObject from "@/selectors/game-object";
+import { getCurrentGameObjectBehaviorSelector } from "@/selectors/behaviors/utils";
 
-export const getSelectedGameObjectIdentityBehavior = createSelector(
-  getSelectedGameObject,
-  gameObject => {
-    if (!gameObject) {
-      return null;
-    }
-
-    return getBehavior(gameObject, MinionIdentityBehavior);
-  }
+export const getSelectedGameObjectIdentityBehavior = getCurrentGameObjectBehaviorSelector(
+  MinionIdentityBehavior
 );
 
 export const getSelectedGameObjectGender = (state: AppState) => {

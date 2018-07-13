@@ -28,8 +28,7 @@ class GameObjectList extends React.Component<Props> {
       </Portrait>
     ));
     return (
-      <EditorContainer>
-        <EditorHeader>GameObjects</EditorHeader>
+      <EditorContainer header="GameObjects">
         <GameObjectListContent>{portraits}</GameObjectListContent>
       </EditorContainer>
     );

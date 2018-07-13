@@ -4,14 +4,12 @@ import { connect } from "react-redux";
 import mapStateToProps, { StateProps } from "./derived-state";
 
 import VerticalTabs from "@/components/VerticalTabs";
-import EditModeCondition from "@/components/EditModeCondition";
 
 import EditorContainer from "../../components/EditorContainer";
 
 import GameObjectHeader from "../components/GameObjectHeader";
 
 import MinionHeader from "./components/MinionEditableName";
-
 import MinionAppearanceTab from "./components/MinionAppearanceTab";
 import MinionHealthTab from "./components/MinionHealthTab";
 import MinionTraitsEditor from "./components/MinionTraitsEditor";
@@ -26,12 +24,14 @@ class DuplicantEditor extends React.Component<Props> {
     }
 
     return (
-      <EditorContainer>
-        <GameObjectHeader>
-          <MinionHeader minionNamePath={minionNamePath} />
-        </GameObjectHeader>
-
-        <VerticalTabs width="100%">
+      <EditorContainer
+        header={
+          <GameObjectHeader>
+            <MinionHeader minionNamePath={minionNamePath} />
+          </GameObjectHeader>
+        }
+      >
+        <VerticalTabs width="100%" height="100%">
           <VerticalTabs.Tab tabKey="appearance" header="Appearance">
             <MinionAppearanceTab />
           </VerticalTabs.Tab>
