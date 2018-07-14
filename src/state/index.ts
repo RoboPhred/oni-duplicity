@@ -5,6 +5,7 @@ export type LoadingState = "idle" | "loading" | "saving" | "ready";
 
 export interface AppState {
   loadingState: LoadingState;
+  loadingProgressMessage: string | null;
   error: Error | null;
   oniSave: SaveGame | null;
   selectedPath: string[];
@@ -12,6 +13,7 @@ export interface AppState {
 }
 export const defaultAppState: Readonly<AppState> = {
   loadingState: "idle" as "idle",
+  loadingProgressMessage: null,
   error: null,
   oniSave: null,
   selectedPath: [],

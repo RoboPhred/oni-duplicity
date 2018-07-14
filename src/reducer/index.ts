@@ -8,6 +8,7 @@ import gameObjectReducer from "./game-object";
 
 import dismissErrorReducer from "./dismiss-error";
 import modifyOniSave from "./modify-onisave";
+import parseProgressReducer from "./onisave-parse-progress";
 import receiveOniSaveReducer from "./receive-onisave";
 import selectPathReducer from "./select-path";
 import setEditModeReducer from "./set-editmode";
@@ -17,6 +18,7 @@ const reducers: Reducer<AppState, any>[] = [
   gameObjectReducer,
   dismissErrorReducer,
   modifyOniSave,
+  parseProgressReducer,
   receiveOniSaveReducer,
   selectPathReducer,
   setEditModeReducer

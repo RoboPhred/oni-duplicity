@@ -1,60 +1,73 @@
 import { SaveGame } from "oni-save-parser";
 
-const COMMAND_PARSE_SAVE = "parse-save";
+export const RESPONSE_PROGRESS = "progress";
+export const sendProgress = (message: string) => ({
+  type: RESPONSE_PROGRESS as typeof RESPONSE_PROGRESS,
+  message
+});
+export type ProgressResponse = ReturnType<typeof sendProgress>;
+
+const COMMAND_PARSE = "parse-save";
 export const parseSave = (data: ArrayBuffer) => ({
-  type: COMMAND_PARSE_SAVE as typeof COMMAND_PARSE_SAVE,
+  type: COMMAND_PARSE as typeof COMMAND_PARSE,
   data
 });
 export type ParseSaveCommand = ReturnType<typeof parseSave>;
 
-const RESULT_SAVE_SUCCESS = "parse-save:success";
+export const RESPONSE_PARSE_SUCCESS = "parse-save:success";
 export const parseSaveSuccess = (saveGame: SaveGame) => ({
-  type: RESULT_SAVE_SUCCESS as typeof RESULT_SAVE_SUCCESS,
+  type: RESPONSE_PARSE_SUCCESS as typeof RESPONSE_PARSE_SUCCESS,
   saveGame
 });
-export type ParseSaveSuccessResult = ReturnType<typeof parseSaveSuccess>;
+export type ParseSaveSuccessResponse = ReturnType<typeof parseSaveSuccess>;
 
-const RESULT_SAVE_ERROR = "parse-save:error";
+export const RESPONSE_PARSE_ERROR = "parse-save:error";
 export const parseSaveError = (error: Error) => ({
-  type: RESULT_SAVE_ERROR as typeof RESULT_SAVE_ERROR,
+  type: RESPONSE_PARSE_ERROR as typeof RESPONSE_PARSE_ERROR,
   error: errorToJson(error)
 });
-export type ParseSaveErrorResult = ReturnType<typeof parseSaveError>;
+export type ParseSaveErrorResponse = ReturnType<typeof parseSaveError>;
 
-export type ParseSaveResult = ParseSaveSuccessResult | ParseSaveErrorResult;
+export type ParseSaveResponse =
+  | ParseSaveSuccessResponse
+  | ParseSaveErrorResponse
+  | ProgressResponse;
 
-const COMMAND_WRITE_SAVE = "write-save";
+const COMMAND_WRITE = "write-save";
 export const writeSave = (saveGame: SaveGame) => ({
-  type: COMMAND_WRITE_SAVE as typeof COMMAND_WRITE_SAVE,
+  type: COMMAND_WRITE as typeof COMMAND_WRITE,
   saveGame
 });
 export type WriteSaveCommand = ReturnType<typeof writeSave>;
 
-const RESULT_WRITE_SUCCESS = "write-save:success";
+export const RESPONSE_WRITE_SUCCESS = "write-save:success";
 export const writeSaveSuccess = (data: ArrayBuffer) => ({
-  type: RESULT_WRITE_SUCCESS as typeof RESULT_WRITE_SUCCESS,
+  type: RESPONSE_WRITE_SUCCESS as typeof RESPONSE_WRITE_SUCCESS,
   data
 });
-export type WriteSaveSuccessResult = ReturnType<typeof writeSaveSuccess>;
+export type WriteSaveSuccessResponse = ReturnType<typeof writeSaveSuccess>;
 
-const RESULT_WRITE_ERROR = "write-save:error";
+export const RESPONSE_WRITE_ERROR = "write-save:error";
 export const writeSaveError = (error: Error) => ({
-  type: RESULT_WRITE_ERROR as typeof RESULT_WRITE_ERROR,
+  type: RESPONSE_WRITE_ERROR as typeof RESPONSE_WRITE_ERROR,
   error: errorToJson(error)
 });
-export type WriteSaveErrorResult = ReturnType<typeof writeSaveError>;
+export type WriteSaveErrorResponse = ReturnType<typeof writeSaveError>;
 
-export type WriteSaveResult = WriteSaveSuccessResult | WriteSaveErrorResult;
+export type WriteSaveResult =
+  | WriteSaveSuccessResponse
+  | WriteSaveErrorResponse
+  | ProgressResponse;
 
-export type SaveEditorCommand = ParseSaveCommand | WriteSaveCommand;
-export type SaveEditorResult = ParseSaveResult | WriteSaveResult;
+export type SaveParserCommand = ParseSaveCommand | WriteSaveCommand;
+export type SaveParserResponse = ParseSaveResponse | WriteSaveResult;
 
-export interface SaveEditorCommandEvent extends MessageEvent {
-  data: SaveEditorCommand;
+export interface SaveParserCommandEvent extends MessageEvent {
+  data: SaveParserCommand;
 }
 
-export interface SaveEditorResultEvent extends MessageEvent {
-  data: SaveEditorResult;
+export interface SaveParserResultEvent extends MessageEvent {
+  data: SaveParserResponse;
 }
 
 export interface ErrorJson {

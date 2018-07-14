@@ -7,7 +7,6 @@ import mapDispatchToProps, { DispatchProps } from "./events";
 import NoSave from "@/pages/NoSave";
 import Error from "@/pages/Error";
 import Loading from "@/pages/Loading";
-import Saving from "@/pages/Saving";
 import SaveEditor from "@/pages/SaveEditor";
 
 import AppContainer from "./components/AppContainer";
@@ -29,10 +28,8 @@ class App extends React.Component<Props> {
           element = <NoSave />;
           break;
         case "loading":
-          element = <Loading />;
-          break;
         case "saving":
-          element = <Saving />;
+          element = <Loading />;
           break;
         case "ready":
           element = <SaveEditor />;

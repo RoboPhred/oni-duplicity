@@ -16,6 +16,7 @@ export default function receiveOniSaveReducer(
         ...state,
         error: null,
         loadingState: action.payload.operation,
+        loadingProgressMessage: null,
         oniSave: action.payload.clearExisting ? null : state.oniSave
       };
     case ACTION_RECEIVE_ONISAVE_ERROR:
@@ -29,6 +30,7 @@ export default function receiveOniSaveReducer(
       state = {
         ...state,
         loadingState: "ready",
+        loadingProgressMessage: null,
         error: null,
         oniSave: action.payload
       };
