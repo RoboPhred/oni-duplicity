@@ -7,16 +7,19 @@ import styled, {
 
 import {
   AlignSelfProps,
+  JustifySelfProps,
   WidthProps,
   HeightProps,
   SpaceProps,
   alignSelf,
+  justifySelf,
   width,
   height,
   space
 } from "styled-system";
 
 export type BoxProps = AlignSelfProps &
+  JustifySelfProps &
   WidthProps &
   HeightProps &
   SpaceProps &
@@ -25,9 +28,11 @@ export type BoxProps = AlignSelfProps &
 
 const Box = styled<BoxProps, "div">("div")`
   ${alignSelf};
+  ${justifySelf};
   ${width};
   ${height};
-  ${space} ${background};
+  ${space};
+  ${background};
   ${intent.withDefault(null)};
   box-sizing: border-box;
 `;

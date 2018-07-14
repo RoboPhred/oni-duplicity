@@ -1,7 +1,7 @@
 import { HashedString } from "oni-save-parser";
 
 export const ACTION_PRIMARY_ELEMENT_SET_DISEASE =
-  "behaviors/primary-element/set-disease";
+  "oni-save/behaviors/primary-element/set-disease";
 export const setPrimaryElementDisease = (
   diseaseId: HashedString,
   diseaseCount: number

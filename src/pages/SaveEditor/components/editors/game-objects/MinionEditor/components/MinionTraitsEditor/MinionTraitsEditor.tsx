@@ -4,9 +4,7 @@ import { connect } from "react-redux";
 import { AI_TRAIT_IDS } from "oni-save-parser";
 
 import mapStateToProps, { StateProps } from "./derived-state";
-
-import SelectField from "@/pages/SaveEditor/components/fields/SelectField";
-import { Option } from "@/components/Select";
+import mapDispatchToProps, { DispatchProps } from "./events";
 
 import DataTable, {
   DataTableColumn,
@@ -14,23 +12,17 @@ import DataTable, {
 } from "@/Components/DataTable";
 import CheckInput from "@/components/CheckInput";
 import Text from "@/components/Text";
+import Flex from "@/components/Flex";
 
-type Props = StateProps;
+type Props = StateProps & DispatchProps;
 class MinionTraitsEditor extends React.Component<Props> {
   render() {
-    const { traitsDataPath } = this.props;
-    if (!traitsDataPath) {
-      return "No Klei.AI.Traits Behavior.";
+    const { traits, onSetTrait } = this.props;
+
+    if (traits == null) {
+      return "No Trait Data";
     }
 
-    // This looks terrible and is difficult to use.
-    //  We should use a checkbox table that provides descriptions and effects.
-    const options: Option[] = AI_TRAIT_IDS.map(x => ({
-      label: x,
-      value: x
-    }));
-
-    const traits = this.props.traits || [];
     const data = AI_TRAIT_IDS.map(trait => ({
       trait: trait,
       selected: traits.some(x => x === trait)
@@ -38,18 +30,24 @@ class MinionTraitsEditor extends React.Component<Props> {
 
     const columns: DataTableColumn[] = [
       {
+        Header: "Has Trait",
         id: "selected",
-        Cell: (row: DataTableRow) => (
-          <CheckInput
-            value={traits.some(x => x === row.value.selected)}
-            onCommit={this._onTraitChanged.bind(this, row.value.trait)}
-          />
+        Cell: (row: DataTableRow<typeof data[0]>) => (
+          <Flex
+            direction="row"
+            width="100%"
+            height="100%"
+            justifyContent="center"
+          >
+            <CheckInput
+              value={row.value.selected}
+              onCommit={onSetTrait.bind(null, row.value.trait)}
+            />
+          </Flex>
         ),
         accessor: x => x,
-        sortable: false,
-        filterable: false,
         resizable: false,
-        width: 30
+        width: 70
       },
       {
         Header: "Trait",
@@ -61,27 +59,17 @@ class MinionTraitsEditor extends React.Component<Props> {
     ];
 
     return (
-      <SelectField
-        multi
-        joinValues={false}
-        simpleValue={false}
-        closeOnSelect={false}
-        options={options}
-        path={[...traitsDataPath, "TraitIds"]}
+      <DataTable
+        style={{ width: "100%", height: "100%" }}
+        data={data}
+        columns={columns}
+        showFilters
+        showPagination={false}
       />
     );
-
-    // return (
-    //   <DataTable
-    //     style={{ width: "100%", height: "100%" }}
-    //     data={data}
-    //     columns={columns}
-    //     showFilters
-    //     showPagination={false}
-    //   />
-    // );
   }
-
-  private _onTraitChanged(trait: string, isPresent: boolean) {}
 }
-export default connect(mapStateToProps)(MinionTraitsEditor);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MinionTraitsEditor);

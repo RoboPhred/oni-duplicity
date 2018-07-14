@@ -1,9 +1,9 @@
 import styled from "@/theme";
 
-import { TextProps as ThemeTextProps, text } from "@/theme";
+import { TextCssProps, text } from "@/theme";
 
-export type TextProps = ThemeTextProps;
-const EditableTextInput = styled<TextProps, "input">("input")`
+export type EditableTextProps = TextCssProps;
+const EditableTextInput = styled<EditableTextProps, "input">("input")`
   ${text};
   font-size: inherit;
   background: none;

@@ -1,6 +1,6 @@
 import styled from "@/theme";
 
-import { TextProps, text } from "@/theme";
+import { TextCssProps, text } from "@/theme";
 
 const PortraitFooter = styled.div`
   width: 100%;

@@ -3,7 +3,7 @@ import * as CSS from "csstype";
 import styled, {
   Background,
   BackgroundProps,
-  TextProps,
+  TextCssProps,
   background,
   css,
   text
@@ -21,7 +21,7 @@ const toolbarItem = css<ToolbarItemProps>`
   align-self: ${props => props.alignContent || "baseline"};
 `;
 
-export type ToolbarLabelProps = ToolbarItemProps & TextProps;
+export type ToolbarLabelProps = ToolbarItemProps & TextCssProps;
 const ToolbarLabel = styled<ToolbarLabelProps, "label">("label")`
   ${text};
   ${toolbarItem};

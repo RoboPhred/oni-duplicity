@@ -1,6 +1,13 @@
 import { attachProps } from "@/utils";
 
-import Box, { BoxProps } from "./Box";
+import Box, { BoxProps } from "@/components/Box";
+
+import {
+  AlignContentProps,
+  JustifyContentProps,
+  alignContent,
+  justifyContent
+} from "styled-system";
 
 export interface FlexItemProps extends BoxProps {
   grow?: boolean;
@@ -26,12 +33,17 @@ const FlexItem = Box.extend<FlexItemProps>`
 `;
 FlexItem.displayName = "FlexItem";
 
-export interface FlexProps extends BoxProps {
+export interface FlexProps
+  extends BoxProps,
+    AlignContentProps,
+    JustifyContentProps {
   direction: "row" | "column";
 }
 
 const Flex = Box.extend<FlexProps>`
   display: flex;
+  ${alignContent};
+  ${justifyContent};
   flex-direction: ${props => props.direction};
   align-items: stretch;
 `;

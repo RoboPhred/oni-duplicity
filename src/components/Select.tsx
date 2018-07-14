@@ -7,7 +7,7 @@ import ReactSelect, {
   ReactCreatableSelectProps
 } from "react-select";
 
-import { TextProps, text } from "@/theme";
+import { TextCssProps, text } from "@/theme";
 import { attachProps } from "@/utils";
 
 export { Option } from "react-select";
@@ -15,14 +15,17 @@ export { Option } from "react-select";
 export interface SelectCreatableProps
   extends ReactCreatableSelectProps,
     WidthProps,
-    TextProps {}
+    TextCssProps {}
 const Creatable = styled<SelectCreatableProps>(ReactSelectCreatable)`
   ${text};
   ${width};
 `;
 Creatable.displayName = "Select.Creatable";
 
-export interface SelectProps extends ReactSelectProps, WidthProps, TextProps {}
+export interface SelectProps
+  extends ReactSelectProps,
+    WidthProps,
+    TextCssProps {}
 // TODO: We need to pass the generated className to the specific className structure
 //  for the various sub-components of Select.
 const Select = styled<SelectProps>(ReactSelect)`
