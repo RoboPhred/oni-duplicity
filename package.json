@@ -26,7 +26,7 @@
     "@types/react-dom": "^16.0.6",
     "@types/react-modal": "^3.1.2",
     "@types/react-redux": "^6.0.4",
-    "@types/react-select": "^1.2.8",
+    "@types/react-select": "^1.2.9",
     "@types/react-table": "^6.7.11",
     "@types/styled-system": "^2.3.0",
     "babel-core": "^6.26.3",
@@ -40,10 +40,10 @@
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.20.3",
     "ts-loader": "^4.4.1",
-    "typescript": "^2.9.1",
+    "typescript": "^2.9.2",
     "typescript-plugin-styled-components": "0.0.6",
     "url-loader": "^1.0.1",
-    "webpack": "^4.12.0",
+    "webpack": "^4.16.0",
     "webpack-cli": "^2.1.5",
     "webpack-dev-server": "^3.1.4",
     "worker-loader": "^1.1.1"
@@ -73,8 +73,8 @@
     "redux-saga": "^0.16.0",
     "reselect": "^3.0.1",
     "string-natural-compare": "^2.0.2",
-    "styled-components": "^3.3.3",
-    "styled-system": "^2.3.5",
+    "styled-components": "3.3.2",
+    "styled-system": "^2.3.6",
     "styled-system-html": "^1.0.3"
   }
 }

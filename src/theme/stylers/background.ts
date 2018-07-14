@@ -1,25 +1,15 @@
-import { css } from "../styled";
-
-import { Background, Intent, isBackground, isIntent, getTheme } from "../theme";
 import { attachProps } from "@/utils";
 
+import { css } from "../styled";
+
+import { ColorValue, colorValue } from "./color";
+
 export interface BackgroundProps {
-  background?: Background | Intent;
+  background?: ColorValue;
 }
 
-export const backgroundOf = (background: Background | Intent) => css<
-  BackgroundProps
->`
-  ${props => {
-    const colors = getTheme(props).colors;
-    if (isIntent(background)) {
-      return `background-color: ${colors.intent[background]}`;
-    } else if (isBackground(background)) {
-      return `background-color: ${colors.bg[background]}`;
-    } else {
-      return undefined;
-    }
-  }};
+export const backgroundOf = (background: ColorValue) => css<BackgroundProps>`
+  background-color: ${colorValue.of(background)};
 `;
 
 export const backgroundFromProps = css<BackgroundProps>`

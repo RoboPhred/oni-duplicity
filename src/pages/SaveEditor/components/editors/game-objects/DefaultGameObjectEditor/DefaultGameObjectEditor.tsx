@@ -26,20 +26,20 @@ class DefaultGameObjectEditor extends React.Component<Props> {
         header={<GameObjectHeader>{gameObjectName}</GameObjectHeader>}
       >
         <FormGroup label="Position">
-          <FormGroup label="X">
+          <FormGroup label="X" inline>
             <NumericField
               precision="single"
               path={[...gameObjectPath, "position", "x"]}
             />
           </FormGroup>
-          <FormGroup label="Y">
+          <FormGroup label="Y" inline>
             <NumericField
               precision="single"
               path={[...gameObjectPath, "position", "y"]}
             />
           </FormGroup>
           <EditModeCondition editMode="advanced">
-            <FormGroup label="Z">
+            <FormGroup label="Z" inline>
               <NumericField
                 precision="single"
                 path={[...gameObjectPath, "position", "z"]}
@@ -48,13 +48,13 @@ class DefaultGameObjectEditor extends React.Component<Props> {
           </EditModeCondition>
         </FormGroup>
         <FormGroup label="Scale">
-          <FormGroup label="X">
+          <FormGroup label="X" inline>
             <NumericField
               precision="single"
               path={[...gameObjectPath, "scale", "x"]}
             />
           </FormGroup>
-          <FormGroup label="Y">
+          <FormGroup label="Y" inline>
             <NumericField
               precision="single"
               path={[...gameObjectPath, "scale", "y"]}

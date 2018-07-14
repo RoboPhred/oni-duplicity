@@ -9,13 +9,13 @@ import mapDispatchToProps, { DispatchProps } from "./events";
 import DataTable, {
   DataTableColumn,
   DataTableRow
-} from "@/Components/DataTable";
+} from "@/components/DataTable";
 import CheckInput from "@/components/CheckInput";
 import Text from "@/components/Text";
 import Flex from "@/components/Flex";
 
 type Props = StateProps & DispatchProps;
-class MinionTraitsEditor extends React.Component<Props> {
+class MinionTraitsTab extends React.Component<Props> {
   render() {
     const { traits, onSetTrait } = this.props;
 
@@ -60,7 +60,6 @@ class MinionTraitsEditor extends React.Component<Props> {
 
     return (
       <DataTable
-        style={{ width: "100%", height: "100%" }}
         data={data}
         columns={columns}
         showFilters
@@ -72,4 +71,4 @@ class MinionTraitsEditor extends React.Component<Props> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MinionTraitsEditor);
+)(MinionTraitsTab);

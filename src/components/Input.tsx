@@ -1,7 +1,10 @@
-import styled, { getTheme, text } from "@/theme";
+import styled, { TextCssProps, getTheme, text, css } from "@/theme";
 
-export interface InputProps {}
-const Input = styled.input`
+// Note: Should extend TextCssProps, but doing so causes some odd typing issues
+//  Props will somehow demand but refuse 'ref'
+export interface InputStyledProps extends TextCssProps {}
+
+export const inputStyle = css<InputStyledProps>`
   ${text};
   padding: 2px;
   background-color: ${props => getTheme(props).colors.bg.panel};
@@ -15,5 +18,11 @@ const Input = styled.input`
     border-color: ${props => getTheme(props).colors.intent.dangerous};
   }
 `;
+
+const Input = styled.input`
+  ${inputStyle};
+`;
 Input.displayName = "Input";
+
+export type InputProps = StyledComponentProps<typeof Input>;
 export default Input;

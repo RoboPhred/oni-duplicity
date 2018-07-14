@@ -91,6 +91,11 @@ export const enum Radii {
 }
 const radii = [0, 2, 4, 8];
 
+export const enum Border {
+  None,
+  Normal,
+  Thick
+}
 const borders = [0, "1px solid", "2px solid"];
 
 export const theme = {

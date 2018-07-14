@@ -37,10 +37,12 @@ const Autocomplete: React.SFC<AutocompleteProps> = props => (
 Autocomplete.displayName = "Autocomplete";
 export default Autocomplete;
 
-function convertProps(props: React.HTMLProps<HTMLInputElement>): InputProps {
+function convertProps(
+  props: React.HTMLProps<HTMLInputElement>
+): Omit<InputProps, "ref"> {
+  const { ref, ...rest } = props;
   return {
-    ...props,
-    ref: undefined as never,
+    ...(rest as any),
     innerRef: props.ref
   };
 }

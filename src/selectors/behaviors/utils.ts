@@ -51,7 +51,7 @@ export function createCurrentGameObjectBehaviorPropertySelector<
 type getCGOBByPath = <T extends GameObjectBehavior, TResult>(
   behaviorName: BehaviorName<T>,
   valuePath: string[]
-) => TResult;
+) => Selector<AppState, TResult>;
 
 export const getCurrentGameObjectBehaviorPropertySelector = memoize(
   createCurrentGameObjectBehaviorPropertySelector,
