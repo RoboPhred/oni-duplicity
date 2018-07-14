@@ -7,7 +7,7 @@ import { receiveOniSaveSuccess } from "@/actions/receive-onisave";
 
 const mapDispatchToProps = {
   onLoad: loadOniSave,
-  onLoadTestData: () => receiveOniSaveSuccess(testData),
+  onLoadTestData: () => receiveOniSaveSuccess(testData as any),
   onSave: saveOniSave
 };
 export default mapDispatchToProps;

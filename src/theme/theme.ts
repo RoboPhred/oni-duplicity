@@ -47,9 +47,9 @@ const textIntentContrastColors: Record<Intent, string> = {
 
 // https://coolors.co/313e50-3a435e-455561-5c6672-6c6f7f
 const backgroundColors: Record<Background, string> = {
-  default: "#3A435E",
-  navbar: "#313E50",
-  panel: "#455561",
+  default: "#313a57", //"#3A435E",
+  navbar: "#355d95", //"#313E50",
+  panel: "#36444f", //"#455561",
   separator: "#6C6F7F"
 };
 

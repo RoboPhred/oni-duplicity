@@ -9,10 +9,10 @@ const VerticalTabItem = styled<TabProps, "div">("div")`
 
   padding: ${props => getTheme(props).space[Space.Small]}px;
 
-  color: ${props =>
-    props.isSelected ? intent.of(Intent.Primary) : intent.of(Intent.Secondary)}
-
-  :not(:last-child) {
+  ${props =>
+    props.isSelected
+      ? intent.of(Intent.Primary)
+      : intent.of(Intent.Secondary)} :not(:last-child) {
     border-bottom: ${props => {
       const theme = getTheme(props);
       return `${theme.borders[1]} ${theme.colors.intent.secondary}`;

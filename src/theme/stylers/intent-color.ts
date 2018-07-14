@@ -8,11 +8,11 @@ export interface IntentColorProps {
 }
 
 const intentColorOf = (intent: Intent) => css`
-  ${props => getTheme(props).colors.intent[intent]};
+  color: ${props => getTheme(props).colors.intent[intent]};
 `;
 
 const intentColorFromProps = css<IntentColorProps>`
-  color: ${props => intentColorOf(props.intent || Intent.Default)};
+  ${props => intentColorOf(props.intent || Intent.Default)};
 `;
 
 export const intentColor = attachProps(intentColorFromProps, {

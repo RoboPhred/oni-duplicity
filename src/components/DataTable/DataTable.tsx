@@ -2,15 +2,11 @@ import ReactTable, { TableProps, Column, RowRenderProps } from "react-table";
 import { WidthProps, HeightProps, width, height } from "styled-system";
 
 import styled, {
-  border,
-  borderValue,
-  getTheme,
-  Space,
-  Border,
   Background,
   colorValue,
   Intent,
-  intent
+  intent,
+  background
 } from "@/theme";
 
 import { inputStyle } from "@/components/Input";
@@ -34,11 +30,40 @@ const DataTable = styled<Partial<TableProps> & DataTableStyleProps>(ReactTable)`
   }
 
   &.ReactTable .rt-thead {
-    color: ${intent.of(Intent.Secondary)};
+    ${intent.of(Intent.Secondary)};
+    ${background.of(Background.Panel)};
+    font-weight: bold;
+  }
+
+  &.ReactTable .rt-thead .rt-th.-sort-asc,
+  &.ReactTable .rt-thead .rt-th.-sort-desc {
+    ${intent.of(Intent.Primary)};
+  }
+
+  &.ReactTable .rt-thead .rt-th.-sort-asc {
+    box-shadow: none;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='${props =>
+      encodeURIComponent(
+        colorValue.of(Intent.Primary)(props)!
+      )}'><polygon points='0,50 100,50 50,0'/></svg>")
+      no-repeat;
+    background-size: 12px;
+    background-position: calc(100% - 20px) center;
+  }
+
+  &.ReactTable .rt-thead .rt-th.-sort-desc {
+    box-shadow: none;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='${props =>
+      encodeURIComponent(
+        colorValue.of(Intent.Primary)(props)!
+      )}'><polygon points='0,0 100,0 50,50'/></svg>")
+      no-repeat;
+    background-size: 12px;
+    background-position: calc(100% - 20px) center;
   }
 
   &.ReactTable .rt-td {
-    color: ${intent.of(Intent.Default)};
+    ${intent.of(Intent.Default)};
   }
 `;
 

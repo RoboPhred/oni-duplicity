@@ -60,6 +60,7 @@ class MinionTraitsTab extends React.Component<Props> {
 
     return (
       <DataTable
+        height="100%"
         data={data}
         columns={columns}
         showFilters

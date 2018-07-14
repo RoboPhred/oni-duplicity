@@ -75,7 +75,7 @@ function readFile(file: File): Promise<ArrayBuffer> {
   const reader = new FileReader();
   return new Promise<ArrayBuffer>((accept, reject) => {
     reader.onload = () => {
-      accept(reader.result);
+      accept(reader.result as ArrayBuffer);
     };
     reader.onerror = () => {
       reject(reader.error);
