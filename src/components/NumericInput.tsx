@@ -19,15 +19,16 @@ export interface NumericInputProps {
 type Props = NumericInputProps;
 interface State {
   editValue: number | null;
-  isValid: boolean;
+  validationMessage: string | null;
 }
 export default class NumericInput extends React.Component<Props, State> {
+  private _input = React.createRef<HTMLInputElement>();
   constructor(props: Props) {
     super(props);
 
     this.state = {
       editValue: null,
-      isValid: true
+      validationMessage: null
     };
   }
 
@@ -39,6 +40,7 @@ export default class NumericInput extends React.Component<Props, State> {
 
     return (
       <Input
+        innerRef={this._input}
         type="number"
         min={minValue}
         max={maxValue}
@@ -52,13 +54,22 @@ export default class NumericInput extends React.Component<Props, State> {
 
   @autobind()
   private _onValueChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { minValue, maxValue } = this.props;
+
     const value = e.target.valueAsNumber;
-    const clampValue = this._clamp(value);
-    const isValid = e.target.valueAsNumber === clampValue;
-    e.target.setCustomValidity(isValid ? "" : "Value out of range");
+    let validationMessage: string | null = null;
+
+    if (maxValue != null && value >= maxValue) {
+      validationMessage = `Value must be less than ${maxValue}`;
+    } else if (minValue != null && value <= minValue) {
+      validationMessage = `Value must be greater than ${minValue}`;
+    }
+
+    e.target.setCustomValidity(validationMessage || "");
+
     this.setState({
       editValue: value,
-      isValid
+      validationMessage
     });
   }
 
@@ -75,29 +86,28 @@ export default class NumericInput extends React.Component<Props, State> {
   }
 
   private _commitEdit() {
-    const { editValue, isValid } = this.state;
-    const { onCommit } = this.props;
+    const { editValue, validationMessage } = this.state;
+    const { precision = "int32", onCommit } = this.props;
+
+    // Reset validation
+    if (validationMessage && this._input.current) {
+      this._input.current.setCustomValidity("");
+    }
 
     this.setState({
-      editValue: null
+      editValue: null,
+      validationMessage: null
     });
 
-    if (!editValue || !isValid) {
+    if (!editValue || validationMessage) {
       return;
     }
 
-    onCommit(editValue);
-  }
+    const newValue = clamp(precision, editValue);
+    if (isNaN(newValue)) {
+      return;
+    }
 
-  private _clamp(value: number): number {
-    const { precision = "int32", minValue, maxValue } = this.props;
-    value = clamp(precision, value);
-    if (maxValue != null) {
-      value = Math.min(value, maxValue);
-    }
-    if (minValue != null) {
-      value = Math.max(value, minValue);
-    }
-    return value;
+    onCommit(newValue);
   }
 }
