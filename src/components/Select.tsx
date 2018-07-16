@@ -1,38 +1,44 @@
+import * as React from "react";
+
+import { autobind } from "core-decorators";
+
 import styled from "@/theme";
-import { WidthProps, width } from "styled-system";
 
-import ReactSelect, {
-  Creatable as ReactSelectCreatable,
-  ReactSelectProps,
-  ReactCreatableSelectProps
-} from "react-select";
+import { InputStyleProps, inputStyle } from "@/components/Input";
 
-import { TextCssProps, text } from "@/theme";
-import { attachProps } from "@/utils";
-
-export { Option } from "react-select";
-
-export interface SelectCreatableProps
-  extends ReactCreatableSelectProps,
-    WidthProps,
-    TextCssProps {}
-const Creatable = styled<SelectCreatableProps>(ReactSelectCreatable)`
-  ${text};
-  ${width};
+const SelectElement = styled<InputStyleProps, "select">("select")`
+  ${inputStyle};
 `;
-Creatable.displayName = "Select.Creatable";
 
-export interface SelectProps
-  extends ReactSelectProps,
-    WidthProps,
-    TextCssProps {}
-// TODO: We need to pass the generated className to the specific className structure
-//  for the various sub-components of Select.
-const Select = styled<SelectProps>(ReactSelect)`
-  ${text};
-  ${width};
-`;
-Select.displayName = "Select";
-export default attachProps(Select, {
-  Creatable
-});
+export interface Option<T extends string | number = string | number> {
+  label?: string;
+  value: T;
+}
+export interface SelectProps<T extends string | number = string | number>
+  extends InputStyleProps {
+  options: Option<T>[];
+  value: T;
+  onChange(value: T): void;
+}
+
+export default class Select extends React.Component<SelectProps> {
+  render() {
+    const { options, value, children, onChange, ...rest } = this.props;
+    return (
+      <SelectElement {...rest} onChange={this._onChange}>
+        {options.map(x => (
+          <option key={x.value} value={x.value} selected={x.value === value}>
+            {x.label}
+          </option>
+        ))}
+      </SelectElement>
+    );
+  }
+
+  @autobind()
+  private _onChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const { onChange } = this.props;
+    const value = e.target.value;
+    onChange(value);
+  }
+}

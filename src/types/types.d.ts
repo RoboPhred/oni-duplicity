@@ -4,7 +4,7 @@ type StructuredStateProps<T> = {
     : never
 };
 
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 /**
  * Utility type returning the unioned values of the object or array index.

@@ -42,27 +42,23 @@ class EnumerationField extends React.Component<Props> {
         value: enumeration[x]
       }));
       return (
-        <span>
-          <Select
-            value={value as number}
-            options={options}
-            searchable={options.length >= 7}
-            clearable={false}
-            onChange={this._onSelectInputChange}
-            width="200px"
-          />
-        </span>
+        <Select
+          value={value as number}
+          options={options}
+          onChange={this._onSelectInputChange}
+          width="200px"
+        />
       );
     }
   }
 
   @autobind()
-  private _onSelectInputChange(value: Option<any> | null) {
+  private _onSelectInputChange(value: number) {
     if (!value) {
       return;
     }
     const { onCommit } = this.props;
-    onCommit(value.value);
+    onCommit(value);
   }
 }
 

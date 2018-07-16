@@ -13,7 +13,7 @@ export type SelectFieldProps = EditorFieldProps &
 type Props = SelectFieldProps & InjectedProps;
 class SelectField extends React.Component<Props> {
   render() {
-    const { value, onCommit, options, ref, ...otherProps } = this.props;
+    const { value, onCommit, options, ...otherProps } = this.props;
     return (
       <SelectInput
         {...otherProps}

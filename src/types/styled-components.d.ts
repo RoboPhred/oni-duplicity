@@ -10,16 +10,12 @@ declare type StyledWithComponentTag<
   TProps
 > = SCC<JSX.IntrinsicElements[TTag], any, JSX.IntrinsicElements[TTag] & TProps>;
 
-// Typescript has a bug trying to deep-infer props through React.ComponentClass<infer R>,
-//  so we have to be explicit and reproduce it at this level.
-declare type PropsOfStyledComponent<T> = T extends React.ComponentClass<
-  TOSP<infer O, infer T>
->
-  ? import("styled-components").ThemedOuterStyledProps<O, T>
-  : never;
-
 // Cannot use ReactComponentProps as typescript fails to infer the presense of ThemedOuterStyledProps
 //  This is still mucking up the type of 'ref'
-declare type StyledComponentProps<T> = T extends SCC<infer P, infer T, infer O>
-  ? TOSP<O, T>
+// Ref is not being inferred correctly: it is being pulled from P, which is not
+//  the actual class being produced.
+//  Ref gets replaced by one pointing to the class in question, which in our
+//  case is T.  Pull out ref, and merge in the correct one.
+declare type StyledComponentProps<T> = T extends SCC<infer P, infer Q, infer O>
+  ? TOSP<Omit<O, "ref">, Q> & { ref: React.Ref<T> }
   : never;
