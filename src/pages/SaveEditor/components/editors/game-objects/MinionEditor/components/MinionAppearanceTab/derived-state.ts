@@ -1,7 +1,7 @@
 import { Selector, createStructuredSelector, createSelector } from "reselect";
 
 import {
-  ACCESSORY_TYPES,
+  AccessoryTypes,
   AccessorizerBehavior,
   GameObject,
   AccessoryType,
@@ -52,7 +52,7 @@ const structuredSelector = {
   gender: getSelectedGameObjectGender,
   scale: getSelectedGameObjectScale
 };
-ACCESSORY_TYPES.forEach(x => {
+AccessoryTypes.forEach(x => {
   (structuredSelector as any)[x] = createAccessorySelector(x);
 });
 export type StateProps = StructuredStateProps<

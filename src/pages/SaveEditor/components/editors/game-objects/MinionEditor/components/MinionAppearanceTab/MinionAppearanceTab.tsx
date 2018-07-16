@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { autobind } from "core-decorators";
 
 import {
-  ACCESSORIES_BY_TYPE,
-  ACCESSORY_TYPES,
+  AccessoriesByType,
+  AccessoryTypes,
   MINION_IDENTITY_GENDERS,
   AccessoryType
 } from "oni-save-parser";
@@ -37,9 +37,7 @@ class MinionAppearanceTab extends React.Component<Props> {
   render() {
     const { gender, onSetGender, scale } = this.props;
 
-    const fields = ACCESSORY_TYPES.map(type =>
-      this._renderAccessoryField(type)
-    );
+    const fields = AccessoryTypes.map(type => this._renderAccessoryField(type));
 
     const genderOpts: Option[] = MINION_IDENTITY_GENDERS.map(ident => ({
       label: ident,
@@ -110,7 +108,7 @@ class MinionAppearanceTab extends React.Component<Props> {
             renderInput={props => this._renderAccessorySelector(type, props)}
             renderNull={type !== "mouth" ? NoAccessory : NoAccessoryMouth}
             value={this.props[type]}
-            defaultValue={(ACCESSORIES_BY_TYPE[type] || [])[0] || ""}
+            defaultValue={(AccessoriesByType[type] || [])[0] || ""}
             onCommit={onSetAccessory.bind(this, type)}
           />
         </td>
@@ -132,7 +130,7 @@ class MinionAppearanceTab extends React.Component<Props> {
     type: AccessoryType,
     props: InputCompatibleProps<string>
   ) {
-    const accessoryNames = ACCESSORIES_BY_TYPE[type];
+    const accessoryNames = AccessoriesByType[type];
     if (!accessoryNames || accessoryNames.length === 0) {
       return <TextInput {...props} minLength={1} />;
     } else {
