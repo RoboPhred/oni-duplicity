@@ -25,9 +25,9 @@ export default class Select extends React.Component<SelectProps> {
   render() {
     const { options, value, children, onChange, ...rest } = this.props;
     return (
-      <SelectElement {...rest} onChange={this._onChange}>
+      <SelectElement {...rest} value={value} onChange={this._onChange}>
         {options.map(x => (
-          <option key={x.value} value={x.value} selected={x.value === value}>
+          <option key={x.value} value={x.value}>
             {x.label}
           </option>
         ))}
