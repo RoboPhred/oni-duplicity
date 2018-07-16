@@ -36,6 +36,9 @@ const jobsSelector = createSelector(
 
     masteries.forEach((x, i) => {
       const [key, value] = x;
+      if (key === "NoRole") {
+        return;
+      }
       jobs[key] = {
         id: key,
         mastery: value,
@@ -47,6 +50,9 @@ const jobsSelector = createSelector(
 
     experience.forEach((x, i) => {
       const [key, value] = x;
+      if (key === "NoRole") {
+        return;
+      }
       jobs[key].experience = value;
       jobs[key].experienceIndex = i;
     });

@@ -1,12 +1,14 @@
 import { SaveGame } from "oni-save-parser";
 import createCachedSelector from "re-reselect";
 
+import naturalCompare from "string-natural-compare";
+
 import { AppState } from "@/state";
 
 import {
+  EditMode,
   getSaveItemTitle,
-  getSaveItemChildPaths,
-  EditMode
+  getSaveItemChildPaths
 } from "@/services/save-structure";
 
 import oniSaveSelector from "@/selectors/oni-save";
@@ -64,8 +66,21 @@ const childPaths = createCachedSelector<
   itemPathSelector,
   oniSaveSelector,
   editModeSelector,
-  (path, saveGame, editMode) =>
-    saveGame ? getSaveItemChildPaths(path, saveGame, editMode) : []
+  (path, saveGame, editMode) => {
+    if (saveGame == null) {
+      return [];
+    }
+
+    // Note: This is a pretty heavy operation.  We recurse the save
+    //  to find the child items, then scan every path for both
+    //  items during sort.
+    const childItems = getSaveItemChildPaths(path, saveGame, editMode);
+    return childItems.sort((a, b) => {
+      const aTitle = getSaveItemTitle(a, saveGame);
+      const bTitle = getSaveItemTitle(b, saveGame);
+      return naturalCompare(aTitle, bTitle);
+    });
+  }
 )(cacheKeyGenerator);
 
 const mapStateToProps = function(
