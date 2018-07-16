@@ -10,7 +10,9 @@ import SaveStructureLink from "@/components/SaveStructureLink";
 import { EditorFieldProps } from "./connect-field";
 
 import ArrayLikeField from "./ArrayLikeField";
-import BooleanField from "./BooleanField";
+import CheckField from "./CheckField";
+import ColorField from "./ColorField";
+import DictionaryField from "./DictionaryField";
 import EnumerationField from "./EnumerationField";
 import NumericField from "./NumericField";
 import TextField from "./TextField";
@@ -28,15 +30,17 @@ export default function getFieldElementClass(
         <ArrayLikeField {...props} subType={typeInfo.subTypes![0]} />
       );
     case SerializationTypeCode.Boolean:
-      return (props: EditorFieldProps) => <BooleanField {...props} />;
+      return (props: EditorFieldProps) => <CheckField {...props} />;
     case SerializationTypeCode.Byte:
       return (props: EditorFieldProps) => (
         <NumericField {...props} minValue={0} maxValue={0xff} />
       );
     case SerializationTypeCode.Colour:
-      return () => <Text intent={Intent.Dangerous}>TODO Colour</Text>;
+      return (props: EditorFieldProps) => <ColorField {...props} />;
     case SerializationTypeCode.Dictionary:
-      return () => <Text intent={Intent.Dangerous}>TODO Dictionary</Text>;
+      return (props: EditorFieldProps) => (
+        <DictionaryField subType={typeInfo.subTypes![1]} {...props} />
+      );
     case SerializationTypeCode.Double:
       return (props: EditorFieldProps) => (
         <NumericField {...props} precision="double" />
