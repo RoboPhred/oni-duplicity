@@ -5,7 +5,7 @@ import mapStateToProps, { StateProps } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";
 
 import NoSave from "@/pages/NoSave";
-import Error from "@/pages/Error";
+import ErrorPage from "@/pages/Error";
 import Loading from "@/pages/Loading";
 import SaveEditor from "@/pages/SaveEditor";
 
@@ -21,7 +21,7 @@ class App extends React.Component<Props> {
     let element: JSX.Element;
 
     if (error) {
-      element = <Error error={error} onDismiss={onDismissError} />;
+      element = <ErrorPage error={error} onDismiss={onDismissError} />;
     } else {
       switch (loadingState) {
         case "idle":

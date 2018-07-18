@@ -37,7 +37,7 @@ class MinionHealthTab extends React.Component<Props> {
 
     return (
       <React.Fragment>
-        <FormGroup label="Status">
+        <FormGroup label="Status" inline>
           <SelectInput
             value={healthState || HealthState.Perfect}
             options={options}

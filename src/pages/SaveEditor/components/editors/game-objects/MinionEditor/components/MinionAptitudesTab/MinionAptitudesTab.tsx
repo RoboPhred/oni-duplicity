@@ -6,6 +6,7 @@ import { Intent } from "@/theme/theme";
 import mapStateToProps, { StateProps, AptitudeData } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";
 
+import NonIdealState from "@/components/NonIdealState";
 import DataTable, {
   DataTableColumn,
   DataTableRow
@@ -18,12 +19,12 @@ class MinionAptitudesTab extends React.Component<Props> {
   render() {
     const { aptitudes, setAptitude } = this.props;
 
-    if (!aptitudes) {
-      return "No Aptitude Data.";
-    }
-
-    if (aptitudes.length === 0) {
-      return <Text intent={Intent.Dangerous}>No Role Groups Recognized.</Text>;
+    if (!aptitudes || aptitudes.length === 0) {
+      return (
+        <NonIdealState intent={Intent.Dangerous} header="No Data">
+          No aptitude data could be found on this duplicant.
+        </NonIdealState>
+      );
     }
 
     const columns: DataTableColumn[] = [

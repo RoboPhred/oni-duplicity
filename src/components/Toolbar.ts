@@ -2,7 +2,7 @@ import * as CSS from "csstype";
 
 import styled, {
   Background,
-  BackgroundProps,
+  BackgroundCssProps,
   TextCssProps,
   background,
   css,
@@ -41,7 +41,7 @@ ToolbarGroup.defaultProps = {
 };
 ToolbarGroup.displayName = "ToolbarButtonGroup";
 
-export type ToolbarProps = BackgroundProps;
+export type ToolbarProps = BackgroundCssProps;
 const Toolbar = styled<ToolbarProps, "div">("div")`
   width: 100%;
   height: auto;

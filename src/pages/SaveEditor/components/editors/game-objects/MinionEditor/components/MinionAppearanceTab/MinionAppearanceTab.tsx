@@ -10,7 +10,7 @@ import {
   AccessoryType
 } from "oni-save-parser";
 
-import { Intent, FontSize } from "@/theme";
+import { Intent } from "@/theme";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";

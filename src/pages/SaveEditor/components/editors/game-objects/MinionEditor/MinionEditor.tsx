@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 
+import NonIdealState from "@/components/NonIdealState";
 import VerticalTabs from "@/components/VerticalTabs";
 
 import EditorContainer from "../../components/EditorContainer";
@@ -17,13 +18,18 @@ import MinionJobsTab from "./components/MinionJobsTab";
 import MinionSkillsTab from "./components/MinionSkillsTab";
 import MinionTraitsTab from "./components/MinionTraitsTab";
 import MinionPositionTab from "./components/MinionPositionTab";
+import { Intent } from "@/theme";
 
 type Props = StateProps;
 class DuplicantEditor extends React.Component<Props> {
   render() {
     const { minionNamePath, gameObjectPath } = this.props;
     if (!minionNamePath) {
-      return "Error: Malformed data";
+      return (
+        <NonIdealState intent={Intent.Dangerous} header="Malformed Data">
+          Duplicant is missing the MinionIdentity behavior.
+        </NonIdealState>
+      );
     }
 
     return (
