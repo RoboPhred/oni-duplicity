@@ -69,9 +69,7 @@ const DataTable = styled<Partial<TableProps> & DataTableStyleProps>(ReactTable)`
 `;
 
 DataTable.displayName = "DataTable";
-DataTable.defaultProps = {
-  showPagination: false
-};
+DataTable.defaultProps = {};
 
 export type DataTableProps = TableProps & DataTableStyleProps;
 export type DataTableColumn = Column;
