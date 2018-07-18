@@ -17,12 +17,14 @@ export default function receiveOniSaveReducer(
         error: null,
         loadingState: action.payload.operation,
         loadingProgressMessage: null,
+        selectedPath: [],
         oniSave: action.payload.clearExisting ? null : state.oniSave
       };
     case ACTION_RECEIVE_ONISAVE_ERROR:
       state = {
         ...state,
         loadingState: "idle",
+        selectedPath: [],
         error: action.payload
       };
       break;
@@ -32,6 +34,7 @@ export default function receiveOniSaveReducer(
         loadingState: "ready",
         loadingProgressMessage: null,
         error: null,
+        selectedPath: [],
         oniSave: action.payload
       };
   }
