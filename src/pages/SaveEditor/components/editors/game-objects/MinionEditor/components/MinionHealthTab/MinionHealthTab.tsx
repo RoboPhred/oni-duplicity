@@ -11,7 +11,6 @@ import mapDispatchToProps, { DispatchProps } from "./events";
 import FormGroup from "@/components/FormGroup";
 import SelectInput from "@/components/SelectInput";
 import NumericInput from "@/components/NumericInput";
-import { FontSize } from "@/theme";
 
 type Props = StateProps & DispatchProps;
 class MinionHealthTab extends React.Component<Props> {
