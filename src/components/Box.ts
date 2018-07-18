@@ -42,6 +42,6 @@ const Box = styled<BoxProps, "div">("div")`
 `;
 Box.displayName = "Box";
 Box.defaultProps = {
-  intentIsBg: true
+  intentIsBg: false
 };
 export default Box;
