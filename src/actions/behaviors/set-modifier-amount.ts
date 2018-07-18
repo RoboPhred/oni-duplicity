@@ -1,9 +1,7 @@
-export const ACTION_MINION_MODIFIER_SET_AMOUNT =
-  "oni-save/behaviors/minion-modifier/set-amount";
-export const setModifierAmount = (amountType: string, value: number) => ({
-  type: ACTION_MINION_MODIFIER_SET_AMOUNT as typeof ACTION_MINION_MODIFIER_SET_AMOUNT,
+export const ACTION_MINION_MODIFIER_SET_VALUE =
+  "oni-save/behaviors/minion-modifier/set-value";
+export const setModifierValue = (amountType: string, value: number) => ({
+  type: ACTION_MINION_MODIFIER_SET_VALUE as typeof ACTION_MINION_MODIFIER_SET_VALUE,
   payload: { amountType, value }
 });
-export type SetMinionModifierAmountAction = ReturnType<
-  typeof setModifierAmount
->;
+export type SetMinionModifierValueAction = ReturnType<typeof setModifierValue>;

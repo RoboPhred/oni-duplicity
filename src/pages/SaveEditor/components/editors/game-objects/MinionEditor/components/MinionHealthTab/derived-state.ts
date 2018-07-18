@@ -15,13 +15,25 @@ import {
   getSelectedGameObjectElementDiseaseCount
 } from "@/selectors/behaviors/primary-element";
 
-import { getSelectedGameObjectHitPoints } from "@/selectors/behaviors/minion-modifiers";
+import { getSelectedGameObjectModifierValueSelector } from "@/selectors/behaviors/minion-modifiers";
 
 const structuredSelector = {
   healthState: getSelectedGameObjectHealthState,
   surfaceDiseaseId: getSelectedGameObjectElementDiseaseId,
   surfaceDiseaseCount: getSelectedGameObjectElementDiseaseCount,
-  hitpoints: getSelectedGameObjectHitPoints
+  hitpoints: getSelectedGameObjectModifierValueSelector("HitPoints"),
+  stamina: getSelectedGameObjectModifierValueSelector("Stamina"),
+  calories: getSelectedGameObjectModifierValueSelector("Calories"),
+  immuneLevel: getSelectedGameObjectModifierValueSelector("ImmuneLevel"),
+  breath: getSelectedGameObjectModifierValueSelector("Breath"),
+  stress: getSelectedGameObjectModifierValueSelector("Stress"),
+  bladder: getSelectedGameObjectModifierValueSelector("Bladder"),
+  foodPoisoning: getSelectedGameObjectModifierValueSelector("FoodPoisoning"),
+  coldBrain: getSelectedGameObjectModifierValueSelector("ColdBrain"),
+  heatRash: getSelectedGameObjectModifierValueSelector("HeatRash"),
+  slimeLung: getSelectedGameObjectModifierValueSelector("SlimeLung"),
+  sunburn: getSelectedGameObjectModifierValueSelector("Sunburn"),
+  spores: getSelectedGameObjectModifierValueSelector("Spores")
 };
 export type StateProps = StructuredStateProps<typeof structuredSelector>;
 const mapStateToProps = createStructuredSelector<AppState, StateProps>(
