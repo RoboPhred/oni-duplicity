@@ -4,14 +4,14 @@ import { AppState, defaultAppState } from "@/state";
 
 import {
   ACTION_CURRENTOBJECT_BEHAVIOR_SET_VALUE,
-  SetCurrentObjectBehaviorValue
+  SetCurrentObjectBehaviorValueAction
 } from "@/actions/behaviors/set-currentobject-behavior-value";
 
 import { produceFromBehavior } from "./utils";
 
 export default function setCurrentObjectBehaviorValueReducer(
   state: AppState = defaultAppState,
-  action: SetCurrentObjectBehaviorValue
+  action: SetCurrentObjectBehaviorValueAction
 ): AppState {
   if (action.type !== ACTION_CURRENTOBJECT_BEHAVIOR_SET_VALUE) {
     return state;

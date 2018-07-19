@@ -2,15 +2,17 @@ import reduceReducers from "reduce-reducers";
 
 import { AppState } from "@/state";
 
-import setAccessoryReducer from "@/reducer/behaviors/set-accessory";
-import setCurrentObjectBehaviorValueReducer from "@/reducer/behaviors/set-currentobject-behavior-value";
-import setElementDiseaseReducer from "@/reducer/behaviors/set-element-disease";
-import setHealthStateReducer from "@/reducer/behaviors/set-health-state";
-import setIdentityGenderReducer from "@/reducer/behaviors/set-identity-gender";
-import setModifierAmountReducer from "@/reducer/behaviors/set-modifier-amount";
-import setTraitReducer from "@/reducer/behaviors/set-traits-trait";
+import modifyCurrentObjectBehaviorArray from "./modify-currentobject-behavior-array";
+import setAccessoryReducer from "./set-accessory";
+import setCurrentObjectBehaviorValueReducer from "./set-currentobject-behavior-value";
+import setElementDiseaseReducer from "./set-element-disease";
+import setHealthStateReducer from "./set-health-state";
+import setIdentityGenderReducer from "./set-identity-gender";
+import setModifierAmountReducer from "./set-modifier-amount";
+import setTraitReducer from "./set-traits-trait";
 
 const reducers = [
+  modifyCurrentObjectBehaviorArray,
   setAccessoryReducer,
   setCurrentObjectBehaviorValueReducer,
   setElementDiseaseReducer,
