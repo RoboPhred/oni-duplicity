@@ -1,14 +1,16 @@
 import { attachProps } from "@/utils";
 
 import { Background, Intent, isBackground, isIntent, getTheme } from "../theme";
-import { ThemeProps, ThemedOuterStyledProps } from "../styled";
+import { ThemedOuterStyledProps } from "../styled";
 
 export type ColorValue = Background | Intent;
 export interface ColorCssProps {
   color?: ColorValue;
 }
 
-const colorOf = (color: ColorValue) => (props: ThemedOuterStyledProps<{}>) => {
+const colorValueOf = (color: ColorValue) => (
+  props: ThemedOuterStyledProps<{}>
+) => {
   const colors = getTheme(props).colors;
   if (isIntent(color)) {
     return `${colors.intent[color]}`;
@@ -19,14 +21,14 @@ const colorOf = (color: ColorValue) => (props: ThemedOuterStyledProps<{}>) => {
   }
 };
 
-const colorFromProps = (props: ThemedOuterStyledProps<ColorCssProps>) => {
+const colorValueFromProps = (props: ThemedOuterStyledProps<ColorCssProps>) => {
   let { color } = props;
   if (!color) {
     return undefined;
   }
-  return colorOf(color);
+  return colorValueOf(color);
 };
 
-export const colorValue = attachProps(colorFromProps, {
-  of: colorOf
+export const colorValue = attachProps(colorValueFromProps, {
+  of: colorValueOf
 });

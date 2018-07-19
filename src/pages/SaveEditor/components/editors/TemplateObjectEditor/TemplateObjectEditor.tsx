@@ -7,7 +7,6 @@ import { TemplateObjectEditorProps } from "./props";
 import mapStateToProps, { StateProps } from "./derived-state";
 
 import Text from "@/components/Text";
-const H4 = Text.withComponent("h4");
 const TD = Text.withComponent("td");
 
 import TemplateObjectEditorContainer from "./components/TemplateObjectEditorContainer";
@@ -34,7 +33,7 @@ class TemplateObjectEditor extends React.Component<Props> {
       });
     return (
       <TemplateObjectEditorContainer>
-        <H4 intent={Intent.Primary}>{templateName}</H4>
+        <Text.H4 intent={Intent.Primary}>{templateName}</Text.H4>
         <table>
           <tbody>{fieldRows}</tbody>
         </table>

@@ -58,3 +58,9 @@ export function clamp(precision: NumberPrecision, value: number): number {
 
   return clamper(value);
 }
+
+export function isFloatingPoint(
+  precision: NumberPrecision
+): precision is "single" | "double" {
+  return precision === "single" || precision === "double";
+}

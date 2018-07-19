@@ -10,7 +10,7 @@ export interface ErrorProps {
   onDismiss(): void;
 }
 
-const Error: React.SFC<ErrorProps> = ({ error, onDismiss }) => (
+const ErrorPage: React.SFC<ErrorProps> = ({ error, onDismiss }) => (
   <Flex direction="column" width="100%" height="100%">
     <Flex.Item grow>
       <Text intent={Intent.Dangerous}>
@@ -25,5 +25,5 @@ const Error: React.SFC<ErrorProps> = ({ error, onDismiss }) => (
     </Flex.Item>
   </Flex>
 );
-Error.displayName = "Error";
-export default Error;
+ErrorPage.displayName = "Error";
+export default ErrorPage;

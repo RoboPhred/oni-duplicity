@@ -12,7 +12,7 @@ export function setCurrentObjectBehaviorValue<T extends GameObjectBehavior>(
     payload: { behaviorName, path, value }
   };
 }
-export type SetCurrentObjectBehaviorValue<
+export type SetCurrentObjectBehaviorValueAction<
   T extends GameObjectBehavior = GameObjectBehavior
 > = {
   type: typeof ACTION_CURRENTOBJECT_BEHAVIOR_SET_VALUE;

@@ -2,11 +2,13 @@ import * as CSS from "csstype";
 
 import styled, {
   Background,
-  BackgroundProps,
+  BackgroundCssProps,
   TextCssProps,
   background,
   css,
-  text
+  text,
+  getTheme,
+  Space
 } from "@/theme";
 
 import { attachProps } from "@/utils";
@@ -41,11 +43,13 @@ ToolbarGroup.defaultProps = {
 };
 ToolbarGroup.displayName = "ToolbarButtonGroup";
 
-export type ToolbarProps = BackgroundProps;
+export type ToolbarProps = BackgroundCssProps;
 const Toolbar = styled<ToolbarProps, "div">("div")`
   width: 100%;
   height: auto;
   display: grid;
+  padding: 0px ${props => getTheme(props).space[Space.Small]}px;
+  box-sizing: border-box;
   grid-template-columns: [left] 1fr [center] 1fr [right] 1fr;
   ${background};
 `;

@@ -3,9 +3,12 @@ import { connect } from "react-redux";
 
 import { AI_TRAIT_IDS } from "oni-save-parser";
 
+import { Intent } from "@/theme";
+
 import mapStateToProps, { StateProps } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";
 
+import NonIdealState from "@/components/NonIdealState";
 import DataTable, {
   DataTableColumn,
   DataTableRow
@@ -19,8 +22,12 @@ class MinionTraitsTab extends React.Component<Props> {
   render() {
     const { traits, onSetTrait } = this.props;
 
-    if (traits == null) {
-      return "No Trait Data";
+    if (traits == null || traits.length === 0) {
+      return (
+        <NonIdealState intent={Intent.Dangerous} header="No Data">
+          No traits could be found on this duplicant.
+        </NonIdealState>
+      );
     }
 
     const data = AI_TRAIT_IDS.map(trait => ({

@@ -4,15 +4,15 @@ import { css } from "../styled";
 
 import { ColorValue, colorValue } from "./color";
 
-export interface BackgroundProps {
+export interface BackgroundCssProps {
   background?: ColorValue;
 }
 
-export const backgroundOf = (background: ColorValue) => css<BackgroundProps>`
+export const backgroundOf = (background: ColorValue) => css<BackgroundCssProps>`
   background-color: ${colorValue.of(background)};
 `;
 
-export const backgroundFromProps = css<BackgroundProps>`
+export const backgroundFromProps = css<BackgroundCssProps>`
   ${props => {
     let { background } = props;
     if (!background) {

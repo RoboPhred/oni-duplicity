@@ -3,17 +3,17 @@ import { MinionModifiersBehavior } from "oni-save-parser";
 import { AppState, defaultAppState } from "@/state";
 
 import {
-  ACTION_MINION_MODIFIER_SET_AMOUNT,
-  SetMinionModifierAmountAction
+  ACTION_MINION_MODIFIER_SET_VALUE,
+  SetMinionModifierValueAction
 } from "@/actions/behaviors/set-modifier-amount";
 
 import { produceFromBehavior } from "./utils";
 
 export default function setModifierAmountReducer(
   state: AppState = defaultAppState,
-  action: SetMinionModifierAmountAction
+  action: SetMinionModifierValueAction
 ): AppState {
-  if (action.type !== ACTION_MINION_MODIFIER_SET_AMOUNT) {
+  if (action.type !== ACTION_MINION_MODIFIER_SET_VALUE) {
     return state;
   }
 

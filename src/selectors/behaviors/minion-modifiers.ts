@@ -1,4 +1,6 @@
-import { createSelector } from "reselect";
+import { createSelector, Selector } from "reselect";
+
+import { memoize } from "lodash-es";
 
 import { MinionModifiersBehavior } from "oni-save-parser";
 
@@ -10,9 +12,10 @@ export const getSelectedGameObjectModifiersBehavior = getCurrentGameObjectBehavi
   MinionModifiersBehavior
 );
 
-export const getSelectedGameObjectHitPoints = createSelector(
-  getSelectedGameObjectModifiersBehavior,
-  behavior => {
+function createSelectedGameObjectModifierValueSelector(
+  amountId: string
+): Selector<AppState, number | null> {
+  return createSelector(getSelectedGameObjectModifiersBehavior, behavior => {
     if (!behavior) {
       return null;
     }
@@ -22,27 +25,14 @@ export const getSelectedGameObjectHitPoints = createSelector(
       return null;
     }
 
-    const hitpoints = extraData.amounts.find(x => x.name === "HitPoints");
-    if (!hitpoints) {
+    const amount = extraData.amounts.find(x => x.name === amountId);
+    if (!amount) {
       return null;
     }
-    return hitpoints.value.value;
-  }
+    return amount.value.value;
+  });
+}
+
+export const getSelectedGameObjectModifierValueSelector = memoize(
+  createSelectedGameObjectModifierValueSelector
 );
-
-(state: AppState) => {
-  const behavior = getSelectedGameObjectModifiersBehavior(state);
-  if (!behavior) {
-    return null;
-  }
-  const extraData = behavior.extraData;
-  if (!extraData) {
-    return null;
-  }
-
-  const hitpoints = extraData.amounts.find(x => x.name === "HitPoints");
-  if (!hitpoints) {
-    return null;
-  }
-  return hitpoints.value.value;
-};

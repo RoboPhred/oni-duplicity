@@ -4,7 +4,7 @@ import { autobind } from "core-decorators";
 
 import Keys from "@/keys";
 
-import { NumberPrecision, clamp } from "@/math";
+import { NumberPrecision, clamp, isFloatingPoint } from "@/math";
 
 import Input from "@/components/Input";
 
@@ -33,10 +33,12 @@ export default class NumericInput extends React.Component<Props, State> {
   }
 
   render() {
-    const { value, minValue, maxValue } = this.props;
+    const { value, minValue, maxValue, precision } = this.props;
     const { editValue } = this.state;
 
     const currentValue = editValue != null ? editValue : value;
+
+    const step = isFloatingPoint(precision || "int32") ? Math.pow(10, -16) : 1;
 
     return (
       <Input
@@ -48,6 +50,7 @@ export default class NumericInput extends React.Component<Props, State> {
         onChange={this._onValueChange}
         onKeyPress={this._onInputKeyPress}
         onBlur={this._onInputBlur}
+        step={step}
       />
     );
   }

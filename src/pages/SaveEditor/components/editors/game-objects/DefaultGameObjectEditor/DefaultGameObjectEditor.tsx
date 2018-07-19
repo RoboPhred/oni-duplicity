@@ -5,6 +5,7 @@ import { Intent } from "@/theme";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 
+import NonIdealState from "@/components/NonIdealState";
 import FormGroup from "@/components/FormGroup";
 import EditModeCondition from "@/components/EditModeCondition";
 
@@ -18,7 +19,9 @@ class DefaultGameObjectEditor extends React.Component<Props> {
   render() {
     const { gameObjectPath, gameObjectName } = this.props;
     if (!gameObjectPath) {
-      return "Error: Malformed data";
+      <NonIdealState intent={Intent.Dangerous} header="No GameObject Selected">
+        No object is selected, or the selected object is not a GameObject.
+      </NonIdealState>;
     }
 
     return (

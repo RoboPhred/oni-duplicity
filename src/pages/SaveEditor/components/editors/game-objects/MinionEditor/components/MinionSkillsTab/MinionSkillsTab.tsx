@@ -1,9 +1,12 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
+import { Intent } from "@/theme";
+
 import mapStateToProps, { StateProps } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";
 
+import NonIdealState from "@/components/NonIdealState";
 import DataTable, {
   DataTableColumn,
   DataTableRow
@@ -15,8 +18,12 @@ class MinionSkillsTab extends React.Component<Props> {
   render() {
     const { skills, setSkillLevel, setSkillExperience } = this.props;
 
-    if (!skills) {
-      return "No Skills Data.";
+    if (!skills || skills.length === 0) {
+      return (
+        <NonIdealState intent={Intent.Dangerous} header="No Data">
+          No skills could be found on this duplicant.
+        </NonIdealState>
+      );
     }
 
     const data = skills.map((x, i) => ({

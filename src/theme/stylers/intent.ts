@@ -4,15 +4,14 @@ import { attachProps } from "@/utils";
 
 import { Intent } from "../theme";
 
-import { intentColor } from "./intent-color";
+import { intentColor, IntentColorProps } from "./intent-color";
 import { intentFill } from "./intent-fill";
 
-export interface IntentProps {
+export interface IntentCssProps extends IntentColorProps {
   intentIsBg?: boolean;
-  intent?: Intent;
 }
 
-const intentDefault = (defaultIntent: Intent | null) => css<IntentProps>`
+const intentDefault = (defaultIntent: Intent | null) => css<IntentCssProps>`
   ${props => {
     return props.intent
       ? props.intentIsBg
@@ -26,7 +25,7 @@ const intentOf = (intent: Intent, isBg: boolean = false) => css`
   ${isBg ? intentFill.of(intent) : intentColor.of(intent)};
 `;
 
-const intentFromProps = css<IntentProps>`
+const intentFromProps = css<IntentCssProps>`
   ${props => {
     return props.intentIsBg ? intentFill : intentColor;
   }};
