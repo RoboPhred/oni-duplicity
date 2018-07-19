@@ -54,14 +54,18 @@ class MinionTraitsTab extends React.Component<Props> {
         ),
         accessor: x => x,
         resizable: false,
-        width: 70
+        width: 70,
+        sortable: true,
+        sortMethod: (a: typeof data[0], b: typeof data[0]) =>
+          a.selected != b.selected ? (a.selected ? -1 : 1) : 0
       },
       {
         Header: "Trait",
         id: "trait_name",
         Cell: (row: DataTableRow) => <Text>{row.value}</Text>,
         accessor: "trait",
-        filterable: true
+        filterable: true,
+        sortable: true
       }
     ];
 

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
+import { compare } from "@/math";
 import { Intent } from "@/theme";
 
 import mapStateToProps, { StateProps } from "./derived-state";
@@ -40,8 +41,6 @@ class MinionSkillsTab extends React.Component<Props> {
       },
       {
         Header: "Level",
-        sortable: true,
-        filterable: false,
         id: "level",
         accessor: x => x,
         Cell: (row: DataTableRow<typeof data[0]>) => (
@@ -51,12 +50,13 @@ class MinionSkillsTab extends React.Component<Props> {
             value={row.value.level}
             onCommit={setSkillLevel.bind(null, row.value.index)}
           />
-        )
+        ),
+        sortable: true,
+        sortMethod: (a: typeof data[0], b: typeof data[0]) =>
+          compare(a.level, b.level)
       },
       {
         Header: "Experience",
-        sortable: true,
-        filterable: false,
         id: "experience",
         accessor: x => x,
         Cell: (row: DataTableRow<typeof data[0]>) => (
@@ -65,18 +65,14 @@ class MinionSkillsTab extends React.Component<Props> {
             value={row.value.experience}
             onCommit={setSkillExperience.bind(null, row.value.index)}
           />
-        )
+        ),
+        sortable: true,
+        sortMethod: (a: typeof data[0], b: typeof data[0]) =>
+          compare(a.experience, b.experience)
       }
     ];
 
-    return (
-      <DataTable
-        height="100%"
-        columns={columns}
-        showPagination={false}
-        data={data}
-      />
-    );
+    return <DataTable height="100%" columns={columns} data={data} />;
   }
 }
 export default connect(

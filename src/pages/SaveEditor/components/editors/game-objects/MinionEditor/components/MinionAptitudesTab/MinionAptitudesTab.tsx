@@ -1,7 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { Intent } from "@/theme/theme";
+import { compare } from "@/math";
+import { Intent } from "@/theme";
 
 import mapStateToProps, { StateProps, AptitudeData } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";
@@ -12,7 +13,6 @@ import DataTable, {
   DataTableRow
 } from "@/components/DataTable";
 import NumericInput from "@/components/NumericInput";
-import Text from "@/components/Text";
 
 type Props = StateProps & DispatchProps;
 class MinionAptitudesTab extends React.Component<Props> {
@@ -47,7 +47,9 @@ class MinionAptitudesTab extends React.Component<Props> {
             value={row.value.aptitude}
             onCommit={setAptitude.bind(null, row.value.index)}
           />
-        )
+        ),
+        sortMethod: (a: AptitudeData, b: AptitudeData) =>
+          compare(a.aptitude, b.aptitude)
       }
     ];
 

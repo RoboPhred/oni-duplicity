@@ -64,3 +64,9 @@ export function isFloatingPoint(
 ): precision is "single" | "double" {
   return precision === "single" || precision === "double";
 }
+
+export function compare(a: number, b: number) {
+  if (a > b) return -1;
+  if (a < b) return 1;
+  return 0;
+}
