@@ -13,6 +13,7 @@ import GameObjectHeader from "../components/GameObjectHeader";
 import MinionHeader from "./components/MinionEditableName";
 import MinionAppearanceTab from "./components/MinionAppearanceTab";
 import MinionAptitudesTab from "./components/MinionAptitudesTab";
+import MinionEffectsTab from "./components/MinionEffectsTab";
 import MinionHealthTab from "./components/MinionHealthTab";
 import MinionJobsTab from "./components/MinionJobsTab";
 import MinionSkillsTab from "./components/MinionSkillsTab";
@@ -63,6 +64,10 @@ class DuplicantEditor extends React.Component<Props> {
 
           <VerticalTabs.Tab tabKey="aptitude" header="Aptitudes">
             <MinionAptitudesTab />
+          </VerticalTabs.Tab>
+
+          <VerticalTabs.Tab tabKey="effects" header="Effects">
+            <MinionEffectsTab />
           </VerticalTabs.Tab>
 
           <VerticalTabs.Tab tabKey="position" header="Position">
