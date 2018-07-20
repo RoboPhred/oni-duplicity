@@ -23,8 +23,11 @@ const ArrayLikeField: React.SFC<ArrayLikeFieldProps & InjectedProps> = ({
   subType,
   value
 }) => {
+  if (value == null) {
+    return <Text intent={Intent.Hint}>Null Value</Text>;
+  }
   const ValueElement = getFieldElementClass(subType);
-  const elements = (value as any[]).map((value, i) => {
+  const elements = (value as any[]).map((_, i) => {
     return (
       <tr key={i}>
         <TD>{i}</TD>
