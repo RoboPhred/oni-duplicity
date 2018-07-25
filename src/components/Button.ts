@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import styled, { Space, FontSize, Radii } from "@/style";
+import styled, { Space, FontSize, Radius } from "@/style";
 
 import { Intent, getTheme, intentFill } from "@/style";
 
@@ -12,7 +12,7 @@ export interface ButtonProps {
 const Button = styled<ButtonProps, "button">("button")`
   ${intentFill};
   border: none;
-  border-radius: ${props => getTheme(props).radii[Radii.Button]}px;
+  border-radius: ${props => getTheme(props).radii[Radius.Button]}px;
   margin: ${props => getTheme(props).space[Space.Small]}px;
   font-size: ${props => getTheme(props).fontSizes[FontSize.Button]}px;
 `;

@@ -6,4 +6,8 @@ declare module "styled-system" {
   }
 
   export function bgColor(...args: any[]): any;
+
+  export function variant(opts: { key: string; prop?: string }): any;
+
+  export function mixed(obj: Record<string, any>): any;
 }

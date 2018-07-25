@@ -1,14 +1,16 @@
-import styled, { Space } from "@/style";
+import { SpaceProps, space } from "styled-system";
 
-import { getTheme } from "@/style";
+import styled, { Space, Border, Color, border } from "@/style";
 
-const DuplicantsListContainer = styled.div`
+const DuplicantsListContainer = styled<SpaceProps, "div">("div")`
   width: 100%;
   margin-top: 5px;
   box-sizing: border-box;
-  padding: ${props => getTheme(props).space[Space.Small]}px;
-  border: ${props => getTheme(props).borders[2]};
-  border-color: ${props => getTheme(props).colors.bg.separator};
+  ${space};
+  ${border.of(Border.Normal, Color.DefaultSeparator)};
 `;
+DuplicantsListContainer.defaultProps = {
+  p: Space.Small
+};
 DuplicantsListContainer.displayName = "DuplicantsListContainer";
 export default DuplicantsListContainer;

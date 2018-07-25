@@ -1,8 +1,8 @@
 import styled from "@/style";
 
-import { TextCssProps, text } from "@/style";
+import { TextProps, text } from "@/style";
 
-export type EditableTextProps = TextCssProps;
+export type EditableTextProps = TextProps;
 const EditableTextInput = styled<EditableTextProps, "input">("input")`
   ${text};
   font-size: inherit;

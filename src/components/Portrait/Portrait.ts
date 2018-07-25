@@ -1,4 +1,4 @@
-import styled, { Radii } from "@/style";
+import styled, { Radius } from "@/style";
 
 import { attachProps } from "@/utils";
 
@@ -8,7 +8,7 @@ import Header from "./PortraitHeader";
 import Footer from "./PortraitFooter";
 
 const Portrait = styled.div`
-  border-radius: ${props => getTheme(props).radii[Radii.Small]}px;
+  border-radius: ${props => getTheme(props).radii[Radius.Small]}px;
   background-color: ${props => getTheme(props).colors.bg.panel};
   width: 150px;
   height: 150px;

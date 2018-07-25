@@ -9,11 +9,11 @@ import {
 
 import styled from "@/style";
 
-import { TextCssProps, text } from "@/style";
+import { TextProps as TextStyleProps, text } from "@/style";
 
 import { attachProps } from "@/utils";
 
-export type TextProps = TextCssProps &
+export type TextProps = TextStyleProps &
   AlignSelfProps &
   JustifySelfProps &
   SpaceProps;

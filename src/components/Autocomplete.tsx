@@ -2,7 +2,7 @@ import * as React from "react";
 
 import ReactAutocomplete from "react-autocomplete";
 
-import styled, { Intent, Background, getTheme, Space } from "@/style";
+import { Intent, getTheme, Space } from "@/style";
 
 import Input, { InputProps } from "@/components/Input";
 import Box from "@/components/Box";

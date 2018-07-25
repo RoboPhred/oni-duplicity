@@ -1,11 +1,10 @@
 import styled, {
   intent,
-  borderValue,
   text,
-  background,
-  Background,
   Intent,
-  Border
+  Border,
+  getThemeColor,
+  Color
 } from "@/style";
 
 import { attachProps } from "@/utils";
@@ -18,7 +17,7 @@ const Table = styled.table`
 
 export default attachProps(Table, {
   THead: styled.thead`
-    ${background.of(Background.Panel)};
+    background-color: ${getThemeColor(Color.PanelBackground)};
   `,
   TH: styled.th`
     ${intent.of(Intent.Secondary)};

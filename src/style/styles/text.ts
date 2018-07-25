@@ -8,9 +8,9 @@ import {
   style
 } from "styled-system";
 
-import { css } from "@/style/styled";
+import { css } from "../styled";
 
-import { IntentColorProps, intentColor } from "@/style/stylers/intent-color";
+import { IntentColorProps, intentColor } from "./intent-color";
 
 export interface WordWrapProps {
   wordWrap?: CSS.WordWrapProperty;
@@ -36,14 +36,14 @@ export const whiteSpace = style({
   cssProperty: "white-space"
 });
 
-export type TextCssProps = IntentColorProps &
+export type TextProps = IntentColorProps &
   FontSizeProps &
   FontWeightProps &
   WordWrapProps &
   WordBreakProps &
   WhitespaceProps;
 
-export const text = css<TextCssProps>`
+export const text = css<TextProps>`
   ${intentColor};
   ${fontSize};
   ${fontWeight};
