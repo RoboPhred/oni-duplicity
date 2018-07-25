@@ -1,5 +1,5 @@
-import { css } from "@/theme/styled";
-import { TextCssProps, text } from "@/theme/stylers/text";
+import { css } from "@/style/styled";
+import { TextCssProps, text } from "@/style/stylers/text";
 
 export interface LinkProps extends TextCssProps {}
 

@@ -1,6 +1,6 @@
 import { WidthProps, width } from "styled-system";
 
-import styled, { TextCssProps, getTheme, text, css } from "@/theme";
+import styled, { TextCssProps, getTheme, text, css } from "@/style";
 
 // Note: Should extend TextCssProps, but doing so causes some odd typing issues
 //  Props will somehow demand but refuse 'ref'

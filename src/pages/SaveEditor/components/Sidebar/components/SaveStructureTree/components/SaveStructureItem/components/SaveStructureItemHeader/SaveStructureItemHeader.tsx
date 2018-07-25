@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import styled from "@/theme";
+import styled from "@/style";
 
 import Expander from "./components/Expander";
 import ItemText from "./components/ItemText";
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 export interface SaveStructureItemHeaderProps {
   expandable: boolean;

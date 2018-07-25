@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 import Text from "@/components/Text";
 import InfoText from "@/components/InfoText";

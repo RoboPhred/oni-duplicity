@@ -2,7 +2,7 @@ import * as React from "react";
 import { hot } from "react-hot-loader";
 import { Provider } from "react-redux";
 
-import { ThemeProvider, theme } from "@/theme";
+import { ThemeProvider, theme } from "@/style";
 
 import store from "./store";
 

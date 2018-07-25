@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 import Text from "@/components/Text";
 import SaveStructureLink from "@/components/SaveStructureLink";

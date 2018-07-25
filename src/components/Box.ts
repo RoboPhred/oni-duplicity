@@ -5,7 +5,7 @@ import styled, {
   background,
   border,
   intent
-} from "@/theme";
+} from "@/style";
 
 import {
   AlignSelfProps,

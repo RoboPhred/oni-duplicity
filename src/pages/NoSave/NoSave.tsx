@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 import { OSType } from "@/runtime-env";
 

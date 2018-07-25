@@ -3,7 +3,7 @@ import * as React from "react";
 import Flex from "@/components/Flex";
 import Button from "@/components/Button";
 import Text from "@/components/Text";
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 export interface ErrorProps {
   error: Error;

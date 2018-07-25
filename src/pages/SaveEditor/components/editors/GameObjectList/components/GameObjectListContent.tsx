@@ -1,4 +1,4 @@
-import styled from "@/theme";
+import styled from "@/style";
 
 const GroupListContent = styled.div`
   display: flex;

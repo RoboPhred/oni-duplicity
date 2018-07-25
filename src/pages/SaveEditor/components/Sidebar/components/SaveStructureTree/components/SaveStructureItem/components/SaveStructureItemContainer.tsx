@@ -1,4 +1,4 @@
-import styled from "@/theme";
+import styled from "@/style";
 
 const SaveStructureItemContainer = styled.div``;
 SaveStructureItemContainer.displayName = "SaveStructureItemContainer";

@@ -1,4 +1,4 @@
-import styled, { border, Border, Intent, Radii } from "@/theme";
+import styled, { border, Border, Intent, Radii } from "@/style";
 
 const Code = styled.code`
   ${border.of(Border.Normal, Intent.Hint, Radii.Small)};

@@ -8,9 +8,9 @@ import {
   style
 } from "styled-system";
 
-import { css } from "@/theme/styled";
+import { css } from "@/style/styled";
 
-import { IntentColorProps, intentColor } from "@/theme/stylers/intent-color";
+import { IntentColorProps, intentColor } from "@/style/stylers/intent-color";
 
 export interface WordWrapProps {
   wordWrap?: CSS.WordWrapProperty;

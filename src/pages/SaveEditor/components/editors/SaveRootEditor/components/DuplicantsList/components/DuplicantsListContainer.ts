@@ -1,6 +1,6 @@
-import styled, { Space } from "@/theme";
+import styled, { Space } from "@/style";
 
-import { getTheme } from "@/theme";
+import { getTheme } from "@/style";
 
 const DuplicantsListContainer = styled.div`
   width: 100%;

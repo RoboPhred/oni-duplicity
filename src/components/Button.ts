@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import styled, { Space, FontSize, Radii } from "@/theme";
+import styled, { Space, FontSize, Radii } from "@/style";
 
-import { Intent, getTheme, intentFill } from "@/theme";
+import { Intent, getTheme, intentFill } from "@/style";
 
 export interface ButtonProps {
   intent?: Intent;

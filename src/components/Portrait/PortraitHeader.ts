@@ -1,6 +1,6 @@
-import styled from "@/theme";
+import styled from "@/style";
 
-import { TextCssProps, text } from "@/theme";
+import { TextCssProps, text } from "@/style";
 
 export interface PortraitHeaderProps extends TextCssProps {}
 const PortraitHeader = styled<TextCssProps, "h4">("h4")`

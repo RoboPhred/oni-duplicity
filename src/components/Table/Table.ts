@@ -6,7 +6,7 @@ import styled, {
   Background,
   Intent,
   Border
-} from "@/theme";
+} from "@/style";
 
 import { attachProps } from "@/utils";
 

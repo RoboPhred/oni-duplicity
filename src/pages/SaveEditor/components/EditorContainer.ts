@@ -1,4 +1,4 @@
-import styled from "@/theme";
+import styled from "@/style";
 
 const EditorContainer = styled.div`
   flex: 1 1 auto;

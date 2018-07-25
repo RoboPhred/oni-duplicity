@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IntentCssProps, Border, Radii, Intent, Space } from "@/theme";
+import { IntentCssProps, Border, Radii, Intent, Space } from "@/style";
 
 import Box from "@/components/Box";
 import Text from "@/components/Text";

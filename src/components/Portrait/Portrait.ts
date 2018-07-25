@@ -1,8 +1,8 @@
-import styled, { Radii } from "@/theme";
+import styled, { Radii } from "@/style";
 
 import { attachProps } from "@/utils";
 
-import { getTheme } from "@/theme";
+import { getTheme } from "@/style";
 
 import Header from "./PortraitHeader";
 import Footer from "./PortraitFooter";

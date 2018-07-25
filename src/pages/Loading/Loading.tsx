@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { Intent, Space } from "@/theme";
+import { Intent, Space } from "@/style";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 

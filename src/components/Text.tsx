@@ -7,9 +7,9 @@ import {
   space
 } from "styled-system";
 
-import styled from "@/theme";
+import styled from "@/style";
 
-import { TextCssProps, text } from "@/theme";
+import { TextCssProps, text } from "@/style";
 
 import { attachProps } from "@/utils";
 

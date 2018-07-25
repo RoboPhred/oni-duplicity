@@ -7,7 +7,7 @@ import styled, {
   Intent,
   intent,
   background
-} from "@/theme";
+} from "@/style";
 
 import { inputStyle } from "@/components/Input";
 

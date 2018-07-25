@@ -1,4 +1,4 @@
-import { getTheme, Space } from "@/theme";
+import { getTheme, Space } from "@/style";
 
 import Text from "@/components/Text";
 

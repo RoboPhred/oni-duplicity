@@ -1,4 +1,4 @@
-import styled, { Background, Intent, background, intentFill } from "@/theme";
+import styled, { Background, Intent, background, intentFill } from "@/style";
 
 export interface ResizeHandleVisualProps {
   isResizing: boolean;

@@ -1,8 +1,8 @@
-import styled from "@/theme";
+import styled from "@/style";
 
 import { WidthProps, SpaceProps, width, space } from "styled-system";
 
-import { getTheme } from "@/theme";
+import { getTheme } from "@/style";
 
 export interface SeparatorProps extends WidthProps, SpaceProps {}
 const Separator = styled<SeparatorProps, "div">("div")`

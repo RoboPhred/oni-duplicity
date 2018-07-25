@@ -1,4 +1,4 @@
-import styled, { getTheme, intent, Intent, Space } from "@/theme";
+import styled, { getTheme, intent, Intent, Space } from "@/style";
 
 export interface TabProps {
   isSelected?: boolean;

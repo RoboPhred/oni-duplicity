@@ -9,7 +9,7 @@ import styled, {
   text,
   getTheme,
   Space
-} from "@/theme";
+} from "@/style";
 
 import { attachProps } from "@/utils";
 

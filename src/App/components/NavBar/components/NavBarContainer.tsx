@@ -1,6 +1,6 @@
-import styled from "@/theme";
+import styled from "@/style";
 
-import { getTheme } from "@/theme";
+import { getTheme } from "@/style";
 
 const NavBarContainer = styled.div`
   display: flex;
