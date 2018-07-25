@@ -5,7 +5,6 @@ import styled, {
   background,
   Background,
   Intent,
-  css,
   Border
 } from "@/theme";
 
@@ -20,24 +19,9 @@ const Table = styled.table`
 export default attachProps(Table, {
   THead: styled.thead`
     ${background.of(Background.Panel)};
-    /* border-left: ${borderValue(Border.Normal, Intent.Secondary)};
-    border-right: ${borderValue(Border.Normal, Intent.Secondary)};
-    border-top: ${borderValue(Border.Normal, Intent.Secondary)}; */
   `,
   TH: styled.th`
     ${intent.of(Intent.Secondary)};
-    /* box-sizing: border-box;
-    position: relative;
-
-    :not(:first-child):after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 50%;
-      border-left: ${borderValue(Border.Normal, Intent.Secondary)};
-    } */
   `,
   TBody: styled.tbody``,
   TR: styled.tr`
@@ -45,31 +29,40 @@ export default attachProps(Table, {
   `,
   TD: styled.td`
     ${text};
+
+    padding: 2px;
+
     position: relative;
 
-    :before {
-      position: absolute;
-      content: "";
-      top: 0;
-      left: 0;
-      width: 5px;
-      height: 3px;
-      border-top: ${borderValue(Border.Normal, Intent.Secondary)};
-      border-left: ${borderValue(Border.Normal, Intent.Secondary)};
-    }
+    tr:not(:first-child):not(:last-child) > & {
+      :before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 3px;
+        border-top: ${borderValue(Border.Normal, Intent.Secondary)};
+      }
 
-    :after {
-      position: absolute;
-      content: "";
-      bottom: 0;
-      left: 0;
-      width: 5px;
-      height: 3px;
-      border-left: ${borderValue(Border.Normal, Intent.Secondary)};
-    }
+      :first-child:before {
+        width: 7px;
+      }
 
-    :first-child:before {
-      height: 5px;
+      :after {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        width: 4px;
+        height: 3px;
+        border-top: ${borderValue(Border.Normal, Intent.Secondary)};
+        /* border-right: ${borderValue(Border.Normal, Intent.Secondary)}; */
+      }
+
+      :last-child:after {
+        width: 7px;
+      }
     }
   `
 });
