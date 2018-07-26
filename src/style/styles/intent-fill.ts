@@ -4,15 +4,15 @@ import { attachProps } from "@/utils";
 
 import { Intent } from "../intent";
 
-import { colorFromIntent, getThemeColor } from "../theme";
+import { Color, getThemeColor } from "../theme";
 
 export interface IntentFillProps {
   intent?: Intent;
 }
 
 const intentFillOf = (intent: Intent) => css`
-  color: ${getThemeColor(colorFromIntent(intent, true))};
-  background-color: ${getThemeColor(colorFromIntent(intent))};
+  color: ${getThemeColor(Color.fromIntent(intent, true))};
+  background-color: ${getThemeColor(Color.fromIntent(intent))};
 `;
 
 const intentFillFromProps = css<IntentFillProps>`

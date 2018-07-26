@@ -4,7 +4,9 @@ import styled, {
   Intent,
   Border,
   getThemeColor,
-  Color
+  Color,
+  getThemeBorder,
+  intentColor
 } from "@/style";
 
 import { attachProps } from "@/utils";
@@ -41,7 +43,8 @@ export default attachProps(Table, {
         left: 0;
         width: 4px;
         height: 3px;
-        border-top: ${borderValue(Border.Normal, Intent.Secondary)};
+        border-top: ${getThemeBorder(Border.Normal)};
+        border-color: ${getThemeColor(Color.fromIntent(Intent.Secondary))};
       }
 
       :first-child:before {
@@ -55,8 +58,8 @@ export default attachProps(Table, {
         right: 0;
         width: 4px;
         height: 3px;
-        border-top: ${borderValue(Border.Normal, Intent.Secondary)};
-        /* border-right: ${borderValue(Border.Normal, Intent.Secondary)}; */
+        border-top: ${getThemeBorder(Border.Normal)};
+        border-color: ${getThemeColor(Color.fromIntent(Intent.Secondary))};
       }
 
       :last-child:after {

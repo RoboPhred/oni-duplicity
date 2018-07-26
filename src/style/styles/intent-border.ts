@@ -6,11 +6,11 @@ import { Intent } from "../intent";
 
 import {
   Border,
+  Color,
   Radius,
   getThemeBorder,
   getThemeRadius,
-  getThemeColor,
-  colorFromIntent
+  getThemeColor
 } from "../theme";
 
 export interface IntentBorderProps {
@@ -19,7 +19,7 @@ export interface IntentBorderProps {
 
 const borderOf = (intent: Intent) => css`
   border: ${getThemeBorder(Border.Normal)};
-  border-color: ${getThemeColor(colorFromIntent(intent))};
+  border-color: ${getThemeColor(Color.fromIntent(intent))};
   ${intent !== Intent.Default
     ? `border-radius: ${getThemeRadius(Radius.Medium)}`
     : undefined};

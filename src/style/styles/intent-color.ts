@@ -4,14 +4,14 @@ import { attachProps } from "@/utils";
 
 import { Intent } from "../intent";
 
-import { colorFromIntent as intentColorKey, getThemeColor } from "../theme";
+import { Color, getThemeColor } from "../theme";
 
 export interface IntentColorProps {
   intent?: Intent;
 }
 
 const intentColorOf = (intent: Intent) => css`
-  color: ${getThemeColor(intentColorKey(intent))};
+  color: ${getThemeColor(Color.fromIntent(intent))};
 `;
 
 const intentColorFromProps = css<IntentColorProps>`

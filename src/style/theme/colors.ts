@@ -44,22 +44,20 @@ export enum Color {
 
   DefaultSeparator = "separator"
 }
-
-export function colorFromIntent(
-  intent: Intent,
-  contrast: boolean = false
-): Color {
-  switch (intent) {
-    default:
-      return contrast ? Color.DefaultIntentContrast : Color.DefaultIntent;
-    case Intent.Primary:
-      return contrast ? Color.PrimaryIntentContrast : Color.PrimaryIntent;
-    case Intent.Secondary:
-      return contrast ? Color.SecondaryIntentContrast : Color.SecondaryIntent;
-    case Intent.Dangerous:
-      return contrast ? Color.DangerousIntentContrast : Color.DangerousIntent;
-    case Intent.Hint:
-      return contrast ? Color.HintIntentContrast : Color.HintIntent;
+export namespace Color {
+  export function fromIntent(intent: Intent, contrast?: boolean) {
+    switch (intent) {
+      default:
+        return contrast ? Color.DefaultIntentContrast : Color.DefaultIntent;
+      case Intent.Primary:
+        return contrast ? Color.PrimaryIntentContrast : Color.PrimaryIntent;
+      case Intent.Secondary:
+        return contrast ? Color.SecondaryIntentContrast : Color.SecondaryIntent;
+      case Intent.Dangerous:
+        return contrast ? Color.DangerousIntentContrast : Color.DangerousIntent;
+      case Intent.Hint:
+        return contrast ? Color.HintIntentContrast : Color.HintIntent;
+    }
   }
 }
 

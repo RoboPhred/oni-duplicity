@@ -11,7 +11,14 @@ import {
   space
 } from "styled-system";
 
-import styled, { BorderProps, IntentProps, border, intent } from "@/style";
+import styled, {
+  BorderProps,
+  IntentBorderProps,
+  intentBorder,
+  IntentProps,
+  border,
+  intent
+} from "@/style";
 
 export type BoxProps = AlignSelfProps &
   JustifySelfProps &
@@ -19,6 +26,7 @@ export type BoxProps = AlignSelfProps &
   HeightProps &
   SpaceProps &
   BorderProps &
+  IntentBorderProps &
   IntentProps;
 
 const Box = styled<BoxProps, "div">("div")`
@@ -28,6 +36,7 @@ const Box = styled<BoxProps, "div">("div")`
   ${height};
   ${space};
   ${border};
+  /* ${intentBorder}; */
   ${intent};
   box-sizing: border-box;
 `;

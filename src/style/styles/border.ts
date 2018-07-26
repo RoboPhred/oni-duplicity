@@ -20,16 +20,18 @@ const borderOf = (type: Border, color: Color, radius?: Radius) => css`
 
 const borderFromProps = css<BorderProps>`
   ${props =>
-    props.border ? `border: ${getThemeBorder(props.border)}` : undefined};
-
-  ${props =>
-    props.borderColor
-      ? `border-color: ${getThemeColor(props.borderColor)}`
+    props.border != null
+      ? `border: ${getThemeBorder(props.border)(props)}`
       : undefined};
 
   ${props =>
-    props.borderRadius
-      ? `border-radius: ${getThemeRadius(props.borderRadius)}`
+    props.borderColor != null
+      ? `border-color: ${getThemeColor(props.borderColor)(props)}`
+      : undefined};
+
+  ${props =>
+    props.borderRadius != null
+      ? `border-radius: ${getThemeRadius(props.borderRadius)(props)}px`
       : undefined};
 `;
 

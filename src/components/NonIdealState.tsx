@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IntentProps, Border, Radius, Intent, Space } from "@/style";
+import { IntentProps, Border, Radius, Intent, Space, Color } from "@/style";
 
 import Box from "@/components/Box";
 import Text from "@/components/Text";
@@ -24,6 +24,7 @@ const NonIdealState: React.SFC<NonIdealStatProps> = ({
       intent={intent}
       border={Border.Thick}
       borderRadius={Radius.Medium}
+      borderColor={Color.HintIntent}
       p={Space.Medium}
       mx="auto"
       mt={Space.Large}

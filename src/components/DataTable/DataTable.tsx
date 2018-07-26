@@ -2,11 +2,11 @@ import ReactTable, { TableProps, Column, RowRenderProps } from "react-table";
 import { WidthProps, HeightProps, width, height } from "styled-system";
 
 import styled, {
-  Background,
-  colorValue,
+  Color,
   Intent,
+  ThemeProps,
   intent,
-  background
+  getThemeColor
 } from "@/style";
 
 import { inputStyle } from "@/components/Input";
@@ -16,6 +16,12 @@ import { inputStyle } from "@/components/Input";
 import "react-table/react-table.css";
 
 export interface DataTableStyleProps extends WidthProps, HeightProps {}
+
+function encodedPrimaryColor(props: ThemeProps): any {
+  const color = getThemeColor(Color.fromIntent(Intent.Primary))(props);
+  const encoded = encodeURIComponent(color);
+  return encoded;
+}
 
 const DataTable = styled<Partial<TableProps> & DataTableStyleProps>(ReactTable)`
   &.ReactTable {
@@ -32,7 +38,7 @@ const DataTable = styled<Partial<TableProps> & DataTableStyleProps>(ReactTable)`
 
   &.ReactTable .rt-thead {
     ${intent.of(Intent.Secondary)};
-    ${background.of(Background.Panel)};
+    background-color: ${getThemeColor(Color.PanelBackground)};
     font-weight: bold;
   }
 
@@ -43,10 +49,7 @@ const DataTable = styled<Partial<TableProps> & DataTableStyleProps>(ReactTable)`
 
   &.ReactTable .rt-thead .rt-th.-sort-asc {
     box-shadow: none;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='${props =>
-      encodeURIComponent(
-        colorValue.of(Intent.Primary)(props)!
-      )}'><polygon points='0,50 100,50 50,0'/></svg>")
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='${encodedPrimaryColor}'><polygon points='0,50 100,50 50,0'/></svg>")
       no-repeat;
     background-size: 12px;
     background-position: calc(100% - 20px) center;
@@ -54,10 +57,7 @@ const DataTable = styled<Partial<TableProps> & DataTableStyleProps>(ReactTable)`
 
   &.ReactTable .rt-thead .rt-th.-sort-desc {
     box-shadow: none;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='${props =>
-      encodeURIComponent(
-        colorValue.of(Intent.Primary)(props)!
-      )}'><polygon points='0,0 100,0 50,50'/></svg>")
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='${encodedPrimaryColor}'><polygon points='0,0 100,0 50,50'/></svg>")
       no-repeat;
     background-size: 12px;
     background-position: calc(100% - 20px) center;

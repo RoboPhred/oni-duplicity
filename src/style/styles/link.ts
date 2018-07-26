@@ -1,4 +1,5 @@
-import { TextProps, text, css } from "@/style";
+import { TextProps, text } from "./text";
+import { css } from "../styled";
 
 export interface LinkProps extends TextProps {}
 
