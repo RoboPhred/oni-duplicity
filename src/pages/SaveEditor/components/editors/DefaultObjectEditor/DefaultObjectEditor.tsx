@@ -5,7 +5,7 @@ import { autobind } from "core-decorators";
 
 import Text from "@/components/Text";
 
-import SelectedObjectEditorContainer from "./components/Container";
+import DefaultObjectEditorContainer from "./components/DefaultObjectEditorContainer";
 
 import EditorField from "./components/EditorField";
 
@@ -27,7 +27,7 @@ class DefaultObjectEditor extends React.Component<Props> {
     const fieldElements = fields.map(field => this._renderFieldRow(field));
 
     return (
-      <SelectedObjectEditorContainer>
+      <DefaultObjectEditorContainer>
         <table>
           <thead>
             <tr>
@@ -37,7 +37,7 @@ class DefaultObjectEditor extends React.Component<Props> {
           </thead>
           <tbody>{fieldElements}</tbody>
         </table>
-      </SelectedObjectEditorContainer>
+      </DefaultObjectEditorContainer>
     );
   }
 
