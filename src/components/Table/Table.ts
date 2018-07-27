@@ -5,8 +5,7 @@ import styled, {
   Border,
   getThemeColor,
   Color,
-  getThemeBorder,
-  intentColor
+  getThemeBorder
 } from "@/style";
 
 import { attachProps } from "@/utils";
@@ -27,6 +26,9 @@ export default attachProps(Table, {
   TBody: styled.tbody``,
   TR: styled.tr`
     ${text};
+    border-left: ${getThemeBorder(Border.Normal)};
+    border-right: ${getThemeBorder(Border.Normal)};
+    border-color: ${getThemeColor(Color.fromIntent(Intent.Secondary))};
   `,
   TD: styled.td`
     ${text};
@@ -35,7 +37,7 @@ export default attachProps(Table, {
 
     position: relative;
 
-    tr:not(:first-child):not(:last-child) > & {
+    tr:not(:first-child) > & {
       :before {
         position: absolute;
         content: "";

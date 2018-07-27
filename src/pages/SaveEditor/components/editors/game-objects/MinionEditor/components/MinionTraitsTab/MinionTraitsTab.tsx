@@ -10,13 +10,7 @@ import mapDispatchToProps, { DispatchProps } from "./events";
 
 import Table from "@/components/Table";
 import NonIdealState from "@/components/NonIdealState";
-import DataTable, {
-  DataTableColumn,
-  DataTableRow
-} from "@/components/DataTable";
 import CheckInput from "@/components/CheckInput";
-import Text from "@/components/Text";
-import Flex from "@/components/Flex";
 
 type Props = StateProps & DispatchProps;
 class MinionTraitsTab extends React.Component<Props> {
@@ -54,55 +48,6 @@ class MinionTraitsTab extends React.Component<Props> {
         <Table.TBody>{rows}</Table.TBody>
       </Table>
     );
-
-    // const data = AI_TRAIT_IDS.map(trait => ({
-    //   trait: trait,
-    //   selected: traits.some(x => x === trait)
-    // }));
-
-    // const columns: DataTableColumn[] = [
-    //   {
-    //     Header: "Has Trait",
-    //     id: "selected",
-    //     Cell: (row: DataTableRow<typeof data[0]>) => (
-    //       <Flex
-    //         direction="row"
-    //         width="100%"
-    //         height="100%"
-    //         justifyContent="center"
-    //       >
-    //         <CheckInput
-    //           value={row.value.selected}
-    //           onCommit={onSetTrait.bind(null, row.value.trait)}
-    //         />
-    //       </Flex>
-    //     ),
-    //     accessor: x => x,
-    //     resizable: false,
-    //     width: 70,
-    //     sortable: true,
-    //     sortMethod: (a: typeof data[0], b: typeof data[0]) =>
-    //       a.selected != b.selected ? (a.selected ? -1 : 1) : 0
-    //   },
-    //   {
-    //     Header: "Trait",
-    //     id: "trait_name",
-    //     Cell: (row: DataTableRow) => <Text>{row.value}</Text>,
-    //     accessor: "trait",
-    //     filterable: true,
-    //     sortable: true
-    //   }
-    // ];
-
-    // return (
-    //   <DataTable
-    //     height="100%"
-    //     data={data}
-    //     columns={columns}
-    //     showFilters
-    //     showPagination={false}
-    //   />
-    // );
   }
 }
 export default connect(

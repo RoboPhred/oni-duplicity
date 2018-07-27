@@ -8,10 +8,7 @@ import mapStateToProps, { StateProps, AptitudeData } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";
 
 import NonIdealState from "@/components/NonIdealState";
-import DataTable, {
-  DataTableColumn,
-  DataTableRow
-} from "@/components/DataTable";
+import DataTable, { DataTableColumn } from "@/components/DataTable";
 import NumericInput from "@/components/NumericInput";
 
 type Props = StateProps & DispatchProps;
@@ -29,38 +26,31 @@ class MinionAptitudesTab extends React.Component<Props> {
 
     const columns: DataTableColumn[] = [
       {
-        Header: "Role",
+        header: "Role",
         sortable: true,
         filterable: true,
-        accessor: "roleId"
+        property: "roleId"
       },
       {
-        Header: "Aptitude",
+        header: "Aptitude",
         sortable: true,
         filterable: false,
-        id: "aptitude",
-        accessor: x => x,
-        Cell: (row: DataTableRow<AptitudeData>) => (
+        property: "aptitude",
+        cell: ({ value, rowData }) => (
           <NumericInput
             precision="single"
             minValue={0}
-            value={row.value.aptitude}
-            onCommit={setAptitude.bind(null, row.value.index)}
+            value={value}
+            onCommit={setAptitude.bind(null, rowData.index)}
           />
         ),
-        sortMethod: (a: AptitudeData, b: AptitudeData) =>
-          compare(a.aptitude, b.aptitude)
+        sortMethod: (data, column, sortAscending) => {
+          return data.sort((a, b) => compare(a, b, sortAscending));
+        }
       }
     ];
 
-    return (
-      <DataTable
-        height="100%"
-        columns={columns}
-        showPagination={false}
-        data={aptitudes}
-      />
-    );
+    return <DataTable columns={columns} data={aptitudes} />;
   }
 }
 export default connect(
