@@ -2,7 +2,7 @@
 
 A web-based Oxygen Not Included save editor.
 
-You can find the editor at [https://robophred.github.io/oni-duplicity/vnext](https://robophred.github.io/oni-duplicity).
+You can find the editor at [https://robophred.github.io/oni-duplicity](https://robophred.github.io/oni-duplicity).
 
 # Compatibility
 
