@@ -1,3 +1,7 @@
+### v2.0.1
+
+- Fix incorrect url path preventing website from loading.
+
 ### v2.0.0
 
 Major rewrite of save editor.
