@@ -1,3 +1,7 @@
+### v2.0.3
+
+- Really remove test button from production build...
+
 ### v2.0.2
 
 - Remove test button from production build.

@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
-    "build": "webpack --config ./config/webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.js",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.config.js",
     "start:prod": "cross-env NODE_ENV=production webpack-dev-server --config ./config/webpack.config.js",
     "deploy": "git subtree push --prefix dist origin gh-pages"

@@ -34,7 +34,7 @@ class NavBar extends React.Component<Props> {
             onChange={this._onLoadFileInput}
           />
           <Button onClick={this._onLoadFileClick}>Load</Button>
-          {isProd && <Button onClick={onLoadTestData}>Test</Button>}
+          {!isProd && <Button onClick={onLoadTestData}>Test</Button>}
           <Button intent={Intent.Primary} onClick={this._onSaveFileClick}>
             Save
           </Button>
