@@ -73,6 +73,10 @@ export default function getFieldElementClass(
       return (props: EditorFieldProps) => (
         <NumericField {...props} minValue={-128} maxValue={127} />
       );
+    case SerializationTypeCode.Queue:
+      return (props: EditorFieldProps) => (
+        <ArrayLikeField {...props} subType={typeInfo.subTypes![0]} />
+      );
     case SerializationTypeCode.Single:
       return (props: EditorFieldProps) => (
         <NumericField {...props} precision="single" />
