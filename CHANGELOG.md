@@ -1,3 +1,14 @@
+### v2.0.0
+
+Major rewrite of save editor.
+
+- Ground-up rewrite of UI.
+- Save / Load progress reporting.
+- Edit any recognized template object
+- extraData editors duplicant modifiers (health, stanima, germs, diseases, ...)
+- extraData editor for storage
+- Additional editors for minion modifiers
+
 ### v1.4.3
 
 Fix all job mastery and experiences displayed as unmastered / 0.
