@@ -24,7 +24,7 @@ module.exports = {
 
   devServer: {
     contentBase: paths.appDist,
-    hot: true
+    hot: isDev
   },
 
   entry: {
