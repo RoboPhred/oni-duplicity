@@ -14,3 +14,5 @@ export const OSType: OSType = OS_WINDOWS.test(osPlatform)
     : OS_LINUX.test(osPlatform)
       ? "linux"
       : "unknown";
+
+export const isProd: boolean = process.env.NODE_ENV === "production";
