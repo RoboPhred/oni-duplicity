@@ -1,4 +1,4 @@
-import styled from "@/theme";
+import styled from "@/style";
 
 const DuplicantsListContent = styled.div`
   padding: 5px;

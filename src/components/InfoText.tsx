@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import Text from "./Text";
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 export interface InfoTextProps {
   value: any;

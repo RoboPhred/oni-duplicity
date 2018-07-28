@@ -7,7 +7,7 @@ import { autobind } from "core-decorators";
 import Flex from "@/components/Flex";
 
 import ResizeHandle from "./components/ResizeHandle";
-import styled from "@/theme";
+import styled from "@/style";
 
 export interface ResizePanelProps extends HeightProps {
   className?: string;

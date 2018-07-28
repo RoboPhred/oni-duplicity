@@ -1,12 +1,3 @@
-import styled, {
-  BackgroundCssProps,
-  BorderCssProps,
-  IntentCssProps,
-  background,
-  border,
-  intent
-} from "@/theme";
-
 import {
   AlignSelfProps,
   JustifySelfProps,
@@ -20,14 +11,23 @@ import {
   space
 } from "styled-system";
 
+import styled, {
+  BorderProps,
+  IntentBorderProps,
+  intentBorder,
+  IntentProps,
+  border,
+  intent
+} from "@/style";
+
 export type BoxProps = AlignSelfProps &
   JustifySelfProps &
   WidthProps &
   HeightProps &
   SpaceProps &
-  BackgroundCssProps &
-  BorderCssProps &
-  IntentCssProps;
+  BorderProps &
+  IntentBorderProps &
+  IntentProps;
 
 const Box = styled<BoxProps, "div">("div")`
   ${alignSelf};
@@ -35,9 +35,9 @@ const Box = styled<BoxProps, "div">("div")`
   ${width};
   ${height};
   ${space};
-  ${background};
   ${border};
-  ${intent.withDefault(null)};
+  /* ${intentBorder}; */
+  ${intent};
   box-sizing: border-box;
 `;
 Box.displayName = "Box";

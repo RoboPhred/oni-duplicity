@@ -1,4 +1,4 @@
-import styled, { Background, Intent, background, intentFill } from "@/theme";
+import styled, { Intent, intentFill, getThemeColor, Color } from "@/style";
 
 export interface ResizeHandleVisualProps {
   isResizing: boolean;
@@ -6,10 +6,10 @@ export interface ResizeHandleVisualProps {
 const ResizeHandleVisual = styled<ResizeHandleVisualProps, "div">("div")`
   width: 4px;
   height: 100%;
-  ${props =>
-    props.isResizing
-      ? intentFill.of(Intent.Primary)
-      : background.of(Background.Separator)};
+  background-color: ${props =>
+    getThemeColor(
+      props.isResizing ? Color.PrimaryIntent : Color.DefaultSeparator
+    )};
   flex: none;
   cursor: ew-resize;
 

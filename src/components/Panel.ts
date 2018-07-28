@@ -1,6 +1,6 @@
-import styled from "@/theme";
+import styled from "@/style";
 import { WidthProps, HeightProps, width, height } from "styled-system";
-import { getTheme } from "@/theme";
+import { getTheme } from "@/style";
 
 export type BoxProps = WidthProps & HeightProps;
 

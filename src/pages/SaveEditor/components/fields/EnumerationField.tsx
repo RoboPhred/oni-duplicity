@@ -3,7 +3,7 @@ import * as React from "react";
 import { autobind } from "core-decorators";
 import { EnumerationsByName } from "oni-save-parser";
 
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 import Text from "@/components/Text";
 import NumericInput from "@/components/NumericInput";

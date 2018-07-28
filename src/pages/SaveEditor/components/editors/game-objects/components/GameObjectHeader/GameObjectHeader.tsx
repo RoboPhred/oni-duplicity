@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { Intent, FontSize } from "@/theme";
+import { Intent, FontSize } from "@/style";
 
 import { formatPosition, formatSimHash, formatDisease } from "@/format";
 

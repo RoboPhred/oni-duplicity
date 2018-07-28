@@ -7,13 +7,13 @@ import {
   space
 } from "styled-system";
 
-import styled from "@/theme";
+import styled from "@/style";
 
-import { TextCssProps, text } from "@/theme";
+import { TextProps as TextStyleProps, text } from "@/style";
 
 import { attachProps } from "@/utils";
 
-export type TextProps = TextCssProps &
+export type TextProps = TextStyleProps &
   AlignSelfProps &
   JustifySelfProps &
   SpaceProps;

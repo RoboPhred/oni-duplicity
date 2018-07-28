@@ -1,15 +1,8 @@
 import * as CSS from "csstype";
 
-import styled, {
-  Background,
-  BackgroundCssProps,
-  TextCssProps,
-  background,
-  css,
-  text,
-  getTheme,
-  Space
-} from "@/theme";
+import { BackgroundProps, background } from "styled-system";
+
+import styled, { TextProps, css, text, getTheme, Space, Color } from "@/style";
 
 import { attachProps } from "@/utils";
 
@@ -23,7 +16,7 @@ const toolbarItem = css<ToolbarItemProps>`
   align-self: ${props => props.alignContent || "baseline"};
 `;
 
-export type ToolbarLabelProps = ToolbarItemProps & TextCssProps;
+export type ToolbarLabelProps = ToolbarItemProps & TextProps;
 const ToolbarLabel = styled<ToolbarLabelProps, "label">("label")`
   ${text};
   ${toolbarItem};
@@ -43,7 +36,7 @@ ToolbarGroup.defaultProps = {
 };
 ToolbarGroup.displayName = "ToolbarButtonGroup";
 
-export type ToolbarProps = BackgroundCssProps;
+export type ToolbarProps = BackgroundProps;
 const Toolbar = styled<ToolbarProps, "div">("div")`
   width: 100%;
   height: auto;
@@ -54,7 +47,7 @@ const Toolbar = styled<ToolbarProps, "div">("div")`
   ${background};
 `;
 Toolbar.defaultProps = {
-  background: Background.Panel
+  background: Color.PanelBackground
 };
 Toolbar.displayName = "Toolbar";
 

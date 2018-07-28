@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 import { DuplicantPortraitProps } from "./props";
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FontSizeProps } from "styled-system";
 
-import { Intent, Space } from "@/theme";
+import { Intent, Space } from "@/style";
 
 import Flex from "@/components/Flex";
 import Box from "@/components/Box";

@@ -6,7 +6,7 @@ import { autobind } from "core-decorators";
 
 import scrollIntoView from "dom-scroll-into-view";
 
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 import { SaveStructureItemProps } from "./props";
 import mapStateToProps, { StateProps } from "./derived-state";

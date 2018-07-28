@@ -19,7 +19,7 @@ import MinionJobsTab from "./components/MinionJobsTab";
 import MinionSkillsTab from "./components/MinionSkillsTab";
 import MinionTraitsTab from "./components/MinionTraitsTab";
 import MinionPositionTab from "./components/MinionPositionTab";
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 type Props = StateProps;
 class DuplicantEditor extends React.Component<Props> {

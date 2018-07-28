@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { AI_EFFECT_IDS } from "oni-save-parser";
 
 import { compare } from "@/math";
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";

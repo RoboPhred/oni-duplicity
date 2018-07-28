@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
 
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 import Button from "@/components/Button";
 

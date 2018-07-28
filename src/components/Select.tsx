@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { autobind } from "core-decorators";
 
-import styled from "@/theme";
+import styled from "@/style";
 
 import { InputStyleProps, inputStyle } from "@/components/Input";
 

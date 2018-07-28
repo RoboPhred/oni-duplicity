@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { FontSize, Space } from "@/theme";
+import { FontSize, Space } from "@/style";
 
 import Box from "@/components/Box";
 import Text from "@/components/Text";

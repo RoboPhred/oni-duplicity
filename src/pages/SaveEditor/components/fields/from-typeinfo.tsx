@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { TypeInfo, SerializationTypeCode, getTypeCode } from "oni-save-parser";
 
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 import Text from "@/components/Text";
 import SaveStructureLink from "@/components/SaveStructureLink";
@@ -21,14 +21,20 @@ import Vector2IField from "./Vector2IField";
 import Vector3Field from "./Vector3Field";
 
 export default function getFieldElementClass(
-  typeInfo: TypeInfo
+  typeInfo: TypeInfo,
+  short?: boolean
 ): React.ComponentType<EditorFieldProps> {
   const code = getTypeCode(typeInfo.info);
   switch (code) {
     case SerializationTypeCode.Array:
-      return (props: EditorFieldProps) => (
-        <ArrayLikeField {...props} subType={typeInfo.subTypes![0]} />
-      );
+      return (props: EditorFieldProps) =>
+        short ? (
+          <SaveStructureLink intent={Intent.Primary} path={props.path}>
+            [Edit Array]
+          </SaveStructureLink>
+        ) : (
+          <ArrayLikeField {...props} subType={typeInfo.subTypes![0]} />
+        );
     case SerializationTypeCode.Boolean:
       return (props: EditorFieldProps) => <CheckField {...props} />;
     case SerializationTypeCode.Byte:
@@ -38,9 +44,14 @@ export default function getFieldElementClass(
     case SerializationTypeCode.Colour:
       return (props: EditorFieldProps) => <ColorField {...props} />;
     case SerializationTypeCode.Dictionary:
-      return (props: EditorFieldProps) => (
-        <DictionaryField subType={typeInfo.subTypes![1]} {...props} />
-      );
+      return (props: EditorFieldProps) =>
+        short ? (
+          <SaveStructureLink intent={Intent.Primary} path={props.path}>
+            [Edit Dictionary]
+          </SaveStructureLink>
+        ) : (
+          <DictionaryField subType={typeInfo.subTypes![1]} {...props} />
+        );
     case SerializationTypeCode.Double:
       return (props: EditorFieldProps) => (
         <NumericField {...props} precision="double" />
@@ -50,9 +61,14 @@ export default function getFieldElementClass(
         <EnumerationField {...props} enumerationName={typeInfo.templateName!} />
       );
     case SerializationTypeCode.HashSet:
-      return (props: EditorFieldProps) => (
-        <ArrayLikeField {...props} subType={typeInfo.subTypes![0]} />
-      );
+      return (props: EditorFieldProps) =>
+        short ? (
+          <SaveStructureLink intent={Intent.Primary} path={props.path}>
+            [Edit HashSet]
+          </SaveStructureLink>
+        ) : (
+          <ArrayLikeField {...props} subType={typeInfo.subTypes![0]} />
+        );
     case SerializationTypeCode.Int16:
       return (props: EditorFieldProps) => (
         <NumericField {...props} precision="int16" />
@@ -64,9 +80,14 @@ export default function getFieldElementClass(
     case SerializationTypeCode.Int64:
       return () => <Text intent={Intent.Dangerous}>TODO Int64</Text>;
     case SerializationTypeCode.List:
-      return (props: EditorFieldProps) => (
-        <ArrayLikeField {...props} subType={typeInfo.subTypes![0]} />
-      );
+      return (props: EditorFieldProps) =>
+        short ? (
+          <SaveStructureLink intent={Intent.Primary} path={props.path}>
+            [Edit Array]
+          </SaveStructureLink>
+        ) : (
+          <ArrayLikeField {...props} subType={typeInfo.subTypes![0]} />
+        );
     case SerializationTypeCode.Pair:
       return () => <Text intent={Intent.Dangerous}>TODO Pair</Text>;
     case SerializationTypeCode.SByte:
@@ -96,7 +117,7 @@ export default function getFieldElementClass(
     case SerializationTypeCode.UserDefined:
       return (props: EditorFieldProps) => (
         <SaveStructureLink intent={Intent.Primary} path={props.path}>
-          [{typeInfo.templateName || "Edit"}]
+          [{typeInfo.templateName || "Edit Object"}]
         </SaveStructureLink>
       );
     case SerializationTypeCode.Vector2:

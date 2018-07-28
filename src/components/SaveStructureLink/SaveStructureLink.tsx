@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
 
-import styled from "@/theme";
+import styled from "@/style";
 
-import { LinkProps, link } from "@/theme";
+import { LinkProps, link } from "@/style";
 
 import { SaveStructureLinkProps } from "./props";
 import mapDispatchToProps, { DispatchProps } from "./events";

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { AI_TRAIT_IDS } from "oni-save-parser";
 
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";

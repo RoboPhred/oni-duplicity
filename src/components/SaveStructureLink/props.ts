@@ -1,4 +1,4 @@
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 export interface SaveStructureLinkProps {
   intent?: Intent;

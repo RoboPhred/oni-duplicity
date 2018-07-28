@@ -1,5 +1,5 @@
-import styled from "@/theme";
-import { getTheme } from "@/theme";
+import styled from "@/style";
+import { getTheme } from "@/style";
 
 const NavBarTitleText = styled.span`
   font-size: 2em;

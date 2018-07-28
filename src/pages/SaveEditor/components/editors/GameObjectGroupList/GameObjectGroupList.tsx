@@ -5,7 +5,7 @@ import { Filter } from "react-table";
 
 import mapStateToProps, { StateProps, GroupItem } from "./derived-state";
 
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 import SaveStructureLink from "@/components/SaveStructureLink";
 import DataTable, {

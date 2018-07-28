@@ -15,6 +15,8 @@ const isDev = process.env["NODE_ENV"] === "development";
 
 const paths = require("./paths");
 
+console.log("Webpack build", isDev ? "[development]" : "[production]");
+
 module.exports = {
   mode: isDev ? "development" : "production",
 
@@ -149,6 +151,7 @@ module.exports = {
     splitChunks: {
       chunks: "all"
     },
-    runtimeChunk: true
+    runtimeChunk: true,
+    minimize: !isDev
   }
 };

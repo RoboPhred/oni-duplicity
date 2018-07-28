@@ -1,12 +1,13 @@
 import styled, {
   intent,
-  borderValue,
   text,
-  background,
-  Background,
   Intent,
-  Border
-} from "@/theme";
+  Border,
+  getThemeColor,
+  Color,
+  getThemeBorder,
+  intentColor
+} from "@/style";
 
 import { attachProps } from "@/utils";
 
@@ -18,7 +19,7 @@ const Table = styled.table`
 
 export default attachProps(Table, {
   THead: styled.thead`
-    ${background.of(Background.Panel)};
+    background-color: ${getThemeColor(Color.PanelBackground)};
   `,
   TH: styled.th`
     ${intent.of(Intent.Secondary)};
@@ -42,7 +43,8 @@ export default attachProps(Table, {
         left: 0;
         width: 4px;
         height: 3px;
-        border-top: ${borderValue(Border.Normal, Intent.Secondary)};
+        border-top: ${getThemeBorder(Border.Normal)};
+        border-color: ${getThemeColor(Color.fromIntent(Intent.Secondary))};
       }
 
       :first-child:before {
@@ -56,8 +58,8 @@ export default attachProps(Table, {
         right: 0;
         width: 4px;
         height: 3px;
-        border-top: ${borderValue(Border.Normal, Intent.Secondary)};
-        /* border-right: ${borderValue(Border.Normal, Intent.Secondary)}; */
+        border-top: ${getThemeBorder(Border.Normal)};
+        border-color: ${getThemeColor(Color.fromIntent(Intent.Secondary))};
       }
 
       :last-child:after {

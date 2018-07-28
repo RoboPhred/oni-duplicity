@@ -1,10 +1,10 @@
 import * as React from "react";
-import { IntentCssProps, Border, Radii, Intent, Space } from "@/theme";
+import { IntentProps, Border, Radius, Intent, Space, Color } from "@/style";
 
 import Box from "@/components/Box";
 import Text from "@/components/Text";
 
-export interface NonIdealStatProps extends IntentCssProps {
+export interface NonIdealStatProps extends IntentProps {
   header?: React.ReactNode;
 }
 
@@ -21,10 +21,10 @@ const NonIdealState: React.SFC<NonIdealStatProps> = ({
   <Box width="100%" height="100%">
     <Box
       width="75%"
-      border={Border.Thick}
-      borderColor={intent}
-      borderRadius={Radii.Medium}
       intent={intent}
+      border={Border.Thick}
+      borderRadius={Radius.Medium}
+      borderColor={Color.HintIntent}
       p={Space.Medium}
       mx="auto"
       mt={Space.Large}

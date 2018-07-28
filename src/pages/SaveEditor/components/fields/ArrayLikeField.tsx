@@ -9,7 +9,7 @@ import connectEditorField, {
   InjectedProps
 } from "./connect-field";
 
-import { Intent } from "@/theme";
+import { Intent } from "@/style";
 
 import getFieldElementClass from "./from-typeinfo";
 
