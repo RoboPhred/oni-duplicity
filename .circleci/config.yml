@@ -4,12 +4,6 @@
 #
 version: 2
 
-
-general:
-  branches:
-    ignore:
-      - gh-pages
-
 jobs:
   build:
     docker:
@@ -28,20 +22,49 @@ jobs:
 
       # Download and cache dependencies
       - restore_cache:
-          keys:
+        keys:
           - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
       - run: npm ci
 
-      - save_cache:
-          paths:
-            - $HOME/.npm
-          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+        name: "Build"
+        command: npm run build
 
-deployment:
-  staging:
-    branch: master
-    commands:
-      - ./scripts/deploy-ghpages.sh build
+      - save_cache:
+        paths:
+          - $HOME/.npm
+        key: v1-dependencies-{{ checksum "package.json" }}
+
+      - save_cache:
+        paths:
+          - dist
+        key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+        
+
+  deploy:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:10
+    steps:
+      - restore_cache:
+        key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run: npm run deploy
+
+workflows:
+  version: 2
+  # The build and deploy workflow
+  build_and_deploy:
+    jobs:
+      - build
+      # The deploy job will only run on the filtered branches and
+      # require the build job to be successful before it starts
+      - deploy:
+        requires:
+          - build
+        filters:
+          branches:
+            only:
+              - master
