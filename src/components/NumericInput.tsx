@@ -59,7 +59,7 @@ export default class NumericInput extends React.Component<Props, State> {
   private _onValueChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { minValue, maxValue } = this.props;
 
-    const value = e.target.valueAsNumber;
+    const value = parseInt(e.target.value, 10);
     let validationMessage: string | null = null;
 
     if (maxValue != null && value >= maxValue) {

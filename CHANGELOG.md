@@ -1,3 +1,7 @@
+### v2.0.4
+
+- Fix numeric values not editable in browsers other than chrome.
+
 ### v2.0.3
 
 - Really remove test button from production build...
