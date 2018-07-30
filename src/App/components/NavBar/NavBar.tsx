@@ -5,8 +5,9 @@ import { autobind } from "core-decorators";
 
 import { isProd } from "@/runtime-env";
 
-import { Intent } from "@/style";
+import { Intent, FontSize } from "@/style";
 
+import Icon from "@/components/Icon";
 import Button from "@/components/Button";
 
 import mapDispatchToProps, { DispatchProps } from "./events";
@@ -33,11 +34,32 @@ class NavBar extends React.Component<Props> {
             accept=".sav"
             onChange={this._onLoadFileInput}
           />
-          <Button onClick={this._onLoadFileClick}>Load</Button>
-          {!isProd && <Button onClick={onLoadTestData}>Test</Button>}
-          <Button intent={Intent.Primary} onClick={this._onSaveFileClick}>
+          <Button onClick={this._onLoadFileClick} verticalAlign="middle">
+            Load
+          </Button>
+          {!isProd && (
+            <Button onClick={onLoadTestData} verticalAlign="middle">
+              Test
+            </Button>
+          )}
+          <Button
+            intent={Intent.Primary}
+            onClick={this._onSaveFileClick}
+            verticalAlign="middle"
+          >
             Save
           </Button>
+          <a
+            title="Github"
+            href="https://github.com/RoboPhred/oni-duplicity"
+            target="_blank"
+          >
+            <Icon.Github
+              intent={Intent.Hint}
+              fontSize={FontSize.Heading}
+              verticalAlign="middle"
+            />
+          </a>
         </NavBarGroup>
       </NavBarContainer>
     );
