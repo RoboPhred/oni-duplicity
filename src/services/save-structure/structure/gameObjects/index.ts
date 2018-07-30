@@ -21,6 +21,12 @@ const gameObjectGroupsStructure: SaveStructureDef<GameObjectGroup> = {
   $variants: createGameObjectVariants(["gameObjects", "*"])
 };
 
+// HACK: Add recursion support to Storage
+import { storageBehavior } from "./behaviors/storage";
+(storageBehavior.extraData! as any)["*"].$variants = createGameObjectVariants(
+  null
+);
+
 const gameObjectsStructure: SaveStructureDef<SaveGame["gameObjects"]> = {
   $editor: "game-object-group-list",
 
