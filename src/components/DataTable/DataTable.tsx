@@ -8,6 +8,10 @@ import Griddle, {
   plugins
 } from "griddle-react";
 
+import { Space } from "@/style";
+
+import Flex from "@/components/Flex";
+import Input from "@/components/Input";
 import Table from "@/components/Table";
 import Text from "@/components/Text";
 
@@ -36,10 +40,28 @@ export interface DataTableProps {
 }
 
 const defaultComponents: GriddleComponents = {
-  // Table: Table as any
-  // TableHeading: Table.THead as any,
-  // TableHeadingCell: Table.TH as any,
-  // TableBody: Table.TBody as any,
+  Layout: ({ Table, Pagination, Filter, SettingsWrapper }) => (
+    <Flex direction="column" m={Space.Small}>
+      <Flex direction="row">
+        <Flex.Item grow constrain="row">
+          <Filter style={{ width: "100%" }} />
+        </Flex.Item>
+        <Pagination />
+      </Flex>
+      <Table />
+      <Pagination />
+    </Flex>
+  ),
+  Filter: ({ placeholder, style, className, setFilter }) => (
+    <Input
+      type="text"
+      name="filter"
+      placeholder={placeholder}
+      style={style}
+      className={className}
+      onChange={e => setFilter && setFilter(e.target.value)}
+    />
+  ),
   Table: props => {
     // Note: There is some loading logic and child properties in here
     //  that were not typed and are going unused.
@@ -117,6 +139,10 @@ const DataTable: React.SFC<DataTableProps> = ({ data, columns }) => (
     data={data}
     plugins={[plugins.LocalPlugin]}
     components={defaultComponents}
+    enableSettings={false}
+    pageProperties={{
+      pageSize: 100
+    }}
   >
     <RowDefinition>{columns.map(columnToDef)}</RowDefinition>
   </Griddle>
