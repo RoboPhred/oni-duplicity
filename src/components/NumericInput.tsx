@@ -18,7 +18,7 @@ export interface NumericInputProps {
 
 type Props = NumericInputProps;
 interface State {
-  editValue: number | null;
+  editValue: string | null;
   validationMessage: string | null;
 }
 export default class NumericInput extends React.Component<Props, State> {
@@ -38,7 +38,7 @@ export default class NumericInput extends React.Component<Props, State> {
 
     const currentValue = editValue != null ? editValue : value;
 
-    const step = isFloatingPoint(precision || "int32") ? Math.pow(10, -16) : 1;
+    const step = isFloatingPoint(precision || "int32") ? "any" : 1;
 
     return (
       <Input
@@ -58,20 +58,20 @@ export default class NumericInput extends React.Component<Props, State> {
   @autobind()
   private _onValueChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { minValue, maxValue } = this.props;
-
-    const value = parseInt(e.target.value, 10);
+    const editValue = e.target.value;
+    const numberValue = parseFloat(editValue);
     let validationMessage: string | null = null;
 
-    if (maxValue != null && value >= maxValue) {
+    if (maxValue != null && numberValue >= maxValue) {
       validationMessage = `Value must be less than ${maxValue}`;
-    } else if (minValue != null && value <= minValue) {
+    } else if (minValue != null && numberValue <= minValue) {
       validationMessage = `Value must be greater than ${minValue}`;
     }
 
     e.target.setCustomValidity(validationMessage || "");
 
     this.setState({
-      editValue: value,
+      editValue,
       validationMessage
     });
   }
@@ -106,7 +106,12 @@ export default class NumericInput extends React.Component<Props, State> {
       return;
     }
 
-    const newValue = clamp(precision, editValue);
+    const numberValue = parseFloat(editValue);
+    if (isNaN(numberValue)) {
+      return;
+    }
+
+    const newValue = clamp(precision, numberValue);
     if (isNaN(newValue)) {
       return;
     }
