@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
 
+import { Trans } from "react-i18next";
+
 import { isProd } from "@/runtime-env";
 
 import { Intent, FontSize } from "@/style";
@@ -35,7 +37,7 @@ class NavBar extends React.Component<Props> {
             onChange={this._onLoadFileInput}
           />
           <Button onClick={this._onLoadFileClick} verticalAlign="middle">
-            Load
+            <Trans i18nKey={"load-file.load"}>Load</Trans>
           </Button>
           {!isProd && (
             <Button onClick={onLoadTestData} verticalAlign="middle">
@@ -47,7 +49,7 @@ class NavBar extends React.Component<Props> {
             onClick={this._onSaveFileClick}
             verticalAlign="middle"
           >
-            Save
+            <Trans i18nKey={"load-file.load"}>Save</Trans>
           </Button>
           <a
             title="Github"

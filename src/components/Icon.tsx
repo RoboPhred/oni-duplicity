@@ -25,7 +25,11 @@ export type IconProps = FontAwesomeIconProps &
   SpaceProps &
   VerticalAlignProps &
   FontSizeProps;
-const Icon = styled<IconProps>(FontAwesomeIcon)`
+const CleanFontAwesomeIcon: React.SFC<IconProps> = ({
+  verticalAlign,
+  ...props
+}) => <FontAwesomeIcon {...props} />;
+const Icon = styled<IconProps>(CleanFontAwesomeIcon)`
   ${intentColor};
   ${fontSize};
   ${verticalAlign};
