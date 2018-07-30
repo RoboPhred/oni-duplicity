@@ -1,0 +1,11 @@
+{
+  "load-file": {
+    "loading": "Loading",
+    "instructions": "Load a save using the controls on the upper left.",
+    "save-location": "Save files can be found at {{path}}."
+  },
+  "save-file": {
+    "saving": "Saving"
+  },
+  "close-dialog": "Close"
+}

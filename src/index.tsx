@@ -3,6 +3,8 @@ import * as ReactDOM from "react-dom";
 
 import Modal from "react-modal";
 
+import "./i18n";
+
 import "./style";
 
 import Root from "./root";
