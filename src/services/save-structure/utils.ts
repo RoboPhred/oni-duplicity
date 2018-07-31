@@ -12,7 +12,8 @@ import { EditMode, SaveItemBreadcrumb } from "./types";
 import {
   SaveStructureDef,
   getSaveStructureDef,
-  walkSaveStructurePath
+  walkSaveStructurePath,
+  ValueSelector
 } from "./structure";
 
 const GAME_OBJECT_GROUP_PATH_ROOT = ["gameObjects", "*"];
@@ -93,11 +94,8 @@ export function getSaveItemTitle(path: string[], saveGame: SaveGame): string {
   let nameSource: string | false | undefined;
   if (def) {
     const nameProducer = def.$uiPathName;
-    if (typeof nameProducer === "function") {
-      const value = path.length > 0 ? get(saveGame, path) : saveGame;
-      nameSource = nameProducer(value, path, saveGame);
-    } else if (typeof nameProducer === "string") {
-      nameSource = nameProducer;
+    if (nameProducer) {
+      nameSource = resolveValueSelector(nameProducer, path, saveGame);
     }
   }
 
@@ -116,11 +114,8 @@ export function getSaveItemBreadcrumb(
     const { def, path: defPath } = structurePath;
     let title: string | false = false;
     const nameProducer = def.$uiPathName;
-    if (typeof nameProducer === "function") {
-      const value = defPath.length > 0 ? get(saveGame, defPath) : saveGame;
-      title = nameProducer(value, defPath, saveGame) || false;
-    } else if (typeof nameProducer === "string") {
-      title = nameProducer;
+    if (nameProducer) {
+      title = resolveValueSelector(nameProducer, defPath, saveGame);
     } else if (nameProducer === false) {
       // Opting out of a path entry.
       continue;
@@ -175,34 +170,29 @@ export function getSaveItemEditorProps(
     return {};
   }
 
-  if (typeof propFactory === "function") {
-    const value = path.length > 0 ? get(saveGame, path) : saveGame;
-    return propFactory(value, path, saveGame);
-  } else {
-    return propFactory;
-  }
+  return resolveValueSelector(propFactory, path, saveGame);
 }
 
 /**
  * Determine the child values for the given value.
- * @param saveGamePath The path to the value whose children to determine
- * @param oniSave The oni save game structure
+ * @param path The path to the value whose children to determine
+ * @param saveGame The oni save game structure
  * @param def The definition of the value whose children to determine
  * @param editMode The current edit mode.
  * @returns A collection of absolute save game paths for the child values of this value.
  */
 function collectChildPaths(
-  saveGamePath: string[],
-  oniSave: SaveGame,
+  path: string[],
+  saveGame: SaveGame,
   def: SaveStructureDef | null,
   editMode: EditMode
 ): string[][] {
   let uiChildren = def ? def.$uiChildren : null;
 
-  const value = saveGamePath.length > 0 ? get(oniSave, saveGamePath) : oniSave;
+  const value = path.length > 0 ? get(saveGame, path) : saveGame;
 
-  if (typeof uiChildren === "function") {
-    uiChildren = uiChildren(value);
+  if (uiChildren) {
+    uiChildren = resolveValueSelector(uiChildren, path, saveGame);
   }
 
   if (uiChildren === false) {
@@ -228,18 +218,17 @@ function collectChildPaths(
 
   // Failed to find any children, attempt to auto-determine them.
   if (uiChildren == null) {
-    uiChildren = collectAutoChildPaths(saveGamePath, oniSave, editMode);
+    uiChildren = collectAutoChildPaths(path, saveGame, editMode);
   }
 
   // Make the path absolute
-  uiChildren = uiChildren ? uiChildren.map(x => [...saveGamePath, ...x]) : [];
+  uiChildren = uiChildren ? uiChildren.map(x => [...path, ...x]) : [];
 
   if (uiChildren) {
     // Check for editMode visibility.
     uiChildren = uiChildren.filter(path => {
-      const childValue = get(oniSave, path);
-      const childDef = getSaveStructureDef(path, oniSave);
-      return checkEditMode(childValue, childDef, editMode);
+      const childDef = getSaveStructureDef(path, saveGame);
+      return checkEditMode(path, saveGame, childDef, editMode);
     });
   }
 
@@ -247,7 +236,8 @@ function collectChildPaths(
 }
 
 function checkEditMode(
-  value: any,
+  path: string[],
+  saveGame: SaveGame,
   def: SaveStructureDef | null,
   editMode: EditMode
 ): boolean {
@@ -255,16 +245,12 @@ function checkEditMode(
     return true;
   }
 
-  // Unknown objects are implicitly advanced.
-  let advancedProducer = def ? def.$advanced : true;
-  let advanced: boolean;
-  if (typeof advancedProducer === "boolean") {
-    advanced = advancedProducer;
-  } else if (typeof advancedProducer === "function") {
-    advanced = advancedProducer(value);
-  } else {
-    advanced = false;
+  let advancedProducer = def && def.$advanced;
+  if (advancedProducer == null) {
+    // Unknown objects are implicitly advanced.
+    return true;
   }
+  let advanced = resolveValueSelector(advancedProducer, path, saveGame);
 
   return !advanced;
 }
@@ -296,4 +282,16 @@ function collectAutoChildPaths(
 
 function isImplicitChild(value: any): boolean {
   return isObject(value);
+}
+
+function resolveValueSelector<T>(
+  selector: ValueSelector<T>,
+  path: string[],
+  oniSave: SaveGame
+): T {
+  if (typeof selector === "function") {
+    const value = path.length > 0 ? get(oniSave, path) : oniSave;
+    return selector(value, path, oniSave);
+  }
+  return selector as T;
 }
