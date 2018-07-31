@@ -5,7 +5,31 @@ import { forEach, isObject } from "lodash-es";
 import { SaveStructureDef } from "../../types";
 import { behaviorIs } from "../../matchers";
 
+import {
+  getGameObjectVariants,
+  gameObjectVariantInfos
+} from "../gameObjectTypes";
+
 import { defaultBehavior } from "./default";
+
+const storageBehaviorStoredObject: SaveStructureDef<StoredGameObject> = {
+  $editor: "game-object-default",
+  $uiPathName(obj: StoredGameObject, path: string[]) {
+    const index = path[path.length - 1];
+    return `${obj.name} (${index})`;
+  },
+  $variants: []
+};
+
+// We cannot do this until we finish the getGameObjectVariants call
+//  for the game object group handler.
+export function initStorageBehaviorHack() {
+  // Set this up after we create the object, to allow for circular dependencies.
+  storageBehaviorStoredObject.$variants = getGameObjectVariants(
+    gameObjectVariantInfos,
+    null
+  );
+}
 
 const storageBehaviorExtraData: SaveStructureDef<
   StorageBehavior["extraData"]
@@ -17,14 +41,7 @@ const storageBehaviorExtraData: SaveStructureDef<
     isFlatList: true
   },
 
-  "*": {
-    $editor: "game-object-default",
-    $uiPathName(obj: StoredGameObject, path: string[]) {
-      const index = path[path.length - 1];
-      return `${index}: ${obj.name}`;
-    },
-    $variants: []
-  }
+  "*": storageBehaviorStoredObject
 };
 
 export const storageBehavior: SaveStructureDef<StorageBehavior> = {

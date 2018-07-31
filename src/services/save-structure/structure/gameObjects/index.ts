@@ -2,7 +2,11 @@ import { GameObjectGroup, SaveGame } from "oni-save-parser";
 
 import { SaveStructureDef } from "../types";
 
-import { createGameObjectVariants } from "./gameObjectTypes";
+import {
+  getGameObjectVariants,
+  gameObjectVariantInfos
+} from "./gameObjectTypes";
+import { initStorageBehaviorHack } from "@/services/save-structure/structure/gameObjects/behaviors/storage";
 
 const gameObjectGroupsStructure: SaveStructureDef<GameObjectGroup> = {
   $uiPathName(group: GameObjectGroup) {
@@ -15,17 +19,22 @@ const gameObjectGroupsStructure: SaveStructureDef<GameObjectGroup> = {
 
   $editor: "game-object-list",
 
-  // We want to handle each game object type uniquely,
-  //  but their uniqueness is keyed off the name of this group.
-  // To handle this, we provide variants that match off the group's name.
-  $variants: createGameObjectVariants(["gameObjects", "*"])
+  // This will be populated after object instantiation, to
+  //  allow us to define circular references for nested
+  //  game objects in the Storage behavior.
+  $variants: []
 };
 
-// HACK: Add recursion support to Storage
-import { storageBehavior } from "./behaviors/storage";
-(storageBehavior.extraData! as any)["*"].$variants = createGameObjectVariants(
-  null
+// We want to handle each game object type uniquely,
+//  but their uniqueness is keyed off the name of this group.
+// To handle this, we provide variants that match off the group's name.
+gameObjectGroupsStructure.$variants = getGameObjectVariants(
+  gameObjectVariantInfos,
+  ["gameObjects", "*"]
 );
+
+// Need to wait until after getGameObjectVariants completes
+initStorageBehaviorHack();
 
 const gameObjectsStructure: SaveStructureDef<SaveGame["gameObjects"]> = {
   $editor: "game-object-group-list",
