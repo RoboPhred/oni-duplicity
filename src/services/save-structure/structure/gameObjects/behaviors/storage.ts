@@ -12,8 +12,10 @@ const storageBehaviorExtraData: SaveStructureDef<
 > = {
   $uiPathName: "Stored Items",
 
-  // TODO: game-object-list expects a GameObjectGroup
-  // $editor: "game-object-list",
+  $editor: "game-object-list",
+  $editorProps: {
+    isFlatList: true
+  },
 
   "*": {
     $editor: "game-object-default",

@@ -1,20 +1,18 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import mapStateToProps, { StateProps } from "./derived-state";
-
 import { Intent } from "@/style";
 
-import Text from "@/components/Text";
+import { GameObjectListProps } from "./props";
+import mapStateToProps, { StateProps } from "./derived-state";
+
 import Portrait from "@/components/Portrait";
 import SaveStructureLink from "@/components/SaveStructureLink";
-
-import EditorContainer from "@/pages/SaveEditor/components/editors/components/EditorContainer";
-import EditorHeader from "@/pages/SaveEditor/components/editors/components/EditorHeader";
-
 import GameObjectListContent from "./components/GameObjectListContent";
 
-type Props = StateProps;
+import EditorContainer from "@/pages/SaveEditor/components/editors/components/EditorContainer";
+
+type Props = GameObjectListProps & StateProps;
 class GameObjectList extends React.Component<Props> {
   render() {
     const { gameObjectItems } = this.props;

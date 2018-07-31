@@ -175,8 +175,12 @@ export function getSaveItemEditorProps(
     return {};
   }
 
-  const value = path.length > 0 ? get(saveGame, path) : saveGame;
-  return propFactory(value, path, saveGame);
+  if (typeof propFactory === "function") {
+    const value = path.length > 0 ? get(saveGame, path) : saveGame;
+    return propFactory(value, path, saveGame);
+  } else {
+    return propFactory;
+  }
 }
 
 /**

@@ -42,11 +42,9 @@ export type SaveStructureDefCore<T> = {
    * A function to generate the props to pass to the editor
    * when an item of this def is selected.
    */
-  $editorProps?(
-    value: any,
-    path: string[],
-    saveGame: SaveGame
-  ): Record<string, any>;
+  $editorProps?:
+    | ((value: any, path: string[], saveGame: SaveGame) => Record<string, any>)
+    | Record<string, any>;
 
   /**
    * Other defs to try and merge into this def when resolving
