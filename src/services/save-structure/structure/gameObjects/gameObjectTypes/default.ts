@@ -5,6 +5,8 @@ import { SaveStructureDef } from "../../types";
 import behavior from "../behaviors";
 
 export const defaultGameObject: SaveStructureDef<GameObject> = {
+  $type: "game-object",
+
   $uiPathName(obj: GameObject) {
     const idBehavior = getBehavior(obj, KPrefabIDBehavior);
     const id =
@@ -24,8 +26,6 @@ export const defaultGameObject: SaveStructureDef<GameObject> = {
 
     return behaviors.map((_, i) => ["behaviors", `${i}`]);
   },
-
-  $editor: "game-object-default",
 
   behaviors: {
     $uiPathName: false,

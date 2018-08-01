@@ -13,7 +13,7 @@ import {
 import { defaultBehavior } from "./default";
 
 const storageBehaviorStoredObject: SaveStructureDef<StoredGameObject> = {
-  $editor: "game-object-default",
+  $type: "game-object",
   $uiPathName(obj: StoredGameObject, path: string[]) {
     const index = path[path.length - 1];
     return `${obj.name} (${index})`;
@@ -34,12 +34,8 @@ export function initStorageBehaviorHack() {
 const storageBehaviorExtraData: SaveStructureDef<
   StorageBehavior["extraData"]
 > = {
+  $type: "game-object-list",
   $uiPathName: "Stored Items",
-
-  $editor: "game-object-list",
-  $editorProps: {
-    isFlatList: true
-  },
 
   "*": storageBehaviorStoredObject
 };

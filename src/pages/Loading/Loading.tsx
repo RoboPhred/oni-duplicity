@@ -17,7 +17,7 @@ const Loading: React.SFC<Props> = ({
   <Box p={Space.Large}>
     <Text intent={Intent.Primary}>
       {loadingState === "loading" ? (
-        <Trans i18nKey="load-file.loading">Loading</Trans>
+        <Trans i18nKey="save-file.loading">Loading</Trans>
       ) : (
         <Trans i18nKey="save-file.saving">Saving</Trans>
       )}

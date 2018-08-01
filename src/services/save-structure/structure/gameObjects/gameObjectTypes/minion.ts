@@ -11,7 +11,7 @@ import { defaultGameObject } from "./default";
 const minionGameObject: SaveStructureDef<GameObject> = {
   ...defaultGameObject,
 
-  $editor: "game-object-minion",
+  $subType: "Minion",
 
   $uiPathName: (obj: GameObject) => {
     const identityBehavior = getBehavior(obj, MinionIdentityBehavior);

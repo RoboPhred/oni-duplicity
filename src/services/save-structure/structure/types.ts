@@ -4,10 +4,39 @@ export type ValueSelector<T> =
   | T
   | ((value: any, path: string[], oniSave: SaveGame) => T);
 
+export type SaveStructurePrimaryType =
+  | "save-root"
+  | "template-object"
+  | "game-object-group-list"
+  | "game-object-group"
+  | "game-object-list"
+  | "game-object"
+  | "game-object-behavior";
+
+export interface SaveStructureItemType {
+  type: SaveStructurePrimaryType;
+  subType?: string;
+}
+
 /**
  * Data properties describing the save structure item at this point.
  */
 export type SaveStructureDefCore<T> = {
+  /**
+   * The type of save item this represents.
+   * This is used to select the editors, and to
+   * identify common targets when performing edit operations
+   * on deeper data.
+   */
+  $type?: SaveStructurePrimaryType;
+
+  /**
+   * The sub-type of this game object.
+   * This is used to select editors.
+   * See `$type`.
+   */
+  $subType?: ValueSelector<string | null>;
+
   /**
    * Defines name of this item in the ui path.
    * If the value is a string, the string will be used
@@ -33,20 +62,6 @@ export type SaveStructureDefCore<T> = {
    * Whether this item should only show up in advanced edit mode.
    */
   $advanced?: ValueSelector<boolean>;
-
-  /**
-   * The type of save item this represents.
-   * This is used to select the editors, and to
-   * identify common targets when performing edit operations
-   * on deeper data.
-   */
-  $editor?: string;
-
-  /**
-   * A function to generate the props to pass to the editor
-   * when an item of this def is selected.
-   */
-  $editorProps?: ValueSelector<Record<string, any>>;
 
   /**
    * Other defs to try and merge into this def when resolving

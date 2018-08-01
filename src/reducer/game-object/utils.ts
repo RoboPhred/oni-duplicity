@@ -6,7 +6,7 @@ import { GameObject } from "oni-save-parser";
 
 import { AppState } from "@/state";
 
-import { getSelectedGameObjectPath } from "@/selectors/game-object";
+import { getGameObjectPathInSelection } from "@/selectors/game-object";
 
 export function produceFromGameObject(
   state: AppState,
@@ -16,7 +16,7 @@ export function produceFromGameObject(
     return state;
   }
 
-  const path = getSelectedGameObjectPath(state);
+  const path = getGameObjectPathInSelection(state);
   if (!path) {
     return state;
   }

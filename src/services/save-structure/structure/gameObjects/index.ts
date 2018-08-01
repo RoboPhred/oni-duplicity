@@ -6,9 +6,12 @@ import {
   getGameObjectVariants,
   gameObjectVariantInfos
 } from "./gameObjectTypes";
-import { initStorageBehaviorHack } from "@/services/save-structure/structure/gameObjects/behaviors/storage";
+
+import { initStorageBehaviorHack } from "../gameObjects/behaviors/storage";
 
 const gameObjectGroupsStructure: SaveStructureDef<GameObjectGroup> = {
+  $type: "game-object-group",
+
   $uiPathName(group: GameObjectGroup) {
     return group.name;
   },
@@ -16,8 +19,6 @@ const gameObjectGroupsStructure: SaveStructureDef<GameObjectGroup> = {
   $uiChildren(group: GameObjectGroup) {
     return group.gameObjects.map((_, i) => ["gameObjects", `${i}`]);
   },
-
-  $editor: "game-object-list",
 
   // This will be populated after object instantiation, to
   //  allow us to define circular references for nested
@@ -37,7 +38,7 @@ gameObjectGroupsStructure.$variants = getGameObjectVariants(
 initStorageBehaviorHack();
 
 const gameObjectsStructure: SaveStructureDef<SaveGame["gameObjects"]> = {
-  $editor: "game-object-group-list",
+  $type: "game-object-group-list",
 
   // gameObjects is an array, so we use the fallback key to
   //  handle all items.

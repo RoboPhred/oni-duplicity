@@ -4,38 +4,34 @@ import { GameObject } from "oni-save-parser";
 
 import { get } from "lodash-es";
 
+import { getLastSaveItemOfType } from "@/services/save-structure";
+
 import selectedPath from "./selected-path";
-import oniSave from "@/selectors/oni-save";
+import oniSave from "./oni-save";
 
-const GAME_OBJECT_PATH = [/gameObjects/, /.+/, /gameObjects/, /\d+/];
-
-export const getIsGameObjectSelected = createSelector(selectedPath, path => {
-  if (!path) {
-    return null;
-  }
-
-  if (path.length < GAME_OBJECT_PATH.length) {
-    return false;
-  }
-
-  return GAME_OBJECT_PATH.every((x, i) => x.test(path[i]));
-});
-
-export const getSelectedGameObjectPath = createSelector(
+/**
+ * Gets the path to the deepest game object in the selected path.
+ *
+ */
+export const getGameObjectPathInSelection = createSelector(
   selectedPath,
-  getIsGameObjectSelected,
-  (path, valid) => {
-    if (!valid) {
+  oniSave,
+  (path, oniSave) => {
+    if (!path || !oniSave) {
       return null;
     }
 
-    return path.slice(0, GAME_OBJECT_PATH.length);
+    const found = getLastSaveItemOfType("game-object", path, oniSave);
+    if (!found) {
+      return null;
+    }
+    return found.path;
   }
 );
 
 export const getSelectedGameObject = createSelector(
   oniSave,
-  getSelectedGameObjectPath,
+  getGameObjectPathInSelection,
   (oniSave, path) => {
     if (!oniSave || !path) {
       return null;
