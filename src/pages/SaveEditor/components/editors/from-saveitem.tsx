@@ -4,6 +4,10 @@ import { SaveGame } from "oni-save-parser";
 
 import { getSaveItemType } from "@/services/save-structure";
 
+import { Intent } from "@/style";
+
+import Text from "@/components/Text";
+
 import { editorFromGameObjectType } from "./game-objects";
 
 import DefaultObjectEditor from "./DefaultObjectEditor";
@@ -42,9 +46,9 @@ export function editorFromSaveItem(
         DefaultGameObjectEditor
       );
     case "game-object-behavior":
-      return itemType.subType
-        ? () => <TemplateObjectEditor templateName={itemType.subType!} />
-        : DefaultObjectEditor;
+      return () => (
+        <Text intent={Intent.Dangerous}>TODO Behavior root page</Text>
+      );
   }
 
   return DefaultObjectEditor;
