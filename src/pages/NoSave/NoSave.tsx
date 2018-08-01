@@ -21,14 +21,14 @@ const NoSave: React.SFC = () => (
   <NonIdealState intent={Intent.Hint} header={"No File Loaded"}>
     <Text intent={Intent.Hint}>
       <div>
-        <Trans i18nKey="load-file.instructions">
+        <Trans i18nKey="save-file.instructions">
           Load a save using the controls on the upper left.
         </Trans>
       </div>
       {SaveFilePaths[OSType] && (
         <div>
           <Trans
-            i18nKey="load-file.save-location"
+            i18nKey="save-file.save-location"
             defaults="Save files can be found at <0>{{path}}</0>"
             values={{ path: SaveFilePaths[OSType] }}
             components={[<Code />]}

@@ -37,7 +37,7 @@ class NavBar extends React.Component<Props> {
             onChange={this._onLoadFileInput}
           />
           <Button onClick={this._onLoadFileClick} verticalAlign="middle">
-            <Trans i18nKey={"load-file.load"}>Load</Trans>
+            <Trans i18nKey={"save-file.load"}>Load</Trans>
           </Button>
           {!isProd && (
             <Button onClick={onLoadTestData} verticalAlign="middle">
@@ -49,7 +49,7 @@ class NavBar extends React.Component<Props> {
             onClick={this._onSaveFileClick}
             verticalAlign="middle"
           >
-            <Trans i18nKey={"load-file.load"}>Save</Trans>
+            <Trans i18nKey={"save-file.load"}>Save</Trans>
           </Button>
           <a
             title="Github"

@@ -13,81 +13,179 @@ import {
   SaveStructureDef,
   getSaveStructureDef,
   walkSaveStructurePath,
-  ValueSelector
+  ValueSelector,
+  SaveStructureItemType,
+  SaveStructurePrimaryType
 } from "./structure";
 
-const GAME_OBJECT_GROUP_PATH_ROOT = ["gameObjects", "*"];
-export function getPathGameObjectGroup(
+export function getSaveItemType(
   path: string[],
   saveGame: SaveGame
-): GameObjectGroup | null {
-  if (path.length < GAME_OBJECT_GROUP_PATH_ROOT.length) {
+): SaveStructureItemType | null {
+  const def = getSaveStructureDef(path, saveGame);
+  const type = (def && def.$type) || null;
+  if (type == null) {
     return null;
   }
-
-  path = path.slice(0, GAME_OBJECT_GROUP_PATH_ROOT.length);
-
-  if (
-    !path.every((x, i) => comparePathMatch(x, i, GAME_OBJECT_GROUP_PATH_ROOT))
-  ) {
-    return null;
+  let subType = (def && def.$subType) || null;
+  if (subType) {
+    subType = resolveValueSelector(subType, path, saveGame);
   }
-
-  return get(saveGame, path);
+  return {
+    type,
+    subType: subType || undefined
+  };
 }
 
-const GAME_OBJECT_PATH_ROOT = ["gameObjects", "*", "gameObject", "*"];
-export function getPathGameObject(
+export interface FoundSaveItem<T> {
+  path: string[];
+  item: T;
+}
+/**
+ * Gets the deepest save item of the given type
+ */
+export function getLastSaveItemOfType(
+  type: "game-object-group",
   path: string[],
   saveGame: SaveGame
-): GameObject | null {
-  if (path.length < GAME_OBJECT_PATH_ROOT.length) {
-    return null;
-  }
-
-  path = path.slice(0, GAME_OBJECT_PATH_ROOT.length);
-
-  if (!path.every((x, i) => comparePathMatch(x, i, GAME_OBJECT_PATH_ROOT))) {
-    return null;
-  }
-
-  return get(saveGame, path);
-}
-
-const GAME_OBJECT_BEHAVIOR_PATH_ROOT = [
-  "gameObjects",
-  "*",
-  "gameObject",
-  "*",
-  "behaviors",
-  "*"
-];
-export function getPathBehavior(
+): FoundSaveItem<GameObjectGroup> | undefined;
+export function getLastSaveItemOfType(
+  type: "game-object",
   path: string[],
   saveGame: SaveGame
-): GameObjectBehavior | null {
-  if (path.length < GAME_OBJECT_BEHAVIOR_PATH_ROOT.length) {
-    return null;
+): FoundSaveItem<GameObject> | undefined;
+export function getLastSaveItemOfType(
+  type: "game-object-behavior",
+  path: string[],
+  saveGame: SaveGame
+): FoundSaveItem<GameObjectBehavior> | undefined;
+export function getLastSaveItemOfType<T = any>(
+  type: SaveStructurePrimaryType,
+  path: string[],
+  saveGame: SaveGame
+): FoundSaveItem<T> | undefined;
+export function getLastSaveItemOfType<T>(
+  type: SaveStructurePrimaryType,
+  path: string[],
+  saveGame: SaveGame
+): FoundSaveItem<T> | undefined {
+  let foundPath: string[] | undefined;
+  for (const pair of walkSaveStructurePath(path, saveGame)) {
+    if (pair.def.$type === type) {
+      foundPath = pair.path;
+    }
   }
 
-  path = path.slice(0, GAME_OBJECT_BEHAVIOR_PATH_ROOT.length);
-
-  if (
-    !path.every((x, i) =>
-      comparePathMatch(x, i, GAME_OBJECT_BEHAVIOR_PATH_ROOT)
-    )
-  ) {
-    return null;
+  if (foundPath) {
+    const item = foundPath.length > 0 ? get(saveGame, foundPath) : saveGame;
+    return {
+      path: foundPath,
+      item
+    };
   }
 
-  return get(saveGame, path);
+  return undefined;
 }
 
-function comparePathMatch(part: string, index: number, match: string[]) {
-  if (match[index] === "*") return true;
-  if (part === match[index]) return true;
-  return false;
+export function getLastSaveItemOfSubType<T>(
+  type: SaveStructurePrimaryType,
+  subType: string,
+  path: string[],
+  saveGame: SaveGame
+): FoundSaveItem<T> | undefined {
+  let foundPath: string[] | undefined;
+  for (const pair of walkSaveStructurePath(path, saveGame)) {
+    const pairSubType = pair.def.$subType
+      ? resolveValueSelector(pair.def.$subType, pair.path, saveGame)
+      : null;
+    if (pair.def.$type === type && pairSubType === subType) {
+      foundPath = pair.path;
+    }
+  }
+
+  if (foundPath) {
+    const item = foundPath.length > 0 ? get(saveGame, foundPath) : saveGame;
+    return {
+      path: foundPath,
+      item
+    };
+  }
+
+  return undefined;
 }
+
+// const GAME_OBJECT_GROUP_PATH_ROOT = ["gameObjects", "*"];
+// export function getPathGameObjectGroup(
+//   path: string[],
+//   saveGame: SaveGame
+// ): GameObjectGroup | null {
+//   if (path.length < GAME_OBJECT_GROUP_PATH_ROOT.length) {
+//     return null;
+//   }
+
+//   path = path.slice(0, GAME_OBJECT_GROUP_PATH_ROOT.length);
+
+//   if (
+//     !path.every((x, i) => comparePathMatch(x, i, GAME_OBJECT_GROUP_PATH_ROOT))
+//   ) {
+//     return null;
+//   }
+
+//   return get(saveGame, path);
+// }
+
+// const GAME_OBJECT_PATH_ROOT = ["gameObjects", "*", "gameObject", "*"];
+// export function getPathGameObject(
+//   path: string[],
+//   saveGame: SaveGame
+// ): GameObject | null {
+//   if (path.length < GAME_OBJECT_PATH_ROOT.length) {
+//     return null;
+//   }
+
+//   path = path.slice(0, GAME_OBJECT_PATH_ROOT.length);
+
+//   if (!path.every((x, i) => comparePathMatch(x, i, GAME_OBJECT_PATH_ROOT))) {
+//     return null;
+//   }
+
+//   return get(saveGame, path);
+// }
+
+// const GAME_OBJECT_BEHAVIOR_PATH_ROOT = [
+//   "gameObjects",
+//   "*",
+//   "gameObject",
+//   "*",
+//   "behaviors",
+//   "*"
+// ];
+// export function getPathBehavior(
+//   path: string[],
+//   saveGame: SaveGame
+// ): GameObjectBehavior | null {
+//   if (path.length < GAME_OBJECT_BEHAVIOR_PATH_ROOT.length) {
+//     return null;
+//   }
+
+//   path = path.slice(0, GAME_OBJECT_BEHAVIOR_PATH_ROOT.length);
+
+//   if (
+//     !path.every((x, i) =>
+//       comparePathMatch(x, i, GAME_OBJECT_BEHAVIOR_PATH_ROOT)
+//     )
+//   ) {
+//     return null;
+//   }
+
+//   return get(saveGame, path);
+// }
+
+// function comparePathMatch(part: string, index: number, match: string[]) {
+//   if (match[index] === "*") return true;
+//   if (part === match[index]) return true;
+//   return false;
+// }
 
 export function getSaveItemTitle(path: string[], saveGame: SaveGame): string {
   const def = getSaveStructureDef(path, saveGame);
@@ -146,31 +244,6 @@ export function getSaveItemChildPaths(
   const def = getSaveStructureDef(path, saveGame);
   const childPaths = collectChildPaths(path, saveGame, def, editMode);
   return childPaths;
-}
-
-export function getSaveItemEditor(
-  path: string[],
-  saveGame: SaveGame
-): string | null {
-  const def = getSaveStructureDef(path, saveGame);
-  return (def && def.$editor) || null;
-}
-
-export function getSaveItemEditorProps(
-  path: string[],
-  saveGame: SaveGame
-): Record<string, any> {
-  const def = getSaveStructureDef(path, saveGame);
-  if (!def || !def.$editor) {
-    return {};
-  }
-
-  const propFactory = def.$editorProps;
-  if (!propFactory) {
-    return {};
-  }
-
-  return resolveValueSelector(propFactory, path, saveGame);
 }
 
 /**

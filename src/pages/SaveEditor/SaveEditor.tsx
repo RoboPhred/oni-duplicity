@@ -1,12 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { Trans } from "react-i18next";
 
 import mapStateToProps, { StateProps } from "./derived-state";
 
 import SelectedPathBreadcrumb from "@/components/SelectedPathBreadcrumb";
 import ResizePanel from "@/components/ResizePanel";
 
-import { getEditor } from "./components/editors";
+import { editorFromSaveItem } from "./components/editors";
 
 import SaveEditorContainer from "./components/SaveEditorContainer";
 import ContentContainer from "./components/ContentContainer";
@@ -14,6 +15,8 @@ import EditorContainer from "./components/EditorContainer";
 
 import Sidebar from "./components/Sidebar";
 import Separator from "@/components/Separator";
+import NonIdealState from "@/components/NonIdealState";
+import { Intent } from "@/style";
 
 type Props = StateProps;
 class SaveEditor extends React.Component<Props> {
@@ -26,9 +29,21 @@ class SaveEditor extends React.Component<Props> {
   }
 
   render() {
-    const { editorType, editorProps } = this.props;
+    const { selectedPath, oniSave } = this.props;
 
-    const ObjectEditor = getEditor(editorType);
+    if (!oniSave) {
+      return (
+        <SaveEditorContainer>
+          <NonIdealState intent={Intent.Dangerous}>
+            <Trans i18nKey="save-file.not-loaded">
+              No save has been loaded
+            </Trans>
+          </NonIdealState>
+        </SaveEditorContainer>
+      );
+    }
+
+    const ObjectEditor = editorFromSaveItem(selectedPath, oniSave);
 
     return (
       <SaveEditorContainer>
@@ -39,7 +54,7 @@ class SaveEditor extends React.Component<Props> {
           <SelectedPathBreadcrumb />
           <Separator width="100%" />
           <EditorContainer>
-            <ObjectEditor {...editorProps} />
+            <ObjectEditor />
           </EditorContainer>
         </ContentContainer>
       </SaveEditorContainer>

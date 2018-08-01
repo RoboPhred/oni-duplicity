@@ -9,7 +9,7 @@ import { SaveStructureDef } from "./types";
 const defaultAdvancedField: SaveStructureDef<{}> = { $advanced: true };
 
 const saveStructure: SaveStructureDef<SaveGame> = {
-  $editor: "save-root",
+  $type: "save-root",
   $uiPathName: (obj: SaveGame) => obj.header.gameInfo.baseName || "Save Game",
 
   /**
@@ -56,13 +56,9 @@ const saveStructure: SaveStructureDef<SaveGame> = {
    * Another blob of generalized non-object-specific game data
    */
   gameData: {
-    $editor: "template-object",
+    $type: "template-object",
+    $subType: "Game+GameSaveData",
     $advanced: true,
-    $editorProps() {
-      return {
-        templateName: "Game+GameSaveData"
-      };
-    },
 
     /**
      * Presumably tracks the flow of material through the gas conduits.
