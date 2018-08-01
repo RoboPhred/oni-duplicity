@@ -43,9 +43,7 @@ export function editorFromSaveItem(
       );
     case "game-object-behavior":
       return itemType.subType
-        ? () => (
-            <TemplateObjectEditor templateName={itemType.subType!} isBehavior />
-          )
+        ? () => <TemplateObjectEditor templateName={itemType.subType!} />
         : DefaultObjectEditor;
   }
 

@@ -20,22 +20,18 @@ import { TemplateObjectEditorProps } from "./props";
 const templateName = (_: AppState, props: TemplateObjectEditorProps) =>
   props.templateName;
 
-const isBehavior = (_: AppState, props: TemplateObjectEditorProps) =>
-  props.isBehavior || false;
-
 const typeInfo = createSelector(
   oniSave,
   templateName,
   selectedPath,
-  isBehavior,
-  (oniSave, templateName, selectedPath, isBehavior) => {
+  (oniSave, templateName, selectedPath) => {
     if (!oniSave) {
       return null;
     }
 
     // TODO: This will cause problems with recursive types.
     const foundRoot = getLastSaveItemOfSubType(
-      isBehavior ? "game-object-behavior" : "template-object",
+      "template-object",
       templateName,
       selectedPath,
       oniSave

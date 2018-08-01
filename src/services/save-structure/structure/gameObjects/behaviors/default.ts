@@ -8,7 +8,7 @@ import {
   LIST_TYPES
 } from "oni-save-parser";
 
-import { get, forEach, isObject } from "lodash-es";
+import { get, isObject } from "lodash-es";
 
 import { getLastSaveItemOfType } from "../../../utils";
 
@@ -17,7 +17,7 @@ import { SaveStructureDef } from "../../types";
 const defaultBehaviorTemplateDataObj: SaveStructureDef<{}> = {
   $type: "template-object",
   $subType(_: any, path: string[], saveGame: SaveGame) {
-    const found = getLastSaveItemOfType("template-object", path, saveGame);
+    const found = getLastSaveItemOfType("game-object-behavior", path, saveGame);
     if (!found) {
       return null;
     }
@@ -121,11 +121,12 @@ export const defaultBehavior: SaveStructureDef<GameObjectBehavior> = {
       behavior.templateData &&
       Object.keys(behavior.templateData).length > 0
     ) {
-      forEach(behavior.templateData, (_, key) => {
-        if (isObject(behavior.templateData[key])) {
-          children.push(["templateData", key]);
-        }
-      });
+      // forEach(behavior.templateData, (_, key) => {
+      //   if (isObject(behavior.templateData[key])) {
+      //     children.push(["templateData", key]);
+      //   }
+      // });
+      children.push(["templateData"]);
     }
     if (behavior.extraData) {
       children.push(["extraData"]);
@@ -137,17 +138,16 @@ export const defaultBehavior: SaveStructureDef<GameObjectBehavior> = {
     $uiPathName: false,
     $type: "template-object",
     $subType(_: any, path: string[], saveGame: SaveGame) {
-      const gameObject = get(
-        saveGame,
-        path[path.length - 2]
-      ) as GameObjectBehavior;
+      const gameObject = get(saveGame, path.slice(0, -1)) as GameObjectBehavior;
       return gameObject ? gameObject.name : null;
     },
 
-    "*": defaultBehaviorTemplateDataObj
+    $uiChildren(value: any) {
+      return Object.keys(value)
+        .filter(x => isObject(value[x]))
+        .map(x => [x]);
+    },
 
-    // TODO: Handle '*' with an object that gets the template editor
-    //  set up with the correct template path, and references itself
-    //  for its own '*' recursively.
+    "*": defaultBehaviorTemplateDataObj
   } as SaveStructureDef<{}>
 };
