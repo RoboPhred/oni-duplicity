@@ -1,6 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
+import { Intent } from "@/style";
+
 import mapStateToProps, { StateProps } from "./derived-state";
 
 import NonIdealState from "@/components/NonIdealState";
@@ -19,7 +21,6 @@ import MinionJobsTab from "./components/MinionJobsTab";
 import MinionSkillsTab from "./components/MinionSkillsTab";
 import MinionTraitsTab from "./components/MinionTraitsTab";
 import MinionPositionTab from "./components/MinionPositionTab";
-import { Intent } from "@/style";
 
 type Props = StateProps;
 class DuplicantEditor extends React.Component<Props> {
@@ -71,7 +72,7 @@ class DuplicantEditor extends React.Component<Props> {
           </VerticalTabs.Tab>
 
           <VerticalTabs.Tab tabKey="position" header="Position">
-            <MinionPositionTab gameObjectPath={gameObjectPath} />
+            <MinionPositionTab />
           </VerticalTabs.Tab>
         </VerticalTabs>
       </EditorContainer>
