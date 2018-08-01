@@ -1,13 +1,12 @@
-import { set, memoize } from "lodash-es";
+import { set } from "lodash-es";
 
-import { gameObjectIs } from "../../matchers";
 import { SaveStructureDef } from "../../types";
 
 import { defaultGameObject } from "./default";
 
 import { GameObjectTypeInfo } from "./types";
 
-function createGameObjectVariants(
+export function getGameObjectVariants(
   gameObjectTypeInfos: GameObjectTypeInfo[],
   gameObjectPath: string[] | null
 ): SaveStructureDef<{}>[] {
@@ -18,7 +17,7 @@ function createGameObjectVariants(
 
   const variants = gameObjectTypeInfos.map(info => {
     const rootVariant: SaveStructureDef<{}> = {
-      $match: gameObjectIs(info.gameObjectName)
+      $match: info.gameObjectMatcher
     };
     setStructure(rootVariant, gameObjectPath, info.gameObjectStructure);
     return rootVariant;
@@ -46,18 +45,3 @@ function setStructure(
     Object.assign(obj, structure);
   }
 }
-
-export const getGameObjectVariants = memoize(
-  createGameObjectVariants,
-  (
-    gameObjectTypeInfos: GameObjectTypeInfo[],
-    gameObjectPath: string[] | null
-  ) => {
-    const infoKey = gameObjectTypeInfos
-      .map(x => x.gameObjectName)
-      .sort()
-      .join(":");
-    const pathKey = gameObjectPath ? gameObjectPath.join(":") : "";
-    return `${infoKey}::${pathKey}`;
-  }
-);
