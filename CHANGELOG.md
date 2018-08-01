@@ -1,3 +1,8 @@
+### v2.0.5
+
+- Fix decimal values not editable.
+- Stylistic improvements to tables.
+
 ### v2.0.4
 
 - Fix numeric values not editable in browsers other than chrome.
