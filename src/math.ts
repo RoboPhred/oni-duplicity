@@ -65,8 +65,8 @@ export function isFloatingPoint(
   return precision === "single" || precision === "double";
 }
 
-export function compare(a: number, b: number) {
-  if (a > b) return -1;
-  if (a < b) return 1;
+export function compare(a: number, b: number, sortAscending?: boolean) {
+  if (a > b) return sortAscending ? 1 : -1;
+  if (a < b) return sortAscending ? -1 : 1;
   return 0;
 }

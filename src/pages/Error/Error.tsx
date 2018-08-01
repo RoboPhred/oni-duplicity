@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Trans } from "react-i18next";
 
 import Flex from "@/components/Flex";
 import Button from "@/components/Button";
@@ -20,7 +21,7 @@ const ErrorPage: React.SFC<ErrorProps> = ({ error, onDismiss }) => (
     </Flex.Item>
     <Flex.Item>
       <Button intent={Intent.Primary} onClick={onDismiss}>
-        Close
+        <Trans i18nKey="close-dialog">Close</Trans>
       </Button>
     </Flex.Item>
   </Flex>

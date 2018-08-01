@@ -4,9 +4,14 @@ import { autobind } from "core-decorators";
 
 import Keys from "@/keys";
 
-import Text, { TextProps } from "../Text";
+import { FontSize } from "@/style";
 
+import { TextProps } from "../Text";
+
+import EditableTextDisplay from "./components/EditableTextDisplay";
 import EditableTextInput from "./components/EditableTextInput";
+
+import Icon from "@/components/Icon";
 
 export interface EditableTextProps extends TextProps {
   className?: string;
@@ -47,9 +52,12 @@ export default class EditableText extends React.Component<Props, State> {
       );
     } else {
       return (
-        <Text className={className} intent={intent} onClick={this._onTextClick}>
-          {value}
-        </Text>
+        <span onClick={this._onTextClick} title="Click to Edit">
+          <EditableTextDisplay className={className} intent={intent}>
+            {value}
+          </EditableTextDisplay>
+          <Icon.Pencil fontSize={FontSize.Small} />
+        </span>
       );
     }
   }

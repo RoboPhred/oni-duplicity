@@ -5,14 +5,16 @@ import styled, {
   Border,
   getThemeColor,
   Color,
-  getThemeBorder,
-  intentColor
+  getThemeBorder
 } from "@/style";
 
 import { attachProps } from "@/utils";
 
 const Table = styled.table`
-  border: none;
+  border-left: ${getThemeBorder(Border.Normal)};
+  border-right: ${getThemeBorder(Border.Normal)};
+  border-bottom: ${getThemeBorder(Border.Normal)};
+  border-color: ${getThemeColor(Color.fromIntent(Intent.Secondary))};
   border-spacing: 0;
   border-collapse: collapse;
 `;
@@ -27,6 +29,10 @@ export default attachProps(Table, {
   TBody: styled.tbody``,
   TR: styled.tr`
     ${text};
+
+    :hover {
+      background-color: ${getThemeColor(Color.PanelBackground)};
+    }
   `,
   TD: styled.td`
     ${text};
@@ -35,7 +41,7 @@ export default attachProps(Table, {
 
     position: relative;
 
-    tr:not(:first-child):not(:last-child) > & {
+    tr:not(:first-child) > & {
       :before {
         position: absolute;
         content: "";

@@ -44,6 +44,6 @@ function setStructure(
   } else {
     // Use a one-value rootVariant to ensure we get a reference,
     //  to mantain recursive support.
-    obj.$variants = [structure];
+    Object.assign(obj, structure);
   }
 }

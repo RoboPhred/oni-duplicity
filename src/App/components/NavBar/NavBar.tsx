@@ -3,10 +3,13 @@ import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
 
+import { Trans } from "react-i18next";
+
 import { isProd } from "@/runtime-env";
 
-import { Intent } from "@/style";
+import { Intent, FontSize } from "@/style";
 
+import Icon from "@/components/Icon";
 import Button from "@/components/Button";
 
 import mapDispatchToProps, { DispatchProps } from "./events";
@@ -33,11 +36,32 @@ class NavBar extends React.Component<Props> {
             accept=".sav"
             onChange={this._onLoadFileInput}
           />
-          <Button onClick={this._onLoadFileClick}>Load</Button>
-          {!isProd && <Button onClick={onLoadTestData}>Test</Button>}
-          <Button intent={Intent.Primary} onClick={this._onSaveFileClick}>
-            Save
+          <Button onClick={this._onLoadFileClick} verticalAlign="middle">
+            <Trans i18nKey={"load-file.load"}>Load</Trans>
           </Button>
+          {!isProd && (
+            <Button onClick={onLoadTestData} verticalAlign="middle">
+              Test
+            </Button>
+          )}
+          <Button
+            intent={Intent.Primary}
+            onClick={this._onSaveFileClick}
+            verticalAlign="middle"
+          >
+            <Trans i18nKey={"load-file.load"}>Save</Trans>
+          </Button>
+          <a
+            title="Github"
+            href="https://github.com/RoboPhred/oni-duplicity"
+            target="_blank"
+          >
+            <Icon.Github
+              intent={Intent.Hint}
+              fontSize={FontSize.Heading}
+              verticalAlign="middle"
+            />
+          </a>
         </NavBarGroup>
       </NavBarContainer>
     );

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { Trans } from "react-i18next";
 
 import { Intent, Space } from "@/style";
 
@@ -15,11 +16,15 @@ const Loading: React.SFC<Props> = ({
 }) => (
   <Box p={Space.Large}>
     <Text intent={Intent.Primary}>
-      {loadingState === "loading" ? "Loading" : "Saving"}
+      {loadingState === "loading" ? (
+        <Trans i18nKey="load-file.loading">Loading</Trans>
+      ) : (
+        <Trans i18nKey="save-file.saving">Saving</Trans>
+      )}
     </Text>
     <br />
     <Text intent={Intent.Secondary}>{loadingProgressMessageSelector}</Text>
   </Box>
 );
-Loading.displayName = "Loading";
+Loading.displayName = "LoadingPage";
 export default connect(mapStateToProps)(Loading);

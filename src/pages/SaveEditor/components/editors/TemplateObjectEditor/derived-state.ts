@@ -19,7 +19,7 @@ const templateName = (_: AppState, props: TemplateObjectEditorProps) =>
   props.templateName;
 
 const templatePath = (_: AppState, props: TemplateObjectEditorProps) =>
-  props.templatePath;
+  props.templatePath || [];
 
 const valuePath = (state: AppState, props: TemplateObjectEditorProps) =>
   props.valuePathHack || selectedPath(state);

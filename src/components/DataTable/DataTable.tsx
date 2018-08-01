@@ -1,80 +1,188 @@
-import ReactTable, { TableProps, Column, RowRenderProps } from "react-table";
-import { WidthProps, HeightProps, width, height } from "styled-system";
+import * as React from "react";
 
-import styled, {
-  Color,
-  Intent,
-  ThemeProps,
-  intent,
-  getThemeColor
-} from "@/style";
+import Griddle, {
+  components,
+  RowDefinition,
+  ColumnDefinition,
+  GriddleComponents,
+  plugins
+} from "griddle-react";
 
-import { inputStyle } from "@/components/Input";
+import { Space } from "@/style";
 
-// TODO Use https://reactabular.js.org/#/.
+import Flex from "@/components/Flex";
+import Input from "@/components/Input";
+import Table from "@/components/Table";
+import Text from "@/components/Text";
 
-import "react-table/react-table.css";
+import enhancedWithRowData from "./rowDataEnhancer";
 
-export interface DataTableStyleProps extends WidthProps, HeightProps {}
+export interface DataTableColumn {
+  id?: string;
+  header?: string | React.ReactChild;
+  property?: string;
+  // accessor?: (rowData: any) => any;
+  cell?: React.ComponentType<components.CellProps & { rowData: any }>;
 
-function encodedPrimaryColor(props: ThemeProps): any {
-  const color = getThemeColor(Color.fromIntent(Intent.Primary))(props);
-  const encoded = encodeURIComponent(color);
-  return encoded;
+  //Can this column be filtered
+  filterable?: boolean;
+
+  //Can this column be sorted
+  sortable?: boolean;
+
+  //What sort method this column uses
+  sortMethod?: (data: any[], column: string, sortAscending?: boolean) => any[];
 }
 
-const DataTable = styled<Partial<TableProps> & DataTableStyleProps>(ReactTable)`
-  &.ReactTable {
-    ${width};
-    ${height};
-    box-sizing: border-box;
+export interface DataTableProps {
+  data: any[];
+  columns: DataTableColumn[];
+}
+
+const defaultComponents: GriddleComponents = {
+  Layout: ({ Table, Pagination, Filter, SettingsWrapper }) => (
+    <Flex direction="column" m={Space.Small}>
+      <Flex direction="row">
+        <Flex.Item grow constrain="row">
+          <Filter style={{ width: "100%" }} />
+        </Flex.Item>
+        <Pagination />
+      </Flex>
+      <Table />
+      <Pagination />
+    </Flex>
+  ),
+  Filter: ({ placeholder, style, className, setFilter }) => (
+    <Input
+      type="text"
+      name="filter"
+      placeholder={placeholder}
+      style={style}
+      className={className}
+      onChange={e => setFilter && setFilter(e.target.value)}
+    />
+  ),
+  Table: props => {
+    // Note: There is some loading logic and child properties in here
+    //  that were not typed and are going unused.
+    const { TableHeading, TableBody, NoResults, visibleRows } = props;
+    if (visibleRows === 0) {
+      return <NoResults />;
+    }
+    return (
+      <Table>
+        <TableHeading />
+        <TableBody />
+      </Table>
+    );
+  },
+  TableHeading: props => {
+    const { columnTitles, columnIds, TableHeadingCell } = props;
+
+    const headingCells =
+      columnIds &&
+      columnTitles &&
+      columnTitles.map((title, i) => (
+        <TableHeadingCell
+          key={columnIds[i]}
+          title={title}
+          columnId={columnIds[i]}
+        />
+      ));
+
+    return (
+      <Table.THead>
+        <Table.TR>{headingCells}</Table.TR>
+      </Table.THead>
+    );
+  },
+  Row: props => {
+    const {
+      griddleKey,
+      onClick,
+      onMouseEnter,
+      onMouseLeave,
+      style,
+      className,
+      columnIds,
+      Cell
+    } = props;
+    return (
+      <Table.TR
+        key={griddleKey}
+        onClick={onClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        style={style}
+        className={className}
+      >
+        {columnIds &&
+          columnIds.map(c => (
+            <Cell
+              key={`${c}-${griddleKey}`}
+              griddleKey={griddleKey}
+              columnId={c}
+              style={style}
+              className={className}
+            />
+          ))}
+      </Table.TR>
+    );
+  },
+  Cell: props => {
+    const { value, ...rest } = props;
+    return <Table.TD {...rest}>{value}</Table.TD>;
   }
-
-  &.ReactTable .rt-thead.-filters input,
-  &.ReactTable .rt-thead.-filters select {
-    border-radius: 0;
-    ${inputStyle};
-  }
-
-  &.ReactTable .rt-thead {
-    ${intent.of(Intent.Secondary)};
-    background-color: ${getThemeColor(Color.PanelBackground)};
-    font-weight: bold;
-  }
-
-  &.ReactTable .rt-thead .rt-th.-sort-asc,
-  &.ReactTable .rt-thead .rt-th.-sort-desc {
-    ${intent.of(Intent.Primary)};
-  }
-
-  &.ReactTable .rt-thead .rt-th.-sort-asc {
-    box-shadow: none;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='${encodedPrimaryColor}'><polygon points='0,50 100,50 50,0'/></svg>")
-      no-repeat;
-    background-size: 12px;
-    background-position: calc(100% - 20px) center;
-  }
-
-  &.ReactTable .rt-thead .rt-th.-sort-desc {
-    box-shadow: none;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='${encodedPrimaryColor}'><polygon points='0,0 100,0 50,50'/></svg>")
-      no-repeat;
-    background-size: 12px;
-    background-position: calc(100% - 20px) center;
-  }
-
-  &.ReactTable .rt-td {
-    ${intent.of(Intent.Default)};
-  }
-`;
-
-DataTable.displayName = "DataTable";
-DataTable.defaultProps = {};
-
-export type DataTableProps = TableProps & DataTableStyleProps;
-export type DataTableColumn = Column;
-export type DataTableRow<T = any> = Omit<RowRenderProps, "value"> & {
-  value: T;
 };
-
+const DataTable: React.SFC<DataTableProps> = ({ data, columns }) => (
+  <Griddle
+    data={data}
+    plugins={[plugins.LocalPlugin]}
+    components={defaultComponents}
+    enableSettings={false}
+    pageProperties={{
+      pageSize: 100
+    }}
+  >
+    <RowDefinition>{columns.map(columnToDef)}</RowDefinition>
+  </Griddle>
+);
+DataTable.displayName = "DataTable";
 export default DataTable;
+
+function columnToDef(column: DataTableColumn): React.ReactElement<any> {
+  const {
+    id,
+    header,
+    property,
+    cell,
+    filterable,
+    sortable,
+    sortMethod
+  } = column;
+  if (id == null && property == null) {
+    throw new Error(
+      "At least one of 'id' or 'property' must be defined in a DataTableColumn."
+    );
+  }
+
+  const colId = (id || property)!;
+
+  return (
+    <ColumnDefinition
+      key={colId}
+      id={colId}
+      customHeadingComponent={header ? () => toElement(header) : undefined}
+      customComponent={cell ? enhancedWithRowData(cell) : undefined}
+      filterable={filterable}
+      sortable={sortable}
+      sortMethod={sortMethod as any} // Typedefs are wrong: should return array
+    />
+  );
+}
+function toElement(value: string | React.ReactChild): React.ReactElement<{}> {
+  if (React.isValidElement(value)) {
+    return value;
+  }
+  return <Text>{value}</Text>;
+}

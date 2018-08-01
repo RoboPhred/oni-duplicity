@@ -10,9 +10,10 @@ import { defaultBehavior } from "./default";
 const storageBehaviorExtraData: SaveStructureDef<
   StorageBehavior["extraData"]
 > = {
-  $uiPathName: false,
+  $uiPathName: "Stored Items",
 
-  $editor: "game-object-list",
+  // TODO: game-object-list expects a GameObjectGroup
+  // $editor: "game-object-list",
 
   "*": {
     $editor: "game-object-default",
@@ -23,9 +24,6 @@ const storageBehaviorExtraData: SaveStructureDef<
     $variants: []
   }
 };
-// TODO: Recurse into behavior editors.
-//  Cannot do this currently because we are executing this file to build behaviors for initializing the createGameObjectVariants file.
-// storageBehaviorExtraData["*"]!.$variants = createGameObjectVariants(null);
 
 export const storageBehavior: SaveStructureDef<StorageBehavior> = {
   ...(defaultBehavior as any),
@@ -53,9 +51,7 @@ export const storageBehavior: SaveStructureDef<StorageBehavior> = {
 
     if (behavior.extraData) {
       // extraData is aray of gameObjects stored in this storage.
-      forEach(behavior.extraData, (_, key) => {
-        children.push(["extraData", `${key}`]);
-      });
+      children.push(["extraData"]);
     }
     return children.length > 0 ? children : false;
   },

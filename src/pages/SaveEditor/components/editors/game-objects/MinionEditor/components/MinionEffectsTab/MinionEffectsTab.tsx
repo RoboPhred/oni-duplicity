@@ -10,10 +10,7 @@ import mapStateToProps, { StateProps } from "./derived-state";
 import mapDispatchToProps, { DispatchProps } from "./events";
 
 import NonIdealState from "@/components/NonIdealState";
-import DataTable, {
-  DataTableColumn,
-  DataTableRow
-} from "@/components/DataTable";
+import DataTable, { DataTableColumn } from "@/components/DataTable";
 import NullableInput from "@/components/NullableInput";
 import NumericInput from "@/components/NumericInput";
 
@@ -42,24 +39,23 @@ class MinionEffectsTab extends React.Component<Props> {
 
     const columns: DataTableColumn[] = [
       {
-        Header: "Effect",
+        header: "Effect",
         sortable: true,
         filterable: true,
-        accessor: "effectId"
+        property: "effectId"
       },
       {
-        Header: "Time Remaining",
+        header: "Time Remaining",
         sortable: true,
         filterable: false,
-        id: "level",
-        accessor: x => x,
-        Cell: (row: DataTableRow<typeof data[0]>) => (
+        property: "timeRemaining",
+        cell: ({ rowData }: { rowData: typeof data[0] }) => (
           <NullableInput
-            value={row.value.timeRemaining}
+            value={rowData.timeRemaining}
             onCommit={onSetEffectData.bind(
               null,
-              row.value.effectId,
-              row.value.effectIndex
+              rowData.effectId,
+              rowData.effectIndex
             )}
             defaultValue={15000}
             renderInput={props => (
@@ -67,12 +63,13 @@ class MinionEffectsTab extends React.Component<Props> {
             )}
           />
         ),
-        sortMethod: (a: typeof data[0], b: typeof data[0]) =>
-          compare(a.timeRemaining || 0, b.timeRemaining || 0)
+        sortMethod: (data, column, sortAscending) => {
+          return data.sort((a, b) => compare(a, b, sortAscending));
+        }
       }
     ];
 
-    return <DataTable height="100%" columns={columns} data={data} />;
+    return <DataTable columns={columns} data={data} />;
   }
 }
 export default connect(

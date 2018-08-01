@@ -1,8 +1,14 @@
 import { createStructuredSelector, createSelector } from "reselect";
 
+import { get } from "lodash-es";
+
+import { GameObjectGroup } from "oni-save-parser";
+
 import { AppState } from "@/state";
 
 import oniSave from "@/selectors/oni-save";
+import { getSaveItemChildPaths } from "@/services/save-structure";
+import editMode from "@/selectors/edit-mode";
 
 export interface GroupItem {
   name: string;
@@ -10,20 +16,31 @@ export interface GroupItem {
   path: string[];
 }
 
-const gameObjectGroups = createSelector(oniSave, oniSave => {
-  if (!oniSave) {
-    return [];
-  }
+const gameObjectGroups = createSelector(
+  oniSave,
+  editMode,
+  (oniSave, editMode) => {
+    if (!oniSave) {
+      return [];
+    }
 
-  return oniSave.gameObjects.map((x, i) => {
-    const item: GroupItem = {
-      name: x.name,
-      count: x.gameObjects.length,
-      path: ["gameObjects", `${i}`]
-    };
-    return item;
-  });
-});
+    const gameObjectPaths = getSaveItemChildPaths(
+      ["gameObjects"],
+      oniSave,
+      editMode
+    );
+
+    return gameObjectPaths.map((path, i) => {
+      const group = get(oniSave, path) as GameObjectGroup;
+      const item: GroupItem = {
+        name: group.name,
+        count: group.gameObjects.length,
+        path
+      };
+      return item;
+    });
+  }
+);
 
 const structuredSelector = {
   gameObjectGroups

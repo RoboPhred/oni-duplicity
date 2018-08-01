@@ -57,6 +57,7 @@ const saveStructure: SaveStructureDef<SaveGame> = {
    */
   gameData: {
     $editor: "template-object",
+    $advanced: true,
     $editorProps() {
       return {
         templateName: "Game+GameSaveData"

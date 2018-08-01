@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { Trans } from "react-i18next";
+
 import { Intent } from "@/style";
 
 import { OSType } from "@/runtime-env";
@@ -18,15 +20,23 @@ const SaveFilePaths: Record<OSType, string | null> = {
 const NoSave: React.SFC = () => (
   <NonIdealState intent={Intent.Hint} header={"No File Loaded"}>
     <Text intent={Intent.Hint}>
-      <div>Load a save using the controls on the upper left.</div>
+      <div>
+        <Trans i18nKey="load-file.instructions">
+          Load a save using the controls on the upper left.
+        </Trans>
+      </div>
       {SaveFilePaths[OSType] && (
         <div>
-          Save files can be found at
-          <Code>{SaveFilePaths[OSType]}</Code>
+          <Trans
+            i18nKey="load-file.save-location"
+            defaults="Save files can be found at <0>{{path}}</0>"
+            values={{ path: SaveFilePaths[OSType] }}
+            components={[<Code />]}
+          />
         </div>
       )}
     </Text>
   </NonIdealState>
 );
-NoSave.displayName = "NoSave";
+NoSave.displayName = "NoSavePage";
 export default NoSave;

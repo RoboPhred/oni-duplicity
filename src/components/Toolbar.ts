@@ -1,6 +1,6 @@
 import * as CSS from "csstype";
 
-import { BackgroundProps, background } from "styled-system";
+import { BgColorProps, bgColor } from "styled-system";
 
 import styled, { TextProps, css, text, getTheme, Space, Color } from "@/style";
 
@@ -36,7 +36,7 @@ ToolbarGroup.defaultProps = {
 };
 ToolbarGroup.displayName = "ToolbarButtonGroup";
 
-export type ToolbarProps = BackgroundProps;
+export type ToolbarProps = BgColorProps;
 const Toolbar = styled<ToolbarProps, "div">("div")`
   width: 100%;
   height: auto;
@@ -44,10 +44,10 @@ const Toolbar = styled<ToolbarProps, "div">("div")`
   padding: 0px ${props => getTheme(props).space[Space.Small]}px;
   box-sizing: border-box;
   grid-template-columns: [left] 1fr [center] 1fr [right] 1fr;
-  ${background};
+  ${bgColor};
 `;
 Toolbar.defaultProps = {
-  background: Color.PanelBackground
+  bg: Color.PanelBackground
 };
 Toolbar.displayName = "Toolbar";
 
