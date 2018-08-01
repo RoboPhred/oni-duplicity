@@ -4,7 +4,6 @@ import {
   getTypeCode,
   SerializationTypeCode,
   TypeTemplate,
-  TypeTemplateMember,
   TypeInfo,
   LIST_TYPES
 } from "oni-save-parser";
@@ -18,7 +17,7 @@ import { SaveStructureDef } from "../../types";
 const defaultBehaviorTemplateDataObj: SaveStructureDef<{}> = {
   $type: "template-object",
   $subType(_: any, path: string[], saveGame: SaveGame) {
-    const found = getLastSaveItemOfType("game-object-behavior", path, saveGame);
+    const found = getLastSaveItemOfType("template-object", path, saveGame);
     if (!found) {
       return null;
     }
@@ -66,6 +65,19 @@ const defaultBehaviorTemplateDataObj: SaveStructureDef<{}> = {
           SerializationTypeCode.UserDefined
         ) {
           const arrayTypeInfo = typeInfo.subTypes![0];
+          template = templates.find(x => x.name === arrayTypeInfo.templateName);
+          if (template == null) {
+            // Unknown template.
+            return null;
+          }
+        }
+      } else if (code === SerializationTypeCode.Dictionary) {
+        i++;
+        if (
+          getTypeCode(typeInfo.subTypes![1].info) ===
+          SerializationTypeCode.UserDefined
+        ) {
+          const arrayTypeInfo = typeInfo.subTypes![1];
           template = templates.find(x => x.name === arrayTypeInfo.templateName);
           if (template == null) {
             // Unknown template.
@@ -123,6 +135,14 @@ export const defaultBehavior: SaveStructureDef<GameObjectBehavior> = {
 
   templateData: {
     $uiPathName: false,
+    $type: "template-object",
+    $subType(_: any, path: string[], saveGame: SaveGame) {
+      const gameObject = get(
+        saveGame,
+        path[path.length - 2]
+      ) as GameObjectBehavior;
+      return gameObject ? gameObject.name : null;
+    },
 
     "*": defaultBehaviorTemplateDataObj
 
