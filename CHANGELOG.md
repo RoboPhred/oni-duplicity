@@ -1,4 +1,4 @@
-### vNext
+### v2.0.6
 
 - Fixes to numeric input preventing editing of some values
 - Geyser editing (type, rate, lifecycle values)
