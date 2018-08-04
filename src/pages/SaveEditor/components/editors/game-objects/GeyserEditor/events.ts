@@ -13,6 +13,41 @@ const mapDispatchToProps = {
       ["templateData", "configuration", "typeId"],
       hash
     );
+  },
+  onEmissionRateChanged(rate: number) {
+    return setCurrentObjectBehaviorValue(
+      GeyserBehavior,
+      ["templateData", "configuration", "rateRoll"],
+      rate
+    );
+  },
+  onYearLengthRollChanged(value: number) {
+    return setCurrentObjectBehaviorValue(
+      GeyserBehavior,
+      ["templateData", "configuration", "yearLengthRoll"],
+      value
+    );
+  },
+  onYearPercentRollChanged(value: number) {
+    return setCurrentObjectBehaviorValue(
+      GeyserBehavior,
+      ["templateData", "configuration", "yearPercentRoll"],
+      value
+    );
+  },
+  onIterationLengthRollChanged(value: number) {
+    return setCurrentObjectBehaviorValue(
+      GeyserBehavior,
+      ["templateData", "configuration", "iterationLengthRoll"],
+      value
+    );
+  },
+  onIterationPercentRollChanged(value: number) {
+    return setCurrentObjectBehaviorValue(
+      GeyserBehavior,
+      ["templateData", "configuration", "iterationPercentRoll"],
+      value
+    );
   }
 };
 export type DispatchProps = typeof mapDispatchToProps;

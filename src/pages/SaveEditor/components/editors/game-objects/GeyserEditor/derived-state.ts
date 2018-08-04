@@ -4,7 +4,10 @@ import { GeyserBehavior, GeyserType, GeyserTypeNames } from "oni-save-parser";
 
 import { AppState } from "@/state";
 
-import { getCurrentGameObjectBehaviorSelector } from "@/selectors/behaviors/utils";
+import {
+  getCurrentGameObjectBehaviorSelector,
+  createCurrentGameObjectBehaviorPropertySelector
+} from "@/selectors/behaviors/utils";
 
 const geyserBehaviorSelector = getCurrentGameObjectBehaviorSelector(
   GeyserBehavior
@@ -25,7 +28,27 @@ const structuredSelector = {
     }
 
     return GeyserType[type.hash] || null;
-  })
+  }),
+  emissionRate: createCurrentGameObjectBehaviorPropertySelector<
+    GeyserBehavior,
+    number
+  >(GeyserBehavior, ["templateData", "configuration", "rateRoll"]),
+  yearLengthRoll: createCurrentGameObjectBehaviorPropertySelector<
+    GeyserBehavior,
+    number
+  >(GeyserBehavior, ["templateData", "configuration", "yearLengthRoll"]),
+  yearPercentRoll: createCurrentGameObjectBehaviorPropertySelector<
+    GeyserBehavior,
+    number
+  >(GeyserBehavior, ["templateData", "configuration", "yearPercentRoll"]),
+  iterationLengthRoll: createCurrentGameObjectBehaviorPropertySelector<
+    GeyserBehavior,
+    number
+  >(GeyserBehavior, ["templateData", "configuration", "iterationLengthRoll"]),
+  iterationPercentRoll: createCurrentGameObjectBehaviorPropertySelector<
+    GeyserBehavior,
+    number
+  >(GeyserBehavior, ["templateData", "configuration", "iterationPercentRoll"])
 };
 export type StateProps = StructuredStateProps<typeof structuredSelector>;
 const mapStateToProps = createStructuredSelector<AppState, StateProps>(
