@@ -21,6 +21,9 @@ i18n
     resources: {
       en: {
         common: require("./translations/en/common.json")
+      },
+      zh: {
+        common: require("./translations/zh/common.json")
       }
     },
 
