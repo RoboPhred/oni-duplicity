@@ -18,6 +18,7 @@ import NavBarContainer from "./components/NavBarContainer";
 
 import NavBarGroup from "./components/NavBarGroup";
 import NavBarTitleText from "./components/NavBarTitleText";
+import SettingsButton from "./components/SettingsButton";
 
 type Props = DispatchProps;
 class NavBar extends React.Component<Props> {
@@ -62,6 +63,7 @@ class NavBar extends React.Component<Props> {
               verticalAlign="middle"
             />
           </a>
+          <SettingsButton />
         </NavBarGroup>
       </NavBarContainer>
     );
