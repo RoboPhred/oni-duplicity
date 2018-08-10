@@ -3,7 +3,7 @@ import styled from "@/style";
 import { TextProps, text } from "@/style";
 
 export interface PortraitHeaderProps extends TextProps {}
-const PortraitHeader = styled<TextProps, "h4">("h4")`
+const PortraitHeader = styled<PortraitHeaderProps, "h4">("h4")`
   ${text};
   width: 100%;
   box-sizing: border-box;
