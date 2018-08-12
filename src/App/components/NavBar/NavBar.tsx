@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
 
-import { Trans } from "react-i18next";
+import { Trans, translate } from "react-i18next";
 
 import { isProd } from "@/runtime-env";
 
@@ -99,7 +99,7 @@ class NavBar extends React.Component<Props> {
 export default connect(
   null,
   mapDispatchToProps
-)(NavBar);
+)(translate()(NavBar));
 
 function withExtension(name: string, ext: string): string {
   if (name.endsWith(ext)) return name;
