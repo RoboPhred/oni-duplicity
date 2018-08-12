@@ -50,7 +50,7 @@ class NavBar extends React.Component<Props> {
             onClick={this._onSaveFileClick}
             verticalAlign="middle"
           >
-            <Trans i18nKey={"load-file.load"}>Save</Trans>
+            <Trans i18nKey={"save-file.save"}>Save</Trans>
           </Button>
           <a
             title="Github"
