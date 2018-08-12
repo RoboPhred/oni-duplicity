@@ -22,6 +22,7 @@ const Button = styled<ButtonProps, "button">("button")`
   ${intentFill};
   ${verticalAlign};
   ${space} border: none;
+  user-select: none;
   border-radius: ${getThemeRadius(Radius.Button)}px;
   font-size: ${props => getTheme(props).fontSizes[FontSize.Button]}px;
   cursor: pointer;

@@ -22,12 +22,16 @@ const intentContrastColors: Record<Intent, string> = {
 const backgroundColors = {
   default: "#313a57", //"#3A435E",
   navbar: "#355d95", //"#313E50",
+
+  // TODO: This is used for inputs as well.  make an input background.
   panel: "#36444f" //"#455561",
 };
 
 export enum Color {
   DefaultIntent = "intent.default",
   PrimaryIntent = "intent.primary",
+
+  // TODO: THis is used as borders everywhere.  Make a borderColors section.
   SecondaryIntent = "intent.secondary",
   DangerousIntent = "intent.dangerous",
   HintIntent = "intent.hint",

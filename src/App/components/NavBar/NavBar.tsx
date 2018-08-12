@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { autobind } from "core-decorators";
 
-import { Trans } from "react-i18next";
+import { Trans, translate } from "react-i18next";
 
 import { isProd } from "@/runtime-env";
 
@@ -18,6 +18,7 @@ import NavBarContainer from "./components/NavBarContainer";
 
 import NavBarGroup from "./components/NavBarGroup";
 import NavBarTitleText from "./components/NavBarTitleText";
+import SettingsButton from "./components/SettingsButton";
 
 type Props = DispatchProps;
 class NavBar extends React.Component<Props> {
@@ -49,7 +50,7 @@ class NavBar extends React.Component<Props> {
             onClick={this._onSaveFileClick}
             verticalAlign="middle"
           >
-            <Trans i18nKey={"save-file.load"}>Save</Trans>
+            <Trans i18nKey={"save-file.save"}>Save</Trans>
           </Button>
           <a
             title="Github"
@@ -62,6 +63,7 @@ class NavBar extends React.Component<Props> {
               verticalAlign="middle"
             />
           </a>
+          <SettingsButton />
         </NavBarGroup>
       </NavBarContainer>
     );
@@ -97,7 +99,7 @@ class NavBar extends React.Component<Props> {
 export default connect(
   null,
   mapDispatchToProps
-)(NavBar);
+)(translate()(NavBar));
 
 function withExtension(name: string, ext: string): string {
   if (name.endsWith(ext)) return name;

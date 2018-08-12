@@ -41,6 +41,16 @@ export const getSelectedGameObject = createSelector(
   }
 );
 
+export const getSelectedGameObjectPosition = createSelector(
+  getSelectedGameObject,
+  gameObject => {
+    if (!gameObject) {
+      return null;
+    }
+    return gameObject.position;
+  }
+);
+
 export const getSelectedGameObjectScale = createSelector(
   getSelectedGameObject,
   gameObject => {

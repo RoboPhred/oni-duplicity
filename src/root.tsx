@@ -12,13 +12,13 @@ import i18n from "./i18n";
 import App from "./App";
 
 const Root: React.SFC = () => (
-  <Provider store={store}>
-    <I18nextProvider i18n={i18n}>
+  <I18nextProvider i18n={i18n}>
+    <Provider store={store}>
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>
-    </I18nextProvider>
-  </Provider>
+    </Provider>
+  </I18nextProvider>
 );
 
 export default hot(module)(Root);
