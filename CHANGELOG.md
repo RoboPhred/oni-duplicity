@@ -2,6 +2,7 @@
 
 - Fixes to numeric input preventing editing of some values
 - Geyser editing (type, rate, lifecycle values)
+- Chinese language support contributed by [@zsnmwy](https://github.com/zsnmwy)
 
 ### v2.0.5
 

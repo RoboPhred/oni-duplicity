@@ -1,5 +1,5 @@
 import i18n from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
+// import LanguageDetector from "i18next-browser-languagedetector";
 import { reactI18nextModule } from "react-i18next";
 
 import { isProd } from "@/runtime-env";
@@ -9,7 +9,7 @@ import { isProd } from "@/runtime-env";
 // import Backend from "i18next-xhr-backend";
 
 i18n
-  .use(LanguageDetector)
+  // .use(LanguageDetector)
   .use(reactI18nextModule)
   .init({
     fallbackLng: "en",
@@ -21,6 +21,9 @@ i18n
     resources: {
       en: {
         common: require("./translations/en/common.json")
+      },
+      zh: {
+        common: require("./translations/zh/common.json")
       }
     },
 

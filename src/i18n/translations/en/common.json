@@ -2,7 +2,7 @@
   "load-file": {
     "load": "Load",
     "loading": "Loading",
-    "instructions": "Load a save using the controls on the upper left.",
+    "instructions": "Load a save using the controls on the upper right.",
     "save-location": "Save files can be found at {{path}}."
   },
   "save-file": {

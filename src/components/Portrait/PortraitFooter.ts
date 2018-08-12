@@ -2,7 +2,9 @@ import styled from "@/style";
 
 import { TextProps, text } from "@/style";
 
-const PortraitFooter = styled.div`
+export interface PortraitFooterProps extends TextProps {}
+const PortraitFooter = styled<PortraitFooterProps, "div">("div")`
+  ${text};
   width: 100%;
   box-sizing: border-box;
   margin-top: 2px;

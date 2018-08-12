@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Trans } from "react-i18next";
+import { Trans, translate } from "react-i18next";
 
 import { Intent } from "@/style";
 
@@ -39,4 +39,4 @@ const NoSave: React.SFC = () => (
   </NonIdealState>
 );
 NoSave.displayName = "NoSavePage";
-export default NoSave;
+export default translate()(NoSave);
