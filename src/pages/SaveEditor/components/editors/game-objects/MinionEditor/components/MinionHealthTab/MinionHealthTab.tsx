@@ -80,7 +80,7 @@ class MinionHealthTab extends React.Component<Props> {
               minValue={0}
             />
           </FormGroup>
-          <FormGroup label="Stanima" inline>
+          <FormGroup label="Stamina" inline>
             <NumericInput
               value={stamina || 0}
               precision="single"

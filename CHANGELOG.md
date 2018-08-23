@@ -1,3 +1,8 @@
+### vNext
+
+- Fix spelling of stamina (#37)
+- More flexible type system for identifying save elements to edit.
+
 ### v2.1.1
 
 - The same fix to numeric input, preventing editing of some values.
@@ -36,7 +41,7 @@ Major rewrite of save editor.
 - Ground-up rewrite of UI.
 - Save / Load progress reporting.
 - Edit any recognized template object
-- extraData editors duplicant modifiers (health, stanima, germs, diseases, ...)
+- extraData editors duplicant modifiers (health, stamina, germs, diseases, ...)
 - extraData editor for storage
 - Additional editors for minion modifiers
 
