@@ -12,7 +12,7 @@ import { defaultGameObject } from "./default";
 const minionGameObject: SaveStructureDef<GameObject> = {
   ...defaultGameObject,
 
-  $subType: "Minion",
+  $subType: "minion",
 
   $uiPathName: (obj: GameObject) => {
     const identityBehavior = getBehavior(obj, MinionIdentityBehavior);
