@@ -1,11 +1,9 @@
 {
-  "load-file": {
+  "save-file": {
     "load": "Load",
     "loading": "Loading",
     "instructions": "Load a save using the controls on the upper right.",
-    "save-location": "Save files can be found at {{path}}."
-  },
-  "save-file": {
+    "save-location": "Save files can be found at {{path}}.",
     "not-loaded": "No save file has been loaded.",
     "save": "Save",
     "saving": "Saving"
