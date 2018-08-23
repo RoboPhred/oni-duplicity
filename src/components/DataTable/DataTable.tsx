@@ -32,10 +32,11 @@ export interface DataTableColumn {
 export interface DataTableProps {
   data: any[];
   columns: DataTableColumn[];
+  className?: string;
 }
 
-const DataTable: React.SFC<DataTableProps> = ({ data, columns }) => (
-  <Table>
+const DataTable: React.SFC<DataTableProps> = ({ data, columns, className }) => (
+  <Table className={className}>
     <Table.THead>
       <Table.TR>
         {columns.map((col, i) => (
