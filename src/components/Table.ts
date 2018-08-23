@@ -5,7 +5,9 @@ import styled, {
   Border,
   getThemeColor,
   Color,
-  getThemeBorder
+  getThemeBorder,
+  Space,
+  getThemeSpace
 } from "@/style";
 
 import { attachProps } from "@/utils";
@@ -25,6 +27,7 @@ export default attachProps(Table, {
   `,
   TH: styled.th`
     ${intent.of(Intent.Secondary)};
+    padding: 0 ${getThemeSpace(Space.Small)}px;
   `,
   TBody: styled.tbody``,
   TR: styled.tr`
