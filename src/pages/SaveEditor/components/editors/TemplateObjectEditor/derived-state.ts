@@ -10,6 +10,8 @@ import {
 
 import { AppState } from "@/state";
 
+import { getLastSaveItemOfSubType } from "@/services/save-structure";
+
 import oniSave from "@/selectors/oni-save";
 import selectedPath from "@/selectors/selected-path";
 
@@ -18,20 +20,28 @@ import { TemplateObjectEditorProps } from "./props";
 const templateName = (_: AppState, props: TemplateObjectEditorProps) =>
   props.templateName;
 
-const templatePath = (_: AppState, props: TemplateObjectEditorProps) =>
-  props.templatePath || [];
-
-const valuePath = (state: AppState, props: TemplateObjectEditorProps) =>
-  props.valuePathHack || selectedPath(state);
-
 const typeInfo = createSelector(
   oniSave,
   templateName,
-  templatePath,
-  (oniSave, templateName, templatePath) => {
+  selectedPath,
+  (oniSave, templateName, selectedPath) => {
     if (!oniSave) {
       return null;
     }
+
+    // TODO: This will cause problems with recursive types.
+    const foundRoot = getLastSaveItemOfSubType(
+      "template-object",
+      templateName,
+      selectedPath,
+      oniSave
+    );
+    if (!foundRoot) {
+      return null;
+    }
+
+    const rootTemplatePath = foundRoot.path;
+    const templatePath = selectedPath.slice(rootTemplatePath.length);
 
     let typeInfo: TypeInfo = {
       info: SerializationTypeInfo.UserDefined,
@@ -132,7 +142,7 @@ const template = createSelector(oniSave, typeInfo, (oniSave, typeInfo) => {
 const structuredSelector = {
   template,
   typeInfo,
-  selectedPath: valuePath
+  selectedPath
 };
 export type StateProps = StructuredStateProps<typeof structuredSelector>;
 const mapStateToProps = createStructuredSelector<

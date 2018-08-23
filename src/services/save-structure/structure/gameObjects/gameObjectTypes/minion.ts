@@ -5,13 +5,14 @@ import {
 } from "oni-save-parser";
 
 import { SaveStructureDef } from "../../types";
+import { gameObjectIs } from "../../matchers";
 
 import { defaultGameObject } from "./default";
 
 const minionGameObject: SaveStructureDef<GameObject> = {
   ...defaultGameObject,
 
-  $editor: "game-object-minion",
+  $subType: "minion",
 
   $uiPathName: (obj: GameObject) => {
     const identityBehavior = getBehavior(obj, MinionIdentityBehavior);
@@ -24,7 +25,7 @@ const minionGameObject: SaveStructureDef<GameObject> = {
   }
 };
 
-export const gameObjectName = "Minion";
+export const gameObjectMatcher = gameObjectIs("Minion");
 export const gameObjectStructure = minionGameObject;
 
 export default minionGameObject;

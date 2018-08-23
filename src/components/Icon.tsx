@@ -7,7 +7,12 @@ import {
   Props as FontAwesomeIconProps
 } from "@fortawesome/react-fontawesome";
 
-import { faPencilAlt, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCog,
+  faLanguage,
+  faPencilAlt,
+  IconDefinition
+} from "@fortawesome/free-solid-svg-icons";
 import { faGithubSquare } from "@fortawesome/free-brands-svg-icons";
 
 import styled, {
@@ -46,9 +51,13 @@ function createIcon(
 }
 
 const GithubIcon = createIcon(faGithubSquare);
+const LanguageIcon = createIcon(faLanguage);
 const PencilIcon = createIcon(faPencilAlt);
+const SettingsIcon = createIcon(faCog);
 
 export default attachProps(Icon, {
   Github: GithubIcon,
-  Pencil: PencilIcon
+  Language: LanguageIcon,
+  Pencil: PencilIcon,
+  Settings: SettingsIcon
 });

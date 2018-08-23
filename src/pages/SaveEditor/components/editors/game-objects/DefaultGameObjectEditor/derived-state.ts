@@ -4,7 +4,7 @@ import { KPrefabIDBehavior, getBehavior, GameObject } from "oni-save-parser";
 
 import { AppState } from "@/state";
 
-import { getPathGameObjectGroup } from "@/services/save-structure";
+import { getLastSaveItemOfType } from "@/services/save-structure";
 
 import selectedValue from "@/selectors/selected-value";
 import selectedPath from "@/selectors/selected-path";
@@ -32,9 +32,13 @@ const structuredSelector = {
           prefabIdBehavior.templateData.InstanceID) ||
         "[no instance id]";
 
-      const group = getPathGameObjectGroup(selectedPath, oniSave);
+      const found = getLastSaveItemOfType(
+        "game-object-group",
+        selectedPath,
+        oniSave
+      );
 
-      return `${group ? group.name : "[unknown]"} #${prefabId}`;
+      return `${found ? found.item.name : "[unknown]"} #${prefabId}`;
     }
   )
 };
