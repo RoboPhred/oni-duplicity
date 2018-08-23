@@ -31,7 +31,7 @@ const NoSave: React.SFC = () => (
             i18nKey="save-file.save-location"
             defaults="Save files can be found at <0>{{path}}</0>"
             values={{ path: SaveFilePaths[OSType] }}
-            components={[<Code />]}
+            components={[<Code key="SaveFilePath"/>]}
           />
         </div>
       )}
