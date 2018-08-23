@@ -1,0 +1,11 @@
+{
+  "save-file": {
+    "load": "载入存档",
+    "loading": "载入中......",
+    "instructions": "点击右上角的 [加载存档] 以载入存档。",
+    "save-location": "保存的文件路径: {{path}}.",
+    "save": "保存存档",
+    "saving": "保存中......"
+  },
+  "close-dialog": "关闭"
+}

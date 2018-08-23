@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Trans } from "react-i18next";
+import { Trans, translate } from "react-i18next";
 
 import Flex from "@/components/Flex";
 import Button from "@/components/Button";
@@ -27,4 +27,4 @@ const ErrorPage: React.SFC<ErrorProps> = ({ error, onDismiss }) => (
   </Flex>
 );
 ErrorPage.displayName = "Error";
-export default ErrorPage;
+export default translate()(ErrorPage);

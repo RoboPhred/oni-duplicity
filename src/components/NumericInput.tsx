@@ -62,9 +62,9 @@ export default class NumericInput extends React.Component<Props, State> {
     const numberValue = parseFloat(editValue);
     let validationMessage: string | null = null;
 
-    if (maxValue != null && numberValue >= maxValue) {
+    if (maxValue != null && numberValue > maxValue) {
       validationMessage = `Value must be less than ${maxValue}`;
-    } else if (minValue != null && numberValue <= minValue) {
+    } else if (minValue != null && numberValue < minValue) {
       validationMessage = `Value must be greater than ${minValue}`;
     }
 

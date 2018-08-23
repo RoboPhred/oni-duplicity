@@ -60,18 +60,12 @@ export default class TextAutocompleteInput extends React.Component<
 
   @autobind()
   private _onValueSelect(value: string) {
-    this._setEditValue(value);
-    this._commitEdit();
+    this._setEditValue(value, () => {
+      this._commitEdit();
+    });
   }
 
-  // @autobind()
-  // private _onInputKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
-  //   if (e.key === Keys.Enter) {
-  //     this._commitEdit();
-  //   }
-  // }
-
-  private _setEditValue(value: string) {
+  private _setEditValue(value: string, onSet?: () => void) {
     const validation = this._validate(value);
     const isValid = !validation;
 
@@ -79,10 +73,13 @@ export default class TextAutocompleteInput extends React.Component<
       this._inputRef.current.setCustomValidity(validation || "");
     }
 
-    this.setState({
-      editValue: value,
-      isValid
-    });
+    this.setState(
+      {
+        editValue: value,
+        isValid
+      },
+      onSet
+    );
   }
 
   private _commitEdit() {

@@ -12,6 +12,7 @@ import parseProgressReducer from "./onisave-parse-progress";
 import receiveOniSaveReducer from "./receive-onisave";
 import selectPathReducer from "./select-path";
 import setEditModeReducer from "./set-editmode";
+import setLanguageReducer from "./set-language";
 
 const reducers: Reducer<AppState, any>[] = [
   behaviorsReducer,
@@ -21,7 +22,8 @@ const reducers: Reducer<AppState, any>[] = [
   parseProgressReducer,
   receiveOniSaveReducer,
   selectPathReducer,
-  setEditModeReducer
+  setEditModeReducer,
+  setLanguageReducer
 ];
 
 export default reduceReducers<AppState, any>(...reducers);

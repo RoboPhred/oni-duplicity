@@ -5,6 +5,7 @@ import {
 } from "oni-save-parser";
 
 import { SaveStructureDef } from "../../types";
+import { gameObjectIs } from "../../matchers";
 
 import { defaultGameObject } from "./default";
 
@@ -24,7 +25,7 @@ const minionGameObject: SaveStructureDef<GameObject> = {
   }
 };
 
-export const gameObjectName = "Minion";
+export const gameObjectMatcher = gameObjectIs("Minion");
 export const gameObjectStructure = minionGameObject;
 
 export default minionGameObject;
