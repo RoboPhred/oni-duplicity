@@ -1,7 +1,8 @@
-### vNext
+### v2.1.2
 
 - Fix spelling of stamina (#37)
 - More flexible type system for identifying save elements to edit.
+- Rocketry update supprt.
 
 ### v2.1.1
 
