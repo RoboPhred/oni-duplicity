@@ -6,7 +6,7 @@ You can find the editor at [https://robophred.github.io/oni-duplicity](https://r
 
 # Compatibility
 
-Supports Cosmic Update (save file version 7.4). Future versions may not be compatible until the editor is updated. Previous versions may need to be updated by re-saving them in the newest version of the game.
+Supports Rocketry Update (save file version 7.6). Future versions may not be compatible until the editor is updated. Previous versions may need to be updated by re-saving them in the newest version of the game.
 
 # VNext
 
