@@ -1,3 +1,7 @@
+### v2.1.3
+
+- Update oni-save-parser to bring in missing traits.
+
 ### v2.1.2
 
 - Fix spelling of stamina (#37)
