@@ -48,7 +48,7 @@
     "url-loader": "^1.1.1",
     "webpack": "^4.17.1",
     "webpack-cli": "^2.1.5",
-    "webpack-dev-server": "^3.1.5",
+    "webpack-dev-server": "^3.1.13",
     "worker-loader": "^1.1.1"
   },
   "dependencies": {
@@ -74,6 +74,7 @@
     "react-draggable": "^3.0.5",
     "react-i18next": "^7.10.1",
     "react-modal": "^3.4.5",
+    "react-oni-duplicant": "^0.1.2",
     "react-redux": "^5.0.7",
     "reduce-reducers": "^0.3.0",
     "redux": "^4.0.0",

@@ -56,7 +56,7 @@ AccessoryTypes.forEach(x => {
   (structuredSelector as any)[x] = createAccessorySelector(x);
 });
 export type StateProps = StructuredStateProps<
-  typeof structuredSelector & Record<AccessoryType, string | null>
+  typeof structuredSelector & Record<AccessoryType, () => string | null>
 >;
 const mapStateToProps = createStructuredSelector<AppState, StateProps>(
   structuredSelector as any

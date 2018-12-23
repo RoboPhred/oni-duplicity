@@ -125,6 +125,11 @@ module.exports = {
       },
 
       {
+        test: /\.png/,
+        loader: "file-loader"
+      },
+
+      {
         test: /\.(txt|md)$/,
         loader: "raw-loader"
       }
