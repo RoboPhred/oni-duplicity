@@ -6,12 +6,12 @@ import {
 
 import createSagaMiddleware from "redux-saga";
 
-import reducer from "@/reducer";
-import saga from "@/saga";
+import reducer from "./reducer";
+import saga from "./saga";
 
 import { actionSanitizer, stateSanitizer } from "./devtool-sanitizer";
 
-export function createStore() {
+function createStore() {
   const composeEnhancers =
     (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
@@ -29,3 +29,6 @@ export function createStore() {
   sagaMiddleware.run(saga);
   return store;
 }
+
+const store = createStore();
+export default store;

@@ -1,24 +1,17 @@
-import { SaveGame } from "oni-save-parser";
-import { EditMode } from "@/services/save-structure";
-
-export type LoadingState = "idle" | "loading" | "saving" | "ready";
+import { I18NState, defaultI18NState } from "@/services/i18n/state";
+import { OniSaveState, defaultOniSaveState } from "@/services/oni-save/state";
 
 export interface AppState {
-  language: string;
-  loadingState: LoadingState;
-  loadingProgressMessage: string | null;
-  error: Error | null;
-  oniSave: SaveGame | null;
-  selectedPath: string[];
-  editMode: EditMode;
+  services: {
+    i18n: I18NState;
+    oniSave: OniSaveState;
+  };
 }
+
 export const defaultAppState: Readonly<AppState> = {
-  language: "en",
-  loadingState: "idle" as "idle",
-  loadingProgressMessage: null,
-  error: null,
-  oniSave: null,
-  selectedPath: [],
-  editMode: "normal"
+  services: {
+    i18n: defaultI18NState,
+    oniSave: defaultOniSaveState
+  }
 };
 Object.freeze(defaultAppState);

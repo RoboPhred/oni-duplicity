@@ -5,12 +5,6 @@ const webpack = require("webpack");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-// Chokes on template strings at runtime (???)
-// Maybe related: https://github.com/Igorbek/typescript-plugin-styled-components/issues/13
-// const createStyledComponentsTransformer = require("typescript-plugin-styled-components")
-//   .default;
-// const styledComponentsTransformer = createStyledComponentsTransformer();
-
 const isDev = process.env["NODE_ENV"] === "development";
 
 const paths = require("./paths");
@@ -28,7 +22,7 @@ module.exports = {
   },
 
   entry: {
-    client: [path.join(paths.appSrc, "./index.tsx")].filter(x => x)
+    client: [path.join(paths.appSrc, "./index.tsx")]
   },
 
   output: {
@@ -64,19 +58,7 @@ module.exports = {
         test: /\.tsx?$/,
         use: [
           {
-            loader: "babel-loader",
-            options: {
-              babelrc: false,
-              plugins: ["react-hot-loader/babel"]
-            }
-          },
-          {
             loader: "ts-loader",
-            options: {
-              // getCustomTransformers: () => ({
-              //   before: [styledComponentsTransformer]
-              // })
-            }
           }
         ],
         exclude: [/\.worker\.ts$/]
@@ -86,18 +68,6 @@ module.exports = {
         test: /\.worker\.ts$/,
         use: "ts-loader"
       },
-
-      // Doesn't seem to take with typescript.  Probably an ordering issue.
-      //  Using prefix form for now, as it plays better with typescript.
-      // {
-      //     test: /\.worker.\.(t|j)s$/,
-      //     use: [
-      //         {
-      //             loader: "worker-loader"
-      //         }
-      //     ]
-      // },
-
       {
         test: /\.css$/,
         loader: ["style-loader", "css-loader"]
