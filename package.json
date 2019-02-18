@@ -47,6 +47,7 @@
     "worker-loader": "^2.0.0"
   },
   "dependencies": {
+    "@material-ui/core": "^3.9.2",
     "file-saver": "^2.0.1",
     "i18next": "^15.0.4",
     "i18next-browser-languagedetector": "^3.0.0",
@@ -64,6 +65,7 @@
     "reduce-reducers": "^0.4.3",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.1",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "typeface-roboto": "0.0.54"
   }
 }
