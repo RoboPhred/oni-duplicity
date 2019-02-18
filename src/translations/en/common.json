@@ -1,12 +1,13 @@
 {
-  "save-file": {
-    "load": "Load",
-    "loading": "Loading",
-    "instructions": "Load a save using the controls on the upper right.",
-    "save-location": "Save files can be found at {{path}}.",
-    "not-loaded": "No save file has been loaded.",
-    "save": "Save",
-    "saving": "Saving"
+  "nav": {
+    "overview": "Overview",
+    "duplicants": "Duplicants"
   },
-  "close-dialog": "Close"
+  "overview": {
+    "no-save": {
+      "title": "Choose a Save",
+      "prompt": "No save file has been loaded.",
+      "save-location": "Save files can be found at <1>{{path}}</1>."
+    }
+  }
 }

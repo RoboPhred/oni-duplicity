@@ -14,8 +14,11 @@ export interface AbstractSaveStatusProps {
 
 type Props = AbstractSaveStatusProps & StateProps;
 
-const AbstractSaveStatus: React.SFC<Props> = ({ children, loadingStatus }) => (
-  <>{children({ loadingStatus })}</>
-);
+class AbstractSaveStatus extends React.Component<Props> {
+  render() {
+    const { children, loadingStatus } = this.props;
+    return React.Children.only(children({ loadingStatus }));
+  }
+}
 
 export default connect(mapStateToProps)(AbstractSaveStatus);

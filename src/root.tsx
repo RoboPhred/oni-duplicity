@@ -1,10 +1,14 @@
 import * as React from "react";
 import { hot } from "react-hot-loader";
 
+import "es6-promise/auto";
+
 import "typeface-roboto";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+
+import { ConnectedRouter } from "connected-react-router";
 
 import "@/style.css";
 
@@ -13,15 +17,19 @@ import StoreProvider from "@/store/components/StoreProvider";
 
 import theme from "@/theme";
 
-import App from "@/App";
+import Routes from "@/routes";
+
+import history from "@/history";
 
 const Root: React.SFC = () => (
   <I18NProvider>
     <StoreProvider>
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </MuiThemeProvider>
+      <ConnectedRouter history={history}>
+        <MuiThemeProvider theme={theme}>
+          <CssBaseline />
+          <Routes />
+        </MuiThemeProvider>
+      </ConnectedRouter>
     </StoreProvider>
   </I18NProvider>
 );

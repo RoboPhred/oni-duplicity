@@ -5,20 +5,30 @@
 
     "module": "commonjs",
     "moduleResolution": "node",
-
     "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
 
-    "lib": ["dom", "es6", "webworker"],
+    "downlevelIteration": true,
+
+    "lib": [
+      "dom",
+      "es5",
+      "webworker",
+      "es2015.promise",
+      "es2015.generator",
+      "es2015.iterable"
+    ],
 
     "strict": true,
-
-    "esModuleInterop": true,
 
     "baseUrl": "../node_modules",
     "paths": {
       "@/*": ["../src/*"]
     },
 
-    "sourceMap": true
+    "sourceMap": true,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   }
 }

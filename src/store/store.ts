@@ -6,6 +6,10 @@ import {
 
 import createSagaMiddleware from "redux-saga";
 
+import { routerMiddleware } from "connected-react-router";
+
+import history from "@/history";
+
 import reducer from "./reducer";
 import saga from "./saga";
 
@@ -24,7 +28,7 @@ function createStore() {
 
   const store = createReduxStore(
     reducer,
-    composeEnhancers(applyMiddleware(sagaMiddleware))
+    composeEnhancers(applyMiddleware(sagaMiddleware, routerMiddleware(history)))
   );
   sagaMiddleware.run(saga);
   return store;
