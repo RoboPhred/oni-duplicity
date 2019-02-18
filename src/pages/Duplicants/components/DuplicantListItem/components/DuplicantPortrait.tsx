@@ -21,12 +21,14 @@ export interface DuplicantPortraitProps {
 
 const styles = createStyles({
   portraitContainer: {
-    marginLeft: 25,
-    marginTop: 55,
-    width: 50,
-    height: 50
+    position: "relative",
+    width: 80,
+    height: 80
   },
   portrait: {
+    position: "absolute",
+    left: 30,
+    top: 60,
     width: 250,
     height: 250,
     transform: "scale(.3)",

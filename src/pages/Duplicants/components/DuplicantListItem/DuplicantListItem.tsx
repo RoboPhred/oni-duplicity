@@ -7,29 +7,39 @@ import CardContent from "@material-ui/core/CardContent";
 import DuplicantName from "./components/DuplicantName";
 import DuplicantPortrait from "./components/DuplicantPortrait";
 import DuplicantTraits from "./components/DuplicantTraits";
+import DuplicantAttributes from "./components/DuplicantAttributes";
 
 export interface DuplicantListItemProps {
+  className?: string;
   gameObjectId: number;
 }
 
 const styles = (theme: Theme) =>
   createStyles({
-    root: {}
+    row: {
+      display: "flex",
+      flexDirection: "row"
+    },
+    column: {
+      display: "flex",
+      flexDirection: "column"
+    }
   });
 
 type Props = DuplicantListItemProps & StyleProps<typeof styles>;
-const DuplicantListItem: React.SFC<Props> = ({ classes, gameObjectId }) => (
-  <Card className={classes.root}>
-    <CardContent>
-      <div>
-        <DuplicantName gameObjectId={gameObjectId} />
-      </div>
-      <div>
+const DuplicantListItem: React.SFC<Props> = ({
+  className,
+  classes,
+  gameObjectId
+}) => (
+  <Card className={className}>
+    <CardContent className={classes.column}>
+      <DuplicantName gameObjectId={gameObjectId} />
+      <div className={classes.row}>
         <DuplicantPortrait gameObjectId={gameObjectId} />
+        <DuplicantAttributes gameObjectId={gameObjectId} />
       </div>
-      <div>
-        <DuplicantTraits gameObjectId={gameObjectId} />
-      </div>
+      <DuplicantTraits gameObjectId={gameObjectId} />
     </CardContent>
   </Card>
 );
