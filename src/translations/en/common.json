@@ -3,6 +3,9 @@
     "overview": "Overview",
     "duplicants": "Duplicants"
   },
+  "save-file": {
+    "load": "Load"
+  },
   "overview": {
     "no-save": {
       "title": "Choose a Save",

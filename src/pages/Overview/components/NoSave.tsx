@@ -7,7 +7,9 @@ import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
 import { OSType } from "@/runtime-env";
+
 import PageContainer from "@/components/PageContainer";
+import LoadButton from "@/components/LoadButton";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -43,6 +45,7 @@ const NoSave: React.SFC<Props> = ({ classes, t }) => (
           </Trans>
         </div>
       )}
+      <LoadButton />
     </div>
   </PageContainer>
 );
