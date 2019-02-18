@@ -18,7 +18,8 @@ module.exports = {
 
   devServer: {
     contentBase: paths.appDist,
-    hot: isDev
+    hot: isDev,
+    historyApiFallback: true
   },
 
   entry: {
@@ -58,7 +59,7 @@ module.exports = {
         test: /\.tsx?$/,
         use: [
           {
-            loader: "ts-loader",
+            loader: "ts-loader"
           }
         ],
         exclude: [/\.worker\.ts$/]
