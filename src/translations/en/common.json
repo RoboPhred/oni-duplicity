@@ -12,5 +12,8 @@
       "prompt": "No save file has been loaded.",
       "save-location": "Save files can be found at <1>{{path}}</1>."
     }
+  },
+  "duplicants": {
+    "title": "Duplicants"
   }
 }
