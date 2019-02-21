@@ -24,7 +24,7 @@ class ListItemLink extends React.Component<Props> {
     } = this.props;
     return (
       <ListItem
-        selected={autoselect && location.pathname === to}
+        selected={autoselect && pathStartsWith(location.pathname, to)}
         {...props}
         component="a"
         href={history.createHref({ pathname: to })}
@@ -47,7 +47,7 @@ class ListItemLink extends React.Component<Props> {
       !event.defaultPrevented && // onClick prevented default
       event.button === 0 && // ignore everything but left clicks
       (!target || target === "_self") && // let browser handle "target=_blank" etc.
-      !modifierKeyPressed(event) // ignore clicks with modifier keys
+      !isModifierPressed(event) // ignore clicks with modifier keys
     ) {
       event.preventDefault();
 
@@ -57,6 +57,14 @@ class ListItemLink extends React.Component<Props> {
 }
 export default withRouter(ListItemLink);
 
-function modifierKeyPressed(event: React.MouseEvent<any>) {
+function isModifierPressed(event: React.MouseEvent<any>) {
   return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+}
+
+function pathStartsWith(path: string, startsWith: string): boolean {
+  if (path === startsWith) {
+    return true;
+  }
+
+  return path.substr(0, startsWith.length + 1) === `${startsWith}/`;
 }

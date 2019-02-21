@@ -16,5 +16,9 @@
   "duplicants": {
     "title": "Duplicants",
     "edit": "Edit"
+  },
+  "duplicant-editor": {
+    "notfound": "Duplicant Not Found",
+    "title": "Edit Duplicant"
   }
 }

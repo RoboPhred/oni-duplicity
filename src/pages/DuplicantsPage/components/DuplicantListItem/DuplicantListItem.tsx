@@ -49,11 +49,6 @@ const styles = (theme: Theme) =>
     }
   });
 
-/*
-      <div className={classes.row}>
-      </div>
-  */
-
 type Props = DuplicantListItemProps & StyleProps<typeof styles>;
 const DuplicantListItem: React.SFC<Props> = ({
   className,

@@ -9,7 +9,7 @@ export interface AbstractLoadButtonRenderProps {
   onClick(): void;
 }
 export interface AbstractLoadButtonProps {
-  children(props: AbstractLoadButtonRenderProps): React.ReactNode;
+  children(props: AbstractLoadButtonRenderProps): React.ReactChild;
 }
 
 type Props = AbstractLoadButtonProps & StateProps & DispatchProps;
@@ -28,7 +28,7 @@ class AbstractLoadButton extends React.Component<Props> {
           accept=".sav"
           onChange={this._onLoadFileInput}
         />
-        {children({ disabled, onClick: this._onClick })}
+        {React.Children.only(children({ disabled, onClick: this._onClick }))}
       </React.Fragment>
     );
   }

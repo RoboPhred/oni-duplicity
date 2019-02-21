@@ -2,17 +2,21 @@ import * as React from "react";
 
 import { Switch, Route } from "react-router-dom";
 
-import Overview from "@/pages/Overview";
-import Duplicants from "@/pages/Duplicants";
-import DuplicantEditor from "./pages/DuplicantEditor";
-import Settings from "@/pages/Settings";
+import OverviewPage from "@/pages/OverviewPage";
+import DuplicantsPage from "@/pages/DuplicantsPage";
+import DuplicantEditorPage from "@/pages/DuplicantEditorPage";
+import SettingsPage from "@/pages/SettingsPage";
 
 const Routes: React.SFC = () => (
   <Switch>
-    <Route path="/" exact component={Overview} />
-    <Route path="/duplicants" exact component={Duplicants} />
-    <Route path="/duplicants/:gameObjectId" exact component={DuplicantEditor} />
-    <Route path="/settings" exact component={Settings} />
+    <Route path="/" exact component={OverviewPage} />
+    <Route path="/duplicants" exact component={DuplicantsPage} />
+    <Route
+      path="/duplicants/:gameObjectId"
+      exact
+      component={DuplicantEditorPage}
+    />
+    <Route path="/settings" exact component={SettingsPage} />
   </Switch>
 );
 export default Routes;

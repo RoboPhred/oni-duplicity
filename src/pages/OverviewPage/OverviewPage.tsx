@@ -7,6 +7,6 @@ import NoSave from "./components/NoSave";
 import SaveOverview from "./components/SaveOverview";
 
 type Props = StateProps;
-const Overview: React.SFC<Props> = ({ saveAvailable }) =>
+const OverviewPage: React.SFC<Props> = ({ saveAvailable }) =>
   saveAvailable ? <SaveOverview /> : <NoSave />;
-export default connect(mapStateToProps)(Overview);
+export default connect(mapStateToProps)(OverviewPage);

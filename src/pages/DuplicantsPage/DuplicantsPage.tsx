@@ -7,9 +7,9 @@ import PageContainer from "@/components/PageContainer";
 import DuplicantList from "./components/DuplicantList";
 
 type Props = WithTranslation;
-const Duplicants: React.SFC<Props> = ({ t }) => (
+const DuplicantsPage: React.SFC<Props> = ({ t }) => (
   <PageContainer title={t("duplicants.title")}>
     <DuplicantList />
   </PageContainer>
 );
-export default withTranslation()(Duplicants);
+export default withTranslation()(DuplicantsPage);
