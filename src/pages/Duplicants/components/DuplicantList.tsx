@@ -15,7 +15,6 @@ const styles = (theme: Theme) =>
       margin: theme.spacing.unit
     },
     item: {
-      width: 350,
       margin: theme.spacing.unit / 2
     }
   });

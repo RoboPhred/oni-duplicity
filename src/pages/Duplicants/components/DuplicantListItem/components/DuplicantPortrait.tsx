@@ -23,12 +23,12 @@ const styles = createStyles({
   portraitContainer: {
     position: "relative",
     width: 80,
-    height: 80
+    height: 90
   },
   portrait: {
     position: "absolute",
-    left: 30,
-    top: 60,
+    left: 42,
+    top: 50,
     width: 250,
     height: 250,
     transform: "scale(.3)",

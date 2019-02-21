@@ -20,6 +20,7 @@
   "author": "William Matthews",
   "license": "MIT",
   "devDependencies": {
+    "@types/classnames": "^2.2.7",
     "@types/es6-promise": "^3.3.0",
     "@types/file-saver": "^2.0.0",
     "@types/history": "^4.7.2",
@@ -53,6 +54,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
+    "classnames": "^2.2.6",
     "connected-react-router": "^6.3.1",
     "es6-promise": "^4.2.6",
     "file-saver": "^2.0.1",

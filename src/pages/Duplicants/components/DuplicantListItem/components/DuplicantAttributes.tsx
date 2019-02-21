@@ -1,15 +1,17 @@
 import * as React from "react";
+import classnames from "classnames";
+import { AIAttributeLevelsBehavior } from "oni-save-parser";
 
 import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
-import { AIAttributeLevelsBehavior } from "oni-save-parser";
 
 const AttributeEditor = AbstractBehaviorEditor.ofType(
   AIAttributeLevelsBehavior
 );
 
 export interface DuplicantAttributesProps {
+  className?: string;
   gameObjectId: number;
 }
 
@@ -19,6 +21,7 @@ const styles = (theme: Theme) =>
       display: "flex",
       flexDirection: "column",
       flexWrap: "wrap",
+      width: theme.spacing.unit * 30,
       height: theme.spacing.unit * 20,
       marginLeft: -theme.spacing.unit / 2,
       marginRight: -theme.spacing.unit / 2
@@ -30,11 +33,15 @@ const styles = (theme: Theme) =>
   });
 
 type Props = DuplicantAttributesProps & StyleProps<typeof styles>;
-const DuplicantAttributes: React.SFC<Props> = ({ classes, gameObjectId }) => (
+const DuplicantAttributes: React.SFC<Props> = ({
+  className,
+  classes,
+  gameObjectId
+}) => (
   <AttributeEditor gameObjectId={gameObjectId}>
     {({ templateData }) => (
-      <div className={classes.root}>
-        {templateData.saveLoadLevels.map(attribute => (
+      <div className={classnames(className, classes.root)}>
+        {[...templateData.saveLoadLevels].sort().map(attribute => (
           <div key={attribute.attributeId} className={classes.item}>
             {signPrefix(attribute.level)} {attribute.attributeId}
           </div>
