@@ -65,7 +65,9 @@ const DuplicantModifier: React.SFC<Props> = ({
       }
       return (
         <CommitTextField
-          label={t(`oni:todo-trans.modifier.${modifierId}`)}
+          label={t(`oni:todo-trans.modifier.${modifierId}`, {
+            defaultValue: modifierId
+          })}
           type="number"
           value={attribute.value.value}
           onCommit={value =>
