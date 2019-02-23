@@ -4,7 +4,8 @@
     "duplicants": "Duplicants"
   },
   "save-file": {
-    "load": "Load"
+    "load": "Load",
+    "loading": "Loading"
   },
   "overview": {
     "no-save": {

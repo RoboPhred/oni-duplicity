@@ -7,5 +7,8 @@ export const loadingStatusSelector = (state: AppState) =>
 export const loadingStatusLoadingSelector = (state: AppState) =>
   loadingStatusSelector(state) === LoadingStatus.Loading;
 
+export const loadingStatusMessageSelector = (state: AppState) =>
+  state.services.oniSave.loadingProgressMessage;
+
 export const loadingStatusReadySelector = (state: AppState) =>
   loadingStatusSelector(state) === LoadingStatus.Ready;

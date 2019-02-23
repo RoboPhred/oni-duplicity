@@ -14,6 +14,7 @@ export const gameObjectGroupsSelector = (state: AppState) => {
   return saveGame.gameObjects;
 };
 
+const gameObjectIdTypes: Record<number, string> = {};
 export const gameObjectsByIdSelector = createSelector(
   gameObjectGroupsSelector,
   groups => {
@@ -29,7 +30,18 @@ export const gameObjectsByIdSelector = createSelector(
         if (!idBehavior) {
           continue;
         }
-        gameObjectsById[idBehavior.templateData.InstanceID] = gameObject;
+        const { InstanceID } = idBehavior.templateData;
+        if (gameObjectsById[InstanceID]) {
+          console.log(
+            "ID CONFLICT",
+            InstanceID,
+            gameObjectIdTypes[InstanceID],
+            " <=> ",
+            group.name
+          );
+        }
+        gameObjectIdTypes[InstanceID] = group.name;
+        gameObjectsById[InstanceID] = gameObject;
       }
     }
 

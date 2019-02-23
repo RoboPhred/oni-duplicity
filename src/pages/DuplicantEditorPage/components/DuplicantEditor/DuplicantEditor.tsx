@@ -9,8 +9,6 @@ import PageContainer from "@/components/PageContainer";
 
 import DuplicantName from "./components/DuplicantName";
 import DuplicantPortrait from "./components/DuplicantPortrait";
-import DuplicantAttributes from "./components/DuplicantAttributes";
-import DuplicantTraits from "./components/DuplicantTraits";
 
 export interface DuplicantEditorProps {
   gameObjectId: number;
@@ -39,9 +37,7 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => (
       <Divider className={classes.divider} />
       <div className={classes.content}>
         <DuplicantPortrait gameObjectId={gameObjectId} />
-        <DuplicantAttributes gameObjectId={gameObjectId} />
       </div>
-      <DuplicantTraits gameObjectId={gameObjectId} />
     </div>
   </PageContainer>
 );

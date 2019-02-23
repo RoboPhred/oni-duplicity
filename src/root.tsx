@@ -18,7 +18,7 @@ import theme from "@/theme";
 import I18NProvider from "@/services/i18n/components/I18NProvider";
 import StoreProvider from "@/store/components/StoreProvider";
 
-import LoadingDialog from "@/components/LoadingDialog/LoadingDialog";
+import LoadingDialog from "@/components/LoadingDialog";
 
 import Routes from "@/routes";
 

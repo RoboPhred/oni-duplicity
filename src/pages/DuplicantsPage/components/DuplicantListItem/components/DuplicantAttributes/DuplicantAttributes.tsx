@@ -1,14 +1,9 @@
 import * as React from "react";
 import classnames from "classnames";
-import { AIAttributeLevelsBehavior } from "oni-save-parser";
 
 import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 
-import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
-
-const AttributeEditor = AbstractBehaviorEditor.ofType(
-  AIAttributeLevelsBehavior
-);
+import Attribute from "./components/Attribute";
 
 export interface DuplicantAttributesProps {
   className?: string;
@@ -38,26 +33,20 @@ const DuplicantAttributes: React.SFC<Props> = ({
   classes,
   gameObjectId
 }) => (
-  <AttributeEditor gameObjectId={gameObjectId}>
-    {({ templateData }) => (
-      <div className={classnames(className, classes.root)}>
-        {[...templateData.saveLoadLevels].sort().map(attribute => (
-          <div key={attribute.attributeId} className={classes.item}>
-            {signPrefix(attribute.level)} {attribute.attributeId}
-          </div>
-        ))}
-      </div>
-    )}
-  </AttributeEditor>
+  <div className={classnames(className, classes.root)}>
+    <Attribute gameObjectId={gameObjectId} attributeId="Athletics" />
+    <Attribute gameObjectId={gameObjectId} attributeId="Cooking" />
+    <Attribute gameObjectId={gameObjectId} attributeId="Digging" />
+    <Attribute gameObjectId={gameObjectId} attributeId="Caring" />
+    <Attribute gameObjectId={gameObjectId} attributeId="Ranching" />
+    <Attribute gameObjectId={gameObjectId} attributeId="Machinery" />
+
+    <Attribute gameObjectId={gameObjectId} attributeId="Construction" />
+    <Attribute gameObjectId={gameObjectId} attributeId="Art" />
+    <Attribute gameObjectId={gameObjectId} attributeId="Botanist" />
+    <Attribute gameObjectId={gameObjectId} attributeId="Learning" />
+    <Attribute gameObjectId={gameObjectId} attributeId="Strength" />
+  </div>
 );
 
 export default withStyles(styles)(DuplicantAttributes);
-
-function signPrefix(x: number): string {
-  if (x > 0) {
-    return `+${x}`;
-  } else if (x < 0) {
-    return `-${x}`;
-  }
-  return String(x);
-}
