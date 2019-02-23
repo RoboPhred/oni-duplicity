@@ -41,12 +41,11 @@ function sanitizeSave(save: SaveGame | null): any {
   if (!save) {
     return null;
   }
-  return "~snip~";
-  // return {
-  //   ...save,
-  //   world: {
-  //     ...save.world,
-  //     streamed: "~snip~"
-  //   }
-  // };
+  return {
+    ...save,
+    world: {
+      ...save.world,
+      streamed: "~snip~"
+    }
+  };
 }

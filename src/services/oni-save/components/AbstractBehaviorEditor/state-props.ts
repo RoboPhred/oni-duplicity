@@ -8,6 +8,7 @@ import { getBehavior } from "oni-save-parser";
 
 export interface StateProps {
   templateData: any;
+  extraData: any;
 }
 
 const gameObjectIdSelector = (
@@ -19,7 +20,7 @@ const gameObjectBehaviorSelector = (
   props: AbstractBehaviorEditorProps<any>
 ) => props.gameObjectBehavior;
 
-const templateDataSelector = createCachedSelector(
+const behaviorSelector = createCachedSelector(
   gameObjectIdSelector,
   gameObjectBehaviorSelector,
   gameObjectsByIdSelector,
@@ -33,7 +34,7 @@ const templateDataSelector = createCachedSelector(
       return null;
     }
 
-    return behavior.templateData;
+    return behavior;
   }
 )(
   (_: any, props: AbstractBehaviorEditorProps<any>) =>
@@ -45,7 +46,16 @@ const mapStateToProps = createStructuredSelector<
   AbstractBehaviorEditorProps<any>,
   StateProps
 >({
-  templateData: templateDataSelector
+  templateData: (state: AppState, props: AbstractBehaviorEditorProps<any>) => {
+    const behavior = behaviorSelector(state, props);
+    if (!behavior) return null;
+    return behavior.templateData;
+  },
+  extraData: (state: AppState, props: AbstractBehaviorEditorProps<any>) => {
+    const behavior = behaviorSelector(state, props);
+    if (!behavior) return null;
+    return behavior.extraData;
+  }
 });
 
 export default mapStateToProps;

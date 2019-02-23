@@ -4,7 +4,6 @@ import { find } from "lodash-es";
 
 import { Trans } from "react-i18next";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import ErrorIcon from "@material-ui/icons/Error";
 
@@ -19,19 +18,8 @@ export interface AttributeNameProps {
   attributeId: string;
 }
 
-const styles = (theme: Theme) =>
-  createStyles({
-    notFound: {
-      color: `#${theme.palette.error}`
-    }
-  });
-
-type Props = AttributeNameProps & StyleProps<typeof styles>;
-const AttributeName: React.SFC<Props> = ({
-  classes,
-  gameObjectId,
-  attributeId
-}) => (
+type Props = AttributeNameProps;
+const AttributeName: React.SFC<Props> = ({ gameObjectId, attributeId }) => (
   <AttributeEditor gameObjectId={gameObjectId}>
     {({ templateData }) => {
       console.log(templateData.saveLoadLevels);
@@ -42,7 +30,7 @@ const AttributeName: React.SFC<Props> = ({
       return (
         <Typography component="span" variant="body2">
           {attribute && signPrefix(attribute.level)}
-          {!attribute && <ErrorIcon className={classes.notFound} />}{" "}
+          {!attribute && <ErrorIcon />}{" "}
           <Trans i18nKey={`oni:todo-trans.${attributeId}`}>{attributeId}</Trans>
         </Typography>
       );
@@ -50,7 +38,7 @@ const AttributeName: React.SFC<Props> = ({
   </AttributeEditor>
 );
 
-export default withStyles(styles)(AttributeName);
+export default AttributeName;
 
 function signPrefix(x: number): string {
   if (x > 0) {

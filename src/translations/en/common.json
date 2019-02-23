@@ -19,7 +19,17 @@
     "edit": "Edit"
   },
   "duplicant-editor": {
+    "title": "Edit Duplicant",
     "notfound": "Duplicant Not Found",
-    "title": "Edit Duplicant"
+    "missing-data": "Value is missing from the save file",
+    "duplicant-name": "Name",
+    "duplicant-gender": "Gender",
+    "duplicant-voice": "Voice",
+    "effect": "Effect",
+    "add-effect": "Add Effect",
+    "add-effect-cancel": "Cancel",
+    "add-effect-create": "Add Effect",
+    "time-in-cycles": "Time (cycles)",
+    "cycle-time": "Cycle Time"
   }
 }

@@ -26,9 +26,19 @@ class AbstractBehaviorEditor extends React.Component<Props> {
   }
 
   render() {
-    const { children, templateData } = this.props;
-    return React.Children.only(children({ templateData }));
+    const { children, templateData, extraData } = this.props;
+    return React.Children.only(
+      children({
+        templateData,
+        extraData,
+        onTemplateDataModify: this._onTemplateDataModify,
+        onExtraDataModify: this._onExtraDataModify
+      })
+    );
   }
+
+  private _onTemplateDataModify = (data: any) => {};
+  private _onExtraDataModify = (data: any) => {};
 }
 const ConnectedAbstractBehaviorEditor = attachProps(
   connect(mapStateToProps)(AbstractBehaviorEditor),

@@ -9,4 +9,7 @@ export interface AbstractBehaviorEditorRenderProps<
   T extends GameObjectBehavior
 > {
   templateData: T["templateData"];
+  extraData: T["extraData"];
+  onTemplateDataModify(templateData: Partial<T["templateData"]>): void;
+  onExtraDataModify(extraData: Partial<T["extraData"]>): void;
 }

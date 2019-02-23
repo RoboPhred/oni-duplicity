@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AccessorizerBehavior, getAccessoryOfType } from "oni-save-parser";
 
-import { createStyles, withStyles, Theme } from "@material-ui/core/styles";
+import { createStyles, withStyles } from "@material-ui/core/styles";
 
 import {
   DuplicantContainer,
@@ -19,23 +19,22 @@ export interface DuplicantPortraitProps {
   gameObjectId: number;
 }
 
-const styles = (theme: Theme) =>
-  createStyles({
-    portraitContainer: {
-      position: "relative",
-      width: 100,
-      height: 120
-    },
-    portrait: {
-      position: "absolute",
-      left: 50,
-      top: 65,
-      width: 250,
-      height: 250,
-      transform: "scale(.4)",
-      transformOrigin: "top left"
-    }
-  });
+const styles = createStyles({
+  portraitContainer: {
+    position: "relative",
+    width: 100,
+    height: 140
+  },
+  portrait: {
+    position: "absolute",
+    left: 50,
+    top: 65,
+    width: 250,
+    height: 250,
+    transform: "scale(.4)",
+    transformOrigin: "top left"
+  }
+});
 
 type Props = DuplicantPortraitProps & StyleProps<typeof styles>;
 const DuplicantPortrait: React.SFC<Props> = ({ classes, gameObjectId }) => (

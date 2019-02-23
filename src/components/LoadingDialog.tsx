@@ -21,10 +21,6 @@ const styles = (theme: Theme) =>
     loadingText: {
       textAlign: "center"
     },
-    spinner: {
-      marginLeft: "auto",
-      marginRight: "auto"
-    },
     message: {
       textAlign: "center"
     }
