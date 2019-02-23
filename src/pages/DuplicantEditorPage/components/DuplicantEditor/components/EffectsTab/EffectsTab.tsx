@@ -53,10 +53,10 @@ const EffectsTab: React.SFC<Props> = ({ gameObjectId }) => {
                       onCommit={value =>
                         onTemplateDataModify({
                           saveLoadEffects: merge(
-                            {},
+                            [],
                             templateData.saveLoadEffects,
                             {
-                              [i]: Number(value) * 200
+                              [i]: { id, timeRemaining: Number(value) * 200 }
                             }
                           )
                         })

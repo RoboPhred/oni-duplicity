@@ -8,6 +8,14 @@ type ObjStyleProps<T> = { classes: { [K in keyof T]: string } };
 
 type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
+type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends Array<infer U>
+    ? Array<DeepPartial<U>>
+    : T[P] extends ReadonlyArray<infer U>
+    ? ReadonlyArray<DeepPartial<U>>
+    : DeepPartial<T[P]>
+};
+
 declare module "worker-loader!*" {
   class WebpackWorker extends Worker {
     constructor();

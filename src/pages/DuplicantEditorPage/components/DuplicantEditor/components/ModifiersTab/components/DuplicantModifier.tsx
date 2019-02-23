@@ -1,16 +1,17 @@
 import * as React from "react";
 import { MinionModifiersBehavior } from "oni-save-parser";
-import { findIndex } from "lodash-es";
+import { findIndex, merge } from "lodash-es";
 
 import { Trans, WithTranslation, withTranslation } from "react-i18next";
 
 import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
 import ErrorIcon from "@material-ui/icons/Error";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
+
+import CommitTextField from "@/components/CommitTextField";
 
 const ModifierEditor = AbstractBehaviorEditor.ofType(MinionModifiersBehavior);
 
@@ -38,31 +39,47 @@ const DuplicantModifier: React.SFC<Props> = ({
   t
 }) => (
   <ModifierEditor gameObjectId={gameObjectId}>
-    {({ extraData }) => {
+    {({ extraData, onExtraDataModify }) => {
       const attributeIndex = findIndex(
         extraData.amounts,
         x => x.name === modifierId
       );
       const attribute =
-        attributeIndex > -1 ? extraData.amounts[attributeIndex] : null;
-      const id = `duplicant-modifier-${modifierId}`;
-      return (
-        <FormControl className={className}>
-          <InputLabel htmlFor={id} shrink={true}>
-            <Trans i18nKey={`oni:todo-trans.modifier.${modifierId}`}>
-              {modifierId}
-            </Trans>
-          </InputLabel>
-          {attribute && <Input id={id} value={attribute.value.value} />}
-          {!attribute && (
+        attributeIndex >= 0 ? extraData.amounts[attributeIndex] : null;
+      if (!attribute) {
+        return (
+          <FormControl className={className}>
+            <InputLabel shrink={true}>
+              <Trans i18nKey={`oni:todo-trans.modifier.${modifierId}`}>
+                {modifierId}
+              </Trans>
+            </InputLabel>
             <div
               className={classes.errorIndicator}
               title={t("duplicant-editor.missing-data")}
             >
               <ErrorIcon />
             </div>
-          )}
-        </FormControl>
+          </FormControl>
+        );
+      }
+      return (
+        <CommitTextField
+          label={t(`oni:todo-trans.modifier.${modifierId}`)}
+          type="number"
+          value={attribute.value.value}
+          onCommit={value =>
+            onExtraDataModify({
+              amounts: merge([], extraData.amounts, {
+                [attributeIndex]: {
+                  value: {
+                    value
+                  }
+                }
+              })
+            })
+          }
+        />
       );
     }}
   </ModifierEditor>

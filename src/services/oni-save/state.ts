@@ -12,12 +12,14 @@ export interface OniSaveState {
   loadingProgressMessage: string | null;
   loadError: Error | null;
   saveGame: SaveGame | null;
+  isModified: boolean;
 }
 
 export const defaultOniSaveState: Readonly<OniSaveState> = {
   loadingStatus: LoadingStatus.Idle,
   loadingProgressMessage: null,
   loadError: null,
-  saveGame: null
+  saveGame: null,
+  isModified: false
 };
 Object.freeze(defaultOniSaveState);

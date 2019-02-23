@@ -7,8 +7,10 @@ import { attachProps } from "@/utils";
 import { AbstractBehaviorEditorProps } from "./props";
 
 import mapStateToProps, { StateProps } from "./state-props";
+import mapDispatchToProps, { DispatchProps } from "./dispatch-props";
+import { BehaviorDataTarget } from "../../actions/modify-behavior";
 
-type Props = AbstractBehaviorEditorProps<any> & StateProps;
+type Props = AbstractBehaviorEditorProps<any> & StateProps & DispatchProps;
 class AbstractBehaviorEditor extends React.Component<Props> {
   static ofType<T extends GameObjectBehavior>(
     behavior: BehaviorName<T>
@@ -37,11 +39,30 @@ class AbstractBehaviorEditor extends React.Component<Props> {
     );
   }
 
-  private _onTemplateDataModify = (data: any) => {};
-  private _onExtraDataModify = (data: any) => {};
+  private _onTemplateDataModify = (data: any) => {
+    const { gameObjectId, gameObjectBehavior, onModifyBehavior } = this.props;
+    onModifyBehavior(
+      gameObjectId,
+      gameObjectBehavior,
+      BehaviorDataTarget.Template,
+      data
+    );
+  };
+  private _onExtraDataModify = (data: any) => {
+    const { gameObjectId, gameObjectBehavior, onModifyBehavior } = this.props;
+    onModifyBehavior(
+      gameObjectId,
+      gameObjectBehavior,
+      BehaviorDataTarget.Extra,
+      data
+    );
+  };
 }
 const ConnectedAbstractBehaviorEditor = attachProps(
-  connect(mapStateToProps)(AbstractBehaviorEditor),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AbstractBehaviorEditor),
   {
     ofType: AbstractBehaviorEditor.ofType
   }

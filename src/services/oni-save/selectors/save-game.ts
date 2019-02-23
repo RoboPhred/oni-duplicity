@@ -1,6 +1,7 @@
-import { AppState } from "@/state";
 import { createSelector } from "reselect";
 import { GameObject, getBehavior, KPrefabIDBehavior } from "oni-save-parser";
+
+import { AppState } from "@/state";
 
 export const saveGameSelector = (state: AppState) =>
   state.services.oniSave.saveGame;

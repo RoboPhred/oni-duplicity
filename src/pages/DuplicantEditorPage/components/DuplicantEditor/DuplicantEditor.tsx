@@ -40,7 +40,9 @@ const styles = (theme: Theme) =>
     tabContainer: {
       width: "100%",
       height: "100%",
-      overflow: "auto"
+      overflow: "auto",
+      paddingRight: theme.spacing.unit,
+      paddingBottom: theme.spacing.unit
     }
   });
 
