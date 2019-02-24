@@ -16,6 +16,7 @@ import IdentityTab from "./components/IdentityTab";
 import EffectsTab from "./components/EffectsTab";
 import TraitsTab from "./components/TraitsTab";
 import AttributesTab from "./components/AttributesTab";
+import AppearanceTab from "./components/AppearanceTab";
 
 export interface DuplicantEditorProps {
   gameObjectId: number;
@@ -59,10 +60,11 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
         <DuplicantPortrait gameObjectId={gameObjectId} />
         <Tabs
           value={tab}
-          textColor="primary"
+          textColor="secondary"
           onChange={(_, value) => setTab(value)}
         >
           <Tab label="Identity" />
+          <Tab label="Appearance" />
           <Tab label="Modifiers" />
           <Tab label="Effects" />
           <Tab label="Traits" />
@@ -70,10 +72,11 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
         </Tabs>
         <div className={classes.tabContainer}>
           {tab === 0 && <IdentityTab gameObjectId={gameObjectId} />}
-          {tab === 1 && <ModifiersTab gameObjectId={gameObjectId} />}
-          {tab === 2 && <EffectsTab gameObjectId={gameObjectId} />}
-          {tab === 3 && <TraitsTab gameObjectId={gameObjectId} />}
-          {tab === 4 && <AttributesTab gameObjectId={gameObjectId} />}
+          {tab === 1 && <AppearanceTab gameObjectId={gameObjectId} />}
+          {tab === 2 && <ModifiersTab gameObjectId={gameObjectId} />}
+          {tab === 3 && <EffectsTab gameObjectId={gameObjectId} />}
+          {tab === 4 && <TraitsTab gameObjectId={gameObjectId} />}
+          {tab === 5 && <AttributesTab gameObjectId={gameObjectId} />}
         </div>
       </div>
     </PageContainer>
