@@ -121,6 +121,7 @@ const AppearanceTab: React.SFC<Props> = ({ classes, gameObjectId }) => {
                 <div className={classes.partList}>
                   {ordinalRange(33).map(ordinal => (
                     <HeadPortrait
+                      key={ordinal}
                       className={classes.partContainer}
                       hairOrdinal={ordinal}
                       headOrdinal={headOrdinal}
@@ -143,6 +144,7 @@ const AppearanceTab: React.SFC<Props> = ({ classes, gameObjectId }) => {
                 <div className={classes.partList}>
                   {ordinalRange(4).map(ordinal => (
                     <HeadPortrait
+                      key={ordinal}
                       className={classes.partContainer}
                       hairOrdinal={hairOrdinal}
                       headOrdinal={ordinal}
@@ -165,6 +167,7 @@ const AppearanceTab: React.SFC<Props> = ({ classes, gameObjectId }) => {
                 <div className={classes.partList}>
                   {ordinalRange(5).map(ordinal => (
                     <HeadPortrait
+                      key={ordinal}
                       className={classes.partContainer}
                       hairOrdinal={hairOrdinal}
                       headOrdinal={headOrdinal}
@@ -187,6 +190,7 @@ const AppearanceTab: React.SFC<Props> = ({ classes, gameObjectId }) => {
                 <div className={classes.partList}>
                   {ordinalRange(4).map(ordinal => (
                     <Portrait
+                      key={ordinal}
                       className={classes.partContainer}
                       hairOrdinal={hairOrdinal}
                       headOrdinal={headOrdinal}

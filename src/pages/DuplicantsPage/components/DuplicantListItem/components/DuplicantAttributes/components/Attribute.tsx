@@ -22,7 +22,6 @@ type Props = AttributeNameProps;
 const AttributeName: React.SFC<Props> = ({ gameObjectId, attributeId }) => (
   <AttributeEditor gameObjectId={gameObjectId}>
     {({ templateData }) => {
-      console.log(templateData.saveLoadLevels);
       let attribute = find(
         templateData.saveLoadLevels,
         x => x.attributeId === attributeId

@@ -18,6 +18,8 @@ import EffectsTab from "./components/EffectsTab";
 import TraitsTab from "./components/TraitsTab";
 import AttributesTab from "./components/AttributesTab";
 import AppearanceTab from "./components/AppearanceTab";
+import AptitudesTab from "./components/AptitudesTab";
+import MasteriesTab from "./components/MasteriesTab/MasteriesTab";
 
 export interface DuplicantEditorProps {
   gameObjectId: number;
@@ -73,6 +75,8 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
             <Tab label="Effects" />
             <Tab label="Traits" />
             <Tab label="Attributes" />
+            <Tab label="Aptitudes" />
+            <Tab label="Masteries" />
           </Tabs>
         </Paper>
         <div className={classes.tabContainer}>
@@ -82,6 +86,8 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
           {tab === 3 && <EffectsTab gameObjectId={gameObjectId} />}
           {tab === 4 && <TraitsTab gameObjectId={gameObjectId} />}
           {tab === 5 && <AttributesTab gameObjectId={gameObjectId} />}
+          {tab === 6 && <AptitudesTab gameObjectId={gameObjectId} />}
+          {tab === 7 && <MasteriesTab gameObjectId={gameObjectId} />}
         </div>
       </div>
     </PageContainer>

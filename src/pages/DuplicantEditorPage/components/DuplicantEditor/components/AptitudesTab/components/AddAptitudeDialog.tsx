@@ -13,42 +13,42 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 
-export interface AddTraitDialogProps {
+export interface AddAptitudeDialogProps {
   open: boolean;
-  availableTraits: string[];
+  availableAptitudes: string[];
   onClose(): void;
-  onAddTrait(trait: string): void;
+  onAddAptitude(aptitude: string): void;
 }
 
-type Props = AddTraitDialogProps & WithTranslation;
-const AddTraitDialog: React.SFC<Props> = ({
+type Props = AddAptitudeDialogProps & WithTranslation;
+const AddAptitudeDialog: React.SFC<Props> = ({
   open,
-  availableTraits,
+  availableAptitudes,
   onClose,
-  onAddTrait,
+  onAddAptitude,
   t
 }) => {
-  const [selectedTrait, setSelectedTrait] = React.useState("");
+  const [selectedAptitude, setSelectedAptitude] = React.useState("");
   return (
     <Dialog open={open} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">
-        <Trans i18nKey="dialog-editor.add-trait">Add Trait</Trans>
+        <Trans i18nKey="dialog-editor.add-aptitude">Add Aptitude</Trans>
       </DialogTitle>
       <DialogContent>
         <FormGroup>
           <FormControl>
-            <InputLabel htmlFor="duplicant-trait">
-              <Trans i18nKey="duplicant-editor.trait">Trait</Trans>
+            <InputLabel htmlFor="duplicant-aptitude">
+              <Trans i18nKey="duplicant-editor.aptitude">Aptitude</Trans>
             </InputLabel>
             <Select
-              value={selectedTrait}
-              onChange={e => setSelectedTrait(e.target.value)}
-              inputProps={{ id: "duplicant-trait" }}
+              value={selectedAptitude}
+              onChange={e => setSelectedAptitude(e.target.value)}
+              inputProps={{ id: "duplicant-aptitude" }}
             >
-              {availableTraits.map(trait => (
-                <MenuItem key={trait} value={trait}>
-                  <Trans i18nKey={`oni:todo-trans.traits.${trait}`}>
-                    {trait}
+              {availableAptitudes.map(aptitude => (
+                <MenuItem key={aptitude} value={aptitude}>
+                  <Trans i18nKey={`oni:todo-trans.aptitudes.${aptitude}`}>
+                    {aptitude}
                   </Trans>
                 </MenuItem>
               ))}
@@ -61,18 +61,18 @@ const AddTraitDialog: React.SFC<Props> = ({
           <Trans i18nKey="dialog-editor.cancel">Cancel</Trans>
         </Button>
         <Button
-          disabled={selectedTrait === ""}
+          disabled={selectedAptitude === ""}
           onClick={() => {
-            setSelectedTrait("");
-            onAddTrait(selectedTrait);
+            setSelectedAptitude("");
+            onAddAptitude(selectedAptitude);
           }}
           color="primary"
         >
-          <Trans i18nKey="dialog-editor.add-trait">Add Trait</Trans>
+          <Trans i18nKey="dialog-editor.add-aptitude">Add Aptitude</Trans>
         </Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default withTranslation()(AddTraitDialog);
+export default withTranslation()(AddAptitudeDialog);
