@@ -22,7 +22,7 @@ export default function receiveOniSaveReducer(
       return {
         ...state,
         loadError: null,
-        loadingStatus: action.payload.operation,
+        loadingStatus: action.meta.operation,
         loadingProgressMessage: null,
         saveGame: action.payload.clearExisting ? null : state.saveGame
       };
@@ -39,7 +39,11 @@ export default function receiveOniSaveReducer(
         loadingStatus: LoadingStatus.Ready,
         loadingProgressMessage: null,
         loadError: null,
-        saveGame: action.payload
+        saveGame: action.payload,
+        isModified:
+          action.meta.operation === LoadingStatus.Saving
+            ? false
+            : state.isModified
       };
   }
 

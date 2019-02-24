@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import mapStateToProps, { StateProps } from "./state-props";
 import mapDispatchToProps, { DispatchProps } from "./dispatch-props";
 
+export interface AbstractLoadButtonProps {
+  children(props: AbstractLoadButtonRenderProps): React.ReactChild;
+}
 export interface AbstractLoadButtonRenderProps {
   disabled: boolean;
   onClick(): void;
-}
-export interface AbstractLoadButtonProps {
-  children(props: AbstractLoadButtonRenderProps): React.ReactChild;
 }
 
 type Props = AbstractLoadButtonProps & StateProps & DispatchProps;

@@ -28,11 +28,15 @@ export default function* saveEditorSaga() {
 }
 
 function* handleOniSaveWrite(action: SaveOniSaveAction) {
-  const saveName = action.payload;
+  let saveName = action.payload;
 
   const saveGame: SaveGame | null = yield select(saveGameSelector);
   if (!saveGame) {
     return;
+  }
+
+  if (!saveName || saveName === "") {
+    saveName = `${saveGame.header.gameInfo.baseName}.sav`;
   }
 
   yield put(receiveOniSaveBegin(LoadingStatus.Saving));
@@ -46,10 +50,10 @@ function* handleOniSaveWrite(action: SaveOniSaveAction) {
       continue;
     } else if (msg.type === "success") {
       saveAs(msg.blob, saveName);
-      yield put(receiveOniSaveSuccess(saveGame));
+      yield put(receiveOniSaveSuccess(saveGame, LoadingStatus.Saving));
       return;
     } else if (msg.type === "error") {
-      yield put(receiveOniSaveError(msg.error));
+      yield put(receiveOniSaveError(msg.error, LoadingStatus.Saving));
       return;
     }
   }

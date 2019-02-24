@@ -19,6 +19,7 @@ class CommitTextField extends React.Component<CommitTextFieldProps, State> {
       onCommit,
       onChange,
       onBlur,
+      onKeyPress,
       value: prevValue,
       ...props
     } = this.props;
@@ -29,6 +30,7 @@ class CommitTextField extends React.Component<CommitTextFieldProps, State> {
         value={editValue || prevValue}
         onChange={this._onChange}
         onBlur={this._onBlur}
+        onKeyPress={this._onKeyPress}
       />
     );
   }
@@ -42,13 +44,28 @@ class CommitTextField extends React.Component<CommitTextFieldProps, State> {
     this.setState({ value: e.target.value });
   };
 
+  private _onKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const { onKeyPress } = this.props;
+    if (onKeyPress) {
+      onKeyPress(e);
+    }
+
+    if (e.key === "Enter") {
+      this._commit();
+    }
+  };
+
   private _onBlur = (e: React.FocusEvent) => {
-    const { onBlur, onCommit } = this.props;
+    const { onBlur } = this.props;
     if (onBlur) {
       onBlur(e);
     }
 
-    const { value: prevValue } = this.props;
+    this._commit();
+  };
+
+  private _commit() {
+    const { value: prevValue, onCommit } = this.props;
     const { value } = this.state;
     if (onCommit && value && value !== prevValue) {
       onCommit(value);
@@ -57,7 +74,7 @@ class CommitTextField extends React.Component<CommitTextFieldProps, State> {
     this.setState({
       value: null
     });
-  };
+  }
 }
 
 export default CommitTextField;

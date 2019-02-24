@@ -8,21 +8,30 @@ export const receiveOniSaveBegin = (
   clearExisting?: boolean
 ) => ({
   type: ACTION_RECEIVE_ONISAVE_BEGIN as typeof ACTION_RECEIVE_ONISAVE_BEGIN,
-  payload: { operation, clearExisting }
+  payload: { clearExisting },
+  meta: { operation }
 });
 export type ReceiveOniSaveBeginAction = ReturnType<typeof receiveOniSaveBegin>;
 
 export const ACTION_RECEIVE_ONISAVE_ERROR = "oni-save/receive:error";
-export const receiveOniSaveError = (error: Error) => ({
+export const receiveOniSaveError = (
+  error: Error,
+  operation: LoadingStatus.Loading | LoadingStatus.Saving
+) => ({
   type: ACTION_RECEIVE_ONISAVE_ERROR as typeof ACTION_RECEIVE_ONISAVE_ERROR,
-  payload: error
+  payload: error,
+  meta: { operation }
 });
 export type ReceiveOniSaveErrorAction = ReturnType<typeof receiveOniSaveError>;
 
 export const ACTION_RECEIVE_ONISAVE_SUCCESS = "oni-save/receive:success";
-export const receiveOniSaveSuccess = (oniSave: SaveGame) => ({
+export const receiveOniSaveSuccess = (
+  oniSave: SaveGame,
+  operation: LoadingStatus.Loading | LoadingStatus.Saving
+) => ({
   type: ACTION_RECEIVE_ONISAVE_SUCCESS as typeof ACTION_RECEIVE_ONISAVE_SUCCESS,
-  payload: oniSave
+  payload: oniSave,
+  meta: { operation }
 });
 export type ReceiveOniSaveSuccessAction = ReturnType<
   typeof receiveOniSaveSuccess

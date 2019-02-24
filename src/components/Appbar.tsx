@@ -8,6 +8,7 @@ import { createStyles, withStyles } from "@material-ui/core/styles";
 
 import SettingsButton from "./SettingsButton";
 import SaveModifiedChip from "./SaveModifiedChip";
+import SaveButton from "./SaveButton";
 
 export interface AppbarProps {
   title: string;
@@ -27,6 +28,7 @@ const Appbar: React.SFC<Props> = ({ classes, title }) => (
         {title}
       </Typography>
       <SaveModifiedChip />
+      <SaveButton />
       <SettingsButton />
     </Toolbar>
   </MaterialAppBar>

@@ -39,11 +39,11 @@ const NoSave: React.SFC<Props> = ({ classes, t }) => (
         </Typography>
       </div>
       {SaveFilePaths[OSType] && (
-        <div>
+        <Typography component="div" variant="body1">
           <Trans i18nKey="overview.no-save.save-location">
             Save files can be found at <code>{{ path: saveFilePath }}</code>
           </Trans>
-        </div>
+        </Typography>
       )}
       <LoadButton />
     </div>

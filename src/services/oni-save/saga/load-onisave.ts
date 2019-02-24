@@ -36,10 +36,10 @@ function* handleOniSaveLoad(action: LoadOniSaveAction) {
       yield put(parseProgress(msg.message));
       continue;
     } else if (msg.type === "success") {
-      yield put(receiveOniSaveSuccess(msg.saveGame));
+      yield put(receiveOniSaveSuccess(msg.saveGame, LoadingStatus.Loading));
       return;
     } else if (msg.type === "error") {
-      yield put(receiveOniSaveError(msg.error));
+      yield put(receiveOniSaveError(msg.error, LoadingStatus.Loading));
       return;
     }
   }
