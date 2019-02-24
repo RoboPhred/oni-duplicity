@@ -6,6 +6,7 @@ import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Paper from "@material-ui/core/Paper";
 
 import PageContainer from "@/components/PageContainer";
 
@@ -58,18 +59,22 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
         <DuplicantName gameObjectId={gameObjectId} />
         <Divider className={classes.divider} />
         <DuplicantPortrait gameObjectId={gameObjectId} />
-        <Tabs
-          value={tab}
-          textColor="secondary"
-          onChange={(_, value) => setTab(value)}
-        >
-          <Tab label="Identity" />
-          <Tab label="Appearance" />
-          <Tab label="Modifiers" />
-          <Tab label="Effects" />
-          <Tab label="Traits" />
-          <Tab label="Attributes" />
-        </Tabs>
+        <Paper elevation={0} square>
+          <Tabs
+            value={tab}
+            textColor="secondary"
+            variant="scrollable"
+            scrollButtons="auto"
+            onChange={(_, value) => setTab(value)}
+          >
+            <Tab label="Identity" />
+            <Tab label="Appearance" />
+            <Tab label="Modifiers" />
+            <Tab label="Effects" />
+            <Tab label="Traits" />
+            <Tab label="Attributes" />
+          </Tabs>
+        </Paper>
         <div className={classes.tabContainer}>
           {tab === 0 && <IdentityTab gameObjectId={gameObjectId} />}
           {tab === 1 && <AppearanceTab gameObjectId={gameObjectId} />}

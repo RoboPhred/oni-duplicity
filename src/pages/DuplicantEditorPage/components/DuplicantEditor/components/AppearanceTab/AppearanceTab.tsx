@@ -75,10 +75,28 @@ const AppearanceTab: React.SFC<Props> = ({ classes, gameObjectId }) => {
           if (index === -1) {
             return;
           }
+          const accessoryMod: Record<number, Accessory> = {
+            [index]: Accessory(`${type}_${padStart(String(ordinal), 3, "0")}`)
+          };
+          if (type === "hair") {
+            const hatHair = getIndexOfAccessoryType(accessories, "hat_hair");
+            if (hatHair !== -1) {
+              accessoryMod[hatHair] = Accessory(
+                `hat_hair_${padStart(String(ordinal), 3, "0")}`
+              );
+            }
+            const hairAlways = getIndexOfAccessoryType(
+              accessories,
+              "hair_always"
+            );
+            if (hairAlways !== -1) {
+              accessoryMod[hairAlways] = Accessory(
+                `hair_always_${padStart(String(ordinal), 3, "0")}`
+              );
+            }
+          }
           onTemplateDataModify({
-            accessories: merge([], accessories, {
-              [index]: Accessory(`${type}_${padStart(String(ordinal), 3, "0")}`)
-            })
+            accessories: merge([], accessories, accessoryMod)
           });
         }
 
