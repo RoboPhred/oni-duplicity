@@ -6,6 +6,9 @@ import { AppState } from "@/state";
 export const saveGameSelector = (state: AppState) =>
   state.services.oniSave.saveGame;
 
+export const isSaveModifiedSelector = (state: AppState) =>
+  state.services.oniSave.isModified;
+
 export const gameObjectGroupsSelector = (state: AppState) => {
   const saveGame = saveGameSelector(state);
   if (!saveGame) {

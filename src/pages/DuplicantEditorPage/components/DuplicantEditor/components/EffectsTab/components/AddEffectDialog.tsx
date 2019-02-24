@@ -76,11 +76,14 @@ const AddEffectDialog: React.SFC<Props> = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={() => onClose()} color="primary">
-          <Trans i18nKey="dialog-editor.add-effect-cancel">Cancel</Trans>
+          <Trans i18nKey="dialog-editor.cancel">Cancel</Trans>
         </Button>
         <Button
           disabled={selectedEffect === "" || timeRemaining <= 0}
-          onClick={() => onAddEffect(selectedEffect, timeRemaining * 200)}
+          onClick={() => {
+            setSelectedEffect("");
+            onAddEffect(selectedEffect, timeRemaining * 200);
+          }}
           color="primary"
         >
           <Trans i18nKey="dialog-editor.add-effect">Add Effect</Trans>

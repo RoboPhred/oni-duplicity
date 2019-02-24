@@ -9,6 +9,9 @@ const theme = createMuiTheme({
     //  The old styles are deprecated and will be
     //  removed.
     useNextVariants: true
+  },
+  palette: {
+    type: "dark"
   }
 });
 

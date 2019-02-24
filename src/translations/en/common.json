@@ -5,7 +5,8 @@
   },
   "save-file": {
     "load": "Load",
-    "loading": "Loading"
+    "loading": "Loading",
+    "modified": "Modified"
   },
   "overview": {
     "no-save": {
@@ -27,8 +28,10 @@
     "duplicant-voice": "Voice",
     "effect": "Effect",
     "add-effect": "Add Effect",
-    "add-effect-cancel": "Cancel",
+    "cancel": "Cancel",
     "time-in-cycles": "Time (cycles)",
-    "cycle-time": "Cycle Time"
+    "cycle-time": "Cycle Time",
+    "trait": "Trait",
+    "add-trait": "Add Trait"
   }
 }

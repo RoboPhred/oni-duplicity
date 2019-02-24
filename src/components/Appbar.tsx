@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { createStyles, withStyles } from "@material-ui/core/styles";
 
 import SettingsButton from "./SettingsButton";
+import SaveModifiedChip from "./SaveModifiedChip";
 
 export interface AppbarProps {
   title: string;
@@ -25,6 +26,7 @@ const Appbar: React.SFC<Props> = ({ classes, title }) => (
       <Typography className={classes.title} variant="h6" color="inherit">
         {title}
       </Typography>
+      <SaveModifiedChip />
       <SettingsButton />
     </Toolbar>
   </MaterialAppBar>
