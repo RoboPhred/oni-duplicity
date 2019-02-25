@@ -20,11 +20,11 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       display: "flex",
-      flexDirection: "row"
+      flexDirection: "row",
+      flexWrap: "wrap"
     },
     chip: {
-      marginLeft: theme.spacing.unit / 2,
-      marginRight: theme.spacing.unit / 2
+      margin: theme.spacing.unit / 2
     }
   });
 
