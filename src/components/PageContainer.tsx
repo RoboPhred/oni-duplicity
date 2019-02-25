@@ -7,7 +7,7 @@ import Drawer from "@material-ui/core/Drawer";
 import Sidebar from "@/components/Sidebar";
 import Appbar from "@/components/Appbar";
 
-const SIDEBAR_WIDTH = 255;
+const SIDEBAR_WIDTH = 200;
 
 const styles = createStyles({
   root: {

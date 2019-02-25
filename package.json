@@ -51,6 +51,9 @@
     "worker-loader": "^2.0.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-brands-svg-icons": "^5.7.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
     "classnames": "^2.2.6",

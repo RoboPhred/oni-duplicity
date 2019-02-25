@@ -15,6 +15,7 @@
       "save-location": "Save files can be found at <1>{{path}}</1>."
     }
   },
+  "view-github": "View project on GitHub",
   "duplicants": {
     "title": "Duplicants",
     "edit": "Edit"

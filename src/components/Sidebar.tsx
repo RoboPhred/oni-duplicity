@@ -6,6 +6,7 @@ import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 
 import Nav from "./Nav";
+import GithubButton from "./GithubButton";
 
 export interface SidebarProps {
   className?: string;
@@ -18,6 +19,10 @@ const styles = (theme: Theme) =>
       display: "flex",
       paddingLeft: theme.spacing.unit * 3,
       alignItems: "center"
+    },
+    ghButton: {
+      marginLeft: "auto",
+      marginRight: theme.spacing.unit
     }
   });
 
@@ -28,6 +33,7 @@ const Sidebar: React.SFC<Props> = ({ className, classes }) => (
       <Typography variant="h6" color="textSecondary">
         Duplicity
       </Typography>
+      <GithubButton className={classes.ghButton} />
     </div>
     <Divider />
     <Nav />
