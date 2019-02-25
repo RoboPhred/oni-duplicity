@@ -32,9 +32,11 @@
     "time-in-cycles": "Time (cycles)",
     "cycle-time": "Cycle Time",
     "trait": "Trait",
+    "traits": "Traits",
     "add-trait": "Add Trait",
-    "add-aptitude": "Add Aptitude",
-    "aptitude": "Aptitude",
+    "add-aptitude": "Add Interest",
+    "aptitude": "Interest",
+    "aptitudes": "Interests",
     "job": "Job",
     "mastery": "Mastery"
   }

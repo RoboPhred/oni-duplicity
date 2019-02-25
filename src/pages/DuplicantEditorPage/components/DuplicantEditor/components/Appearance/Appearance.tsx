@@ -10,11 +10,9 @@ import {
 import { merge, padStart } from "lodash-es";
 
 import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Paper from "@material-ui/core/Paper";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
 
@@ -23,24 +21,27 @@ const AccessorizerEditor = AbstractBehaviorEditor.ofType(AccessorizerBehavior);
 import HeadPortrait from "./components/HeadPortrait";
 import Portrait from "./components/Portrait";
 
-export interface AppearanceTabProps {
+export interface AppearanceProps {
   gameObjectId: number;
 }
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      width: "100%"
+      display: "flex",
+      flexDirection: "column",
+      width: "100%",
+      height: "100%"
     },
-    heading: {
-      fontSize: theme.typography.pxToRem(15),
-      fontWeight: theme.typography.fontWeightRegular
+    tabContent: {
+      width: "100%",
+      height: "100%",
+      overflow: "auto"
     },
     partList: {
       display: "flex",
       flexDirection: "row",
-      flexWrap: "wrap",
-      margin: -theme.spacing.unit / 2
+      flexWrap: "wrap"
     },
     partContainer: {
       margin: theme.spacing.unit / 2
@@ -50,18 +51,9 @@ const styles = (theme: Theme) =>
     }
   });
 
-const expandIcon = <ExpandMoreIcon />;
-
-type Props = AppearanceTabProps & StyleProps<typeof styles>;
-const AppearanceTab: React.SFC<Props> = ({ classes, gameObjectId }) => {
-  const [selectedPanel, setSelectedPanel] = React.useState(0);
-  function toggleSelected(index: number) {
-    if (selectedPanel !== index) {
-      setSelectedPanel(index);
-    } else {
-      setSelectedPanel(0);
-    }
-  }
+type Props = AppearanceProps & StyleProps<typeof styles>;
+const Appearance: React.SFC<Props> = ({ classes, gameObjectId }) => {
+  const [tab, setTab] = React.useState(0);
 
   return (
     <AccessorizerEditor gameObjectId={gameObjectId}>
@@ -110,14 +102,20 @@ const AppearanceTab: React.SFC<Props> = ({ classes, gameObjectId }) => {
 
         return (
           <div className={classes.root}>
-            <ExpansionPanel
-              expanded={selectedPanel === 1}
-              onClick={() => toggleSelected(1)}
-            >
-              <ExpansionPanelSummary expandIcon={expandIcon}>
-                <Typography className={classes.heading}>Hair</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
+            <Paper square>
+              <Tabs
+                textColor="secondary"
+                value={tab}
+                onChange={(_, value) => setTab(value)}
+              >
+                <Tab label="Hair" />
+                <Tab label="Head" />
+                <Tab label="Eyes" />
+                <Tab label="Body" />
+              </Tabs>
+            </Paper>
+            <div className={classes.tabContent}>
+              {tab === 0 && (
                 <div className={classes.partList}>
                   {ordinalRange(33).map(ordinal => (
                     <HeadPortrait
@@ -131,16 +129,8 @@ const AppearanceTab: React.SFC<Props> = ({ classes, gameObjectId }) => {
                     />
                   ))}
                 </div>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel
-              expanded={selectedPanel === 2}
-              onClick={() => toggleSelected(2)}
-            >
-              <ExpansionPanelSummary expandIcon={expandIcon}>
-                <Typography className={classes.heading}>Head</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
+              )}
+              {tab === 1 && (
                 <div className={classes.partList}>
                   {ordinalRange(4).map(ordinal => (
                     <HeadPortrait
@@ -154,16 +144,8 @@ const AppearanceTab: React.SFC<Props> = ({ classes, gameObjectId }) => {
                     />
                   ))}
                 </div>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel
-              expanded={selectedPanel === 3}
-              onClick={() => toggleSelected(3)}
-            >
-              <ExpansionPanelSummary expandIcon={expandIcon}>
-                <Typography className={classes.heading}>Eyes</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
+              )}
+              {tab === 2 && (
                 <div className={classes.partList}>
                   {ordinalRange(5).map(ordinal => (
                     <HeadPortrait
@@ -177,16 +159,8 @@ const AppearanceTab: React.SFC<Props> = ({ classes, gameObjectId }) => {
                     />
                   ))}
                 </div>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel
-              expanded={selectedPanel === 4}
-              onClick={() => toggleSelected(4)}
-            >
-              <ExpansionPanelSummary expandIcon={expandIcon}>
-                <Typography className={classes.heading}>Body</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
+              )}
+              {tab === 4 && (
                 <div className={classes.partList}>
                   {ordinalRange(4).map(ordinal => (
                     <Portrait
@@ -201,15 +175,15 @@ const AppearanceTab: React.SFC<Props> = ({ classes, gameObjectId }) => {
                     />
                   ))}
                 </div>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
+              )}
+            </div>
           </div>
         );
       }}
     </AccessorizerEditor>
   );
 };
-export default withStyles(styles)(AppearanceTab);
+export default withStyles(styles)(Appearance);
 
 function getOrdinalOfType(
   accessories: Accessory[],

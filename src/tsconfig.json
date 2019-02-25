@@ -26,8 +26,6 @@
       "@/*": ["../src/*"]
     },
 
-    "sourceMap": true,
-
-    "noUnusedLocals": true
+    "sourceMap": true
   }
 }

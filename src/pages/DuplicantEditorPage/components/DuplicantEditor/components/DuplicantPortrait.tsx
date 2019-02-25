@@ -23,14 +23,15 @@ const styles = createStyles({
   portraitContainer: {
     position: "relative",
     width: 100,
-    height: 160
+    height: 120
   },
   portrait: {
     position: "absolute",
+    overflow: "visible",
+    width: 0,
+    height: 0,
     left: 50,
     top: 65,
-    width: 250,
-    height: 250,
     transform: "scale(.4)",
     transformOrigin: "top left"
   }

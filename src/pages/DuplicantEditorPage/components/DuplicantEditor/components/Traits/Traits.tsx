@@ -12,7 +12,7 @@ import AddTraitDialog from "./components/AddTraitDialog";
 
 const TraitsEditor = AbstractBehaviorEditor.ofType(AITraitsBehavior);
 
-export interface TraitsTabProps {
+export interface TraitsProps {
   gameObjectId: number;
 }
 
@@ -20,9 +20,7 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       display: "flex",
-      flexDirection: "row",
-      marginLeft: -theme.spacing.unit / 2,
-      marginRight: -theme.spacing.unit / 2
+      flexDirection: "row"
     },
     chip: {
       marginLeft: theme.spacing.unit / 2,
@@ -30,8 +28,8 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = TraitsTabProps & StyleProps<typeof styles> & WithTranslation;
-const TraitsTab: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
+type Props = TraitsProps & StyleProps<typeof styles> & WithTranslation;
+const Traits: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
   const [isAddingTrait, setIsAddingTrait] = React.useState(false);
   return (
     <TraitsEditor gameObjectId={gameObjectId}>
@@ -81,4 +79,4 @@ const TraitsTab: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
   );
 };
 
-export default withStyles(styles)(withTranslation()(TraitsTab));
+export default withStyles(styles)(withTranslation()(Traits));

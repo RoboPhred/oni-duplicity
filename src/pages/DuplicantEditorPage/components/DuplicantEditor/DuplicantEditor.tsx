@@ -1,25 +1,22 @@
 import * as React from "react";
 
-import { WithTranslation, withTranslation } from "react-i18next";
+import { WithTranslation, withTranslation, Trans } from "react-i18next";
 
 import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Paper from "@material-ui/core/Paper";
 
 import PageContainer from "@/components/PageContainer";
 
 import DuplicantName from "./components/DuplicantName";
 import DuplicantPortrait from "./components/DuplicantPortrait";
-import ModifiersTab from "./components/ModifiersTab";
-import IdentityTab from "./components/IdentityTab";
-import EffectsTab from "./components/EffectsTab";
-import TraitsTab from "./components/TraitsTab";
-import AttributesTab from "./components/AttributesTab";
-import AppearanceTab from "./components/AppearanceTab";
-import AptitudesTab from "./components/AptitudesTab";
-import MasteriesTab from "./components/MasteriesTab/MasteriesTab";
+import Traits from "./components/Traits";
+import Aptitudes from "./components/Interests";
+import Appearance from "./components/Appearance";
+import MessyEditor from "./components/MessyEditor";
 
 export interface DuplicantEditorProps {
   gameObjectId: number;
@@ -39,16 +36,38 @@ const styles = (theme: Theme) =>
       marginTop: theme.spacing.unit,
       marginBottom: theme.spacing.unit
     },
-    content: {
-      display: "flex",
-      flexDirection: "row"
+    nameRow: {
+      flexGrow: 0,
+      flexShrink: 0
     },
-    tabContainer: {
+    portraitRow: {
+      display: "flex",
+      flexDirection: "row",
+      marginBottom: theme.spacing.unit,
+      flexGrow: 0,
+      flexShrink: 0
+    },
+    portraitRowColumn: {
+      marginRight: theme.spacing.unit
+    },
+    portraitRowTweakables: {
+      width: "100%"
+    },
+    row: {
+      marginBottom: theme.spacing.unit,
+      flexGrow: 0,
+      flexShrink: 0
+    },
+    tabRow: {
+      display: "flex",
+      flexDirection: "column",
+      marginLeft: -theme.spacing.unit,
+      height: "100%"
+    },
+    tabContent: {
       width: "100%",
       height: "100%",
-      overflow: "auto",
-      paddingRight: theme.spacing.unit,
-      paddingBottom: theme.spacing.unit
+      overflow: "auto"
     }
   });
 
@@ -58,36 +77,52 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
   return (
     <PageContainer title={t("duplicant-editor.title")}>
       <div className={classes.root}>
-        <DuplicantName gameObjectId={gameObjectId} />
+        <div className={classes.nameRow}>
+          <DuplicantName gameObjectId={gameObjectId} />
+        </div>
         <Divider className={classes.divider} />
-        <DuplicantPortrait gameObjectId={gameObjectId} />
-        <Paper elevation={0} square>
-          <Tabs
-            value={tab}
-            textColor="secondary"
-            variant="scrollable"
-            scrollButtons="auto"
-            onChange={(_, value) => setTab(value)}
-          >
-            <Tab label="Identity" />
-            <Tab label="Appearance" />
-            <Tab label="Modifiers" />
-            <Tab label="Effects" />
-            <Tab label="Traits" />
-            <Tab label="Attributes" />
-            <Tab label="Aptitudes" />
-            <Tab label="Masteries" />
-          </Tabs>
-        </Paper>
-        <div className={classes.tabContainer}>
-          {tab === 0 && <IdentityTab gameObjectId={gameObjectId} />}
-          {tab === 1 && <AppearanceTab gameObjectId={gameObjectId} />}
-          {tab === 2 && <ModifiersTab gameObjectId={gameObjectId} />}
-          {tab === 3 && <EffectsTab gameObjectId={gameObjectId} />}
-          {tab === 4 && <TraitsTab gameObjectId={gameObjectId} />}
-          {tab === 5 && <AttributesTab gameObjectId={gameObjectId} />}
-          {tab === 6 && <AptitudesTab gameObjectId={gameObjectId} />}
-          {tab === 7 && <MasteriesTab gameObjectId={gameObjectId} />}
+        <div className={classes.portraitRow}>
+          <div className={classes.portraitRowColumn}>
+            <Paper>
+              <DuplicantPortrait gameObjectId={gameObjectId} />
+            </Paper>
+          </div>
+          <div className={classes.portraitRowTweakables}>
+            <div className={classes.row}>
+              <Typography variant="h6">
+                <Trans i18nKey="duplicant-editor.traits">Traits</Trans>
+              </Typography>
+              <Divider className={classes.divider} />
+              <Traits gameObjectId={gameObjectId} />
+            </div>
+            <div className={classes.row}>
+              <Typography variant="h6">
+                <Trans i18nKey="duplicant-editor.aptitudes">Interests</Trans>
+              </Typography>
+              <Divider className={classes.divider} />
+              <Aptitudes gameObjectId={gameObjectId} />
+            </div>
+          </div>
+        </div>
+        <div className={classes.tabRow}>
+          <Paper square>
+            <Tabs
+              textColor="secondary"
+              value={tab}
+              onChange={(_, value) => setTab(value)}
+            >
+              <Tab label="Attributes" />
+              <Tab label="Appearance" />
+              <Tab label="Skills" />
+              <Tab label="Effects" />
+              <Tab label="Health" />
+              <Tab label="Old Junk" />
+            </Tabs>
+          </Paper>
+          <div className={classes.tabContent}>
+            {tab === 1 && <Appearance gameObjectId={gameObjectId} />}
+            {tab === 5 && <MessyEditor gameObjectId={gameObjectId} />}
+          </div>
         </div>
       </div>
     </PageContainer>
@@ -95,3 +130,9 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
 };
 
 export default withStyles(styles)(withTranslation()(DuplicantEditor));
+
+/*
+        <div className={classes.messy}>
+          <MessyEditor gameObjectId={gameObjectId} />
+        </div>
+*/
