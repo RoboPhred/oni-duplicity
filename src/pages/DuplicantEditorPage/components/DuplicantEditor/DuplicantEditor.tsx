@@ -14,6 +14,7 @@ import PageContainer from "@/components/PageContainer";
 import DuplicantName from "./components/DuplicantName";
 import DuplicantPortrait from "./components/DuplicantPortrait";
 import Traits from "./components/Traits";
+import Attributes from "./components/Attributes";
 import Aptitudes from "./components/Interests";
 import Appearance from "./components/Appearance";
 import MessyEditor from "./components/MessyEditor";
@@ -120,6 +121,7 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
             </Tabs>
           </Paper>
           <div className={classes.tabContent}>
+            {tab === 0 && <Attributes gameObjectId={gameObjectId} />}
             {tab === 1 && <Appearance gameObjectId={gameObjectId} />}
             {tab === 5 && <MessyEditor gameObjectId={gameObjectId} />}
           </div>
