@@ -17,6 +17,7 @@ import Traits from "./components/Traits";
 import Attributes from "./components/Attributes";
 import Aptitudes from "./components/Interests";
 import Appearance from "./components/Appearance";
+import Health from "./components/Health";
 import MessyEditor from "./components/MessyEditor";
 
 export interface DuplicantEditorProps {
@@ -123,6 +124,7 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
           <div className={classes.tabContent}>
             {tab === 0 && <Attributes gameObjectId={gameObjectId} />}
             {tab === 1 && <Appearance gameObjectId={gameObjectId} />}
+            {tab === 4 && <Health gameObjectId={gameObjectId} />}
             {tab === 5 && <MessyEditor gameObjectId={gameObjectId} />}
           </div>
         </div>
