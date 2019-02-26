@@ -1,14 +1,15 @@
 import * as React from "react";
 import { AIAttributeLevelsBehavior } from "oni-save-parser";
-import { find } from "lodash-es";
+import { findIndex, merge } from "lodash-es";
 
 import { Trans } from "react-i18next";
 
 import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
+
+import CommitTextField from "@/components/CommitTextField";
 
 const AttributesEditor = AbstractBehaviorEditor.ofType(
   AIAttributeLevelsBehavior
@@ -63,20 +64,28 @@ const Attributes: React.SFC<Props> = ({ classes, gameObjectId }) => (
       <div className={classes.root}>
         <div className={classes.basicAttributes}>
           {PRIMARY_ATTRIBUTES.map(attributeId => {
-            const attr = find(
+            const attrIndex = findIndex(
               saveLoadLevels,
               x => x.attributeId === attributeId
             );
-            if (!attr) {
+            if (attrIndex === -1) {
               return undefined;
             }
+            const attr = saveLoadLevels[attrIndex];
             const { level } = attr;
             return (
               <div className={classes.basicAttributeItem}>
-                <TextField
+                <CommitTextField
                   className={classes.basicAttributeInput}
                   type="number"
                   value={level}
+                  onCommit={value => {
+                    onTemplateDataModify({
+                      saveLoadLevels: merge([], saveLoadLevels, {
+                        [attrIndex]: { attributeId, level: Number(value) }
+                      })
+                    });
+                  }}
                 />
                 <Typography component="span" variant="body1">
                   <Trans i18nKey={`oni:todo-trans.attributes.${attributeId}`}>
@@ -87,10 +96,6 @@ const Attributes: React.SFC<Props> = ({ classes, gameObjectId }) => (
             );
           })}
         </div>
-        <Typography>
-          Primary attributes, plus decor benefit, food benefit, and stress
-          reaction
-        </Typography>
       </div>
     )}
   </AttributesEditor>
