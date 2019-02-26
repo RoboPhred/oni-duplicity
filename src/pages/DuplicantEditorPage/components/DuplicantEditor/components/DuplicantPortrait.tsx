@@ -22,17 +22,17 @@ export interface DuplicantPortraitProps {
 const styles = createStyles({
   portraitContainer: {
     position: "relative",
-    width: 100,
-    height: 120
+    width: 173,
+    height: 190
   },
   portrait: {
     position: "absolute",
     overflow: "visible",
     width: 0,
     height: 0,
-    left: 50,
-    top: 65,
-    transform: "scale(.4)",
+    left: 90,
+    top: 115,
+    transform: "scale(.6)",
     transformOrigin: "top left"
   }
 });

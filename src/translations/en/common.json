@@ -38,6 +38,8 @@
     "add-aptitude": "Add Interest",
     "aptitude": "Interest",
     "aptitudes": "Interests",
+    "primary-attributes": "Primary",
+    "secondary-attributes": "Secondary",
     "job": "Job",
     "mastery": "Mastery"
   }
