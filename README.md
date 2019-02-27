@@ -1,4 +1,4 @@
-# Duplicity (vnext)
+# Duplicity V2
 
 A web-based Oxygen Not Included save editor.
 
@@ -6,13 +6,13 @@ You can find the editor at [https://robophred.github.io/oni-duplicity](https://r
 
 # Compatibility
 
-Supports Rocketry Update (save file version 7.6). Future versions may not be compatible until the editor is updated. Previous versions may need to be updated by re-saving them in the newest version of the game.
+Supports updates up to QoL 2 (save file version 7.6). Future versions may not be compatible until the editor is updated. Previous versions may need to be updated by re-saving them in the newest version of the game.
 
-# VNext
+# V2
 
-VNext is a full rewrite of the web editor, accompanied by a full rewrite of oni-save-parser
+V3 is a full rewrite of the web editor, accompanied by a full rewrite of oni-save-parser
 
-The new version will focus on editing the data as directly extracted from the save file. This will allow most of the data in the save to be immediately editable, and allow for future game objects and behaviors to immediately be supported so long as the underlying format remains the same.
+This version focuses on editing the data as directly extracted from the save file. This allows most of the data in the save to be immediately editable, at the cost of increased complexity and potential to corrupt the save file.
 
 ## Data Editing
 
