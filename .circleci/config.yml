@@ -1,0 +1,70 @@
+# Javascript Node CircleCI 2.0 configuration file
+version: 2
+jobs:
+  prepare:
+    docker:
+      - image: circleci/node:10.15
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+        name: Install Dependencies
+        command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+  build:
+    docker:
+      - image: circleci/node:10.15
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Build
+          command: npm run build
+      - persist_to_workspace:
+        root: dist
+        paths: "*"
+  deploy:
+    docker:
+      - image: circleci/node:10.15
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - attach_workspace:
+          at: dist
+      - run:
+          name: Setup Git
+          command: |
+            git config user.email "ci-build@RoboPhredDev.net"
+            git config user.name "ci-build"
+      - run:
+          name: Deploy to gh-pages
+          command: npm run deploy
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - prepare
+      - build:
+          requires:
+            - prepare
+      - deploy:
+          requires:
+            - prepare
+            - build
+          filters:
+            branches:
+              only: master
