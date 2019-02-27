@@ -37,14 +37,13 @@ const styles = (theme: Theme) =>
     },
     group: {
       display: "flex",
-      flexDirection: "column",
+      flexDirection: "row",
       flexWrap: "wrap",
       padding: theme.spacing.unit
     },
     value: {
       width: 300,
       marginTop: theme.spacing.unit,
-      marginBottom: theme.spacing.unit,
       marginLeft: theme.spacing.unit * 2,
       marginRight: theme.spacing.unit * 2
     }
@@ -72,6 +71,7 @@ const Health: React.SFC<Props> = ({ classes, gameObjectId }) => (
         className={classes.value}
         gameObjectId={gameObjectId}
         modifier="Calories"
+        max={4000}
       />
       <Value
         className={classes.value}

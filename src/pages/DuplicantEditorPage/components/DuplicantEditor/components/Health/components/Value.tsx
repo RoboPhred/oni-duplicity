@@ -25,6 +25,7 @@ export interface ValueProps {
   className?: string;
   gameObjectId: number;
   modifier: string;
+  max?: number;
 }
 
 type Props = ValueProps & StyleProps<typeof styles>;
@@ -33,7 +34,8 @@ const Value: React.SFC<Props> = ({
   className,
   classes,
   gameObjectId,
-  modifier
+  modifier,
+  max
 }) => (
   <ModifierBehaviorEditor gameObjectId={gameObjectId}>
     {({ extraData: { amounts }, onExtraDataModify }) => {
@@ -63,7 +65,7 @@ const Value: React.SFC<Props> = ({
             aria-labeledby={`${modifier}-label`}
             value={value}
             min={0}
-            max={100}
+            max={max || 100}
             onChange={(_, value) => setAmount(value)}
           />
         </div>
