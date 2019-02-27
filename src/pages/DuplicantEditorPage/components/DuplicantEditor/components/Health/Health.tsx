@@ -1,6 +1,4 @@
 import * as React from "react";
-import { find, findIndex, merge } from "lodash-es";
-import { MinionModifiersBehavior } from "oni-save-parser";
 
 import { Trans } from "react-i18next";
 
@@ -8,12 +6,7 @@ import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 
-import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
 import Value from "./components/Value";
-
-const ModifierBehaviorEditor = AbstractBehaviorEditor.ofType(
-  MinionModifiersBehavior
-);
 
 export interface HealthProps {
   gameObjectId: number;
