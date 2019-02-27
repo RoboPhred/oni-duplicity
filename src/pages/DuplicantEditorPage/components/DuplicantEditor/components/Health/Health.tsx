@@ -71,7 +71,7 @@ const Health: React.SFC<Props> = ({ classes, gameObjectId }) => (
         className={classes.value}
         gameObjectId={gameObjectId}
         modifier="Calories"
-        max={4000}
+        max={4000000}
       />
       <Value
         className={classes.value}
