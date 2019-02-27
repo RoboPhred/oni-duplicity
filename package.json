@@ -9,7 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.js",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.config.js",
     "start:prod": "cross-env NODE_ENV=production webpack-dev-server --config ./config/webpack.config.js",
-    "deploy": "git subtree push --prefix dist origin gh-pages"
+    "deploy": "gh-pages -d dist -e vnext"
   },
   "private": true,
   "keywords": [
@@ -37,6 +37,7 @@
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.0",
     "file-loader": "^3.0.1",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
     "react-hot-loader": "^4.6.5",
     "rimraf": "^2.6.3",
