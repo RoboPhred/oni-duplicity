@@ -1,3 +1,8 @@
+### v3.2.0
+
+- Fix Body Appearance tab.
+- Add in-game names for aptitudes and traits
+
 ### v3.1.0
 
 - Fill in duplicant property editors.
