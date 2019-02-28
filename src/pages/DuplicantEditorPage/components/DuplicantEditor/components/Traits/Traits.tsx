@@ -42,8 +42,11 @@ const Traits: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
               <Chip
                 key={trait}
                 className={classes.chip}
-                label={t(`oni:todo-trans.traits.${trait}`, {
+                label={t(`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.NAME`, {
                   defaultValue: trait
+                })}
+                title={t(`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.DESC`, {
+                  defaultValue: ""
                 })}
                 onDelete={() => {
                   const newTraitIds = [...TraitIds];

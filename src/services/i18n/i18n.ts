@@ -15,7 +15,8 @@ i18n.use(initReactI18next).init({
 
   resources: {
     en: {
-      common: require("@/translations/en/common.json")
+      common: require("@/translations/en/common.json"),
+      oni: require("@/translations/en/oni.json")
     }
   },
 

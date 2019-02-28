@@ -47,7 +47,9 @@ const AddTraitDialog: React.SFC<Props> = ({
             >
               {availableTraits.map(trait => (
                 <MenuItem key={trait} value={trait}>
-                  <Trans i18nKey={`oni:todo-trans.traits.${trait}`}>
+                  <Trans
+                    i18nKey={`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.NAME`}
+                  >
                     {trait}
                   </Trans>
                 </MenuItem>

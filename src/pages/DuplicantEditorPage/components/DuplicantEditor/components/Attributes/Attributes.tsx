@@ -2,7 +2,7 @@ import * as React from "react";
 import { AIAttributeLevelsBehavior, AttributeLevel } from "oni-save-parser";
 import { findIndex, merge } from "lodash-es";
 
-import { Trans } from "react-i18next";
+import { Trans, WithTranslation, withTranslation } from "react-i18next";
 
 import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -11,6 +11,8 @@ import Divider from "@material-ui/core/Divider";
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
 
 import CommitTextField from "@/components/CommitTextField";
+
+import AttributeName from "./components/AttributeName";
 
 const AttributesEditor = AbstractBehaviorEditor.ofType(
   AIAttributeLevelsBehavior
@@ -54,7 +56,7 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = AttributesProps & StyleProps<typeof styles>;
+type Props = AttributesProps & WithTranslation & StyleProps<typeof styles>;
 
 const PRIMARY_ATTRIBUTES = [
   "Athletics",
@@ -70,7 +72,7 @@ const PRIMARY_ATTRIBUTES = [
   "Strength"
 ];
 
-const Attributes: React.SFC<Props> = ({ classes, gameObjectId }) => (
+const Attributes: React.SFC<Props> = ({ classes, gameObjectId, t }) => (
   <AttributesEditor gameObjectId={gameObjectId}>
     {({ templateData: { saveLoadLevels }, onTemplateDataModify }) => (
       <div className={classes.root}>
@@ -90,7 +92,7 @@ const Attributes: React.SFC<Props> = ({ classes, gameObjectId }) => (
             const attr = saveLoadLevels[attrIndex];
             const { level } = attr;
             return (
-              <div className={classes.attributeItem}>
+              <div key={attributeId} className={classes.attributeItem}>
                 <CommitTextField
                   className={classes.attributeInput}
                   type="number"
@@ -103,11 +105,7 @@ const Attributes: React.SFC<Props> = ({ classes, gameObjectId }) => (
                     });
                   }}
                 />
-                <Typography component="span" variant="body1">
-                  <Trans i18nKey={`oni:todo-trans.attributes.${attributeId}`}>
-                    {attributeId}
-                  </Trans>
-                </Typography>
+                <AttributeName attributeId={attributeId} />
               </div>
             );
           })}
@@ -143,11 +141,7 @@ const Attributes: React.SFC<Props> = ({ classes, gameObjectId }) => (
                     });
                   }}
                 />
-                <Typography component="span" variant="body1">
-                  <Trans i18nKey={`oni:todo-trans.attributes.${attributeId}`}>
-                    {attributeId}
-                  </Trans>
-                </Typography>
+                <AttributeName attributeId={attributeId} />
               </div>
             );
           })}
@@ -157,7 +151,7 @@ const Attributes: React.SFC<Props> = ({ classes, gameObjectId }) => (
   </AttributesEditor>
 );
 
-export default withStyles(styles)(Attributes);
+export default withStyles(styles)(withTranslation()(Attributes));
 
 function nonPrimaryAttributeIds(attributes: AttributeLevel[]): string[] {
   return attributes
