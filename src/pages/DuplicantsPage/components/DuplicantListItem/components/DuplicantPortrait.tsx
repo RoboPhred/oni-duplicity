@@ -29,8 +29,8 @@ const styles = createStyles({
     position: "absolute",
     left: 42,
     top: 50,
-    width: 250,
-    height: 250,
+    width: 0,
+    height: 0,
     transform: "scale(.3)",
     transformOrigin: "top left"
   }

@@ -2,7 +2,7 @@ import * as React from "react";
 import { AIAttributeLevelsBehavior } from "oni-save-parser";
 import { find } from "lodash-es";
 
-import { Trans } from "react-i18next";
+import { Trans, WithTranslation, withTranslation } from "react-i18next";
 
 import Typography from "@material-ui/core/Typography";
 import ErrorIcon from "@material-ui/icons/Error";
@@ -18,8 +18,8 @@ export interface AttributeNameProps {
   attributeId: string;
 }
 
-type Props = AttributeNameProps;
-const AttributeName: React.SFC<Props> = ({ gameObjectId, attributeId }) => (
+type Props = AttributeNameProps & WithTranslation;
+const AttributeName: React.SFC<Props> = ({ gameObjectId, attributeId, t }) => (
   <AttributeEditor gameObjectId={gameObjectId}>
     {({ templateData }) => {
       let attribute = find(
@@ -27,17 +27,25 @@ const AttributeName: React.SFC<Props> = ({ gameObjectId, attributeId }) => (
         x => x.attributeId === attributeId
       );
       return (
-        <Typography component="span" variant="body2">
+        <Typography
+          component="span"
+          variant="body2"
+          title={t(`oni:DUPLICANTS.ATTRIBUTES.${attributeId}.DESC`, {
+            defaultValue: ""
+          })}
+        >
           {attribute && signPrefix(attribute.level)}
           {!attribute && <ErrorIcon />}{" "}
-          <Trans i18nKey={`oni:todo-trans.${attributeId}`}>{attributeId}</Trans>
+          <Trans i18nKey={`oni:DUPLICANTS.ATTRIBUTES.${attributeId}.NAME`}>
+            {attributeId}
+          </Trans>
         </Typography>
       );
     }}
   </AttributeEditor>
 );
 
-export default AttributeName;
+export default withTranslation()(AttributeName);
 
 function signPrefix(x: number): string {
   if (x > 0) {
