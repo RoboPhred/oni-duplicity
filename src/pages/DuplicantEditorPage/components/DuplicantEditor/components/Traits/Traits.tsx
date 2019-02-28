@@ -8,6 +8,7 @@ import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
+
 import AddTraitDialog from "./components/AddTraitDialog";
 
 const TraitsEditor = AbstractBehaviorEditor.ofType(AITraitsBehavior);
