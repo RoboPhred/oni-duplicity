@@ -114,11 +114,27 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
               value={tab}
               onChange={(_, value) => setTab(value)}
             >
-              <Tab label="Attributes" />
-              <Tab label="Appearance" />
-              <Tab label="Health" />
-              <Tab label="Jobs" />
-              <Tab label="Effects" />
+              <Tab
+                label={t("duplicant-editor.attributes", {
+                  defaultValue: "Attributes"
+                })}
+              />
+              <Tab
+                label={t("duplicant-editor.appearance", {
+                  defaultValue: "Appearance"
+                })}
+              />
+              <Tab
+                label={t("duplicant-editor.health", { defaultValue: "Health" })}
+              />
+              <Tab
+                label={t("duplicant-editor.jobs", { defaultValue: "Jobs" })}
+              />
+              <Tab
+                label={t("duplicant-editor.effects", {
+                  defaultValue: "Effects"
+                })}
+              />
             </Tabs>
           </Paper>
           <div className={classes.tabContent}>
