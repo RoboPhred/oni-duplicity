@@ -38,9 +38,14 @@
     "add-aptitude": "Add Interest",
     "aptitude": "Interest",
     "aptitudes": "Interests",
+    "attributes": "Attributes",
     "primary-attributes": "Primary",
     "secondary-attributes": "Secondary",
     "job": "Job",
-    "mastery": "Mastery"
+    "jobs": "Jobs",
+    "mastery": "Mastery",
+    "appearance": "Appearance",
+    "health": "Health",
+    "effects": "Effects"
   }
 }
