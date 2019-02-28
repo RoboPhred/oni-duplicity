@@ -262,7 +262,7 @@
         "DESC": "Determines a Duplicant's building speed."
       },
 
-      "digging": {
+      "Digging": {
         "NAME": "Digging",
         "DESC": "Determines a Duplicant's mining speed."
       },

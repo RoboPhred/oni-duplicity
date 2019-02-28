@@ -45,7 +45,7 @@ const AddAptitudeDialog: React.SFC<Props> = ({
               onChange={e => setSelectedAptitude(e.target.value)}
               inputProps={{ id: "duplicant-aptitude" }}
             >
-              {availableAptitudes.map(aptitude => (
+              {[...availableAptitudes].sort().map(aptitude => (
                 <MenuItem key={aptitude} value={aptitude}>
                   <Trans i18nKey={`oni:todo-trans.aptitudes.${aptitude}`}>
                     {aptitude}

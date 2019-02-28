@@ -128,7 +128,7 @@ const Attributes: React.SFC<Props> = ({ classes, gameObjectId, t }) => (
             const attr = saveLoadLevels[attrIndex];
             const { level } = attr;
             return (
-              <div className={classes.attributeItem}>
+              <div key={attributeId} className={classes.attributeItem}>
                 <CommitTextField
                   className={classes.attributeInput}
                   type="number"
