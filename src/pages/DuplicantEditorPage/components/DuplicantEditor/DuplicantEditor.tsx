@@ -14,11 +14,12 @@ import PageContainer from "@/components/PageContainer";
 import DuplicantName from "./components/DuplicantName";
 import DuplicantPortrait from "./components/DuplicantPortrait";
 import Traits from "./components/Traits";
-import Attributes from "./components/Attributes";
 import Aptitudes from "./components/Interests";
+import Attributes from "./components/Attributes";
 import Appearance from "./components/Appearance";
+import Jobs from "./components/Jobs";
+import Effects from "./components/Effects";
 import Health from "./components/Health";
-import MessyEditor from "./components/MessyEditor";
 
 export interface DuplicantEditorProps {
   gameObjectId: number;
@@ -113,19 +114,35 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
               value={tab}
               onChange={(_, value) => setTab(value)}
             >
-              <Tab label="Attributes" />
-              <Tab label="Appearance" />
-              <Tab label="Skills" />
-              <Tab label="Effects" />
-              <Tab label="Health" />
-              <Tab label="Old Junk" />
+              <Tab
+                label={t("duplicant-editor.attributes", {
+                  defaultValue: "Attributes"
+                })}
+              />
+              <Tab
+                label={t("duplicant-editor.appearance", {
+                  defaultValue: "Appearance"
+                })}
+              />
+              <Tab
+                label={t("duplicant-editor.health", { defaultValue: "Health" })}
+              />
+              <Tab
+                label={t("duplicant-editor.jobs", { defaultValue: "Jobs" })}
+              />
+              <Tab
+                label={t("duplicant-editor.effects", {
+                  defaultValue: "Effects"
+                })}
+              />
             </Tabs>
           </Paper>
           <div className={classes.tabContent}>
             {tab === 0 && <Attributes gameObjectId={gameObjectId} />}
             {tab === 1 && <Appearance gameObjectId={gameObjectId} />}
-            {tab === 4 && <Health gameObjectId={gameObjectId} />}
-            {tab === 5 && <MessyEditor gameObjectId={gameObjectId} />}
+            {tab === 2 && <Health gameObjectId={gameObjectId} />}
+            {tab === 3 && <Jobs gameObjectId={gameObjectId} />}
+            {tab === 4 && <Effects gameObjectId={gameObjectId} />}
           </div>
         </div>
       </div>
