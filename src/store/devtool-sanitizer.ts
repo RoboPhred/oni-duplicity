@@ -2,10 +2,19 @@ import { AnyAction } from "redux";
 
 import { SaveGame } from "oni-save-parser";
 
-import { ACTION_RECEIVE_ONISAVE_SUCCESS } from "@/actions/receive-onisave";
 import { AppState } from "@/state";
 
+import { ACTION_RECEIVE_ONISAVE_SUCCESS } from "@/services/oni-save/actions/receive-onisave";
+import { ACTION_ONISAVE_LOAD } from "@/services/oni-save/actions/load-onisave";
+
 export function actionSanitizer(action: AnyAction): AnyAction {
+  if (action.type == ACTION_ONISAVE_LOAD) {
+    return {
+      ...action,
+      payload: "~snip~"
+    };
+  }
+
   if (action.type === ACTION_RECEIVE_ONISAVE_SUCCESS) {
     return {
       ...action,
@@ -18,11 +27,20 @@ export function actionSanitizer(action: AnyAction): AnyAction {
 export function stateSanitizer(state: AppState): any {
   return {
     ...state,
-    oniSave: state.oniSave ? sanitizeSave(state.oniSave) : null
+    services: {
+      ...state.services,
+      oniSave: {
+        ...state.services.oniSave,
+        saveGame: sanitizeSave(state.services.oniSave.saveGame)
+      }
+    }
   };
 }
 
-function sanitizeSave(save: SaveGame): any {
+function sanitizeSave(save: SaveGame | null): any {
+  if (!save) {
+    return null;
+  }
   return {
     ...save,
     world: {

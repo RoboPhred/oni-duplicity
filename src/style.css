@@ -1,0 +1,14 @@
+/*
+This should be kept minimal and only provide globals
+or non-react component styles.
+
+Styles for react components should use the jss style api provided
+by material-ui
+*/
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}

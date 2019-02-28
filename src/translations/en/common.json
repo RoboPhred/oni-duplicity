@@ -1,0 +1,46 @@
+{
+  "nav": {
+    "overview": "Overview",
+    "duplicants": "Duplicants"
+  },
+  "save-file": {
+    "load": "Load",
+    "loading": "Loading",
+    "modified": "Modified"
+  },
+  "overview": {
+    "no-save": {
+      "title": "Choose a Save",
+      "prompt": "No save file has been loaded.",
+      "save-location": "Save files can be found at <1>{{path}}</1>."
+    }
+  },
+  "view-github": "View project on GitHub",
+  "duplicants": {
+    "title": "Duplicants",
+    "edit": "Edit"
+  },
+  "duplicant-editor": {
+    "title": "Edit Duplicant",
+    "notfound": "Duplicant Not Found",
+    "missing-data": "Value is missing from the save file",
+    "duplicant-name": "Name",
+    "duplicant-gender": "Gender",
+    "duplicant-voice": "Voice",
+    "effect": "Effect",
+    "add-effect": "Add Effect",
+    "cancel": "Cancel",
+    "time-in-cycles": "Time (cycles)",
+    "cycle-time": "Cycle Time",
+    "trait": "Trait",
+    "traits": "Traits",
+    "add-trait": "Add Trait",
+    "add-aptitude": "Add Interest",
+    "aptitude": "Interest",
+    "aptitudes": "Interests",
+    "primary-attributes": "Primary",
+    "secondary-attributes": "Secondary",
+    "job": "Job",
+    "mastery": "Mastery"
+  }
+}

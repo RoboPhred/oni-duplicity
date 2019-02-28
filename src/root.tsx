@@ -1,24 +1,39 @@
 import * as React from "react";
 import { hot } from "react-hot-loader";
-import { Provider } from "react-redux";
-import { I18nextProvider } from "react-i18next";
 
-import { ThemeProvider, theme } from "@/style";
+import "es6-promise/auto";
 
-import store from "./store";
+import "typeface-roboto";
 
-import i18n from "./i18n";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
-import App from "./App";
+import { ConnectedRouter } from "connected-react-router";
+
+import "@/style.css";
+
+import history from "@/history";
+import theme from "@/theme";
+
+import I18NProvider from "@/services/i18n/components/I18NProvider";
+import StoreProvider from "@/store/components/StoreProvider";
+
+import LoadingDialog from "@/components/LoadingDialog";
+
+import Routes from "@/routes";
 
 const Root: React.SFC = () => (
-  <I18nextProvider i18n={i18n}>
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </Provider>
-  </I18nextProvider>
+  <I18NProvider>
+    <StoreProvider>
+      <ConnectedRouter history={history}>
+        <MuiThemeProvider theme={theme}>
+          <CssBaseline />
+          <LoadingDialog />
+          <Routes />
+        </MuiThemeProvider>
+      </ConnectedRouter>
+    </StoreProvider>
+  </I18NProvider>
 );
 
 export default hot(module)(Root);

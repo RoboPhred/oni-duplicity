@@ -6,12 +6,16 @@ import {
 
 import createSagaMiddleware from "redux-saga";
 
-import reducer from "@/reducer";
-import saga from "@/saga";
+import { routerMiddleware } from "connected-react-router";
+
+import history from "@/history";
+
+import reducer from "./reducer";
+import saga from "./saga";
 
 import { actionSanitizer, stateSanitizer } from "./devtool-sanitizer";
 
-export function createStore() {
+function createStore() {
   const composeEnhancers =
     (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
@@ -24,8 +28,11 @@ export function createStore() {
 
   const store = createReduxStore(
     reducer,
-    composeEnhancers(applyMiddleware(sagaMiddleware))
+    composeEnhancers(applyMiddleware(sagaMiddleware, routerMiddleware(history)))
   );
   sagaMiddleware.run(saga);
   return store;
 }
+
+const store = createStore();
+export default store;
