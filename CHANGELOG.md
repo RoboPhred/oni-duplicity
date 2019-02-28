@@ -1,3 +1,15 @@
+### v3.1.0
+
+- Fill in duplicant property editors.
+
+### v3.0.1
+
+- Fix saves not loading
+
+### v3.0.0
+
+- Rewrite of UI focusing on reusability
+
 ### v2.1.3
 
 - Update oni-save-parser to bring in missing traits.
