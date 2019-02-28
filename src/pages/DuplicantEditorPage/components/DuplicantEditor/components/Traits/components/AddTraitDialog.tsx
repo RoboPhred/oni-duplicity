@@ -45,9 +45,18 @@ const AddTraitDialog: React.SFC<Props> = ({
               onChange={e => setSelectedTrait(e.target.value)}
               inputProps={{ id: "duplicant-trait" }}
             >
-              {availableTraits.map(trait => (
-                <MenuItem key={trait} value={trait}>
-                  <Trans i18nKey={`oni:todo-trans.traits.${trait}`}>
+              {[...availableTraits].sort().map(trait => (
+                <MenuItem
+                  key={trait}
+                  value={trait}
+                  title={t(
+                    `oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.DESC`,
+                    { defaultValue: "" }
+                  )}
+                >
+                  <Trans
+                    i18nKey={`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.NAME`}
+                  >
                     {trait}
                   </Trans>
                 </MenuItem>

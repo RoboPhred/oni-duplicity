@@ -160,7 +160,7 @@ const Appearance: React.SFC<Props> = ({ classes, gameObjectId }) => {
                   ))}
                 </div>
               )}
-              {tab === 4 && (
+              {tab === 3 && (
                 <div className={classes.partList}>
                   {ordinalRange(4).map(ordinal => (
                     <Portrait
