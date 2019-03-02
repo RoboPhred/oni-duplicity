@@ -22,6 +22,9 @@ type Props = AttributeNameProps & WithTranslation;
 const AttributeName: React.SFC<Props> = ({ gameObjectId, attributeId, t }) => (
   <AttributeEditor gameObjectId={gameObjectId}>
     {({ templateData }) => {
+      if (!templateData) {
+        return <div>Error: No Data</div>;
+      }
       let attribute = find(
         templateData.saveLoadLevels,
         x => x.attributeId === attributeId

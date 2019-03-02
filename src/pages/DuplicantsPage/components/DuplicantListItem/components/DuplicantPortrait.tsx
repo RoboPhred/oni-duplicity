@@ -39,35 +39,43 @@ const styles = createStyles({
 type Props = DuplicantPortraitProps & StyleProps<typeof styles>;
 const DuplicantPortrait: React.SFC<Props> = ({ classes, gameObjectId }) => (
   <AccessorizerEditor gameObjectId={gameObjectId}>
-    {({ templateData }) => (
-      <div className={classes.portraitContainer}>
-        <div className={classes.portrait}>
-          <DuplicantContainer>
-            <Body
-              ordinal={ordinalFromAccessory(
-                getAccessoryOfType(templateData.accessories, "body")!.guid.Guid
-              )}
-            />
-            <Head
-              ordinal={ordinalFromAccessory(
-                getAccessoryOfType(templateData.accessories, "headshape")!.guid
-                  .Guid
-              )}
-            />
-            <Eyes
-              ordinal={ordinalFromAccessory(
-                getAccessoryOfType(templateData.accessories, "eyes")!.guid.Guid
-              )}
-            />
-            <Hair
-              ordinal={ordinalFromAccessory(
-                getAccessoryOfType(templateData.accessories, "hair")!.guid.Guid
-              )}
-            />
-          </DuplicantContainer>
+    {({ templateData }) => {
+      if (!templateData) {
+        return <div>Error: No Data</div>;
+      }
+      return (
+        <div className={classes.portraitContainer}>
+          <div className={classes.portrait}>
+            <DuplicantContainer>
+              <Body
+                ordinal={ordinalFromAccessory(
+                  getAccessoryOfType(templateData.accessories, "body")!.guid
+                    .Guid
+                )}
+              />
+              <Head
+                ordinal={ordinalFromAccessory(
+                  getAccessoryOfType(templateData.accessories, "headshape")!
+                    .guid.Guid
+                )}
+              />
+              <Eyes
+                ordinal={ordinalFromAccessory(
+                  getAccessoryOfType(templateData.accessories, "eyes")!.guid
+                    .Guid
+                )}
+              />
+              <Hair
+                ordinal={ordinalFromAccessory(
+                  getAccessoryOfType(templateData.accessories, "hair")!.guid
+                    .Guid
+                )}
+              />
+            </DuplicantContainer>
+          </div>
         </div>
-      </div>
-    )}
+      );
+    }}
   </AccessorizerEditor>
 );
 export default withStyles(styles)(DuplicantPortrait);

@@ -53,7 +53,16 @@ function* handleOniSaveWrite(action: SaveOniSaveAction) {
       yield put(receiveOniSaveSuccess(saveGame, LoadingStatus.Saving));
       return;
     } else if (msg.type === "error") {
-      yield put(receiveOniSaveError(msg.error, LoadingStatus.Saving));
+      yield put(
+        receiveOniSaveError(
+          {
+            name: msg.error.name,
+            message: msg.error.message,
+            stack: msg.error.stack
+          },
+          LoadingStatus.Saving
+        )
+      );
       return;
     }
   }

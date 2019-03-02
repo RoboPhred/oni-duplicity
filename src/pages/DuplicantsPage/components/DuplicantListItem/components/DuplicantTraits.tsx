@@ -31,7 +31,7 @@ const DuplicantTraits: React.SFC<Props> = ({ classes, gameObjectId, t }) => (
   <TraitsEditor gameObjectId={gameObjectId}>
     {({ templateData }) => (
       <div className={classes.root}>
-        {templateData.TraitIds.map(trait => (
+        {(templateData || { TraitIds: [] }).TraitIds.map(trait => (
           <Typography
             key={trait}
             className={classes.trait}
