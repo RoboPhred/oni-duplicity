@@ -1,6 +1,6 @@
 ### vNext
 
-- Copy / Paste Duplicant appearance and attributes.
+- Copy / Paste Duplicant settings.
 - Clone Duplicant.
 
 ### v3.2.0

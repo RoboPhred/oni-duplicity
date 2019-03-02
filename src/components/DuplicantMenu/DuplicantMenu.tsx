@@ -15,6 +15,8 @@ import {
 } from "oni-save-parser";
 import AbstractPasteButton from "@/services/oni-save/components/AbstractPasteButton";
 
+import CopyMenuItem from "./components/CopyMenuItem";
+
 import mapDispatchToProps, { DispatchProps } from "./dispatch-props";
 
 export interface DuplicantMenuProps {
@@ -42,28 +44,7 @@ const DuplicantMenu: React.SFC<Props> = ({ gameObjectId, cloneDuplicant }) => {
         open={Boolean(anchorEl)}
         onClose={onClose}
       >
-        <AbstractCopyButton gameObjectId={gameObjectId}>
-          {({ onCopy }) => (
-            <>
-              <MenuItem
-                onClick={() => {
-                  onClose();
-                  onCopy([AccessorizerBehavior]);
-                }}
-              >
-                Copy Appearance
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  onClose();
-                  onCopy([AIAttributeLevelsBehavior]);
-                }}
-              >
-                Copy Attributes
-              </MenuItem>
-            </>
-          )}
-        </AbstractCopyButton>
+        <CopyMenuItem gameObjectId={gameObjectId} onClose={onClose} />
         <AbstractPasteButton gameObjectId={gameObjectId}>
           {({ disabled, availableBehaviors, onPaste }) => (
             <MenuItem
