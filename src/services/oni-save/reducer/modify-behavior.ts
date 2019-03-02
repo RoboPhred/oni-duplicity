@@ -1,20 +1,16 @@
-import { AnyAction } from "redux";
 import produce from "immer";
+import { AnyAction } from "redux";
+import { getBehavior } from "oni-save-parser";
 
 import { OniSaveState, defaultOniSaveState } from "../state";
+import { getGameObjectById } from "../utils";
 
 import {
   isModifyBehaviorAction,
   BehaviorDataTarget
 } from "../actions/modify-behavior";
-import {
-  GameObject,
-  SaveGame,
-  getBehavior,
-  KPrefabIDBehavior
-} from "oni-save-parser";
 
-export default function modifyOniSaveReducer(
+export default function modifyBehaviorReducer(
   state: OniSaveState = defaultOniSaveState,
   action: AnyAction
 ): OniSaveState {
@@ -33,6 +29,7 @@ export default function modifyOniSaveReducer(
     if (!gameObject) {
       return;
     }
+
     const behavior = getBehavior(gameObject, behaviorId);
     if (!behavior) {
       return;
@@ -52,24 +49,4 @@ export default function modifyOniSaveReducer(
 
     draft.isModified = true;
   });
-}
-
-// We should use the existing selector for this.
-//  Currently limited by our state being the nested OniSaveState
-function getGameObjectById(
-  saveGame: SaveGame,
-  gameObjectId: number
-): GameObject | null {
-  for (const group of saveGame.gameObjects) {
-    for (const gameObject of group.gameObjects) {
-      const idBehavior = getBehavior(gameObject, KPrefabIDBehavior);
-      if (!idBehavior) {
-        continue;
-      }
-      if (idBehavior.templateData.InstanceID === gameObjectId) {
-        return gameObject;
-      }
-    }
-  }
-  return null;
 }

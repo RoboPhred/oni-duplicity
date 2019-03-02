@@ -1,54 +1,77 @@
 import { createSelector } from "reselect";
 import { GameObject, getBehavior, KPrefabIDBehavior } from "oni-save-parser";
 
-import { AppState } from "@/state";
+import { OniSaveState } from "../state";
 
-export const saveGameSelector = (state: AppState) =>
-  state.services.oniSave.saveGame;
+import { createServiceSelector } from "./utils";
 
-export const isSaveModifiedSelector = (state: AppState) =>
-  state.services.oniSave.isModified;
+export const saveGameSelector = createServiceSelector(
+  (state: OniSaveState) => state.saveGame
+);
 
-export const gameObjectGroupsSelector = (state: AppState) => {
-  const saveGame = saveGameSelector(state);
-  if (!saveGame) {
-    return null;
+export const isSaveModifiedSelector = createServiceSelector(
+  (state: OniSaveState) => state.isModified
+);
+
+export const gameObjectGroupsSelector = createServiceSelector(
+  (state: OniSaveState) => {
+    const saveGame = saveGameSelector.local(state);
+    if (!saveGame) {
+      return null;
+    }
+
+    return saveGame.gameObjects;
   }
+);
 
-  return saveGame.gameObjects;
-};
+export const gameObjectTypesByIdSelector = createServiceSelector(
+  createSelector(
+    gameObjectGroupsSelector.local,
+    groups => {
+      const gameObjectTypesById: Record<number, string> = {};
 
-const gameObjectIdTypes: Record<number, string> = {};
-export const gameObjectsByIdSelector = createSelector(
-  gameObjectGroupsSelector,
-  groups => {
-    const gameObjectsById: Record<number, GameObject> = {};
+      if (!groups) {
+        return gameObjectTypesById;
+      }
 
-    if (!groups) {
+      for (const group of groups) {
+        for (const gameObject of group.gameObjects) {
+          const idBehavior = getBehavior(gameObject, KPrefabIDBehavior);
+          if (!idBehavior) {
+            continue;
+          }
+          const { InstanceID } = idBehavior.templateData;
+          gameObjectTypesById[InstanceID] = group.name;
+        }
+      }
+
+      return gameObjectTypesById;
+    }
+  )
+);
+
+export const gameObjectsByIdSelector = createServiceSelector(
+  createSelector(
+    gameObjectGroupsSelector.local,
+    groups => {
+      const gameObjectsById: Record<number, GameObject> = {};
+
+      if (!groups) {
+        return gameObjectsById;
+      }
+
+      for (const group of groups) {
+        for (const gameObject of group.gameObjects) {
+          const idBehavior = getBehavior(gameObject, KPrefabIDBehavior);
+          if (!idBehavior) {
+            continue;
+          }
+          const { InstanceID } = idBehavior.templateData;
+          gameObjectsById[InstanceID] = gameObject;
+        }
+      }
+
       return gameObjectsById;
     }
-
-    for (const group of groups) {
-      for (const gameObject of group.gameObjects) {
-        const idBehavior = getBehavior(gameObject, KPrefabIDBehavior);
-        if (!idBehavior) {
-          continue;
-        }
-        const { InstanceID } = idBehavior.templateData;
-        if (gameObjectsById[InstanceID]) {
-          console.log(
-            "ID CONFLICT",
-            InstanceID,
-            gameObjectIdTypes[InstanceID],
-            " <=> ",
-            group.name
-          );
-        }
-        gameObjectIdTypes[InstanceID] = group.name;
-        gameObjectsById[InstanceID] = gameObject;
-      }
-    }
-
-    return gameObjectsById;
-  }
+  )
 );

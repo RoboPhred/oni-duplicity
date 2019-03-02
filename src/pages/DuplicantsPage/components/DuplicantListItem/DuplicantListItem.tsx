@@ -11,6 +11,7 @@ import DuplicantPortrait from "./components/DuplicantPortrait";
 import DuplicantTraits from "./components/DuplicantTraits";
 import DuplicantAttributes from "./components/DuplicantAttributes";
 import EditButton from "./components/EditButton";
+import DuplicantMenu from "@/components/DuplicantMenu/DuplicantMenu";
 
 export interface DuplicantListItemProps {
   className?: string;
@@ -31,6 +32,8 @@ const styles = (theme: Theme) =>
       marginBottom: theme.spacing.unit
     },
     titleControls: {
+      display: "flex",
+      flexDirection: "row",
       marginLeft: "auto"
     },
     content: {
@@ -63,6 +66,7 @@ const DuplicantListItem: React.SFC<Props> = ({
           className={classes.editButton}
           gameObjectId={gameObjectId}
         />
+        <DuplicantMenu gameObjectId={gameObjectId} />
       </div>
     </div>
     <Divider />

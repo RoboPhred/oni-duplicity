@@ -1,4 +1,4 @@
-import { SaveGame } from "oni-save-parser";
+import { SaveGame, GameObjectBehavior } from "oni-save-parser";
 
 export enum LoadingStatus {
   Idle = "idle",
@@ -7,12 +7,22 @@ export enum LoadingStatus {
   Ready = "ready"
 }
 
+export interface CopyPasteData {
+  gameObjectType: string;
+  behaviors: Record<string, BehaviorCopyData>;
+}
+export interface BehaviorCopyData {
+  templateData?: any;
+  extraData?: any;
+}
+
 export interface OniSaveState {
   loadingStatus: LoadingStatus;
   loadingProgressMessage: string | null;
   loadError: Error | null;
   saveGame: SaveGame | null;
   isModified: boolean;
+  copyPasteData: CopyPasteData | null;
 }
 
 export const defaultOniSaveState: Readonly<OniSaveState> = {
@@ -20,6 +30,7 @@ export const defaultOniSaveState: Readonly<OniSaveState> = {
   loadingProgressMessage: null,
   loadError: null,
   saveGame: null,
-  isModified: false
+  isModified: false,
+  copyPasteData: null
 };
 Object.freeze(defaultOniSaveState);
