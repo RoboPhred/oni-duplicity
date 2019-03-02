@@ -1,3 +1,7 @@
+### vNext
+
+- Copy / Paste Duplicant appearance and attributes.
+
 ### v3.2.0
 
 - Fix Body Appearance tab.
