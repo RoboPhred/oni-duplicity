@@ -78,7 +78,7 @@ type Props = DuplicantEditorProps & WithTranslation & StyleProps<typeof styles>;
 const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
   const [tab, setTab] = React.useState(0);
   return (
-    <PageContainer title={t("duplicant-editor.title")}>
+    <PageContainer title={t("duplicant-editor.title")} back>
       <div className={classes.root}>
         <div className={classes.nameRow}>
           <DuplicantName gameObjectId={gameObjectId} />

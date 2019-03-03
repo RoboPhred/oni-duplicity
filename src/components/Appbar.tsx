@@ -9,9 +9,11 @@ import { createStyles, withStyles } from "@material-ui/core/styles";
 import SettingsButton from "./SettingsButton";
 import SaveModifiedChip from "./SaveModifiedChip";
 import SaveButton from "./SaveButton";
+import BackButton from "./BackButton";
 
 export interface AppbarProps {
   title: string;
+  back?: boolean;
 }
 
 const styles = createStyles({
@@ -21,9 +23,10 @@ const styles = createStyles({
 });
 
 type Props = AppbarProps & StyleProps<typeof styles>;
-const Appbar: React.SFC<Props> = ({ classes, title }) => (
+const Appbar: React.SFC<Props> = ({ classes, title, back }) => (
   <MaterialAppBar position="static">
     <Toolbar>
+      {back && <BackButton />}
       <Typography className={classes.title} variant="h6" color="inherit">
         {title}
       </Typography>

@@ -35,16 +35,22 @@ const styles = createStyles({
 
 export interface PageContainerProps {
   title: string;
+  back?: boolean;
 }
 
 type Props = PageContainerProps & StyleProps<typeof styles>;
-const PageContainer: React.SFC<Props> = ({ classes, title, children }) => (
+const PageContainer: React.SFC<Props> = ({
+  classes,
+  title,
+  back,
+  children
+}) => (
   <div className={classes.root}>
     <Drawer variant="permanent" anchor="left">
       <Sidebar className={classes.sidebar} />
     </Drawer>
     <div className={classes.appRoot}>
-      <Appbar title={title} />
+      <Appbar title={title} back={back} />
       <div className={classes.content}>{children}</div>
     </div>
   </div>
