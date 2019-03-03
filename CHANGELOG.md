@@ -1,3 +1,7 @@
+### vNext
+
+- Fix deleting interests
+
 ### v3.3.0
 
 - Copy / Paste Duplicant settings.
