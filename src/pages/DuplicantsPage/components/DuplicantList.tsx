@@ -1,10 +1,15 @@
 import * as React from "react";
+import classnames from "classnames";
 
 import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 
 import AbstractGameObjectList from "@/services/oni-save/components/AbstractGameObjectList";
 
 import DuplicantListItem from "./DuplicantListItem";
+
+export interface DuplicantListProps {
+  className?: string;
+}
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -19,11 +24,11 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = StyleProps<typeof styles>;
-const DuplicantList: React.SFC<Props> = ({ classes }) => (
+type Props = DuplicantListProps & StyleProps<typeof styles>;
+const DuplicantList: React.SFC<Props> = ({ className, classes }) => (
   <AbstractGameObjectList gameObjectType="Minion">
     {({ gameObjectIds }) => (
-      <div className={classes.root}>
+      <div className={classnames(className, classes.root)}>
         {gameObjectIds.map(id => (
           <DuplicantListItem
             key={id}

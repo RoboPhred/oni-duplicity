@@ -28,6 +28,16 @@ const Nav: React.SFC<Props> = ({ enableSaveNavigation }) => (
         <Trans i18nKey="nav.duplicants">Duplicants</Trans>
       </ListItemText>
     </ListItemLink>
+    <ListItemLink
+      button
+      to="/materials"
+      autoselect
+      disabled={!enableSaveNavigation}
+    >
+      <ListItemText>
+        <Trans i18nKey="nav.materials">Materials</Trans>
+      </ListItemText>
+    </ListItemLink>
   </List>
 );
 export default connect(mapStateToProps)(Nav);

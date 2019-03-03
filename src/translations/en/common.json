@@ -1,7 +1,8 @@
 {
   "nav": {
     "overview": "Overview",
-    "duplicants": "Duplicants"
+    "duplicants": "Duplicants",
+    "materials": "Materials"
   },
   "save-file": {
     "load": "Load",
