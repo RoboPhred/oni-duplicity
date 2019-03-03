@@ -1,4 +1,4 @@
-### vNext
+### v3.3.1
 
 - Fix deleting interests
 
