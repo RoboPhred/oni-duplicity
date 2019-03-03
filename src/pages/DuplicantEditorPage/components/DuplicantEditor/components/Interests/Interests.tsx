@@ -4,7 +4,7 @@ import {
   MinionResumeBehavior,
   getHashedString
 } from "oni-save-parser";
-import { merge, findIndex } from "lodash-es";
+import { findIndex } from "lodash-es";
 
 import { WithTranslation, withTranslation } from "react-i18next";
 
@@ -55,6 +55,10 @@ const Interests: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
           <div className={classes.root}>
             {selectedAptitudes.map((aptitude, i) => {
               const aptitudeName = MinionRoleGroup[aptitude[0].hash];
+              const aptitudeIndex = findIndex(
+                AptitudeByRoleGroup,
+                a => a[0].hash === aptitude[0].hash
+              );
               return (
                 <Chip
                   key={i}
@@ -63,10 +67,17 @@ const Interests: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
                     defaultValue: aptitudeName
                   })}
                   onDelete={() => {
+                    console.log(
+                      "Deleting aptitude",
+                      aptitudeIndex,
+                      aptitude[0]
+                    );
                     onTemplateDataModify({
-                      AptitudeByRoleGroup: merge([], AptitudeByRoleGroup, {
-                        [i]: [aptitude[0], 0]
-                      })
+                      AptitudeByRoleGroup: [
+                        ...AptitudeByRoleGroup!.slice(0, aptitudeIndex),
+                        [aptitude[0], 0],
+                        ...AptitudeByRoleGroup!.slice(aptitudeIndex + 1)
+                      ]
                     });
                   }}
                 />
@@ -91,12 +102,11 @@ const Interests: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
                 );
                 if (aptitudeIndex) {
                   onTemplateDataModify({
-                    AptitudeByRoleGroup: merge([], AptitudeByRoleGroup, {
-                      [aptitudeIndex]: [
-                        AptitudeByRoleGroup![aptitudeIndex][0],
-                        1
-                      ]
-                    })
+                    AptitudeByRoleGroup: [
+                      ...AptitudeByRoleGroup!.slice(0, aptitudeIndex),
+                      [AptitudeByRoleGroup![aptitudeIndex][0], 1],
+                      ...AptitudeByRoleGroup!.slice(aptitudeIndex + 1)
+                    ]
                   });
                 }
               }}
