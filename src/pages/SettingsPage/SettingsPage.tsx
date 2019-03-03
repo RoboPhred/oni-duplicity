@@ -1,10 +1,30 @@
 import * as React from "react";
 
+import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+
+import Typography from "@material-ui/core/Typography";
+
 import PageContainer from "@/components/PageContainer";
 
-const SettingsPage: React.SFC = () => (
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      padding: theme.spacing.unit
+    }
+  });
+
+type Props = StyleProps<typeof styles>;
+
+const SettingsPage: React.SFC<Props> = ({ classes }) => (
   <PageContainer title="Settings" back>
-    Settings
+    <div className={classes.root}>
+      <Typography variant="h6">Help Wanted: Translations</Typography>
+      <Typography>
+        <br />
+        Contribute translations at the{" "}
+        <a href="https://github.com/robophred/oni-duplicity">GitHub Repo</a>
+      </Typography>
+    </div>
   </PageContainer>
 );
-export default SettingsPage;
+export default withStyles(styles)(SettingsPage);
