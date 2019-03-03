@@ -9,7 +9,7 @@ import Chip from "@material-ui/core/Chip";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
 
-import AddTraitDialog from "./components/AddTraitDialog";
+import AddTraitButton from "./components/AddTraitButton";
 
 const TraitsEditor = AbstractBehaviorEditor.ofType(AITraitsBehavior);
 
@@ -31,7 +31,6 @@ const styles = (theme: Theme) =>
 
 type Props = TraitsProps & StyleProps<typeof styles> & WithTranslation;
 const Traits: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
-  const [isAddingTrait, setIsAddingTrait] = React.useState(false);
   return (
     <TraitsEditor gameObjectId={gameObjectId}>
       {({ templateData, onTemplateDataModify }) => {
@@ -58,23 +57,12 @@ const Traits: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
                 }}
               />
             ))}
-            <Chip
+            <AddTraitButton
               className={classes.chip}
-              color="primary"
-              label={t(`duplicant-editor.add-trait`)}
-              clickable
-              onClick={() => setIsAddingTrait(true)}
-            />
-            <AddTraitDialog
-              open={isAddingTrait}
               availableTraits={availableTraits}
-              onClose={() => setIsAddingTrait(false)}
-              onAddTrait={trait => {
-                setIsAddingTrait(false);
-                onTemplateDataModify({
-                  TraitIds: [...TraitIds, trait]
-                });
-              }}
+              onAddTrait={trait =>
+                onTemplateDataModify({ TraitIds: [...TraitIds, trait] })
+              }
             />
           </div>
         );

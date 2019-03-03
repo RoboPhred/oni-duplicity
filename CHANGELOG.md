@@ -4,6 +4,7 @@
 - Redirect to home page if no save is loaded
 - Redirect to home page on 404.
 - Materials list
+- Imporove "Add Trait/Interest" UI.
 
 ### v3.3.1
 

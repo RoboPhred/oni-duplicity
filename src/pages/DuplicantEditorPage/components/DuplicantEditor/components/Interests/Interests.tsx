@@ -13,7 +13,7 @@ import Chip from "@material-ui/core/Chip";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
 
-import AddAptitudeDialog from "./components/AddAptitudeDialog";
+import AddAptitudeButton from "./components/AddAptitudeButton";
 
 const ResumeEditor = AbstractBehaviorEditor.ofType(MinionResumeBehavior);
 
@@ -35,7 +35,6 @@ const styles = (theme: Theme) =>
 
 type Props = InterestsProps & StyleProps<typeof styles> & WithTranslation;
 const Interests: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
-  const [isAddingAptitude, setIsAddingAptitude] = React.useState(false);
   return (
     <ResumeEditor gameObjectId={gameObjectId}>
       {({ templateData: { AptitudeByRoleGroup }, onTemplateDataModify }) => {
@@ -83,19 +82,10 @@ const Interests: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
                 />
               );
             })}
-            <Chip
+            <AddAptitudeButton
               className={classes.chip}
-              color="primary"
-              label={t(`duplicant-editor.add-aptitude`)}
-              clickable
-              onClick={() => setIsAddingAptitude(true)}
-            />
-            <AddAptitudeDialog
-              open={isAddingAptitude}
               availableAptitudes={availableAptitudes}
-              onClose={() => setIsAddingAptitude(false)}
               onAddAptitude={aptitude => {
-                setIsAddingAptitude(false);
                 const aptitudeIndex = findIndex(
                   AptitudeByRoleGroup,
                   a => a[0].hash === getHashedString(aptitude).hash
