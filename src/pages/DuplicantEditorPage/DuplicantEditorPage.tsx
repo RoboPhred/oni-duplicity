@@ -4,6 +4,8 @@ import { RouteComponentProps } from "react-router";
 
 import AbstractGameObject from "@/services/oni-save/components/AbstractGameObject/AbstractGameObject";
 
+import RedirectIfNoSave from "@/components/RedirectIfNoSave";
+
 import DuplicantEditor from "./components/DuplicantEditor";
 import DuplicantNotFound from "./components/DuplicantNotFound";
 
@@ -23,6 +25,8 @@ const DuplicantEditorPage: React.SFC<Props> = ({
   <AbstractGameObject gameObjectId={Number(gameObjectId)}>
     {({ gameObjectType }) => (
       <React.Fragment>
+        <RedirectIfNoSave />
+
         {gameObjectType === "Minion" && (
           <DuplicantEditor gameObjectId={Number(gameObjectId)} />
         )}

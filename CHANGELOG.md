@@ -1,3 +1,9 @@
+### vNext
+
+- Back button for sub-pages
+- Redirect to home page if no save is loaded
+- Redirect to home page on 404.
+
 ### v3.3.1
 
 - Fix deleting interests

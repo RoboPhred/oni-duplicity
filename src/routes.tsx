@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import OverviewPage from "@/pages/OverviewPage";
 import DuplicantsPage from "@/pages/DuplicantsPage";
@@ -17,6 +17,7 @@ const Routes: React.SFC = () => (
       component={DuplicantEditorPage}
     />
     <Route path="/settings" exact component={SettingsPage} />
+    <Redirect to="/" />
   </Switch>
 );
 export default Routes;
