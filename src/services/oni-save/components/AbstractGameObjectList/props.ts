@@ -1,5 +1,5 @@
 export interface AbstractGameObjectListProps {
-  gameObjectType: string;
+  gameObjectType: string | string[];
   children(props: AbstractGameObjectListRenderProps): React.ReactChild;
 }
 

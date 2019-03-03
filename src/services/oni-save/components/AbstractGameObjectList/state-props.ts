@@ -1,7 +1,6 @@
 import { createStructuredSelector } from "reselect";
 import createCachedSelector from "re-reselect";
-import { find } from "lodash-es";
-import { getBehavior, KPrefabIDBehavior } from "oni-save-parser";
+import { getBehavior, KPrefabIDBehavior, GameObject } from "oni-save-parser";
 
 import { AppState } from "@/state";
 
@@ -15,20 +14,28 @@ const gameObjectTypeSelector = (_: any, props: AbstractGameObjectListProps) =>
 const gameObjectIdsSelector = createCachedSelector(
   gameObjectTypeSelector,
   gameObjectGroupsSelector,
-  (type, gameObjects) => {
-    if (!gameObjects) {
+  (typeProp, gameObjectsGroups) => {
+    if (!gameObjectsGroups) {
       return [];
     }
-    const typedObjects = find(gameObjects, x => x.name === type);
-    if (!typedObjects) {
-      return [];
+
+    const types = maybeArray(typeProp);
+
+    const gameObjects: GameObject[] = [];
+    for (const group of gameObjectsGroups) {
+      if (types.indexOf(group.name) !== -1) {
+        gameObjects.push(...group.gameObjects);
+      }
     }
-    return typedObjects.gameObjects
+
+    return gameObjects
       .map(x => getBehavior(x, KPrefabIDBehavior))
       .filter(isNotNull)
       .map(x => x.templateData.InstanceID);
   }
-)(gameObjectTypeSelector);
+)((_: any, props: AbstractGameObjectListProps) =>
+  maybeArray(props.gameObjectType).join(",")
+);
 
 export interface StateProps {
   gameObjectIds: number[];
@@ -46,4 +53,11 @@ export default mapStateToProps;
 
 function isNotNull<T>(x: T | null | undefined): x is T {
   return x != null;
+}
+
+function maybeArray(x: string | string[]): string[] {
+  if (Array.isArray(x)) {
+    return x;
+  }
+  return [x];
 }

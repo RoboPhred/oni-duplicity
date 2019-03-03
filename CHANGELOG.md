@@ -5,6 +5,7 @@
 - Redirect to home page on 404.
 - Materials list
 - Imporove "Add Trait/Interest" UI.
+- Geysers list
 
 ### v3.3.1
 

@@ -30,6 +30,16 @@ const Nav: React.SFC<Props> = ({ enableSaveNavigation }) => (
     </ListItemLink>
     <ListItemLink
       button
+      to="/geysers"
+      autoselect
+      disabled={!enableSaveNavigation}
+    >
+      <ListItemText>
+        <Trans i18nKey="nav.geysers">Geysers</Trans>
+      </ListItemText>
+    </ListItemLink>
+    <ListItemLink
+      button
       to="/materials"
       autoselect
       disabled={!enableSaveNavigation}

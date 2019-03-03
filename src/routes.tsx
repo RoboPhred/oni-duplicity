@@ -5,6 +5,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import OverviewPage from "@/pages/OverviewPage";
 import DuplicantsPage from "@/pages/DuplicantsPage";
 import DuplicantEditorPage from "@/pages/DuplicantEditorPage";
+import GeysersPage from "@/pages/GeysersPage";
 import MaterialsPage from "@/pages/MaterialsPage";
 import SettingsPage from "@/pages/SettingsPage";
 
@@ -17,6 +18,7 @@ const Routes: React.SFC = () => (
       exact
       component={DuplicantEditorPage}
     />
+    <Route path="/geysers" exact component={GeysersPage} />
     <Route path="/materials" exact component={MaterialsPage} />
     <Route path="/settings" exact component={SettingsPage} />
     <Redirect to="/" />

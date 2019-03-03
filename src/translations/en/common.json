@@ -2,6 +2,7 @@
   "nav": {
     "overview": "Overview",
     "duplicants": "Duplicants",
+    "geysers": "Geysers",
     "materials": "Materials"
   },
   "save-file": {
@@ -48,5 +49,8 @@
     "appearance": "Appearance",
     "health": "Health",
     "effects": "Effects"
+  },
+  "geysers": {
+    "title": "Geysers"
   }
 }
