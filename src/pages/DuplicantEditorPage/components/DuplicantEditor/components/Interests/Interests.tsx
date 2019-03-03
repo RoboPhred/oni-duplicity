@@ -90,15 +90,17 @@ const Interests: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
                   AptitudeByRoleGroup,
                   a => a[0].hash === getHashedString(aptitude).hash
                 );
-                if (aptitudeIndex) {
-                  onTemplateDataModify({
-                    AptitudeByRoleGroup: [
-                      ...AptitudeByRoleGroup!.slice(0, aptitudeIndex),
-                      [AptitudeByRoleGroup![aptitudeIndex][0], 1],
-                      ...AptitudeByRoleGroup!.slice(aptitudeIndex + 1)
-                    ]
-                  });
+                if (aptitudeIndex === -1) {
+                  return;
                 }
+                const aptitudeData = AptitudeByRoleGroup![aptitudeIndex];
+                onTemplateDataModify({
+                  AptitudeByRoleGroup: [
+                    ...AptitudeByRoleGroup!.slice(0, aptitudeIndex),
+                    [aptitudeData[0], 1],
+                    ...AptitudeByRoleGroup!.slice(aptitudeIndex + 1)
+                  ]
+                });
               }}
             />
           </div>
