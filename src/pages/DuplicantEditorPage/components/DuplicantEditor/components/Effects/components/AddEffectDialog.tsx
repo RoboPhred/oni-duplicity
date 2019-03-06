@@ -43,13 +43,15 @@ const AddEffectDialog: React.SFC<Props> = ({
   return (
     <Dialog open={open} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">
-        <Trans i18nKey="dialog-editor.add-effect">Add Effect</Trans>
+        <Trans i18nKey="duplicant_effects.verbs.add_titlecase">
+          Add Effect
+        </Trans>
       </DialogTitle>
       <DialogContent>
         <FormGroup>
           <FormControl>
             <InputLabel htmlFor="duplicant-effect">
-              <Trans i18nKey="duplicant-editor.effect">Effect</Trans>
+              <Trans i18nKey="duplicant_effect.noun_titlecase">Effect</Trans>
             </InputLabel>
             <Select
               value={selectedEffect}
@@ -67,7 +69,7 @@ const AddEffectDialog: React.SFC<Props> = ({
           </FormControl>
           <TextField
             className={classes.cycleTime}
-            label={t("duplicant-editor.cycle-time")}
+            label={t("time_cycles.noun_titlecase")}
             type="number"
             value={timeRemaining}
             onChange={e => setTimeRemaining(Number(e.target.value))}
@@ -76,7 +78,7 @@ const AddEffectDialog: React.SFC<Props> = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={() => onClose()} color="primary">
-          <Trans i18nKey="dialog-editor.cancel">Cancel</Trans>
+          <Trans i18nKey="dialog.verbs.cancel_titlecase">Cancel</Trans>
         </Button>
         <Button
           disabled={selectedEffect === "" || timeRemaining <= 0}
@@ -86,7 +88,9 @@ const AddEffectDialog: React.SFC<Props> = ({
           }}
           color="primary"
         >
-          <Trans i18nKey="dialog-editor.add-effect">Add Effect</Trans>
+          <Trans i18nKey="duplicant_effects.verbs.add_titlecase">
+            Add Effect
+          </Trans>
         </Button>
       </DialogActions>
     </Dialog>

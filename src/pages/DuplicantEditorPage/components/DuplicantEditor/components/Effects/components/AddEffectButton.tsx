@@ -26,7 +26,9 @@ const AddEffectButton: React.SFC<Props> = ({ gameObjectId }) => {
         return (
           <React.Fragment>
             <Button color="primary" onClick={() => setIsAddingEffect(true)}>
-              <Trans i18nKey="dialog-editor.add-effect">Add Effect</Trans>
+              <Trans i18nKey="duplicant_effects.verbs.add_titlecase">
+                Add Effect
+              </Trans>
             </Button>
             <AddEffectDialog
               open={isAddingEffect}

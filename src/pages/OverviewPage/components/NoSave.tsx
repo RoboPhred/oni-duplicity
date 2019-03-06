@@ -29,18 +29,18 @@ const saveFilePath = SaveFilePaths[OSType];
 type Props = StyleProps<typeof styles> & WithTranslation;
 
 const NoSave: React.SFC<Props> = ({ classes, t }) => (
-  <PageContainer title={t("overview.no-save.title")}>
+  <PageContainer title={t("overview-page.no-save.title")}>
     <div className={classes.root}>
       <div>
         <Typography variant="h5">
-          <Trans i18nKey="overview.no-save.prompt">
+          <Trans i18nKey="overview-page.no-save.prompt">
             Load a save using the controls on the upper left.
           </Trans>
         </Typography>
       </div>
       {SaveFilePaths[OSType] && (
         <Typography component="div" variant="body1">
-          <Trans i18nKey="overview.no-save.save-location">
+          <Trans i18nKey="overview-page.no-save.save-location">
             Save files can be found at <code>{{ path: saveFilePath }}</code>
           </Trans>
         </Typography>

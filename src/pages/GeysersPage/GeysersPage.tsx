@@ -26,7 +26,7 @@ const styles = (theme: Theme) =>
 
 type Props = StyleProps<typeof styles> & WithTranslation;
 const GeysersPage: React.SFC<Props> = ({ classes, t }) => (
-  <PageContainer title={t("geysers.title")}>
+  <PageContainer title={t("geyser.noun_titlecase_plural")}>
     <RedirectIfNoSave />
     <AbstractGameObjectList
       gameObjectType={GeyserTypeNames.map(x => `GeyserGeneric_${x}`)}

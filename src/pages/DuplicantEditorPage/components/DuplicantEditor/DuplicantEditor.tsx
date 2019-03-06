@@ -78,7 +78,7 @@ type Props = DuplicantEditorProps & WithTranslation & StyleProps<typeof styles>;
 const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
   const [tab, setTab] = React.useState(0);
   return (
-    <PageContainer title={t("duplicant-editor.title")} back>
+    <PageContainer title={t("duplicant.verbs.edit_titlecase")} back>
       <div className={classes.root}>
         <div className={classes.nameRow}>
           <DuplicantName gameObjectId={gameObjectId} />
@@ -93,14 +93,16 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
           <div className={classes.portraitRowTweakables}>
             <div className={classes.row}>
               <Typography variant="h6">
-                <Trans i18nKey="duplicant-editor.traits">Traits</Trans>
+                <Trans i18nKey="duplicant_trait.noun_titlecases">Traits</Trans>
               </Typography>
               <Divider className={classes.divider} />
               <Traits gameObjectId={gameObjectId} />
             </div>
             <div className={classes.row}>
               <Typography variant="h6">
-                <Trans i18nKey="duplicant-editor.aptitudes">Interests</Trans>
+                <Trans i18nKey="duplicant_interest.noun_titlecases">
+                  Interests
+                </Trans>
               </Typography>
               <Divider className={classes.divider} />
               <Aptitudes gameObjectId={gameObjectId} />
@@ -115,23 +117,27 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
               onChange={(_, value) => setTab(value)}
             >
               <Tab
-                label={t("duplicant-editor.attributes", {
+                label={t("duplicant_attribute.noun_titlecase_plural", {
                   defaultValue: "Attributes"
                 })}
               />
               <Tab
-                label={t("duplicant-editor.appearance", {
+                label={t("duplicant_appearance.noun_titlecase", {
                   defaultValue: "Appearance"
                 })}
               />
               <Tab
-                label={t("duplicant-editor.health", { defaultValue: "Health" })}
+                label={t("duplicant_health.noun_titlecase", {
+                  defaultValue: "Health"
+                })}
               />
               <Tab
-                label={t("duplicant-editor.jobs", { defaultValue: "Jobs" })}
+                label={t("duplicant_job.noun_titlecases", {
+                  defaultValue: "Jobs"
+                })}
               />
               <Tab
-                label={t("duplicant-editor.effects", {
+                label={t("duplicant_effect.noun_titlecases", {
                   defaultValue: "Effects"
                 })}
               />

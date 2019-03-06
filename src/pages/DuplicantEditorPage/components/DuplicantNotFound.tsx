@@ -23,10 +23,10 @@ const styles = (theme: Theme) =>
 
 type Props = WithTranslation & StyleProps<typeof styles>;
 const DuplicantNotFound: React.SFC<Props> = ({ t, classes }) => (
-  <PageContainer title={t("duplicant-editor.notfound")} back>
+  <PageContainer title={t("duplicant.conditions.missing_titlecase")} back>
     <div className={classes.root}>
       <Typography className={classes.text} variant="h5">
-        {t("duplicant-editor.notfound")}
+        {t("duplicant.conditions.missing_titlecase")}
       </Typography>
     </div>
   </PageContainer>

@@ -15,7 +15,7 @@ const Nav: React.SFC<Props> = ({ enableSaveNavigation }) => (
   <List component="nav">
     <ListItemLink button to="/" autoselect>
       <ListItemText>
-        <Trans i18nKey="nav.overview">Overview</Trans>
+        <Trans i18nKey="overview-page.title">Overview</Trans>
       </ListItemText>
     </ListItemLink>
     <ListItemLink
@@ -25,7 +25,7 @@ const Nav: React.SFC<Props> = ({ enableSaveNavigation }) => (
       disabled={!enableSaveNavigation}
     >
       <ListItemText>
-        <Trans i18nKey="nav.duplicants">Duplicants</Trans>
+        <Trans i18nKey="duplicant.noun_titlecase_plural">Duplicants</Trans>
       </ListItemText>
     </ListItemLink>
     <ListItemLink
@@ -35,7 +35,7 @@ const Nav: React.SFC<Props> = ({ enableSaveNavigation }) => (
       disabled={!enableSaveNavigation}
     >
       <ListItemText>
-        <Trans i18nKey="nav.geysers">Geysers</Trans>
+        <Trans i18nKey="geyser.noun_titlecase_plural">Geysers</Trans>
       </ListItemText>
     </ListItemLink>
     <ListItemLink
@@ -45,7 +45,7 @@ const Nav: React.SFC<Props> = ({ enableSaveNavigation }) => (
       disabled={!enableSaveNavigation}
     >
       <ListItemText>
-        <Trans i18nKey="nav.materials">Materials</Trans>
+        <Trans i18nKey="material.noun_titlecase_plural">Materials</Trans>
       </ListItemText>
     </ListItemLink>
   </List>

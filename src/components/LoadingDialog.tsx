@@ -34,7 +34,7 @@ const LoadingDialog: React.SFC<Props> = ({ classes }) => (
         <div className={classes.root}>
           <div className={classes.content}>
             <Typography className={classes.loadingText} variant="h4">
-              <Trans i18nKey="save-file.loading">Loading</Trans>
+              <Trans i18nKey="save-file.conditions.loading">Loading</Trans>
             </Typography>
             <Typography className={classes.message} variant="body1">
               {message}

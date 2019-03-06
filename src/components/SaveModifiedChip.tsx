@@ -14,7 +14,9 @@ const SaveModifiedChip: React.SFC<Props> = ({ t }) => (
         {hasChanges && (
           <Chip
             color="secondary"
-            label={t("save-file.modified", { defaultValue: "Modified" })}
+            label={t("save-file.conditions.modified", {
+              defaultValue: "Modified"
+            })}
           />
         )}
       </div>

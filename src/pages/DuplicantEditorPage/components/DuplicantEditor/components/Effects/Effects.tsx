@@ -31,10 +31,10 @@ const Effects: React.SFC<Props> = ({ gameObjectId }) => {
           <TableHead>
             <TableRow>
               <TableCell>
-                <Trans i18nKey="duplicant-editor.effect">Effect</Trans>
+                <Trans i18nKey="duplicant_effect.noun_titlecase">Effect</Trans>
               </TableCell>
               <TableCell align="right">
-                <Trans i18nKey="duplicant-editor.time-in-cycles">
+                <Trans i18nKey="time_cycles.noun_titlecase">
                   Time (cycles)
                 </Trans>
               </TableCell>

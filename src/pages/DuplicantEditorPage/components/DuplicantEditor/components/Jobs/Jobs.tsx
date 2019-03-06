@@ -30,10 +30,10 @@ const Jobs: React.SFC<Props> = ({ gameObjectId }) => (
         <Table>
           <TableHead>
             <TableCell>
-              <Trans i18nKey="duplicant-editor.job">Job</Trans>
+              <Trans i18nKey="duplicant_job.noun_titlecase">Job</Trans>
             </TableCell>
             <TableCell align="right">
-              <Trans i18nKey="duplicant-editor.mastery">Mastery</Trans>
+              <Trans i18nKey="duplicant_job.mastery_titlecase">Mastery</Trans>
             </TableCell>
           </TableHead>
           <TableBody>

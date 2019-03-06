@@ -77,7 +77,7 @@ const Attributes: React.SFC<Props> = ({ classes, gameObjectId, t }) => (
     {({ templateData: { saveLoadLevels }, onTemplateDataModify }) => (
       <div className={classes.root}>
         <Typography className={classes.header} variant="h6">
-          <Trans i18nKey="duplicant-editor.primary-attributes">Primary</Trans>
+          <Trans i18nKey="duplicant_attribute.primary_titlecase">Primary</Trans>
         </Typography>
         <Divider className={classes.divider} />
         <div className={classes.attributeList}>
@@ -111,7 +111,7 @@ const Attributes: React.SFC<Props> = ({ classes, gameObjectId, t }) => (
           })}
         </div>
         <Typography className={classes.header} variant="h6">
-          <Trans i18nKey="duplicant-editor.secondary-attributes">
+          <Trans i18nKey="duplicant_attribute.secondary_titlecase">
             Secondary
           </Trans>
         </Typography>

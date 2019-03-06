@@ -16,7 +16,7 @@ const EditButton: React.SFC<Props> = ({ className, gameObjectId, t }) => (
     className={className}
     to={`/duplicants/${gameObjectId}`}
     size="small"
-    title={t("duplicants.edit")}
+    title={t("duplicant.verbs.edit_titlecase")}
   >
     <EditIcon />
   </ButtonLink>

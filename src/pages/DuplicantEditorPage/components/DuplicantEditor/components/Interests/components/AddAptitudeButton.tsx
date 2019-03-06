@@ -27,7 +27,7 @@ const AddAptitudeButton: React.SFC<Props> = ({
       <div ref={chipRef}>
         <Chip
           color="primary"
-          label={t(`duplicant-editor.add-aptitude`)}
+          label={t(`duplicant_interest.verbs.add_titlecase`)}
           clickable
           onClick={() => setIsOpen(true)}
         />

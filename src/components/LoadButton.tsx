@@ -8,7 +8,7 @@ const LoadButton: React.SFC = () => (
   <AbstractLoadButton>
     {({ disabled, onClick }) => (
       <button disabled={disabled} onClick={onClick}>
-        <Trans i18nKey="save-file.load">Load</Trans>
+        <Trans i18nKey="save-file.verbs.load_titlecase">Load</Trans>
       </button>
     )}
   </AbstractLoadButton>

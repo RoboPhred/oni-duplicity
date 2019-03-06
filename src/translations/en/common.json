@@ -1,56 +1,77 @@
 {
-  "nav": {
-    "overview": "Overview",
-    "duplicants": "Duplicants",
-    "geysers": "Geysers",
-    "materials": "Materials"
+  "duplicant": {
+    "noun_titlecase_plural": "Duplicants",
+    "noun_titlecase": "Duplicant",
+    "verbs": {
+      "edit_titlecase": "Edit Duplicant"
+    },
+    "conditions": {
+      "missing_titlecase": "Duplicant Not Found"
+    }
+  },
+  "duplicant_effect": {
+    "noun_titlecase": "Effect",
+    "verbs": {
+      "add_titlecase": "Add Effect"
+    }
+  },
+  "duplicant_trait": {
+    "noun_titlecase": "Trait",
+    "verbs": {
+      "add_titlecase": "Add Trait"
+    }
+  },
+  "duplicant_interest": {
+    "noun_titlecase": "Interest",
+    "verbs": {
+      "add_titlecase": "Add Interest"
+    }
+  },
+  "duplicant_attribute": {
+    "noun_titlecase_plural": "Attributes",
+    "primary_titlecase": "Primary",
+    "secondary_titlecase": "Secondary"
+  },
+  "duplicant_job": {
+    "noun_titlecase": "Job",
+    "mastery_titlecase": "Mastery"
+  },
+  "duplicant_appearance": {
+    "noun_titlecase": "Appearance"
+  },
+  "duplicant_health": {
+    "noun_titlecase": "Health"
+  },
+  "geyser": {
+    "noun_titlecase_plural": "Geysers"
+  },
+  "material": {
+    "noun_titlecase_plural": "Materials"
+  },
+  "time_cycles": {
+    "noun_titlecase": "Cycle Time"
+  },
+  "dialog": {
+    "verbs": {
+      "cancel_titlecase": "Cancel"
+    }
   },
   "save-file": {
-    "load": "Load",
-    "loading": "Loading",
-    "modified": "Modified"
+    "verbs": {
+      "load_titlecase": "Load"
+    },
+    "conditions": {
+      "loading": "Loading",
+      "modified": "Modified"
+    }
   },
-  "overview": {
+  "overview-page": {
+    "title": "Overview",
     "no-save": {
       "title": "Choose a Save",
       "prompt": "No save file has been loaded.",
       "save-location": "Save files can be found at <1>{{path}}</1>."
     }
   },
-  "view-github": "View project on GitHub",
-  "duplicants": {
-    "title": "Duplicants",
-    "edit": "Edit"
-  },
-  "duplicant-editor": {
-    "title": "Edit Duplicant",
-    "notfound": "Duplicant Not Found",
-    "missing-data": "Value is missing from the save file",
-    "duplicant-name": "Name",
-    "duplicant-gender": "Gender",
-    "duplicant-voice": "Voice",
-    "effect": "Effect",
-    "add-effect": "Add Effect",
-    "cancel": "Cancel",
-    "time-in-cycles": "Time (cycles)",
-    "cycle-time": "Cycle Time",
-    "trait": "Trait",
-    "traits": "Traits",
-    "add-trait": "Add Trait",
-    "add-aptitude": "Add Interest",
-    "aptitude": "Interest",
-    "aptitudes": "Interests",
-    "attributes": "Attributes",
-    "primary-attributes": "Primary",
-    "secondary-attributes": "Secondary",
-    "job": "Job",
-    "jobs": "Jobs",
-    "mastery": "Mastery",
-    "appearance": "Appearance",
-    "health": "Health",
-    "effects": "Effects"
-  },
-  "geysers": {
-    "title": "Geysers"
-  }
+  "view-github": "View project on GitHub"
 }

@@ -27,7 +27,7 @@ const AddTraitButton: React.SFC<Props> = ({
       <div ref={chipRef}>
         <Chip
           color="primary"
-          label={t(`duplicant-editor.add-trait`)}
+          label={t(`duplicant_trait.verbs.add_titlecase`)}
           clickable
           onClick={() => setIsOpen(true)}
         />
