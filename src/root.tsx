@@ -1,16 +1,10 @@
 import * as React from "react";
 import { hot } from "react-hot-loader";
 
-import "es6-promise/auto";
-
-import "typeface-roboto";
-
 import CssBaseline from "@material-ui/core/CssBaseline";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
 import { ConnectedRouter } from "connected-react-router";
-
-import "@/style.css";
 
 import history from "@/history";
 import theme from "@/theme";
