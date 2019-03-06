@@ -56,6 +56,11 @@
       "cancel_titlecase": "Cancel"
     }
   },
+  "data": {
+    "verbs": {
+      "copy_titlecase": "Copy"
+    }
+  },
   "save-file": {
     "verbs": {
       "load_titlecase": "Load"
