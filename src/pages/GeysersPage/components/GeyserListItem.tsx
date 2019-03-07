@@ -7,6 +7,8 @@ import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
 
@@ -45,7 +47,7 @@ const GeyserListItem: React.SFC<Props> = ({
   gameObjectId
 }) => (
   <GeyserEditor gameObjectId={gameObjectId}>
-    {({ templateData }) => {
+    {({ templateData, onTemplateDataModify }) => {
       const config = templateData.configuration;
       if (!config) {
         return <div />;
@@ -59,6 +61,26 @@ const GeyserListItem: React.SFC<Props> = ({
             <div className={classes.titleControls} />
           </div>
           <Divider />
+          <Select
+            value={config.typeId.hash}
+            onChange={e =>
+              onTemplateDataModify({
+                configuration: {
+                  ...config,
+                  typeId: { hash: Number(e.target.value) }
+                }
+              })
+            }
+          >
+            {keysOfType(GeyserType).map(typeName => (
+              <MenuItem
+                key={typeName}
+                value={(GeyserType[typeName] as any).hash}
+              >
+                {typeName}
+              </MenuItem>
+            ))}
+          </Select>
         </Paper>
       );
     }}
@@ -66,3 +88,7 @@ const GeyserListItem: React.SFC<Props> = ({
 );
 
 export default withStyles(styles)(GeyserListItem);
+
+function keysOfType<T>(type: T): (keyof T)[] {
+  return Object.keys(type) as any;
+}
