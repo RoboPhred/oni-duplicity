@@ -48,10 +48,14 @@ function* handleExportBehaviorsActionSaga(action: ExportBehaviorsAction) {
       continue;
     }
 
-    exportBehaviors[behaviorName] = {
-      templateData: behavior.templateData,
-      extraData: behavior.extraData
-    };
+    const exportBehavior: any = (exportBehaviors[behaviorName] = {});
+    // We cannot leave any undefined props, as objectHash will include them.
+    if (behavior.templateData) {
+      exportBehavior.templateData = behavior.templateData;
+    }
+    if (behavior.extraData) {
+      exportBehavior.extraData = behavior.extraData;
+    }
   }
 
   const exportObject: any = {

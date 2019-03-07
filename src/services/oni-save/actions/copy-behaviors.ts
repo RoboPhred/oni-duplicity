@@ -5,10 +5,10 @@ export const copyBehaviors = (gameObjectId: number, behaviors: string[]) => ({
   type: ACTION_ONISAVE_COPY_BEHAVIORS as typeof ACTION_ONISAVE_COPY_BEHAVIORS,
   payload: { gameObjectId, behaviors }
 });
-export type CopyBehaviorAction = ReturnType<typeof copyBehaviors>;
+export type CopyBehaviorsAction = ReturnType<typeof copyBehaviors>;
 
 export function isCopyBehaviorsAction(
   action: AnyAction
-): action is CopyBehaviorAction {
+): action is CopyBehaviorsAction {
   return action.type === ACTION_ONISAVE_COPY_BEHAVIORS;
 }
