@@ -11,14 +11,14 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 
-import { AbstractCopyButtonProps } from "./props";
+import { AbstractExportButtonProps } from "./props";
 import mapDispatchToProps, { DispatchProps } from "./dispatch-props";
 
-type Props = AbstractCopyButtonProps & DispatchProps;
-const AbstractCopyButton: React.SFC<Props> = ({
+type Props = AbstractExportButtonProps & DispatchProps;
+const AbstractExportButton: React.SFC<Props> = ({
   targets,
-  onCopy,
   children,
+  onExport,
   onComplete
 }) => {
   const [isDialogOpen, setDialogOpen] = React.useState(false);
@@ -76,13 +76,13 @@ const AbstractCopyButton: React.SFC<Props> = ({
               </Button>
               <Button
                 onClick={() => {
-                  onCopy(selectedTargets);
+                  onExport(selectedTargets);
                   close();
                 }}
                 color="primary"
                 autoFocus
               >
-                <Trans i18nKey="data.verbs.copy_titlecase">Copy</Trans>
+                <Trans i18nKey="data.verbs.export_titlecase">Export</Trans>
               </Button>
             </DialogActions>
           </React.Fragment>
@@ -95,4 +95,4 @@ const AbstractCopyButton: React.SFC<Props> = ({
 export default connect(
   null,
   mapDispatchToProps
-)(AbstractCopyButton);
+)(AbstractExportButton);

@@ -18,6 +18,7 @@ import AbstractPasteButton from "@/services/oni-save/components/AbstractPasteBut
 import CopyMenuItem from "./components/CopyMenuItem";
 
 import mapDispatchToProps, { DispatchProps } from "./dispatch-props";
+import ExportMenuItem from "./components/ExportMenuItem";
 
 export interface DuplicantMenuProps {
   gameObjectId: number;
@@ -58,6 +59,7 @@ const DuplicantMenu: React.SFC<Props> = ({ gameObjectId, cloneDuplicant }) => {
             </MenuItem>
           )}
         </AbstractPasteButton>
+        <ExportMenuItem gameObjectId={gameObjectId} onClose={onClose} />
         <Divider />
         <MenuItem
           onClick={() => {

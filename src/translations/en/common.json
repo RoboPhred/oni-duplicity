@@ -58,7 +58,8 @@
   },
   "data": {
     "verbs": {
-      "copy_titlecase": "Copy"
+      "copy_titlecase": "Copy",
+      "export_titlecase": "Export"
     }
   },
   "save-file": {

@@ -7,6 +7,7 @@
 - Imporove "Add Trait/Interest" UI.
 - Geysers list
 - Basic geyser element editing.
+- Duplicant data export.
 
 ### v3.3.1
 

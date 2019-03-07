@@ -1,8 +1,8 @@
 import { AppState } from "@/state";
 
 import {
-  copyPasteGameObjectType,
-  copyPasteAvailableBehaviors
+  copyPasteGameObjectTypeSelect,
+  copyPasteAvailableBehaviorsSelector
 } from "../../selectors/copy-paste";
 
 import { gameObjectTypesByIdSelector } from "../../selectors/save-game";
@@ -17,8 +17,8 @@ export default function mapStateToProps(
   return {
     disabled:
       !typesById[props.gameObjectId] ||
-      copyPasteGameObjectType(state) !== typesById[props.gameObjectId],
-    availableBehaviors: copyPasteAvailableBehaviors(state) || []
+      copyPasteGameObjectTypeSelect(state) !== typesById[props.gameObjectId],
+    availableBehaviors: copyPasteAvailableBehaviorsSelector(state) || []
   };
 }
 export type StateProps = ReturnType<typeof mapStateToProps>;
