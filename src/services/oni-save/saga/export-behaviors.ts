@@ -1,5 +1,6 @@
 import { takeEvery, select } from "redux-saga/effects";
 import { getBehavior, MinionIdentityBehavior } from "oni-save-parser";
+import objectHash from "object-hash";
 
 import { saveAs } from "file-saver";
 
@@ -53,14 +54,15 @@ function* handleExportBehaviorsActionSaga(action: ExportBehaviorsAction) {
     };
   }
 
-  const content = JSON.stringify(
-    {
-      gameObjectType,
-      behaviors: exportBehaviors
-    },
-    null,
-    2
-  );
+  const exportObject: any = {
+    gameObjectType,
+    behaviors: exportBehaviors
+  };
+
+  const hash = objectHash(exportObject, { algorithm: "sha1" });
+  exportObject.$sha1 = hash;
+
+  const content = JSON.stringify(exportObject, null, 2);
 
   const blob = new Blob([content], {
     type: "application/javascript;charset=utf-8"
