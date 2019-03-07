@@ -6,6 +6,7 @@
 - Materials list
 - Imporove "Add Trait/Interest" UI.
 - Geysers list
+- Basic geyser element editing.
 
 ### v3.3.1
 
