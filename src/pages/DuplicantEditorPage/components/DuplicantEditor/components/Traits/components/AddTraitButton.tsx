@@ -37,25 +37,26 @@ const AddTraitButton: React.SFC<Props> = ({
         anchorEl={chipRef.current}
         onClose={() => setIsOpen(false)}
       >
-        {[...availableTraits].sort().map(trait => (
-          <MenuItem
-            key={trait}
-            value={trait}
-            title={t(`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.DESC`, {
-              defaultValue: ""
-            })}
-            onClick={() => {
-              setIsOpen(false);
-              onAddTrait(trait);
-            }}
-          >
-            <Trans
-              i18nKey={`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.NAME`}
+        {isOpen &&
+          [...availableTraits].sort().map(trait => (
+            <MenuItem
+              key={trait}
+              value={trait}
+              title={t(`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.DESC`, {
+                defaultValue: ""
+              })}
+              onClick={() => {
+                setIsOpen(false);
+                onAddTrait(trait);
+              }}
             >
-              {trait}
-            </Trans>
-          </MenuItem>
-        ))}
+              <Trans
+                i18nKey={`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.NAME`}
+              >
+                {trait}
+              </Trans>
+            </MenuItem>
+          ))}
       </Menu>
     </div>
   );

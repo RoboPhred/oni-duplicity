@@ -93,14 +93,14 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
           <div className={classes.portraitRowTweakables}>
             <div className={classes.row}>
               <Typography variant="h6">
-                <Trans i18nKey="duplicant_trait.noun_titlecases">Traits</Trans>
+                <Trans i18nKey="duplicant_trait.noun_titlecase">Traits</Trans>
               </Typography>
               <Divider className={classes.divider} />
               <Traits gameObjectId={gameObjectId} />
             </div>
             <div className={classes.row}>
               <Typography variant="h6">
-                <Trans i18nKey="duplicant_interest.noun_titlecases">
+                <Trans i18nKey="duplicant_interest.noun_titlecase">
                   Interests
                 </Trans>
               </Typography>
@@ -132,12 +132,12 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
                 })}
               />
               <Tab
-                label={t("duplicant_job.noun_titlecases", {
+                label={t("duplicant_job.noun_titlecase", {
                   defaultValue: "Jobs"
                 })}
               />
               <Tab
-                label={t("duplicant_effect.noun_titlecases", {
+                label={t("duplicant_effect.noun_titlecase", {
                   defaultValue: "Effects"
                 })}
               />

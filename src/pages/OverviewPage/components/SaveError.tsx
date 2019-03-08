@@ -11,6 +11,9 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       padding: theme.spacing.unit
+    },
+    errorMessage: {
+      marginTop: theme.spacing.unit
     }
   });
 
@@ -23,7 +26,9 @@ const SaveError: React.SFC<Props> = ({ classes }) => (
         <div className={classes.root}>
           <Typography variant="h5">Error loading save</Typography>
           <Divider />
-          <Typography>{errorMessage}</Typography>
+          <Typography className={classes.errorMessage}>
+            {errorMessage}
+          </Typography>
         </div>
       </PageContainer>
     )}

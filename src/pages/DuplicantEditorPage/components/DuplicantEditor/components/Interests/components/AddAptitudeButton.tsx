@@ -37,25 +37,26 @@ const AddAptitudeButton: React.SFC<Props> = ({
         anchorEl={chipRef.current}
         onClose={() => setIsOpen(false)}
       >
-        {[...availableAptitudes].sort().map(trait => (
-          <MenuItem
-            key={trait}
-            value={trait}
-            title={t(`oni:DUPLICANTS.APTITUDES.${trait.toUpperCase()}.DESC`, {
-              defaultValue: ""
-            })}
-            onClick={() => {
-              setIsOpen(false);
-              onAddAptitude(trait);
-            }}
-          >
-            <Trans
-              i18nKey={`oni:DUPLICANTS.APTITUDES.${trait.toUpperCase()}.NAME`}
+        {isOpen &&
+          [...availableAptitudes].sort().map(trait => (
+            <MenuItem
+              key={trait}
+              value={trait}
+              title={t(`oni:DUPLICANTS.APTITUDES.${trait.toUpperCase()}.DESC`, {
+                defaultValue: ""
+              })}
+              onClick={() => {
+                setIsOpen(false);
+                onAddAptitude(trait);
+              }}
             >
-              {trait}
-            </Trans>
-          </MenuItem>
-        ))}
+              <Trans
+                i18nKey={`oni:DUPLICANTS.APTITUDES.${trait.toUpperCase()}.NAME`}
+              >
+                {trait}
+              </Trans>
+            </MenuItem>
+          ))}
       </Menu>
     </div>
   );
