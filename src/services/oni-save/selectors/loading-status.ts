@@ -5,3 +5,6 @@ export const loadingStatusSelector = (state: AppState) =>
 
 export const loadingStatusMessageSelector = (state: AppState) =>
   state.services.oniSave.loadingProgressMessage;
+
+export const loadingErrorSelector = (state: AppState) =>
+  state.services.oniSave.loadError;

@@ -4,7 +4,8 @@ export enum LoadingStatus {
   Idle = "idle",
   Loading = "loading",
   Saving = "saving",
-  Ready = "ready"
+  Ready = "ready",
+  Error = "error"
 }
 
 export interface CopyPasteData {

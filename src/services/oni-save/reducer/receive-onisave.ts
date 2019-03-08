@@ -29,7 +29,7 @@ export default function receiveOniSaveReducer(
     case ACTION_RECEIVE_ONISAVE_ERROR:
       state = {
         ...state,
-        loadingStatus: LoadingStatus.Idle,
+        loadingStatus: LoadingStatus.Error,
         loadError: action.payload
       };
       break;

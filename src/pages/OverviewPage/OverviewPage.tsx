@@ -5,11 +5,19 @@ import AbstractLoadStatus from "@/services/oni-save/components/AbstractLoadStatu
 
 import NoSave from "./components/NoSave";
 import SaveOverview from "./components/SaveOverview";
+import SaveError from "./components/SaveError";
 
 const OverviewPage: React.SFC = () => (
   <AbstractLoadStatus>
     {({ status }) => {
-      return status === LoadingStatus.Ready ? <SaveOverview /> : <NoSave />;
+      switch (status) {
+        default:
+          return <NoSave />;
+        case LoadingStatus.Error:
+          return <SaveError />;
+        case LoadingStatus.Ready:
+          return <SaveOverview />;
+      }
     }}
   </AbstractLoadStatus>
 );
