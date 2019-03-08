@@ -46,11 +46,7 @@ const ExportMenuItem: React.SFC<Props> = ({ gameObjectId, onClose }) => {
       onComplete={onClose}
     >
       {({ onClick }) => (
-        <MenuItem
-          onClick={() => {
-            onClick();
-          }}
-        >
+        <MenuItem onClick={onClick}>
           <Trans i18nKey="data.verbs.export_titlecase">Export</Trans>
         </MenuItem>
       )}

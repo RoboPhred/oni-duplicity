@@ -49,7 +49,7 @@ const AbstractExportButton: React.SFC<Props> = ({
         {isDialogOpen && (
           <React.Fragment>
             <DialogTitle id="set-copy-targets-title">
-              <Trans i18nKey="data.verbs.copy_titlecase">Copy</Trans>
+              <Trans i18nKey="data.verbs.export_titlecase">Export</Trans>
             </DialogTitle>
             <DialogContent>
               {targets.map(({ name, behavior }) => (

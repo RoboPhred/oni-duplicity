@@ -32,7 +32,7 @@ const MaterialsPage: React.SFC<Props> = ({ classes, materialData, t }) => {
         <TableHead>
           <TableRow>
             <TableCell>Element</TableCell>
-            <TableCell>Free Standing</TableCell>
+            <TableCell>Loose Ore</TableCell>
             <TableCell>Storage</TableCell>
           </TableRow>
         </TableHead>
@@ -48,14 +48,23 @@ const MaterialsPage: React.SFC<Props> = ({ classes, materialData, t }) => {
               <TableRow key={elementName}>
                 <TableCell>{elementName}</TableCell>
                 <TableCell>
-                  {formatWeight(freeStandingGrams)}
-                  <br />
-                  {freeStandingCount} clump{freeStandingCount !== 1 ? "s" : ""}
+                  {freeStandingGrams > 0 && (
+                    <>
+                      {formatWeight(freeStandingGrams)}
+                      <br />
+                      {freeStandingCount} clump
+                      {freeStandingCount !== 1 ? "s" : ""}
+                    </>
+                  )}
                 </TableCell>
                 <TableCell>
-                  {formatWeight(storageGrams)}
-                  <br />
-                  {storageCount} container{storageCount !== 1 ? "s" : ""}
+                  {storageGrams > 0 && (
+                    <>
+                      {formatWeight(storageGrams)}
+                      <br />
+                      {storageCount} container{storageCount !== 1 ? "s" : ""}
+                    </>
+                  )}
                 </TableCell>
               </TableRow>
             )
@@ -75,6 +84,5 @@ function formatWeight(weight: number) {
     return `${weight.toFixed(2)} g`;
   }
 
-  console.log(weight, weight / 1000.0, (weight / 1000.0).toFixed(2));
   return `${(weight / 1000.0).toFixed(2)} kg`;
 }

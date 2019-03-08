@@ -46,11 +46,7 @@ const CopyMenuItem: React.SFC<Props> = ({ gameObjectId, onClose }) => {
       onComplete={onClose}
     >
       {({ onClick }) => (
-        <MenuItem
-          onClick={() => {
-            onClick();
-          }}
-        >
+        <MenuItem onClick={onClick}>
           <Trans i18nKey="data.verbs.copy_titlecase">Copy</Trans>
         </MenuItem>
       )}

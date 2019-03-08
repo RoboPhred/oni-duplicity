@@ -11,6 +11,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
+import AbstractGameObject from "@/services/oni-save/components/AbstractGameObject/AbstractGameObject";
 
 const GeyserEditor = AbstractBehaviorEditor.ofType(GeyserBehavior);
 
@@ -46,45 +47,51 @@ const GeyserListItem: React.SFC<Props> = ({
   className,
   gameObjectId
 }) => (
-  <GeyserEditor gameObjectId={gameObjectId}>
-    {({ templateData, onTemplateDataModify }) => {
-      const config = templateData.configuration;
-      if (!config) {
-        return <div />;
-      }
-      return (
-        <Paper className={classnames(className, classes.root)}>
-          <div className={classes.titleBar}>
-            <Typography variant="h6">
-              {GeyserType[config.typeId.hash]}
-            </Typography>
-            <div className={classes.titleControls} />
-          </div>
-          <Divider />
-          <Select
-            value={config.typeId.hash}
-            onChange={e =>
-              onTemplateDataModify({
-                configuration: {
-                  ...config,
-                  typeId: { hash: Number(e.target.value) }
+  <AbstractGameObject gameObjectId={gameObjectId}>
+    {({ gameObjectType }) => (
+      <GeyserEditor gameObjectId={gameObjectId}>
+        {({ templateData, onTemplateDataModify }) => {
+          const config = templateData.configuration;
+          if (!config) {
+            return (
+              <Paper className={classnames(className, classes.root)}>
+                <Typography>Geyser is missing configuration data.</Typography>
+              </Paper>
+            );
+          }
+          return (
+            <Paper className={classnames(className, classes.root)}>
+              <div className={classes.titleBar}>
+                <Typography variant="h6">{gameObjectType}</Typography>
+                <div className={classes.titleControls} />
+              </div>
+              <Divider />
+              <Select
+                value={config.typeId.hash}
+                onChange={e =>
+                  onTemplateDataModify({
+                    configuration: {
+                      ...config,
+                      typeId: { hash: Number(e.target.value) }
+                    }
+                  })
                 }
-              })
-            }
-          >
-            {keysOfType(GeyserType).map(typeName => (
-              <MenuItem
-                key={typeName}
-                value={(GeyserType[typeName] as any).hash}
               >
-                {typeName}
-              </MenuItem>
-            ))}
-          </Select>
-        </Paper>
-      );
-    }}
-  </GeyserEditor>
+                {keysOfType(GeyserType).map(typeName => (
+                  <MenuItem
+                    key={typeName}
+                    value={(GeyserType[typeName] as any).hash}
+                  >
+                    {typeName}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Paper>
+          );
+        }}
+      </GeyserEditor>
+    )}
+  </AbstractGameObject>
 );
 
 export default withStyles(styles)(GeyserListItem);

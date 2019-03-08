@@ -13,6 +13,8 @@ import AddTraitButton from "./components/AddTraitButton";
 
 const TraitsEditor = AbstractBehaviorEditor.ofType(AITraitsBehavior);
 
+const CANDIDATE_TRAITS = AI_TRAIT_IDS.filter(x => x !== "None");
+
 export interface TraitsProps {
   gameObjectId: number;
 }
@@ -35,7 +37,7 @@ const Traits: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
     <TraitsEditor gameObjectId={gameObjectId}>
       {({ templateData, onTemplateDataModify }) => {
         const { TraitIds } = templateData;
-        const availableTraits = difference(AI_TRAIT_IDS, TraitIds);
+        const availableTraits = difference(CANDIDATE_TRAITS, TraitIds);
         return (
           <div className={classes.root}>
             {TraitIds.map((trait, i) => (

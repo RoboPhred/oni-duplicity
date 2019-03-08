@@ -1,13 +1,13 @@
 import { AppState } from "@/state";
 
 import {
-  loadingStatusLoadingSelector,
+  loadingStatusSelector,
   loadingStatusMessageSelector
 } from "../../selectors/loading-status";
 
 function mapStateToProps(state: AppState) {
   return {
-    isLoading: loadingStatusLoadingSelector(state),
+    status: loadingStatusSelector(state),
     message: loadingStatusMessageSelector(state)
   };
 }

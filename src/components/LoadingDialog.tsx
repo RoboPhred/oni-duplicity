@@ -7,6 +7,7 @@ import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import Typography from "@material-ui/core/Typography";
 
+import { LoadingStatus } from "@/services/oni-save/state";
 import AbstractLoadStatus from "@/services/oni-save/components/AbstractLoadStatus";
 
 const styles = (theme: Theme) =>
@@ -29,8 +30,8 @@ const styles = (theme: Theme) =>
 type Props = StyleProps<typeof styles>;
 const LoadingDialog: React.SFC<Props> = ({ classes }) => (
   <AbstractLoadStatus>
-    {({ isLoading, message }) => (
-      <Dialog open={isLoading}>
+    {({ status, message }) => (
+      <Dialog open={status === LoadingStatus.Loading}>
         <div className={classes.root}>
           <div className={classes.content}>
             <Typography className={classes.loadingText} variant="h4">
