@@ -64,7 +64,7 @@ const PRIMARY_ATTRIBUTES = [
   "Digging",
   "Caring",
   "Ranching",
-  "Toggle",
+  "Machinery",
   "Construction",
   "Art",
   "Botanist",

@@ -7,7 +7,8 @@
 - Imporove "Add Trait/Interest" UI.
 - Geysers list
 - Basic geyser element editing.
-- Duplicant data export.
+- Duplicant data import / export.
+- Fix Tinker and Toggle primary / secondary attribute classification being swapped.
 
 ### v3.3.1
 
