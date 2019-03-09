@@ -77,7 +77,7 @@ const AddEffectDialog: React.SFC<Props> = ({
         </FormGroup>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => onClose()} color="primary">
+        <Button onClick={() => onClose()}>
           <Trans i18nKey="dialog.verbs.cancel_titlecase">Cancel</Trans>
         </Button>
         <Button
@@ -86,7 +86,6 @@ const AddEffectDialog: React.SFC<Props> = ({
             setSelectedEffect("");
             onAddEffect(selectedEffect, timeRemaining * 200);
           }}
-          color="primary"
         >
           <Trans i18nKey="duplicant_effects.verbs.add_titlecase">
             Add Effect

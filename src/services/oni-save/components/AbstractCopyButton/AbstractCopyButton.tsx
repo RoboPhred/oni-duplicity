@@ -71,7 +71,7 @@ const AbstractCopyButton: React.SFC<Props> = ({
               ))}
             </DialogContent>
             <DialogActions>
-              <Button onClick={close} color="primary">
+              <Button onClick={close}>
                 <Trans i18nKey="dialog.verbs.cancel_titlecase">Cancel</Trans>
               </Button>
               <Button
@@ -79,7 +79,6 @@ const AbstractCopyButton: React.SFC<Props> = ({
                   onCopy(selectedTargets);
                   close();
                 }}
-                color="primary"
                 autoFocus
               >
                 <Trans i18nKey="data.verbs.copy_titlecase">Copy</Trans>

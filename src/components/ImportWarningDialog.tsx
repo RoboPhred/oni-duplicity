@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { Trans } from "react-i18next";
+
 import Typography from "@material-ui/core/Typography";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -24,7 +26,9 @@ const ImportWarningDialog: React.SFC = () => (
           <Typography>Are you sure you want to continue?</Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onCancel}>Cancel</Button>
+          <Button onClick={onCancel}>
+            <Trans i18nKey="dialog.verbs.cancel_titlecase">Cancel</Trans>
+          </Button>
           <Button onClick={onConfirm}>Confirm</Button>
         </DialogActions>
       </Dialog>
