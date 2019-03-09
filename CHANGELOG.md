@@ -6,7 +6,7 @@
 - Materials list
 - Imporove "Add Trait/Interest" UI.
 - Geysers list
-- Basic geyser element editing.
+- Basic geyser element and rate editing.
 - Duplicant data import / export.
 - Fix Tinker and Toggle primary / secondary attribute classification being swapped.
 

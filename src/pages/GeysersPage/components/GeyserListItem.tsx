@@ -9,6 +9,7 @@ import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import Slider from "@material-ui/lab/Slider";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
 import AbstractGameObject from "@/services/oni-save/components/AbstractGameObject/AbstractGameObject";
@@ -37,6 +38,12 @@ const styles = (theme: Theme) =>
       display: "flex",
       flexDirection: "row",
       marginLeft: "auto"
+    },
+    sliderSection: {
+      marginTop: theme.spacing.unit
+    },
+    valueLabel: {
+      marginBottom: theme.spacing.unit
     }
   });
 
@@ -59,6 +66,7 @@ const GeyserListItem: React.SFC<Props> = ({
               </Paper>
             );
           }
+
           return (
             <Paper className={classnames(className, classes.root)}>
               <div className={classes.titleBar}>
@@ -86,6 +94,25 @@ const GeyserListItem: React.SFC<Props> = ({
                   </MenuItem>
                 ))}
               </Select>
+              <div className={classes.sliderSection}>
+                <Typography className={classes.valueLabel} id={`rate-label`}>
+                  Rate
+                </Typography>
+                <Slider
+                  aria-labeledby={`rate-label`}
+                  value={config.rateRoll}
+                  min={0}
+                  max={1}
+                  onChange={(_, value) =>
+                    onTemplateDataModify({
+                      configuration: {
+                        ...config,
+                        rateRoll: value
+                      }
+                    })
+                  }
+                />
+              </div>
             </Paper>
           );
         }}
