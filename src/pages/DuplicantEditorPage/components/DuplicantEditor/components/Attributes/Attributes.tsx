@@ -10,9 +10,8 @@ import Divider from "@material-ui/core/Divider";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
 
-import CommitTextField from "@/components/CommitTextField";
-
 import AttributeName from "./components/AttributeName";
+import AttributeField from "./components/AttributeField";
 
 const AttributesEditor = AbstractBehaviorEditor.ofType(
   AIAttributeLevelsBehavior
@@ -74,41 +73,23 @@ const PRIMARY_ATTRIBUTES = [
 
 const Attributes: React.SFC<Props> = ({ classes, gameObjectId }) => (
   <AttributesEditor gameObjectId={gameObjectId}>
-    {({ templateData: { saveLoadLevels }, onTemplateDataModify }) => (
+    {({ templateData: { saveLoadLevels } }) => (
       <div className={classes.root}>
         <Typography className={classes.header} variant="h6">
           <Trans i18nKey="duplicant_attribute.primary_titlecase">Primary</Trans>
         </Typography>
         <Divider className={classes.divider} />
         <div className={classes.attributeList}>
-          {PRIMARY_ATTRIBUTES.map(attributeId => {
-            const attrIndex = findIndex(
-              saveLoadLevels,
-              x => x.attributeId === attributeId
-            );
-            if (attrIndex === -1) {
-              return undefined;
-            }
-            const attr = saveLoadLevels[attrIndex];
-            const { level } = attr;
-            return (
-              <div key={attributeId} className={classes.attributeItem}>
-                <CommitTextField
-                  className={classes.attributeInput}
-                  type="number"
-                  value={level}
-                  onCommit={value => {
-                    onTemplateDataModify({
-                      saveLoadLevels: merge([], saveLoadLevels, {
-                        [attrIndex]: { attributeId, level: Number(value) }
-                      })
-                    });
-                  }}
-                />
-                <AttributeName attributeId={attributeId} />
-              </div>
-            );
-          })}
+          {PRIMARY_ATTRIBUTES.map(attributeId => (
+            <div key={attributeId} className={classes.attributeItem}>
+              <AttributeField
+                className={classes.attributeInput}
+                gameObjectId={gameObjectId}
+                attributeId={attributeId}
+              />
+              <AttributeName attributeId={attributeId} />
+            </div>
+          ))}
         </div>
         <Typography className={classes.header} variant="h6">
           <Trans i18nKey="duplicant_attribute.secondary_titlecase">
@@ -117,34 +98,16 @@ const Attributes: React.SFC<Props> = ({ classes, gameObjectId }) => (
         </Typography>
         <Divider className={classes.divider} />
         <div className={classes.attributeList}>
-          {nonPrimaryAttributeIds(saveLoadLevels).map(attributeId => {
-            const attrIndex = findIndex(
-              saveLoadLevels,
-              x => x.attributeId === attributeId
-            );
-            if (attrIndex === -1) {
-              return undefined;
-            }
-            const attr = saveLoadLevels[attrIndex];
-            const { level } = attr;
-            return (
-              <div key={attributeId} className={classes.attributeItem}>
-                <CommitTextField
-                  className={classes.attributeInput}
-                  type="number"
-                  value={level}
-                  onCommit={value => {
-                    onTemplateDataModify({
-                      saveLoadLevels: merge([], saveLoadLevels, {
-                        [attrIndex]: { attributeId, level: Number(value) }
-                      })
-                    });
-                  }}
-                />
-                <AttributeName attributeId={attributeId} />
-              </div>
-            );
-          })}
+          {nonPrimaryAttributeIds(saveLoadLevels).map(attributeId => (
+            <div key={attributeId} className={classes.attributeItem}>
+              <AttributeField
+                className={classes.attributeInput}
+                gameObjectId={gameObjectId}
+                attributeId={attributeId}
+              />
+              <AttributeName attributeId={attributeId} />
+            </div>
+          ))}
         </div>
       </div>
     )}
