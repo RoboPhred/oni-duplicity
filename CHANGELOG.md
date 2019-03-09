@@ -1,4 +1,4 @@
-### vNext
+### v3.4.0
 
 - Back button for sub-pages
 - Redirect to home page if no save is loaded
