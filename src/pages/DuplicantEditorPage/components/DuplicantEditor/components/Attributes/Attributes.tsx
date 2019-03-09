@@ -2,7 +2,7 @@ import * as React from "react";
 import { AIAttributeLevelsBehavior, AttributeLevel } from "oni-save-parser";
 import { findIndex, merge } from "lodash-es";
 
-import { Trans, WithTranslation, withTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 
 import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -56,7 +56,7 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = AttributesProps & WithTranslation & StyleProps<typeof styles>;
+type Props = AttributesProps & StyleProps<typeof styles>;
 
 const PRIMARY_ATTRIBUTES = [
   "Athletics",
@@ -72,7 +72,7 @@ const PRIMARY_ATTRIBUTES = [
   "Strength"
 ];
 
-const Attributes: React.SFC<Props> = ({ classes, gameObjectId, t }) => (
+const Attributes: React.SFC<Props> = ({ classes, gameObjectId }) => (
   <AttributesEditor gameObjectId={gameObjectId}>
     {({ templateData: { saveLoadLevels }, onTemplateDataModify }) => (
       <div className={classes.root}>
@@ -151,7 +151,7 @@ const Attributes: React.SFC<Props> = ({ classes, gameObjectId, t }) => (
   </AttributesEditor>
 );
 
-export default withStyles(styles)(withTranslation()(Attributes));
+export default withStyles(styles)(Attributes);
 
 function nonPrimaryAttributeIds(attributes: AttributeLevel[]): string[] {
   return attributes

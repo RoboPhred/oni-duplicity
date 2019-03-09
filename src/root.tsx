@@ -9,10 +9,12 @@ import { ConnectedRouter } from "connected-react-router";
 import history from "@/history";
 import theme from "@/theme";
 
-import I18NProvider from "@/services/i18n/components/I18NProvider";
 import StoreProvider from "@/store/components/StoreProvider";
 
+import I18NProvider from "@/services/i18n/components/I18NProvider";
+
 import LoadingDialog from "@/components/LoadingDialog";
+import ImportWarningDialog from "@/components/ImportWarningDialog";
 
 import Routes from "@/routes";
 
@@ -23,6 +25,7 @@ const Root: React.SFC = () => (
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
           <LoadingDialog />
+          <ImportWarningDialog />
           <Routes />
         </MuiThemeProvider>
       </ConnectedRouter>

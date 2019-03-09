@@ -1,9 +1,11 @@
-import { takeEvery, call, select, put } from "redux-saga/effects";
+import { takeEvery, call, select, put, take } from "redux-saga/effects";
 import objectHash from "object-hash";
 
 import {
   ACTION_ONISAVE_IMPORT_BEHAVIORS,
-  ImportBehaviorsAction
+  ImportBehaviorsAction,
+  importWarnChecksum,
+  ACTION_ONISAVE_IMPORT_CONFIRM
 } from "../actions/import-behaviors";
 import { mergeBehaviors } from "../actions/merge-behaviors";
 
@@ -37,11 +39,10 @@ function* handleImportBehaviorsSaga(action: ImportBehaviorsAction) {
   delete content.$sha1;
   const contentSha1 = objectHash(content, { algorithm: "sha1" });
   if (sha1 !== contentSha1) {
-    // TODO: Show yes/no dialog and allow unmatching data to be used.
-    onError(
-      "Content checksum does not match.  Modified export data has a risk of corrupting the save file."
-    );
-    return;
+    const shouldContinue = yield* warnImportChecksumSaga();
+    if (!shouldContinue) {
+      return;
+    }
   }
 
   const { gameObjectType, behaviors } = content;
@@ -66,4 +67,10 @@ function readFile(file: File): Promise<string> {
     };
     reader.readAsText(file);
   });
+}
+
+function* warnImportChecksumSaga() {
+  yield put(importWarnChecksum());
+  const action = yield take(ACTION_ONISAVE_IMPORT_CONFIRM);
+  return action.payload;
 }

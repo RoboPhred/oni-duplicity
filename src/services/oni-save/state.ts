@@ -24,6 +24,7 @@ export interface OniSaveState {
   saveGame: SaveGame | null;
   isModified: boolean;
   copyPasteData: CopyPasteData | null;
+  warnInputChecksum: boolean;
 }
 
 export const defaultOniSaveState: Readonly<OniSaveState> = {
@@ -32,6 +33,7 @@ export const defaultOniSaveState: Readonly<OniSaveState> = {
   loadError: null,
   saveGame: null,
   isModified: false,
-  copyPasteData: null
+  copyPasteData: null,
+  warnInputChecksum: false
 };
 Object.freeze(defaultOniSaveState);
