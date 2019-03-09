@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Trans } from "react-i18next";
 
+import { createStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -11,29 +12,42 @@ import Button from "@material-ui/core/Button";
 
 import AbstractImportWarningDialog from "@/services/oni-save/components/AbstractImportWarningDialog";
 
-const ImportWarningDialog: React.SFC = () => (
+const styles = createStyles({
+  description: {
+    whiteSpace: "pre-line"
+  }
+});
+
+type Props = StyleProps<typeof styles>;
+
+const ImportWarningDialog: React.SFC<Props> = ({ classes }) => (
   <AbstractImportWarningDialog>
     {({ isOpen, onConfirm, onCancel }) => (
       <Dialog open={isOpen}>
-        <DialogTitle>Data Modified</DialogTitle>
+        <DialogTitle>
+          <Trans i18nKey="data.conditions.modified_titlecase">
+            Data Modified
+          </Trans>
+        </DialogTitle>
         <DialogContent>
-          <Typography>
-            The data in this file has been modified since it was exported.
-            <br />
-            Imported data is not validated, and importing invalid data can
-            corrupt your save
+          <Typography className={classes.description}>
+            <Trans i18nKey="data.prompts.modified-description" />
           </Typography>
-          <Typography>Are you sure you want to continue?</Typography>
+          <Typography>
+            <Trans i18nKey="dialog.queries.continue" />
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={onCancel}>
             <Trans i18nKey="dialog.verbs.cancel_titlecase">Cancel</Trans>
           </Button>
-          <Button onClick={onConfirm}>Confirm</Button>
+          <Button onClick={onConfirm}>
+            <Trans i18nKey="data.verbs.import_titlecase">Import</Trans>
+          </Button>
         </DialogActions>
       </Dialog>
     )}
   </AbstractImportWarningDialog>
 );
 
-export default ImportWarningDialog;
+export default withStyles(styles)(ImportWarningDialog);
