@@ -1,8 +1,4 @@
-import {
-  parseSaveGame,
-  writeSaveGame,
-  progressReporter
-} from "oni-save-parser";
+import { parseSaveGame, writeSaveGame } from "oni-save-parser";
 
 import {
   SaveParserCommandEvent,
@@ -53,12 +49,37 @@ function writeSave(command: WriteSaveCommand) {
   }
 }
 
+// Copied from progressReporter of oni-save-parser and
+//  modified to debounce messages
+let messageQueueTime = 0;
+let messageQueue: string | null = null;
+function progressReporter(
+  onProgress: (message: string) => void
+): (value: any) => any {
+  return (instruction: { type: "progress"; message: string }) => {
+    // Check if its time to emit a message.
+    if (messageQueue && messageQueueTime + 200 < Date.now()) {
+      onProgress(messageQueue);
+      messageQueue = null;
+      messageQueueTime = 0;
+    }
+
+    // Check if we have a message to queue up.
+    if (instruction && instruction.type === "progress") {
+      messageQueue = instruction.message;
+      if (messageQueueTime === 0) {
+        // Only set the time if we are not already set
+        //  This ensures only the most recent message in
+        //  the debounce time is sent.
+        messageQueueTime = Date.now();
+      }
+    }
+    return instruction;
+  };
+}
+
 let lastProgress: number = 0;
 function onProgress(message: string) {
-  // This reports lethargically and hangs on messages that are not
-  //  the object which is slowing us down.
-  // TODO: Move elapse timer to progressReporter() logic queue
-  //  up the last message to send when elapsed.
   const elapsed = Date.now() - lastProgress;
   if (elapsed > 200) {
     postMessage(sendProgress(message));
