@@ -1,5 +1,6 @@
 import reduceReducers from "reduce-reducers";
 
+import changeGeyserTypeReducer from "./change-geyser-type";
 import cloneDuplicantReducer from "./clone-duplicant";
 import copyBehaviorsReducer from "./copy-behaviors";
 import importWarnChecksumReducer from "./import-warn-checksum";
@@ -10,6 +11,7 @@ import pasteBehaviorsReducer from "./paste-behaviors";
 import receiveOniSaveReducer from "./receive-onisave";
 
 export default reduceReducers(
+  changeGeyserTypeReducer,
   cloneDuplicantReducer,
   copyBehaviorsReducer,
   importWarnChecksumReducer,

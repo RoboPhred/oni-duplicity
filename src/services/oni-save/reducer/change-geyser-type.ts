@@ -1,18 +1,23 @@
 import { AnyAction } from "redux";
-import { findIndex, find } from "lodash-es";
+import { findIndex, find, startsWith } from "lodash-es";
 import produce from "immer";
+import { GeyserType, HashedString } from "oni-save-parser";
 
 import { OniSaveState, defaultOniSaveState } from "../state";
 
-import { isChangeGameObjectTypeAction } from "../actions/change-gameobject-type";
+import { isChangeGeyserTypeAction } from "../actions/change-geyser-type";
 import { gameObjectTypesByIdSelector } from "../selectors/save-game";
-import { getBehavior, KPrefabIDBehavior } from "oni-save-parser";
+import {
+  getBehavior,
+  KPrefabIDBehavior,
+  GeyserBehavior
+} from "oni-save-parser";
 
-export default function changeGameObjectTypeReducer(
+export default function changeGeyserTypeReducer(
   state: OniSaveState = defaultOniSaveState,
   action: AnyAction
 ): OniSaveState {
-  if (!isChangeGameObjectTypeAction(action)) {
+  if (!isChangeGeyserTypeAction(action)) {
     return state;
   }
 
@@ -20,7 +25,7 @@ export default function changeGameObjectTypeReducer(
     return state;
   }
 
-  const { gameObjectId, gameObjectType } = action.payload;
+  const { gameObjectId, geyserType } = action.payload;
 
   const typesById = gameObjectTypesByIdSelector.local(state);
   if (!typesById || !typesById[gameObjectId]) {
@@ -28,6 +33,9 @@ export default function changeGameObjectTypeReducer(
   }
 
   const oldType = typesById[gameObjectId];
+  if (!startsWith(oldType, "GeyserGeneric_")) {
+    return state;
+  }
 
   return produce(state, draft => {
     const saveGame = draft.saveGame!;
@@ -50,10 +58,17 @@ export default function changeGameObjectTypeReducer(
 
     const gameObject = oldGroup.gameObjects.splice(oldIndex, 1)[0];
 
-    let newGroup = find(saveGame.gameObjects, x => x.name === gameObjectType);
+    const geyserBehavior = getBehavior(gameObject, GeyserBehavior);
+    if (!geyserBehavior || !geyserBehavior.templateData.configuration) {
+      return;
+    }
+    geyserBehavior.templateData.configuration.typeId = HashedString(geyserType);
+
+    const newObjectType = `GeyserGeneric_${geyserType}`;
+    let newGroup = find(saveGame.gameObjects, x => x.name === newObjectType);
     if (!newGroup) {
       newGroup = {
-        name: gameObjectType,
+        name: newObjectType,
         gameObjects: []
       };
       saveGame.gameObjects.push(newGroup);

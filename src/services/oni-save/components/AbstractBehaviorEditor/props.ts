@@ -10,6 +10,6 @@ export interface AbstractBehaviorEditorRenderProps<
 > {
   templateData: T["templateData"];
   extraData: T["extraData"];
-  onTemplateDataModify(templateData: Partial<T["templateData"]>): void;
-  onExtraDataModify(extraData: Partial<T["extraData"]>): void;
+  onTemplateDataModify(templateData: DeepPartial<T["templateData"]>): void;
+  onExtraDataModify(extraData: DeepPartial<T["extraData"]>): void;
 }

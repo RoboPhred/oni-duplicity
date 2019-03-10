@@ -31,7 +31,8 @@ const gameObjectIdsSelector = createCachedSelector(
     return gameObjects
       .map(x => getBehavior(x, KPrefabIDBehavior))
       .filter(isNotNull)
-      .map(x => x.templateData.InstanceID);
+      .map(x => x.templateData.InstanceID)
+      .sort();
   }
 )((_: any, props: AbstractGameObjectListProps) =>
   maybeArray(props.gameObjectType).join(",")

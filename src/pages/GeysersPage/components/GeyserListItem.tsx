@@ -11,10 +11,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Slider from "@material-ui/lab/Slider";
 
-import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
-import AbstractGameObject from "@/services/oni-save/components/AbstractGameObject/AbstractGameObject";
-
-const GeyserEditor = AbstractBehaviorEditor.ofType(GeyserBehavior);
+import AbstractGeyserEditor from "@/services/oni-save/components/AbstractGeyserEditor";
 
 export interface GeyserListItemProps {
   gameObjectId: number;
@@ -54,71 +51,39 @@ const GeyserListItem: React.SFC<Props> = ({
   className,
   gameObjectId
 }) => (
-  <AbstractGameObject gameObjectId={gameObjectId}>
-    {({ gameObjectType }) => (
-      <GeyserEditor gameObjectId={gameObjectId}>
-        {({ templateData, onTemplateDataModify }) => {
-          const config = templateData.configuration;
-          if (!config) {
-            return (
-              <Paper className={classnames(className, classes.root)}>
-                <Typography>Geyser is missing configuration data.</Typography>
-              </Paper>
-            );
-          }
-
-          return (
-            <Paper className={classnames(className, classes.root)}>
-              <div className={classes.titleBar}>
-                <Typography variant="h6">{gameObjectType}</Typography>
-                <div className={classes.titleControls} />
-              </div>
-              <Divider />
-              <Select
-                value={config.typeId.hash}
-                onChange={e =>
-                  onTemplateDataModify({
-                    configuration: {
-                      ...config,
-                      typeId: { hash: Number(e.target.value) }
-                    }
-                  })
-                }
-              >
-                {keysOfType(GeyserType).map(typeName => (
-                  <MenuItem
-                    key={typeName}
-                    value={(GeyserType[typeName] as any).hash}
-                  >
-                    {typeName}
-                  </MenuItem>
-                ))}
-              </Select>
-              <div className={classes.sliderSection}>
-                <Typography className={classes.valueLabel} id={`rate-label`}>
-                  Rate
-                </Typography>
-                <Slider
-                  aria-labeledby={`rate-label`}
-                  value={config.rateRoll}
-                  min={0}
-                  max={1}
-                  onChange={(_, value) =>
-                    onTemplateDataModify({
-                      configuration: {
-                        ...config,
-                        rateRoll: value
-                      }
-                    })
-                  }
-                />
-              </div>
-            </Paper>
-          );
-        }}
-      </GeyserEditor>
+  <AbstractGeyserEditor gameObjectId={gameObjectId}>
+    {({ geyserType, emitRate, onChangeEmitRate, onChangeGeyserType }) => (
+      <Paper className={classnames(className, classes.root)}>
+        <div className={classes.titleBar}>
+          <Typography variant="h6">{geyserType}</Typography>
+          <div className={classes.titleControls} />
+        </div>
+        <Divider />
+        <Select
+          value={geyserType || ""}
+          onChange={e => onChangeGeyserType(e.target.value)}
+        >
+          {keysOfType(GeyserType).map(typeName => (
+            <MenuItem key={typeName} value={typeName}>
+              {typeName}
+            </MenuItem>
+          ))}
+        </Select>
+        <div className={classes.sliderSection}>
+          <Typography className={classes.valueLabel} id="rate-label">
+            Rate
+          </Typography>
+          <Slider
+            aria-labelledby="rate-label"
+            value={emitRate || 0}
+            min={0}
+            max={1}
+            onChange={(_, value) => onChangeEmitRate(value)}
+          />
+        </div>
+      </Paper>
     )}
-  </AbstractGameObject>
+  </AbstractGeyserEditor>
 );
 
 export default withStyles(styles)(GeyserListItem);

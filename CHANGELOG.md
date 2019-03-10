@@ -1,3 +1,7 @@
+### vNext
+
+- Change geyser game object type (and artwork) when changing emit element.
+
 ### v3.4.0
 
 - Back button for sub-pages
