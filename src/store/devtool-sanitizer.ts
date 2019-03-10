@@ -6,15 +6,14 @@ import { AppState } from "@/state";
 
 import { ACTION_RECEIVE_ONISAVE_SUCCESS } from "@/services/oni-save/actions/receive-onisave";
 import { ACTION_ONISAVE_LOAD } from "@/services/oni-save/actions/load-onisave";
+import { ACTION_ONISAVE_PARSE_PROGRESS } from "@/services/oni-save/actions/parse-progress";
+
+export const actionsBlacklist: string[] = [
+  ACTION_ONISAVE_LOAD,
+  ACTION_ONISAVE_PARSE_PROGRESS
+];
 
 export function actionSanitizer(action: AnyAction): AnyAction {
-  if (action.type == ACTION_ONISAVE_LOAD) {
-    return {
-      ...action,
-      payload: "~snip~"
-    };
-  }
-
   if (action.type === ACTION_RECEIVE_ONISAVE_SUCCESS) {
     return {
       ...action,

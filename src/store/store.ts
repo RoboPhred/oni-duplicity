@@ -13,14 +13,19 @@ import history from "@/history";
 import reducer from "./reducer";
 import saga from "./saga";
 
-import { actionSanitizer, stateSanitizer } from "./devtool-sanitizer";
+import {
+  actionSanitizer,
+  stateSanitizer,
+  actionsBlacklist
+} from "./devtool-sanitizer";
 
 function createStore() {
   const composeEnhancers =
     (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
         actionSanitizer,
-        stateSanitizer
+        stateSanitizer,
+        actionsBlacklist
       })) ||
     compose;
 
