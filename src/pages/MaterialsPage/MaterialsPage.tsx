@@ -1,5 +1,4 @@
 import * as React from "react";
-import { connect } from "react-redux";
 
 import { WithTranslation, withTranslation } from "react-i18next";
 
@@ -10,10 +9,13 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 
+import withMaterialList, {
+  WithMaterialList
+} from "@/services/oni-save/hoc/MaterialList";
+
 import PageContainer from "@/components/PageContainer";
 import RedirectIfNoSave from "@/components/RedirectIfNoSave";
-
-import mapStateToProps, { StateProps } from "./state-props";
+import DeleteLooseButton from "./components/DeleteLooseButton";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -22,47 +24,63 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = StateProps & StyleProps<typeof styles> & WithTranslation;
+type Props = WithMaterialList & StyleProps<typeof styles> & WithTranslation;
 
-const MaterialsPage: React.SFC<Props> = ({ classes, materialData, t }) => {
+const MaterialsPage: React.SFC<Props> = ({
+  classes,
+  materials,
+  onDeleteLooseMaterial,
+  t
+}) => {
+  function formatWeight(weight: number) {
+    if (Math.abs(weight) < 1000) {
+      const g = Number(weight.toFixed(2));
+      return t("material.gram", { count: g });
+    }
+
+    const kg = Number((weight / 1000.0).toFixed(2));
+    return t("material.kilogram", { count: kg });
+  }
+
   return (
-    <PageContainer title={t("materials.title", { defaultValue: "Materials" })}>
+    <PageContainer title={t("material.noun_titlecase")}>
       <RedirectIfNoSave />
       <Table className={classes.root}>
         <TableHead>
           <TableRow>
-            <TableCell>Element</TableCell>
-            <TableCell>Loose Ore</TableCell>
-            <TableCell>Storage</TableCell>
+            <TableCell>{t("material.noun_titlecase")}</TableCell>
+            <TableCell>
+              {t("material_loose.noun_titlecase")}
+              <DeleteLooseButton
+                materialName={t("material.all_titlecase")}
+                onDelete={onDeleteLooseMaterial}
+              />
+            </TableCell>
+            <TableCell>{t("material_storage.noun_titlecase")}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {materialData.map(
-            ({
-              elementName,
-              freeStandingGrams,
-              freeStandingCount,
-              storageGrams,
-              storageCount
-            }) => (
-              <TableRow key={elementName}>
-                <TableCell>{elementName}</TableCell>
+          {materials.map(
+            ({ name, looseGrams, looseCount, storedGrams, storedCount }) => (
+              <TableRow key={name}>
+                <TableCell>{name}</TableCell>
                 <TableCell>
-                  {freeStandingGrams > 0 && (
+                  {looseGrams > 0 && (
                     <>
-                      {formatWeight(freeStandingGrams)}
+                      {formatWeight(looseGrams)}
                       <br />
-                      {freeStandingCount} clump
-                      {freeStandingCount !== 1 ? "s" : ""}
+                      {t("material_loose.clump_count", { count: looseCount })}
                     </>
                   )}
                 </TableCell>
                 <TableCell>
-                  {storageGrams > 0 && (
+                  {storedGrams > 0 && (
                     <>
-                      {formatWeight(storageGrams)}
+                      {formatWeight(storedGrams)}
                       <br />
-                      {storageCount} container{storageCount !== 1 ? "s" : ""}
+                      {t("material_storage.continer_count", {
+                        count: storedCount
+                      })}
                     </>
                   )}
                 </TableCell>
@@ -75,14 +93,6 @@ const MaterialsPage: React.SFC<Props> = ({ classes, materialData, t }) => {
   );
 };
 
-export default connect(mapStateToProps)(
+export default withMaterialList(
   withStyles(styles)(withTranslation()(MaterialsPage))
 );
-
-function formatWeight(weight: number) {
-  if (Math.abs(weight) < 1000) {
-    return `${weight.toFixed(2)} g`;
-  }
-
-  return `${(weight / 1000.0).toFixed(2)} kg`;
-}

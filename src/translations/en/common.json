@@ -46,7 +46,27 @@
     "noun_titlecase_plural": "Geysers"
   },
   "material": {
-    "noun_titlecase_plural": "Materials"
+    "noun_titlecase": "Material",
+    "noun_titlecase_plural": "Materials",
+    "all_titlecase": "All Material",
+    "gram": "{{count}} g",
+    "kilogram": "{{count}} kg"
+  },
+  "material_loose": {
+    "noun_titlecase": "Loose",
+    "clump_count": "{{count}} clump",
+    "clump_count_plural": "{{count}} clumps",
+    "verbs": {
+      "delete_name": "Delete {{name}}"
+    },
+    "prompts": {
+      "delete": "This will remove all loose material from the game.  The material will not be recovered."
+    }
+  },
+  "material_storage": {
+    "noun_titlecase": "Storage",
+    "container_count": "{{count}} container",
+    "container_count_plural": "{{count}} containers"
   },
   "time_cycles": {
     "noun_titlecase": "Cycle Time"
@@ -56,7 +76,8 @@
       "continue": "Are you sure you want to continue?"
     },
     "verbs": {
-      "cancel_titlecase": "Cancel"
+      "cancel_titlecase": "Cancel",
+      "confirm_titlecase": "Confirm"
     }
   },
   "data": {

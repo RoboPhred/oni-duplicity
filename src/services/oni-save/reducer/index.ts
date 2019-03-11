@@ -3,6 +3,7 @@ import reduceReducers from "reduce-reducers";
 import changeGeyserTypeReducer from "./change-geyser-type";
 import cloneDuplicantReducer from "./clone-duplicant";
 import copyBehaviorsReducer from "./copy-behaviors";
+import deleteLooseMaterial from "./delete-looe-material";
 import importWarnChecksumReducer from "./import-warn-checksum";
 import mergeBehaviorsReducer from "./merge-behaviors";
 import modifyBehaviorReducer from "./modify-behavior";
@@ -14,6 +15,7 @@ export default reduceReducers(
   changeGeyserTypeReducer,
   cloneDuplicantReducer,
   copyBehaviorsReducer,
+  deleteLooseMaterial,
   importWarnChecksumReducer,
   mergeBehaviorsReducer,
   modifyBehaviorReducer,
