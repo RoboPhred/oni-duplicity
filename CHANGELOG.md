@@ -1,4 +1,4 @@
-### vNext
+### 3.5.0
 
 - Change geyser game object type (and artwork) when changing emit element.
 - Improve load/save performance.
