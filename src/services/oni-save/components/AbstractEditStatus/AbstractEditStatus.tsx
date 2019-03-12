@@ -8,13 +8,14 @@ export interface AbstractEditStatusProps {
 }
 export interface AbstractEditStatusRenderProps {
   hasChanges: boolean;
+  isMock: boolean;
 }
 
 type Props = AbstractEditStatusProps & StateProps;
 class AbstractEditStatus extends React.Component<Props> {
   render() {
-    const { children, hasChanges } = this.props;
-    return React.Children.only(children({ hasChanges }));
+    const { children, isMock, hasChanges } = this.props;
+    return React.Children.only(children({ isMock, hasChanges }));
   }
 }
 

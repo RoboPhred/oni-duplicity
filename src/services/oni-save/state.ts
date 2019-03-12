@@ -22,6 +22,7 @@ export interface OniSaveState {
   loadingProgressMessage: string | null;
   loadError: Error | null;
   saveGame: SaveGame | null;
+  isMock: boolean;
   isModified: boolean;
   copyPasteData: CopyPasteData | null;
   warnInputChecksum: boolean;
@@ -32,6 +33,7 @@ export const defaultOniSaveState: Readonly<OniSaveState> = {
   loadingProgressMessage: null,
   loadError: null,
   saveGame: null,
+  isMock: false,
   isModified: false,
   copyPasteData: null,
   warnInputChecksum: false
