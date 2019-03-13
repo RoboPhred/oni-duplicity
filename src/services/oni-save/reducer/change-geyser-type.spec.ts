@@ -125,5 +125,11 @@ describe("changeGeyserTypeReducer", () => {
         })
       );
     });
+
+    it("marks the save as modified", () => {
+      const resultState = changeGeyserTypeReducer(state, action);
+
+      expect(resultState.isModified).toBeTruthy();
+    });
   });
 });

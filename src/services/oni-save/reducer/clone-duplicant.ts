@@ -8,12 +8,10 @@ import { gameObjectsByIdSelector } from "../selectors/save-game";
 import {
   KPrefabIDBehavior,
   GameObject,
-  getBehavior,
   MinionIdentityBehavior
 } from "oni-save-parser";
 
 const BEHAVIOR_BLACKLIST = ["StateMachineController", "Navigator"];
-KPrefabIDBehavior;
 
 export default function cloneDuplicantReducer(
   state: OniSaveState = defaultOniSaveState,

@@ -74,5 +74,7 @@ export default function changeGeyserTypeReducer(
       saveGame.gameObjects.push(newGroup);
     }
     newGroup.gameObjects.push(gameObject);
+
+    draft.isModified = true;
   });
 }
