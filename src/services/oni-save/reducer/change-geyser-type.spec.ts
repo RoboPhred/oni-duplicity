@@ -42,9 +42,9 @@ describe("changeGeyserTypeReducer", () => {
   });
 
   describe("operational cases", () => {
-    const mockGeyserObjectId = 1;
+    const mockGameObjectId = 1;
     const newGeyserType = GeyserTypeNames[1];
-    const action = changeGeyserType(mockGeyserObjectId, newGeyserType);
+    const action = changeGeyserType(mockGameObjectId, newGeyserType);
 
     let mockSaveGame: DeepPartial<SaveGame>;
     let state: OniSaveState;
@@ -59,7 +59,7 @@ describe("changeGeyserTypeReducer", () => {
                 behaviors: [
                   createBehavior(KPrefabIDBehavior, {
                     templateData: {
-                      InstanceID: mockGeyserObjectId
+                      InstanceID: mockGameObjectId
                     }
                   }),
                   createBehavior(GeyserBehavior, {
@@ -92,7 +92,7 @@ describe("changeGeyserTypeReducer", () => {
 
       const gameObject = getGameObjectById(
         resultState.saveGame!,
-        mockGeyserObjectId
+        mockGameObjectId
       );
       expect(gameObject).toBeDefined();
 
@@ -118,7 +118,7 @@ describe("changeGeyserTypeReducer", () => {
           behaviors: expect.arrayContaining([
             createBehavior(KPrefabIDBehavior, {
               templateData: {
-                InstanceID: mockGeyserObjectId
+                InstanceID: mockGameObjectId
               }
             })
           ])
