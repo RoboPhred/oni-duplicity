@@ -2,6 +2,7 @@
 
 - Change geyser game object type (and artwork) when changing emit element.
 - Improve load/save performance.
+- "Delete Loose Material" - Option to delete all loose ores on map.
 
 ### v3.4.0
 
