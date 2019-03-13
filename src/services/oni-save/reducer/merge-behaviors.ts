@@ -17,6 +17,10 @@ export default function mergeBehaviorsReducer(
     return state;
   }
 
+  if (!state.saveGame) {
+    return state;
+  }
+
   const { gameObjectId, behaviors } = action.payload;
 
   const typesById = gameObjectTypesByIdSelector.local(state);
@@ -45,5 +49,7 @@ export default function mergeBehaviorsReducer(
         behavior.extraData = extraData;
       }
     }
+
+    draft.isModified = true;
   });
 }
