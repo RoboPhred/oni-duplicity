@@ -10,6 +10,7 @@ import SettingsButton from "./SettingsButton";
 import SaveModifiedChip from "./SaveModifiedChip";
 import SaveButton from "./SaveButton";
 import BackButton from "./BackButton";
+import SaveExampleChip from "./SaveExampleChip";
 
 export interface AppbarProps {
   title: string;
@@ -31,6 +32,7 @@ const Appbar: React.SFC<Props> = ({ classes, title, back }) => (
         {title}
       </Typography>
       <SaveModifiedChip />
+      <SaveExampleChip />
       <SaveButton />
       <SettingsButton />
     </Toolbar>

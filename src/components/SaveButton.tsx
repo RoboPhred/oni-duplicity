@@ -7,8 +7,8 @@ import AbstractSaveButton from "@/services/oni-save/components/AbstractSaveButto
 
 const SaveFab: React.SFC = () => (
   <AbstractSaveButton>
-    {({ onClick }) => (
-      <IconButton onClick={onClick}>
+    {({ disabled, onClick }) => (
+      <IconButton disabled={disabled} onClick={onClick}>
         <SaveIcon />
       </IconButton>
     )}

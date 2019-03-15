@@ -10,6 +10,7 @@ import { OSType } from "@/runtime-env";
 
 import PageContainer from "@/components/PageContainer";
 import LoadButton from "@/components/LoadButton";
+import LoadExampleButton from "@/components/LoadExampleButton";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -46,6 +47,10 @@ const NoSave: React.SFC<Props> = ({ classes, t }) => (
         </Typography>
       )}
       <LoadButton />
+      <Typography component="div">
+        Have no save file? Want to preview the editor?
+      </Typography>
+      <LoadExampleButton />
     </div>
   </PageContainer>
 );

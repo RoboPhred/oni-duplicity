@@ -5,6 +5,7 @@ import cloneDuplicantReducer from "./clone-duplicant";
 import copyBehaviorsReducer from "./copy-behaviors";
 import deleteLooseMaterial from "./delete-looe-material";
 import importWarnChecksumReducer from "./import-warn-checksum";
+import loadExampleSaveReducer from "./load-example";
 import mergeBehaviorsReducer from "./merge-behaviors";
 import modifyBehaviorReducer from "./modify-behavior";
 import parseProgressReducer from "./parse-progress";
@@ -17,6 +18,7 @@ export default reduceReducers(
   copyBehaviorsReducer,
   deleteLooseMaterial,
   importWarnChecksumReducer,
+  loadExampleSaveReducer,
   mergeBehaviorsReducer,
   modifyBehaviorReducer,
   parseProgressReducer,
