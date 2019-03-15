@@ -27,6 +27,8 @@
     // This apparently does not block modules with built in typings.
     "types": [
       "classnames",
+      "enzyme",
+      "enzyme-adapter-react-16",
       "es6-promise",
       "file-saver",
       "history",
