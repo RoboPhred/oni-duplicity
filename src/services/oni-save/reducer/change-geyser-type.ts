@@ -1,7 +1,12 @@
 import { AnyAction } from "redux";
 import { findIndex, find, startsWith } from "lodash-es";
 import produce from "immer";
-import { GeyserType, HashedString } from "oni-save-parser";
+import {
+  GeyserType,
+  HashedString,
+  GameObjectGroup,
+  SaveGame
+} from "oni-save-parser";
 
 import { OniSaveState, defaultOniSaveState } from "../state";
 
@@ -38,7 +43,10 @@ export default function changeGeyserTypeReducer(
   }
 
   return produce(state, draft => {
-    const saveGame = draft.saveGame!;
+    // Force un-type the draft object back to SaveGame
+    //  to avoid type errors with symbol stripping from ArrayBuffer
+    const saveGame = draft.saveGame! as SaveGame;
+
     const groupIndex = findIndex(saveGame.gameObjects, x => x.name === oldType);
     if (groupIndex === -1) {
       return;

@@ -19,33 +19,6 @@
       "es2015.iterable"
     ],
 
-    // Jest includes @types/node, which causes conflicts with
-    //  the dom-defined ArrayBuffer by specifying Symbol.toStringTag
-    //  as a required property.
-    // To get around this, we have to use a whitelist of all types
-    //  to exclude @types/node.
-    // This apparently does not block modules with built in typings.
-    "types": [
-      "classnames",
-      "enzyme",
-      "enzyme-adapter-react-16",
-      "es6-promise",
-      "file-saver",
-      "history",
-      "i18next",
-      "jest",
-      "lodash-es",
-      "object-hash",
-      "platform",
-      "react",
-      "react-dom",
-      "react-redux",
-      "react-router",
-      "react-router-dom",
-      "reduce-reducers",
-      "webpack-env"
-    ],
-
     "strict": true,
 
     "baseUrl": "../node_modules",
