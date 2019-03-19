@@ -20,12 +20,3 @@ export function createBehavior<T extends GameObjectBehavior>(
     ...data
   };
 }
-
-export function getGameObjectId(gameObject: GameObject): number | null {
-  const idBehavior = getBehavior(gameObject, KPrefabIDBehavior);
-  if (!idBehavior) {
-    return null;
-  }
-
-  return idBehavior.templateData.InstanceID;
-}

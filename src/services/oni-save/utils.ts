@@ -23,3 +23,12 @@ export function getGameObjectById(
   }
   return null;
 }
+
+export function getGameObjectId(gameObject: GameObject): number | null {
+  const idBehavior = getBehavior(gameObject, KPrefabIDBehavior);
+  if (!idBehavior) {
+    return null;
+  }
+
+  return idBehavior.templateData.InstanceID;
+}

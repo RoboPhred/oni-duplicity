@@ -1,9 +1,3 @@
-import mockState from "@/__mocks__/active-state";
-
-import { defaultOniSaveState, OniSaveState } from "../state";
-import { cloneDuplicant } from "../actions/clone-duplicant";
-
-import cloneDuplicantReducer from "./clone-duplicant";
 import {
   KPrefabIDBehavior,
   MinionIdentityBehavior,
@@ -11,7 +5,16 @@ import {
   GameObjectGroup,
   GameObject
 } from "oni-save-parser";
-import { createBehavior, getGameObjectId } from "../test-utils";
+
+import mockState from "@/__mocks__/active-state";
+
+import { defaultOniSaveState, OniSaveState } from "../state";
+import { cloneDuplicant } from "../actions/clone-duplicant";
+
+import cloneDuplicantReducer from "./clone-duplicant";
+
+import { createBehavior } from "../test-utils";
+import { getGameObjectId } from "../utils";
 
 describe("cloneDuplicantReducer", () => {
   describe("no-op cases", () => {

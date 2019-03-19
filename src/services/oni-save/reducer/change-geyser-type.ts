@@ -1,22 +1,17 @@
 import { AnyAction } from "redux";
-import { findIndex, find, startsWith } from "lodash-es";
-import produce from "immer";
-import {
-  GeyserType,
-  HashedString,
-  GameObjectGroup,
-  SaveGame
-} from "oni-save-parser";
+import { startsWith } from "lodash-es";
+import { HashedString, GeyserBehavior } from "oni-save-parser";
 
 import { OniSaveState, defaultOniSaveState } from "../state";
 
 import { isChangeGeyserTypeAction } from "../actions/change-geyser-type";
 import { gameObjectTypesByIdSelector } from "../selectors/save-game";
+import { getGameObjectById } from "../utils";
 import {
-  getBehavior,
-  KPrefabIDBehavior,
-  GeyserBehavior
-} from "oni-save-parser";
+  addGameObject,
+  removeGameObject,
+  changeBehaviorTemplateDataState
+} from "./utils";
 
 export default function changeGeyserTypeReducer(
   state: OniSaveState = defaultOniSaveState,
@@ -42,47 +37,38 @@ export default function changeGeyserTypeReducer(
     return state;
   }
 
-  return produce(state, draft => {
-    // Force un-type the draft object back to SaveGame
-    //  to avoid type errors with symbol stripping from ArrayBuffer
-    const saveGame = draft.saveGame! as SaveGame;
+  let saveGame = state.saveGame;
 
-    const groupIndex = findIndex(saveGame.gameObjects, x => x.name === oldType);
-    if (groupIndex === -1) {
-      return;
-    }
-    const oldGroup = saveGame.gameObjects[groupIndex];
+  let gameObject = getGameObjectById(saveGame, gameObjectId);
+  if (!gameObject) {
+    return state;
+  }
 
-    const oldIndex = findIndex(oldGroup.gameObjects, gameObject => {
-      const idBehavior = getBehavior(gameObject, KPrefabIDBehavior);
-      if (!idBehavior) {
-        return false;
+  // Remove the object from the old type, as the type is changing.
+  saveGame = removeGameObject(saveGame, oldType, gameObjectId);
+
+  // Update the geyser behavior to emit the new element.
+  gameObject = changeBehaviorTemplateDataState(
+    gameObject,
+    GeyserBehavior,
+    templateData => ({
+      ...templateData,
+      configuration: {
+        ...templateData.configuration!,
+        typeId: HashedString(geyserType)
       }
-      return idBehavior.templateData.InstanceID === gameObjectId;
-    });
-    if (oldIndex === -1) {
-      return;
-    }
+    })
+  );
+  if (!gameObject) {
+    return state;
+  }
 
-    const gameObject = oldGroup.gameObjects.splice(oldIndex, 1)[0];
+  // Add the game object back in to reflect the new type.
+  saveGame = addGameObject(saveGame, `GeyserGeneric_${geyserType}`, gameObject);
 
-    const geyserBehavior = getBehavior(gameObject, GeyserBehavior);
-    if (!geyserBehavior || !geyserBehavior.templateData.configuration) {
-      return;
-    }
-    geyserBehavior.templateData.configuration.typeId = HashedString(geyserType);
-
-    const newObjectType = `GeyserGeneric_${geyserType}`;
-    let newGroup = find(saveGame.gameObjects, x => x.name === newObjectType);
-    if (!newGroup) {
-      newGroup = {
-        name: newObjectType,
-        gameObjects: []
-      };
-      saveGame.gameObjects.push(newGroup);
-    }
-    newGroup.gameObjects.push(gameObject);
-
-    draft.isModified = true;
-  });
+  return {
+    ...state,
+    saveGame,
+    isModified: true
+  };
 }
