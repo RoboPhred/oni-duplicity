@@ -8,6 +8,8 @@ import {
   getBehavior
 } from "oni-save-parser";
 
+import mockState from "@/__mocks__/active-state";
+
 import { OniSaveState, defaultOniSaveState, LoadingStatus } from "../state";
 import { changeGeyserType } from "../actions/change-geyser-type";
 
@@ -29,7 +31,7 @@ describe("changeGeyserTypeReducer", () => {
     });
 
     it("makes no changes when the action is not the correct type", () => {
-      const state = defaultOniSaveState;
+      const state = mockState.services.oniSave;
       const action = {
         ...changeGeyserType(1, GeyserTypeNames[1]),
         type: "another-action"

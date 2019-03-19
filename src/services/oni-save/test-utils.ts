@@ -1,4 +1,10 @@
-import { BehaviorName, GameObjectBehavior } from "oni-save-parser";
+import {
+  BehaviorName,
+  GameObjectBehavior,
+  GameObject,
+  getBehavior,
+  KPrefabIDBehavior
+} from "oni-save-parser";
 
 /**
  * Typecasting function to ensure type correctness of behavior data based on name.
@@ -13,4 +19,13 @@ export function createBehavior<T extends GameObjectBehavior>(
     name: behaviorName,
     ...data
   };
+}
+
+export function getGameObjectId(gameObject: GameObject): number | null {
+  const idBehavior = getBehavior(gameObject, KPrefabIDBehavior);
+  if (!idBehavior) {
+    return null;
+  }
+
+  return idBehavior.templateData.InstanceID;
 }

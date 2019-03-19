@@ -1,5 +1,7 @@
 import { KPrefabIDBehavior, SaveGame, AITraitsBehavior } from "oni-save-parser";
 
+import mockState from "@/__mocks__/active-state";
+
 import { defaultOniSaveState, OniSaveState, LoadingStatus } from "../state";
 
 import { mergeBehaviors } from "../actions/merge-behaviors";
@@ -19,7 +21,7 @@ describe("mergeBehaviorsReducer", () => {
     });
 
     it("makes no changes when the action is not the correct type", () => {
-      const state = defaultOniSaveState;
+      const state = mockState.services.oniSave;
       const action = {
         ...mergeBehaviors(1, {
           [KPrefabIDBehavior]: { templateData: { InstanceID: 1 } }

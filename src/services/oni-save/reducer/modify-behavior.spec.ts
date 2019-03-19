@@ -1,5 +1,7 @@
 import { KPrefabIDBehavior, SaveGame, getBehavior } from "oni-save-parser";
 
+import mockState from "@/__mocks__/active-state";
+
 import { defaultOniSaveState, OniSaveState, LoadingStatus } from "../state";
 import { modifyBehavior, BehaviorDataTarget } from "../actions/modify-behavior";
 
@@ -25,7 +27,7 @@ describe("changeGeyserTypeReducer", () => {
     });
 
     it("makes no changes when the action is not the correct type", () => {
-      const state = defaultOniSaveState;
+      const state = mockState.services.oniSave;
       const action = {
         ...modifyBehavior(
           1,
