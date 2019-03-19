@@ -6,8 +6,8 @@ import mapStateToProps, { StateProps } from "./state-props";
 
 type Props = AbstractPlanetListProps & StateProps;
 
-const AbstractPlanetList: React.SFC<Props> = ({ planets, children }) => (
-  <>{children({ planets })}</>
+const AbstractPlanetList: React.SFC<Props> = ({ planetIds, children }) => (
+  <>{children({ planetIds })}</>
 );
 
 export default connect(mapStateToProps)(AbstractPlanetList);

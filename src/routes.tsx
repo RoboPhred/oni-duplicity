@@ -6,6 +6,7 @@ import OverviewPage from "@/pages/OverviewPage";
 import DuplicantsPage from "@/pages/DuplicantsPage";
 import DuplicantEditorPage from "@/pages/DuplicantEditorPage";
 import GeysersPage from "@/pages/GeysersPage";
+import PlanetsPage from "@/pages/PlanetsPage";
 import MaterialsPage from "@/pages/MaterialsPage";
 import SettingsPage from "@/pages/SettingsPage";
 
@@ -19,6 +20,7 @@ const Routes: React.SFC = () => (
       component={DuplicantEditorPage}
     />
     <Route path="/geysers" exact component={GeysersPage} />
+    <Route path="/planets" exact component={PlanetsPage} />
     <Route path="/materials" exact component={MaterialsPage} />
     <Route path="/settings" exact component={SettingsPage} />
     <Redirect to="/" />

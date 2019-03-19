@@ -3,9 +3,10 @@ import { KPrefabIDBehavior, SaveGame, getBehavior } from "oni-save-parser";
 import { defaultOniSaveState, OniSaveState, LoadingStatus } from "../state";
 import { modifyBehavior, BehaviorDataTarget } from "../actions/modify-behavior";
 
-import modifyBehaviorReducer from "./modify-behavior";
 import { createBehavior } from "../test-utils";
 import { getGameObjectById } from "../utils";
+
+import modifyBehaviorReducer from "./modify-behavior";
 
 describe("changeGeyserTypeReducer", () => {
   describe("no-op cases", () => {

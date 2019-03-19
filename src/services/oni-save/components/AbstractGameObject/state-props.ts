@@ -15,10 +15,10 @@ const gameObjectTypeSelector = (
   return type;
 };
 
-function mapDispatchToProps(state: AppState, props: AbstractGameObjectProps) {
+function mapStateToProps(state: AppState, props: AbstractGameObjectProps) {
   return {
     gameObjectType: gameObjectTypeSelector(state, props)
   };
 }
-export type StateProps = ReturnType<typeof mapDispatchToProps>;
-export default mapDispatchToProps;
+export type StateProps = ReturnType<typeof mapStateToProps>;
+export default mapStateToProps;
