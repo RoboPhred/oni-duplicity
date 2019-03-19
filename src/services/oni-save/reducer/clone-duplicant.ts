@@ -1,15 +1,18 @@
 import { AnyAction } from "redux";
 import produce from "immer";
-import { find, findIndex } from "lodash-es";
+import { find } from "lodash-es";
+import {
+  KPrefabIDBehavior,
+  GameObject,
+  MinionIdentityBehavior,
+  getBehavior
+} from "oni-save-parser";
 
 import { defaultOniSaveState, OniSaveState } from "../state";
 import { isCloneDuplicantAction } from "../actions/clone-duplicant";
 import { gameObjectsByIdSelector } from "../selectors/save-game";
-import {
-  KPrefabIDBehavior,
-  GameObject,
-  MinionIdentityBehavior
-} from "oni-save-parser";
+
+import { changeBehaviorTemplateDataState } from "./utils";
 
 const BEHAVIOR_BLACKLIST = ["StateMachineController", "Navigator"];
 
@@ -33,6 +36,40 @@ export default function cloneDuplicantReducer(
   }
   const sourceGameObject = gameObjectsById[gameObjectId];
 
+  let newMinion: GameObject | null = {
+    ...sourceGameObject,
+    behaviors: sourceGameObject.behaviors.filter(
+      behavior => BEHAVIOR_BLACKLIST.indexOf(behavior.name) === -1
+    )
+  };
+
+  // Because we shallow clone behaviors, modifying the reference
+  //  with immer will modify both the original and the modified minion.
+  // Instead, we produce new immutable copies of the game object as we go.
+
+  const newPrefabId = state.saveGame!.settings.nextUniqueID;
+  newMinion = changeBehaviorTemplateDataState(newMinion, KPrefabIDBehavior, {
+    InstanceID: newPrefabId
+  });
+  if (!newMinion) {
+    return state;
+  }
+
+  const oldIdentity = getBehavior(sourceGameObject, MinionIdentityBehavior);
+  if (!oldIdentity) {
+    return state;
+  }
+  newMinion = changeBehaviorTemplateDataState(
+    newMinion,
+    MinionIdentityBehavior,
+    {
+      name: `Clone of ${oldIdentity.templateData.name}`
+    }
+  );
+  if (!newMinion) {
+    return state;
+  }
+
   return produce(state, draft => {
     const minionObjects = find(
       draft.saveGame!.gameObjects,
@@ -42,50 +79,9 @@ export default function cloneDuplicantReducer(
       return;
     }
 
-    const newMinion: GameObject = {
-      ...sourceGameObject,
-      behaviors: sourceGameObject.behaviors.filter(
-        behavior => BEHAVIOR_BLACKLIST.indexOf(behavior.name) === -1
-      )
-    };
+    minionObjects.gameObjects.push(newMinion!);
 
-    const idBehaviorIndex = findIndex(
-      newMinion.behaviors,
-      x => x.name === KPrefabIDBehavior
-    );
-    if (idBehaviorIndex === -1) {
-      return;
-    }
-
-    const newPrefabId = draft.saveGame!.settings.nextUniqueID;
     draft.saveGame!.settings.nextUniqueID += 1;
-
-    newMinion.behaviors[idBehaviorIndex] = {
-      ...newMinion.behaviors[idBehaviorIndex],
-      templateData: {
-        ...newMinion.behaviors[idBehaviorIndex].templateData,
-        InstanceID: newPrefabId
-      }
-    };
-
-    const identityBehaviorIndex = findIndex(
-      newMinion.behaviors,
-      x => x.name === MinionIdentityBehavior
-    );
-    if (identityBehaviorIndex !== -1) {
-      newMinion.behaviors[identityBehaviorIndex] = {
-        ...newMinion.behaviors[identityBehaviorIndex],
-        templateData: {
-          ...newMinion.behaviors[identityBehaviorIndex].templateData,
-          name: `Clone of ${
-            newMinion.behaviors[identityBehaviorIndex].templateData.name
-          }`
-        }
-      };
-    }
-
-    minionObjects.gameObjects.push(newMinion);
-
     draft.isModified = true;
   });
 }
