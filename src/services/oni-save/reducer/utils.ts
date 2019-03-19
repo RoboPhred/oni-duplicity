@@ -5,7 +5,8 @@ import {
   GameObjectBehavior,
   GameObjectGroup
 } from "oni-save-parser";
-import { findIndex } from "lodash-es";
+import { findIndex, merge } from "lodash-es";
+
 import { getGameObjectId } from "../utils";
 
 export function addGameObject(
@@ -92,27 +93,23 @@ export function changeBehaviorTemplateDataState<T extends GameObjectBehavior>(
     return null;
   }
 
-  // Duplicate game object and behaviors array
-  const newGameObject = {
-    ...gameObject,
-    behaviors: [...gameObject.behaviors]
-  };
+  const behavior = gameObject.behaviors[behaviorIndex];
 
-  // Modify behaviors array with duplicated behavior, and apply the change.
-  const oldBehavior = gameObject.behaviors[behaviorIndex];
+  let newTemplateData: any;
+  if (typeof templateData === "function") {
+    newTemplateData = templateData(behavior.templateData);
+  } else {
+    newTemplateData = {
+      ...behavior.templateData,
+      ...templateData
+    };
+  }
 
-  let resolvedTemplateData =
-    typeof templateData === "function"
-      ? templateData(oldBehavior.templateData)
-      : templateData;
-
-  newGameObject.behaviors[behaviorIndex] = {
-    ...oldBehavior,
-    templateData: {
-      ...oldBehavior.templateData,
-      ...resolvedTemplateData
+  return merge({}, gameObject, {
+    behaviors: {
+      [behaviorIndex]: {
+        templateData: newTemplateData
+      }
     }
-  };
-
-  return newGameObject;
+  });
 }

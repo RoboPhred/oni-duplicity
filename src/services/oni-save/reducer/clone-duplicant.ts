@@ -47,6 +47,7 @@ export default function cloneDuplicantReducer(
   //  with immer will modify both the original and the modified minion.
   // Instead, we produce new immutable copies of the game object as we go.
 
+  // Give the new duplicant a new PrefabID
   const newPrefabId = state.saveGame!.settings.nextUniqueID;
   newMinion = changeBehaviorTemplateDataState(newMinion, KPrefabIDBehavior, {
     InstanceID: newPrefabId
@@ -55,10 +56,13 @@ export default function cloneDuplicantReducer(
     return state;
   }
 
+  // Look up the old duplicant's name
   const oldIdentity = getBehavior(sourceGameObject, MinionIdentityBehavior);
   if (!oldIdentity) {
     return state;
   }
+
+  // Give the new duplicate a new name to differentiate it.
   newMinion = changeBehaviorTemplateDataState(
     newMinion,
     MinionIdentityBehavior,
@@ -71,17 +75,19 @@ export default function cloneDuplicantReducer(
   }
 
   return produce(state, draft => {
-    const minionObjects = find(
-      draft.saveGame!.gameObjects,
-      x => x.name === "Minion"
-    );
+    const saveGame = draft.saveGame!;
+
+    const minionObjects = find(saveGame.gameObjects, x => x.name === "Minion");
     if (!minionObjects) {
       return;
     }
 
     minionObjects.gameObjects.push(newMinion!);
 
-    draft.saveGame!.settings.nextUniqueID += 1;
+    // We used the next ID for the duplicant, so we
+    //  need to increment the counter
+    saveGame.settings.nextUniqueID += 1;
+
     draft.isModified = true;
   });
 }
