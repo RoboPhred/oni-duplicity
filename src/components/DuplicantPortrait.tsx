@@ -17,35 +17,50 @@ const AccessorizerEditor = AbstractBehaviorEditor.ofType(AccessorizerBehavior);
 
 export interface DuplicantPortraitProps {
   gameObjectId: number;
+  scale: number;
 }
 
 const styles = createStyles({
   portraitContainer: {
-    position: "relative",
-    width: 80,
-    height: 90
+    position: "relative"
+    // width: 80,
+    // height: 90
   },
   portrait: {
     position: "absolute",
-    left: 42,
-    top: 50,
+    // left: 42,
+    // top: 50,
     width: 0,
     height: 0,
-    transform: "scale(.3)",
+    // transform: "scale(.3)",
     transformOrigin: "top left"
   }
 });
 
 type Props = DuplicantPortraitProps & StyleProps<typeof styles>;
-const DuplicantPortrait: React.SFC<Props> = ({ classes, gameObjectId }) => (
+const DuplicantPortrait: React.SFC<Props> = ({
+  classes,
+  gameObjectId,
+  scale
+}) => (
   <AccessorizerEditor gameObjectId={gameObjectId}>
     {({ templateData }) => {
       if (!templateData) {
         return <div>Error: No Data</div>;
       }
       return (
-        <div className={classes.portraitContainer}>
-          <div className={classes.portrait}>
+        <div
+          className={classes.portraitContainer}
+          style={{ width: 240 * scale, height: 270 * scale }}
+        >
+          <div
+            className={classes.portrait}
+            style={{
+              left: 126 * scale,
+              top: 150 * scale,
+              transform: `scale(${scale})`
+            }}
+          >
             <DuplicantContainer>
               <Body
                 ordinal={ordinalFromAccessory(

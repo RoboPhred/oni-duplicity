@@ -10,9 +10,10 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
 import PageContainer from "@/components/PageContainer";
+import DuplicantPortrait from "@/components/DuplicantPortrait";
 
 import DuplicantName from "./components/DuplicantName";
-import DuplicantPortrait from "./components/DuplicantPortrait";
+// import DuplicantPortrait from "./components/DuplicantPortrait";
 import Traits from "./components/Traits";
 import Aptitudes from "./components/Interests";
 import Attributes from "./components/Attributes";
@@ -87,7 +88,7 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
         <div className={classes.portraitRow}>
           <div className={classes.portraitRowColumn}>
             <Paper>
-              <DuplicantPortrait gameObjectId={gameObjectId} />
+              <DuplicantPortrait gameObjectId={gameObjectId} scale={0.6} />
             </Paper>
           </div>
           <div className={classes.portraitRowTweakables}>

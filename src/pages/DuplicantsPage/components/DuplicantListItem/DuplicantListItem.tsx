@@ -6,12 +6,14 @@ import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Paper from "@material-ui/core/Paper";
 
+import DuplicantMenu from "@/components/DuplicantMenu";
+import DuplicantPortrait from "@/components/DuplicantPortrait";
+
 import DuplicantName from "./components/DuplicantName";
-import DuplicantPortrait from "./components/DuplicantPortrait";
+// import DuplicantPortrait from "./components/DuplicantPortrait";
 import DuplicantTraits from "./components/DuplicantTraits";
 import DuplicantAttributes from "./components/DuplicantAttributes";
 import EditButton from "./components/EditButton";
-import DuplicantMenu from "@/components/DuplicantMenu/DuplicantMenu";
 
 export interface DuplicantListItemProps {
   className?: string;
@@ -72,7 +74,7 @@ const DuplicantListItem: React.SFC<Props> = ({
     <Divider />
     <div className={classes.content}>
       <div className={classes.portraitColumn}>
-        <DuplicantPortrait gameObjectId={gameObjectId} />
+        <DuplicantPortrait gameObjectId={gameObjectId} scale={0.3} />
         <DuplicantTraits gameObjectId={gameObjectId} />
       </div>
       <DuplicantAttributes
