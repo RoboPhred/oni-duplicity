@@ -1,15 +1,13 @@
-import { createStructuredSelector } from "reselect";
 import createCachedSelector from "re-reselect";
-
-import { AbstractBehaviorEditorProps } from "./props";
-import { AppState } from "@/state";
-import { gameObjectsByIdSelector } from "../../selectors/save-game";
 import { getBehavior } from "oni-save-parser";
 
-export interface StateProps {
-  templateData: any;
-  extraData: any;
-}
+import { AppState } from "@/state";
+
+import { gameObjectsByIdSelector } from "../../selectors/save-game";
+
+import { createStructuredSelector } from "../utils";
+
+import { AbstractBehaviorEditorProps } from "./props";
 
 const gameObjectIdSelector = (
   _: any,
@@ -41,11 +39,7 @@ const behaviorSelector = createCachedSelector(
     `${props.gameObjectId}:${props.gameObjectBehavior}`
 );
 
-const mapStateToProps = createStructuredSelector<
-  AppState,
-  AbstractBehaviorEditorProps<any>,
-  StateProps
->({
+const mapStateToProps = createStructuredSelector({
   templateData: (state: AppState, props: AbstractBehaviorEditorProps<any>) => {
     const behavior = behaviorSelector(state, props);
     if (!behavior) return null;
@@ -58,4 +52,5 @@ const mapStateToProps = createStructuredSelector<
   }
 });
 
+export type StateProps = ReturnType<typeof mapStateToProps>;
 export default mapStateToProps;

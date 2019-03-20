@@ -1,9 +1,10 @@
-import { createSelector, createStructuredSelector } from "reselect";
+import { createSelector } from "reselect";
 
+import { LoadingStatus } from "../../state";
 import { isMockSelector } from "../../selectors/save-game";
 import { loadingStatusSelector } from "../../selectors/loading-status";
-import { LoadingStatus } from "../../state";
-import { AppState } from "@/state";
+
+import { createStructuredSelector } from "../utils";
 
 const disabledSelector = createSelector(
   loadingStatusSelector,
@@ -19,10 +20,9 @@ const disabledSelector = createSelector(
   }
 );
 
-export interface StateProps {
-  disabled: boolean;
-}
-const mapStateToProps = createStructuredSelector<AppState, StateProps>({
+const mapStateToProps = createStructuredSelector({
   disabled: disabledSelector
 });
+
+export type StateProps = ReturnType<typeof mapStateToProps>;
 export default mapStateToProps;

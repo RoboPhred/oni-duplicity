@@ -1,8 +1,10 @@
-import { createSelector, createStructuredSelector } from "reselect";
+import { createSelector } from "reselect";
 
 import { AppState } from "@/state";
 
 import { spaceManagerSelector } from "../../selectors/space-manager";
+
+import { createStructuredSelector } from "../utils";
 
 const planetIdsSelector = createSelector(
   spaceManagerSelector,
@@ -15,11 +17,9 @@ const planetIdsSelector = createSelector(
   }
 );
 
-export interface StateProps {
-  planetIds: number[];
-}
-
-const mapStateToProps = createStructuredSelector<AppState, StateProps>({
+const mapStateToProps = createStructuredSelector({
   planetIds: planetIdsSelector
 });
+
+export type StateProps = ReturnType<typeof mapStateToProps>;
 export default mapStateToProps;

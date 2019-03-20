@@ -1,10 +1,11 @@
-import { createStructuredSelector } from "reselect";
 import createCachedSelector from "re-reselect";
 import { getBehavior, KPrefabIDBehavior, GameObject } from "oni-save-parser";
 
 import { AppState } from "@/state";
 
 import { gameObjectGroupsSelector } from "../../selectors/save-game";
+
+import { createStructuredSelector } from "../utils";
 
 import { AbstractGameObjectListProps } from "./props";
 
@@ -38,18 +39,11 @@ const gameObjectIdsSelector = createCachedSelector(
   maybeArray(props.gameObjectType).join(",")
 );
 
-export interface StateProps {
-  gameObjectIds: number[];
-}
-
-const mapStateToProps = createStructuredSelector<
-  AppState,
-  AbstractGameObjectListProps,
-  StateProps
->({
+const mapStateToProps = createStructuredSelector({
   gameObjectIds: gameObjectIdsSelector
 });
 
+export type StateProps = ReturnType<typeof mapStateToProps>;
 export default mapStateToProps;
 
 function isNotNull<T>(x: T | null | undefined): x is T {

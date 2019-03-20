@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { RouteComponentProps } from "react-router";
 
-import AbstractGameObject from "@/services/oni-save/components/AbstractGameObject/AbstractGameObject";
+import AbstractGameObject from "@/services/oni-save/components/AbstractGameObject";
 
 import RedirectIfNoSave from "@/components/RedirectIfNoSave";
 

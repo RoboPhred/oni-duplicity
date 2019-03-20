@@ -3,7 +3,7 @@ import * as React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import SaveIcon from "@material-ui/icons/Save";
 
-import AbstractSaveButton from "@/services/oni-save/components/AbstractSaveButton/AbstractSaveButton";
+import AbstractSaveButton from "@/services/oni-save/components/AbstractSaveButton";
 
 const SaveFab: React.SFC = () => (
   <AbstractSaveButton>
