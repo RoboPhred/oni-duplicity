@@ -4,6 +4,8 @@ import { withRouter, RouteComponentProps } from "react-router";
 
 import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
 
+import { onLinkClick } from "./utils";
+
 export interface ListItemLinkProps
   extends Omit<ListItemProps, "href" | "component"> {
   to: string;
@@ -18,7 +20,6 @@ class ListItemLink extends React.Component<Props> {
       history,
       location,
       to,
-      staticContext,
       autoselect,
       ...props
     } = this.props;
@@ -28,38 +29,14 @@ class ListItemLink extends React.Component<Props> {
         {...props}
         component="a"
         href={history.createHref({ pathname: to })}
-        onClick={this._onClick}
+        onClick={onLinkClick}
       >
         {children}
       </ListItem>
     );
   }
-
-  private _onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    // Code copied from implementation of Link in react-router-dom
-    const { onClick, target, history } = this.props;
-
-    if (onClick) {
-      onClick(event);
-    }
-
-    if (
-      !event.defaultPrevented && // onClick prevented default
-      event.button === 0 && // ignore everything but left clicks
-      (!target || target === "_self") && // let browser handle "target=_blank" etc.
-      !isModifierPressed(event) // ignore clicks with modifier keys
-    ) {
-      event.preventDefault();
-
-      history.push(this.props.to);
-    }
-  };
 }
 export default withRouter(ListItemLink);
-
-function isModifierPressed(event: React.MouseEvent<any>) {
-  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
-}
 
 function pathStartsWith(path: string, startsWith: string): boolean {
   if (path === startsWith) {
