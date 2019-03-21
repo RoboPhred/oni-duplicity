@@ -25,7 +25,7 @@ const materialsSelector = createSelector(
 
     if (groups) {
       for (const group of groups) {
-        countGroupMaterials(group, rowsByMaterial);
+        countMaterialGroup(group, rowsByMaterial);
       }
     }
 
@@ -34,7 +34,7 @@ const materialsSelector = createSelector(
   }
 );
 
-function countGroupMaterials(
+function countMaterialGroup(
   group: GameObjectGroup,
   rowsByMaterial: Record<string, MaterialListItem>
 ) {
