@@ -9,7 +9,7 @@ import {
 } from "../actions/import-behaviors";
 import { mergeBehaviors } from "../actions/merge-behaviors";
 
-import { gameObjectTypesByIdSelector } from "../selectors/save-game";
+import { gameObjectTypesByIdSelector } from "../selectors/game-objects";
 
 export default function* importBehaviorsSaga() {
   yield takeEvery(ACTION_ONISAVE_IMPORT_BEHAVIORS, handleImportBehaviorsSaga);

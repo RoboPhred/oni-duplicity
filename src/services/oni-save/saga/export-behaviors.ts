@@ -16,7 +16,7 @@ import {
 import {
   gameObjectTypesByIdSelector,
   gameObjectsByIdSelector
-} from "../selectors/save-game";
+} from "../selectors/game-objects";
 
 export default function* exportBehaviorsSaga() {
   yield takeEvery(

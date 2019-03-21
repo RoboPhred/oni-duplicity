@@ -5,8 +5,10 @@ import { HashedString, GeyserBehavior } from "oni-save-parser";
 import { OniSaveState, defaultOniSaveState } from "../state";
 
 import { isChangeGeyserTypeAction } from "../actions/change-geyser-type";
-import { gameObjectTypesByIdSelector } from "../selectors/save-game";
+import { gameObjectTypesByIdSelector } from "../selectors/game-objects";
+
 import { getGameObjectById } from "../utils";
+
 import {
   addGameObject,
   removeGameObject,

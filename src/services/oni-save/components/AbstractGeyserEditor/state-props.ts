@@ -2,7 +2,7 @@ import createCachedSelector from "re-reselect";
 import { getBehavior, GeyserBehavior, GeyserType } from "oni-save-parser";
 
 import { AbstractGeyserEditorProps } from "./props";
-import { gameObjectsByIdSelector } from "../../selectors/save-game";
+import { gameObjectsByIdSelector } from "../../selectors/game-objects";
 import { AppState } from "@/state";
 
 const geyserConfigSelector = createCachedSelector(

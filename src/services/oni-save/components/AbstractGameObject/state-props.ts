@@ -1,7 +1,8 @@
-import { gameObjectTypesByIdSelector } from "../../selectors/save-game";
+import { AppState } from "@/state";
+
+import { gameObjectTypesByIdSelector } from "../../selectors/game-objects";
 
 import { AbstractGameObjectProps } from "./props";
-import { AppState } from "@/state";
 
 const gameObjectTypeSelector = (
   state: AppState,

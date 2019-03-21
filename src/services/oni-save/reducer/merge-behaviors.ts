@@ -7,7 +7,7 @@ import { getGameObjectById } from "../utils";
 
 import { isMergeBehaviorsAction } from "../actions/merge-behaviors";
 
-import { gameObjectTypesByIdSelector } from "../selectors/save-game";
+import { gameObjectTypesByIdSelector } from "../selectors/game-objects";
 
 export default function mergeBehaviorsReducer(
   state: OniSaveState = defaultOniSaveState,

@@ -10,7 +10,7 @@ import {
 
 import { defaultOniSaveState, OniSaveState } from "../state";
 import { isCloneDuplicantAction } from "../actions/clone-duplicant";
-import { gameObjectsByIdSelector } from "../selectors/save-game";
+import { gameObjectsByIdSelector } from "../selectors/game-objects";
 
 import { changeBehaviorTemplateDataState } from "./utils";
 

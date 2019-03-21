@@ -7,7 +7,7 @@ import { getGameObjectById } from "../utils";
 
 import { isPasteBehaviorsAction } from "../actions/paste-behaviors";
 
-import { gameObjectTypesByIdSelector } from "../selectors/save-game";
+import { gameObjectTypesByIdSelector } from "../selectors/game-objects";
 
 export default function pasteBehaviorsReducer(
   state: OniSaveState = defaultOniSaveState,

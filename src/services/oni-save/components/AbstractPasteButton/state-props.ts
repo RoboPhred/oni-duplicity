@@ -5,7 +5,7 @@ import {
   copyPasteAvailableBehaviorsSelector
 } from "../../selectors/copy-paste";
 
-import { gameObjectTypesByIdSelector } from "../../selectors/save-game";
+import { gameObjectTypesByIdSelector } from "../../selectors/game-objects";
 
 import { AbstractPasteButtonProps } from "./props";
 

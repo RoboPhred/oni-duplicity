@@ -1,9 +1,9 @@
 import createCachedSelector from "re-reselect";
 import { getBehavior, KPrefabIDBehavior, GameObject } from "oni-save-parser";
 
-import { AppState } from "@/state";
+import { isNotNull, maybeArray } from "@/utils";
 
-import { gameObjectGroupsSelector } from "../../selectors/save-game";
+import { gameObjectGroupsSelector } from "../../selectors/game-objects";
 
 import { createStructuredSelector } from "../utils";
 
@@ -45,14 +45,3 @@ const mapStateToProps = createStructuredSelector({
 
 export type StateProps = ReturnType<typeof mapStateToProps>;
 export default mapStateToProps;
-
-function isNotNull<T>(x: T | null | undefined): x is T {
-  return x != null;
-}
-
-function maybeArray(x: string | string[]): string[] {
-  if (Array.isArray(x)) {
-    return x;
-  }
-  return [x];
-}

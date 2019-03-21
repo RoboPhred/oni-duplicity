@@ -3,7 +3,7 @@ import { getBehavior } from "oni-save-parser";
 
 import { AppState } from "@/state";
 
-import { gameObjectsByIdSelector } from "../../selectors/save-game";
+import { gameObjectsByIdSelector } from "../../selectors/game-objects";
 
 import { createStructuredSelector } from "../utils";
 

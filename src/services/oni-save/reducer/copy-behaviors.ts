@@ -6,7 +6,7 @@ import { isCopyBehaviorsAction } from "../actions/copy-behaviors";
 import {
   gameObjectsByIdSelector,
   gameObjectTypesByIdSelector
-} from "../selectors/save-game";
+} from "../selectors/game-objects";
 
 export default function copyBehaviorsReducer(
   state: OniSaveState = defaultOniSaveState,
