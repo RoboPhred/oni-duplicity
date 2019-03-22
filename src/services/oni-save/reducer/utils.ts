@@ -3,7 +3,8 @@ import {
   GameObject,
   BehaviorName,
   GameObjectBehavior,
-  GameObjectGroup
+  GameObjectGroup,
+  getBehavior
 } from "oni-save-parser";
 import { findIndex, merge } from "lodash-es";
 
@@ -114,6 +115,19 @@ export function requireGameObject(
     );
   }
   return saveGame.gameObjects[groupIndex].gameObjects[gameObjectIndex];
+}
+
+export function requireBehavior<T extends GameObjectBehavior>(
+  gameObject: GameObject,
+  behaviorName: BehaviorName<T>
+): T {
+  const behavior = getBehavior(gameObject, behaviorName);
+  if (!behavior) {
+    throw new ModifySaveError(
+      `Expected GameObject to have behavior ${behaviorName}.`
+    );
+  }
+  return behavior;
 }
 
 export function replaceGameObject(

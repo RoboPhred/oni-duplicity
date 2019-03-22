@@ -17,7 +17,7 @@ export default function changeGeyserTypeReducer(
   state: OniSaveState = defaultOniSaveState,
   action: AnyAction
 ): OniSaveState {
-  if (!isChangeGeyserTypeAction(action) || !state.saveGame) {
+  if (!isChangeGeyserTypeAction(action)) {
     return state;
   }
 
