@@ -8,6 +8,35 @@ import {
 import { findIndex, merge } from "lodash-es";
 
 import { getGameObjectId } from "../utils";
+import { OniSaveState } from "../state";
+
+export class ModifySaveError extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}
+
+export function tryModifySaveGame(
+  state: OniSaveState,
+  modifier: (saveGame: SaveGame) => SaveGame
+): OniSaveState {
+  let { saveGame } = state;
+  if (saveGame) {
+    try {
+      saveGame = modifier(saveGame);
+      state = {
+        ...state,
+        saveGame,
+        isModified: true
+      };
+    } catch (e) {
+      if (!(e instanceof ModifySaveError)) {
+        throw e;
+      }
+    }
+  }
+  return state;
+}
 
 export function addGameObject(
   saveGame: SaveGame,
@@ -32,10 +61,8 @@ export function addGameObject(
   const gameObjects = [...saveGame.gameObjects];
   gameObjects[groupIndex] = {
     ...gameObjects[groupIndex],
-    gameObjects: [...gameObjects[groupIndex].gameObjects]
+    gameObjects: [...gameObjects[groupIndex].gameObjects, gameObject]
   };
-
-  gameObjects[groupIndex].gameObjects.push(gameObject);
 
   return {
     ...saveGame,
@@ -45,35 +72,73 @@ export function addGameObject(
 
 export function removeGameObject(
   saveGame: SaveGame,
-  gameObjectType: string,
   gameObjectId: number
 ): SaveGame {
-  const groupIndex = findIndex(
-    saveGame.gameObjects,
-    x => x.name === gameObjectType
+  const [groupIndex, gameObjectIndex] = getGameObjectLocationById(
+    saveGame,
+    gameObjectId
   );
-  if (groupIndex === -1) {
-    return saveGame;
-  }
 
-  const group = saveGame.gameObjects[groupIndex];
-  const gameObjectIndex = findIndex(
-    group.gameObjects,
-    x => getGameObjectId(x) === gameObjectId
-  );
-  if (gameObjectIndex === -1) {
-    return saveGame;
-  }
-
+  // We need to use basic spread here instead of merge(), as merge treats
+  //  empty array the same as empty object and will use the source value.
+  // We want to directly set an empty array if we remove the last object.
   let newSaveGame = {
     ...saveGame,
-    gameObjects: [...saveGame.gameObjects]
+    gameObjects: replace(saveGame.gameObjects, groupIndex, {
+      ...saveGame.gameObjects[groupIndex],
+      gameObjects: drop(
+        saveGame.gameObjects[groupIndex].gameObjects,
+        gameObjectIndex
+      )
+    })
   };
-  newSaveGame.gameObjects[groupIndex] = {
-    ...saveGame.gameObjects[groupIndex],
-    gameObjects: [...saveGame.gameObjects[groupIndex].gameObjects]
-  };
-  newSaveGame.gameObjects[groupIndex].gameObjects.splice(gameObjectIndex, 1);
+
+  return newSaveGame;
+}
+
+export function requireGameObject(
+  saveGame: SaveGame,
+  gameObjectId: number,
+  gameObjectType?: string
+): GameObject {
+  const [groupIndex, gameObjectIndex] = getGameObjectLocationById(
+    saveGame,
+    gameObjectId
+  );
+  if (
+    gameObjectType &&
+    saveGame.gameObjects[groupIndex].name !== gameObjectType
+  ) {
+    throw new ModifySaveError(
+      `Expected GameObject ${gameObjectId} to be type ${gameObjectType}.`
+    );
+  }
+  return saveGame.gameObjects[groupIndex].gameObjects[gameObjectIndex];
+}
+
+export function replaceGameObject(
+  saveGame: SaveGame,
+  gameObject: GameObject
+): SaveGame {
+  const gameObjectId = getGameObjectId(gameObject);
+  if (!gameObjectId) {
+    throw new ModifySaveError(`GameObject ${gameObjectId} has no id.`);
+  }
+
+  const [groupIndex, gameObjectIndex] = getGameObjectLocationById(
+    saveGame,
+    gameObjectId
+  );
+
+  let newSaveGame = merge({}, saveGame, {
+    gameObjects: {
+      [groupIndex]: {
+        gameObjects: {
+          [gameObjectIndex]: gameObject
+        }
+      }
+    }
+  });
 
   return newSaveGame;
 }
@@ -87,13 +152,15 @@ export function changeStateBehaviorData<
   behaviorName: BehaviorName<T>,
   dataKey: K,
   modifier: DataModifier<T[K]>
-): GameObject | null {
+): GameObject {
   const behaviorIndex = findIndex(
     gameObject.behaviors,
     x => x.name === behaviorName
   );
   if (behaviorIndex === -1) {
-    return null;
+    throw new ModifySaveError(
+      `GameObject does not have behavior "${behaviorName}".`
+    );
   }
 
   const behavior = gameObject.behaviors[behaviorIndex];
@@ -119,4 +186,47 @@ function applyModifier<T>(data: T, modifier: DataModifier<T>): T {
     };
   }
   return newData;
+}
+
+function getGameObjectLocationById(
+  saveGame: SaveGame,
+  gameObjectId: number
+): [number, number] {
+  const { gameObjects: gameObjectGroups } = saveGame;
+  let gameObjectIndex = -1;
+  for (let groupIndex = 0; groupIndex < gameObjectGroups.length; groupIndex++) {
+    const group = gameObjectGroups[groupIndex];
+    gameObjectIndex = getGameObjectIndexById(group, gameObjectId);
+    if (gameObjectIndex !== -1) {
+      return [groupIndex, gameObjectIndex];
+    }
+  }
+
+  throw new ModifySaveError(
+    `GameObject ${gameObjectId} does not exist in the save.`
+  );
+}
+
+function getGameObjectIndexById(group: GameObjectGroup, gameObjectId: number) {
+  const { gameObjects } = group;
+  for (
+    let gameObjectIndex = 0;
+    gameObjectIndex < gameObjects.length;
+    gameObjectIndex++
+  ) {
+    const gameObject = gameObjects[gameObjectIndex];
+    if (getGameObjectId(gameObject) === gameObjectId) {
+      return gameObjectIndex;
+    }
+  }
+
+  return -1;
+}
+
+function drop<T>(array: T[], index: number): T[] {
+  return [...array.slice(0, index), ...array.slice(index + 1)];
+}
+
+function replace<T>(array: T[], index: number, value: T): T[] {
+  return [...array.slice(0, index), value, ...array.slice(index + 1)];
 }

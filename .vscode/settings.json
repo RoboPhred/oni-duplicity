@@ -7,5 +7,10 @@
   },
   "emmet.showExpandedAbbreviation": "never",
   "typescript.tsdk": "./node_modules/typescript/lib",
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+
+  // Align cyclomatic complexity settings to tslint cyclomatic-complexity
+  "codemetrics.nodeconfiguration.TryStatement": 0,
+  "codemetrics.nodeconfiguration.ThrowStatement": 0,
+  "codemetrics.nodeconfiguration.ReturnStatement": 0
 }
