@@ -5,16 +5,20 @@ import {
   KPrefabIDBehavior,
   GameObject,
   MinionIdentityBehavior,
-  getBehavior
+  getBehavior,
+  GameObjectBehavior
 } from "oni-save-parser";
 
 import { defaultOniSaveState, OniSaveState } from "../state";
 import { isCloneDuplicantAction } from "../actions/clone-duplicant";
 import { gameObjectsByIdSelector } from "../selectors/game-objects";
 
-import { changeBehaviorTemplateDataState } from "./utils";
+import { changeStateBehaviorData } from "./utils";
 
 const BEHAVIOR_BLACKLIST = ["StateMachineController", "Navigator"];
+function shouldCloneBehavior(behavior: GameObjectBehavior): boolean {
+  return BEHAVIOR_BLACKLIST.indexOf(behavior.name) === -1;
+}
 
 export default function cloneDuplicantReducer(
   state: OniSaveState = defaultOniSaveState,
@@ -38,9 +42,7 @@ export default function cloneDuplicantReducer(
 
   let newMinion: GameObject | null = {
     ...sourceGameObject,
-    behaviors: sourceGameObject.behaviors.filter(
-      behavior => BEHAVIOR_BLACKLIST.indexOf(behavior.name) === -1
-    )
+    behaviors: sourceGameObject.behaviors.filter(shouldCloneBehavior)
   };
 
   // Because we shallow clone behaviors, modifying the reference
@@ -49,9 +51,14 @@ export default function cloneDuplicantReducer(
 
   // Give the new duplicant a new PrefabID
   const newPrefabId = state.saveGame!.settings.nextUniqueID;
-  newMinion = changeBehaviorTemplateDataState(newMinion, KPrefabIDBehavior, {
-    InstanceID: newPrefabId
-  });
+  newMinion = changeStateBehaviorData(
+    newMinion,
+    KPrefabIDBehavior,
+    "templateData",
+    {
+      InstanceID: newPrefabId
+    }
+  );
   if (!newMinion) {
     return state;
   }
@@ -63,9 +70,10 @@ export default function cloneDuplicantReducer(
   }
 
   // Give the new duplicate a new name to differentiate it.
-  newMinion = changeBehaviorTemplateDataState(
+  newMinion = changeStateBehaviorData(
     newMinion,
     MinionIdentityBehavior,
+    "templateData",
     {
       name: `Clone of ${oldIdentity.templateData.name}`
     }

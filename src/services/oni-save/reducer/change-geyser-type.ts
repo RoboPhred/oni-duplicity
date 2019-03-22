@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { startsWith } from "lodash-es";
-import { HashedString, GeyserBehavior } from "oni-save-parser";
+import { HashedString, GeyserBehavior, SaveGame } from "oni-save-parser";
 
 import { OniSaveState, defaultOniSaveState } from "../state";
 
@@ -12,7 +12,7 @@ import { getGameObjectById } from "../utils";
 import {
   addGameObject,
   removeGameObject,
-  changeBehaviorTemplateDataState
+  changeStateBehaviorData
 } from "./utils";
 
 export default function changeGeyserTypeReducer(
@@ -50,9 +50,10 @@ export default function changeGeyserTypeReducer(
   saveGame = removeGameObject(saveGame, oldType, gameObjectId);
 
   // Update the geyser behavior to emit the new element.
-  gameObject = changeBehaviorTemplateDataState(
+  gameObject = changeStateBehaviorData(
     gameObject,
     GeyserBehavior,
+    "templateData",
     templateData => ({
       ...templateData,
       configuration: {

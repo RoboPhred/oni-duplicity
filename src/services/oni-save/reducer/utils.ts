@@ -78,12 +78,15 @@ export function removeGameObject(
   return newSaveGame;
 }
 
-export function changeBehaviorTemplateDataState<T extends GameObjectBehavior>(
+export type DataModifier<T> = Partial<T> | ((data: T) => T);
+export function changeStateBehaviorData<
+  T extends GameObjectBehavior,
+  K extends "templateData" | "extraData"
+>(
   gameObject: GameObject,
   behaviorName: BehaviorName<T>,
-  templateData:
-    | Partial<T["templateData"]>
-    | ((templateData: T["templateData"]) => T["templateData"])
+  dataKey: K,
+  modifier: DataModifier<T[K]>
 ): GameObject | null {
   const behaviorIndex = findIndex(
     gameObject.behaviors,
@@ -94,22 +97,26 @@ export function changeBehaviorTemplateDataState<T extends GameObjectBehavior>(
   }
 
   const behavior = gameObject.behaviors[behaviorIndex];
-
-  let newTemplateData: any;
-  if (typeof templateData === "function") {
-    newTemplateData = templateData(behavior.templateData);
-  } else {
-    newTemplateData = {
-      ...behavior.templateData,
-      ...templateData
-    };
-  }
+  const newData = applyModifier(behavior[dataKey], modifier);
 
   return merge({}, gameObject, {
     behaviors: {
       [behaviorIndex]: {
-        templateData: newTemplateData
+        templateData: newData
       }
     }
   });
+}
+
+function applyModifier<T>(data: T, modifier: DataModifier<T>): T {
+  let newData: T;
+  if (typeof modifier === "function") {
+    newData = modifier(data);
+  } else {
+    newData = {
+      ...data,
+      ...modifier
+    };
+  }
+  return newData;
 }
