@@ -6,7 +6,7 @@ import {
   GameObjectGroup,
   getBehavior
 } from "oni-save-parser";
-import { findIndex, merge } from "lodash-es";
+import { findIndex } from "lodash-es";
 
 import { getGameObjectId } from "../utils";
 import { OniSaveState } from "../state";

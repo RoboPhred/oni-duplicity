@@ -1,14 +1,19 @@
-import produce from "immer";
 import { AnyAction } from "redux";
-import { getBehavior, SaveGame } from "oni-save-parser";
+import { SaveGame } from "oni-save-parser";
 
 import { OniSaveState, defaultOniSaveState } from "../state";
-import { getGameObjectById } from "../utils";
 
 import {
   isModifyBehaviorAction,
   BehaviorDataTarget
 } from "../actions/modify-behavior";
+
+import {
+  requireGameObject,
+  changeStateBehaviorData,
+  replaceGameObject,
+  tryModifySaveGame
+} from "./utils";
 
 export default function modifyBehaviorReducer(
   state: OniSaveState = defaultOniSaveState,
@@ -18,39 +23,41 @@ export default function modifyBehaviorReducer(
     return state;
   }
 
-  if (!state.saveGame) {
-    return state;
-  }
-
   let { gameObjectId, behaviorId, target, value } = action.payload;
 
-  return produce(state, draft => {
-    // Force un-type the draft object back to SaveGame
-    //  to avoid type errors with symbol stripping from ArrayBuffer
-    const saveGame = draft.saveGame! as SaveGame;
+  return tryModifySaveGame(state, saveGame =>
+    performModifyBehavior(saveGame, gameObjectId, behaviorId, target, value)
+  );
+}
 
-    const gameObject = getGameObjectById(saveGame, gameObjectId);
-    if (!gameObject) {
-      return;
-    }
+function performModifyBehavior(
+  saveGame: SaveGame,
+  gameObjectId: number,
+  behaviorName: string,
+  target: BehaviorDataTarget,
+  value: any
+) {
+  let gameObject = requireGameObject(saveGame, gameObjectId);
 
-    const behavior = getBehavior(gameObject, behaviorId);
-    if (!behavior) {
-      return;
-    }
+  switch (target) {
+    case BehaviorDataTarget.Template:
+      gameObject = changeStateBehaviorData(
+        gameObject,
+        behaviorName,
+        "templateData",
+        value
+      );
+      break;
+    case BehaviorDataTarget.Extra:
+      gameObject = changeStateBehaviorData(
+        gameObject,
+        behaviorName,
+        "extraData",
+        value
+      );
+      break;
+  }
 
-    if (target === BehaviorDataTarget.Template) {
-      behavior.templateData = {
-        ...behavior.templateData,
-        ...value
-      };
-    } else if (target === BehaviorDataTarget.Extra) {
-      behavior.extraData = {
-        ...behavior.extraData,
-        ...value
-      };
-    }
-
-    draft.isModified = true;
-  });
+  saveGame = replaceGameObject(saveGame, gameObject);
+  return saveGame;
 }
