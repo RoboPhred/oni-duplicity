@@ -2,7 +2,7 @@ import { AnyAction } from "redux";
 
 import { defaultOniSaveState, OniSaveState } from "../state";
 import { isDeleteLooseMaterialAction } from "../actions/delete-loose-material";
-import { SimHashNames } from "oni-save-parser";
+import { SimHashNames, GameObjectGroup } from "oni-save-parser";
 
 export default function deleteLooseMaterialReducer(
   state: OniSaveState = defaultOniSaveState,
@@ -23,13 +23,15 @@ export default function deleteLooseMaterialReducer(
     materialsToRemove = [materialType];
   }
 
+  function shouldRemoveMaterial(group: GameObjectGroup) {
+    return materialsToRemove.indexOf(group.name);
+  }
+
   return {
     ...state,
     saveGame: {
       ...state.saveGame,
-      gameObjects: state.saveGame.gameObjects.filter(
-        x => materialsToRemove.indexOf(x.name) === -1
-      )
+      gameObjects: state.saveGame.gameObjects.filter(shouldRemoveMaterial)
     }
   };
 }

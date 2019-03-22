@@ -144,15 +144,17 @@ export function replaceGameObject(
     gameObjectId
   );
 
-  let newSaveGame = merge({}, saveGame, {
-    gameObjects: {
-      [groupIndex]: {
-        gameObjects: {
-          [gameObjectIndex]: gameObject
-        }
-      }
-    }
-  });
+  let newSaveGame = {
+    ...saveGame,
+    gameObjects: replace(saveGame.gameObjects, groupIndex, {
+      ...saveGame.gameObjects[groupIndex],
+      gameObjects: replace(
+        saveGame.gameObjects[groupIndex].gameObjects,
+        gameObjectIndex,
+        gameObject
+      )
+    })
+  };
 
   return newSaveGame;
 }
@@ -180,13 +182,13 @@ export function changeStateBehaviorData<
   const behavior = gameObject.behaviors[behaviorIndex];
   const newData = applyModifier(behavior[dataKey], modifier);
 
-  return merge({}, gameObject, {
-    behaviors: {
-      [behaviorIndex]: {
-        templateData: newData
-      }
-    }
-  });
+  return {
+    ...gameObject,
+    behaviors: replace(gameObject.behaviors, behaviorIndex, {
+      ...gameObject.behaviors[behaviorIndex],
+      [dataKey]: newData
+    })
+  };
 }
 
 function applyModifier<T>(data: T, modifier: DataModifier<T>): T {

@@ -5,9 +5,16 @@ import { getBehavior, SaveGame } from "oni-save-parser";
 import { OniSaveState, defaultOniSaveState } from "../state";
 import { getGameObjectById } from "../utils";
 
-import { isMergeBehaviorsAction } from "../actions/merge-behaviors";
-
-import { gameObjectTypesByIdSelector } from "../selectors/game-objects";
+import {
+  isMergeBehaviorsAction,
+  BehaviorMergeData
+} from "../actions/merge-behaviors";
+import {
+  requireGameObject,
+  changeStateBehaviorData,
+  replaceGameObject,
+  tryModifySaveGame
+} from "./utils";
 
 export default function mergeBehaviorsReducer(
   state: OniSaveState = defaultOniSaveState,
@@ -17,43 +24,43 @@ export default function mergeBehaviorsReducer(
     return state;
   }
 
-  if (!state.saveGame) {
-    return state;
-  }
-
   const { gameObjectId, behaviors } = action.payload;
 
-  const typesById = gameObjectTypesByIdSelector.local(state);
-  if (!typesById || !typesById[gameObjectId]) {
-    return state;
+  return tryModifySaveGame(state, saveGame =>
+    performMergeBehaviors(saveGame, gameObjectId, behaviors)
+  );
+}
+
+function performMergeBehaviors(
+  saveGame: SaveGame,
+  gameObjectId: number,
+  behaviors: Record<string, BehaviorMergeData>
+): SaveGame {
+  let gameObject = requireGameObject(saveGame, gameObjectId);
+
+  for (const behaviorName of Object.keys(behaviors)) {
+    const behavior = behaviors[behaviorName];
+
+    if (behavior.templateData) {
+      gameObject = changeStateBehaviorData(
+        gameObject,
+        behaviorName,
+        "templateData",
+        _ => behavior.templateData
+      );
+    }
+
+    if (behavior.extraData) {
+      gameObject = changeStateBehaviorData(
+        gameObject,
+        behaviorName,
+        "extraData",
+        _ => behavior.extraData
+      );
+    }
   }
 
-  return produce(state, draft => {
-    // Force un-type the draft object back to SaveGame
-    //  to avoid type errors with symbol stripping from ArrayBuffer
-    const saveGame = draft.saveGame! as SaveGame;
+  saveGame = replaceGameObject(saveGame, gameObject);
 
-    const gameObject = getGameObjectById(saveGame, gameObjectId);
-    if (!gameObject) {
-      return;
-    }
-
-    for (const behaviorName of Object.keys(behaviors)) {
-      const behavior = getBehavior(gameObject, behaviorName);
-      if (!behavior) {
-        continue;
-      }
-
-      const copyData = behaviors[behaviorName];
-      const { templateData, extraData } = copyData;
-      if (templateData) {
-        behavior.templateData = templateData;
-      }
-      if (extraData) {
-        behavior.extraData = extraData;
-      }
-    }
-
-    draft.isModified = true;
-  });
+  return saveGame;
 }
