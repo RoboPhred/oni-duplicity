@@ -14,7 +14,14 @@ export interface ButtonLinkProps
 type Props = ButtonLinkProps & RouteComponentProps;
 class ButtonLink extends React.Component<Props> {
   render() {
-    const { children, history, location, to, ...props } = this.props;
+    const {
+      children,
+      history,
+      location,
+      to,
+      staticContext,
+      ...props
+    } = this.props;
     return (
       <Button
         {...props}

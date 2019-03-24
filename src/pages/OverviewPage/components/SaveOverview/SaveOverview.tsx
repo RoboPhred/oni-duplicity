@@ -7,6 +7,8 @@ import Divider from "@material-ui/core/Divider";
 
 import PageContainer from "@/components/PageContainer";
 
+import Difficulty from "./components/Difficulty";
+
 import mapStateToProps, { StateProps } from "./state-props";
 
 const styles = (theme: Theme) =>
@@ -23,6 +25,7 @@ const SaveOverview: React.SFC<Props> = ({ classes, saveName, cycleCount }) => (
       <Typography variant="h4">{saveName}</Typography>
       <Divider />
       <Typography>{cycleCount} cycles.</Typography>
+      <Difficulty />
     </div>
   </PageContainer>
 );

@@ -16,6 +16,8 @@ type DeepPartial<T> = {
     : DeepPartial<T[P]>
 };
 
+type ArrayValues<T> = T extends Array<infer U> ? U : never;
+
 declare module "worker-loader!*" {
   class WebpackWorker extends Worker {
     constructor();

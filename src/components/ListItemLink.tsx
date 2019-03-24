@@ -21,6 +21,7 @@ class ListItemLink extends React.Component<Props> {
       location,
       to,
       autoselect,
+      staticContext,
       ...props
     } = this.props;
     return (

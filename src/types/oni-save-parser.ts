@@ -41,3 +41,13 @@ export interface SpacecraftResearchOpportunity {
     "secondsUntilNextBombardment": 0
   }
   */
+
+export const DifficultySetttingNames = [
+  "ImmuneSystem" as "ImmuneSystem",
+  "Stress" as "Stress",
+  "StressBreaks" as "StressBreaks",
+  "Morale" as "Morale",
+  "CalorieBurn" as "CalorieBurn",
+  "SandboxMode" as "SandboxMode"
+];
+export type DifficultySetting = ArrayValues<typeof DifficultySetttingNames>;
