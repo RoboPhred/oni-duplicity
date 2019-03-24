@@ -4,7 +4,12 @@ import { find, findIndex, merge } from "lodash-es";
 
 import { Trans } from "react-i18next";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/lab/Slider";
 
@@ -28,7 +33,7 @@ export interface ValueProps {
   max?: number;
 }
 
-type Props = ValueProps & StyleProps<typeof styles>;
+type Props = ValueProps & WithStyles<typeof styles>;
 
 const Value: React.SFC<Props> = ({
   className,

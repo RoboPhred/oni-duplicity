@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { WithTranslation, withTranslation } from "react-i18next";
 
-import { createStyles, withStyles } from "@material-ui/core/styles";
+import { createStyles, withStyles, WithStyles } from "@material-ui/core/styles";
 
 import PageContainer from "@/components/PageContainer";
 import RedirectIfNoSave from "@/components/RedirectIfNoSave";
@@ -15,7 +15,8 @@ const styles = createStyles({
   }
 });
 
-type Props = StyleProps<typeof styles> & WithTranslation;
+type Props = WithStyles<typeof styles> & WithTranslation;
+
 const DuplicantsPage: React.SFC<Props> = ({ classes, t }) => (
   <PageContainer title={t("duplicant.noun_titlecase_plural")}>
     <RedirectIfNoSave />

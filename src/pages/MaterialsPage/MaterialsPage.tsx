@@ -2,7 +2,12 @@ import * as React from "react";
 
 import { WithTranslation, withTranslation } from "react-i18next";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 
 import PageContainer from "@/components/PageContainer";
 
@@ -16,7 +21,7 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = StyleProps<typeof styles> & WithTranslation;
+type Props = WithStyles<typeof styles> & WithTranslation;
 
 const MaterialsPage: React.SFC<Props> = ({ classes, t }) => {
   return (

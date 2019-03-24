@@ -1,7 +1,12 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 
@@ -18,7 +23,8 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = StateProps & StyleProps<typeof styles>;
+type Props = StateProps & WithStyles<typeof styles>;
+
 const SaveOverview: React.SFC<Props> = ({ classes, saveName, cycleCount }) => (
   <PageContainer title="Overview">
     <div className={classes.root}>

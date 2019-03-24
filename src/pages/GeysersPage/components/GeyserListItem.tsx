@@ -2,7 +2,12 @@ import * as React from "react";
 import { GeyserBehavior, GeyserType } from "oni-save-parser";
 import classnames from "classnames";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 
 import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
@@ -44,7 +49,7 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = GeyserListItemProps & StyleProps<typeof styles>;
+type Props = GeyserListItemProps & WithStyles<typeof styles>;
 
 const GeyserListItem: React.SFC<Props> = ({
   classes,

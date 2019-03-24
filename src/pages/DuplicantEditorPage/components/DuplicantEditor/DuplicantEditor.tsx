@@ -2,7 +2,12 @@ import * as React from "react";
 
 import { WithTranslation, withTranslation, Trans } from "react-i18next";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
@@ -75,7 +80,8 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = DuplicantEditorProps & WithTranslation & StyleProps<typeof styles>;
+type Props = DuplicantEditorProps & WithTranslation & WithStyles<typeof styles>;
+
 const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
   const [tab, setTab] = React.useState(0);
   return (
@@ -158,9 +164,3 @@ const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
 };
 
 export default withStyles(styles)(withTranslation()(DuplicantEditor));
-
-/*
-        <div className={classes.messy}>
-          <MessyEditor gameObjectId={gameObjectId} />
-        </div>
-*/

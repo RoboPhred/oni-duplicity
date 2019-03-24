@@ -4,7 +4,7 @@ import MaterialAppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-import { createStyles, withStyles } from "@material-ui/core/styles";
+import { createStyles, withStyles, WithStyles } from "@material-ui/core/styles";
 
 import SettingsButton from "./SettingsButton";
 import SaveModifiedChip from "./SaveModifiedChip";
@@ -23,7 +23,8 @@ const styles = createStyles({
   }
 });
 
-type Props = AppbarProps & StyleProps<typeof styles>;
+type Props = AppbarProps & WithStyles<typeof styles>;
+
 const Appbar: React.SFC<Props> = ({ classes, title, back }) => (
   <MaterialAppBar position="static">
     <Toolbar>

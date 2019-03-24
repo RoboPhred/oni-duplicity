@@ -1,6 +1,11 @@
 import * as React from "react";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
 
@@ -13,7 +18,7 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = StyleProps<typeof styles>;
+type Props = WithStyles<typeof styles>;
 
 const SettingsPage: React.SFC<Props> = ({ classes }) => (
   <PageContainer title="Settings" back>

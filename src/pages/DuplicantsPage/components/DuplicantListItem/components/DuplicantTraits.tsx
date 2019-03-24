@@ -3,7 +3,12 @@ import { AITraitsBehavior } from "oni-save-parser";
 
 import { WithTranslation, withTranslation } from "react-i18next";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
@@ -26,7 +31,8 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = DuplicantTraitsProps & StyleProps<typeof styles> & WithTranslation;
+type Props = DuplicantTraitsProps & WithStyles<typeof styles> & WithTranslation;
+
 const DuplicantTraits: React.SFC<Props> = ({ classes, gameObjectId, t }) => (
   <TraitsEditor gameObjectId={gameObjectId}>
     {({ templateData }) => (

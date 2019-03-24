@@ -2,7 +2,12 @@ import * as React from "react";
 
 import classnames from "classnames";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Paper from "@material-ui/core/Paper";
 
@@ -54,7 +59,8 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = DuplicantListItemProps & StyleProps<typeof styles>;
+type Props = DuplicantListItemProps & WithStyles<typeof styles>;
+
 const DuplicantListItem: React.SFC<Props> = ({
   className,
   classes,

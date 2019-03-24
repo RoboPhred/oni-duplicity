@@ -1,7 +1,12 @@
 import * as React from "react";
 import classnames from "classnames";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 
 import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
@@ -34,7 +39,7 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = PlanetListItemProps & StyleProps<typeof styles>;
+type Props = PlanetListItemProps & WithStyles<typeof styles>;
 
 const PlanetListItem: React.SFC<Props> = ({ classes, className, planetId }) => (
   <AbstractPlanet planetId={planetId}>

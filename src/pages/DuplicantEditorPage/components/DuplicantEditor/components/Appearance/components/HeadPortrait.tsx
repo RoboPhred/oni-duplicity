@@ -4,7 +4,7 @@ import classnames from "classnames";
 
 import { DuplicantContainer, Hair, Head, Eyes } from "react-oni-duplicant";
 
-import { createStyles, withStyles } from "@material-ui/core/styles";
+import { createStyles, withStyles, WithStyles } from "@material-ui/core/styles";
 
 export interface HeadPortraitProps {
   className?: string;
@@ -35,7 +35,8 @@ const styles = createStyles({
   }
 });
 
-type Props = HeadPortraitProps & StyleProps<typeof styles>;
+type Props = HeadPortraitProps & WithStyles<typeof styles>;
+
 const HeadPortrait: React.SFC<Props> = ({
   className,
   classes,

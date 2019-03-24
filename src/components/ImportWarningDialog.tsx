@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Trans } from "react-i18next";
 
-import { createStyles, withStyles } from "@material-ui/core/styles";
+import { createStyles, withStyles, WithStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -18,7 +18,7 @@ const styles = createStyles({
   }
 });
 
-type Props = StyleProps<typeof styles>;
+type Props = WithStyles<typeof styles>;
 
 const ImportWarningDialog: React.SFC<Props> = ({ classes }) => (
   <AbstractImportWarningDialog>

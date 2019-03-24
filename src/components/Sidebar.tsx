@@ -1,6 +1,11 @@
 import * as React from "react";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
@@ -26,7 +31,8 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = SidebarProps & StyleProps<typeof styles>;
+type Props = SidebarProps & WithStyles<typeof styles>;
+
 const Sidebar: React.SFC<Props> = ({ className, classes }) => (
   <div className={className}>
     <div className={classes.toolbar}>

@@ -2,7 +2,12 @@ import * as React from "react";
 
 import { Trans } from "react-i18next";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 
 import Dialog from "@material-ui/core/Dialog";
 import Typography from "@material-ui/core/Typography";
@@ -27,7 +32,8 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = StyleProps<typeof styles>;
+type Props = WithStyles<typeof styles>;
+
 const LoadingDialog: React.SFC<Props> = ({ classes }) => (
   <AbstractLoadStatus>
     {({ status, message }) => (

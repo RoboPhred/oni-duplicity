@@ -9,7 +9,12 @@ import {
 } from "oni-save-parser";
 import { merge, padStart } from "lodash-es";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -51,7 +56,8 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = AppearanceProps & StyleProps<typeof styles>;
+type Props = AppearanceProps & WithStyles<typeof styles>;
+
 const Appearance: React.SFC<Props> = ({ classes, gameObjectId }) => {
   const [tab, setTab] = React.useState(0);
 
