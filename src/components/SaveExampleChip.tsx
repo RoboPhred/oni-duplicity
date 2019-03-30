@@ -6,11 +6,15 @@ import Chip from "@material-ui/core/Chip";
 
 import AbstractEditStatus from "@/services/oni-save/components/AbstractEditStatus";
 
-type Props = WithTranslation;
-const SaveExampleChip: React.SFC<Props> = ({ t }) => (
+export interface SaveExampleChipProps {
+  className?: string;
+}
+
+type Props = SaveExampleChipProps & WithTranslation;
+const SaveExampleChip: React.SFC<Props> = ({ t, className }) => (
   <AbstractEditStatus>
     {({ isMock }) => (
-      <div>
+      <div className={className}>
         {isMock && (
           <Chip
             color="secondary"

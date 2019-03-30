@@ -1,4 +1,4 @@
-import { SpacecraftDestination } from "@/types/oni-save-parser";
+import { SpaceDestination } from "oni-save-parser";
 
 export interface AbstractPlanetProps {
   planetId: number;
@@ -6,6 +6,6 @@ export interface AbstractPlanetProps {
 }
 
 export interface AbstractPlanetRenderProps {
-  planet: SpacecraftDestination | null;
-  onPlanetModify(planet: Partial<SpacecraftDestination>): void;
+  planet: SpaceDestination | null;
+  onPlanetModify(planet: Partial<SpaceDestination>): void;
 }

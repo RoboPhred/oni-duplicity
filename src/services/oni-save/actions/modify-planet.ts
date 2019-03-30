@@ -1,11 +1,10 @@
 import { AnyAction } from "redux";
-
-import { SpacecraftDestination } from "@/types/oni-save-parser";
+import { SpaceDestination } from "oni-save-parser";
 
 export const ACTION_ONISAVE_MODIFY_PLANET = "oni-save/modify-planet";
 export const modifyPlanet = (
   planetId: number,
-  planet: Partial<SpacecraftDestination>
+  planet: Partial<SpaceDestination>
 ) => ({
   type: ACTION_ONISAVE_MODIFY_PLANET as typeof ACTION_ONISAVE_MODIFY_PLANET,
   payload: { planetId, planet }

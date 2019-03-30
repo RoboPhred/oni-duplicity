@@ -20,6 +20,9 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       padding: theme.spacing.unit
+    },
+    difficulty: {
+      marginTop: theme.spacing.unit
     }
   });
 
@@ -31,7 +34,7 @@ const SaveOverview: React.SFC<Props> = ({ classes, saveName, cycleCount }) => (
       <Typography variant="h4">{saveName}</Typography>
       <Divider />
       <Typography>{cycleCount} cycles.</Typography>
-      <Difficulty />
+      <Difficulty className={classes.difficulty} />
     </div>
   </PageContainer>
 );

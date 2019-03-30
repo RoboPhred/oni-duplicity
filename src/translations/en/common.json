@@ -99,7 +99,8 @@
     },
     "conditions": {
       "loading": "Loading",
-      "modified": "Modified"
+      "modified": "Modified",
+      "modified_description": "The file has been modified since it was last saved."
     }
   },
   "overview-page": {

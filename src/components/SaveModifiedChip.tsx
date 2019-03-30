@@ -6,17 +6,22 @@ import Chip from "@material-ui/core/Chip";
 
 import AbstractEditStatus from "@/services/oni-save/components/AbstractEditStatus";
 
-type Props = WithTranslation;
-const SaveModifiedChip: React.SFC<Props> = ({ t }) => (
+export interface SaveModifiedChipProps {
+  className?: string;
+}
+
+type Props = SaveModifiedChipProps & WithTranslation;
+const SaveModifiedChip: React.SFC<Props> = ({ t, className }) => (
   <AbstractEditStatus>
     {({ hasChanges }) => (
-      <div>
+      <div className={className}>
         {hasChanges && (
           <Chip
             color="secondary"
             label={t("save-file.conditions.modified", {
               defaultValue: "Modified"
             })}
+            title={t("save-file.conditions.modified_description")}
           />
         )}
       </div>

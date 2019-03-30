@@ -14,6 +14,8 @@ export interface ListItemLinkProps
 
 type Props = ListItemLinkProps & RouteComponentProps;
 class ListItemLink extends React.Component<Props> {
+  private _onClick = onLinkClick.bind(this);
+
   render() {
     const {
       children,
@@ -30,7 +32,7 @@ class ListItemLink extends React.Component<Props> {
         {...props}
         component="a"
         href={history.createHref({ pathname: to })}
-        onClick={onLinkClick}
+        onClick={this._onClick}
       >
         {children}
       </ListItem>

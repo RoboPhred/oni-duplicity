@@ -1,14 +1,13 @@
 import { createSelector } from "reselect";
 import { find } from "lodash-es";
+import { QualityLevelSettingValues } from "oni-save-parser";
 
-import {
-  DifficultySetting,
-  DifficultySetttingNames
-} from "@/types/oni-save-parser";
+import { keysOfType } from "@/utils";
 
 import { saveGameSelector } from "../selectors/save-game";
 import { createStructuredSelector } from "./utils";
 import { connectRenderComponent } from "./connectRenderComponent";
+import { modifyDifficulty } from "../actions/modify-difficulty";
 
 const gameSettingsSelector = createSelector(
   saveGameSelector,
@@ -20,13 +19,15 @@ const gameSettingsSelector = createSelector(
   }
 );
 
-export type DifficultySettings = Record<DifficultySetting, string>;
 const difficultySelector = createSelector(
   gameSettingsSelector,
   gameSettings => {
-    const difficulty: Record<string, string> = {};
+    const difficulty: Record<
+      keyof typeof QualityLevelSettingValues,
+      string
+    > = {} as any;
     if (gameSettings) {
-      for (const setting of DifficultySetttingNames) {
+      for (const setting of keysOfType(QualityLevelSettingValues)) {
         const [_, value] = find(
           gameSettings.CurrentQualityLevelsBySetting,
           x => x[0] === setting
@@ -45,4 +46,8 @@ const mapStateToProps = createStructuredSelector({
   difficulty: difficultySelector
 });
 
-export default connectRenderComponent(mapStateToProps);
+const mapDispatchToProps = {
+  onModifyDifficulty: modifyDifficulty
+};
+
+export default connectRenderComponent(mapStateToProps, mapDispatchToProps);

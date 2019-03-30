@@ -15,6 +15,7 @@ const OverviewPage: React.SFC = () => (
           return <NoSave />;
         case LoadingStatus.Error:
           return <SaveError />;
+        case LoadingStatus.Saving:
         case LoadingStatus.Ready:
           return <SaveOverview />;
       }

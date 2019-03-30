@@ -191,6 +191,19 @@ export function changeStateBehaviorData<
   };
 }
 
+export function setArrayDict<TKey, TValue>(
+  arrayDict: [TKey, TValue][],
+  key: TKey,
+  value: TValue
+): [TKey, TValue][] {
+  const index = findIndex(arrayDict, x => x[0] === key);
+  if (index === -1) {
+    throw new Error("Key not found.");
+  }
+
+  return replace<[TKey, TValue]>(arrayDict, index, [key, value]);
+}
+
 function applyModifier<T>(data: T, modifier: DataModifier<T>): T {
   let newData: T;
   if (typeof modifier === "function") {
