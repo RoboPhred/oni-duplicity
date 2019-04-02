@@ -14,6 +14,8 @@ import Typography from "@material-ui/core/Typography";
 
 import AbstractPlanet from "@/services/oni-save/components/AbstractPlanet";
 
+import RecoverableElement from "./components/RecoverableElement";
+
 export interface PlanetListItemProps {
   planetId: number;
   className?: string;
@@ -36,6 +38,21 @@ const styles = (theme: Theme) =>
       display: "flex",
       flexDirection: "row",
       marginLeft: "auto"
+    },
+    divider: {
+      marginBottom: theme.spacing.unit
+    },
+    contentLayout: {
+      display: "flex",
+      flexDirection: "row"
+    },
+    planetContainer: {
+      width: 100,
+      height: 100
+    },
+    planetImg: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit
     }
   });
 
@@ -45,7 +62,7 @@ const PlanetListItem: React.SFC<Props> = ({ classes, className, planetId }) => (
   <AbstractPlanet planetId={planetId}>
     {({ planet }) => {
       if (!planet) {
-        return <div>No Data</div>;
+        return <Typography>No Data</Typography>;
       }
       const { type } = planet;
       return (
@@ -54,7 +71,24 @@ const PlanetListItem: React.SFC<Props> = ({ classes, className, planetId }) => (
             <Typography variant="h6">{type}</Typography>
             <div className={classes.titleControls} />
           </div>
-          <Divider />
+          <Divider className={classes.divider} />
+          <div className={classes.contentLayout}>
+            <div className={classes.planetImg}>
+              <svg
+                viewBox="0 0 70 70"
+                width={70}
+                height={70}
+                className={classes.planetImg}
+              >
+                <circle cx={35} cy={35} r={35} fill="red" />
+              </svg>
+            </div>
+            <div>
+              {planet.recoverableElements.map(([hash, chance]) => (
+                <RecoverableElement hash={hash} chance={chance} />
+              ))}
+            </div>
+          </div>
         </Paper>
       );
     }}
