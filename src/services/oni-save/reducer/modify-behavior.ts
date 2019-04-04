@@ -1,5 +1,6 @@
 import { AnyAction } from "redux";
 import { SaveGame } from "oni-save-parser";
+import { merge } from "lodash-es";
 
 import { OniSaveState, defaultOniSaveState } from "../state";
 
@@ -23,10 +24,17 @@ export default function modifyBehaviorReducer(
     return state;
   }
 
-  let { gameObjectId, behaviorId, target, value } = action.payload;
+  let { gameObjectId, behaviorId, target, value, merge } = action.payload;
 
   return tryModifySaveGame(state, saveGame =>
-    performModifyBehavior(saveGame, gameObjectId, behaviorId, target, value)
+    performModifyBehavior(
+      saveGame,
+      gameObjectId,
+      behaviorId,
+      target,
+      value,
+      merge
+    )
   );
 }
 
@@ -35,9 +43,14 @@ function performModifyBehavior(
   gameObjectId: number,
   behaviorName: string,
   target: BehaviorDataTarget,
-  value: any
+  value: any,
+  mergeData: boolean
 ) {
   let gameObject = requireGameObject(saveGame, gameObjectId);
+
+  function performMerge(original: any) {
+    return mergeData ? merge({}, original, value) : { ...original, ...value };
+  }
 
   switch (target) {
     case BehaviorDataTarget.Template:
@@ -45,7 +58,7 @@ function performModifyBehavior(
         gameObject,
         behaviorName,
         "templateData",
-        value
+        performMerge
       );
       break;
     case BehaviorDataTarget.Extra:
@@ -53,7 +66,7 @@ function performModifyBehavior(
         gameObject,
         behaviorName,
         "extraData",
-        value
+        performMerge
       );
       break;
   }
