@@ -1,5 +1,6 @@
 ### vNext
 
+- Editor for various difficulty settings.
 - Fix geyser rate modification.
 - Support saves from 7.6 to 7.8
 
