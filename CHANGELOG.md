@@ -1,4 +1,4 @@
-### vNext
+### v3.6.0
 
 - Editor for various difficulty settings.
 - Fix geyser rate modification.
