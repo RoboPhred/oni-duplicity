@@ -1,8 +1,9 @@
 ### vNext
 
 - Fix geyser rate modification.
+- Support saves from 7.6 to 7.8
 
-### 3.5.0
+### v3.5.0
 
 - Change geyser game object type (and artwork) when changing emit element.
 - Improve load/save performance.
