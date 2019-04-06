@@ -14,14 +14,12 @@ export interface PathSelectorProps {
 const PathSelector: React.FC<PathSelectorProps> = ({ path, onChange }) => (
   <AbstractPathSelector path={path} onChange={onChange}>
     {({ pathMenu, nextItemMenu }) => (
-      <span>
-        <Breadcrumbs>
-          {pathMenu.map(({ label, onClick }) => (
-            <Link key={label} color="inherit" onClick={onClick}>
-              {label}
-            </Link>
-          ))}
-        </Breadcrumbs>
+      <Breadcrumbs>
+        {pathMenu.map(({ label, onClick }) => (
+          <Link key={label} color="inherit" onClick={onClick}>
+            {label}
+          </Link>
+        ))}
         {nextItemMenu.length > 0 && (
           <Select
             onChange={e => nextItemMenu[Number(e.target.value)].onClick()}
@@ -33,7 +31,7 @@ const PathSelector: React.FC<PathSelectorProps> = ({ path, onChange }) => (
             ))}
           </Select>
         )}
-      </span>
+      </Breadcrumbs>
     )}
   </AbstractPathSelector>
 );

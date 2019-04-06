@@ -60,8 +60,10 @@ const RawEditorPage: React.FC<Props> = ({ classes }) => {
                       value={value}
                       onChange={e => onChange(e.target.value)}
                     />
-                    <button onClick={onReset}>Reset</button>
-                    <button onClick={onApply}>Apply</button>
+                    <div>
+                      <button onClick={onReset}>Reset</button>
+                      <button onClick={onApply}>Apply</button>
+                    </div>
                   </div>
                 )}
               </div>
