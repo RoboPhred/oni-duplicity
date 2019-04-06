@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import { AbstractRawEditorProps } from "./props";
 
 import mapStateToProps, { StateProps } from "./state-props";
+import mapDispatchToProps, { DispatchProps } from "./dispatch-props";
 
-type Props = AbstractRawEditorProps & StateProps;
+type Props = AbstractRawEditorProps & StateProps & DispatchProps;
 interface State {
   transientValue: string | null;
   valid: boolean;
@@ -19,41 +20,69 @@ class AbstractRawEditor extends React.Component<Props, State> {
   render() {
     const { value, children } = this.props;
     const { transientValue, valid } = this.state;
-    let isTooComplex = objectDepth(value, 5) >= 5;
-    const strValue = isTooComplex
-      ? "< Object is too complex.  Choose a deeper path >"
-      : JSON.stringify(value, null, 2);
+    let strValue: string | null;
+    if (!value) {
+      strValue = null;
+    } else if (objectDepth(value, 5) >= 5) {
+      strValue = null;
+    } else {
+      strValue = transientValue || JSON.stringify(value, null, 2);
+    }
     return children({
-      value: transientValue || strValue,
+      value: strValue,
+      valid: valid,
       onChange: this._onChange,
-      valid: valid || isTooComplex
+      onApply: this._onApply,
+      onReset: this._onReset
     });
   }
 
   private _onChange = (value: string) => {
-    const { value: objValue } = this.props;
-    let isTooComplex = objectDepth(objValue, 5) >= 5;
-    if (isTooComplex) {
+    let isValid = true;
+    try {
+      JSON.parse(value);
+    } catch {
+      isValid = false;
+    }
+
+    this.setState({
+      transientValue: value,
+      valid: isValid
+    });
+  };
+
+  private _onApply = () => {
+    const { path, value: objValue, onModifySave } = this.props;
+    const { transientValue } = this.state;
+    if (!transientValue) {
       return;
     }
 
     try {
-      const parsed = JSON.parse(value);
+      const parsed = JSON.parse(transientValue);
       this.setState({
         valid: true,
         transientValue: null
       });
-      // TODO: Set value
+      onModifySave(path, parsed);
     } catch {
       this.setState({
-        transientValue: value,
         valid: false
       });
     }
   };
+
+  private _onReset = () => {
+    this.setState({
+      transientValue: null
+    });
+  };
 }
 
-export default connect(mapStateToProps)(AbstractRawEditor);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AbstractRawEditor);
 
 function objectDepth(obj: any, limit: number) {
   if (!obj || typeof obj !== "object") {
