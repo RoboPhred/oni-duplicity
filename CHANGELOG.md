@@ -1,3 +1,7 @@
+### v3.7.0
+
+- Raw JSON editor
+
 ### v3.6.0
 
 - Editor for various difficulty settings.
