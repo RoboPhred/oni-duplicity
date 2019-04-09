@@ -40,6 +40,12 @@ const NAV_ITEMS: NavItem[] = [
     path: "/materials",
     i18nKey: "material.noun_titlecase_plural",
     saveRequired: true
+  },
+  {
+    name: "Raw Editor",
+    path: "/raw",
+    i18nKey: "raw-editor-page.title",
+    saveRequired: true
   }
 ];
 

@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
+import Link from "@material-ui/core/Link";
 
 import PageContainer from "@/components/PageContainer";
 
@@ -27,7 +28,9 @@ const SettingsPage: React.SFC<Props> = ({ classes }) => (
       <Typography>
         <br />
         Contribute translations at the{" "}
-        <a href="https://github.com/robophred/oni-duplicity">GitHub Repo</a>
+        <Link href="https://github.com/robophred/oni-duplicity">
+          GitHub Repo
+        </Link>
       </Typography>
     </div>
   </PageContainer>

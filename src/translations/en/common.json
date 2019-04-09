@@ -111,5 +111,8 @@
       "save-location": "Save files can be found at <1>{{path}}</1>."
     }
   },
+  "raw-editor-page": {
+    "title": "Raw Editor"
+  },
   "view-github": "View project on GitHub"
 }

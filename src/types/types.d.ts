@@ -10,6 +10,8 @@ type DeepPartial<T> = {
 
 type ArrayValues<T> = T extends Array<infer U> ? U : never;
 
+type PropsOfComponent<T> = T extends React.Component<infer P> ? P : never;
+
 declare module "worker-loader!*" {
   class WebpackWorker extends Worker {
     constructor();
