@@ -54,6 +54,10 @@ class AbstractPathSelector extends React.Component<Props> {
     }
 
     for (const key of Object.keys(target)) {
+      const value = target[key];
+      if (!value || typeof value !== "object") {
+        continue;
+      }
       pathMenuItems.push({
         label: this._getPathName([...path, key]),
         onClick: this._onSelectPath.bind(this, [...path, key])

@@ -1,5 +1,4 @@
 import * as React from "react";
-import classnames from "classnames";
 
 import {
   Theme,
@@ -7,31 +6,37 @@ import {
   withStyles,
   WithStyles
 } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 
 import PageContainer from "@/components/PageContainer";
+import RedirectIfNoSave from "@/components/RedirectIfNoSave";
+import JsonEditor from "@/components/JsonEditor";
 
 import AbstractRawEditor from "@/services/oni-save/components/AbstractRawEditor";
 
 import PathSelector from "./components/PathSelector";
-import RedirectIfNoSave from "@/components/RedirectIfNoSave";
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
       display: "flex",
-      flexDirection: "column"
+      flexDirection: "column",
+      height: "100%"
     },
     selectorContainer: {
-      width: "100%"
+      width: "100%",
+      padding: theme.spacing.unit
     },
     editorContainer: {
       flexGrow: 1,
       width: "100%",
-      height: "100%"
+      height: "100%",
+      minHeight: 0
     },
-    editorError: {
-      borderStyle: "solid",
-      borderColor: "red"
+    buttonContainer: {
+      display: "flex",
+      width: "100%",
+      flexDirection: "row"
     }
   });
 
@@ -42,31 +47,37 @@ const RawEditorPage: React.FC<Props> = ({ classes }) => {
     <React.Fragment>
       <RedirectIfNoSave />
       <AbstractRawEditor path={path}>
-        {({ value, valid, onChange, onReset, onApply }) => (
+        {({ value, valid, hasChanges, onChange, onReset, onApply }) => (
           <PageContainer title="Raw Editor" back>
             <div className={classes.root}>
               <div className={classes.selectorContainer}>
                 <PathSelector path={path} onChange={setPath} />
               </div>
-              <div
-                className={classnames(
-                  classes.editorContainer,
-                  !valid && classes.editorError
-                )}
-              >
-                {value && (
-                  <div>
-                    <textarea
+              {value && (
+                <>
+                  <div className={classes.editorContainer}>
+                    <JsonEditor
+                      width="100%"
+                      height="100%"
+                      language="json"
+                      theme="vs-dark"
                       value={value}
-                      onChange={e => onChange(e.target.value)}
+                      onChange={onChange}
                     />
-                    <div>
-                      <button onClick={onReset}>Reset</button>
-                      <button onClick={onApply}>Apply</button>
-                    </div>
                   </div>
-                )}
-              </div>
+                  <div className={classes.buttonContainer}>
+                    <button onClick={onReset}>Reset</button>
+                    <button disabled={!valid || !hasChanges} onClick={onApply}>
+                      Apply
+                    </button>
+                    {!valid && (
+                      <Typography component="span">
+                        Cannot apply changes - JSON contains an error.
+                      </Typography>
+                    )}
+                  </div>
+                </>
+              )}
             </div>
           </PageContainer>
         )}

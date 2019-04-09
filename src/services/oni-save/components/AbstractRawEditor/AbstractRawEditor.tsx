@@ -31,6 +31,7 @@ class AbstractRawEditor extends React.Component<Props, State> {
     return children({
       value: strValue,
       valid: valid,
+      hasChanges: transientValue !== null,
       onChange: this._onChange,
       onApply: this._onApply,
       onReset: this._onReset

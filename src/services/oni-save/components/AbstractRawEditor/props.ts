@@ -4,8 +4,9 @@ export interface AbstractRawEditorProps {
 }
 export interface AbstractRawEditorRenderProps {
   value: string | null;
+  valid: boolean;
+  hasChanges: boolean;
   onChange(value: string): void;
   onApply(): void;
   onReset(): void;
-  valid: boolean;
 }
