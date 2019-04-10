@@ -22,7 +22,7 @@ const Nav: React.FC<Props> = ({ hasSave }) => (
         button
         to={path}
         autoselect
-        disabled={saveRequired ? hasSave : false}
+        disabled={saveRequired ? !hasSave : false}
       >
         <ListItemText>
           <Trans i18nKey={i18nKey}>{name}</Trans>
