@@ -1,11 +1,10 @@
 import createCachedSelector from "re-reselect";
 import { getBehavior, KPrefabIDBehavior, GameObject } from "oni-save-parser";
 
+import { createStructuredSelector } from "@/state";
 import { isNotNull, maybeArray } from "@/utils";
 
 import { gameObjectGroupsSelector } from "../../selectors/game-objects";
-
-import { createStructuredSelector } from "../utils";
 
 import { AbstractGameObjectListProps } from "./props";
 

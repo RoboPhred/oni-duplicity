@@ -1,10 +1,8 @@
 import { createSelector } from "reselect";
 
-import { AppState } from "@/state";
+import { createStructuredSelector } from "@/state";
 
 import { spaceManagerSelector } from "../../selectors/space-manager";
-
-import { createStructuredSelector } from "../utils";
 
 const planetIdsSelector = createSelector(
   spaceManagerSelector,

@@ -1,9 +1,9 @@
 import { AppState } from "@/state";
 
+import { createStructuredSelector } from "@/state";
+
 import { LoadingStatus } from "../../state";
 import { loadingStatusSelector } from "../../selectors/loading-status";
-
-import { createStructuredSelector } from "../utils";
 
 const mapStateToProps = createStructuredSelector({
   disabled: (state: AppState) => isBusy(loadingStatusSelector(state))

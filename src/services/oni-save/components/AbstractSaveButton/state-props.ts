@@ -1,10 +1,10 @@
 import { createSelector } from "reselect";
 
+import { createStructuredSelector } from "@/state";
+
 import { LoadingStatus } from "../../state";
 import { isMockSelector } from "../../selectors/save-game";
 import { loadingStatusSelector } from "../../selectors/loading-status";
-
-import { createStructuredSelector } from "../utils";
 
 const disabledSelector = createSelector(
   loadingStatusSelector,

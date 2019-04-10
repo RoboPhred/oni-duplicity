@@ -1,4 +1,5 @@
-import { createStructuredSelector } from "../utils";
+import { createStructuredSelector } from "@/state";
+
 import { saveGameSelector } from "../../selectors/save-game";
 
 const mapStateToProps = createStructuredSelector({

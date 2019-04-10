@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { shallow } from "@/enzyme";
 
-import CommitTextField from "./CommitTextField";
+import CommitTextField from "./component";
 
 describe("CommitTextField", () => {
   it("forwards calls to onChange", () => {

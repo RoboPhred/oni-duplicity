@@ -85,7 +85,7 @@
       "modified_titlecase": "Data Modified"
     },
     "prompts": {
-      "modified-description": "The data in this file has been modified since it was exported.\nImported data is not validated, and importing invalid data can corrupt your save"
+      "modified-description": "The data in this file has been modified since it was exported.\nImported data is not validated, and importing invalid data can corrupt your save."
     },
     "verbs": {
       "copy_titlecase": "Copy",

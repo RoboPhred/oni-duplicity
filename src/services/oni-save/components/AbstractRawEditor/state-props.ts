@@ -1,11 +1,9 @@
 import createCachedSelector from "re-reselect";
 import { get } from "lodash-es";
 
-import { AppState } from "@/state";
+import { AppState, createStructuredSelector } from "@/state";
 
 import { saveGameSelector } from "../../selectors/save-game";
-
-import { createStructuredSelector } from "../utils";
 
 import { AbstractRawEditorProps } from "./props";
 

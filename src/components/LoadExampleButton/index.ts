@@ -1,2 +1,4 @@
-import LoadExampleButton from "./LoadExampleButton";
-export default LoadExampleButton;
+import LoadExampleButton from "./component";
+import connectLoadExampleButton from "./connector";
+
+export default connectLoadExampleButton(LoadExampleButton);
