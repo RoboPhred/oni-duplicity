@@ -16,9 +16,11 @@ export interface CopyMenuItemProps {
 type Props = CopyMenuItemProps & WithTranslation;
 const CopyMenuItem: React.SFC<Props> = ({ onCopyBehaviors, onClose, t }) => {
   const [isDialogOpen, setDialogOpen] = React.useState(false);
+
   const onClick = React.useCallback(() => {
     setDialogOpen(true);
   }, [setDialogOpen]);
+
   const onDialogApply = React.useCallback(
     (behaviors: string[]) => {
       onCopyBehaviors(behaviors);
@@ -26,7 +28,9 @@ const CopyMenuItem: React.SFC<Props> = ({ onCopyBehaviors, onClose, t }) => {
     },
     [onCopyBehaviors, onClose]
   );
+
   const copyText = t("data.verbs.copy_titlecase");
+
   return (
     <MenuItem onClick={onClick}>
       {copyText}

@@ -1,26 +1,23 @@
 import * as React from "react";
-import { connect } from "react-redux";
 
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import Divider from "@material-ui/core/Divider";
 
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import CopyMenuItem from "./components/CopyMenuItem";
-
-import mapDispatchToProps, { DispatchProps } from "./dispatch-props";
+import ImportMenuItem from "./components/ImportMenuItem";
 import ExportMenuItem from "./components/ExportMenuItem";
-import AbstractImportButton from "@/services/oni-save/components/AbstractImportButton";
 import PasteMenuItem from "./components/PasteMenuItem";
+import CloneMenuItem from "./components/CloneMenuItem";
 
 export interface DuplicantMenuProps {
   gameObjectId: number;
 }
 
-type Props = DuplicantMenuProps & DispatchProps;
-const DuplicantMenu: React.SFC<Props> = ({ gameObjectId, cloneDuplicant }) => {
+type Props = DuplicantMenuProps;
+const DuplicantMenu: React.SFC<Props> = ({ gameObjectId }) => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 
   const onOpen = React.useCallback((e: React.MouseEvent<HTMLElement>) => {
@@ -49,25 +46,13 @@ const DuplicantMenu: React.SFC<Props> = ({ gameObjectId, cloneDuplicant }) => {
         <CopyMenuItem gameObjectId={gameObjectId} onClose={onClose} />
         <PasteMenuItem gameObjectId={gameObjectId} onClose={onClose} />
         <Divider />
-        <AbstractImportButton gameObjectId={gameObjectId} onComplete={onClose}>
-          {({ onClick }) => <MenuItem onClick={onClick}>Import</MenuItem>}
-        </AbstractImportButton>
+        <ImportMenuItem gameObjectId={gameObjectId} onClose={onClose} />
         <ExportMenuItem gameObjectId={gameObjectId} onClose={onClose} />
         <Divider />
-        <MenuItem
-          onClick={() => {
-            onClose();
-            cloneDuplicant(gameObjectId);
-          }}
-        >
-          Clone
-        </MenuItem>
+        <CloneMenuItem gameObjectId={gameObjectId} onClick={onClose} />
       </Menu>
     </div>
   );
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(DuplicantMenu);
+export default DuplicantMenu;
