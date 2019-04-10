@@ -8,32 +8,36 @@ import { MinionExportableBehaviors } from "@/exportable-behaviors";
 
 import BehaviorChooserDialog from "@/components/BehaviorChooserDialog";
 
-export interface CopyMenuItemProps {
-  onCopyBehaviors(behaviors: string[]): void;
+export interface ExportMenuItemProps {
+  onExportBehaviors(behaviors: string[]): void;
   onClose(): void;
 }
 
-type Props = CopyMenuItemProps & WithTranslation;
-const CopyMenuItem: React.SFC<Props> = ({ onCopyBehaviors, onClose, t }) => {
+type Props = ExportMenuItemProps & WithTranslation;
+const ExportMenuItem: React.SFC<Props> = ({
+  onExportBehaviors,
+  onClose,
+  t
+}) => {
   const [isDialogOpen, setDialogOpen] = React.useState(false);
   const onClick = React.useCallback(() => {
     setDialogOpen(true);
   }, [setDialogOpen]);
   const onDialogApply = React.useCallback(
     (behaviors: string[]) => {
-      onCopyBehaviors(behaviors);
+      onExportBehaviors(behaviors);
       onClose();
     },
-    [onCopyBehaviors, onClose]
+    [onExportBehaviors, onClose]
   );
-  const copyText = t("data.verbs.copy_titlecase");
+  const exportText = t("data.verbs.export_titlecase");
   return (
     <MenuItem onClick={onClick}>
-      {copyText}
+      {exportText}
       <BehaviorChooserDialog
         open={isDialogOpen}
-        title={copyText}
-        applyText={copyText}
+        title={exportText}
+        applyText={exportText}
         choices={MinionExportableBehaviors}
         onApply={onDialogApply}
         onCancel={onClose}
@@ -42,4 +46,4 @@ const CopyMenuItem: React.SFC<Props> = ({ onCopyBehaviors, onClose, t }) => {
   );
 };
 
-export default withTranslation()(CopyMenuItem);
+export default withTranslation()(ExportMenuItem);
