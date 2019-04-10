@@ -41,12 +41,7 @@ export interface PageContainerProps {
 
 type Props = PageContainerProps & WithStyles<typeof styles>;
 
-const PageContainer: React.FC<Props> = ({
-  classes,
-  title,
-  back,
-  children
-}) => (
+const PageContainer: React.FC<Props> = ({ classes, title, back, children }) => (
   <div className={classes.root}>
     <Drawer variant="permanent" anchor="left">
       <Sidebar className={classes.sidebar} />

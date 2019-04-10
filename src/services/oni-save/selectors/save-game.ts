@@ -10,6 +10,10 @@ export const isMockSelector = createServiceSelector(
   (state: OniSaveState) => state.isMock
 );
 
+export const hasSaveSelector = createServiceSelector(
+  (state: OniSaveState) => state.saveGame != null
+);
+
 export const isSaveModifiedSelector = createServiceSelector(
   (state: OniSaveState) => state.isModified
 );

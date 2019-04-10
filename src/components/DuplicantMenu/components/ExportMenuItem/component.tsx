@@ -14,11 +14,7 @@ export interface ExportMenuItemProps {
 }
 
 type Props = ExportMenuItemProps & WithTranslation;
-const ExportMenuItem: React.FC<Props> = ({
-  onExportBehaviors,
-  onClose,
-  t
-}) => {
+const ExportMenuItem: React.FC<Props> = ({ onExportBehaviors, onClose, t }) => {
   const [isDialogOpen, setDialogOpen] = React.useState(false);
   const onClick = React.useCallback(() => {
     setDialogOpen(true);
