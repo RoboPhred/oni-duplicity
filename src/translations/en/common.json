@@ -100,7 +100,9 @@
     "conditions": {
       "loading": "Loading",
       "modified": "Modified",
-      "modified_description": "The file has been modified since it was last saved."
+      "modified_description": "The file has been modified since it was last saved.",
+      "example": "Example",
+      "example_description": "This is example content and cannot be saved."
     }
   },
   "overview-page": {

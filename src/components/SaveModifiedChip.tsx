@@ -11,7 +11,7 @@ export interface SaveModifiedChipProps {
 }
 
 type Props = SaveModifiedChipProps & WithTranslation;
-const SaveModifiedChip: React.FC<Props> = ({ t, className }) => (
+const SaveModifiedChip: React.FC<Props> = ({ className, t }) => (
   <AbstractEditStatus>
     {({ hasChanges }) => (
       <div className={className}>

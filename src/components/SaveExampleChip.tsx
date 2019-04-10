@@ -11,15 +11,17 @@ export interface SaveExampleChipProps {
 }
 
 type Props = SaveExampleChipProps & WithTranslation;
-const SaveExampleChip: React.FC<Props> = ({ t, className }) => (
+const SaveExampleChip: React.FC<Props> = ({ className, t }) => (
   <AbstractEditStatus>
     {({ isMock }) => (
       <div className={className}>
         {isMock && (
           <Chip
             color="secondary"
-            label="Example"
-            title="This is example content and cannot be saved."
+            label={t("save-file.conditions.example", {
+              defaultValue: "Example"
+            })}
+            title={t("save-file.conditions.example_description")}
           />
         )}
       </div>
