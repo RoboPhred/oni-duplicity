@@ -1,7 +1,7 @@
-import React, { ComponentProps } from "react";
+import React from "react";
 import MonacoEditor from "react-monaco-editor";
 
-export default class JsonEditor extends React.Component<
+export default class ControlledMonaco extends React.Component<
   PropsOfComponent<MonacoEditor>
 > {
   private _editor: any = null;
