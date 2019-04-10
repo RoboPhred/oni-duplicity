@@ -18,7 +18,7 @@ export interface MaterialsPageProps {
 
 type Props = MaterialsPageProps & WithTranslation;
 
-const MaterialsTable: React.SFC<Props> = ({ className, t }) => {
+const MaterialsTable: React.FC<Props> = ({ className, t }) => {
   function formatWeight(weight: number) {
     if (Math.abs(weight) < 1000) {
       const g = Number(weight.toFixed(2));

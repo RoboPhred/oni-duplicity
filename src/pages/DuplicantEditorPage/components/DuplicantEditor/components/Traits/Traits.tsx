@@ -38,7 +38,7 @@ const styles = (theme: Theme) =>
 
 type Props = TraitsProps & WithStyles<typeof styles> & WithTranslation;
 
-const Traits: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
+const Traits: React.FC<Props> = ({ classes, gameObjectId, t }) => {
   return (
     <TraitsEditor gameObjectId={gameObjectId}>
       {({ templateData, onTemplateDataModify }) => {

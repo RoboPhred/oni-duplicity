@@ -14,7 +14,7 @@ export interface ExportMenuItemProps {
 }
 
 type Props = ExportMenuItemProps & WithTranslation;
-const ExportMenuItem: React.SFC<Props> = ({
+const ExportMenuItem: React.FC<Props> = ({
   onExportBehaviors,
   onClose,
   t

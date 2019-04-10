@@ -38,7 +38,7 @@ const styles = (theme: Theme) =>
 
 type Props = LoadingDialogProps & WithStyles<typeof styles>;
 
-const LoadingDialog: React.SFC<Props> = ({ isLoading, message, classes }) => (
+const LoadingDialog: React.FC<Props> = ({ isLoading, message, classes }) => (
   <Dialog open={isLoading}>
     <div className={classes.root}>
       <div className={classes.content}>

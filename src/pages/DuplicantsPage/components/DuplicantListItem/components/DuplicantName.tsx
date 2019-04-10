@@ -13,7 +13,7 @@ export interface DuplicantNameProps {
   gameObjectId: number;
 }
 
-const DuplicantName: React.SFC<DuplicantNameProps> = ({ gameObjectId }) => (
+const DuplicantName: React.FC<DuplicantNameProps> = ({ gameObjectId }) => (
   <MinionIdentityEditor gameObjectId={gameObjectId}>
     {({ templateData }) => (
       <Typography variant="h5">{templateData.name}</Typography>

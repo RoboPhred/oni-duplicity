@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import AbstractLoadStatus from "@/services/oni-save/components/AbstractLoadStatus";
 import { LoadingStatus } from "@/services/oni-save/state";
 
-const RedirectIfNoSave: React.SFC = () => (
+const RedirectIfNoSave: React.FC = () => (
   <AbstractLoadStatus>
     {({ status }) => {
       if (status === LoadingStatus.Idle) {

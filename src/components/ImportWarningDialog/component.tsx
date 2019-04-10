@@ -22,7 +22,7 @@ const styles = createStyles({
 });
 
 type Props = ImportWarningDialogProps & WithStyles<typeof styles>;
-const ImportWarningDialog: React.SFC<Props> = ({
+const ImportWarningDialog: React.FC<Props> = ({
   classes,
   isOpen,
   onConfirm,

@@ -17,7 +17,7 @@ export interface DuplicantEditorProps
   extends RouteComponentProps<DuplicantEditorRouteParams> {}
 
 type Props = DuplicantEditorProps;
-const DuplicantEditorPage: React.SFC<Props> = ({
+const DuplicantEditorPage: React.FC<Props> = ({
   match: {
     params: { gameObjectId }
   }

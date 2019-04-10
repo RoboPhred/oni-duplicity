@@ -34,7 +34,7 @@ const styles = (theme: Theme) =>
 
 type Props = DuplicantAttributesProps & WithStyles<typeof styles>;
 
-const DuplicantAttributes: React.SFC<Props> = ({
+const DuplicantAttributes: React.FC<Props> = ({
   className,
   classes,
   gameObjectId

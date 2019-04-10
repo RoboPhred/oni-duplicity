@@ -8,7 +8,7 @@ export interface CloneMenuItemProps {
 }
 
 type Props = CloneMenuItemProps;
-const CloneMenuItem: React.SFC<Props> = ({ onCloneDuplicant, onClick }) => {
+const CloneMenuItem: React.FC<Props> = ({ onCloneDuplicant, onClick }) => {
   const onMenuItemClick = React.useCallback(() => {
     onCloneDuplicant();
     onClick();

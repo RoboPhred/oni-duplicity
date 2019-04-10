@@ -82,7 +82,7 @@ const styles = (theme: Theme) =>
 
 type Props = DuplicantEditorProps & WithTranslation & WithStyles<typeof styles>;
 
-const DuplicantEditor: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
+const DuplicantEditor: React.FC<Props> = ({ classes, gameObjectId, t }) => {
   const [tab, setTab] = React.useState(0);
   return (
     <PageContainer title={t("duplicant.verbs.edit_titlecase")} back>

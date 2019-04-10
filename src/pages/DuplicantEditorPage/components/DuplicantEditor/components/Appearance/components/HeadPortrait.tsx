@@ -37,7 +37,7 @@ const styles = createStyles({
 
 type Props = HeadPortraitProps & WithStyles<typeof styles>;
 
-const HeadPortrait: React.SFC<Props> = ({
+const HeadPortrait: React.FC<Props> = ({
   className,
   classes,
   hairOrdinal,

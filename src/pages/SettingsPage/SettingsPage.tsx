@@ -21,7 +21,7 @@ const styles = (theme: Theme) =>
 
 type Props = WithStyles<typeof styles>;
 
-const SettingsPage: React.SFC<Props> = ({ classes }) => (
+const SettingsPage: React.FC<Props> = ({ classes }) => (
   <PageContainer title="Settings" back>
     <div className={classes.root}>
       <Typography variant="h6">Help Wanted: Translations</Typography>

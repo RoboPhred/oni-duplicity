@@ -14,7 +14,7 @@ export interface CopyMenuItemProps {
 }
 
 type Props = CopyMenuItemProps & WithTranslation;
-const CopyMenuItem: React.SFC<Props> = ({ onCopyBehaviors, onClose, t }) => {
+const CopyMenuItem: React.FC<Props> = ({ onCopyBehaviors, onClose, t }) => {
   const [isDialogOpen, setDialogOpen] = React.useState(false);
 
   const onClick = React.useCallback(() => {

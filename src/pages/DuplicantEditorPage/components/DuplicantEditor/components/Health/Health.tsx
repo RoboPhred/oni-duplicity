@@ -49,7 +49,7 @@ const styles = (theme: Theme) =>
 
 type Props = HealthProps & WithStyles<typeof styles>;
 
-const Health: React.SFC<Props> = ({ classes, gameObjectId }) => (
+const Health: React.FC<Props> = ({ classes, gameObjectId }) => (
   <div className={classes.root}>
     <Typography className={classes.header} variant="h6">
       <Trans>Fitness</Trans>

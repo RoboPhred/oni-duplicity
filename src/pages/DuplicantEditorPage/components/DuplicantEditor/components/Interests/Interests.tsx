@@ -40,7 +40,7 @@ const styles = (theme: Theme) =>
 
 type Props = InterestsProps & WithStyles<typeof styles> & WithTranslation;
 
-const Interests: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
+const Interests: React.FC<Props> = ({ classes, gameObjectId, t }) => {
   return (
     <ResumeEditor gameObjectId={gameObjectId}>
       {({ templateData: { AptitudeByRoleGroup }, onTemplateDataModify }) => {

@@ -8,7 +8,7 @@ export interface ImportMenuItemProps {
 }
 
 type Props = ImportMenuItemProps;
-const ImportMenuItem: React.SFC<Props> = ({ onImportDuplicant, onClose }) => {
+const ImportMenuItem: React.FC<Props> = ({ onImportDuplicant, onClose }) => {
   const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   const onMenuItemClick = React.useCallback(() => {

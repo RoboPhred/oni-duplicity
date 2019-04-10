@@ -7,7 +7,7 @@ import mapDispatchToProps, { DispatchProps } from "./dispatch-props";
 
 type Props = MaterialListProps & StateProps & DispatchProps;
 
-const AbstractMaterialList: React.SFC<Props> = ({
+const AbstractMaterialList: React.FC<Props> = ({
   materials,
   onDeleteLooseMaterial,
   children

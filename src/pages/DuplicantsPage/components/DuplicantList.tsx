@@ -31,7 +31,7 @@ const styles = (theme: Theme) =>
 
 type Props = DuplicantListProps & WithStyles<typeof styles>;
 
-const DuplicantList: React.SFC<Props> = ({ className, classes }) => (
+const DuplicantList: React.FC<Props> = ({ className, classes }) => (
   <AbstractGameObjectList gameObjectType="Minion">
     {({ gameObjectIds }) => (
       <div className={classnames(className, classes.root)}>

@@ -76,7 +76,7 @@ const styles = (theme: Theme) =>
 
 type Props = AttributesProps & WithStyles<typeof styles>;
 
-const Attributes: React.SFC<Props> = ({ classes, gameObjectId }) => (
+const Attributes: React.FC<Props> = ({ classes, gameObjectId }) => (
   <AttributesEditor gameObjectId={gameObjectId}>
     {({ templateData: { saveLoadLevels } }) => (
       <div className={classes.root}>

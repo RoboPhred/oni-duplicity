@@ -28,7 +28,7 @@ const styles = (theme: Theme) =>
 
 type Props = StateProps & WithStyles<typeof styles>;
 
-const SaveOverview: React.SFC<Props> = ({ classes, saveName, cycleCount }) => (
+const SaveOverview: React.FC<Props> = ({ classes, saveName, cycleCount }) => (
   <PageContainer title="Overview">
     <div className={classes.root}>
       <Typography variant="h4">{saveName}</Typography>

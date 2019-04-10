@@ -8,7 +8,7 @@ export interface LoadButtonProps {
 }
 
 type Props = LoadButtonProps;
-const LoadButton: React.SFC<Props> = ({ disabled, onLoadSave }) => {
+const LoadButton: React.FC<Props> = ({ disabled, onLoadSave }) => {
   const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   const onClick = React.useCallback(() => {

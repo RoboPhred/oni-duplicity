@@ -28,7 +28,7 @@ const styles = (theme: Theme) =>
 
 type Props = WithTranslation & WithStyles<typeof styles>;
 
-const DuplicantNotFound: React.SFC<Props> = ({ t, classes }) => (
+const DuplicantNotFound: React.FC<Props> = ({ t, classes }) => (
   <PageContainer title={t("duplicant.conditions.missing_titlecase")} back>
     <div className={classes.root}>
       <Typography className={classes.text} variant="h5">

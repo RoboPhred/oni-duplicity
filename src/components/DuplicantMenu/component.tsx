@@ -17,7 +17,7 @@ export interface DuplicantMenuProps {
 }
 
 type Props = DuplicantMenuProps;
-const DuplicantMenu: React.SFC<Props> = ({ gameObjectId }) => {
+const DuplicantMenu: React.FC<Props> = ({ gameObjectId }) => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 
   const onOpen = React.useCallback((e: React.MouseEvent<HTMLElement>) => {

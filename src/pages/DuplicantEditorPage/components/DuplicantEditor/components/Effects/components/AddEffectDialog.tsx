@@ -36,7 +36,7 @@ const styles = (theme: Theme) =>
 
 type Props = AddEffectDialogProps & WithTranslation & WithStyles<typeof styles>;
 
-const AddEffectDialog: React.SFC<Props> = ({
+const AddEffectDialog: React.FC<Props> = ({
   classes,
   open,
   availableEffects,

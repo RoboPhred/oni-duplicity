@@ -19,7 +19,7 @@ export interface AttributeNameProps {
 }
 
 type Props = AttributeNameProps & WithTranslation;
-const AttributeName: React.SFC<Props> = ({ gameObjectId, attributeId, t }) => (
+const AttributeName: React.FC<Props> = ({ gameObjectId, attributeId, t }) => (
   <AttributeEditor gameObjectId={gameObjectId}>
     {({ templateData }) => {
       if (!templateData) {

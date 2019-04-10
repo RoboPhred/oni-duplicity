@@ -4,7 +4,7 @@ export interface LoadExampleButtonProps {
   onLoadExampleSave(): void;
 }
 type Props = LoadExampleButtonProps;
-const LoadExampleButton: React.SFC<Props> = ({ onLoadExampleSave }) => (
+const LoadExampleButton: React.FC<Props> = ({ onLoadExampleSave }) => (
   <button onClick={onLoadExampleSave}>Load Example</button>
 );
 

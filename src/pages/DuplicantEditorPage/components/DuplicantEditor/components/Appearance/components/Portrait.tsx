@@ -44,7 +44,7 @@ const styles = createStyles({
 
 type Props = PortraitProps & WithStyles<typeof styles>;
 
-const Portrait: React.SFC<Props> = ({
+const Portrait: React.FC<Props> = ({
   className,
   classes,
   hairOrdinal,

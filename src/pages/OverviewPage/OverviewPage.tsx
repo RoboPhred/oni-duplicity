@@ -7,7 +7,7 @@ import NoSave from "./components/NoSave";
 import SaveOverview from "./components/SaveOverview";
 import SaveError from "./components/SaveError";
 
-const OverviewPage: React.SFC = () => (
+const OverviewPage: React.FC = () => (
   <AbstractLoadStatus>
     {({ status }) => {
       switch (status) {

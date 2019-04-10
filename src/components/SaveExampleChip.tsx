@@ -11,7 +11,7 @@ export interface SaveExampleChipProps {
 }
 
 type Props = SaveExampleChipProps & WithTranslation;
-const SaveExampleChip: React.SFC<Props> = ({ t, className }) => (
+const SaveExampleChip: React.FC<Props> = ({ t, className }) => (
   <AbstractEditStatus>
     {({ isMock }) => (
       <div className={className}>

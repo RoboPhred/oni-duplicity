@@ -24,7 +24,7 @@ const styles = (theme: Theme) =>
 
 type Props = WithStyles<typeof styles>;
 
-const SaveError: React.SFC<Props> = ({ classes }) => (
+const SaveError: React.FC<Props> = ({ classes }) => (
   <AbstractLoadStatus>
     {({ errorMessage }) => (
       <PageContainer title="Failed to Load">

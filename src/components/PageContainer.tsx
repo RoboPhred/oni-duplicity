@@ -41,7 +41,7 @@ export interface PageContainerProps {
 
 type Props = PageContainerProps & WithStyles<typeof styles>;
 
-const PageContainer: React.SFC<Props> = ({
+const PageContainer: React.FC<Props> = ({
   classes,
   title,
   back,

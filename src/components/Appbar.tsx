@@ -34,7 +34,7 @@ const styles = (theme: Theme) =>
 
 type Props = AppbarProps & WithStyles<typeof styles>;
 
-const Appbar: React.SFC<Props> = ({ classes, title, back }) => (
+const Appbar: React.FC<Props> = ({ classes, title, back }) => (
   <MaterialAppBar position="static">
     <Toolbar>
       {back && <BackButton />}

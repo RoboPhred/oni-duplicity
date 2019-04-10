@@ -11,7 +11,7 @@ export interface PasteMenuItemProps {
 
 type Props = PasteMenuItemProps;
 
-const PasteMenuItem: React.SFC<Props> = ({
+const PasteMenuItem: React.FC<Props> = ({
   disabled,
   onPasteBehaviors,
   onClose

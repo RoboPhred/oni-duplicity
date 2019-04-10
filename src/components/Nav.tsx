@@ -49,7 +49,7 @@ const NAV_ITEMS: NavItem[] = [
   }
 ];
 
-const Nav: React.SFC = () => (
+const Nav: React.FC = () => (
   <AbstractLoadStatus>
     {({ status }) => {
       const disableSaveRequired = status !== LoadingStatus.Ready;

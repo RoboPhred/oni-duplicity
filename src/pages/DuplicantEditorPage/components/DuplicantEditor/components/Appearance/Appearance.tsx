@@ -58,7 +58,7 @@ const styles = (theme: Theme) =>
 
 type Props = AppearanceProps & WithStyles<typeof styles>;
 
-const Appearance: React.SFC<Props> = ({ classes, gameObjectId }) => {
+const Appearance: React.FC<Props> = ({ classes, gameObjectId }) => {
   const [tab, setTab] = React.useState(0);
 
   return (

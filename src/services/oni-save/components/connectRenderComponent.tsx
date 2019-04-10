@@ -183,7 +183,7 @@ export function connectRenderComponent(
   mapStateToProps: any,
   mapDispatchToProps?: any
 ): React.ComponentType<any> {
-  const ConnectedRenderComponent: React.SFC = (
+  const ConnectedRenderComponent: React.FC = (
     props: ConnectedRenderComponentProps<any, any>
   ) => <>{props.children(...props)}</>;
   return connect(

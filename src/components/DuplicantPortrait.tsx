@@ -39,7 +39,7 @@ const styles = createStyles({
 
 type Props = DuplicantPortraitProps & WithStyles<typeof styles>;
 
-const DuplicantPortrait: React.SFC<Props> = ({
+const DuplicantPortrait: React.FC<Props> = ({
   classes,
   gameObjectId,
   scale

@@ -10,7 +10,7 @@ export interface BackButtonProps {
 }
 
 type Props = BackButtonProps;
-const BackButton: React.SFC<Props> = ({ className, onClick }) => (
+const BackButton: React.FC<Props> = ({ className, onClick }) => (
   <IconButton
     className={className}
     color="inherit"
