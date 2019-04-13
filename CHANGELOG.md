@@ -1,3 +1,8 @@
+### v3.7.0
+
+- Support new QOL3 changes. Breaks compatibility with older saves.
+- Fix interests selection in QOL3.
+
 ### v3.6.0
 
 - Editor for various difficulty settings.
