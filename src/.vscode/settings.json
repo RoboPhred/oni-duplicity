@@ -1,0 +1,28 @@
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "lib/**": true,
+    "dist/**": true
+  },
+  "emmet.showExpandedAbbreviation": "never",
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "editor.tabSize": 2,
+
+  // Align cyclomatic complexity settings to tslint cyclomatic-complexity
+  //  https://github.com/palantir/tslint/blob/master/src/rules/cyclomaticComplexityRule.ts#L117
+
+  // trys are not decision points, but catches are.
+  "codemetrics.nodeconfiguration.TryStatement": 0,
+  // throws are exit points, not decision points.
+  "codemetrics.nodeconfiguration.ThrowStatement": 0,
+  "codemetrics.nodeconfiguration.ReturnStatement": 0,
+  // Arrows are used by decision points, but are not decision points
+  "codemetrics.nodeconfiguration.ArrowFunction": 0,
+  // Switch statements are technically not decision points, the decision
+  //  is made on each case statement.
+  // (They are a decision point if we have no default case, however)
+  "codemetrics.nodeconfiguration.SwitchStatement": 0,
+  // breaks are not decision points on their own.
+  "codemetrics.nodeconfiguration.BreakStatement": 0
+}
