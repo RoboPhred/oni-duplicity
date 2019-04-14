@@ -1,6 +1,8 @@
 import * as React from "react";
 import { MinionResumeBehavior } from "oni-save-parser";
 
+import { Trans } from "react-i18next";
+
 import {
   Theme,
   createStyles,
@@ -34,7 +36,11 @@ const Skills: React.FC<Props> = ({ gameObjectId, classes }) => (
       return (
         <div className={classes.root}>
           <div>
-            <Typography>Skill Points</Typography>
+            <Typography>
+              <Trans i18nKey="duplicant_skills.experience_titlecase">
+                Experience
+              </Trans>
+            </Typography>
             <TextField
               type="number"
               value={totalExperienceGained || 0}

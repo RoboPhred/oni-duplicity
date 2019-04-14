@@ -34,6 +34,7 @@
   },
   "duplicant_skills": {
     "noun_titlecase": "Skills",
+    "experience_titlecase": "Experience",
     "mastery_titlecase": "Mastery"
   },
   "duplicant_appearance": {
