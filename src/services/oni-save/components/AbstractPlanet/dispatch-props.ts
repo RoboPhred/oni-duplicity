@@ -1,6 +1,5 @@
 import { Dispatch } from "redux";
-
-import { SpacecraftDestination } from "@/types/oni-save-parser";
+import { SpaceDestination } from "oni-save-parser";
 
 import { modifyPlanet } from "../../actions/modify-planet";
 
@@ -11,7 +10,7 @@ export default function mapDispatchToProps(
   props: AbstractPlanetProps
 ) {
   return {
-    onPlanetModify(planet: Partial<SpacecraftDestination>) {
+    onPlanetModify(planet: Partial<SpaceDestination>) {
       dispatch(modifyPlanet(props.planetId, planet));
     }
   };

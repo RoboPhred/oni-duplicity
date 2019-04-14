@@ -1,7 +1,12 @@
 import * as React from "react";
 import classnames from "classnames";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 
 import AbstractGameObjectList from "@/services/oni-save/components/AbstractGameObjectList";
 
@@ -24,8 +29,9 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = DuplicantListProps & StyleProps<typeof styles>;
-const DuplicantList: React.SFC<Props> = ({ className, classes }) => (
+type Props = DuplicantListProps & WithStyles<typeof styles>;
+
+const DuplicantList: React.FC<Props> = ({ className, classes }) => (
   <AbstractGameObjectList gameObjectType="Minion">
     {({ gameObjectIds }) => (
       <div className={classnames(className, classes.root)}>

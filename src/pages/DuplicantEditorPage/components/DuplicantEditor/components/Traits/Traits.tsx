@@ -4,7 +4,12 @@ import { difference } from "lodash-es";
 
 import { WithTranslation, withTranslation } from "react-i18next";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
@@ -31,8 +36,9 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = TraitsProps & StyleProps<typeof styles> & WithTranslation;
-const Traits: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
+type Props = TraitsProps & WithStyles<typeof styles> & WithTranslation;
+
+const Traits: React.FC<Props> = ({ classes, gameObjectId, t }) => {
   return (
     <TraitsEditor gameObjectId={gameObjectId}>
       {({ templateData, onTemplateDataModify }) => {

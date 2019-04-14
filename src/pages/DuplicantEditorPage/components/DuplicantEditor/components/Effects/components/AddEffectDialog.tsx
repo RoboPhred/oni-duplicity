@@ -2,7 +2,12 @@ import * as React from "react";
 
 import { Trans, WithTranslation, withTranslation } from "react-i18next";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import FormGroup from "@material-ui/core/FormGroup";
 import Select from "@material-ui/core/Select";
@@ -29,8 +34,9 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = AddEffectDialogProps & WithTranslation & StyleProps<typeof styles>;
-const AddEffectDialog: React.SFC<Props> = ({
+type Props = AddEffectDialogProps & WithTranslation & WithStyles<typeof styles>;
+
+const AddEffectDialog: React.FC<Props> = ({
   classes,
   open,
   availableEffects,

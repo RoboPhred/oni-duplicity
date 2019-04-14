@@ -13,7 +13,7 @@ const mapDispatchToProps = {
 type DispatchProps = typeof mapDispatchToProps;
 
 type Props = DispatchProps;
-const SettingsButton: React.SFC<Props> = ({ onClick }) => (
+const SettingsButton: React.FC<Props> = ({ onClick }) => (
   <IconButton color="inherit" onClick={onClick}>
     <SettingsIcon />
   </IconButton>

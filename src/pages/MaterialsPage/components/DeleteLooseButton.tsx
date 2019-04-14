@@ -13,7 +13,7 @@ export interface DeleteLooseButtonProps {
 }
 
 type Props = DeleteLooseButtonProps & WithTranslation;
-const DeleteLooseButton: React.SFC<Props> = ({ materialName, onDelete, t }) => (
+const DeleteLooseButton: React.FC<Props> = ({ materialName, onDelete, t }) => (
   <ConfirmationDialog
     title={t("material_loose.verbs.delete_name", { name: materialName })}
     message={t("material_loose.prompts.delete")}

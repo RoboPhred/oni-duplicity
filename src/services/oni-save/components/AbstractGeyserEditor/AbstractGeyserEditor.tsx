@@ -7,7 +7,7 @@ import mapDispatchToProps, { DispatchProps } from "./dispatch-props";
 
 type Props = AbstractGeyserEditorProps & StateProps & DispatchProps;
 
-const AbstractGeyserEditor: React.SFC<Props> = ({
+const AbstractGeyserEditor: React.FC<Props> = ({
   emitRate,
   geyserType,
   onChangeEmitRate,

@@ -13,14 +13,23 @@ export interface ButtonLinkProps
 
 type Props = ButtonLinkProps & RouteComponentProps;
 class ButtonLink extends React.Component<Props> {
+  private _onClick = onLinkClick.bind(this);
+
   render() {
-    const { children, history, location, to, ...props } = this.props;
+    const {
+      children,
+      history,
+      location,
+      to,
+      staticContext,
+      ...props
+    } = this.props;
     return (
       <Button
         {...props}
         component="a"
         href={history.createHref({ pathname: to })}
-        onClick={onLinkClick}
+        onClick={this._onClick}
       >
         {children}
       </Button>

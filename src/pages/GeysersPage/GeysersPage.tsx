@@ -3,7 +3,12 @@ import { GeyserTypeNames } from "oni-save-parser";
 
 import { WithTranslation, withTranslation } from "react-i18next";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 
 import AbstractGameObjectList from "@/services/oni-save/components/AbstractGameObjectList";
 
@@ -24,8 +29,9 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = StyleProps<typeof styles> & WithTranslation;
-const GeysersPage: React.SFC<Props> = ({ classes, t }) => (
+type Props = WithStyles<typeof styles> & WithTranslation;
+
+const GeysersPage: React.FC<Props> = ({ classes, t }) => (
   <PageContainer title={t("geyser.noun_titlecase_plural")}>
     <RedirectIfNoSave />
     <AbstractGameObjectList

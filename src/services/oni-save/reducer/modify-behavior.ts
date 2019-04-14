@@ -1,14 +1,20 @@
-import produce from "immer";
 import { AnyAction } from "redux";
-import { getBehavior, SaveGame } from "oni-save-parser";
+import { SaveGame } from "oni-save-parser";
+import { merge } from "lodash-es";
 
 import { OniSaveState, defaultOniSaveState } from "../state";
-import { getGameObjectById } from "../utils";
 
 import {
   isModifyBehaviorAction,
   BehaviorDataTarget
 } from "../actions/modify-behavior";
+
+import {
+  requireGameObject,
+  changeStateBehaviorData,
+  replaceGameObject,
+  tryModifySaveGame
+} from "./utils";
 
 export default function modifyBehaviorReducer(
   state: OniSaveState = defaultOniSaveState,
@@ -18,39 +24,53 @@ export default function modifyBehaviorReducer(
     return state;
   }
 
-  if (!state.saveGame) {
-    return state;
+  let { gameObjectId, behaviorId, target, value, merge } = action.payload;
+
+  return tryModifySaveGame(state, saveGame =>
+    performModifyBehavior(
+      saveGame,
+      gameObjectId,
+      behaviorId,
+      target,
+      value,
+      merge
+    )
+  );
+}
+
+function performModifyBehavior(
+  saveGame: SaveGame,
+  gameObjectId: number,
+  behaviorName: string,
+  target: BehaviorDataTarget,
+  value: any,
+  mergeData: boolean
+) {
+  let gameObject = requireGameObject(saveGame, gameObjectId);
+
+  function performMerge(original: any) {
+    return mergeData ? merge({}, original, value) : { ...original, ...value };
   }
 
-  let { gameObjectId, behaviorId, target, value } = action.payload;
+  switch (target) {
+    case BehaviorDataTarget.Template:
+      gameObject = changeStateBehaviorData(
+        gameObject,
+        behaviorName,
+        "templateData",
+        performMerge
+      );
+      break;
+    case BehaviorDataTarget.Extra:
+      gameObject = changeStateBehaviorData(
+        gameObject,
+        behaviorName,
+        "extraData",
+        performMerge
+      );
+      break;
+  }
 
-  return produce(state, draft => {
-    // Force un-type the draft object back to SaveGame
-    //  to avoid type errors with symbol stripping from ArrayBuffer
-    const saveGame = draft.saveGame! as SaveGame;
-
-    const gameObject = getGameObjectById(saveGame, gameObjectId);
-    if (!gameObject) {
-      return;
-    }
-
-    const behavior = getBehavior(gameObject, behaviorId);
-    if (!behavior) {
-      return;
-    }
-
-    if (target === BehaviorDataTarget.Template) {
-      behavior.templateData = {
-        ...behavior.templateData,
-        ...value
-      };
-    } else if (target === BehaviorDataTarget.Extra) {
-      behavior.extraData = {
-        ...behavior.extraData,
-        ...value
-      };
-    }
-
-    draft.isModified = true;
-  });
+  saveGame = replaceGameObject(saveGame, gameObject);
+  return saveGame;
 }

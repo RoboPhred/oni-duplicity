@@ -85,7 +85,7 @@
       "modified_titlecase": "Data Modified"
     },
     "prompts": {
-      "modified-description": "The data in this file has been modified since it was exported.\nImported data is not validated, and importing invalid data can corrupt your save"
+      "modified-description": "The data in this file has been modified since it was exported.\nImported data is not validated, and importing invalid data can corrupt your save."
     },
     "verbs": {
       "copy_titlecase": "Copy",
@@ -99,7 +99,10 @@
     },
     "conditions": {
       "loading": "Loading",
-      "modified": "Modified"
+      "modified": "Modified",
+      "modified_description": "The file has been modified since it was last saved.",
+      "example": "Example",
+      "example_description": "This is example content and cannot be saved."
     }
   },
   "overview-page": {
@@ -109,6 +112,9 @@
       "prompt": "No save file has been loaded.",
       "save-location": "Save files can be found at <1>{{path}}</1>."
     }
+  },
+  "raw-editor-page": {
+    "title": "Raw Editor"
   },
   "view-github": "View project on GitHub"
 }

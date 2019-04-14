@@ -1,11 +1,9 @@
 import createCachedSelector from "re-reselect";
 import { getBehavior } from "oni-save-parser";
 
-import { AppState } from "@/state";
+import { AppState, createStructuredSelector } from "@/state";
 
 import { gameObjectsByIdSelector } from "../../selectors/game-objects";
-
-import { createStructuredSelector } from "../utils";
 
 import { AbstractBehaviorEditorProps } from "./props";
 

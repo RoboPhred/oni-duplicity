@@ -8,6 +8,8 @@ import importWarnChecksumReducer from "./import-warn-checksum";
 import loadExampleSaveReducer from "./load-example";
 import mergeBehaviorsReducer from "./merge-behaviors";
 import modifyBehaviorReducer from "./modify-behavior";
+import modifyDifficultyReducer from "./modify-difficulty";
+import modifyRawReducer from "./modify-raw";
 import parseProgressReducer from "./parse-progress";
 import pasteBehaviorsReducer from "./paste-behaviors";
 import receiveOniSaveReducer from "./receive-onisave";
@@ -21,6 +23,8 @@ export default reduceReducers(
   loadExampleSaveReducer,
   mergeBehaviorsReducer,
   modifyBehaviorReducer,
+  modifyDifficultyReducer,
+  modifyRawReducer,
   parseProgressReducer,
   pasteBehaviorsReducer,
   receiveOniSaveReducer

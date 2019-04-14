@@ -20,7 +20,7 @@ export interface JobsProps {
 
 type Props = JobsProps;
 
-const Jobs: React.SFC<Props> = ({ gameObjectId }) => (
+const Jobs: React.FC<Props> = ({ gameObjectId }) => (
   <ResumeEditor gameObjectId={gameObjectId}>
     {({ templateData: { MasteryByRoleID }, onTemplateDataModify }) => {
       if (!MasteryByRoleID) {

@@ -1,4 +1,15 @@
-### 3.5.0
+### v3.7.0
+
+- Support new QOL3 changes. Breaks compatibility with older saves.
+- Fix interests selection in QOL3.
+
+### v3.6.0
+
+- Editor for various difficulty settings.
+- Fix geyser rate modification.
+- Support saves from 7.6 to 7.8
+
+### v3.5.0
 
 - Change geyser game object type (and artwork) when changing emit element.
 - Improve load/save performance.

@@ -1,7 +1,12 @@
 import * as React from "react";
 import classnames from "classnames";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 
 import Attribute from "./components/Attribute";
 
@@ -27,8 +32,9 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = DuplicantAttributesProps & StyleProps<typeof styles>;
-const DuplicantAttributes: React.SFC<Props> = ({
+type Props = DuplicantAttributesProps & WithStyles<typeof styles>;
+
+const DuplicantAttributes: React.FC<Props> = ({
   className,
   classes,
   gameObjectId

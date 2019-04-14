@@ -1,8 +1,13 @@
 import * as React from "react";
-import { GeyserBehavior, GeyserType } from "oni-save-parser";
+import { GeyserType } from "oni-save-parser";
 import classnames from "classnames";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 
 import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
@@ -12,6 +17,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Slider from "@material-ui/lab/Slider";
 
 import AbstractGeyserEditor from "@/services/oni-save/components/AbstractGeyserEditor";
+
+import { keysOfType } from "@/utils";
 
 export interface GeyserListItemProps {
   gameObjectId: number;
@@ -44,9 +51,9 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = GeyserListItemProps & StyleProps<typeof styles>;
+type Props = GeyserListItemProps & WithStyles<typeof styles>;
 
-const GeyserListItem: React.SFC<Props> = ({
+const GeyserListItem: React.FC<Props> = ({
   classes,
   className,
   gameObjectId
@@ -87,7 +94,3 @@ const GeyserListItem: React.SFC<Props> = ({
 );
 
 export default withStyles(styles)(GeyserListItem);
-
-function keysOfType<T>(type: T): (keyof T)[] {
-  return Object.keys(type) as any;
-}

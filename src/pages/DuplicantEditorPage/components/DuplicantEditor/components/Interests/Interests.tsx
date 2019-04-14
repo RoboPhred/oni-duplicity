@@ -1,14 +1,20 @@
 import * as React from "react";
 import {
-  MinionRoleGroup,
+  MinionSkillGroupNames,
   MinionResumeBehavior,
-  getHashedString
+  getHashedString,
+  HashedString
 } from "oni-save-parser";
-import { findIndex } from "lodash-es";
+import { findIndex, find, difference } from "lodash-es";
 
 import { WithTranslation, withTranslation } from "react-i18next";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
@@ -33,75 +39,76 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = InterestsProps & StyleProps<typeof styles> & WithTranslation;
-const Interests: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
+type Props = InterestsProps & WithStyles<typeof styles> & WithTranslation;
+
+const Interests: React.FC<Props> = ({ classes, gameObjectId, t }) => {
   return (
     <ResumeEditor gameObjectId={gameObjectId}>
-      {({ templateData: { AptitudeByRoleGroup }, onTemplateDataModify }) => {
-        if (!AptitudeByRoleGroup) {
-          AptitudeByRoleGroup = [];
+      {({ templateData: { AptitudeBySkillGroup }, onTemplateDataModify }) => {
+        const availableAptitudes = MinionSkillGroupNames.filter(
+          aptitudeName =>
+            aptitudeValue(AptitudeBySkillGroup, aptitudeName) === 0
+        );
+
+        const selectedAptitudes = difference(
+          MinionSkillGroupNames,
+          availableAptitudes
+        );
+
+        function removeAptitude(aptitudeName: string) {
+          const hashStr = getHashedString(aptitudeName);
+          const index = findIndex(
+            AptitudeBySkillGroup,
+            x => x[0].hash === hashStr.hash
+          );
+          if (index === -1) {
+            return;
+          }
+          onTemplateDataModify({
+            AptitudeBySkillGroup: [
+              ...AptitudeBySkillGroup.slice(0, index),
+              ...AptitudeBySkillGroup.slice(index + 1)
+            ]
+          });
         }
 
-        const availableAptitudes = AptitudeByRoleGroup.filter(
-          aptitude => aptitude[1] === 0 && aptitude[0].hash !== 0
-        ).map(aptitude => MinionRoleGroup[aptitude[0].hash]);
-
-        const selectedAptitudes = AptitudeByRoleGroup.filter(
-          aptitude => aptitude[1] !== 0 && aptitude[0].hash !== 0
-        );
+        function addAptitude(aptitudeName: string) {
+          const hashStr = getHashedString(aptitudeName);
+          const index = findIndex(
+            AptitudeBySkillGroup,
+            x => x[0].hash === hashStr.hash
+          );
+          if (index === -1) {
+            onTemplateDataModify({
+              AptitudeBySkillGroup: [...AptitudeBySkillGroup, [hashStr, 1]]
+            });
+          } else {
+            onTemplateDataModify({
+              AptitudeBySkillGroup: [
+                ...AptitudeBySkillGroup.slice(0, index),
+                [hashStr, 1],
+                ...AptitudeBySkillGroup.slice(index + 1)
+              ]
+            });
+          }
+        }
 
         return (
           <div className={classes.root}>
-            {selectedAptitudes.map((aptitude, i) => {
-              const aptitudeName = MinionRoleGroup[aptitude[0].hash];
-              const aptitudeIndex = findIndex(
-                AptitudeByRoleGroup,
-                a => a[0].hash === aptitude[0].hash
-              );
-              return (
-                <Chip
-                  key={i}
-                  className={classes.chip}
-                  label={t(`oni:todo-trans.aptitudes.${aptitudeName}`, {
-                    defaultValue: aptitudeName
-                  })}
-                  onDelete={() => {
-                    console.log(
-                      "Deleting aptitude",
-                      aptitudeIndex,
-                      aptitude[0]
-                    );
-                    onTemplateDataModify({
-                      AptitudeByRoleGroup: [
-                        ...AptitudeByRoleGroup!.slice(0, aptitudeIndex),
-                        [aptitude[0], 0],
-                        ...AptitudeByRoleGroup!.slice(aptitudeIndex + 1)
-                      ]
-                    });
-                  }}
-                />
-              );
-            })}
+            {selectedAptitudes.map((aptitudeName, i) => (
+              <Chip
+                key={i}
+                className={classes.chip}
+                label={t(`oni:todo-trans.aptitudes.${aptitudeName}`, {
+                  defaultValue: aptitudeName
+                })}
+                onDelete={removeAptitude.bind(null, aptitudeName)}
+              />
+            ))}
             <AddAptitudeButton
               className={classes.chip}
               availableAptitudes={availableAptitudes}
-              onAddAptitude={aptitude => {
-                const aptitudeIndex = findIndex(
-                  AptitudeByRoleGroup,
-                  a => a[0].hash === getHashedString(aptitude).hash
-                );
-                if (aptitudeIndex === -1) {
-                  return;
-                }
-                const aptitudeData = AptitudeByRoleGroup![aptitudeIndex];
-                onTemplateDataModify({
-                  AptitudeByRoleGroup: [
-                    ...AptitudeByRoleGroup!.slice(0, aptitudeIndex),
-                    [aptitudeData[0], 1],
-                    ...AptitudeByRoleGroup!.slice(aptitudeIndex + 1)
-                  ]
-                });
-              }}
+              onAddAptitude={aptitudeName => addAptitude(aptitudeName)}
             />
           </div>
         );
@@ -111,3 +118,15 @@ const Interests: React.SFC<Props> = ({ classes, gameObjectId, t }) => {
 };
 
 export default withStyles(styles)(withTranslation()(Interests));
+
+function aptitudeValue(
+  aptitudes: [HashedString, number][],
+  aptitudeName: string
+): number {
+  const hash = getHashedString(aptitudeName).hash;
+  const aptitude = find(aptitudes, x => x[0].hash === hash);
+  if (!aptitude) {
+    return 0;
+  }
+  return aptitude[1];
+}

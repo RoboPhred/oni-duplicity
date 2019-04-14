@@ -24,7 +24,8 @@ export default function mapDispatchToProps(
             configuration: {
               rateRoll: value
             }
-          }
+          },
+          true
         )
       ),
     onChangeGeyserType: (type: string) =>

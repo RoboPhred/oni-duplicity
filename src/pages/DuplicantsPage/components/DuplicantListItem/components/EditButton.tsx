@@ -11,7 +11,7 @@ export interface EditButtonProps {
   gameObjectId: number;
 }
 type Props = EditButtonProps & WithTranslation;
-const EditButton: React.SFC<Props> = ({ className, gameObjectId, t }) => (
+const EditButton: React.FC<Props> = ({ className, gameObjectId, t }) => (
   <ButtonLink
     className={className}
     to={`/duplicants/${gameObjectId}`}

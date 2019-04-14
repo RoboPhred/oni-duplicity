@@ -1,7 +1,12 @@
 import * as React from "react";
 import classnames from "classnames";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 
 import AbstractPlanetList from "@/services/oni-save/components/AbstractPlanetList";
 
@@ -24,8 +29,9 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = PlanetListProps & StyleProps<typeof styles>;
-const PlanetList: React.SFC<Props> = ({ className, classes }) => (
+type Props = PlanetListProps & WithStyles<typeof styles>;
+
+const PlanetList: React.FC<Props> = ({ className, classes }) => (
   <AbstractPlanetList>
     {({ planetIds }) => (
       <div className={classnames(className, classes.root)}>

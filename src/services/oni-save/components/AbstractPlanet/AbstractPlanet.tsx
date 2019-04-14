@@ -7,7 +7,7 @@ import mapDispatchToProps, { DispatchProps } from "./dispatch-props";
 
 type Props = AbstractPlanetProps & StateProps & DispatchProps;
 
-const AbstractPlanet: React.SFC<Props> = ({
+const AbstractPlanet: React.FC<Props> = ({
   planet,
   onPlanetModify,
   children

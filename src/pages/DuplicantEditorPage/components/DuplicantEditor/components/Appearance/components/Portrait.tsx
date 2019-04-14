@@ -10,7 +10,7 @@ import {
   Body
 } from "react-oni-duplicant";
 
-import { createStyles, withStyles } from "@material-ui/core/styles";
+import { createStyles, withStyles, WithStyles } from "@material-ui/core/styles";
 
 export interface PortraitProps {
   className?: string;
@@ -42,8 +42,9 @@ const styles = createStyles({
   }
 });
 
-type Props = PortraitProps & StyleProps<typeof styles>;
-const Portrait: React.SFC<Props> = ({
+type Props = PortraitProps & WithStyles<typeof styles>;
+
+const Portrait: React.FC<Props> = ({
   className,
   classes,
   hairOrdinal,

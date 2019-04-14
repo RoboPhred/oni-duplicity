@@ -10,10 +10,11 @@ export const modifyBehavior = (
   gameObjectId: number,
   behaviorId: string,
   target: BehaviorDataTarget,
-  value: any
+  value: any,
+  merge: boolean = false
 ) => ({
   type: ACTION_ONISAVE_MODIFY_BEHAVIOR as typeof ACTION_ONISAVE_MODIFY_BEHAVIOR,
-  payload: { gameObjectId, behaviorId, target, value }
+  payload: { gameObjectId, behaviorId, target, value, merge }
 });
 export type ModifyBehaviorAction = ReturnType<typeof modifyBehavior>;
 

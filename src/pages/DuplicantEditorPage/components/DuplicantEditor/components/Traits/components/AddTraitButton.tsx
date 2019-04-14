@@ -14,7 +14,7 @@ export interface AddTraitButtonProps {
 
 type Props = AddTraitButtonProps & WithTranslation;
 
-const AddTraitButton: React.SFC<Props> = ({
+const AddTraitButton: React.FC<Props> = ({
   className,
   availableTraits,
   onAddTrait,

@@ -1,6 +1,3 @@
-import { createSelector } from "reselect";
-import { GameObject, getBehavior, KPrefabIDBehavior } from "oni-save-parser";
-
 import { OniSaveState } from "../state";
 
 import { createServiceSelector } from "./utils";
@@ -11,6 +8,10 @@ export const saveGameSelector = createServiceSelector(
 
 export const isMockSelector = createServiceSelector(
   (state: OniSaveState) => state.isMock
+);
+
+export const hasSaveSelector = createServiceSelector(
+  (state: OniSaveState) => state.saveGame != null
 );
 
 export const isSaveModifiedSelector = createServiceSelector(

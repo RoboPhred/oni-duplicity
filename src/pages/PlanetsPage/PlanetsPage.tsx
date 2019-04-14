@@ -5,7 +5,7 @@ import RedirectIfNoSave from "@/components/RedirectIfNoSave";
 
 import PlanetList from "./components/PlanetList";
 
-const PlanetsPage: React.SFC = () => (
+const PlanetsPage: React.FC = () => (
   <PageContainer title="Planets">
     <RedirectIfNoSave />
     <PlanetList />

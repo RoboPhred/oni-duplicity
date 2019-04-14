@@ -21,3 +21,7 @@ export function maybeArray(x: string | string[]): string[] {
   }
   return [x];
 }
+
+export function keysOfType<T>(type: T): (keyof T)[] {
+  return Object.keys(type) as any;
+}

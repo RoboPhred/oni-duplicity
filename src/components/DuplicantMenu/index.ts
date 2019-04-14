@@ -1,2 +1,2 @@
-import DuplicantMenu from "./DuplicantMenu";
+import DuplicantMenu from "./component";
 export default DuplicantMenu;

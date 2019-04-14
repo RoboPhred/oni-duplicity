@@ -4,7 +4,12 @@ import { findIndex, merge } from "lodash-es";
 
 import { Trans } from "react-i18next";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 
@@ -16,6 +21,20 @@ import AttributeField from "./components/AttributeField";
 const AttributesEditor = AbstractBehaviorEditor.ofType(
   AIAttributeLevelsBehavior
 );
+
+const PRIMARY_ATTRIBUTES = [
+  "Athletics",
+  "Cooking",
+  "Digging",
+  "Caring",
+  "Ranching",
+  "Machinery",
+  "Construction",
+  "Art",
+  "Botanist",
+  "Learning",
+  "Strength"
+];
 
 export interface AttributesProps {
   gameObjectId: number;
@@ -55,23 +74,9 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = AttributesProps & StyleProps<typeof styles>;
+type Props = AttributesProps & WithStyles<typeof styles>;
 
-const PRIMARY_ATTRIBUTES = [
-  "Athletics",
-  "Cooking",
-  "Digging",
-  "Caring",
-  "Ranching",
-  "Machinery",
-  "Construction",
-  "Art",
-  "Botanist",
-  "Learning",
-  "Strength"
-];
-
-const Attributes: React.SFC<Props> = ({ classes, gameObjectId }) => (
+const Attributes: React.FC<Props> = ({ classes, gameObjectId }) => (
   <AttributesEditor gameObjectId={gameObjectId}>
     {({ templateData: { saveLoadLevels } }) => (
       <div className={classes.root}>

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { createStyles, withStyles } from "@material-ui/core/styles";
+import { createStyles, withStyles, WithStyles } from "@material-ui/core/styles";
 
 import Drawer from "@material-ui/core/Drawer";
 
@@ -39,13 +39,9 @@ export interface PageContainerProps {
   back?: boolean;
 }
 
-type Props = PageContainerProps & StyleProps<typeof styles>;
-const PageContainer: React.SFC<Props> = ({
-  classes,
-  title,
-  back,
-  children
-}) => (
+type Props = PageContainerProps & WithStyles<typeof styles>;
+
+const PageContainer: React.FC<Props> = ({ classes, title, back, children }) => (
   <div className={classes.root}>
     <Drawer variant="permanent" anchor="left">
       <Sidebar className={classes.sidebar} />

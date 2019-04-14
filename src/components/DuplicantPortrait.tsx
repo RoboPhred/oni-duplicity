@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AccessorizerBehavior, getAccessoryOfType } from "oni-save-parser";
 
-import { createStyles, withStyles } from "@material-ui/core/styles";
+import { createStyles, withStyles, WithStyles } from "@material-ui/core/styles";
 
 import {
   DuplicantContainer,
@@ -37,8 +37,9 @@ const styles = createStyles({
   }
 });
 
-type Props = DuplicantPortraitProps & StyleProps<typeof styles>;
-const DuplicantPortrait: React.SFC<Props> = ({
+type Props = DuplicantPortraitProps & WithStyles<typeof styles>;
+
+const DuplicantPortrait: React.FC<Props> = ({
   classes,
   gameObjectId,
   scale

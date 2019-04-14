@@ -2,7 +2,12 @@ import * as React from "react";
 
 import { Trans } from "react-i18next";
 
-import { Theme, createStyles, withStyles } from "@material-ui/core/styles";
+import {
+  Theme,
+  createStyles,
+  withStyles,
+  WithStyles
+} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 
@@ -42,8 +47,9 @@ const styles = (theme: Theme) =>
     }
   });
 
-type Props = HealthProps & StyleProps<typeof styles>;
-const Health: React.SFC<Props> = ({ classes, gameObjectId }) => (
+type Props = HealthProps & WithStyles<typeof styles>;
+
+const Health: React.FC<Props> = ({ classes, gameObjectId }) => (
   <div className={classes.root}>
     <Typography className={classes.header} variant="h6">
       <Trans>Fitness</Trans>
