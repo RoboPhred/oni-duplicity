@@ -32,8 +32,8 @@
     "primary_titlecase": "Primary",
     "secondary_titlecase": "Secondary"
   },
-  "duplicant_job": {
-    "noun_titlecase": "Job",
+  "duplicant_skills": {
+    "noun_titlecase": "Skills",
     "mastery_titlecase": "Mastery"
   },
   "duplicant_appearance": {
