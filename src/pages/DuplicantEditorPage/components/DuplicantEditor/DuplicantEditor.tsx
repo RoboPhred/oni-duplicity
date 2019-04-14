@@ -18,12 +18,11 @@ import PageContainer from "@/components/PageContainer";
 import DuplicantPortrait from "@/components/DuplicantPortrait";
 
 import DuplicantName from "./components/DuplicantName";
-// import DuplicantPortrait from "./components/DuplicantPortrait";
 import Traits from "./components/Traits";
 import Aptitudes from "./components/Interests";
 import Attributes from "./components/Attributes";
 import Appearance from "./components/Appearance";
-import Jobs from "./components/Jobs";
+import Skills from "./components/Skills";
 import Effects from "./components/Effects";
 import Health from "./components/Health";
 
@@ -139,8 +138,8 @@ const DuplicantEditor: React.FC<Props> = ({ classes, gameObjectId, t }) => {
                 })}
               />
               <Tab
-                label={t("duplicant_job.noun_titlecase", {
-                  defaultValue: "Jobs"
+                label={t("duplicant_skills.noun_titlecase", {
+                  defaultValue: "Skills"
                 })}
               />
               <Tab
@@ -154,7 +153,7 @@ const DuplicantEditor: React.FC<Props> = ({ classes, gameObjectId, t }) => {
             {tab === 0 && <Attributes gameObjectId={gameObjectId} />}
             {tab === 1 && <Appearance gameObjectId={gameObjectId} />}
             {tab === 2 && <Health gameObjectId={gameObjectId} />}
-            {tab === 3 && <Jobs gameObjectId={gameObjectId} />}
+            {tab === 3 && <Skills gameObjectId={gameObjectId} />}
             {tab === 4 && <Effects gameObjectId={gameObjectId} />}
           </div>
         </div>
