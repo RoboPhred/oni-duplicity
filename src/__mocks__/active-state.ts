@@ -1,4 +1,3 @@
-
 import { AppState, defaultAppState } from "@/state";
 
 import { LoadingStatus } from "@/services/oni-save/state";
@@ -15,5 +14,5 @@ const state: AppState = {
       saveGame
     }
   }
-}
+};
 export default state;

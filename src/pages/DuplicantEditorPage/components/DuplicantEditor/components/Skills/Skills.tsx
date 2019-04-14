@@ -21,7 +21,8 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       display: "flex",
-      flexDirection: "column"
+      flexDirection: "column",
+      padding: theme.spacing.unit
     }
   });
 
