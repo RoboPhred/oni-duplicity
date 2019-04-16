@@ -138,7 +138,7 @@ const DuplicantEditor: React.FC<Props> = ({ classes, gameObjectId, t }) => {
                 })}
               />
               <Tab
-                label={t("duplicant_skills.noun_titlecase", {
+                label={t("duplicant_skills.noun_titlecase_plural", {
                   defaultValue: "Skills"
                 })}
               />

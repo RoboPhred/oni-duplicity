@@ -2,6 +2,8 @@ import * as React from "react";
 import { MinionResumeBehavior, MinionSkillNames } from "oni-save-parser";
 import { find, findIndex } from "lodash-es";
 
+import { Trans } from "react-i18next";
+
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
@@ -51,8 +53,14 @@ const Masteries: React.FC<Props> = ({ gameObjectId }) => (
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Skill</TableCell>
-              <TableCell>Mastery</TableCell>
+              <TableCell>
+                <Trans i18nKey="duplicant_skills.noun_titlecase">Skill</Trans>
+              </TableCell>
+              <TableCell>
+                <Trans i18nKey="duplicant_skills.mastery_titlecase">
+                  Mastery
+                </Trans>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
