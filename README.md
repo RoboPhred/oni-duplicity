@@ -6,7 +6,7 @@ You can find the editor at [https://robophred.github.io/oni-duplicity](https://r
 
 # Compatibility
 
-Supports save file version 7.6. Future versions may not be compatible until the editor is updated. Previous versions may need to be updated by re-saving them in the newest version of the game.
+Supports save file version 7.8. Future versions may not be compatible until the editor is updated. Previous versions may need to be updated by re-saving them in the newest version of the game.
 
 # V3
 
