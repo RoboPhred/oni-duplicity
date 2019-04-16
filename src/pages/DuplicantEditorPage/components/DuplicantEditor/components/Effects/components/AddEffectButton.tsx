@@ -16,7 +16,7 @@ export interface AddEffectButtonProps {
 }
 
 type Props = AddEffectButtonProps;
-const AddEffectButton: React.SFC<Props> = ({ gameObjectId }) => {
+const AddEffectButton: React.FC<Props> = ({ gameObjectId }) => {
   const [isAddingEffect, setIsAddingEffect] = React.useState(false);
   return (
     <EffectsEditor gameObjectId={gameObjectId}>

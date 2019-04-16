@@ -1,13 +1,18 @@
-import produce from "immer";
 import { AnyAction } from "redux";
-import { getBehavior, SaveGame } from "oni-save-parser";
+import { getBehavior, SaveGame, GameObject } from "oni-save-parser";
 
-import { OniSaveState, defaultOniSaveState } from "../state";
-import { getGameObjectById } from "../utils";
+import { OniSaveState, defaultOniSaveState, BehaviorCopyData } from "../state";
 
 import { isPasteBehaviorsAction } from "../actions/paste-behaviors";
 
 import { gameObjectTypesByIdSelector } from "../selectors/game-objects";
+
+import {
+  requireGameObject,
+  changeStateBehaviorData,
+  replaceGameObject,
+  tryModifySaveGame
+} from "./utils";
 
 export default function pasteBehaviorsReducer(
   state: OniSaveState = defaultOniSaveState,
@@ -33,30 +38,59 @@ export default function pasteBehaviorsReducer(
     return state;
   }
 
-  return produce(state, draft => {
-    // Force un-type the draft object back to SaveGame
-    //  to avoid type errors with symbol stripping from ArrayBuffer
-    const saveGame = draft.saveGame! as SaveGame;
+  return tryModifySaveGame(state, saveGame =>
+    performPasteBehaviors(saveGame, gameObjectId, behaviors)
+  );
+}
 
-    const gameObject = getGameObjectById(saveGame, gameObjectId);
-    if (!gameObject) {
-      return;
+function performPasteBehaviors(
+  saveGame: SaveGame,
+  gameObjectId: number,
+  behaviors: Record<string, BehaviorCopyData>
+): SaveGame {
+  let gameObject = requireGameObject(saveGame, gameObjectId);
+
+  for (const behaviorName of Object.keys(behaviors)) {
+    const behavior = getBehavior(gameObject, behaviorName);
+    if (!behavior) {
+      continue;
     }
 
-    for (const behaviorName of Object.keys(behaviors)) {
-      const behavior = getBehavior(gameObject, behaviorName);
-      if (!behavior) {
-        continue;
-      }
+    gameObject = copyBehavior(
+      gameObject,
+      behaviorName,
+      behaviors[behaviorName]
+    );
+  }
 
-      const copyData = behaviors[behaviorName];
-      const { templateData, extraData } = copyData;
-      if (templateData) {
-        behavior.templateData = templateData;
-      }
-      if (extraData) {
-        behavior.extraData = extraData;
-      }
-    }
-  });
+  saveGame = replaceGameObject(saveGame, gameObject);
+  return saveGame;
+}
+
+function copyBehavior(
+  gameObject: GameObject,
+  behaviorName: string,
+  behavior: BehaviorCopyData
+): GameObject {
+  const { templateData, extraData } = behavior;
+
+  if (templateData) {
+    gameObject = changeStateBehaviorData(
+      gameObject,
+      behaviorName,
+      "templateData",
+      templateData
+    );
+  }
+
+  if (extraData) {
+    gameObject = changeStateBehaviorData(
+      gameObject,
+      behaviorName,
+      "extraData",
+      extraData
+    );
+  }
+
+  return gameObject;
 }

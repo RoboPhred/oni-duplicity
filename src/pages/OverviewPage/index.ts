@@ -1,2 +1,4 @@
-import OverviewPage from "./OverviewPage";
-export default OverviewPage;
+import OverviewPage from "./component";
+import connectOverviewPage from "./connector";
+
+export default connectOverviewPage(OverviewPage);

@@ -32,8 +32,9 @@
     "primary_titlecase": "Primary",
     "secondary_titlecase": "Secondary"
   },
-  "duplicant_job": {
-    "noun_titlecase": "Job",
+  "duplicant_skills": {
+    "noun_titlecase": "Skills",
+    "experience_titlecase": "Experience",
     "mastery_titlecase": "Mastery"
   },
   "duplicant_appearance": {
@@ -85,7 +86,7 @@
       "modified_titlecase": "Data Modified"
     },
     "prompts": {
-      "modified-description": "The data in this file has been modified since it was exported.\nImported data is not validated, and importing invalid data can corrupt your save"
+      "modified-description": "The data in this file has been modified since it was exported.\nImported data is not validated, and importing invalid data can corrupt your save."
     },
     "verbs": {
       "copy_titlecase": "Copy",
@@ -100,7 +101,9 @@
     "conditions": {
       "loading": "Loading",
       "modified": "Modified",
-      "modified_description": "The file has been modified since it was last saved."
+      "modified_description": "The file has been modified since it was last saved.",
+      "example": "Example",
+      "example_description": "This is example content and cannot be saved."
     }
   },
   "overview-page": {

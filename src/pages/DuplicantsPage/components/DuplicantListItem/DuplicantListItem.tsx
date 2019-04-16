@@ -61,7 +61,7 @@ const styles = (theme: Theme) =>
 
 type Props = DuplicantListItemProps & WithStyles<typeof styles>;
 
-const DuplicantListItem: React.SFC<Props> = ({
+const DuplicantListItem: React.FC<Props> = ({
   className,
   classes,
   gameObjectId

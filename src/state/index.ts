@@ -3,6 +3,8 @@ import { RouterState } from "connected-react-router";
 import { I18NState, defaultI18NState } from "@/services/i18n/state";
 import { OniSaveState, defaultOniSaveState } from "@/services/oni-save/state";
 
+export * from "./utils";
+
 export interface AppState {
   router: RouterState;
   services: {

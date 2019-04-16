@@ -11,7 +11,7 @@ import MaterialsPage from "@/pages/MaterialsPage";
 import RawEditorPage from "@/pages/RawEditorPage";
 import SettingsPage from "@/pages/SettingsPage";
 
-const Routes: React.SFC = () => (
+const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={OverviewPage} />
     <Route path="/duplicants" exact component={DuplicantsPage} />

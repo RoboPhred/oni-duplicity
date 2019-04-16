@@ -53,7 +53,7 @@ const styles = (theme: Theme) =>
 
 type Props = GeyserListItemProps & WithStyles<typeof styles>;
 
-const GeyserListItem: React.SFC<Props> = ({
+const GeyserListItem: React.FC<Props> = ({
   classes,
   className,
   gameObjectId

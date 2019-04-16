@@ -58,7 +58,7 @@ const styles = (theme: Theme) =>
 
 type Props = PlanetListItemProps & WithStyles<typeof styles>;
 
-const PlanetListItem: React.SFC<Props> = ({ classes, className, planetId }) => (
+const PlanetListItem: React.FC<Props> = ({ classes, className, planetId }) => (
   <AbstractPlanet planetId={planetId}>
     {({ planet }) => {
       if (!planet) {

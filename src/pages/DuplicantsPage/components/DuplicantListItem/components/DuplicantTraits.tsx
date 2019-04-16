@@ -33,7 +33,7 @@ const styles = (theme: Theme) =>
 
 type Props = DuplicantTraitsProps & WithStyles<typeof styles> & WithTranslation;
 
-const DuplicantTraits: React.SFC<Props> = ({ classes, gameObjectId, t }) => (
+const DuplicantTraits: React.FC<Props> = ({ classes, gameObjectId, t }) => (
   <TraitsEditor gameObjectId={gameObjectId}>
     {({ templateData }) => (
       <div className={classes.root}>

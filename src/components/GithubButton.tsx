@@ -11,7 +11,7 @@ export interface GithubButtonProps {
   className?: string;
 }
 type Props = GithubButtonProps & WithTranslation;
-const GithubButton: React.SFC<Props> = ({ className, t }) => (
+const GithubButton: React.FC<Props> = ({ className, t }) => (
   <IconButton
     className={className}
     component="a"

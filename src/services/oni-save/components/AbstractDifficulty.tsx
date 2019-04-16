@@ -2,12 +2,13 @@ import { createSelector } from "reselect";
 import { find } from "lodash-es";
 import { QualityLevelSettingValues } from "oni-save-parser";
 
+import { createStructuredSelector } from "@/state";
 import { keysOfType } from "@/utils";
 
 import { saveGameSelector } from "../selectors/save-game";
-import { createStructuredSelector } from "./utils";
-import { connectRenderComponent } from "./connectRenderComponent";
 import { modifyDifficulty } from "../actions/modify-difficulty";
+
+import { connectRenderComponent } from "./connectRenderComponent";
 
 const gameSettingsSelector = createSelector(
   saveGameSelector,

@@ -18,7 +18,7 @@ import ImportWarningDialog from "@/components/ImportWarningDialog";
 
 import Routes from "@/routes";
 
-const Root: React.SFC = () => (
+const Root: React.FC = () => (
   <I18NProvider>
     <StoreProvider>
       <ConnectedRouter history={history}>

@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 
 import PageContainer from "@/components/PageContainer";
 import RedirectIfNoSave from "@/components/RedirectIfNoSave";
-import JsonEditor from "@/components/JsonEditor";
+import ControlledMonaco from "@/components/ControlledMonaco";
 
 import AbstractRawEditor from "@/services/oni-save/components/AbstractRawEditor";
 
@@ -56,7 +56,7 @@ const RawEditorPage: React.FC<Props> = ({ classes }) => {
               {value && (
                 <>
                   <div className={classes.editorContainer}>
-                    <JsonEditor
+                    <ControlledMonaco
                       width="100%"
                       height="100%"
                       language="json"

@@ -23,7 +23,7 @@ const styles = (theme: Theme) =>
 
 type Props = WithStyles<typeof styles> & WithTranslation;
 
-const MaterialsPage: React.SFC<Props> = ({ classes, t }) => {
+const MaterialsPage: React.FC<Props> = ({ classes, t }) => {
   return (
     <PageContainer title={t("material.noun_titlecase")}>
       <RedirectIfNoSave />

@@ -12,10 +12,10 @@ import {
 } from "@material-ui/core/styles";
 
 import SettingsButton from "./SettingsButton";
-import SaveModifiedChip from "./SaveModifiedChip";
 import SaveButton from "./SaveButton";
 import BackButton from "./BackButton";
-import SaveExampleChip from "./SaveExampleChip";
+import ModifiedChip from "./ModifiedChip";
+import ExampleChip from "./ExampleChip";
 
 export interface AppbarProps {
   title: string;
@@ -34,15 +34,15 @@ const styles = (theme: Theme) =>
 
 type Props = AppbarProps & WithStyles<typeof styles>;
 
-const Appbar: React.SFC<Props> = ({ classes, title, back }) => (
+const Appbar: React.FC<Props> = ({ classes, title, back }) => (
   <MaterialAppBar position="static">
     <Toolbar>
       {back && <BackButton />}
       <Typography className={classes.title} variant="h6" color="inherit">
         {title}
       </Typography>
-      <SaveModifiedChip className={classes.chip} />
-      <SaveExampleChip className={classes.chip} />
+      <ModifiedChip className={classes.chip} />
+      <ExampleChip className={classes.chip} />
       <SaveButton />
       <SettingsButton />
     </Toolbar>

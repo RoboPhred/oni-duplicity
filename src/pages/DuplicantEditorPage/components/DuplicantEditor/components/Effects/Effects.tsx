@@ -23,7 +23,7 @@ export interface EffectsProps {
 }
 
 type Props = EffectsProps;
-const Effects: React.SFC<Props> = ({ gameObjectId }) => {
+const Effects: React.FC<Props> = ({ gameObjectId }) => {
   return (
     <EffectsEditor gameObjectId={gameObjectId}>
       {({ templateData, onTemplateDataModify }) => (

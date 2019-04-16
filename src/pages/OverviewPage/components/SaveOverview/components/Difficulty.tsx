@@ -23,7 +23,7 @@ export interface DifficultyProps {
 
 type Props = DifficultyProps & WithStyles<typeof styles>;
 
-const Difficulty: React.SFC<Props> = ({ className, classes }) => (
+const Difficulty: React.FC<Props> = ({ className, classes }) => (
   <AbstractDifficulty>
     {({ difficulty, onModifyDifficulty }) => (
       <div className={className}>

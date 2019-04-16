@@ -19,7 +19,7 @@ export interface AttributeFieldProps {
 }
 
 type Props = AttributeFieldProps;
-const AttributeField: React.SFC<Props> = ({
+const AttributeField: React.FC<Props> = ({
   className,
   gameObjectId,
   attributeId

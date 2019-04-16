@@ -33,7 +33,7 @@ const styles = (theme: Theme) =>
 
 type Props = SidebarProps & WithStyles<typeof styles>;
 
-const Sidebar: React.SFC<Props> = ({ className, classes }) => (
+const Sidebar: React.FC<Props> = ({ className, classes }) => (
   <div className={className}>
     <div className={classes.toolbar}>
       <Typography variant="h6" color="textSecondary">

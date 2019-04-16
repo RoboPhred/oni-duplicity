@@ -17,7 +17,7 @@ const styles = createStyles({
 
 type Props = WithStyles<typeof styles> & WithTranslation;
 
-const DuplicantsPage: React.SFC<Props> = ({ classes, t }) => (
+const DuplicantsPage: React.FC<Props> = ({ classes, t }) => (
   <PageContainer title={t("duplicant.noun_titlecase_plural")}>
     <RedirectIfNoSave />
     <DuplicantList className={classes.duplicantList} />

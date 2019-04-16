@@ -31,7 +31,7 @@ const styles = (theme: Theme) =>
 
 type Props = PlanetListProps & WithStyles<typeof styles>;
 
-const PlanetList: React.SFC<Props> = ({ className, classes }) => (
+const PlanetList: React.FC<Props> = ({ className, classes }) => (
   <AbstractPlanetList>
     {({ planetIds }) => (
       <div className={classnames(className, classes.root)}>

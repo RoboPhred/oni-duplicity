@@ -14,7 +14,7 @@ export interface AddAptitudeButtonProps {
 
 type Props = AddAptitudeButtonProps & WithTranslation;
 
-const AddAptitudeButton: React.SFC<Props> = ({
+const AddAptitudeButton: React.FC<Props> = ({
   className,
   availableAptitudes,
   onAddAptitude,

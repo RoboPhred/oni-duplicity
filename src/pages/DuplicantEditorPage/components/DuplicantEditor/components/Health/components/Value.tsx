@@ -35,7 +35,7 @@ export interface ValueProps {
 
 type Props = ValueProps & WithStyles<typeof styles>;
 
-const Value: React.SFC<Props> = ({
+const Value: React.FC<Props> = ({
   className,
   classes,
   gameObjectId,

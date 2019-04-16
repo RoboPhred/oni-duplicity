@@ -21,7 +21,7 @@ export interface ConfirmationDialogRenderProps {
 }
 
 type Props = ConfirmationDialogProps;
-const ConfirmationDialog: React.SFC<Props> = ({
+const ConfirmationDialog: React.FC<Props> = ({
   title,
   message,
   onConfirm,

@@ -9,7 +9,7 @@ export interface AttributeNameProps {
 }
 
 type Props = AttributeNameProps & WithTranslation;
-const AttributeName: React.SFC<Props> = ({ attributeId, t }) => (
+const AttributeName: React.FC<Props> = ({ attributeId, t }) => (
   <Typography
     component="span"
     variant="body1"

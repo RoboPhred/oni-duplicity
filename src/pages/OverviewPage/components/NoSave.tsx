@@ -34,7 +34,7 @@ const saveFilePath = SaveFilePaths[OSType];
 
 type Props = WithStyles<typeof styles> & WithTranslation;
 
-const NoSave: React.SFC<Props> = ({ classes, t }) => (
+const NoSave: React.FC<Props> = ({ classes, t }) => (
   <PageContainer title={t("overview-page.no-save.title")}>
     <div className={classes.root}>
       <div>
