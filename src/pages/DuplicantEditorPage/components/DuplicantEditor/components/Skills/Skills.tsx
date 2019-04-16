@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core/styles";
 
 import Experience from "./components/Experience";
+import Masteries from "./components/Masteries";
 
 export interface SkillsProps {
   gameObjectId: number;
@@ -27,6 +28,7 @@ type Props = SkillsProps & WithStyles<typeof styles>;
 const Skills: React.FC<Props> = ({ gameObjectId, classes }) => (
   <div className={classes.root}>
     <Experience gameObjectId={gameObjectId} />
+    <Masteries gameObjectId={gameObjectId} />
   </div>
 );
 
