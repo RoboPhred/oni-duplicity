@@ -33,7 +33,8 @@
     "secondary_titlecase": "Secondary"
   },
   "duplicant_skills": {
-    "noun_titlecase": "Skills",
+    "noun_titlecase": "Skill",
+    "noun_titlecase_plural": "Skills",
     "experience_titlecase": "Experience",
     "mastery_titlecase": "Mastery"
   },

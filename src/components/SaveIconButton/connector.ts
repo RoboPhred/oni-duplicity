@@ -28,7 +28,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  onSave: saveOniSave
+  onSave: () => saveOniSave()
 };
 
 export default connect(
