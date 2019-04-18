@@ -17,6 +17,13 @@ i18n.use(initReactI18next).init({
     en: {
       common: require("@/translations/en/common.json"),
       oni: require("@/translations/en/oni.json")
+    },
+    zh: {
+      common: require("@/translations/zh/common.json"),
+      oni: require("@/translations/zh/oni.json")
+    },
+    ru: {
+      common: require("@/translations/ru/common.json"),
     }
   },
 

@@ -8,9 +8,10 @@ import {
 } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
 
 import PageContainer from "@/components/PageContainer";
+
+import Language from "./components/Language";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -24,14 +25,10 @@ type Props = WithStyles<typeof styles>;
 const SettingsPage: React.FC<Props> = ({ classes }) => (
   <PageContainer title="Settings" back>
     <div className={classes.root}>
-      <Typography variant="h6">Help Wanted: Translations</Typography>
-      <Typography>
-        <br />
-        Contribute translations at the{" "}
-        <Link href="https://github.com/robophred/oni-duplicity">
-          GitHub Repo
-        </Link>
-      </Typography>
+      <div>
+        <Typography>Language</Typography>
+        <Language />
+      </div>
     </div>
   </PageContainer>
 );
