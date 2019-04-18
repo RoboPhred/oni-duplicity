@@ -32,8 +32,9 @@
     "primary_titlecase": "主要属性",
     "secondary_titlecase": "次要属性"
   },
-  "duplicant_job": {
-    "noun_titlecase": "工作",
+  "duplicant_skills": {
+    "noun_titlecase": "技能",
+    "experience_titlecase": "经验值",
     "mastery_titlecase": "精通"
   },
   "duplicant_appearance": {
