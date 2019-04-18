@@ -1,0 +1,118 @@
+{
+  "duplicant": {
+    "noun_titlecase_plural": "Дубликанты",
+    "noun_titlecase": "Дубликант",
+    "verbs": {
+      "edit_titlecase": "Редактировать дубликанта"
+    },
+    "conditions": {
+      "missing_titlecase": "Дубликант не найден"
+    }
+  },
+  "duplicant_effect": {
+    "noun_titlecase": "Эффекты",
+    "verbs": {
+      "add_titlecase": "Добавить эффект"
+    }
+  },
+  "duplicant_trait": {
+    "noun_titlecase": "Характеристики",
+    "verbs": {
+      "add_titlecase": "Добавить хар-ку"
+    }
+  },
+  "duplicant_interest": {
+    "noun_titlecase": "Интересы",
+    "verbs": {
+      "add_titlecase": "Добавить интерес"
+    }
+  },
+  "duplicant_attribute": {
+    "noun_titlecase_plural": "Навыки",
+    "primary_titlecase": "Основные",
+    "secondary_titlecase": "Вторичные"
+  },
+  "duplicant_job": {
+    "noun_titlecase": "Профессия",
+    "mastery_titlecase": "Специализация"
+  },
+  "duplicant_appearance": {
+    "noun_titlecase": "Внешний вид"
+  },
+  "duplicant_health": {
+    "noun_titlecase": "Здоровье"
+  },
+  "geyser": {
+    "noun_titlecase_plural": "Гейзеры"
+  },
+  "material": {
+    "noun_titlecase": "Материал",
+    "noun_titlecase_plural": "Материалы",
+    "all_titlecase": "Все материалы",
+    "gram": "{{count}} г",
+    "kilogram": "{{count}} кг"
+  },
+  "material_loose": {
+    "noun_titlecase": "Разбросаны",
+    "clump_count": "{{count}} кучка",
+    "clump_count_plural": "{{count}} кучек",
+    "verbs": {
+      "delete_name": "Удалить {{name}}"
+    },
+    "prompts": {
+      "delete": "Этим ты удалишь весь разбросанный по карте материал, находящийся не в хранилищах. Он просто исчезнет."
+    }
+  },
+  "material_storage": {
+    "noun_titlecase": "В хранилищах",
+    "container_count": "{{count}} контейнер",
+    "container_count_plural": "{{count}} контейнеров"
+  },
+  "time_cycles": {
+    "noun_titlecase": "Время цикла"
+  },
+  "dialog": {
+    "queries": {
+      "continue": "Точно хочешь продолжить?"
+    },
+    "verbs": {
+      "cancel_titlecase": "Отмена",
+      "confirm_titlecase": "Подтвердить"
+    }
+  },
+  "data": {
+    "conditions": {
+      "modified_titlecase": "Данные изменены"
+    },
+    "prompts": {
+      "modified-description": "Данные в этом файле были изменены с момента последнего экспорта.\nИмпортированные данные не проверены, а импорт некорректных данных может повредить сейв."
+    },
+    "verbs": {
+      "copy_titlecase": "Копировать",
+      "export_titlecase": "Экспортировать",
+      "import_titlecase": "Импортировать"
+    }
+  },
+  "save-file": {
+    "verbs": {
+      "load_titlecase": "Загрузить"
+    },
+    "conditions": {
+      "loading": "Загрузка",
+      "modified": "Изменено",
+      "modified_description": "Файл быз изменён с момента последнего сохранения."
+    }
+  },
+  "overview-page": {
+    "title": "Обзор",
+    "no-save": {
+      "title": "Выбери сейв",
+      "prompt": "Никакой файл не загружен.",
+      "save-location": "Сейвы лежат тут: <1>{{path}}</1>."
+    }
+  },
+  "raw-editor-page": {
+    "title": "Свойства сейва"
+  },
+  "view-github": "Посмотреть проект на GitHub"
+}

@@ -1,6 +1,6 @@
 {
   "name": "oni-duplicity",
-  "version": "3.6.0",
+  "version": "3.8.0",
   "description": "A web-based Oxygen Not Included save file editor.",
   "main": "lib/index.js",
   "scripts": {

@@ -1,7 +1,11 @@
-### v3.7.0
+### v3.8.0
 
 - Support new QOL3 changes. Breaks compatibility with older saves.
 - Fix interests selection in QOL3.
+
+### v3.7.0
+
+- Raw JSON editor
 
 ### v3.6.0
 
