@@ -97,7 +97,8 @@
   },
   "save-file": {
     "verbs": {
-      "load_titlecase": "Load"
+      "load_titlecase": "Load",
+      "save_titlecase": "Save"
     },
     "conditions": {
       "loading": "Loading",

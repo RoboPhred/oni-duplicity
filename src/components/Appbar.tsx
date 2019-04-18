@@ -12,7 +12,8 @@ import {
 } from "@material-ui/core/styles";
 
 import SettingsButton from "./SettingsButton";
-import SaveButton from "./SaveButton";
+import SaveIconButton from "./SaveIconButton";
+import LoadIconButton from "./LoadIconButton";
 import BackButton from "./BackButton";
 import ModifiedChip from "./ModifiedChip";
 import ExampleChip from "./ExampleChip";
@@ -43,7 +44,8 @@ const Appbar: React.FC<Props> = ({ classes, title, back }) => (
       </Typography>
       <ModifiedChip className={classes.chip} />
       <ExampleChip className={classes.chip} />
-      <SaveButton />
+      <SaveIconButton />
+      <LoadIconButton />
       <SettingsButton />
     </Toolbar>
   </MaterialAppBar>
