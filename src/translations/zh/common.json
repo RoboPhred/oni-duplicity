@@ -1,0 +1,114 @@
+{
+  "duplicant": {
+    "noun_titlecase_plural": "复制人们",
+    "noun_titlecase": "复制人",
+    "verbs": {
+      "edit_titlecase": "编辑复制人"
+    },
+    "conditions": {
+      "missing_titlecase": "复制人未找到"
+    }
+  },
+  "duplicant_effect": {
+    "noun_titlecase": "效果",
+    "verbs": {
+      "add_titlecase": "添加效果"
+    }
+  },
+  "duplicant_trait": {
+    "noun_titlecase": "特质",
+    "verbs": {
+      "add_titlecase": "添加特质"
+    }
+  },
+  "duplicant_interest": {
+    "noun_titlecase": "兴趣",
+    "verbs": {
+      "add_titlecase": "添加兴趣"
+    }
+  },
+  "duplicant_attribute": {
+    "noun_titlecase_plural": "属性",
+    "primary_titlecase": "主要属性",
+    "secondary_titlecase": "次要属性"
+  },
+  "duplicant_job": {
+    "noun_titlecase": "工作",
+    "mastery_titlecase": "精通"
+  },
+  "duplicant_appearance": {
+    "noun_titlecase": "外观"
+  },
+  "duplicant_health": {
+    "noun_titlecase": "健康值"
+  },
+  "geyser": {
+    "noun_titlecase_plural": "间歇泉"
+  },
+  "material": {
+    "noun_titlecase": "材料",
+    "noun_titlecase_plural": "材料",
+    "all_titlecase": "全部材料",
+    "gram": "{{count}} 克",
+    "kilogram": "{{count}} 千克"
+  },
+  "material_loose": {
+    "noun_titlecase": "散落的",
+    "clump_count": "{{count}} 堆",
+    "clump_count_plural": "{{count}} 堆",
+    "verbs": {
+      "delete_name": "删除 {{name}}"
+    },
+    "prompts": {
+      "delete": "此操作将从游戏中移除所有散落的材料。材料将被永久删除！"
+    }
+  },
+  "material_storage": {
+    "noun_titlecase": "存储",
+    "container_count": "{{count}} 容器",
+    "container_count_plural": "{{count}} 容器"
+  },
+  "time_cycles": {
+    "noun_titlecase": "周期时间"
+  },
+  "dialog": {
+    "queries": {
+      "continue": "确定要继续吗？"
+    },
+    "verbs": {
+      "cancel_titlecase": "取消",
+      "confirm_titlecase": "确认"
+    }
+  },
+  "data": {
+    "conditions": {
+      "modified_titlecase": "数据已修改"
+    },
+    "prompts": {
+      "modified-description": "此存档中的数据在导出后已被修改过。\n导入数据无效，导入无效数据会损坏存档。"
+    },
+    "verbs": {
+      "copy_titlecase": "复制",
+      "export_titlecase": "导出",
+      "import_titlecase": "导入"
+    }
+  },
+  "save-file": {
+    "verbs": {
+      "load_titlecase": "加载存档"
+    },
+    "conditions": {
+      "loading": "加载中...",
+      "modified": "已修改"
+    }
+  },
+  "overview-page": {
+    "title": "概览",
+    "no-save": {
+      "title": "选择存档",
+      "prompt": "存档未读取",
+      "save-location": "存档保存路径：<1>{{path}}</1>."
+    }
+  },
+  "view-github": "View project on GitHub"
+}
