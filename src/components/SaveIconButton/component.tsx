@@ -13,7 +13,7 @@ export interface SaveIconButtonProps {
 type Props = SaveIconButtonProps & WithTranslation;
 const SaveIconButton: React.SFC<Props> = ({ disabled, onSave, t }) => (
   <IconButton
-    title={t("save-file.verbs.load_titlecase")}
+    title={t("save-file.verbs.save_titlecase")}
     disabled={disabled}
     onClick={onSave}
   >
