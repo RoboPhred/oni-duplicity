@@ -1,3 +1,7 @@
+## v3.8.1
+
+- Fix crash on saves with active mods.
+
 ### v3.8.0
 
 - Support new QOL3 changes. Breaks compatibility with older saves.
