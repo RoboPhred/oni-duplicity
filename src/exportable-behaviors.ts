@@ -25,7 +25,7 @@ export const MinionExportableBehaviors: ExportableBehavior[] = [
     behavior: AITraitsBehavior
   },
   {
-    name: "Job Skills",
+    name: "Skills",
     behavior: MinionResumeBehavior
   }
 ];

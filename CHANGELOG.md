@@ -1,3 +1,7 @@
+## vNext
+
+- Fix selecting multiple categories to copy/export.
+
 ## v3.8.1
 
 - Fix crash on saves with active mods.

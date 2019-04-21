@@ -44,7 +44,7 @@ const BehaviorChooserDialog: React.FC<Props> = ({
         setSelectedTargets(selectedTargets.filter(x => x !== e.target.value));
       }
     },
-    [setSelectedTargets]
+    [selectedTargets, setSelectedTargets]
   );
   const onApplyClick = React.useCallback(() => {
     onApply(selectedTargets);
