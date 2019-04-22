@@ -1,7 +1,7 @@
 import * as React from "react";
 import { BehaviorName } from "oni-save-parser";
 
-import { Trans } from "react-i18next";
+import { withTranslation, WithTranslation } from "react-i18next";
 
 import Dialog from "@material-ui/core/Dialog";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -13,6 +13,7 @@ import Button from "@material-ui/core/Button";
 
 export interface BehaviorChoice {
   name: string;
+  i18nKey: string;
   behavior: BehaviorName<any>;
 }
 
@@ -24,14 +25,15 @@ export interface BehaviorChooserDialogProps {
   onApply(behaviors: string[]): void;
   onCancel(): void;
 }
-type Props = BehaviorChooserDialogProps;
+type Props = BehaviorChooserDialogProps & WithTranslation;
 const BehaviorChooserDialog: React.FC<Props> = ({
   title,
   applyText,
   open,
   choices,
   onApply,
-  onCancel
+  onCancel,
+  t
 }) => {
   const [selectedTargets, setSelectedTargets] = React.useState<string[]>([]);
   const onCheckboxChange = React.useCallback(
@@ -55,7 +57,7 @@ const BehaviorChooserDialog: React.FC<Props> = ({
         <React.Fragment>
           <DialogTitle id="behavior-chooser-dialog-title">{title}</DialogTitle>
           <DialogContent>
-            {choices.map(({ name, behavior }) => (
+            {choices.map(({ name, i18nKey, behavior }) => (
               <FormControlLabel
                 key={behavior}
                 control={
@@ -66,13 +68,13 @@ const BehaviorChooserDialog: React.FC<Props> = ({
                     color="primary"
                   />
                 }
-                label={name}
+                label={t(i18nKey, { defaultValue: name })}
               />
             ))}
           </DialogContent>
           <DialogActions>
             <Button onClick={onCancel}>
-              <Trans i18nKey="dialog.verbs.cancel_titlecase">Cancel</Trans>
+              {t("dialog.verbs.cancel_titlecase", { defaultValue: "Cancel" })}
             </Button>
             <Button onClick={onApplyClick} autoFocus>
               {applyText}
@@ -84,4 +86,4 @@ const BehaviorChooserDialog: React.FC<Props> = ({
   );
 };
 
-export default BehaviorChooserDialog;
+export default withTranslation()(BehaviorChooserDialog);

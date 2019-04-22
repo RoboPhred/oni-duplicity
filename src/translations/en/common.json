@@ -17,6 +17,7 @@
   },
   "duplicant_trait": {
     "noun_titlecase": "Trait",
+    "noun_titlecase_plural": "Traits",
     "verbs": {
       "add_titlecase": "Add Trait"
     }
