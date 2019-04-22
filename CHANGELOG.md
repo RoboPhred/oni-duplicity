@@ -1,6 +1,7 @@
 ## vNext
 
 - Fix selecting multiple categories to copy/export.
+- Persist language selection.
 
 ## v3.8.1
 

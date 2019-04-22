@@ -9,9 +9,12 @@ import createSagaMiddleware from "redux-saga";
 import { routerMiddleware } from "connected-react-router";
 
 import history from "@/history";
+import { defaultAppState } from "@/state";
 
 import reducer from "./reducer";
 import saga from "./saga";
+
+import { loadPersistedState, savePersistedState } from "./persist";
 
 import {
   actionSanitizer,
@@ -31,11 +34,18 @@ function createStore() {
 
   const sagaMiddleware = createSagaMiddleware();
 
+  const initialState = loadPersistedState(defaultAppState);
+
   const store = createReduxStore(
     reducer,
+    initialState,
     composeEnhancers(applyMiddleware(sagaMiddleware, routerMiddleware(history)))
   );
+
   sagaMiddleware.run(saga);
+
+  store.subscribe(() => savePersistedState(store.getState()));
+
   return store;
 }
 
