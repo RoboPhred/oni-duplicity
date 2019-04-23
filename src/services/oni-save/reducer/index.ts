@@ -7,6 +7,7 @@ import deleteLooseMaterial from "./delete-looe-material";
 import importWarnChecksumReducer from "./import-warn-checksum";
 import loadExampleSaveReducer from "./load-example";
 import mergeBehaviorsReducer from "./merge-behaviors";
+import modifyBehaviorPathReducer from "./modify-behavior-path";
 import modifyBehaviorReducer from "./modify-behavior";
 import modifyDifficultyReducer from "./modify-difficulty";
 import modifyRawReducer from "./modify-raw";
@@ -22,6 +23,7 @@ export default reduceReducers(
   importWarnChecksumReducer,
   loadExampleSaveReducer,
   mergeBehaviorsReducer,
+  modifyBehaviorPathReducer,
   modifyBehaviorReducer,
   modifyDifficultyReducer,
   modifyRawReducer,

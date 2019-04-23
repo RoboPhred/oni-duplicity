@@ -191,6 +191,23 @@ export function changeStateBehaviorData<
   };
 }
 
+export function set(obj: any, path: string[], value: any): any {
+  if (path.length === 0) {
+    return value;
+  }
+
+  obj = { ...obj };
+  let target = obj;
+  for (const key of path.slice(0, -1)) {
+    const prop = { ...target[key] };
+    target[key] = prop;
+    target = prop;
+  }
+  target[path[path.length - 1]] = value;
+
+  return obj;
+}
+
 export function setArrayDict<TKey, TValue>(
   arrayDict: [TKey, TValue][],
   key: TKey,
