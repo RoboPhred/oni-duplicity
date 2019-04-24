@@ -10,7 +10,7 @@ import { getGameObjectById } from "../utils";
 
 import modifyBehaviorReducer from "./modify-behavior";
 
-describe("changeGeyserTypeReducer", () => {
+describe("modifyBehaviorReducer", () => {
   describe("no-op cases", () => {
     it("makes no changes when the save game is not present", () => {
       const state = defaultOniSaveState;
