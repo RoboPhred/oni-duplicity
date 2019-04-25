@@ -103,6 +103,7 @@
     },
     "conditions": {
       "loading": "Loading",
+      "saving": "Saving",
       "modified": "Modified",
       "modified_description": "The file has been modified since it was last saved.",
       "example": "Example",

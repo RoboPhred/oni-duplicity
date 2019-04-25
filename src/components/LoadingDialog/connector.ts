@@ -11,6 +11,8 @@ import { LoadingStatus } from "@/services/oni-save/state";
 const mapStateToProps = createStructuredSelector({
   isLoading: (state: AppState) =>
     loadingStatusSelector(state) === LoadingStatus.Loading,
+  isSaving: (state: AppState) =>
+    loadingStatusSelector(state) === LoadingStatus.Saving,
   message: loadingStatusMessageSelector
 });
 

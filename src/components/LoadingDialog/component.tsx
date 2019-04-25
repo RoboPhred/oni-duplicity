@@ -12,10 +12,9 @@ import {
 import Dialog from "@material-ui/core/Dialog";
 import Typography from "@material-ui/core/Typography";
 
-import { LoadingStatus } from "@/services/oni-save/state";
-
 export interface LoadingDialogProps {
   isLoading: boolean;
+  isSaving: boolean;
   message: string | null;
 }
 
@@ -38,12 +37,22 @@ const styles = (theme: Theme) =>
 
 type Props = LoadingDialogProps & WithStyles<typeof styles>;
 
-const LoadingDialog: React.FC<Props> = ({ isLoading, message, classes }) => (
-  <Dialog open={isLoading}>
+const LoadingDialog: React.FC<Props> = ({
+  isLoading,
+  isSaving,
+  message,
+  classes
+}) => (
+  <Dialog open={isLoading || isSaving}>
     <div className={classes.root}>
       <div className={classes.content}>
         <Typography className={classes.loadingText} variant="h4">
-          <Trans i18nKey="save-file.conditions.loading">Loading</Trans>
+          {isLoading && (
+            <Trans i18nKey="save-file.conditions.loading">Loading</Trans>
+          )}
+          {isSaving && (
+            <Trans i18nKey="save-file.conditions.saving">Saving</Trans>
+          )}
         </Typography>
         <Typography className={classes.message} variant="body1">
           {message}

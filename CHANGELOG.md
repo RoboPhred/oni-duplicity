@@ -2,6 +2,7 @@
 
 - Fix selecting multiple categories to copy/export.
 - Persist language selection.
+- Show status dialog when saving.
 
 ## v3.8.1
 
