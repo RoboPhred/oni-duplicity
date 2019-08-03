@@ -1,3 +1,7 @@
+## 3.8.3
+
+- Update for LU support.
+
 ## 3.8.2
 
 - Fix selecting multiple categories to copy/export.
