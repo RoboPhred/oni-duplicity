@@ -93,6 +93,12 @@ const Appearance: React.FC<Props> = ({ classes, gameObjectId }) => {
               );
             }
           }
+          if (type === "body") {
+            const arm = getIndexOfAccessoryType(accessories, "arm");
+            accessoryMod[arm] = Accessory(
+              `arm_${padStart(String(ordinal), 3, "0")}`
+            );
+          }
           onTemplateDataModify({
             accessories: merge([], accessories, accessoryMod)
           });
