@@ -2,6 +2,7 @@
 
 - Change arm color with body.
 - Update parser for salt water geyser support.
+- Fix parsing certain modded fields such as "<Threshold>k\_\_BackingField".
 
 ## 3.8.3
 
