@@ -1,6 +1,7 @@
 ## vNext
 
-- Change arm color with body
+- Change arm color with body.
+- Update parser for salt water geyser support.
 
 ## 3.8.3
 
