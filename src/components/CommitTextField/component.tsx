@@ -10,9 +10,13 @@ interface State {
   value: string | null;
 }
 class CommitTextField extends React.Component<CommitTextFieldProps, State> {
-  state = {
-    value: null
-  };
+  constructor(props: CommitTextFieldProps) {
+    super(props);
+
+    this.state = {
+      value: null
+    };
+  }
 
   render() {
     const {

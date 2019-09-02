@@ -12,10 +12,14 @@ interface State {
   valid: boolean;
 }
 class AbstractRawEditor extends React.Component<Props, State> {
-  state = {
-    transientValue: null,
-    valid: true
-  };
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      transientValue: null,
+      valid: true
+    };
+  }
 
   render() {
     const { value, children } = this.props;
