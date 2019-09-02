@@ -87,7 +87,7 @@
     "re-reselect": "^3.4.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-i18next": "^10.12.2",
+    "react-i18next": "^10.1.2",
     "react-monaco-editor": "^0.30.1",
     "react-oni-duplicant": "^0.1.2",
     "react-redux": "^6.0.0",
