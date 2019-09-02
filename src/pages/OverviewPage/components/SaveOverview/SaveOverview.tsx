@@ -19,10 +19,10 @@ import mapStateToProps, { StateProps } from "./state-props";
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing.unit
+      padding: theme.spacing()
     },
     difficulty: {
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing()
     }
   });
 

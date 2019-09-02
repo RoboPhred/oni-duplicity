@@ -22,10 +22,10 @@ const styles = (theme: Theme) =>
       display: "flex",
       flexDirection: "row",
       flexWrap: "wrap",
-      margin: theme.spacing.unit
+      margin: theme.spacing()
     },
     item: {
-      margin: theme.spacing.unit / 2
+      margin: theme.spacing(0.5)
     }
   });
 

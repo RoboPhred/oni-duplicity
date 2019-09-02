@@ -35,7 +35,7 @@ const styles = (theme: Theme) =>
       flexWrap: "wrap"
     },
     chip: {
-      margin: theme.spacing.unit / 2
+      margin: theme.spacing(0.5)
     }
   });
 

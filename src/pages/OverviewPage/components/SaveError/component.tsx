@@ -19,10 +19,10 @@ export interface SaveErrorProps {
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing.unit
+      padding: theme.spacing()
     },
     errorMessage: {
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing()
     }
   });
 

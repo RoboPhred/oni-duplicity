@@ -28,15 +28,15 @@ export interface GeyserListItemProps {
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      width: theme.spacing.unit * 45,
+      width: theme.spacing(45),
       display: "flex",
       flexDirection: "column",
-      padding: theme.spacing.unit * 2
+      padding: theme.spacing(2)
     },
     titleBar: {
       display: "flex",
       flexDirection: "row",
-      marginBottom: theme.spacing.unit
+      marginBottom: theme.spacing()
     },
     titleControls: {
       display: "flex",
@@ -44,10 +44,10 @@ const styles = (theme: Theme) =>
       marginLeft: "auto"
     },
     sliderSection: {
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing()
     },
     valueLabel: {
-      marginBottom: theme.spacing.unit
+      marginBottom: theme.spacing()
     }
   });
 

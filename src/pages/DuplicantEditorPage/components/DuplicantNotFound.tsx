@@ -22,7 +22,7 @@ const styles = (theme: Theme) =>
     text: {
       marginLeft: "auto",
       marginRight: "auto",
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing()
     }
   });
 

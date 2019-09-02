@@ -29,7 +29,7 @@ const styles = (theme: Theme) =>
       flexGrow: 1
     },
     chip: {
-      marginRight: theme.spacing.unit
+      marginRight: theme.spacing()
     }
   });
 

@@ -28,15 +28,15 @@ export interface DuplicantListItemProps {
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      width: theme.spacing.unit * 45,
+      width: theme.spacing(45),
       display: "flex",
       flexDirection: "column",
-      padding: theme.spacing.unit * 2
+      padding: theme.spacing(2)
     },
     titleBar: {
       display: "flex",
       flexDirection: "row",
-      marginBottom: theme.spacing.unit
+      marginBottom: theme.spacing()
     },
     titleControls: {
       display: "flex",
@@ -46,10 +46,10 @@ const styles = (theme: Theme) =>
     content: {
       display: "flex",
       flexDirection: "row",
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing()
     },
     portraitColumn: {
-      marginRight: theme.spacing.unit * 2
+      marginRight: theme.spacing(2)
     },
     attributes: {
       marginLeft: "auto"

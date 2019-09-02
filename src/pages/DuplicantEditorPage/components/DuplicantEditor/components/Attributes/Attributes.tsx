@@ -49,28 +49,28 @@ const styles = (theme: Theme) =>
       height: "100%"
     },
     header: {
-      marginTop: theme.spacing.unit,
-      marginLeft: theme.spacing.unit
+      marginTop: theme.spacing(),
+      marginLeft: theme.spacing()
     },
     divider: {
-      marginTop: theme.spacing.unit,
-      marginBottom: theme.spacing.unit
+      marginTop: theme.spacing(),
+      marginBottom: theme.spacing()
     },
     attributeList: {
       display: "flex",
       flexDirection: "column",
       flexWrap: "wrap",
-      height: theme.spacing.unit * 20,
-      padding: theme.spacing.unit
+      height: theme.spacing(20),
+      padding: theme.spacing()
     },
     attributeItem: {
-      margin: theme.spacing.unit / 2,
+      margin: theme.spacing(0.5),
       display: "flex",
       flexDirection: "row"
     },
     attributeInput: {
       width: 50,
-      marginRight: theme.spacing.unit
+      marginRight: theme.spacing()
     }
   });
 

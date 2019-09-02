@@ -33,16 +33,16 @@ export interface DuplicantEditorProps {
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      paddingLeft: theme.spacing.unit,
-      paddingTop: theme.spacing.unit,
+      paddingLeft: theme.spacing(),
+      paddingTop: theme.spacing(),
       display: "flex",
       flexDirection: "column",
       width: "100%",
       height: "100%"
     },
     divider: {
-      marginTop: theme.spacing.unit,
-      marginBottom: theme.spacing.unit
+      marginTop: theme.spacing(),
+      marginBottom: theme.spacing()
     },
     nameRow: {
       flexGrow: 0,
@@ -51,25 +51,25 @@ const styles = (theme: Theme) =>
     portraitRow: {
       display: "flex",
       flexDirection: "row",
-      marginBottom: theme.spacing.unit,
+      marginBottom: theme.spacing(),
       flexGrow: 0,
       flexShrink: 0
     },
     portraitRowColumn: {
-      marginRight: theme.spacing.unit
+      marginRight: theme.spacing()
     },
     portraitRowTweakables: {
       width: "100%"
     },
     row: {
-      marginBottom: theme.spacing.unit,
+      marginBottom: theme.spacing(),
       flexGrow: 0,
       flexShrink: 0
     },
     tabRow: {
       display: "flex",
       flexDirection: "column",
-      marginLeft: -theme.spacing.unit,
+      marginLeft: -theme.spacing(),
       height: "100%"
     },
     tabContent: {

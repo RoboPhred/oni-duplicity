@@ -49,7 +49,7 @@ const styles = (theme: Theme) =>
       flexWrap: "wrap"
     },
     partContainer: {
-      margin: theme.spacing.unit / 2
+      margin: theme.spacing(0.5)
     },
     part: {
       cursor: "pointer"

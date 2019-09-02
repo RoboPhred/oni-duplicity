@@ -16,7 +16,7 @@ import Language from "./components/Language";
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing.unit
+      padding: theme.spacing()
     }
   });
 

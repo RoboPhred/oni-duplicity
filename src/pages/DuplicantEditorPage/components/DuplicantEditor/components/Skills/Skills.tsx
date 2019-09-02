@@ -19,7 +19,7 @@ const styles = (theme: Theme) =>
     root: {
       display: "flex",
       flexDirection: "column",
-      padding: theme.spacing.unit
+      padding: theme.spacing()
     }
   });
 

@@ -30,7 +30,7 @@ export interface AddEffectDialogProps {
 const styles = (theme: Theme) =>
   createStyles({
     cycleTime: {
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing()
     }
   });
 

@@ -22,7 +22,7 @@ const ModifierBehaviorEditor = AbstractBehaviorEditor.ofType(
 const styles = (theme: Theme) =>
   createStyles({
     valueLabel: {
-      marginBottom: theme.spacing.unit
+      marginBottom: theme.spacing()
     }
   });
 

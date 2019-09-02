@@ -22,12 +22,12 @@ const styles = (theme: Theme) =>
     toolbar: {
       ...theme.mixins.toolbar,
       display: "flex",
-      paddingLeft: theme.spacing.unit * 3,
+      paddingLeft: theme.spacing(3),
       alignItems: "center"
     },
     ghButton: {
       marginLeft: "auto",
-      marginRight: theme.spacing.unit
+      marginRight: theme.spacing()
     }
   });
 

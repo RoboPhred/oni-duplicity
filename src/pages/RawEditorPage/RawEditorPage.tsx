@@ -25,7 +25,7 @@ const styles = (theme: Theme) =>
     },
     selectorContainer: {
       width: "100%",
-      padding: theme.spacing.unit
+      padding: theme.spacing()
     },
     editorContainer: {
       flexGrow: 1,

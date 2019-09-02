@@ -21,8 +21,8 @@ export interface LoadingDialogProps {
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      width: theme.spacing.unit * 60,
-      height: theme.spacing.unit * 20
+      width: theme.spacing(60),
+      height: theme.spacing(20)
     },
     content: {
       verticalAlign: "middle"

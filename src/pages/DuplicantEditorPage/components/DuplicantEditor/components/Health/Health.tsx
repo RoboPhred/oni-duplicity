@@ -26,24 +26,24 @@ const styles = (theme: Theme) =>
       height: "100%"
     },
     header: {
-      marginTop: theme.spacing.unit,
-      marginLeft: theme.spacing.unit
+      marginTop: theme.spacing(),
+      marginLeft: theme.spacing()
     },
     divider: {
-      marginTop: theme.spacing.unit,
-      marginBottom: theme.spacing.unit
+      marginTop: theme.spacing(),
+      marginBottom: theme.spacing()
     },
     group: {
       display: "flex",
       flexDirection: "row",
       flexWrap: "wrap",
-      padding: theme.spacing.unit
+      padding: theme.spacing()
     },
     value: {
       width: 300,
-      marginTop: theme.spacing.unit,
-      marginLeft: theme.spacing.unit * 2,
-      marginRight: theme.spacing.unit * 2
+      marginTop: theme.spacing(),
+      marginLeft: theme.spacing(2),
+      marginRight: theme.spacing(2)
     }
   });
 

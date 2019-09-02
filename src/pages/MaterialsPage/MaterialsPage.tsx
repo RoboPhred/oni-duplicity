@@ -17,7 +17,7 @@ import MaterialsTable from "./components/MaterialsTable";
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing.unit
+      padding: theme.spacing()
     }
   });
 

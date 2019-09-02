@@ -21,14 +21,14 @@ const styles = (theme: Theme) =>
       display: "flex",
       flexDirection: "column",
       flexWrap: "wrap",
-      width: theme.spacing.unit * 30,
-      height: theme.spacing.unit * 20,
-      marginLeft: -theme.spacing.unit / 2,
-      marginRight: -theme.spacing.unit / 2
+      width: theme.spacing(30),
+      height: theme.spacing(20),
+      marginLeft: -theme.spacing(0.5),
+      marginRight: -theme.spacing(0.5)
     },
     item: {
-      marginLeft: theme.spacing.unit / 2,
-      marginRight: theme.spacing.unit / 2
+      marginLeft: theme.spacing(0.5),
+      marginRight: theme.spacing(0.5)
     }
   });
 
