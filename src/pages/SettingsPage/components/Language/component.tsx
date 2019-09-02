@@ -17,17 +17,23 @@ export interface LanguageProps {
 const Language: React.FC<LanguageProps> = ({
   currentLanguage,
   onChangeLanguage
-}) => (
-  <Select
-    value={currentLanguage}
-    onChange={e => onChangeLanguage(e.target.value)}
-  >
-    {entries(languages).map(([code, title]) => (
-      <MenuItem key={code} value={code}>
-        {title}
-      </MenuItem>
-    ))}
-  </Select>
-);
+}) => {
+  const onChange = React.useCallback(
+    (e: React.ChangeEvent<{ value: unknown }>) => {
+      onChangeLanguage(e.target.value as string);
+    },
+    [onChangeLanguage]
+  );
+
+  return (
+    <Select value={currentLanguage} onChange={onChange}>
+      {entries(languages).map(([code, title]) => (
+        <MenuItem key={code} value={code}>
+          {title}
+        </MenuItem>
+      ))}
+    </Select>
+  );
+};
 
 export default Language;

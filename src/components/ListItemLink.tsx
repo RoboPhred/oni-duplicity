@@ -2,14 +2,15 @@ import * as React from "react";
 
 import { withRouter, RouteComponentProps } from "react-router";
 
-import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
+import ListItem from "@material-ui/core/ListItem";
 
 import { onLinkClick } from "./utils";
 
-export interface ListItemLinkProps
-  extends Omit<ListItemProps, "href" | "component"> {
+export interface ListItemLinkProps {
   to: string;
   autoselect?: boolean;
+  button?: boolean;
+  disabled?: boolean;
 }
 
 type Props = ListItemLinkProps & RouteComponentProps;
@@ -18,20 +19,21 @@ class ListItemLink extends React.Component<Props> {
 
   render() {
     const {
-      children,
       history,
       location,
       to,
       autoselect,
-      staticContext,
-      ...props
+      button,
+      disabled,
+      children
     } = this.props;
     return (
       <ListItem
         selected={autoselect && pathStartsWith(location.pathname, to)}
-        {...props}
         component="a"
+        button={button as any} // typings are weird here.  `button` works fine, `button={true}` does not.
         href={history.createHref({ pathname: to })}
+        disabled={disabled}
         onClick={this._onClick}
       >
         {children}

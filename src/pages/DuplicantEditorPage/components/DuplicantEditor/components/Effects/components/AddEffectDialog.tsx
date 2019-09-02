@@ -61,7 +61,7 @@ const AddEffectDialog: React.FC<Props> = ({
             </InputLabel>
             <Select
               value={selectedEffect}
-              onChange={e => setSelectedEffect(e.target.value)}
+              onChange={e => setSelectedEffect(e.target.value as string)}
               inputProps={{ id: "duplicant-effect" }}
             >
               {availableEffects.map(effect => (

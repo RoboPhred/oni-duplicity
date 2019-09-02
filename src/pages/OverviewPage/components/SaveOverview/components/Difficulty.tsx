@@ -35,7 +35,9 @@ const Difficulty: React.FC<Props> = ({ className, classes }) => (
               <Typography>{name}</Typography>
               <Select
                 value={difficulty[name]}
-                onChange={e => onModifyDifficulty(name, e.target.value)}
+                onChange={e =>
+                  onModifyDifficulty(name, e.target.value as string)
+                }
               >
                 {QualityLevelSettingValues[name].map(value => (
                   <MenuItem key={value} value={value}>

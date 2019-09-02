@@ -6,29 +6,37 @@ import Button, { ButtonProps } from "@material-ui/core/Button";
 
 import { onLinkClick } from "./utils";
 
-export interface ButtonLinkProps
-  extends Omit<ButtonProps, "href" | "component"> {
+export interface ButtonLinkProps {
+  className?: string;
+  size?: ButtonProps["size"];
+  title?: string;
   to: string;
+  disabled?: boolean;
 }
 
 type Props = ButtonLinkProps & RouteComponentProps;
+
 class ButtonLink extends React.Component<Props> {
   private _onClick = onLinkClick.bind(this);
 
   render() {
     const {
-      children,
+      className,
+      size,
+      title,
       history,
-      location,
       to,
-      staticContext,
-      ...props
+      disabled,
+      children
     } = this.props;
     return (
       <Button
-        {...props}
+        className={className}
+        size={size}
+        title={title}
         component="a"
         href={history.createHref({ pathname: to })}
+        disabled={disabled}
         onClick={this._onClick}
       >
         {children}

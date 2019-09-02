@@ -19,8 +19,8 @@ const Nav: React.FC<Props> = ({ hasSave }) => (
     {NavItems.map(({ name, path, i18nKey, saveRequired }) => (
       <ListItemLink
         key={name}
-        button
         to={path}
+        button
         autoselect
         disabled={saveRequired ? !hasSave : false}
       >

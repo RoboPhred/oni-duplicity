@@ -4,12 +4,6 @@ import { createMuiTheme } from "@material-ui/core/styles";
 //  https://material-ui.com/style/color/
 
 const theme = createMuiTheme({
-  typography: {
-    // Opt in to using the newer set of font styles.
-    //  The old styles are deprecated and will be
-    //  removed.
-    useNextVariants: true
-  },
   palette: {
     type: "dark"
   }

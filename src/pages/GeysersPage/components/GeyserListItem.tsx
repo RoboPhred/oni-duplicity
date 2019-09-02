@@ -68,7 +68,7 @@ const GeyserListItem: React.FC<Props> = ({
         <Divider />
         <Select
           value={geyserType || ""}
-          onChange={e => onChangeGeyserType(e.target.value)}
+          onChange={e => onChangeGeyserType(e.target.value as string)}
         >
           {keysOfType(GeyserType).map(typeName => (
             <MenuItem key={typeName} value={typeName}>
@@ -85,7 +85,7 @@ const GeyserListItem: React.FC<Props> = ({
             value={emitRate || 0}
             min={0}
             max={1}
-            onChange={(_, value) => onChangeEmitRate(value)}
+            onChange={(_, value) => onChangeEmitRate(value as number)}
           />
         </div>
       </Paper>

@@ -71,7 +71,7 @@ const Value: React.FC<Props> = ({
             value={value}
             min={0}
             max={max || 100}
-            onChange={(_, value) => setAmount(value)}
+            onChange={(_, value) => setAmount(value as number)}
           />
         </div>
       );

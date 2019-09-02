@@ -2,7 +2,7 @@ import * as React from "react";
 
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import Breadcrumbs from "@material-ui/lab/Breadcrumbs";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Link from "@material-ui/core/Link";
 
 import { WithPathSelectorLogic } from "./logic";
