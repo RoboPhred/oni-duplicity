@@ -80,10 +80,9 @@ const RawTreeChild: React.FC<RawTreeChildProps> = ({
   }, [onChangePath, path]);
 
   const segmentName = getSegmentName(saveGame, path);
-  const label = segmentName || last(path);
 
   return (
-    <TreeItem nodeId={path.join(".")} label={label} onClick={onClick}>
+    <TreeItem nodeId={path.join(".")} label={segmentName} onClick={onClick}>
       <RawTreeChildren
         saveGame={saveGame}
         path={path}

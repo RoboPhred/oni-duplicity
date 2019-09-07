@@ -2,14 +2,12 @@ import * as React from "react";
 import { SaveGame } from "oni-save-parser";
 
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 
 import PageContainer from "@/components/PageContainer";
 import RedirectIfNoSave from "@/components/RedirectIfNoSave";
 
 import RawObjectTree from "./components/RawObjectTree";
-import { getSegmentName } from "./raw-tree";
+import BreadcrumbPath from "./components/BreadcrumbPath";
 
 export interface RawEditorPageProps {
   saveGame: SaveGame | null;
@@ -48,13 +46,7 @@ const RawEditorPage: React.FC<RawEditorPageProps> = ({ saveGame }) => {
               onChangePath={setPath}
             />
             <div className={classes.content}>
-              <Breadcrumbs>
-                {path.map((segment, i) => (
-                  <Typography color="inherit">
-                    {getSegmentName(saveGame, path.slice(0, i + 1)) || segment}
-                  </Typography>
-                ))}
-              </Breadcrumbs>
+              <BreadcrumbPath path={path} onChangePath={setPath} />
             </div>
           </>
         )}

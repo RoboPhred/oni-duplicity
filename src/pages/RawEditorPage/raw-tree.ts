@@ -1,5 +1,5 @@
 import { SaveGame, GameObjectGroup, GameObjectBehavior } from "oni-save-parser";
-import { get } from "lodash";
+import { get, last } from "lodash";
 
 interface SegmentData {
   matcher: string[];
@@ -29,16 +29,13 @@ const data: SegmentData[] = [
   }
 ];
 
-export function getSegmentName(
-  saveGame: SaveGame,
-  path: string[]
-): string | null {
+export function getSegmentName(saveGame: SaveGame, path: string[]): string {
   const segment = data.find(segment => isPathMatch(path, segment.matcher));
   if (!segment || !segment.name) {
-    return null;
+    return last(path)!;
   }
 
-  return segment.name(saveGame, path);
+  return segment.name(saveGame, path) || last(path)!;
 }
 
 function isPathMatch(path: string[], matcher: string[]): boolean {
