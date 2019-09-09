@@ -1,17 +1,20 @@
 import * as React from "react";
+import { SaveGame } from "oni-save-parser";
 
 import Typography from "@material-ui/core/Typography";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 
-import { getSegmentName } from "../../raw-tree";
+import { getSegmentName } from "../../editor-data";
 
 export interface BreadcrumbPathProps {
+  saveGame: SaveGame;
   path: string[];
   onChangePath(path: string[]): void;
 }
 
 const BreadcrumbPath: React.FC<BreadcrumbPathProps> = ({
   path,
+  saveGame,
   onChangePath
 }) => {
   return (

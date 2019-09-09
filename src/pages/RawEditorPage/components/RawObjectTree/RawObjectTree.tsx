@@ -1,12 +1,12 @@
 import * as React from "react";
-import { get, last } from "lodash-es";
+import { get } from "lodash-es";
 import { SaveGame } from "oni-save-parser";
 
 import TreeView from "@material-ui/lab/TreeView";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TreeItem from "@material-ui/lab/TreeItem";
-import { getSegmentName } from "../../raw-tree";
+import { getSegmentName } from "../../editor-data";
 
 export interface RawObjectTreeProps {
   className?: string;
