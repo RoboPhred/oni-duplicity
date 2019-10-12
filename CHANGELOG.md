@@ -1,3 +1,7 @@
+## 3.8.5
+
+- Update parser to support save version 7.12
+
 ## 3.8.4
 
 - Change arm color with body.
