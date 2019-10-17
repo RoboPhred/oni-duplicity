@@ -24,7 +24,8 @@ export default function receiveOniSaveReducer(
         loadError: null,
         loadingStatus: action.meta.operation,
         loadingProgressMessage: null,
-        saveGame: action.payload.clearExisting ? null : state.saveGame
+        saveGame: action.payload.clearExisting ? null : state.saveGame,
+        isMock: false
       };
     case ACTION_RECEIVE_ONISAVE_ERROR:
       state = {
