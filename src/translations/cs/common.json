@@ -1,0 +1,125 @@
+{
+  "duplicant": {
+    "noun_titlecase_plural": "Duplikanti",
+    "noun_titlecase": "Duplikant",
+    "verbs": {
+      "edit_titlecase": "Upravit Duplikanta"
+    },
+    "conditions": {
+      "missing_titlecase": "Duplikant nenalezen"
+    }
+  },
+  "duplicant_effect": {
+    "noun_titlecase": "Efekt",
+    "verbs": {
+      "add_titlecase": "Přidat efekt"
+    }
+  },
+  "duplicant_trait": {
+    "noun_titlecase": "Rys",
+    "noun_titlecase_plural": "Rysy",
+    "verbs": {
+      "add_titlecase": "Přidat rys"
+    }
+  },
+  "duplicant_interest": {
+    "noun_titlecase": "Zájem",
+    "verbs": {
+      "add_titlecase": "Přidat zájem"
+    }
+  },
+  "duplicant_attribute": {
+    "noun_titlecase_plural": "Vlastnosti",
+    "primary_titlecase": "Primární",
+    "secondary_titlecase": "Sekundární"
+  },
+  "duplicant_skills": {
+    "noun_titlecase": "Schopnost",
+    "noun_titlecase_plural": "Schopnosti",
+    "experience_titlecase": "Zkušenosti",
+    "mastery_titlecase": "Zběhlost"
+  },
+  "duplicant_appearance": {
+    "noun_titlecase": "Vzhled"
+  },
+  "duplicant_health": {
+    "noun_titlecase": "Život"
+  },
+  "geyser": {
+    "noun_titlecase_plural": "Gejzíry"
+  },
+  "material": {
+    "noun_titlecase": "Materiál",
+    "noun_titlecase_plural": "Materiály",
+    "all_titlecase": "Všechen materiál",
+    "gram": "{{count}} g",
+    "kilogram": "{{count}} kg"
+  },
+  "material_loose": {
+    "noun_titlecase": "Volný",
+    "clump_count": "{{count}} chomáč",
+    "clump_count_plural": "{{count}} chomáčů",
+    "verbs": {
+      "delete_name": "Smazat {{name}}"
+    },
+    "prompts": {
+      "delete": "Toto odstraní všechen volný materiál ze hry.  Materiál již nelze obnovit."
+    }
+  },
+  "material_storage": {
+    "noun_titlecase": "Úložný prostor",
+    "container_count": "{{count}} kontejner",
+    "container_count_plural": "{{count}} kontejnerů"
+  },
+  "time_cycles": {
+    "noun_titlecase": "Čas cyklu"
+  },
+  "dialog": {
+    "queries": {
+      "continue": "Opravdu chcete pokračovat?"
+    },
+    "verbs": {
+      "cancel_titlecase": "Zrušit",
+      "confirm_titlecase": "Potvrdit"
+    }
+  },
+  "data": {
+    "conditions": {
+      "modified_titlecase": "Data upravena"
+    },
+    "prompts": {
+      "modified-description": "Data v tomto souboru byla upravena od posledního exportu.\nImportovaná data nejsou ověřena a importováním nesprávných dat můžete svůj save poškodit."
+    },
+    "verbs": {
+      "copy_titlecase": "Kopírovat",
+      "export_titlecase": "Exportovat",
+      "import_titlecase": "Importovat"
+    }
+  },
+  "save-file": {
+    "verbs": {
+      "load_titlecase": "Načíst",
+      "save_titlecase": "Uložit"
+    },
+    "conditions": {
+      "loading": "Načítání",
+      "saving": "Ukládání",
+      "modified": "Upraveno",
+      "modified_description": "Soubor byl od posledního uložení upraven.",
+      "example": "Příklad",
+      "example_description": "Tohle je příklad, který nelze uložit."
+    }
+  },
+  "overview-page": {
+    "title": "Přehled",
+    "no-save": {
+      "title": "Vybrat save",
+      "prompt": "Žádný save nebyl načten.",
+      "save-location": "Save můžete nalézt v <1>{{path}}</1>."
+    }
+  },
+  "raw-editor-page": {
+    "title": "Raw Editor"
+  },
+  "view-github": "Zobrazit projekt na GitHub"
+}
