@@ -218,7 +218,7 @@
 
       "NIGHTOWL": {
         "NAME": "Noctámbulo",
-        "DESC": "Este Duplicante trabaja mejor cuando debería de estar durmiendo.",
+        "DESC": "Este Duplicante trabaja mejor cuando debería de estar durmiendo."
       },
 
       "REGENERATION": {
@@ -268,7 +268,7 @@
       },
 
       "Machinery": {
-        "NAME": "Manitas"
+        "NAME": "Manitas",
         "DESC": "Determina la velocidad de usado de maquinas de un Duplicante."
       },
 
