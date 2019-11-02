@@ -136,6 +136,11 @@
         "DESC": "This Duplicant abhors violence"
       },
 
+      "ALLERGIES": {
+        "NAME": "Allergies",
+        "DESC": "This Duplicant will sneeze uncontrollably when exposed to the pollen present in Floral Scent"
+      },
+
       "WEAKIMMUNESYSTEM": {
         "NAME": "Biohazardous",
         "DESC": "All the vitamin C in space couldn't stop this Duplicant from getting sick"
@@ -211,6 +216,11 @@
         "DESC": "This Duplicant has simply no appreciation for the arts"
       },
 
+      "ARCHAEOLOGIST": {
+        "NAME": "Archeologist",
+        "DESC": "This Duplicant will always bring back an artifact from space expeditions."
+      },
+
       "EARLYBIRD": {
         "NAME": "Early Bird",
         "DESC": "This Duplicant always wakes up feeling fresh and efficient!"
@@ -249,11 +259,6 @@
       "FOODIE": {
         "NAME": "Gourmet",
         "DESC": "This Duplicant has a highly refined palate and desires luxurious foods."
-      },
-
-      "ARCHAEOLOGIST": {
-        "NAME": "Archeologist",
-        "DESC": "This Duplicant will always bring back an artifact from space expeditions."
       }
     },
     "ATTRIBUTES": {
