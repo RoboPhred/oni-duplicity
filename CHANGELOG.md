@@ -3,6 +3,9 @@
 - Fix geyser sliders latching to 0 or 100%.
 - Fix UI lag when choosing slider values.
 - Add missing traits Allergies and Archaeologist.
+- Add Spanish translations, contributed by Galo223344.
+- Add Czech translations, contributed by sorashi.
+- Fix unable to save if a file is loaded after the example is loaded.  Contributed by ferrybig.
 
 ## 3.8.5
 
