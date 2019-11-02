@@ -13,14 +13,10 @@ import {
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 
-import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
+import useBehavior from "@/services/oni-save/hooks/useBehavior";
 
 import AttributeName from "./components/AttributeName";
 import AttributeField from "./components/AttributeField";
-
-const AttributesEditor = AbstractBehaviorEditor.ofType(
-  AIAttributeLevelsBehavior
-);
 
 const PRIMARY_ATTRIBUTES = [
   "Athletics",
@@ -76,48 +72,47 @@ const styles = (theme: Theme) =>
 
 type Props = AttributesProps & WithStyles<typeof styles>;
 
-const Attributes: React.FC<Props> = ({ classes, gameObjectId }) => (
-  <AttributesEditor gameObjectId={gameObjectId}>
-    {({ templateData: { saveLoadLevels } }) => (
-      <div className={classes.root}>
-        <Typography className={classes.header} variant="h6">
-          <Trans i18nKey="duplicant_attribute.primary_titlecase">Primary</Trans>
-        </Typography>
-        <Divider className={classes.divider} />
-        <div className={classes.attributeList}>
-          {PRIMARY_ATTRIBUTES.map(attributeId => (
-            <div key={attributeId} className={classes.attributeItem}>
-              <AttributeField
-                className={classes.attributeInput}
-                gameObjectId={gameObjectId}
-                attributeId={attributeId}
-              />
-              <AttributeName attributeId={attributeId} />
-            </div>
-          ))}
-        </div>
-        <Typography className={classes.header} variant="h6">
-          <Trans i18nKey="duplicant_attribute.secondary_titlecase">
-            Secondary
-          </Trans>
-        </Typography>
-        <Divider className={classes.divider} />
-        <div className={classes.attributeList}>
-          {nonPrimaryAttributeIds(saveLoadLevels).map(attributeId => (
-            <div key={attributeId} className={classes.attributeItem}>
-              <AttributeField
-                className={classes.attributeInput}
-                gameObjectId={gameObjectId}
-                attributeId={attributeId}
-              />
-              <AttributeName attributeId={attributeId} />
-            </div>
-          ))}
-        </div>
+const Attributes: React.FC<Props> = ({ classes, gameObjectId }) => {
+  const { templateData: { saveLoadLevels } } = useBehavior(gameObjectId, AIAttributeLevelsBehavior);
+  return (
+    <div className={classes.root}>
+      <Typography className={classes.header} variant="h6">
+        <Trans i18nKey="duplicant_attribute.primary_titlecase">Primary</Trans>
+      </Typography>
+      <Divider className={classes.divider} />
+      <div className={classes.attributeList}>
+        {PRIMARY_ATTRIBUTES.map(attributeId => (
+          <div key={attributeId} className={classes.attributeItem}>
+            <AttributeField
+              className={classes.attributeInput}
+              gameObjectId={gameObjectId}
+              attributeId={attributeId}
+            />
+            <AttributeName attributeId={attributeId} />
+          </div>
+        ))}
       </div>
-    )}
-  </AttributesEditor>
-);
+      <Typography className={classes.header} variant="h6">
+        <Trans i18nKey="duplicant_attribute.secondary_titlecase">
+          Secondary
+          </Trans>
+      </Typography>
+      <Divider className={classes.divider} />
+      <div className={classes.attributeList}>
+        {nonPrimaryAttributeIds(saveLoadLevels).map(attributeId => (
+          <div key={attributeId} className={classes.attributeItem}>
+            <AttributeField
+              className={classes.attributeInput}
+              gameObjectId={gameObjectId}
+              attributeId={attributeId}
+            />
+            <AttributeName attributeId={attributeId} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default withStyles(styles)(Attributes);
 

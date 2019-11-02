@@ -10,10 +10,7 @@ import {
   Eyes,
   Body
 } from "react-oni-duplicant";
-
-import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
-
-const AccessorizerEditor = AbstractBehaviorEditor.ofType(AccessorizerBehavior);
+import useBehavior from "@/services/oni-save/hooks/useBehavior";
 
 export interface DuplicantPortraitProps {
   gameObjectId: number;
@@ -23,16 +20,11 @@ export interface DuplicantPortraitProps {
 const styles = createStyles({
   portraitContainer: {
     position: "relative"
-    // width: 80,
-    // height: 90
   },
   portrait: {
     position: "absolute",
-    // left: 42,
-    // top: 50,
     width: 0,
     height: 0,
-    // transform: "scale(.3)",
     transformOrigin: "top left"
   }
 });
@@ -43,57 +35,55 @@ const DuplicantPortrait: React.FC<Props> = ({
   classes,
   gameObjectId,
   scale
-}) => (
-  <AccessorizerEditor gameObjectId={gameObjectId}>
-    {({ templateData }) => {
-      if (!templateData) {
-        return <div>Error: No Data</div>;
-      }
-      return (
-        <div
-          className={classes.portraitContainer}
-          style={{ width: 240 * scale, height: 270 * scale }}
-        >
-          <div
-            className={classes.portrait}
-            style={{
-              left: 126 * scale,
-              top: 150 * scale,
-              transform: `scale(${scale})`
-            }}
-          >
-            <DuplicantContainer>
-              <Body
-                ordinal={ordinalFromAccessory(
-                  getAccessoryOfType(templateData.accessories, "body")!.guid
-                    .Guid
-                )}
-              />
-              <Head
-                ordinal={ordinalFromAccessory(
-                  getAccessoryOfType(templateData.accessories, "headshape")!
-                    .guid.Guid
-                )}
-              />
-              <Eyes
-                ordinal={ordinalFromAccessory(
-                  getAccessoryOfType(templateData.accessories, "eyes")!.guid
-                    .Guid
-                )}
-              />
-              <Hair
-                ordinal={ordinalFromAccessory(
-                  getAccessoryOfType(templateData.accessories, "hair")!.guid
-                    .Guid
-                )}
-              />
-            </DuplicantContainer>
-          </div>
-        </div>
-      );
-    }}
-  </AccessorizerEditor>
-);
+}) => {
+  const { templateData } = useBehavior(gameObjectId, AccessorizerBehavior);
+  if (!templateData) {
+    return <div>Error: No Data</div>;
+  }
+
+  return (
+    <div
+      className={classes.portraitContainer}
+      style={{ width: 240 * scale, height: 270 * scale }}
+    >
+      <div
+        className={classes.portrait}
+        style={{
+          left: 126 * scale,
+          top: 150 * scale,
+          transform: `scale(${scale})`
+        }}
+      >
+        <DuplicantContainer>
+          <Body
+            ordinal={ordinalFromAccessory(
+              getAccessoryOfType(templateData.accessories, "body")!.guid
+                .Guid
+            )}
+          />
+          <Head
+            ordinal={ordinalFromAccessory(
+              getAccessoryOfType(templateData.accessories, "headshape")!
+                .guid.Guid
+            )}
+          />
+          <Eyes
+            ordinal={ordinalFromAccessory(
+              getAccessoryOfType(templateData.accessories, "eyes")!.guid
+                .Guid
+            )}
+          />
+          <Hair
+            ordinal={ordinalFromAccessory(
+              getAccessoryOfType(templateData.accessories, "hair")!.guid
+                .Guid
+            )}
+          />
+        </DuplicantContainer>
+      </div>
+    </div>
+  );
+}
 export default withStyles(styles)(DuplicantPortrait);
 
 function ordinalFromAccessory(guid: string) {

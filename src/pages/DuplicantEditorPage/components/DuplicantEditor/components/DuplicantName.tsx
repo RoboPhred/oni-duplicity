@@ -3,21 +3,16 @@ import { MinionIdentityBehavior } from "oni-save-parser";
 
 import Typography from "@material-ui/core/Typography";
 
-import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
-
-const MinionIdentityEditor = AbstractBehaviorEditor.ofType(
-  MinionIdentityBehavior
-);
+import useBehavior from "@/services/oni-save/hooks/useBehavior";
 
 export interface DuplicantNameProps {
   gameObjectId: number;
 }
 
-const DuplicantName: React.FC<DuplicantNameProps> = ({ gameObjectId }) => (
-  <MinionIdentityEditor gameObjectId={gameObjectId}>
-    {({ templateData }) => (
-      <Typography variant="h5">{templateData.name}</Typography>
-    )}
-  </MinionIdentityEditor>
-);
+const DuplicantName: React.FC<DuplicantNameProps> = ({ gameObjectId }) => {
+  const { templateData: { name } } = useBehavior(gameObjectId, MinionIdentityBehavior);
+  return (
+    <Typography variant="h5">{name}</Typography>
+  );
+}
 export default DuplicantName;

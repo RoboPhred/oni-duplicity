@@ -11,9 +11,7 @@ import {
 } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
-import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
-
-const TraitsEditor = AbstractBehaviorEditor.ofType(AITraitsBehavior);
+import useBehavior from "@/services/oni-save/hooks/useBehavior";
 
 export interface DuplicantTraitsProps {
   gameObjectId: number;
@@ -33,28 +31,27 @@ const styles = (theme: Theme) =>
 
 type Props = DuplicantTraitsProps & WithStyles<typeof styles> & WithTranslation;
 
-const DuplicantTraits: React.FC<Props> = ({ classes, gameObjectId, t }) => (
-  <TraitsEditor gameObjectId={gameObjectId}>
-    {({ templateData }) => (
-      <div className={classes.root}>
-        {(templateData || { TraitIds: [] }).TraitIds.map(trait => (
-          <Typography
-            key={trait}
-            className={classes.trait}
-            variant="body2"
-            component="div"
-            title={t(`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.DESC`, {
-              defaultValue: ""
-            })}
-          >
-            {t(`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.NAME`, {
-              defaultValue: trait
-            })}
-          </Typography>
-        ))}
-      </div>
-    )}
-  </TraitsEditor>
-);
+const DuplicantTraits: React.FC<Props> = ({ classes, gameObjectId, t }) => {
+  const { templateData } = useBehavior(gameObjectId, AITraitsBehavior);
+  return (
+    <div className={classes.root}>
+      {(templateData || { TraitIds: [] }).TraitIds.map(trait => (
+        <Typography
+          key={trait}
+          className={classes.trait}
+          variant="body2"
+          component="div"
+          title={t(`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.DESC`, {
+            defaultValue: ""
+          })}
+        >
+          {t(`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.NAME`, {
+            defaultValue: trait
+          })}
+        </Typography>
+      ))}
+    </div>
+  );
+}
 
 export default withStyles(styles)(withTranslation()(DuplicantTraits));

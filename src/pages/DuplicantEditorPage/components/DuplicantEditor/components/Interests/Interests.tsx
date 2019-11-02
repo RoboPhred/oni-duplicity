@@ -17,11 +17,9 @@ import {
 } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
 
-import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
+import useBehavior from "@/services/oni-save/hooks/useBehavior";
 
 import AddAptitudeButton from "./components/AddAptitudeButton";
-
-const ResumeEditor = AbstractBehaviorEditor.ofType(MinionResumeBehavior);
 
 export interface InterestsProps {
   gameObjectId: number;
@@ -42,78 +40,74 @@ const styles = (theme: Theme) =>
 type Props = InterestsProps & WithStyles<typeof styles> & WithTranslation;
 
 const Interests: React.FC<Props> = ({ classes, gameObjectId, t }) => {
+  const { templateData: { AptitudeBySkillGroup }, onTemplateDataModify } = useBehavior(gameObjectId, MinionResumeBehavior);
+
+  const availableAptitudes = MinionSkillGroupNames.filter(
+    aptitudeName =>
+      aptitudeValue(AptitudeBySkillGroup, aptitudeName) === 0
+  );
+
+  const selectedAptitudes = difference(
+    MinionSkillGroupNames,
+    availableAptitudes
+  );
+
+  function removeAptitude(aptitudeName: string) {
+    const hashStr = getHashedString(aptitudeName);
+    const index = findIndex(
+      AptitudeBySkillGroup,
+      x => x[0].hash === hashStr.hash
+    );
+    if (index === -1) {
+      return;
+    }
+    onTemplateDataModify({
+      AptitudeBySkillGroup: [
+        ...AptitudeBySkillGroup.slice(0, index),
+        ...AptitudeBySkillGroup.slice(index + 1)
+      ]
+    });
+  }
+
+  function addAptitude(aptitudeName: string) {
+    const hashStr = getHashedString(aptitudeName);
+    const index = findIndex(
+      AptitudeBySkillGroup,
+      x => x[0].hash === hashStr.hash
+    );
+    if (index === -1) {
+      onTemplateDataModify({
+        AptitudeBySkillGroup: [...AptitudeBySkillGroup, [hashStr, 1]]
+      });
+    } else {
+      onTemplateDataModify({
+        AptitudeBySkillGroup: [
+          ...AptitudeBySkillGroup.slice(0, index),
+          [hashStr, 1],
+          ...AptitudeBySkillGroup.slice(index + 1)
+        ]
+      });
+    }
+  }
+
   return (
-    <ResumeEditor gameObjectId={gameObjectId}>
-      {({ templateData: { AptitudeBySkillGroup }, onTemplateDataModify }) => {
-        const availableAptitudes = MinionSkillGroupNames.filter(
-          aptitudeName =>
-            aptitudeValue(AptitudeBySkillGroup, aptitudeName) === 0
-        );
-
-        const selectedAptitudes = difference(
-          MinionSkillGroupNames,
-          availableAptitudes
-        );
-
-        function removeAptitude(aptitudeName: string) {
-          const hashStr = getHashedString(aptitudeName);
-          const index = findIndex(
-            AptitudeBySkillGroup,
-            x => x[0].hash === hashStr.hash
-          );
-          if (index === -1) {
-            return;
-          }
-          onTemplateDataModify({
-            AptitudeBySkillGroup: [
-              ...AptitudeBySkillGroup.slice(0, index),
-              ...AptitudeBySkillGroup.slice(index + 1)
-            ]
-          });
-        }
-
-        function addAptitude(aptitudeName: string) {
-          const hashStr = getHashedString(aptitudeName);
-          const index = findIndex(
-            AptitudeBySkillGroup,
-            x => x[0].hash === hashStr.hash
-          );
-          if (index === -1) {
-            onTemplateDataModify({
-              AptitudeBySkillGroup: [...AptitudeBySkillGroup, [hashStr, 1]]
-            });
-          } else {
-            onTemplateDataModify({
-              AptitudeBySkillGroup: [
-                ...AptitudeBySkillGroup.slice(0, index),
-                [hashStr, 1],
-                ...AptitudeBySkillGroup.slice(index + 1)
-              ]
-            });
-          }
-        }
-
-        return (
-          <div className={classes.root}>
-            {selectedAptitudes.map((aptitudeName, i) => (
-              <Chip
-                key={i}
-                className={classes.chip}
-                label={t(`oni:todo-trans.aptitudes.${aptitudeName}`, {
-                  defaultValue: aptitudeName
-                })}
-                onDelete={removeAptitude.bind(null, aptitudeName)}
-              />
-            ))}
-            <AddAptitudeButton
-              className={classes.chip}
-              availableAptitudes={availableAptitudes}
-              onAddAptitude={aptitudeName => addAptitude(aptitudeName)}
-            />
-          </div>
-        );
-      }}
-    </ResumeEditor>
+    <div className={classes.root}>
+      {selectedAptitudes.map((aptitudeName, i) => (
+        <Chip
+          key={i}
+          className={classes.chip}
+          label={t(`oni:todo-trans.aptitudes.${aptitudeName}`, {
+            defaultValue: aptitudeName
+          })}
+          onDelete={removeAptitude.bind(null, aptitudeName)}
+        />
+      ))}
+      <AddAptitudeButton
+        className={classes.chip}
+        availableAptitudes={availableAptitudes}
+        onAddAptitude={addAptitude}
+      />
+    </div>
   );
 };
 

@@ -12,11 +12,9 @@ import {
 } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
 
-import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
+import useBehavior from "@/services/oni-save/hooks/useBehavior";
 
 import AddTraitButton from "./components/AddTraitButton";
-
-const TraitsEditor = AbstractBehaviorEditor.ofType(AITraitsBehavior);
 
 const CANDIDATE_TRAITS = AI_TRAIT_IDS.filter(x => x !== "None");
 
@@ -39,43 +37,38 @@ const styles = (theme: Theme) =>
 type Props = TraitsProps & WithStyles<typeof styles> & WithTranslation;
 
 const Traits: React.FC<Props> = ({ classes, gameObjectId, t }) => {
+  const { templateData, onTemplateDataModify } = useBehavior(gameObjectId, AITraitsBehavior);
+  const { TraitIds } = templateData;
+  const availableTraits = difference(CANDIDATE_TRAITS, TraitIds);
   return (
-    <TraitsEditor gameObjectId={gameObjectId}>
-      {({ templateData, onTemplateDataModify }) => {
-        const { TraitIds } = templateData;
-        const availableTraits = difference(CANDIDATE_TRAITS, TraitIds);
-        return (
-          <div className={classes.root}>
-            {TraitIds.map((trait, i) => (
-              <Chip
-                key={trait}
-                className={classes.chip}
-                label={t(`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.NAME`, {
-                  defaultValue: trait
-                })}
-                title={t(`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.DESC`, {
-                  defaultValue: ""
-                })}
-                onDelete={() => {
-                  const newTraitIds = [...TraitIds];
-                  newTraitIds.splice(i, 1);
-                  onTemplateDataModify({
-                    TraitIds: newTraitIds
-                  });
-                }}
-              />
-            ))}
-            <AddTraitButton
-              className={classes.chip}
-              availableTraits={availableTraits}
-              onAddTrait={trait =>
-                onTemplateDataModify({ TraitIds: [...TraitIds, trait] })
-              }
-            />
-          </div>
-        );
-      }}
-    </TraitsEditor>
+    <div className={classes.root}>
+      {TraitIds.map((trait, i) => (
+        <Chip
+          key={trait}
+          className={classes.chip}
+          label={t(`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.NAME`, {
+            defaultValue: trait
+          })}
+          title={t(`oni:DUPLICANTS.TRAITS.${trait.toUpperCase()}.DESC`, {
+            defaultValue: ""
+          })}
+          onDelete={() => {
+            const newTraitIds = [...TraitIds];
+            newTraitIds.splice(i, 1);
+            onTemplateDataModify({
+              TraitIds: newTraitIds
+            });
+          }}
+        />
+      ))}
+      <AddTraitButton
+        className={classes.chip}
+        availableTraits={availableTraits}
+        onAddTrait={trait =>
+          onTemplateDataModify({ TraitIds: [...TraitIds, trait] })
+        }
+      />
+    </div>
   );
 };
 
