@@ -1,3 +1,9 @@
+## 3.9.0
+
+- Fix geyser sliders latching to 0 or 100%.
+- Fix UI lag when choosing slider values.
+- Add missing traits Allergies and Archaeologist.
+
 ## 3.8.5
 
 - Update parser to support save version 7.12
