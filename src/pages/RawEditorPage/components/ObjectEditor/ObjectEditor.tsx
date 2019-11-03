@@ -34,15 +34,18 @@ const ObjectEditor: React.FC<ObjectEditorProps> = ({ saveGame, path }) => {
       const editorType = editors[key];
       const EditorField = Editors[editorType];
       if (!EditorField) {
-        return null;
+        return (
+          <div key={key}>
+            {`${key}: No editor available for type ${editorType}.`}
+          </div>
+        );
       }
       return (
         <div key={key}>
           <EditorField path={[...path, key]} />
         </div>
       );
-    })
-    .filter(x => x != null);
+    });
 
   return <div>{editorFields}</div>;
 };
