@@ -60,7 +60,7 @@ class CommitTextField extends React.Component<CommitTextFieldProps, State> {
     }
   };
 
-  private _onBlur = (e: React.FocusEvent) => {
+  private _onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { onBlur } = this.props;
     if (onBlur) {
       onBlur(e);
