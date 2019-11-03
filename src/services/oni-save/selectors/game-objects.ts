@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 import { GameObject } from "oni-save-parser";
-import { flatMap, keyBy } from "lodash-es";
+import { flatMap, keyBy } from "lodash";
 
 import { isNotNull } from "@/utils";
 

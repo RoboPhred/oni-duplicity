@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AIAttributeLevelsBehavior } from "oni-save-parser";
-import { find } from "lodash-es";
+import { find } from "lodash";
 
 import { Trans, WithTranslation, withTranslation } from "react-i18next";
 

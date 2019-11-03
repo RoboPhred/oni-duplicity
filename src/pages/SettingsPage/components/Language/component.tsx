@@ -1,5 +1,5 @@
 import * as React from "react";
-import { entries, sortBy } from "lodash-es";
+import { entries, sortBy } from "lodash";
 
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";

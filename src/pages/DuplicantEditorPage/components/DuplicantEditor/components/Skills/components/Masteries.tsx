@@ -1,6 +1,6 @@
 import * as React from "react";
 import { MinionResumeBehavior, MinionSkillNames } from "oni-save-parser";
-import { find, findIndex } from "lodash-es";
+import { find, findIndex } from "lodash";
 
 import { Trans } from "react-i18next";
 

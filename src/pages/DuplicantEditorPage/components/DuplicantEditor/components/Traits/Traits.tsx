@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AI_TRAIT_IDS, AITraitsBehavior } from "oni-save-parser";
-import { difference } from "lodash-es";
+import { difference } from "lodash";
 
 import { WithTranslation, withTranslation } from "react-i18next";
 

@@ -1,4 +1,4 @@
-import { find } from "lodash-es";
+import { find } from "lodash";
 import {
   SaveGame,
   GeyserTypeNames,

@@ -1,6 +1,6 @@
 import { SimHashNames, GameObjectGroup, GameObject, getBehavior, StorageBehavior, PrimaryElementBehavior } from "oni-save-parser";
 import { createSelector } from "reselect";
-import { values, orderBy, flatMap } from "lodash-es";
+import { values, orderBy, flatMap } from "lodash";
 
 import { gameObjectGroupsSelector } from "./game-objects";
 

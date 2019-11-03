@@ -7,7 +7,7 @@ import {
   getAccessoryName,
   getIndexOfAccessoryType
 } from "oni-save-parser";
-import { merge, padStart } from "lodash-es";
+import { merge, padStart } from "lodash";
 
 import {
   Theme,

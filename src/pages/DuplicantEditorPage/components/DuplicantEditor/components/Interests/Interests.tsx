@@ -5,7 +5,7 @@ import {
   getHashedString,
   HashedString
 } from "oni-save-parser";
-import { findIndex, find, difference } from "lodash-es";
+import { findIndex, find, difference } from "lodash";
 
 import { WithTranslation, withTranslation } from "react-i18next";
 

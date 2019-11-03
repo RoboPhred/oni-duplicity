@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { get } from "lodash-es";
+import { get } from "lodash";
 
 import { AppState } from "@/state";
 import { saveGameSelector } from "@/services/oni-save/selectors/save-game";
