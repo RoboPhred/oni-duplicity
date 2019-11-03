@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import createCachedSelector from "re-reselect";
 import { find } from "lodash-es";
 import { getBehavior, SpacecraftManagerBehavior } from "oni-save-parser";
 
@@ -49,3 +50,16 @@ export const planetIdsSelector = createSelector(
     return spaceManager.destinations.map(x => x.id);
   }
 );
+
+export const planetSelector = createCachedSelector(
+  spaceManagerSelector,
+  (_: any, planetId: number) => planetId,
+  (spaceManager, planetId) => {
+    if (!spaceManager) {
+      return null;
+    }
+
+    const planet = find(spaceManager.destinations, x => x.id === planetId);
+    return planet || null;
+  }
+)((_: any, planetId: number) => planetId);
