@@ -1,24 +1,22 @@
-import {
-  SimHashNames,
-  getBehavior,
-  PrimaryElementBehavior,
-  GameObject,
-  StorageBehavior,
-  GameObjectGroup
-} from "oni-save-parser";
+import { SimHashNames, GameObjectGroup, GameObject, getBehavior, StorageBehavior, PrimaryElementBehavior } from "oni-save-parser";
 import { createSelector } from "reselect";
 import { values, orderBy, flatMap } from "lodash-es";
 
-import { AppState } from "@/state";
-
-import { gameObjectGroupsSelector } from "../../selectors/game-objects";
-
-import { MaterialListItem } from "./props";
+import { gameObjectGroupsSelector } from "./game-objects";
 
 // TODO: Seeds, clothing, other sweepables
 const MaterialGameObjectTypes = [...SimHashNames];
 
-const materialsSelector = createSelector(
+export interface MaterialListItem {
+  name: string;
+  looseGrams: number;
+  looseCount: number;
+  storedGrams: number;
+  storedCount: number;
+}
+
+
+export const materialsSelector = createSelector(
   gameObjectGroupsSelector,
   groups => {
     const rowsByMaterial: Record<string, MaterialListItem> = {};
@@ -129,10 +127,3 @@ function addMaterialObject(
     row.storedGrams += Units;
   }
 }
-
-export default function mapStateToProps(state: AppState) {
-  return {
-    materials: materialsSelector(state)
-  };
-}
-export type StateProps = ReturnType<typeof mapStateToProps>;
