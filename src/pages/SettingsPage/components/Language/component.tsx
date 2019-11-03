@@ -1,5 +1,5 @@
 import * as React from "react";
-import { entries } from "lodash-es";
+import { entries, sortBy } from "lodash-es";
 
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -7,7 +7,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 const languages: Record<string, string> = {
   en: "English",
   zh: "Chinese",
-  ru: "Russian"
+  ru: "Russian",
+  cs: "Czech",
+  es: "Spanish"
 };
 
 export interface LanguageProps {
@@ -25,9 +27,12 @@ const Language: React.FC<LanguageProps> = ({
     [onChangeLanguage]
   );
 
+  let langEntries = entries(languages);
+  langEntries = sortBy(langEntries, x => x[1]);
+
   return (
     <Select value={currentLanguage} onChange={onChange}>
-      {entries(languages).map(([code, title]) => (
+      {langEntries.map(([code, title]) => (
         <MenuItem key={code} value={code}>
           {title}
         </MenuItem>

@@ -1,0 +1,336 @@
+{
+  "DUPLICANTS": {
+    "TRAITS": {
+      "CLAUSTROPHOBIC": {
+        "NAME": "Klaustrofobik",
+        "DESC": "Tento Duplikant se cítí špatně v prostorech nižších než čtyři bloky a užších než tři bloky"
+      },
+
+      "FASHIONABLE": {
+        "NAME": "Fešák",
+        "DESC": "Tento Duplikant částečně uvnitř umře, když je donucen nosti nestylové oblečení"
+      },
+
+      "CLIMACOPHOBIC": {
+        "NAME": "Náchylný k Závratím",
+        "DESC": "Tomuto duplikantovi se dělá špatně při lezení po žebříku vyšším než čtyři bloky"
+      },
+
+      "SOLITARYSLEEPER": {
+        "NAME": "Spáč Samotář",
+        "DESC": "Tento Duplikant raději spí sám"
+      },
+
+      "PREFERSWARMER": {
+        "NAME": "Hubeňour",
+        "DESC": "Tento Duplikant nemá moc izolace, a proto je citlivější na teploty než ostatní"
+      },
+
+      "PREFERSCOOLER": {
+        "NAME": "Tlusťoch",
+        "DESC": "Tento Duplikant má izolaci navíc, a proto na něj mají teploty trochu nižší efekt"
+      },
+
+      "SENSITIVEFEET": {
+        "NAME": "Citlivá Nožka",
+        "DESC": "Tento Duplikant má citlivá chodidla a raději by chodil po dlaždicích než po skále"
+      },
+
+      "WORKAHOLIC": {
+        "NAME": "Workoholik",
+        "DESC": "Tento Duplikant je nervózní, když nemá do čeho píchnout"
+      },
+
+      "CANTRESEARCH": {
+        "NAME": "Křupan",
+        "DESC": "Tento Duplikant není úplně nejchytřejší"
+      },
+
+      "CANTBUILD": {
+        "NAME": "Nestavitel",
+        "DESC": "Tento Duplikant neumí stavět ani ty nejzákladnější stavby"
+      },
+
+      "CANTCOOK": {
+        "NAME": "Gastrofobik",
+        "DESC": "Tento Duplikant má hluboko zakořeněnou nedůvěru ve vaření"
+      },
+
+      "CANTDIG": {
+        "NAME": "Trypofobik",
+        "DESC": "Tento Duplikant má strach z děr, a proto nemůže kopat"
+      },
+
+      "HEMOPHOBIA": {
+        "NAME": "Fajnovka",
+        "DESC": "Tento Duplikant je přecitlivělý a nemůže vydržet být nemocný"
+      },
+
+      "BEDSIDEMANNER": {
+        "NAME": "Pečovatel",
+        "DESC": "Tento Duplikant se umí dobře starat o nemocné"
+      },
+
+      "MOUTHBREATHER": {
+        "NAME": "Dýchač",
+        "DESC": "Tento Duplikant spotřebuje mnohem více kyslíku, protože dýchá pusou"
+      },
+
+      "FUSSY": {
+        "NAME": "Vybíravec",
+        "DESC": "Pro tohoto Duplikanta není nikdy nic dobré"
+      },
+
+      "TWINKLETOES": {
+        "NAME": "Rychlonožka",
+        "DESC": "Tento Duplikant běhá lehce jako pírko"
+      },
+
+      "STRONGARM": {
+        "NAME": "Nabušenec",
+        "DESC": "Tento Duplikant má svaly na svalech"
+      },
+
+      "NOODLEARMS": {
+        "NAME": "Nudloručka",
+        "DESC": "Ruce tohoto Duplikanta mají pevnost převařených těstovin"
+      },
+
+      "AGGRESSIVE": {
+        "NAME": "Ničtiel",
+        "DESC": "Tento Duplikant se vyrovnává se stresem tím, že svou frustraci vybíjí na bezbranných strojích"
+      },
+
+      "UGLYCRIER": {
+        "NAME": "Ubrečenec",
+        "DESC": "Když je tento Duplikant ve stresu, není to pěkné"
+      },
+
+      "BINGEEATER": {
+        "NAME": "Nárazový Jedlík",
+        "DESC": "Tento Duplikant se nebezpečně přejí, když je ve stresu"
+      },
+
+      "ANXIOUS": {
+        "NAME": "Úzkostlivec",
+        "DESC": "Tento Duplikant omdlí, když je ve stresu"
+      },
+
+      "STRESSVOMITER": {
+        "NAME": "Zvraceč",
+        "DESC": "Tento Duplikant všude zvrací, když je ve stresu"
+      },
+
+      "IRONGUT": {
+        "NAME": "Tvrdý Žaludek",
+        "DESC": "Tento Duplikant může sníst úplně cokoliv a neudělá se mu špatně"
+      },
+
+      "STRONGIMMUNESYSTEM": {
+        "NAME": "Odolný",
+        "DESC": "Imunitní systém tohoto Duplikanta je rychlejší než u ostatních"
+      },
+
+      "SCAREDYCAT": {
+        "NAME": "Pacifista",
+        "DESC": "Tento Duplikant opovrhuje násilím"
+      },
+
+      "WEAKIMMUNESYSTEM": {
+        "NAME": "Biohazard",
+        "DESC": "Všechen vitamín C ve vesmíru by nezamezil tomu, aby tento Duplikant onemocněl"
+      },
+
+      "IRRITABLEBOWEL": {
+        "NAME": "Dráždivé Střevo",
+        "DESC": "Tento Duplikant Potřebuje trochu více času na vykonání \"své potřeby\""
+      },
+
+      "CALORIEBURNER": {
+        "NAME": "Bezedný Žaludek",
+        "DESC": "Tento Duplikant je nejspíš černá díra v převleku"
+      },
+
+      "SMALLBLADDER": {
+        "NAME": "Malý Močák",
+        "DESC": "Tento Duplikant má močový měchýř velikosti hrášku. Jak roztomilé!"
+      },
+
+      "ANEMIC": {
+        "NAME": "Chudokrevník",
+        "DESC": "Tento Duplikant má potíže dohonit ostatní"
+      },
+
+      "GREASEMONKEY": {
+        "NAME": "Mechanik",
+        "DESC": "Tento Duplikant rád hodí francouzským klíčem do plánů kolonie... v dobrém slova smyslu"
+      },
+
+      "MOLEHANDS": {
+        "NAME": "Krtčí Ruce",
+        "DESC": "Jsou skvělé na kopání tunelů, ale nalézt dobré rukavice je skoro nemožné"
+      },
+
+      "FASTLEARNER": {
+        "NAME": "Rychlý Učeň",
+        "DESC": "Tento Duplikant je velmi chytrý a rychle se učí novým dovednostem"
+      },
+
+      "SLOWLEARNER": {
+        "NAME": "Pomalý Učeň",
+        "DESC": "Tento Duplikant vše pomalu vychytává, ale opravdu se snaží"
+      },
+
+      "DIVERSLUNG": {
+        "NAME": "Plíce Potapěče",
+        "DESC": "V jiném životě by tento Duplikant mohl být talentovaným operním pěvcem"
+      },
+
+      "FLATULENCE": {
+        "NAME": "Nadýmavka",
+        "DESC": "Někteří Duplikanti jsou toho prostě plní"
+      },
+
+      "SNORER": {
+        "NAME": "Hlasitý Spáč",
+        "DESC": "I ve vesmíru ho všichni slyší chrápat"
+      },
+
+      "NARCOLEPSY": {
+        "NAME": "Narkoleptik",
+        "DESC": "Tento Duplikant usne kdykoli a kdekoli"
+      },
+
+      "INTERIORDECORATOR": {
+        "NAME": "Dekorátor Interiéru",
+        "DESC": "\"Posuň to trochu doleva...\""
+      },
+
+      "UNCULTURED": {
+        "NAME": "Nekulturní",
+        "DESC": "Tento Duplikant neocení umění"
+      },
+
+      "EARLYBIRD": {
+        "NAME": "Ranní Ptáče",
+        "DESC": "Tento Duplikant se vždy vzbudí svěží a plný energie!"
+      },
+
+      "NIGHTOWL": {
+        "NAME": "Noční Sova",
+        "DESC": "Tento Duplikant nejlépe pracuje, když by měl spát"
+      },
+
+      "REGENERATION": {
+        "NAME": "Regenerátor",
+        "DESC": "Tento Duplikant si stále obnovuje zdraví."
+      },
+
+      "DEEPERDIVERSLUNGS": {
+        "NAME": "Plíce Hloubkového Potapěče",
+        "DESC": "Tento Duplikant byl opervním pěvcem a učitelem šnorchlování."
+      },
+
+      "SUNNYDISPOSITION": {
+        "NAME": "Sluníčkář",
+        "DESC": "Tento Duplikant má neochvějný pozitivní pohled na život."
+      },
+
+      "ROCKCRUSHER": {
+        "NAME": "Drtič Skal",
+        "DESC": "Tento Duplikant je neskutečně silný."
+      },
+
+      "SIMPLETASTES": {
+        "NAME": "Jednoduché Chutě",
+        "DESC": "Tento Duplikant si užije i to nejjednodušší jídlo."
+      },
+
+      "FOODIE": {
+        "NAME": "Gurmán",
+        "DESC": "Tento Duplikant má velmi vybrané chutě a touží po tom nejluxusnějším jídle"
+      },
+
+      "ARCHAEOLOGIST": {
+        "NAME": "Archeolog",
+        "DESC": "Tento Duplikant vždy přiveze artefakt z expedicí do vesmíru"
+      }
+    },
+    "ATTRIBUTES": {
+      "Construction": {
+        "NAME": "Konstrukce",
+        "DESC": "Rozhoduje o Duplikantově rychlosti stavby."
+      },
+
+      "Digging": {
+        "NAME": "Kopání",
+        "DESC": "Rozhoduje o Duplikantově rychlosti těžby."
+      },
+
+      "Machinery": {
+        "NAME": "Koumání",
+        "DESC": "Rozhoduje o Duplikantově rychlosti používání strojů."
+      },
+
+      "LifeSupport": {
+        "NAME": "Podpora Života",
+        "DESC": "Rozhoduje o efektivitě Duplikanta při udržování terárií řas, deodorizérů, and a vodních sít."
+      },
+
+      "Toggle": {
+        "NAME": "Přepínání",
+        "DESC": "Rozhoduje, jak rychle Duplikant umí nastavovat stroje, přepínat páčky, a nastavovat senzory."
+      },
+
+      "Athletics": {
+        "NAME": "Atletičnost",
+        "DESC": "Rozhoduje o Duplikantově výchozí rychlosti běhu."
+      },
+
+      "Learning": {
+        "NAME": "Učení",
+        "DESC": "Rozhoduje, jak rychle Duplikant vede výzkum a získává schopnosti."
+      },
+
+      "Cooking": {
+        "NAME": "Vaření",
+        "DESC": "Rozhoduje o rychlosti přípravy jídla."
+      },
+
+      "Strength": {
+        "NAME": "Síla",
+        "DESC": "Rozhoduje o tom, kolik toho Duplikant unese a o rychlosti čištění."
+      },
+
+      "Caring": {
+        "NAME": "Laskavost",
+        "DESC": "Rozhoduje o Duplikantově schopnosti léčení, vycházení s přáteli a zvířaty."
+      },
+
+      "Immunity": {
+        "NAME": "Imunita",
+        "DESC": "Rozhoduje o Duplikantově odolnosti vůči nemocem a rychlosti uzdravení."
+      },
+
+      "Botanist": {
+        "NAME": "Pěstovatelství",
+        "DESC": "Rozhoduje o tom, jak rychle a efektivně umí Duplikant pěstovat rostliny."
+      },
+
+      "Ranching": {
+        "NAME": "Chovatelství",
+        "DESC": "Rozhoduje o Duplikantově rychlosti a efektivitě chování zvířat."
+      },
+
+      "Art": {
+        "NAME": "Kreativita",
+        "DESC": "Rozhoduje o tom, jak rychle umí Duplikant namalovat obraz."
+      },
+
+      "Decor": {
+        "NAME": "Výzdoba",
+        "DESC": "Výzdoba ovlivňuje Duplikantův stres a názor na okolí."
+      }
+    }
+  }
+}

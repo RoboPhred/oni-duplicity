@@ -1,0 +1,125 @@
+{
+  "duplicant": {
+    "noun_titlecase_plural": "Duplicantes",
+    "noun_titlecase": "Duplicante",
+    "verbs": {
+      "edit_titlecase": "Editar Duplicante"
+    },
+    "conditions": {
+      "missing_titlecase": "Duplicante No Encontrado"
+    }
+  },
+  "duplicant_effect": {
+    "noun_titlecase": "Efecto",
+    "verbs": {
+      "add_titlecase": "Agregar Efecto"
+    }
+  },
+  "duplicant_trait": {
+    "noun_titlecase": "Rasgo",
+    "noun_titlecase_plural": "Rasgos",
+    "verbs": {
+      "add_titlecase": "Agregar Rasgo"
+    }
+  },
+  "duplicant_interest": {
+    "noun_titlecase": "Interés",
+    "verbs": {
+      "add_titlecase": "Agregar Interés"
+    }
+  },
+  "duplicant_attribute": {
+    "noun_titlecase_plural": "Atributos",
+    "primary_titlecase": "Primario",
+    "secondary_titlecase": "Secundario"
+  },
+  "duplicant_skills": {
+    "noun_titlecase": "Habilidad",
+    "noun_titlecase_plural": "Habilidades",
+    "experience_titlecase": "Experiencia",
+    "mastery_titlecase": "Maestría"
+  },
+  "duplicant_appearance": {
+    "noun_titlecase": "Apariencia"
+  },
+  "duplicant_health": {
+    "noun_titlecase": "Salud"
+  },
+  "geyser": {
+    "noun_titlecase_plural": "Géiseres"
+  },
+  "material": {
+    "noun_titlecase": "Material",
+    "noun_titlecase_plural": "Materiales",
+    "all_titlecase": "Todos Los Materiales",
+    "gram": "{{count}} g",
+    "kilogram": "{{count}} kg"
+  },
+  "material_loose": {
+    "noun_titlecase": "Suelto",
+    "clump_count": "{{count}} agrupado",
+    "clump_count_plural": "{{count}} agrupados",
+    "verbs": {
+      "delete_name": "Eliminar {{name}}"
+    },
+    "prompts": {
+      "delete": "Esto eliminará todos loas materiales sueltos.  Los materiales no podran ser recuperados."
+    }
+  },
+  "material_storage": {
+    "noun_titlecase": "Almacenamiento",
+    "container_count": "{{count}} contenedor",
+    "container_count_plural": "{{count}} contenedores"
+  },
+  "time_cycles": {
+    "noun_titlecase": "Ciclos"
+  },
+  "dialog": {
+    "queries": {
+      "continue": "¿Estás seguro de que quieres continuar?"
+    },
+    "verbs": {
+      "cancel_titlecase": "Cancelar",
+      "confirm_titlecase": "Confirmar"
+    }
+  },
+  "data": {
+    "conditions": {
+      "modified_titlecase": "Datos Modificados"
+    },
+    "prompts": {
+      "modified-description": "Los datos de este archivo han sido modificados desde que ha sido exportado.\nLos datos importados no son verificados he importar datos invalidos podría corromper tu archivo de guardado."
+    },
+    "verbs": {
+      "copy_titlecase": "Copiar",
+      "export_titlecase": "Exportar",
+      "import_titlecase": "Importar"
+    }
+  },
+  "save-file": {
+    "verbs": {
+      "load_titlecase": "Cargar",
+      "save_titlecase": "Guardar"
+    },
+    "conditions": {
+      "loading": "Cargando",
+      "saving": "Guardando",
+      "modified": "Modificado",
+      "modified_description": "El archivo se ha modificado despues de haber sido guardado.",
+      "example": "Ejemplo",
+      "example_description": "Este es un contenido de ejemplo y no puede ser guardado."
+    }
+  },
+  "overview-page": {
+    "title": "Página general",
+    "no-save": {
+      "title": "Elige un archivo de guardado",
+      "prompt": "Ningun archivo de guardado ha sido cargado.",
+      "save-location": "Los archivos de guardado pueden encontrarse en <1>{{path}}</1>."
+    }
+  },
+  "raw-editor-page": {
+    "title": "Edición manual"
+  },
+  "view-github": "Ver projecto en GitHub"
+}

@@ -11,7 +11,7 @@ import {
   WithStyles
 } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Slider from "@material-ui/lab/Slider";
+import Slider from "@material-ui/core/Slider";
 
 import AbstractBehaviorEditor from "@/services/oni-save/components/AbstractBehaviorEditor";
 
@@ -41,42 +41,46 @@ const Value: React.FC<Props> = ({
   gameObjectId,
   modifier,
   max
-}) => (
-  <ModifierBehaviorEditor gameObjectId={gameObjectId}>
-    {({ extraData: { amounts }, onExtraDataModify }) => {
-      const amount = find(amounts, x => x.name === modifier);
-      const value = (amount && amount.value.value) || 0;
-      function setAmount(value: number) {
-        const i = findIndex(amounts, x => x.name === modifier);
-        if (i === -1) {
-          return;
+}) => {
+  const [transientValue, setTransientValue] = React.useState(-1);
+  return (
+    <ModifierBehaviorEditor gameObjectId={gameObjectId}>
+      {({ extraData: { amounts }, onExtraDataModify }) => {
+        const amount = find(amounts, x => x.name === modifier);
+        const value = (amount && amount.value.value) || 0;
+        function setAmount(value: number) {
+          const i = findIndex(amounts, x => x.name === modifier);
+          if (i === -1) {
+            return;
+          }
+          onExtraDataModify({
+            amounts: merge([], amounts, {
+              [i]: { name: modifier, value: { value } }
+            })
+          });
         }
-        onExtraDataModify({
-          amounts: merge([], amounts, {
-            [i]: { name: modifier, value: { value } }
-          })
-        });
-      }
-      return (
-        <div className={className}>
-          <Typography className={classes.valueLabel} id={`${modifier}-label`}>
-            <Trans i18nKey={`oni:todo-trans.modifiers.${modifier}`}>
-              {modifier}
-            </Trans>
-            {": "}
-            {String(value)}
-          </Typography>
-          <Slider
-            aria-labeledby={`${modifier}-label`}
-            value={value}
-            min={0}
-            max={max || 100}
-            onChange={(_, value) => setAmount(value as number)}
-          />
-        </div>
-      );
-    }}
-  </ModifierBehaviorEditor>
-);
+        return (
+          <div className={className}>
+            <Typography className={classes.valueLabel} id={`${modifier}-label`}>
+              <Trans i18nKey={`oni:todo-trans.modifiers.${modifier}`}>
+                {modifier}
+              </Trans>
+              {": "}
+              {String(transientValue !== -1 ? transientValue : value)}
+            </Typography>
+            <Slider
+              aria-labeledby={`${modifier}-label`}
+              value={transientValue !== -1 ? transientValue : value}
+              min={0}
+              max={max || 100}
+              onChange={(_, value) => setTransientValue(value as number)}
+              onChangeCommitted={(_, value) => setAmount(value as number)}
+            />
+          </div>
+        );
+      }}
+    </ModifierBehaviorEditor>
+  );
+}
 
 export default withStyles(styles)(Value);
