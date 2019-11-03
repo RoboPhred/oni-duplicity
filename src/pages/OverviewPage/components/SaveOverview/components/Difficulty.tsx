@@ -7,7 +7,7 @@ import Divider from "@material-ui/core/Divider";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import AbstractDifficulty from "@/services/oni-save/components/AbstractDifficulty";
+import useDifficulty from "@/services/oni-save/hooks/useDifficulty";
 import { keysOfType } from "@/utils";
 
 const styles = createStyles({
@@ -23,34 +23,33 @@ export interface DifficultyProps {
 
 type Props = DifficultyProps & WithStyles<typeof styles>;
 
-const Difficulty: React.FC<Props> = ({ className, classes }) => (
-  <AbstractDifficulty>
-    {({ difficulty, onModifyDifficulty }) => (
-      <div className={className}>
-        <Typography variant="h6">Difficulty</Typography>
-        <Divider />
-        <div className={classes.table}>
-          {keysOfType(difficulty).map(name => (
-            <React.Fragment key={name}>
-              <Typography>{name}</Typography>
-              <Select
-                value={difficulty[name]}
-                onChange={e =>
-                  onModifyDifficulty(name, e.target.value as string)
-                }
-              >
-                {QualityLevelSettingValues[name].map(value => (
-                  <MenuItem key={value} value={value}>
-                    {value}
-                  </MenuItem>
-                ))}
-              </Select>
-            </React.Fragment>
-          ))}
-        </div>
+const Difficulty: React.FC<Props> = ({ className, classes }) => {
+  const { difficulty, onModifyDifficulty } = useDifficulty()
+  return (
+    <div className={className}>
+      <Typography variant="h6">Difficulty</Typography>
+      <Divider />
+      <div className={classes.table}>
+        {keysOfType(difficulty).map(name => (
+          <React.Fragment key={name}>
+            <Typography>{name}</Typography>
+            <Select
+              value={difficulty[name]}
+              onChange={e =>
+                onModifyDifficulty(name, e.target.value as string)
+              }
+            >
+              {QualityLevelSettingValues[name].map(value => (
+                <MenuItem key={value} value={value}>
+                  {value}
+                </MenuItem>
+              ))}
+            </Select>
+          </React.Fragment>
+        ))}
       </div>
-    )}
-  </AbstractDifficulty>
-);
+    </div>
+  );
+}
 
 export default withStyles(styles)(Difficulty);
