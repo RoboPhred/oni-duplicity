@@ -1,3 +1,7 @@
+## 3.10.0
+
+- Improved raw editor - Tree view and field inputs.
+
 ## 3.9.0
 
 - Fix geyser sliders latching to 0 or 100%.
