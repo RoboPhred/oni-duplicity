@@ -8,7 +8,7 @@ import {
   WithStyles
 } from "@material-ui/core/styles";
 
-import AbstractPlanetList from "@/services/oni-save/components/AbstractPlanetList";
+import usePlanets from "@/services/oni-save/hooks/usePlanets";
 
 import PlanetListItem from "./PlanetListItem";
 
@@ -31,16 +31,17 @@ const styles = (theme: Theme) =>
 
 type Props = PlanetListProps & WithStyles<typeof styles>;
 
-const PlanetList: React.FC<Props> = ({ className, classes }) => (
-  <AbstractPlanetList>
-    {({ planetIds }) => (
-      <div className={classnames(className, classes.root)}>
-        {planetIds.map(id => (
+const PlanetList: React.FC<Props> = ({ className, classes }) => {
+  const { planetIds } = usePlanets();
+  return (
+    <div className={classnames(className, classes.root)}>
+      {
+        planetIds.map(id => (
           <PlanetListItem key={id} className={classes.item} planetId={id} />
-        ))}
-      </div>
-    )}
-  </AbstractPlanetList>
-);
+        ))
+      }
+    </div>
+  );
+}
 
 export default withStyles(styles)(PlanetList);

@@ -38,3 +38,14 @@ export const spaceManagerSelector = createServiceSelector(
     }
   )
 );
+
+export const planetIdsSelector = createSelector(
+  spaceManagerSelector,
+  spaceManager => {
+    if (!spaceManager) {
+      return [];
+    }
+
+    return spaceManager.destinations.map(x => x.id);
+  }
+);
