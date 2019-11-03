@@ -70,7 +70,7 @@ const Value: React.FC<Props> = ({
         {String(transientValue !== -1 ? transientValue : value)}
       </Typography>
       <Slider
-        aria-labeledby={`${modifier}-label`}
+        aria-labelledby={`${modifier}-label`}
         value={transientValue !== -1 ? transientValue : value}
         min={0}
         max={max || 100}
