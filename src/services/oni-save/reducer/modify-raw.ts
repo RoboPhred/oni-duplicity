@@ -1,7 +1,6 @@
 import { AnyAction } from "redux";
 import { SaveGame } from "oni-save-parser";
-import produce from "immer";
-import { set } from "lodash-es";
+import { set as setFp } from "lodash/fp";
 
 import { OniSaveState, defaultOniSaveState } from "../state";
 
@@ -25,7 +24,5 @@ export default function modifyRawReducer(
 }
 
 function performModifyRaw(saveGame: SaveGame, path: string[], data: any) {
-  return produce(saveGame, draftSave => {
-    set(draftSave, path, data);
-  });
+  return setFp(path, data, saveGame);
 }

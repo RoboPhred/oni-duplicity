@@ -4,9 +4,7 @@ import {
   KPrefabIDBehavior,
   GameObject
 } from "oni-save-parser";
-import { find } from "lodash-es";
 
-// We cannot use a selector for this, as it is called with draft objects from immer.
 export function getGameObjectById(
   saveGame: SaveGame,
   gameObjectId: number
