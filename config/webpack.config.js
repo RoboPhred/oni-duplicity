@@ -4,7 +4,6 @@ const path = require("path");
 const webpack = require("webpack");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 
 const isDev = process.env["NODE_ENV"] === "development";
 
@@ -118,10 +117,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(paths.appSrc, "index.ejs")
-    }),
-
-    new MonacoWebpackPlugin({
-      languages: ["json"]
     })
   ].filter(x => x),
 
