@@ -10,7 +10,7 @@ import {
   WithStyles
 } from "@material-ui/core/styles";
 
-import AbstractGameObjectList from "@/services/oni-save/components/AbstractGameObjectList";
+import useGameObjects from "@/services/oni-save/hooks/useGameObjects";
 
 import PageContainer from "@/components/PageContainer";
 import RedirectIfNoSave from "@/components/RedirectIfNoSave";
@@ -31,25 +31,24 @@ const styles = (theme: Theme) =>
 
 type Props = WithStyles<typeof styles> & WithTranslation;
 
-const GeysersPage: React.FC<Props> = ({ classes, t }) => (
-  <PageContainer title={t("geyser.noun_titlecase_plural")}>
-    <RedirectIfNoSave />
-    <AbstractGameObjectList
-      gameObjectType={GeyserTypeNames.map(x => `GeyserGeneric_${x}`)}
-    >
-      {({ gameObjectIds }) => (
-        <div className={classes.root}>
-          {gameObjectIds.map(gameObjectId => (
-            <GeyserListItem
-              key={gameObjectId}
-              className={classes.item}
-              gameObjectId={gameObjectId}
-            />
-          ))}
-        </div>
-      )}
-    </AbstractGameObjectList>
-  </PageContainer>
-);
+const GeysersPage: React.FC<Props> = ({ classes, t }) => {
+  const gameObjectIds = useGameObjects(
+    GeyserTypeNames.map(x => `GeyserGeneric_${x}`)
+  );
+  return (
+    <PageContainer title={t("geyser.noun_titlecase_plural")}>
+      <RedirectIfNoSave />
+      <div className={classes.root}>
+        {gameObjectIds.map(gameObjectId => (
+          <GeyserListItem
+            key={gameObjectId}
+            className={classes.item}
+            gameObjectId={gameObjectId}
+          />
+        ))}
+      </div>
+    </PageContainer>
+  );
+};
 
 export default withStyles(styles)(withTranslation()(GeysersPage));
