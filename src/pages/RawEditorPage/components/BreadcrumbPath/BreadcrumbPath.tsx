@@ -22,7 +22,7 @@ const BreadcrumbPath: React.FC<BreadcrumbPathProps> = ({
       {path.map((_, i) => {
         const segmentPath = path.slice(0, i + 1);
         return (
-          <Typography color="inherit" onClick={() => onChangePath(segmentPath)}>
+          <Typography key={i} color="inherit" onClick={() => onChangePath(segmentPath)}>
             {getSegmentName(saveGame, segmentPath)}
           </Typography>
         );

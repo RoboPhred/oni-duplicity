@@ -28,10 +28,11 @@ class CommitTextField extends React.Component<CommitTextFieldProps, State> {
       ...props
     } = this.props;
     const { value: editValue } = this.state;
+    const displayValue = (editValue == null) ? prevValue : editValue;
     return (
       <TextField
         {...props}
-        value={editValue || prevValue}
+        value={displayValue}
         onChange={this._onChange}
         onBlur={this._onBlur}
         onKeyPress={this._onKeyPress}
