@@ -55,7 +55,6 @@ module.exports = {
         include: [/src\/.+\.tsx?/]
       },
 
-      //  Run typescript through react-hot-loader to rewrite react components for hot loading.
       {
         test: /\.tsx?$/,
         use: [
@@ -63,13 +62,8 @@ module.exports = {
             loader: "ts-loader"
           }
         ],
-        exclude: [/\.worker\.ts$/]
       },
 
-      {
-        test: /\.worker\.ts$/,
-        use: "ts-loader"
-      },
       {
         test: /\.css$/,
         loader: ["style-loader", "css-loader"]
