@@ -1,6 +1,7 @@
-## vNext
+## 3.10.0
 
 - Improved raw editor - Tree view and field inputs.
+- Fix Czech and spanish translations not working.
 
 ## 3.9.0
 
@@ -9,7 +10,7 @@
 - Add missing traits Allergies and Archaeologist.
 - Add Spanish translations, contributed by Galo223344.
 - Add Czech translations, contributed by sorashi.
-- Fix unable to save if a file is loaded after the example is loaded.  Contributed by ferrybig.
+- Fix unable to save if a file is loaded after the example is loaded. Contributed by ferrybig.
 
 ## 3.8.5
 
