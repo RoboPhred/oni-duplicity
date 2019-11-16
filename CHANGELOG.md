@@ -1,3 +1,7 @@
+## vNext
+
+- Toggle inner sandbox mode flag when sandbox difficulty is changed. Possible fix for sandbox mode not changing with difficulty setting.
+
 ## 3.10.0
 
 - Improved raw editor - Tree view and field inputs.
