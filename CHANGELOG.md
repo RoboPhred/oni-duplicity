@@ -1,8 +1,11 @@
+# 3.12.0
+
+- Add traits from Recreation Pack
+
 ## 3.11.0
 
 - Toggle inner sandbox mode flag when sandbox difficulty is changed. Possible fix for sandbox mode not changing with difficulty setting.
 - Switch to supporting Recreation Pack update.
--
 
 ## 3.10.0
 
