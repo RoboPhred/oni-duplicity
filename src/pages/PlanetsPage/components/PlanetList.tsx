@@ -35,13 +35,11 @@ const PlanetList: React.FC<Props> = ({ className, classes }) => {
   const { planetIds } = usePlanets();
   return (
     <div className={classnames(className, classes.root)}>
-      {
-        planetIds.map(id => (
-          <PlanetListItem key={id} className={classes.item} planetId={id} />
-        ))
-      }
+      {planetIds.map(id => (
+        <PlanetListItem key={id} className={classes.item} planetId={id} />
+      ))}
     </div>
   );
-}
+};
 
 export default withStyles(styles)(PlanetList);

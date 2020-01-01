@@ -1,3 +1,7 @@
+# 3.13.0
+
+- Add planet recoverable element mass editing.
+
 # 3.12.0
 
 - Add traits from Recreation Pack
