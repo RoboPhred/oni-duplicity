@@ -24,6 +24,12 @@ const NavItems: NavItem[] = [
     saveRequired: true
   },
   {
+    name: "Planets",
+    path: "/planets",
+    i18nKey: "planet.noun_titlecase_plural",
+    saveRequired: true
+  },
+  {
     name: "Materials",
     path: "/materials",
     i18nKey: "material.noun_titlecase_plural",

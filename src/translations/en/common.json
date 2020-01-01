@@ -48,6 +48,9 @@
   "geyser": {
     "noun_titlecase_plural": "Geysers"
   },
+  "planet": {
+    "noun_titlecase_plural": "Planets"
+  },
   "material": {
     "noun_titlecase": "Material",
     "noun_titlecase_plural": "Materials",

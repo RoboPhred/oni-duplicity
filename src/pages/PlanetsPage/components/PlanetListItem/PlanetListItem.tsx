@@ -86,13 +86,17 @@ const PlanetListItem: React.FC<Props> = ({ classes, className, planetId }) => {
           </svg>
         </div>
         <div>
-          {planet.recoverableElements.map(([hash, chance]) => (
-            <RecoverableElement hash={hash} chance={chance} />
+          {planet.recoverableElements.map((_, index) => (
+            <RecoverableElement
+              key={index}
+              planetId={planetId}
+              resourceId={index}
+            />
           ))}
         </div>
       </div>
     </Paper>
   );
-}
+};
 
 export default withStyles(styles)(PlanetListItem);
