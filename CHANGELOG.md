@@ -1,3 +1,7 @@
+# 3.13.1
+
+- Update oni-save-parser: Open up restrictions on .NET name validator to support mods with symbols or unicode in property names.
+
 # 3.13.0
 
 - Add planet recoverable element mass editing.
