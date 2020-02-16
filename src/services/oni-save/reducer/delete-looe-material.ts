@@ -1,8 +1,8 @@
 import { AnyAction } from "redux";
+import { SimHashNames, GameObjectGroup, SimHashName } from "oni-save-parser";
 
 import { defaultOniSaveState, OniSaveState } from "../state";
 import { isDeleteLooseMaterialAction } from "../actions/delete-loose-material";
-import { SimHashNames, GameObjectGroup } from "oni-save-parser";
 
 export default function deleteLooseMaterialReducer(
   state: OniSaveState = defaultOniSaveState,
@@ -24,7 +24,7 @@ export default function deleteLooseMaterialReducer(
   }
 
   function shouldRemoveMaterial(group: GameObjectGroup) {
-    return materialsToRemove.indexOf(group.name);
+    return materialsToRemove.indexOf(group.name as SimHashName);
   }
 
   return {

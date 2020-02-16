@@ -1,4 +1,12 @@
-import { SimHashNames, GameObjectGroup, GameObject, getBehavior, StorageBehavior, PrimaryElementBehavior } from "oni-save-parser";
+import {
+  SimHashNames,
+  GameObjectGroup,
+  GameObject,
+  getBehavior,
+  StorageBehavior,
+  PrimaryElementBehavior,
+  SimHashName
+} from "oni-save-parser";
 import { createSelector } from "reselect";
 import { values, orderBy, flatMap } from "lodash";
 
@@ -14,7 +22,6 @@ export interface MaterialListItem {
   storedGrams: number;
   storedCount: number;
 }
-
 
 export const materialsSelector = createSelector(
   gameObjectGroupsSelector,
@@ -49,7 +56,12 @@ function countLooseMaterialGroup(
   rowsByMaterial: Record<string, MaterialListItem>
 ) {
   for (const gameObject of group.gameObjects) {
-    addMaterialObject(group.name, gameObject, true, rowsByMaterial);
+    addMaterialObject(
+      group.name as SimHashName,
+      gameObject,
+      true,
+      rowsByMaterial
+    );
   }
 }
 
@@ -65,7 +77,7 @@ function countStorageGroup(
       continue;
     }
 
-    addMaterialObject(type, gameObject, false, rowsByMaterial);
+    addMaterialObject(type as SimHashName, gameObject, false, rowsByMaterial);
   }
 }
 
@@ -99,12 +111,14 @@ function getMaterialRow(
   return rowsByMaterial[name];
 }
 
+// This should return `type is SimHashName`, but typescript wont let me
+//  make that assurance.
 function isMaterialGameObject(type: string): boolean {
-  return MaterialGameObjectTypes.indexOf(type) !== -1;
+  return MaterialGameObjectTypes.indexOf(type as SimHashName) !== -1;
 }
 
 function addMaterialObject(
-  name: string,
+  name: SimHashName,
   gameObject: GameObject,
   loose: boolean,
   rowsByMaterial: Record<string, MaterialListItem>
