@@ -1,3 +1,7 @@
+# vNext
+
+- Allow changing geyser year and active rolls.
+
 # 3.13.1
 
 - Update oni-save-parser: Open up restrictions on .NET name validator to support mods with symbols or unicode in property names.

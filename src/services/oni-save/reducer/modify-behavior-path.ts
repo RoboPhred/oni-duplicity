@@ -37,7 +37,7 @@ function performModifyBehaviorPath(
   saveGame: SaveGame,
   gameObjectId: number,
   behaviorName: string,
-  behaviorPath: string[],
+  behaviorPath: readonly string[],
   value: any
 ): SaveGame {
   let gameObject = requireGameObject(saveGame, gameObjectId);

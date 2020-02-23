@@ -5,10 +5,10 @@ import { flatMap, keyBy } from "lodash";
 import { isNotNull } from "@/utils";
 
 import { OniSaveState } from "../state";
+import { getGameObjectId } from "../utils";
 
 import { saveGameSelector } from "./save-game";
 import { createServiceSelector } from "./utils";
-import { getGameObjectId } from "../utils";
 
 export const gameObjectGroupsSelector = createServiceSelector(
   (state: OniSaveState) => {

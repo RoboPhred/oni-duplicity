@@ -58,7 +58,48 @@ const GeyserListItem: React.FC<Props> = ({
   className,
   gameObjectId
 }) => {
-  const { geyserType, emitRate, onChangeEmitRate, onChangeGeyserType } = useGeyser(gameObjectId);
+  const {
+    geyserType,
+    emitRate,
+    yearLength,
+    yearActive,
+    onChangeEmitRate,
+    onChangeGeyserType,
+    onChangeYearLength,
+    onChangeYearActive
+  } = useGeyser(gameObjectId);
+
+  const onGeyserTypeSelected = React.useCallback(
+    (e: React.ChangeEvent<{ value: unknown }>) => {
+      onChangeGeyserType(e.target.value as string);
+    },
+    [onChangeGeyserType]
+  );
+
+  const onGeyserRateChanged = React.useCallback(
+    (_: any, value: unknown) => {
+      const emitRate = (value as number) / 100;
+      onChangeEmitRate(emitRate);
+    },
+    [onChangeEmitRate]
+  );
+
+  const onGeyserYearLengthChanged = React.useCallback(
+    (_: any, value: unknown) => {
+      const fraction = (value as number) / 100;
+      onChangeYearLength(fraction);
+    },
+    [onChangeYearLength]
+  );
+
+  const onGeyserYearActiveChanged = React.useCallback(
+    (_: any, value: unknown) => {
+      const fraction = (value as number) / 100;
+      onChangeYearActive(fraction);
+    },
+    [onChangeYearActive]
+  );
+
   return (
     <Paper className={classnames(className, classes.root)}>
       <div className={classes.titleBar}>
@@ -66,10 +107,7 @@ const GeyserListItem: React.FC<Props> = ({
         <div className={classes.titleControls} />
       </div>
       <Divider />
-      <Select
-        value={geyserType || ""}
-        onChange={e => onChangeGeyserType(e.target.value as string)}
-      >
+      <Select value={geyserType || ""} onChange={onGeyserTypeSelected}>
         {keysOfType(GeyserType).map(typeName => (
           <MenuItem key={typeName} value={typeName}>
             {typeName}
@@ -78,16 +116,36 @@ const GeyserListItem: React.FC<Props> = ({
       </Select>
       <div className={classes.sliderSection}>
         <Typography className={classes.valueLabel} id="rate-label">
-          Rate
-          </Typography>
+          Emission Rate
+        </Typography>
         <Slider
           aria-labelledby="rate-label"
           defaultValue={(emitRate || 0) * 100}
-          onChangeCommitted={(_, value) => onChangeEmitRate((value as number) / 100)}
+          onChangeCommitted={onGeyserRateChanged}
+        />
+      </div>
+      <div className={classes.sliderSection}>
+        <Typography className={classes.valueLabel} id="lifecycle-label">
+          Total Lifecycle Time (dormant + active)
+        </Typography>
+        <Slider
+          aria-labelledby="lifecycle-label"
+          defaultValue={(yearLength || 0) * 100}
+          onChangeCommitted={onGeyserYearLengthChanged}
+        />
+      </div>
+      <div className={classes.sliderSection}>
+        <Typography className={classes.valueLabel} id="active-label">
+          Active Lifecycle Time
+        </Typography>
+        <Slider
+          aria-labelledby="active-label"
+          defaultValue={(yearActive || 0) * 100}
+          onChangeCommitted={onGeyserYearActiveChanged}
         />
       </div>
     </Paper>
   );
-}
+};
 
 export default withStyles(styles)(GeyserListItem);
