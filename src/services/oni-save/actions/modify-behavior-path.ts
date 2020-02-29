@@ -10,7 +10,7 @@ export function modifyBehaviorPath<
 >(
   gameObjectId: number,
   behaviorName: BehaviorName<T>,
-  behaviorPath: [K, K2],
+  behaviorPath: readonly [K, K2],
   value: T[K][K2]
 ): ModifyBehaviorPathAction;
 export function modifyBehaviorPath<
@@ -21,13 +21,25 @@ export function modifyBehaviorPath<
 >(
   gameObjectId: number,
   behaviorName: BehaviorName<T>,
-  behaviorPath: [K, K2, K3],
+  behaviorPath: readonly [K, K2, K3],
   value: T[K][K2][K3]
+): ModifyBehaviorPathAction;
+export function modifyBehaviorPath<
+  T extends GameObjectBehavior,
+  K extends keyof T,
+  K2 extends keyof T[K],
+  K3 extends keyof T[K][K2],
+  K4 extends keyof T[K][K2][K3]
+>(
+  gameObjectId: number,
+  behaviorName: BehaviorName<T>,
+  behaviorPath: readonly [K, K2, K3, K4],
+  value: T[K][K2][K3][K4]
 ): ModifyBehaviorPathAction;
 export function modifyBehaviorPath(
   gameObjectId: number,
   behaviorName: string,
-  behaviorPath: string[],
+  behaviorPath: readonly string[],
   value: any
 ): ModifyBehaviorPathAction {
   return {
@@ -46,7 +58,7 @@ export interface ModifyBehaviorPathAction {
   payload: {
     gameObjectId: number;
     behaviorName: string;
-    behaviorPath: string[];
+    behaviorPath: readonly string[];
     value: any;
   };
 }
