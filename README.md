@@ -6,9 +6,9 @@ You can find the editor at [https://robophred.github.io/oni-duplicity](https://r
 
 The saved files are located in:
 
-MAC: ~/Library/Application Support/unity.Klei.Oxygen Not Included/save_files/
+MAC: `~/Library/Application Support/unity.Klei.Oxygen Not Included/save_files/`
 
-Windows: C:\Users\Your users name\Documents\Klei\OxygenNotIncluded\save_files\
+Windows: `C:\Users\Your users name\Documents\Klei\OxygenNotIncluded\save_files\`
 
 # Compatibility
 
