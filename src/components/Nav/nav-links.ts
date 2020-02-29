@@ -40,6 +40,11 @@ const NavItems: NavItem[] = [
     path: "/raw",
     i18nKey: "raw-editor-page.title",
     saveRequired: true
+  },
+  {
+    name: "Changelog",
+    path: "/changelog",
+    i18nKey: "changelog.title"
   }
 ];
 

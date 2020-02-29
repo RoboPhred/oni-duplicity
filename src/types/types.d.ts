@@ -10,6 +10,13 @@ type ArrayValues<T> = T extends Array<infer U> ? U : never;
 
 type PropsOfComponent<T> = T extends React.Component<infer P> ? P : never;
 
+interface Window {
+  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: any;
+  __REDUX_DEVTOOLS_EXTENSION__?: any;
+  loadMockSave?: Function;
+  loadMockError?: Function;
+}
+
 declare module "worker-loader!*" {
   class WebpackWorker extends Worker {
     constructor();
@@ -18,9 +25,7 @@ declare module "worker-loader!*" {
   export = WebpackWorker;
 }
 
-interface Window {
-  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: any;
-  __REDUX_DEVTOOLS_EXTENSION__?: any;
-  loadMockSave?: Function;
-  loadMockError?: Function;
+declare module "@changelog" {
+  const content: string;
+  export = content;
 }

@@ -10,6 +10,7 @@ import PlanetsPage from "@/pages/PlanetsPage";
 import MaterialsPage from "@/pages/MaterialsPage";
 import RawEditorPage from "@/pages/RawEditorPage";
 import SettingsPage from "@/pages/SettingsPage";
+import ChangelogPage from "@/pages/ChangelogPage";
 
 const Routes: React.FC = () => (
   <Switch>
@@ -25,6 +26,7 @@ const Routes: React.FC = () => (
     <Route path="/materials" exact component={MaterialsPage} />
     <Route path="/raw" exact component={RawEditorPage} />
     <Route path="/settings" exact component={SettingsPage} />
+    <Route path="/changelog" exact component={ChangelogPage} />
     <Redirect to="/" />
   </Switch>
 );

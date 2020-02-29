@@ -7,7 +7,16 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const isDev = process.env["NODE_ENV"] === "development";
 
-const paths = require("./paths");
+const root = path.resolve(__dirname);
+
+const PATHS = {
+  appPackageJson: path.resolve(root, "package.json"),
+  appSrc: path.resolve(root, "./src"),
+  appDist: path.resolve(root, "./dist"),
+  changelog: path.resolve(root, "./CHANGELOG.md")
+};
+
+const PUBLIC_URL_PATH = "/oni-duplicity";
 
 console.log("Webpack build", isDev ? "[development]" : "[production]");
 
@@ -17,19 +26,19 @@ module.exports = {
   devtool: "source-map",
 
   devServer: {
-    contentBase: paths.appDist,
+    contentBase: PATHS.appDist,
     hot: isDev,
     historyApiFallback: true
   },
 
   entry: {
-    client: [path.join(paths.appSrc, "./index.tsx")]
+    client: [path.join(PATHS.appSrc, "./index.tsx")]
   },
 
   output: {
     filename: "[name].[hash].bundle.js",
-    path: paths.appBuild,
-    publicPath: isDev ? "/" : paths.publicPath,
+    path: PATHS.appBuild,
+    publicPath: isDev ? "/" : PUBLIC_URL_PATH,
 
     // Fix hot-reload interfering with worker-loader
     globalObject: "this"
@@ -39,7 +48,8 @@ module.exports = {
     // Add '.ts' and '.tsx' as resolvable extensions.
     extensions: [".ts", ".tsx", ".js", ".json"],
     alias: {
-      "@": paths.appSrc
+      "@": PATHS.appSrc,
+      "@changelog": PATHS.changelog
     }
   },
 
@@ -60,7 +70,7 @@ module.exports = {
           {
             loader: "ts-loader"
           }
-        ],
+        ]
       },
 
       {
@@ -116,7 +126,7 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       inject: true,
-      template: path.resolve(paths.appSrc, "index.ejs")
+      template: path.resolve(PATHS.appSrc, "index.ejs")
     })
   ].filter(x => x),
 

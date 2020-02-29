@@ -128,5 +128,8 @@
   "raw-editor-page": {
     "title": "Raw Editor"
   },
-  "view-github": "View project on GitHub"
+  "view-github": "View project on GitHub",
+  "changelog": {
+    "title": "Changelog"
+  }
 }
