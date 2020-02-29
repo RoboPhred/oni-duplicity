@@ -8,7 +8,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 
-import useMaterials from "@/services/oni-save/hooks/useMaterials";
+import { useMaterialList } from "@/services/oni-save/hooks/useMaterials";
 
 import DeleteLooseButton from "./DeleteLooseButton";
 
@@ -19,7 +19,7 @@ export interface MaterialsPageProps {
 type Props = MaterialsPageProps & WithTranslation;
 
 const MaterialsTable: React.FC<Props> = ({ className, t }) => {
-  const { materials, onDeleteLooseMaterial } = useMaterials();
+  const materials = useMaterialList();
 
   function formatWeight(weight: number) {
     if (Math.abs(weight) < 1000) {
@@ -38,10 +38,7 @@ const MaterialsTable: React.FC<Props> = ({ className, t }) => {
           <TableCell>{t("material.noun_titlecase")}</TableCell>
           <TableCell>
             {t("material_loose.noun_titlecase")}
-            <DeleteLooseButton
-              materialName={t("material.all_titlecase")}
-              onDelete={onDeleteLooseMaterial}
-            />
+            <DeleteLooseButton />
           </TableCell>
           <TableCell>{t("material_storage.noun_titlecase")}</TableCell>
         </TableRow>
@@ -57,6 +54,7 @@ const MaterialsTable: React.FC<Props> = ({ className, t }) => {
                     {formatWeight(looseGrams)}
                     <br />
                     {t("material_loose.clump_count", { count: looseCount })}
+                    <DeleteLooseButton materialType={name} />
                   </>
                 )}
               </TableCell>

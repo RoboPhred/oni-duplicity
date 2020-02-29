@@ -1,5 +1,4 @@
 import {
-  SimHashNames,
   GameObjectGroup,
   GameObject,
   getBehavior,
@@ -10,13 +9,11 @@ import {
 import { createSelector } from "reselect";
 import { values, orderBy, flatMap } from "lodash";
 
+import { MaterialObjectName, MaterialGameObjectNames } from "../materials";
 import { gameObjectGroupsSelector } from "./game-objects";
 
-// TODO: Seeds, clothing, other sweepables
-const MaterialGameObjectTypes = [...SimHashNames];
-
 export interface MaterialListItem {
-  name: string;
+  name: MaterialObjectName;
   looseGrams: number;
   looseCount: number;
   storedGrams: number;
@@ -77,7 +74,7 @@ function countStorageGroup(
       continue;
     }
 
-    addMaterialObject(type as SimHashName, gameObject, false, rowsByMaterial);
+    addMaterialObject(type, gameObject, false, rowsByMaterial);
   }
 }
 
@@ -96,7 +93,7 @@ function getStoredObjects(
 }
 
 function getMaterialRow(
-  name: string,
+  name: MaterialObjectName,
   rowsByMaterial: Record<string, MaterialListItem>
 ) {
   if (!rowsByMaterial[name]) {
@@ -113,12 +110,12 @@ function getMaterialRow(
 
 // This should return `type is SimHashName`, but typescript wont let me
 //  make that assurance.
-function isMaterialGameObject(type: string): boolean {
-  return MaterialGameObjectTypes.indexOf(type as SimHashName) !== -1;
+function isMaterialGameObject(type: string): type is MaterialObjectName {
+  return MaterialGameObjectNames.indexOf(type as any) !== -1;
 }
 
 function addMaterialObject(
-  name: SimHashName,
+  name: MaterialObjectName,
   gameObject: GameObject,
   loose: boolean,
   rowsByMaterial: Record<string, MaterialListItem>

@@ -1,6 +1,7 @@
 # vNext
 
 - Allow changing geyser year, active, and emission length.
+- Add ability to delete individual loose materials.
 
 # 3.13.1
 
