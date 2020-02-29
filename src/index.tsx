@@ -5,6 +5,8 @@ import "@/style.css";
 
 import "@/debug";
 
+import "@/service-worker-init";
+
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 

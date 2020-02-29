@@ -4,6 +4,8 @@ const path = require("path");
 const webpack = require("webpack");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const WebpackPwaManifest = require("webpack-pwa-manifest");
+const WorkboxPlugin = require("workbox-webpack-plugin");
 
 const isDev = process.env["NODE_ENV"] === "development";
 
@@ -13,12 +15,19 @@ const PATHS = {
   appPackageJson: path.resolve(root, "package.json"),
   appSrc: path.resolve(root, "./src"),
   appDist: path.resolve(root, "./dist"),
+  nodeModules: path.resolve(root, "./node_modules"),
   changelog: path.resolve(root, "./CHANGELOG.md")
 };
+
+const { friendlyName, description } = require(PATHS.appPackageJson);
 
 const PUBLIC_URL_PATH = "/oni-duplicity";
 
 console.log("Webpack build", isDev ? "[development]" : "[production]");
+
+const entry = {
+  client: [path.join(PATHS.appSrc, "./index.tsx")]
+};
 
 module.exports = {
   mode: isDev ? "development" : "production",
@@ -31,9 +40,7 @@ module.exports = {
     historyApiFallback: true
   },
 
-  entry: {
-    client: [path.join(PATHS.appSrc, "./index.tsx")]
-  },
+  entry,
 
   output: {
     filename: "[name].[hash].bundle.js",
@@ -115,9 +122,6 @@ module.exports = {
   },
 
   plugins: [
-    isDev && new webpack.NamedModulesPlugin(),
-    isDev && new webpack.HotModuleReplacementPlugin(),
-
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify(isDev ? "development" : "production")
@@ -127,14 +131,41 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(PATHS.appSrc, "index.ejs")
+    }),
+
+    new WebpackPwaManifest({
+      name: `${friendlyName}: ${description}`,
+      short_name: friendlyName,
+      description,
+      background_color: "#000000",
+      crossorigin: null,
+      display: "standalone",
+      inject: true
+    }),
+
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true
     })
-  ].filter(x => x),
+  ],
 
   optimization: {
-    splitChunks: {
-      chunks: "all"
-    },
     runtimeChunk: true,
-    minimize: !isDev
+    splitChunks: {
+      chunks: "all",
+      cacheGroups: {
+        npm: {
+          test: /node_modules/,
+          name: mod => {
+            const relToModule = path.relative(PATHS.nodeModules, mod.context);
+            const moduleName = relToModule.substring(
+              0,
+              relToModule.indexOf(path.sep)
+            );
+            return `npm.${moduleName}`;
+          }
+        }
+      }
+    }
   }
 };
