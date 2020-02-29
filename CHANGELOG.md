@@ -1,4 +1,4 @@
-# vNext
+# 3.14.0
 
 - Allow changing geyser year, active, and emission length.
 - Make geyser text translatable.
