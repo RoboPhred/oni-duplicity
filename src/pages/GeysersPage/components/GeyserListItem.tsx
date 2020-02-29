@@ -2,13 +2,9 @@ import * as React from "react";
 import { GeyserType } from "oni-save-parser";
 import classnames from "classnames";
 
-import {
-  Theme,
-  createStyles,
-  withStyles,
-  WithStyles
-} from "@material-ui/core/styles";
+import { WithTranslation, withTranslation } from "react-i18next";
 
+import { Theme, makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
@@ -25,39 +21,36 @@ export interface GeyserListItemProps {
   className?: string;
 }
 
-const styles = (theme: Theme) =>
-  createStyles({
-    root: {
-      width: theme.spacing(45),
-      display: "flex",
-      flexDirection: "column",
-      padding: theme.spacing(2)
-    },
-    titleBar: {
-      display: "flex",
-      flexDirection: "row",
-      marginBottom: theme.spacing()
-    },
-    titleControls: {
-      display: "flex",
-      flexDirection: "row",
-      marginLeft: "auto"
-    },
-    sliderSection: {
-      marginTop: theme.spacing()
-    },
-    valueLabel: {
-      marginBottom: theme.spacing()
-    }
-  });
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    width: theme.spacing(45),
+    display: "flex",
+    flexDirection: "column",
+    padding: theme.spacing(2)
+  },
+  titleBar: {
+    display: "flex",
+    flexDirection: "row",
+    marginBottom: theme.spacing()
+  },
+  titleControls: {
+    display: "flex",
+    flexDirection: "row",
+    marginLeft: "auto"
+  },
+  sliderSection: {
+    marginTop: theme.spacing()
+  },
+  valueLabel: {
+    marginBottom: theme.spacing()
+  }
+}));
 
-type Props = GeyserListItemProps & WithStyles<typeof styles>;
+type Props = GeyserListItemProps & WithTranslation;
 
-const GeyserListItem: React.FC<Props> = ({
-  classes,
-  className,
-  gameObjectId
-}) => {
+const GeyserListItem: React.FC<Props> = ({ className, gameObjectId, t }) => {
+  const styles = useStyles();
+
   const {
     geyserType,
     emitRate,
@@ -111,10 +104,10 @@ const GeyserListItem: React.FC<Props> = ({
   );
 
   return (
-    <Paper className={classnames(className, classes.root)}>
-      <div className={classes.titleBar}>
+    <Paper className={classnames(className, styles.root)}>
+      <div className={styles.titleBar}>
         <Typography variant="h6">{geyserType}</Typography>
-        <div className={classes.titleControls} />
+        <div className={styles.titleControls} />
       </div>
       <Divider />
       <Select value={geyserType || ""} onChange={onGeyserTypeSelected}>
@@ -124,19 +117,9 @@ const GeyserListItem: React.FC<Props> = ({
           </MenuItem>
         ))}
       </Select>
-      <div className={classes.sliderSection}>
-        <Typography className={classes.valueLabel} id="rate-label">
-          Emission Rate
-        </Typography>
-        <Slider
-          aria-labelledby="rate-label"
-          defaultValue={(emitRate || 0) * 100}
-          onChangeCommitted={onGeyserRateChanged}
-        />
-      </div>
-      <div className={classes.sliderSection}>
-        <Typography className={classes.valueLabel} id="lifecycle-label">
-          Total Lifecycle Time (dormant + active)
+      <div className={styles.sliderSection}>
+        <Typography className={styles.valueLabel} id="lifecycle-label">
+          {t("geyser.total_lifecycle_time")}
         </Typography>
         <Slider
           aria-labelledby="lifecycle-label"
@@ -144,9 +127,9 @@ const GeyserListItem: React.FC<Props> = ({
           onChangeCommitted={onGeyserYearLengthChanged}
         />
       </div>
-      <div className={classes.sliderSection}>
-        <Typography className={classes.valueLabel} id="active-label">
-          Active Lifecycle Time
+      <div className={styles.sliderSection}>
+        <Typography className={styles.valueLabel} id="active-label">
+          {t("geyser.active_time")}
         </Typography>
         <Slider
           aria-labelledby="active-label"
@@ -154,9 +137,9 @@ const GeyserListItem: React.FC<Props> = ({
           onChangeCommitted={onGeyserYearActiveChanged}
         />
       </div>
-      <div className={classes.sliderSection}>
-        <Typography className={classes.valueLabel} id="emitting-label">
-          Emission Length
+      <div className={styles.sliderSection}>
+        <Typography className={styles.valueLabel} id="emitting-label">
+          {t("geyser.emission_length")}
         </Typography>
         <Slider
           aria-labelledby="emitting-label"
@@ -164,8 +147,18 @@ const GeyserListItem: React.FC<Props> = ({
           onChangeCommitted={onGeyserEmissionLengthChanged}
         />
       </div>
+      <div className={styles.sliderSection}>
+        <Typography className={styles.valueLabel} id="rate-label">
+          {t("geyser.emission_rate")}
+        </Typography>
+        <Slider
+          aria-labelledby="rate-label"
+          defaultValue={(emitRate || 0) * 100}
+          onChangeCommitted={onGeyserRateChanged}
+        />
+      </div>
     </Paper>
   );
 };
 
-export default withStyles(styles)(GeyserListItem);
+export default withTranslation()(GeyserListItem);

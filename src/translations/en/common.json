@@ -46,7 +46,11 @@
     "noun_titlecase": "Health"
   },
   "geyser": {
-    "noun_titlecase_plural": "Geysers"
+    "noun_titlecase_plural": "Geysers",
+    "total_lifecycle_time": "Total Lifecycle Time (dormant + active)",
+    "active_time": "Active Time",
+    "emission_length": "Emission Length",
+    "emission_rate": "Emission Rate"
   },
   "planet": {
     "noun_titlecase_plural": "Planets"

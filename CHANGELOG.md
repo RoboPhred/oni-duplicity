@@ -1,7 +1,9 @@
 # vNext
 
 - Allow changing geyser year, active, and emission length.
+- Make geyser text translatable.
 - Add ability to delete individual loose materials.
+- Add ability to search material list.
 
 # 3.13.1
 

@@ -11,11 +11,12 @@ import { useDeleteMaterials } from "@/services/oni-save/hooks/useMaterials";
 import ConfirmationDialog from "@/components/ConfirmationDialog";
 
 export interface DeleteLooseButtonProps {
+  className?: string;
   materialType?: SimHashName;
 }
 
 type Props = DeleteLooseButtonProps & WithTranslation;
-const DeleteLooseButton: React.FC<Props> = ({ materialType, t }) => {
+const DeleteLooseButton: React.FC<Props> = ({ className, materialType, t }) => {
   const onDeleteMaterial = useDeleteMaterials();
   const onDeleteConfirm = React.useCallback(() => {
     onDeleteMaterial(materialType);
@@ -30,7 +31,7 @@ const DeleteLooseButton: React.FC<Props> = ({ materialType, t }) => {
       onConfirm={onDeleteConfirm}
     >
       {({ onClick }) => (
-        <IconButton onClick={onClick}>
+        <IconButton className={className} onClick={onClick}>
           <DeleteIcon />
         </IconButton>
       )}
