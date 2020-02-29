@@ -1,6 +1,6 @@
 # vNext
 
-- Allow changing geyser year and active rolls.
+- Allow changing geyser year, active, and emission length.
 
 # 3.13.1
 

@@ -63,10 +63,12 @@ const GeyserListItem: React.FC<Props> = ({
     emitRate,
     yearLength,
     yearActive,
+    emitActive,
     onChangeEmitRate,
     onChangeGeyserType,
     onChangeYearLength,
-    onChangeYearActive
+    onChangeYearActive,
+    onChangeEmitActive
   } = useGeyser(gameObjectId);
 
   const onGeyserTypeSelected = React.useCallback(
@@ -98,6 +100,14 @@ const GeyserListItem: React.FC<Props> = ({
       onChangeYearActive(fraction);
     },
     [onChangeYearActive]
+  );
+
+  const onGeyserEmissionLengthChanged = React.useCallback(
+    (_: any, value: unknown) => {
+      const fraction = (value as number) / 100;
+      onChangeEmitActive(fraction);
+    },
+    [onChangeEmitActive]
   );
 
   return (
@@ -142,6 +152,16 @@ const GeyserListItem: React.FC<Props> = ({
           aria-labelledby="active-label"
           defaultValue={(yearActive || 0) * 100}
           onChangeCommitted={onGeyserYearActiveChanged}
+        />
+      </div>
+      <div className={classes.sliderSection}>
+        <Typography className={classes.valueLabel} id="emitting-label">
+          Emission Length
+        </Typography>
+        <Slider
+          aria-labelledby="emitting-label"
+          defaultValue={(emitActive || 0) * 100}
+          onChangeCommitted={onGeyserEmissionLengthChanged}
         />
       </div>
     </Paper>

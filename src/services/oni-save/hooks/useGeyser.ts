@@ -7,7 +7,6 @@ import { AppState } from "@/state";
 import { geyserConfigSelector } from "../selectors/geysers";
 import { modifyBehavior, BehaviorDataTarget } from "../actions/modify-behavior";
 import { changeGeyserType } from "../actions/change-geyser-type";
-import { modifyBehaviorPath } from "../actions/modify-behavior-path";
 import { changeGeyserParameter } from "../actions/change-geyser-parameter";
 
 export interface UseGeyser {
@@ -15,10 +14,12 @@ export interface UseGeyser {
   emitRate: number | null;
   yearLength: number | null;
   yearActive: number | null;
+  emitActive: number | null;
   onChangeEmitRate(rate: number): void;
   onChangeGeyserType(type: string): void;
   onChangeYearLength(fraction: number): void;
   onChangeYearActive(fraction: number): void;
+  onChangeEmitActive(fraction: number): void;
 }
 
 export default function useGeyser(gameObjectId: number): UseGeyser {
@@ -69,14 +70,25 @@ export default function useGeyser(gameObjectId: number): UseGeyser {
     [dispatch, gameObjectId]
   );
 
+  const onChangeEmitActive = React.useCallback(
+    (fraction: number) => {
+      dispatch(
+        changeGeyserParameter(gameObjectId, "iterationPercentRoll", fraction)
+      );
+    },
+    [dispatch, gameObjectId]
+  );
+
   return {
     geyserType: config ? GeyserType[config.typeId.hash] : null,
     emitRate: config ? config.rateRoll : null,
     yearLength: config ? config.yearLengthRoll : null,
     yearActive: config ? config.yearPercentRoll : null,
+    emitActive: config ? config.iterationPercentRoll : null,
     onChangeEmitRate,
     onChangeGeyserType,
     onChangeYearLength,
-    onChangeYearActive
+    onChangeYearActive,
+    onChangeEmitActive
   };
 }
