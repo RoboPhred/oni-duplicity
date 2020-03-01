@@ -1,0 +1,9 @@
+{
+  "name": "Duplicity: A web-based Oxygen Not Included save file editor.",
+  "short_name": "Duplicity",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "description": "A web-based Oxygen Not Included save file editor.",
+  "background_color": "#000000"
+}
