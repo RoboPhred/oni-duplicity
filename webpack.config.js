@@ -25,10 +25,6 @@ const PUBLIC_URL_PATH = "/oni-duplicity";
 
 console.log("Webpack build", isDev ? "[development]" : "[production]");
 
-const entry = {
-  client: [path.join(PATHS.appSrc, "./index.tsx")]
-};
-
 module.exports = {
   mode: isDev ? "development" : "production",
 
@@ -40,7 +36,9 @@ module.exports = {
     historyApiFallback: true
   },
 
-  entry,
+  entry: {
+    client: [path.join(PATHS.appSrc, "./index.tsx")]
+  },
 
   output: {
     filename: "[name].[hash].bundle.js",
