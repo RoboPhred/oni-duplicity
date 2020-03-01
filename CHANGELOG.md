@@ -1,4 +1,4 @@
-# vNext
+# 3.15.0
 
 - Added offline support, can be enabled through settings.
 
