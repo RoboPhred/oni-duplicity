@@ -21,7 +21,7 @@ const PATHS = {
 
 const { friendlyName, description } = require(PATHS.appPackageJson);
 
-const PUBLIC_URL_PATH = "/oni-duplicity";
+const PUBLIC_URL_PATH = "/oni-duplicity/";
 
 console.log("Webpack build", isDev ? "[development]" : "[production]");
 
