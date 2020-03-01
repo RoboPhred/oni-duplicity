@@ -1,3 +1,7 @@
+# 3.15.1
+
+- Fix incorrect site configuration preventing loading or saving files.
+
 # 3.15.0
 
 - Added offline support, can be enabled through settings.
