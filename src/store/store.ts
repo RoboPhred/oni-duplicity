@@ -10,6 +10,7 @@ import { routerMiddleware } from "connected-react-router";
 
 import history from "@/history";
 import { defaultAppState } from "@/state";
+import { initialize } from "@/actions/initialize";
 
 import reducer from "./reducer";
 import saga from "./saga";
@@ -45,6 +46,7 @@ function createStore() {
   sagaMiddleware.run(saga);
 
   store.subscribe(() => savePersistedState(store.getState()));
+  store.dispatch(initialize());
 
   return store;
 }

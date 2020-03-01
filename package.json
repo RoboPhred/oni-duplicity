@@ -90,7 +90,6 @@
     "react-redux": "^7.1.1",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
-    "reduce-reducers": "^1.0.4",
     "redux": "^4.0.4",
     "redux-saga": "^1.1.1",
     "reselect": "^4.0.0",

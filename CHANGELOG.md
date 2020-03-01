@@ -1,3 +1,7 @@
+# vNext
+
+- Added offline support. After the first visit, website should now load when no internet access is available.
+
 # 3.14.0
 
 - Allow changing geyser year, active, and emission length.

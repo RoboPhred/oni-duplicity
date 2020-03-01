@@ -1,4 +1,4 @@
-import reduceReducers from "reduce-reducers";
+import { reduceReducers } from "@/store/utils";
 
 import changeGeyserParameter from "./change-geyser-parameter";
 import changeGeyserTypeReducer from "./change-geyser-type";
