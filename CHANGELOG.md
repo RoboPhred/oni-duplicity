@@ -1,6 +1,6 @@
 # vNext
 
-- Added offline support. After the first visit, website should now load when no internet access is available.
+- Added offline support, can be enabled through settings.
 
 # 3.14.0
 
