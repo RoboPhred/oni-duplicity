@@ -1,31 +1,31 @@
-# vNext
+## 3.15.2
 
 - Support save file version 7.16 (Automation Pack)
 
-# 3.15.1
+## 3.15.1
 
 - Fix incorrect site configuration preventing loading or saving files.
 
-# 3.15.0
+## 3.15.0
 
 - Added offline support, can be enabled through settings.
 
-# 3.14.0
+## 3.14.0
 
 - Allow changing geyser year, active, and emission length.
 - Make geyser text translatable.
 - Add ability to delete individual loose materials.
 - Add ability to search material list.
 
-# 3.13.1
+## 3.13.1
 
 - Update oni-save-parser: Open up restrictions on .NET name validator to support mods with symbols or unicode in property names.
 
-# 3.13.0
+## 3.13.0
 
 - Add planet recoverable element mass editing.
 
-# 3.12.0
+## 3.12.0
 
 - Add traits from Recreation Pack
 
