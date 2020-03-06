@@ -1,3 +1,7 @@
+# vNext
+
+- Support save file version 7.16 (Automation Pack)
+
 # 3.15.1
 
 - Fix incorrect site configuration preventing loading or saving files.
