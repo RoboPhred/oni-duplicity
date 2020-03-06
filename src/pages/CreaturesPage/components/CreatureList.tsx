@@ -5,7 +5,7 @@ import { Theme, makeStyles } from "@material-ui/core/styles";
 
 import useGameObjects from "@/services/oni-save/hooks/useGameObjects";
 
-import DuplicantListItem from "./DuplicantListItem";
+import CreatureListItem from "./CreatureListItem";
 
 export interface DuplicantListProps {
   className?: string;
@@ -25,20 +25,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 type Props = DuplicantListProps;
 
-const DuplicantList: React.FC<Props> = ({ className }) => {
+// TODO: Get a list of all creatures, including variants.
+const SUPPORTED_CREATURES = ["Pacu", "Mole", "LightBug"];
+
+const CreatureList: React.FC<Props> = ({ className }) => {
   const classes = useStyles();
-  const gameObjectIds = useGameObjects("Minion");
+  const gameObjectIds = useGameObjects(SUPPORTED_CREATURES);
   return (
     <div className={classnames(className, classes.root)}>
       {gameObjectIds.map(id => (
-        <DuplicantListItem
-          key={id}
-          className={classes.item}
-          gameObjectId={id}
-        />
+        <CreatureListItem key={id} className={classes.item} gameObjectId={id} />
       ))}
     </div>
   );
 };
 
-export default DuplicantList;
+export default CreatureList;

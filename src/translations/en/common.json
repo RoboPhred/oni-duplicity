@@ -45,6 +45,12 @@
   "duplicant_health": {
     "noun_titlecase": "Health"
   },
+  "creature": {
+    "noun_titlecase_plural": "Creatures",
+    "verbs": {
+      "edit_titlecase": "Edit Creature"
+    }
+  },
   "geyser": {
     "noun_titlecase_plural": "Geysers",
     "total_lifecycle_time": "Total Lifecycle Time (dormant + active)",

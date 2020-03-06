@@ -5,6 +5,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import OverviewPage from "@/pages/OverviewPage";
 import DuplicantsPage from "@/pages/DuplicantsPage";
 import DuplicantEditorPage from "@/pages/DuplicantEditorPage";
+import CreaturesPage from "@/pages/CreaturesPage";
+import CreatureEditorPage from "@/pages/CreatureEditorPage";
 import GeysersPage from "@/pages/GeysersPage";
 import PlanetsPage from "@/pages/PlanetsPage";
 import MaterialsPage from "@/pages/MaterialsPage";
@@ -20,6 +22,12 @@ const Routes: React.FC = () => (
       path="/duplicants/:gameObjectId"
       exact
       component={DuplicantEditorPage}
+    />
+    <Route path="/creatures" exact component={CreaturesPage} />
+    <Route
+      path="/creatures/:gameObjectId"
+      exact
+      component={CreatureEditorPage}
     />
     <Route path="/geysers" exact component={GeysersPage} />
     <Route path="/planets" exact component={PlanetsPage} />

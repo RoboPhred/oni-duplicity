@@ -7,23 +7,23 @@ import { makeStyles } from "@material-ui/core/styles";
 import PageContainer from "@/components/PageContainer";
 import RedirectIfNoSave from "@/components/RedirectIfNoSave";
 
-import DuplicantList from "./components/DuplicantList";
+import CreatureList from "./components/CreatureList";
 
 const useStyles = makeStyles({
-  duplicantList: {
+  creatureList: {
     overflow: "auto"
   }
 });
 
 type Props = WithTranslation;
 
-const DuplicantsPage: React.FC<Props> = ({ t }) => {
+const CreaturesPage: React.FC<Props> = ({ t }) => {
   const classes = useStyles();
   return (
-    <PageContainer title={t("duplicant.noun_titlecase_plural")}>
+    <PageContainer title={t("creature.noun_titlecase_plural")}>
       <RedirectIfNoSave />
-      <DuplicantList className={classes.duplicantList} />
+      <CreatureList className={classes.creatureList} />
     </PageContainer>
   );
 };
-export default withTranslation()(DuplicantsPage);
+export default withTranslation()(CreaturesPage);

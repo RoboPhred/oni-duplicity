@@ -5,16 +5,13 @@ import classnames from "classnames";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
 
-import DuplicantMenu from "@/components/DuplicantMenu";
-import DuplicantPortrait from "@/components/DuplicantPortrait";
+import useGameObject from "@/services/oni-save/hooks/useGameObject";
 
-import DuplicantName from "./components/DuplicantName";
-import DuplicantTraits from "./components/DuplicantTraits";
-import DuplicantAttributes from "./components/DuplicantAttributes";
 import EditButton from "./components/EditButton";
 
-export interface DuplicantListItemProps {
+export interface CreatureListItemProps {
   className?: string;
   gameObjectId: number;
 }
@@ -52,35 +49,42 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-type Props = DuplicantListItemProps;
+type Props = CreatureListItemProps;
 
-const DuplicantListItem: React.FC<Props> = ({ className, gameObjectId }) => {
+const CreatureListItem: React.FC<Props> = ({ className, gameObjectId }) => {
   const classes = useStyles();
+  const { gameObjectType, position } = useGameObject(gameObjectId);
+  if (!gameObjectType || !position) {
+    return null;
+  }
+
   return (
     <Paper className={classnames(classes.root, className)}>
       <div className={classes.titleBar}>
-        <DuplicantName gameObjectId={gameObjectId} />
+        <Typography variant="h5">{gameObjectType}</Typography>
+        <Typography variant="caption">
+          ({position.x.toFixed()}, {position.y.toFixed()})
+        </Typography>
         <div className={classes.titleControls}>
           <EditButton
             className={classes.editButton}
             gameObjectId={gameObjectId}
           />
-          <DuplicantMenu gameObjectId={gameObjectId} />
         </div>
       </div>
       <Divider />
       <div className={classes.content}>
         <div className={classes.portraitColumn}>
-          <DuplicantPortrait gameObjectId={gameObjectId} scale={0.3} />
-          <DuplicantTraits gameObjectId={gameObjectId} />
+          <svg width={72} height={81}>
+            {/* TODO: Creature portrait */}
+            <line stroke="red" strokeWidth={1} x1={0} y1={0} x2={72} y2={81} />
+            <line stroke="red" strokeWidth={1} x1={0} y1={81} x2={72} y2={0} />
+          </svg>
         </div>
-        <DuplicantAttributes
-          className={classes.attributes}
-          gameObjectId={gameObjectId}
-        />
+        {/* TODO: Creature overview */}
       </div>
     </Paper>
   );
 };
 
-export default DuplicantListItem;
+export default CreatureListItem;
