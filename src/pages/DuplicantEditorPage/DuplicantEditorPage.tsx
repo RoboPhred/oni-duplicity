@@ -14,7 +14,7 @@ export interface DuplicantEditorRouteParams {
 }
 
 export interface DuplicantEditorProps
-  extends RouteComponentProps<DuplicantEditorRouteParams> { }
+  extends RouteComponentProps<DuplicantEditorRouteParams> {}
 
 type Props = DuplicantEditorProps;
 const DuplicantEditorPage: React.FC<Props> = ({
@@ -24,15 +24,14 @@ const DuplicantEditorPage: React.FC<Props> = ({
 }) => {
   const { gameObjectType } = useGameObject(Number(gameObjectId));
   return (
-    <React.Fragment>
+    <>
       <RedirectIfNoSave />
-
       {gameObjectType === "Minion" && (
         <DuplicantEditor gameObjectId={Number(gameObjectId)} />
       )}
       {gameObjectType !== "Minion" && <DuplicantNotFound />}
-    </React.Fragment>
-  )
-}
+    </>
+  );
+};
 
 export default DuplicantEditorPage;

@@ -1,17 +1,35 @@
 import * as React from "react";
+import { RouteComponentProps } from "react-router";
+import { includes } from "lodash";
 
-import { WithTranslation, withTranslation } from "react-i18next";
+import useGameObject from "@/services/oni-save/hooks/useGameObject";
+import { CREATURE_GAMEOBJECT_TYPES } from "@/services/oni-save/creatures";
 
-import PageContainer from "@/components/PageContainer";
+import RedirectIfNoSave from "@/components/RedirectIfNoSave";
 
-type Props = WithTranslation;
+import CreatureNotFound from "./components/CreatureNotFound";
 
-const CreatureEditorPage: React.FC<Props> = ({ t }) => {
+export interface RouteParams {
+  gameObjectId: string;
+}
+
+type Props = RouteComponentProps<RouteParams>;
+
+const CreatureEditorPage: React.FC<Props> = ({
+  match: {
+    params: { gameObjectId }
+  }
+}) => {
+  const { gameObjectType } = useGameObject(Number(gameObjectId));
+
+  const supportedCreature = includes(CREATURE_GAMEOBJECT_TYPES, gameObjectType);
+
   return (
-    <PageContainer title={t("creature.verbs.edit_titlecase")} back>
-      Not Implemented
-    </PageContainer>
+    <>
+      <RedirectIfNoSave />
+      {!supportedCreature && <CreatureNotFound />}
+    </>
   );
 };
 
-export default withTranslation()(CreatureEditorPage);
+export default CreatureEditorPage;

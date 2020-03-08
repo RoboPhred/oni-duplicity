@@ -49,6 +49,9 @@
     "noun_titlecase_plural": "Creatures",
     "verbs": {
       "edit_titlecase": "Edit Creature"
+    },
+    "conditions": {
+      "missing_titlecase": "Creature Not Found"
     }
   },
   "geyser": {

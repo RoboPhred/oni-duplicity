@@ -4,6 +4,7 @@ import classnames from "classnames";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 
 import useGameObjects from "@/services/oni-save/hooks/useGameObjects";
+import { CREATURE_GAMEOBJECT_TYPES } from "@/services/oni-save/creatures";
 
 import CreatureListItem from "./CreatureListItem";
 
@@ -25,12 +26,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 type Props = DuplicantListProps;
 
-// TODO: Get a list of all creatures, including variants.
-const SUPPORTED_CREATURES = ["Pacu", "Mole", "LightBug"];
-
 const CreatureList: React.FC<Props> = ({ className }) => {
   const classes = useStyles();
-  const gameObjectIds = useGameObjects(SUPPORTED_CREATURES);
+  const gameObjectIds = useGameObjects(CREATURE_GAMEOBJECT_TYPES);
   return (
     <div className={classnames(className, classes.root)}>
       {gameObjectIds.map(id => (
