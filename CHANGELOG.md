@@ -1,3 +1,7 @@
+## vNext
+
+- Commit text field changes when navigating away from the page.
+
 ## 3.15.2
 
 - Support save file version 7.16 (Automation Pack)
