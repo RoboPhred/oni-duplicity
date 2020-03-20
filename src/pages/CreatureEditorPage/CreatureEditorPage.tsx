@@ -8,6 +8,7 @@ import { CREATURE_GAMEOBJECT_TYPES } from "@/services/oni-save/creatures";
 import RedirectIfNoSave from "@/components/RedirectIfNoSave";
 
 import CreatureNotFound from "./components/CreatureNotFound";
+import CreatureEditor from "./components/CreatureEditor";
 
 export interface RouteParams {
   gameObjectId: string;
@@ -20,13 +21,15 @@ const CreatureEditorPage: React.FC<Props> = ({
     params: { gameObjectId }
   }
 }) => {
-  const { gameObjectType } = useGameObject(Number(gameObjectId));
+  const goid = Number(gameObjectId);
+  const { gameObjectType } = useGameObject(goid);
 
   const supportedCreature = includes(CREATURE_GAMEOBJECT_TYPES, gameObjectType);
 
   return (
     <>
       <RedirectIfNoSave />
+      {supportedCreature && <CreatureEditor gameObjectId={goid} />}
       {!supportedCreature && <CreatureNotFound />}
     </>
   );
