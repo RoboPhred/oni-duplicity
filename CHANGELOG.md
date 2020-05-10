@@ -1,6 +1,7 @@
 ## vNext
 
 - Commit text field changes when navigating away from the page.
+- Support save file version 4.17
 
 ## 3.15.2
 
