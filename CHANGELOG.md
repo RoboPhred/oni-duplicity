@@ -1,7 +1,7 @@
 ## 3.15.3
 
 - Commit text field changes when navigating away from the page.
-- Support save file version 4.17
+- Support save file version 7.17
 
 ## 3.15.2
 
