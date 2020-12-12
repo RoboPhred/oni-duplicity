@@ -1,3 +1,8 @@
+## 3.16.0
+
+- Support save file 4.22
+- Disable planets editor for now; it is incompatible with 4.22.
+
 ## 3.15.3
 
 - Commit text field changes when navigating away from the page.
