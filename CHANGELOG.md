@@ -1,3 +1,7 @@
+## 3.16.1
+
+- Support save file 4.17 as well as 4.22
+
 ## 3.16.0
 
 - Support save file 4.22
