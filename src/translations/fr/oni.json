@@ -193,17 +193,17 @@
 
       "FLATULENCE": {
         "NAME": "Flatulent",
-        "DESC": "Certains Clones en sont juste pleins"
+        "DESC": "Certains Clones en sont juste pleins."
       },
 
       "SNORER": {
         "NAME": "Dormeur Bruyant",
-        "DESC": "Dans l'espace, tout le monde peut vous entendre ronfler"
+        "DESC": "Dans l'espace, tout le monde peut vous entendre ronfler."
       },
 
       "NARCOLEPSY": {
         "NAME": "Narcoleptique",
-        "DESC": "Ce Clone peut s'endormir et s'endormira n'importe quand, n'importe où"
+        "DESC": "Ce Clone peut s'endormir et s'endormira n'importe quand, n'importe où."
       },
 
       "INTERIORDECORATOR": {
@@ -213,7 +213,7 @@
 
       "UNCULTURED": {
         "NAME": "Inculte",
-        "DESC": "Ce Clone n'a simplement aucune appréciation pour les arts"
+        "DESC": "Ce Clone n'a simplement aucune appréciation pour les arts."
       },
 
       "ARCHAEOLOGIST": {
@@ -228,7 +228,7 @@
 
       "NIGHTOWL": {
         "NAME": "Hibou de nuit",
-        "DESC": "Ce Clone fait de son mieux quand il est censé dormir"
+        "DESC": "Ce Clone fait de son mieux quand il est censé dormir."
       },
 
       "REGENERATION": {
@@ -288,53 +288,53 @@
       },
 
       "Athletics": {
-        "NAME": "Athletics",
-        "DESC": "Determines a Clone's default runspeed."
+        "NAME": "Athlétisme",
+        "DESC": "Détermine la vitesse de déplacement initiale d'un Clone."
       },
 
       "Learning": {
-        "NAME": "Learning",
-        "DESC": "Determines how quickly a Clone conducts Research and gains skills."
+        "NAME": "Apprentissage",
+        "DESC": "Détermine la rapidité avec laquelle un Clone mène des recherches et acquiert des compétences."
       },
 
       "Cooking": {
-        "NAME": "Cooking",
-        "DESC": "Determines how quickly a Clone prepares Food."
+        "NAME": "Cuisine",
+        "DESC": "Détermine la rapidité avec laquelle un Clone prépare de la nourriture."
       },
 
       "Strength": {
-        "NAME": "Strength",
-        "DESC": "Determines a Clone's carrying capacity and cleaning speed."
+        "NAME": "Force",
+        "DESC": "Détermine la capacité de charge d'un Clone et sa vitesse de nettoyage."
       },
 
       "Caring": {
-        "NAME": "Kindness",
-        "DESC": "Determines medical skill and sociability with peers and critters."
+        "NAME": "Bienveillance",
+        "DESC": "Détermine les compétences médicales et la sociabilité du Clone avec ses pairs et les bestioles."
       },
 
       "Immunity": {
-        "NAME": "Immunity",
-        "DESC": "Determines a Clone's disease susceptibility and recovery time."
+        "NAME": "Immunité",
+        "DESC": "Détermine la sensibilité d'un Clone à la maladie et le temps de récupération."
       },
 
       "Botanist": {
-        "NAME": "Farming",
-        "DESC": "Determines how quickly and efficiently a Clone cultivates plants."
+        "NAME": "Agriculture",
+        "DESC": "Détermine la rapidité et l'efficacité avec lesquelles un Clone cultive les plantes."
       },
 
       "Ranching": {
-        "NAME": "Ranching",
-        "DESC": "Determines how quickly and efficiently a Clone tends critters."
+        "NAME": "Élevage",
+        "DESC": "Détermine la rapidité et l'efficacité avec lesquelles un Clone s'occupe des bestioles."
       },
 
       "Art": {
-        "NAME": "Creativity",
-        "DESC": "Determines how quickly a Clone can produce artwork."
+        "NAME": "Créativité",
+        "DESC": "Détermine la rapidité avec laquelle un Clone peut produire des oeuvres d'art."
       },
 
       "Decor": {
-        "NAME": "Decor",
-        "DESC": "Decor affects a Clone's Stress and their opinion of their surroundings."
+        "NAME": "Décor",
+        "DESC": "Le Décor affecte le stress du Clone et son opinion sur ses alentours."
       }
     }
   }
