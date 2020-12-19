@@ -72,73 +72,73 @@
     "kilogram": "{{count}} kg"
   },
   "material_loose": {
-    "noun_titlecase": "Loose",
-    "clump_count": "{{count}} clump",
-    "clump_count_plural": "{{count}} clumps",
+    "noun_titlecase": "Soltos",
+    "clump_count": "{{count}} Aglomerado",
+    "clump_count_plural": "{{count}} Aglomerados",
     "verbs": {
       "delete_name": "Deletar {{name}}"
     },
     "prompts": {
-      "delete": "This will remove all loose material from the game.  The material will not be recovered."
+      "delete": "Isso irá remover todo o material 'solto' no jogo.  O material não poderá ser recuperado."
     }
   },
   "material_storage": {
-    "noun_titlecase": "Storage",
-    "container_count": "{{count}} container",
-    "container_count_plural": "{{count}} containers"
+    "noun_titlecase": "Armazenamento",
+    "container_count": "{{count}} bloco",
+    "container_count_plural": "{{count}} blocos"
   },
   "time_cycles": {
-    "noun_titlecase": "Cycle Time"
+    "noun_titlecase": "Tempo de ciclo"
   },
   "dialog": {
     "queries": {
-      "continue": "Are you sure you want to continue?"
+      "continue": "Você tem certeza que quer continuar?"
     },
     "verbs": {
-      "cancel_titlecase": "Cancel",
-      "confirm_titlecase": "Confirm"
+      "cancel_titlecase": "Cancelar",
+      "confirm_titlecase": "Confirmar"
     }
   },
   "data": {
     "conditions": {
-      "modified_titlecase": "Data Modified"
+      "modified_titlecase": "Dados alterados"
     },
     "prompts": {
-      "modified-description": "The data in this file has been modified since it was exported.\nImported data is not validated, and importing invalid data can corrupt your save."
+      "modified-description": "Os dados neste arquivo foram modificados desde que foi exportado.\nOs dados importados não são validados e importar dados inválidos pode corromper seu arquivo salvo."
     },
     "verbs": {
-      "copy_titlecase": "Copy",
-      "export_titlecase": "Export",
-      "import_titlecase": "Import"
+      "copy_titlecase": "Copiar",
+      "export_titlecase": "Exportar",
+      "import_titlecase": "Importar"
     }
   },
   "save-file": {
     "verbs": {
-      "load_titlecase": "Load",
-      "save_titlecase": "Save"
+      "load_titlecase": "Carregar",
+      "save_titlecase": "Salvar"
     },
     "conditions": {
-      "loading": "Loading",
-      "saving": "Saving",
-      "modified": "Modified",
-      "modified_description": "The file has been modified since it was last saved.",
-      "example": "Example",
-      "example_description": "This is example content and cannot be saved."
+      "loading": "Carregando",
+      "saving": "Salvando",
+      "modified": "Modificado",
+      "modified_description": "O arquivo foi modificado desde que foi salvo pela última vez.",
+      "example": "Exemplo",
+      "example_description": "Este é um exemplo de conteúdo e não pode ser salvo."
     }
   },
   "overview-page": {
-    "title": "Overview",
+    "title": "Geral",
     "no-save": {
-      "title": "Choose a Save",
-      "prompt": "No save file has been loaded.",
-      "save-location": "Save files can be found at <1>{{path}}</1>."
+      "title": "Escolha um arquivo '.save'",
+      "prompt": "Nenhum arquivo salvo foi carregado.",
+      "save-location": "Arquivos de save pdoem ser encontrados em <1>{{path}}</1>."
     }
   },
   "raw-editor-page": {
-    "title": "Raw Editor"
+    "title": "Editor Raw"
   },
-  "view-github": "View project on GitHub",
+  "view-github": "Veja o projeto no GitHub",
   "changelog": {
-    "title": "Changelog"
+    "title": "Logs de mudanças"
   }
 }
