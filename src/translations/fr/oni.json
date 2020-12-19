@@ -238,53 +238,53 @@
 
       "DEEPERDIVERSLUNGS": {
         "NAME": "Poumons de plongeur profond",
-        "DESC": "This Clone was a talented opera singer and a snorkeling instructor."
+        "DESC": "Ce Clone était un chanteur d'opéra talentueux et un instructeur de plongée en apnée."
       },
 
       "SUNNYDISPOSITION": {
-        "NAME": "Sunny Disposition",
-        "DESC": "This Clone has an unwaveringly positive outlook on life."
+        "NAME": "Disposition ensoleillée",
+        "DESC": "Ce Clone a une vision résolument positive de la vie."
       },
 
       "ROCKCRUSHER": {
-        "NAME": "Rock Crusher",
-        "DESC": "This Clone is incredibly strong."
+        "NAME": "Concasseur de roches",
+        "DESC": "Ce Clone est incroyablement fort."
       },
 
       "SIMPLETASTES": {
-        "NAME": "Simple Tastes",
-        "DESC": "This Clone finds pleasure in even the blandest of foods."
+        "NAME": "Goûts simples",
+        "DESC": "Ce Clone trouve du plaisir même dans les aliments les plus fades."
       },
 
       "FOODIE": {
-        "NAME": "Gourmet",
-        "DESC": "This Clone has a highly refined palate and desires luxurious foods."
+        "NAME": "Gourmant",
+        "DESC": "Ce Clone a un palais très raffiné et désire des aliments luxueux."
       }
     },
     "ATTRIBUTES": {
       "Construction": {
         "NAME": "Construction",
-        "DESC": "Determines a Clone's building speed."
+        "DESC": "Détermine la vitesse de construction d'un Clone."
       },
 
       "Digging": {
-        "NAME": "Digging",
-        "DESC": "Determines a Clone's mining speed."
+        "NAME": "Extraction",
+        "DESC": "Détermine la vitesse d'extraction d'un Clone."
       },
 
       "Machinery": {
-        "NAME": "Tinkering",
-        "DESC": "Determines how quickly a Clone uses machines."
+        "NAME": "Bricolage",
+        "DESC": "Détermine la vitesse à laquelle un Clone utilise des machines."
       },
 
       "LifeSupport": {
-        "NAME": "Life Support",
-        "DESC": "Determines how efficiently a Clone maintains algae terrariums, deodorizers, and water sieves."
+        "NAME": "Soutien de vie",
+        "DESC": "Détermine l'efficacité avec laquelle un Clone entretient les terrariums d'algues, les désodorisants et les tamis à eau."
       },
 
       "Toggle": {
-        "NAME": "Toggle",
-        "DESC": "Determines how efficiently a Clone tunes machinery, flips switches, and sets sensors."
+        "NAME": "Basculer",
+        "DESC": "Détermine l'efficacité d'un Clone à régler les machines, à actionner les commutateurs et à régler les capteurs."
       },
 
       "Athletics": {
