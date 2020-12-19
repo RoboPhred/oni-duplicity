@@ -202,42 +202,42 @@
       },
 
       "NARCOLEPSY": {
-        "NAME": "Narcoleptic",
-        "DESC": "This Clone can and will fall asleep anytime, anyplace"
+        "NAME": "Narcoleptique",
+        "DESC": "Ce Clone peut s'endormir et s'endormira n'importe quand, n'importe où"
       },
 
       "INTERIORDECORATOR": {
-        "NAME": "Interior Decorator",
-        "DESC": "\"Move it a little to the left...\""
+        "NAME": "Decorateur D'intérieur",
+        "DESC": "\"Déplacez-le un peu vers la gauche...\""
       },
 
       "UNCULTURED": {
-        "NAME": "Uncultured",
-        "DESC": "This Clone has simply no appreciation for the arts"
+        "NAME": "Inculte",
+        "DESC": "Ce Clone n'a simplement aucune appréciation pour les arts"
       },
 
       "ARCHAEOLOGIST": {
-        "NAME": "Archeologist",
-        "DESC": "This Clone will always bring back an artifact from space expeditions."
+        "NAME": "Archéologue",
+        "DESC": "Ce Clone ramènera toujours un artefact des expéditions spaciales."
       },
 
       "EARLYBIRD": {
-        "NAME": "Early Bird",
-        "DESC": "This Clone always wakes up feeling fresh and efficient!"
+        "NAME": "Lève tôt",
+        "DESC": "Ce Clone se réveille toujours frais et efficace!"
       },
 
       "NIGHTOWL": {
-        "NAME": "Night Owl",
-        "DESC": "This Clone does their best work when they'd ought to be sleeping"
+        "NAME": "Hibou de nuit",
+        "DESC": "Ce Clone fait de son mieux quand il est censé dormir"
       },
 
       "REGENERATION": {
-        "NAME": "Regenerative",
-        "DESC": "This Clone is constantly regenerating health."
+        "NAME": "Régénérateur",
+        "DESC": "Ce Clone régénère constamment sa santé."
       },
 
       "DEEPERDIVERSLUNGS": {
-        "NAME": "Deeper Diver's Lungs",
+        "NAME": "Poumons de plongeur profond",
         "DESC": "This Clone was a talented opera singer and a snorkeling instructor."
       },
 
