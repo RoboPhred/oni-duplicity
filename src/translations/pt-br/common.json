@@ -1,0 +1,144 @@
+{
+  "duplicant": {
+    "noun_titlecase_plural": "Duplicantes",
+    "noun_titlecase": "Duplicante",
+    "verbs": {
+      "edit_titlecase": "Editar Duplicante"
+    },
+    "conditions": {
+      "missing_titlecase": "Duplicante Não Encontrado"
+    }
+  },
+  "duplicant_effect": {
+    "noun_titlecase": "Efeito",
+    "verbs": {
+      "add_titlecase": "Adicionar Efeito"
+    }
+  },
+  "duplicant_trait": {
+    "noun_titlecase": "Traço",
+    "noun_titlecase_plural": "Traços",
+    "verbs": {
+      "add_titlecase": "Adicionar traços"
+    }
+  },
+  "duplicant_interest": {
+    "noun_titlecase": "Interesses",
+    "verbs": {
+      "add_titlecase": "Adicionar Interesses"
+    }
+  },
+  "duplicant_attribute": {
+    "noun_titlecase_plural": "Atributos",
+    "primary_titlecase": "Primário",
+    "secondary_titlecase": "Secundário"
+  },
+  "duplicant_skills": {
+    "noun_titlecase": "Habilidade",
+    "noun_titlecase_plural": "Habilidades",
+    "experience_titlecase": "Experiência",
+    "mastery_titlecase": "Maestrica"
+  },
+  "duplicant_appearance": {
+    "noun_titlecase": "Aparência"
+  },
+  "duplicant_health": {
+    "noun_titlecase": "Saúde"
+  },
+  "creature": {
+    "noun_titlecase_plural": "Criaturas",
+    "verbs": {
+      "edit_titlecase": "Editar Criatura"
+    },
+    "conditions": {
+      "missing_titlecase": "Criatura não encontrada"
+    }
+  },
+  "geyser": {
+    "noun_titlecase_plural": "Geysers",
+    "total_lifecycle_time": "Tempo total de vida (dormente + ativo)",
+    "active_time": "Tempo ativo",
+    "emission_length": "Nivel de emissão",
+    "emission_rate": "Freqência de emissão"
+  },
+  "planet": {
+    "noun_titlecase_plural": "Planeas"
+  },
+  "material": {
+    "noun_titlecase": "Material",
+    "noun_titlecase_plural": "Materiais",
+    "all_titlecase": "Todos os materiais",
+    "gram": "{{count}} g",
+    "kilogram": "{{count}} kg"
+  },
+  "material_loose": {
+    "noun_titlecase": "Loose",
+    "clump_count": "{{count}} clump",
+    "clump_count_plural": "{{count}} clumps",
+    "verbs": {
+      "delete_name": "Deletar {{name}}"
+    },
+    "prompts": {
+      "delete": "This will remove all loose material from the game.  The material will not be recovered."
+    }
+  },
+  "material_storage": {
+    "noun_titlecase": "Storage",
+    "container_count": "{{count}} container",
+    "container_count_plural": "{{count}} containers"
+  },
+  "time_cycles": {
+    "noun_titlecase": "Cycle Time"
+  },
+  "dialog": {
+    "queries": {
+      "continue": "Are you sure you want to continue?"
+    },
+    "verbs": {
+      "cancel_titlecase": "Cancel",
+      "confirm_titlecase": "Confirm"
+    }
+  },
+  "data": {
+    "conditions": {
+      "modified_titlecase": "Data Modified"
+    },
+    "prompts": {
+      "modified-description": "The data in this file has been modified since it was exported.\nImported data is not validated, and importing invalid data can corrupt your save."
+    },
+    "verbs": {
+      "copy_titlecase": "Copy",
+      "export_titlecase": "Export",
+      "import_titlecase": "Import"
+    }
+  },
+  "save-file": {
+    "verbs": {
+      "load_titlecase": "Load",
+      "save_titlecase": "Save"
+    },
+    "conditions": {
+      "loading": "Loading",
+      "saving": "Saving",
+      "modified": "Modified",
+      "modified_description": "The file has been modified since it was last saved.",
+      "example": "Example",
+      "example_description": "This is example content and cannot be saved."
+    }
+  },
+  "overview-page": {
+    "title": "Overview",
+    "no-save": {
+      "title": "Choose a Save",
+      "prompt": "No save file has been loaded.",
+      "save-location": "Save files can be found at <1>{{path}}</1>."
+    }
+  },
+  "raw-editor-page": {
+    "title": "Raw Editor"
+  },
+  "view-github": "View project on GitHub",
+  "changelog": {
+    "title": "Changelog"
+  }
+}
