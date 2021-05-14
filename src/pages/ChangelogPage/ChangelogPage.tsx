@@ -13,15 +13,15 @@ type Props = WithTranslation;
 
 const useStyles = makeStyles((theme: Theme) => ({
   markdown: {
-    margin: theme.spacing(2)
-  }
+    margin: theme.spacing(2),
+  },
 }));
 
 const ChangelogPage: React.FC<Props> = ({ t }) => {
   const styles = useStyles();
   return (
     <PageContainer title={t("changelog.title")} back>
-      <Markdown className={styles.markdown} source={ChangelogContent} />;
+      <Markdown className={styles.markdown} children={ChangelogContent} />;
     </PageContainer>
   );
 };

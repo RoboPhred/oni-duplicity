@@ -1,3 +1,7 @@
+## 3.16.2
+
+- Support DLC save version 4.23
+
 ## 3.16.1
 
 - Support save file 4.17 as well as 4.22
