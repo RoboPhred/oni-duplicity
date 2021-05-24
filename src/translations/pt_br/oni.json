@@ -1,0 +1,341 @@
+{
+  "DUPLICANTS": {
+    "TRAITS": {
+      "CLAUSTROPHOBIC": {
+        "NAME": "Claustrofóbico",
+        "DESC": "Esse duplicante se sente sufocado em espaços que sejam menores que quatro blocos de altura ou três de largura"
+      },
+
+      "FASHIONABLE": {
+        "NAME": "Fashionista",
+        "DESC": "Esse duplicante morre um pouco por dentro quando forçado a usar roupas sem estilo"
+      },
+
+      "CLIMACOPHOBIC": {
+        "NAME": "Propenso a Vertigem",
+        "DESC": "Subir escadas que tenha mais de quatro blocos de altura faz o estômago desse duplicante embrulhar"
+      },
+
+      "SOLITARYSLEEPER": {
+        "NAME": "Sono Solitário",
+        "DESC": "Esse duplicante prefere dormir sozinho"
+      },
+
+      "PREFERSWARMER": {
+        "NAME": "Magrelo",
+        "DESC": "Esse duplicante não tem muito isolamento, então é mais sensível a temperatura do que outros"
+      },
+
+      "PREFERSCOOLER": {
+        "NAME": "Rechonchudo",
+        "DESC": "Esse duplicante tem um isolamento extra, então a temperatura do ambiente afeta ele menos"
+      },
+
+      "SENSITIVEFEET": {
+        "NAME": "Pés Delicados",
+        "DESC": "Esse duplicante tem uma sola do pé delicada e prefere andar num bloco do que em pedra bruta"
+      },
+
+      "WORKAHOLIC": {
+        "NAME": "Viciado em Trabalho",
+        "DESC": "Esse duplicante fica agitado quando não tem nada para fazer"
+      },
+
+      "CANTRESEARCH": {
+        "NAME": "Caipira",
+        "DESC": "Esse duplicante não é a estrela mais brilhante do sistema solar"
+      },
+
+      "CANTBUILD": {
+        "NAME": "Inconstrutivo",
+        "DESC": "Esse duplicante é incapaz de construir até as estruturas mais básicas"
+      },
+
+      "CANTCOOK": {
+        "NAME": "Gastrofobia",
+        "DESC": "Esse duplicante tem uma desconfiança profunda nas artes culinárias"
+      },
+
+      "CANTDIG": {
+        "NAME": "Tripofobia",
+        "DESC": "O medo de buracos desse duplicante faz com que ele seja incapaz de fazer tarefas de escavação"
+      },
+
+      "HEMOPHOBIA": {
+        "NAME": "Melindroso",
+        "DESC": "Este Duplicante não pode cuidar de doentes"
+      },
+
+      "BEDSIDEMANNER": {
+        "NAME": "Cuidador",
+        "DESC": "Esse duplicante tem bons cuidados com quem está no leito e um toque de cura"
+      },
+
+      "MOUTHBREATHER": {
+        "NAME": "Respirador",
+        "DESC": "Esse duplicante respira bem mais que a quantidade justa de Oxigênio"
+      },
+
+      "FUSSY": {
+        "NAME": "Espalhafatoso",
+        "DESC": "Nada é bom o suficiente para esse duplicante"
+      },
+
+      "TWINKLETOES": {
+        "NAME": "Pés de Pena",
+        "DESC": "Esse duplicante é leve como uma pena quando o assunto é os pés"
+      },
+
+      "STRONGARM": {
+        "NAME": "Parrudo",
+        "DESC": "Esse duplicante tem músculos nos músculos"
+      },
+
+      "NOODLEARMS": {
+        "NAME": "Braços de Lamen",
+        "DESC": "Os braços desse duplicante tem a mesma força de um macarrão espaguete que cozinhou demais"
+      },
+
+      "AGGRESSIVE": {
+        "NAME": "Destrutivo",
+        "DESC": "Esse duplicante lida com o estresse descontando em máquinas indefesas"
+      },
+
+      "UGLYCRIER": {
+        "NAME": "Chorão",
+        "DESC": "Se esse duplicante ficar muito estressado, não vai ser bonito"
+      },
+
+      "BINGEEATER": {
+        "NAME": "Comedor Compulsivo",
+        "DESC": "Esse duplicante vai comer perigosamente demais quando estiver estressado"
+      },
+
+      "ANXIOUS": {
+        "NAME": "Ansioso",
+        "DESC": "Esse duplicante não reage bem a ser colocado sob muita pressão"
+      },
+
+      "STRESSVOMITER": {
+        "NAME": "Vomitador",
+        "DESC": "Esse duplicante pode vomitar por tudo que é lado quando estressado"
+      },
+
+      "IRONGUT": {
+        "NAME": "Estômago de Ferro",
+        "DESC": "Esse duplicante pode comer basicamente qualquer coisa sem ficar doente"
+      },
+
+      "STRONGIMMUNESYSTEM": {
+        "NAME": "Resistente a Germes",
+        "DESC": "O sistema imunológico desse duplicante responde mais rápido que outros"
+      },
+
+      "SCAREDYCAT": {
+        "NAME": "Pacifista",
+        "DESC": "Esse duplicante abomina a violência"
+      },
+
+      "ALLERGIES": {
+        "NAME": "Alérgico",
+        "DESC": "Esse duplicante vai espirrar descontroladamente quando exposto ao pólem presente no aroma floral"
+      },
+
+      "WEAKIMMUNESYSTEM": {
+        "NAME": "Sistema Imunológico Fraco",
+        "DESC": "Nem toda a vitamia C do mundo conseguiria previnir esse duplicante de adoecer"
+      },
+
+      "IRRITABLEBOWEL": {
+        "NAME": "Intestino Irritável",
+        "DESC": "Esse duplicante precisa de um pouco mais de tempo para \"se aliviar\""
+      },
+
+      "CALORIEBURNER": {
+        "NAME": "Estômago sem fundo",
+        "DESC": "Esse duplicante tem um buraco negro no lugar do estômago"
+      },
+
+      "SMALLBLADDER": {
+        "NAME": "Bexiga pequena",
+        "DESC": "Esse duplicante tem uma bexiga do tamanho de uma ervilha. Que fofo!"
+      },
+
+      "ANEMIC": {
+        "NAME": "Anêmico",
+        "DESC": "Esse duplicante tem dificuldades em acompanhar o ritmo dos outros"
+      },
+
+      "GREASEMONKEY": {
+        "NAME": "Amante de Graxa",
+        "DESC": "Esse duplicante gosta de jogar a chave inglesa nos planos da colÔnia... No bom sentido"
+      },
+
+      "MOLEHANDS": {
+        "NAME": "Mãos de Toupeira",
+        "DESC": "São excelentes para cavar túneis, mas achar boas luvas é um pesadelo"
+      },
+
+      "FASTLEARNER": {
+        "NAME": "Aprendizado Rápido",
+        "DESC": "Esse duplicante é afiado nos estudos e aprende novas habilidades com velocidade impressionante"
+      },
+
+      "SLOWLEARNER": {
+        "NAME": "Aprendizado Lento",
+        "DESC": "Esse duplicante tem o raciocínio meio lento para aprender, mas não o impede de tentar"
+      },
+
+      "DIVERSLUNG": {
+        "NAME": "Pulmões de Nadador",
+        "DESC": "Esse duplicante poderia ter sido um cantor de ópera talentoso em outra vida"
+      },
+
+      "FLATULENCE": {
+        "NAME": "Flatulento",
+        "DESC": "Alguns duplicantes simplesmente tem gás demais"
+      },
+
+      "SNORER": {
+        "NAME": "Sono Barulhento",
+        "DESC": "Até no espaço dá pra ouvir o ronco desse duplicante"
+      },
+
+      "NARCOLEPSY": {
+        "NAME": "Narcoléptico",
+        "DESC": "Esse duplicante pode e vai dormir a qualquer hora e qualquer lugar"
+      },
+
+      "INTERIORDECORATOR": {
+        "NAME": "Decorador de Interiores",
+        "DESC": "\"Agora só mover um pouco para esquerda...\""
+      },
+
+      "UNCULTURED": {
+        "NAME": "Sem Cultura",
+        "DESC": "Esse duplicante simplesmente não tem apreciação nenhuma por arte"
+      },
+
+      "ARCHAEOLOGIST": {
+        "NAME": "Arqueologista",
+        "DESC": "Esse duplicante sempre vai trazer um artefato das suas expedições."
+      },
+
+      "EARLYBIRD": {
+        "NAME": "Pássaro da Manhã",
+        "DESC": "Esse duplicante sempre acorda se sentindo refrescado e eficiente!"
+      },
+
+      "NIGHTOWL": {
+        "NAME": "Coruja da Noite",
+        "DESC": "Esse duplicante trabalha melhor na hora que ele deveria estar dormindo"
+      },
+
+      "REGENERATION": {
+        "NAME": "Regenerativo",
+        "DESC": "Esse duplicante está constantemente regenerando vida."
+      },
+
+      "DEEPERDIVERSLUNGS": {
+        "NAME": "Pulmões de Mergulhador Profundo",
+        "DESC": "Esse duplicante foi um cantor de ópera talentoso e também um instrutor de mergulho."
+      },
+
+      "SUNNYDISPOSITION": {
+        "NAME": "Super Disposto",
+        "DESC": "Esse duplicante tem uma visão da vida extremamente positiva."
+      },
+
+      "ROCKCRUSHER": {
+        "NAME": "Quebra-Rocha",
+        "DESC": "Esse duplicante é incrivelmente forte."
+      },
+
+      "SIMPLETASTES": {
+        "NAME": "Gostos simples",
+        "DESC": "Esse duplicante se sente bem comendo até as comidas mais sem graça"
+      },
+
+      "FOODIE": {
+        "NAME": "Gourmet",
+        "DESC": "Esse duplicante tem um paladar altamente refinado e deseja comidas luxuosas."
+      }
+    },
+    "ATTRIBUTES": {
+      "Construction": {
+        "NAME": "Construção",
+        "DESC": "Determina a velocidade de construção de um duplicante."
+      },
+
+      "Digging": {
+        "NAME": "Escavação",
+        "DESC": "Determina a velocidade de escavação de um duplicante."
+      },
+
+      "Machinery": {
+        "NAME": "Maquinaria",
+        "DESC": "Determina o quão rápido o duplicante usa máquinas."
+      },
+
+      "LifeSupport": {
+        "NAME": "Suporte a Vida",
+        "DESC": "Determina quão eficiente um duplicante mantém terrários de alga, desodorizadores e filtros de água."
+      },
+
+      "Toggle": {
+        "NAME": "Alternar",
+        "DESC": "Determina o quão eficiente um duplicante fazer melhoramento em máquinas, alterna switches and configura sensores."
+      },
+
+      "Athletics": {
+        "NAME": "Atletismo",
+        "DESC": "Determina a velocidade padrão de movimento de um duplicante."
+      },
+
+      "Learning": {
+        "NAME": "Aprendizado",
+        "DESC": "Determina o quão rápido um duplicante conduz pesquisas e ganha habilidades."
+      },
+
+      "Cooking": {
+        "NAME": "Culinária",
+        "DESC": "Determina o quão rápido um duplicante prepara comida."
+      },
+
+      "Strength": {
+        "NAME": "Força",
+        "DESC": "Determinar a capacidade de carga e a velocidade de limpeza de um duplicante."
+      },
+
+      "Caring": {
+        "NAME": "Bondade",
+        "DESC": "Determina a habilidade médica e sociabilidade com outros duplicantes e criaturas."
+      },
+
+      "Immunity": {
+        "NAME": "Imunidade",
+        "DESC": "Determina o quão suscetível a doenças é o duplicante é sua taxa de recuperação."
+      },
+
+      "Botanist": {
+        "NAME": "Agricultura",
+        "DESC": "Determina o quão rápido e eficiente um duplicante cultiva plantas."
+      },
+
+      "Ranching": {
+        "NAME": "Pecuária",
+        "DESC": "Determina o quão rápido e eficiente o duplicante cuida de criaturas."
+      },
+
+      "Art": {
+        "NAME": "Criatividade",
+        "DESC": "Determina o quão rápido o duplicante consegue produzir obras de arte."
+      },
+
+      "Decor": {
+        "NAME": "Decoração",
+        "DESC": "Decoração afeta o estresse do duplicante e sua opinião sobre os arredores."
+      }
+    }
+  }
+}
