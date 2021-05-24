@@ -56,7 +56,7 @@
   },
   "geyser": {
     "noun_titlecase_plural": "Gêisers",
-    "total_lifecycle_time": "Tempo total do ciclo de vida (dorment + ativo)",
+    "total_lifecycle_time": "Tempo total do ciclo de vida (dormente + ativo)",
     "active_time": "Tempo ativo",
     "emission_length": "Duração da emissão",
     "emission_rate": "Taxa de emissão"
@@ -104,7 +104,7 @@
       "modified_titlecase": "Dados Modificados"
     },
     "prompts": {
-      "modified-description": "Os dados nesse arquivo foram modificados desde que foi exportado.\nDados importados não são validados, e importar dados inválidos podem corromper seu save."
+      "modified-description": "Os dados nesse arquivo foram modificados desde que foi exportado.\nDados importados não são checados/validados, e importar dados inválidos pode corromper seu save."
     },
     "verbs": {
       "copy_titlecase": "Copiar",
@@ -121,7 +121,7 @@
       "loading": "Carregando",
       "saving": "Salvando",
       "modified": "Modificado",
-      "modified_description": "O arquivo foi modificado desde a última vez que foi salvo.",
+      "modified_description": "O save foi modificado desde a última vez que foi salvo.",
       "example": "Exemplo",
       "example_description": "Esse é um conteúdo de exemplo e não pode ser salvo."
     }

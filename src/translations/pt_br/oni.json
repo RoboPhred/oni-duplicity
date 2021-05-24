@@ -17,7 +17,7 @@
       },
 
       "SOLITARYSLEEPER": {
-        "NAME": "Dorminhoco Solitário",
+        "NAME": "Sono Solitário",
         "DESC": "Esse duplicante prefere dormir sozinho"
       },
 
@@ -37,8 +37,8 @@
       },
 
       "WORKAHOLIC": {
-        "NAME": "Viciado em trabalho",
-        "DESC": "Esse duplicante fica agitado quando está ocioso"
+        "NAME": "Viciado em Trabalho",
+        "DESC": "Esse duplicante fica agitado quando não tem nada para fazer"
       },
 
       "CANTRESEARCH": {
@@ -82,7 +82,7 @@
       },
 
       "TWINKLETOES": {
-        "NAME": "Pés de pena",
+        "NAME": "Pés de Pena",
         "DESC": "Esse duplicante é leve como uma pena quando o assunto é os pés"
       },
 
@@ -92,7 +92,7 @@
       },
 
       "NOODLEARMS": {
-        "NAME": "Braços de macarrão",
+        "NAME": "Braços de Lamen",
         "DESC": "Os braços desse duplicante tem a mesma força de um macarrão espaguete que cozinhou demais"
       },
 
@@ -107,13 +107,13 @@
       },
 
       "BINGEEATER": {
-        "NAME": "Comedor compulsivo",
+        "NAME": "Comedor Compulsivo",
         "DESC": "Esse duplicante vai comer perigosamente demais quando estiver estressado"
       },
 
       "ANXIOUS": {
         "NAME": "Ansioso",
-        "DESC": "Esse duplicante desaba quando colocado sob muita pressão"
+        "DESC": "Esse duplicante não reage bem a ser colocado sob muita pressão"
       },
 
       "STRESSVOMITER": {
@@ -142,18 +142,18 @@
       },
 
       "WEAKIMMUNESYSTEM": {
-        "NAME": "Sistema imunológico fraco",
+        "NAME": "Sistema Imunológico Fraco",
         "DESC": "Nem toda a vitamia C do mundo conseguiria previnir esse duplicante de adoecer"
       },
 
       "IRRITABLEBOWEL": {
-        "NAME": "Intestino irritável",
+        "NAME": "Intestino Irritável",
         "DESC": "Esse duplicante precisa de um pouco mais de tempo para \"se aliviar\""
       },
 
       "CALORIEBURNER": {
         "NAME": "Estômago sem fundo",
-        "DESC": "Esse duplicante pode talvez ser vários buracos negros disfarçados"
+        "DESC": "Esse duplicante tem um buraco negro no lugar do estômago"
       },
 
       "SMALLBLADDER": {
@@ -163,21 +163,21 @@
 
       "ANEMIC": {
         "NAME": "Anêmico",
-        "DESC": "Esse duplicante tem dificuldados em acompanhar o ritmo dos outros"
+        "DESC": "Esse duplicante tem dificuldades em acompanhar o ritmo dos outros"
       },
 
       "GREASEMONKEY": {
-        "NAME": "Amante de graxa",
+        "NAME": "Amante de Graxa",
         "DESC": "Esse duplicante gosta de jogar a chave inglesa nos planos da colÔnia... No bom sentido"
       },
 
       "MOLEHANDS": {
-        "NAME": "Mãos de toupeira",
+        "NAME": "Mãos de Toupeira",
         "DESC": "São excelentes para cavar túneis, mas achar boas luvas é um pesadelo"
       },
 
       "FASTLEARNER": {
-        "NAME": "Aprendizado rápido",
+        "NAME": "Aprendizado Rápido",
         "DESC": "Esse duplicante é afiado nos estudos e aprende novas habilidades com velocidade impressionante"
       },
 
@@ -197,7 +197,7 @@
       },
 
       "SNORER": {
-        "NAME": "Sono barulhento",
+        "NAME": "Sono Barulhento",
         "DESC": "Até no espaço dá pra ouvir o ronco desse duplicante"
       },
 
@@ -212,7 +212,7 @@
       },
 
       "UNCULTURED": {
-        "NAME": "Sem cultura",
+        "NAME": "Sem Cultura",
         "DESC": "Esse duplicante simplesmente não tem apreciação nenhuma por arte"
       },
 
@@ -222,12 +222,12 @@
       },
 
       "EARLYBIRD": {
-        "NAME": "Pássaro da manhã",
+        "NAME": "Pássaro da Manhã",
         "DESC": "Esse duplicante sempre acorda se sentindo refrescado e eficiente!"
       },
 
       "NIGHTOWL": {
-        "NAME": "Coruja da noite",
+        "NAME": "Coruja da Noite",
         "DESC": "Esse duplicante trabalha melhor na hora que ele deveria estar dormindo"
       },
 
@@ -237,7 +237,7 @@
       },
 
       "DEEPERDIVERSLUNGS": {
-        "NAME": "Pulmões de mergulhador profundo",
+        "NAME": "Pulmões de Mergulhador Profundo",
         "DESC": "Esse duplicante foi um cantor de ópera talentoso e também um instrutor de mergulho."
       },
 
@@ -268,7 +268,7 @@
       },
 
       "Digging": {
-        "NAME": "Digging",
+        "NAME": "Escavação",
         "DESC": "Determina a velocidade de escavação de um duplicante."
       },
 
@@ -278,7 +278,7 @@
       },
 
       "LifeSupport": {
-        "NAME": "Suporte a vida",
+        "NAME": "Suporte a Vida",
         "DESC": "Determina quão eficiente um duplicante mantém terrários de alga, desodorizadores e filtros de água."
       },
 
