@@ -172,169 +172,169 @@
       },
 
       "MOLEHANDS": {
-        "NAME": "Mole Hands",
-        "DESC": "They're great for tunneling, but finding good gloves is a nightmare"
+        "NAME": "Mãos de toupeira",
+        "DESC": "São excelentes para cavar túneis, mas achar boas luvas é um pesadelo"
       },
 
       "FASTLEARNER": {
-        "NAME": "Quick Learner",
-        "DESC": "This Duplicant's sharp as a tack and learns new skills with amazing speed"
+        "NAME": "Aprendizado rápido",
+        "DESC": "Esse duplicante é afiado nos estudos e aprende novas habilidades com velocidade impressionante"
       },
 
       "SLOWLEARNER": {
-        "NAME": "Slow Learner",
-        "DESC": "This Duplicant's a little slow on the uptake, but gosh do they try"
+        "NAME": "Aprendizado Lento",
+        "DESC": "Esse duplicante tem o raciocínio meio lento para aprender, mas não o impede de tentar"
       },
 
       "DIVERSLUNG": {
-        "NAME": "Diver's Lungs",
-        "DESC": "This Duplicant could have been a talented opera singer in another life"
+        "NAME": "Pulmões de Nadador",
+        "DESC": "Esse duplicante poderia ter sido um cantor de ópera talentoso em outra vida"
       },
 
       "FLATULENCE": {
-        "NAME": "Flatulent",
-        "DESC": "Some Duplicants are just full of it"
+        "NAME": "Flatulento",
+        "DESC": "Alguns duplicantes simplesmente tem gás demais"
       },
 
       "SNORER": {
-        "NAME": "Loud Sleeper",
-        "DESC": "In space, everyone can hear you snore"
+        "NAME": "Sono barulhento",
+        "DESC": "Até no espaço dá pra ouvir o ronco desse duplicante"
       },
 
       "NARCOLEPSY": {
-        "NAME": "Narcoleptic",
-        "DESC": "This Duplicant can and will fall asleep anytime, anyplace"
+        "NAME": "Narcoléptico",
+        "DESC": "Esse duplicante pode e vai dormir a qualquer hora e qualquer lugar"
       },
 
       "INTERIORDECORATOR": {
-        "NAME": "Interior Decorator",
-        "DESC": "\"Move it a little to the left...\""
+        "NAME": "Decorador de Interiores",
+        "DESC": "\"Agora só mover um pouco para esquerda...\""
       },
 
       "UNCULTURED": {
-        "NAME": "Uncultured",
-        "DESC": "This Duplicant has simply no appreciation for the arts"
+        "NAME": "Sem cultura",
+        "DESC": "Esse duplicante simplesmente não tem apreciação nenhuma por arte"
       },
 
       "ARCHAEOLOGIST": {
-        "NAME": "Archeologist",
-        "DESC": "This Duplicant will always bring back an artifact from space expeditions."
+        "NAME": "Arqueologista",
+        "DESC": "Esse duplicante sempre vai trazer um artefato das suas expedições."
       },
 
       "EARLYBIRD": {
-        "NAME": "Early Bird",
-        "DESC": "This Duplicant always wakes up feeling fresh and efficient!"
+        "NAME": "Pássaro da manhã",
+        "DESC": "Esse duplicante sempre acorda se sentindo refrescado e eficiente!"
       },
 
       "NIGHTOWL": {
-        "NAME": "Night Owl",
-        "DESC": "This Duplicant does their best work when they'd ought to be sleeping"
+        "NAME": "Coruja da noite",
+        "DESC": "Esse duplicante trabalha melhor na hora que ele deveria estar dormindo"
       },
 
       "REGENERATION": {
-        "NAME": "Regenerative",
-        "DESC": "This Duplicant is constantly regenerating health."
+        "NAME": "Regenerativo",
+        "DESC": "Esse duplicante está constantemente regenerando vida."
       },
 
       "DEEPERDIVERSLUNGS": {
-        "NAME": "Deeper Diver's Lungs",
-        "DESC": "This Duplicant was a talented opera singer and a snorkeling instructor."
+        "NAME": "Pulmões de mergulhador profundo",
+        "DESC": "Esse duplicante foi um cantor de ópera talentoso e também um instrutor de mergulho."
       },
 
       "SUNNYDISPOSITION": {
-        "NAME": "Sunny Disposition",
-        "DESC": "This Duplicant has an unwaveringly positive outlook on life."
+        "NAME": "Super Disposto",
+        "DESC": "Esse duplicante tem uma visão da vida extremamente positiva."
       },
 
       "ROCKCRUSHER": {
-        "NAME": "Rock Crusher",
-        "DESC": "This Duplicant is incredibly strong."
+        "NAME": "Quebra-Rocha",
+        "DESC": "Esse duplicante é incrivelmente forte."
       },
 
       "SIMPLETASTES": {
-        "NAME": "Simple Tastes",
-        "DESC": "This Duplicant finds pleasure in even the blandest of foods."
+        "NAME": "Gostos simples",
+        "DESC": "Esse duplicante se sente bem comendo até as comidas mais sem graça"
       },
 
       "FOODIE": {
         "NAME": "Gourmet",
-        "DESC": "This Duplicant has a highly refined palate and desires luxurious foods."
+        "DESC": "Esse duplicante tem um paladar altamente refinado e deseja comidas luxuosas."
       }
     },
     "ATTRIBUTES": {
       "Construction": {
-        "NAME": "Construction",
-        "DESC": "Determines a Duplicant's building speed."
+        "NAME": "Construção",
+        "DESC": "Determina a velocidade de construção de um duplicante."
       },
 
       "Digging": {
         "NAME": "Digging",
-        "DESC": "Determines a Duplicant's mining speed."
+        "DESC": "Determina a velocidade de escavação de um duplicante."
       },
 
       "Machinery": {
-        "NAME": "Tinkering",
-        "DESC": "Determines how quickly a Duplicant uses machines."
+        "NAME": "Maquinaria",
+        "DESC": "Determina o quão rápido o duplicante usa máquinas."
       },
 
       "LifeSupport": {
-        "NAME": "Life Support",
-        "DESC": "Determines how efficiently a Duplicant maintains algae terrariums, deodorizers, and water sieves."
+        "NAME": "Suporte a vida",
+        "DESC": "Determina quão eficiente um duplicante mantém terrários de alga, desodorizadores e filtros de água."
       },
 
       "Toggle": {
-        "NAME": "Toggle",
-        "DESC": "Determines how efficiently a Duplicant tunes machinery, flips switches, and sets sensors."
+        "NAME": "Alternar",
+        "DESC": "Determina o quão eficiente um duplicante fazer melhoramento em máquinas, alterna switches and configura sensores."
       },
 
       "Athletics": {
-        "NAME": "Athletics",
-        "DESC": "Determines a Duplicant's default runspeed."
+        "NAME": "Atletismo",
+        "DESC": "Determina a velocidade padrão de movimento de um duplicante."
       },
 
       "Learning": {
-        "NAME": "Learning",
-        "DESC": "Determines how quickly a Duplicant conducts Research and gains skills."
+        "NAME": "Aprendizado",
+        "DESC": "Determina o quão rápido um duplicante conduz pesquisas e ganha habilidades."
       },
 
       "Cooking": {
-        "NAME": "Cooking",
-        "DESC": "Determines how quickly a Duplicant prepares Food."
+        "NAME": "Culinária",
+        "DESC": "Determina o quão rápido um duplicante prepara comida."
       },
 
       "Strength": {
-        "NAME": "Strength",
-        "DESC": "Determines a Duplicant's carrying capacity and cleaning speed."
+        "NAME": "Força",
+        "DESC": "Determinar a capacidade de carga e a velocidade de limpeza de um duplicante."
       },
 
       "Caring": {
-        "NAME": "Kindness",
-        "DESC": "Determines medical skill and sociability with peers and critters."
+        "NAME": "Bondade",
+        "DESC": "Determina a habilidade médica e sociabilidade com outros duplicantes e criaturas."
       },
 
       "Immunity": {
-        "NAME": "Immunity",
-        "DESC": "Determines a Duplicant's disease susceptibility and recovery time."
+        "NAME": "Imunidade",
+        "DESC": "Determina o quão suscetível a doenças é o duplicante é sua taxa de recuperação."
       },
 
       "Botanist": {
-        "NAME": "Farming",
-        "DESC": "Determines how quickly and efficiently a Duplicant cultivates plants."
+        "NAME": "Agricultura",
+        "DESC": "Determina o quão rápido e eficiente um duplicante cultiva plantas."
       },
 
       "Ranching": {
-        "NAME": "Ranching",
-        "DESC": "Determines how quickly and efficiently a Duplicant tends critters."
+        "NAME": "Pecuária",
+        "DESC": "Determina o quão rápido e eficiente o duplicante cuida de criaturas."
       },
 
       "Art": {
-        "NAME": "Creativity",
-        "DESC": "Determines how quickly a Duplicant can produce artwork."
+        "NAME": "Criatividade",
+        "DESC": "Determina o quão rápido o duplicante consegue produzir obras de arte."
       },
 
       "Decor": {
-        "NAME": "Decor",
-        "DESC": "Decor affects a Duplicant's Stress and their opinion of their surroundings."
+        "NAME": "Decoração",
+        "DESC": "Decoração afeta o estresse do duplicante e sua opinião sobre os arredores."
       }
     }
   }
