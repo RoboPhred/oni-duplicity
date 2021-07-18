@@ -6,7 +6,7 @@ import {
   ACTION_RECEIVE_ONISAVE_BEGIN,
   ACTION_RECEIVE_ONISAVE_ERROR,
   ACTION_RECEIVE_ONISAVE_SUCCESS,
-  isReceiveOniSaveAction
+  isReceiveOniSaveAction,
 } from "../actions/receive-onisave";
 
 export default function receiveOniSaveReducer(
@@ -25,26 +25,27 @@ export default function receiveOniSaveReducer(
         loadingStatus: action.meta.operation,
         loadingProgressMessage: null,
         saveGame: action.payload.clearExisting ? null : state.saveGame,
-        isMock: false
+        isMock: false,
       };
     case ACTION_RECEIVE_ONISAVE_ERROR:
       state = {
         ...state,
         loadingStatus: LoadingStatus.Error,
-        loadError: action.payload
+        loadError: action.payload,
       };
       break;
     case ACTION_RECEIVE_ONISAVE_SUCCESS:
       state = {
         ...state,
         loadingStatus: LoadingStatus.Ready,
+        loadingFile: null,
         loadingProgressMessage: null,
         loadError: null,
         saveGame: action.payload,
         isModified:
           action.meta.operation === LoadingStatus.Saving
             ? false
-            : state.isModified
+            : state.isModified,
       };
   }
 

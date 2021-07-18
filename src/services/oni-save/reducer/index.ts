@@ -7,6 +7,7 @@ import copyBehaviorsReducer from "./copy-behaviors";
 import deleteLooseMaterial from "./delete-looe-material";
 import importWarnChecksumReducer from "./import-warn-checksum";
 import loadExampleSaveReducer from "./load-example";
+import loadOniSaveReducer from "./load-onisave";
 import mergeBehaviorsReducer from "./merge-behaviors";
 import modifyBehaviorPathReducer from "./modify-behavior-path";
 import modifyBehaviorReducer from "./modify-behavior";
@@ -25,6 +26,7 @@ export default reduceReducers(
   deleteLooseMaterial,
   importWarnChecksumReducer,
   loadExampleSaveReducer,
+  loadOniSaveReducer,
   mergeBehaviorsReducer,
   modifyBehaviorPathReducer,
   modifyBehaviorReducer,

@@ -3,13 +3,13 @@ import { call, put, takeEvery, take } from "redux-saga/effects";
 
 import {
   ACTION_ONISAVE_LOAD,
-  LoadOniSaveAction
+  LoadOniSaveAction,
 } from "../actions/load-onisave";
 
 import {
   receiveOniSaveBegin,
   receiveOniSaveError,
-  receiveOniSaveSuccess
+  receiveOniSaveSuccess,
 } from "../actions/receive-onisave";
 
 import { parseProgress } from "../actions/parse-progress";
@@ -22,13 +22,13 @@ export default function* saveEditorSaga() {
 }
 
 function* handleOniSaveLoad(action: LoadOniSaveAction) {
-  const file = action.payload;
+  const { file, bypassVersionCheck } = action.payload;
 
   yield put(receiveOniSaveBegin(LoadingStatus.Loading, true));
 
   const data: ArrayBuffer = yield call(readFile, file);
 
-  const loadChannel = createLoadChannel(data);
+  const loadChannel = createLoadChannel(data, bypassVersionCheck);
 
   while (true) {
     const msg = yield take(loadChannel);
@@ -45,27 +45,27 @@ function* handleOniSaveLoad(action: LoadOniSaveAction) {
   }
 }
 
-function createLoadChannel(data: ArrayBuffer) {
-  return eventChannel(emitter => {
+function createLoadChannel(data: ArrayBuffer, bypassVersionCheck: boolean) {
+  return eventChannel((emitter) => {
     function onProgress(message: string) {
       emitter({
         type: "progress",
-        message
+        message,
       });
     }
 
-    parseSave(data, onProgress)
-      .then(saveGame => {
+    parseSave(data, bypassVersionCheck, onProgress)
+      .then((saveGame) => {
         emitter({
           type: "success",
-          saveGame
+          saveGame,
         });
         emitter(END);
       })
-      .catch(error => {
+      .catch((error) => {
         emitter({
           type: "error",
-          error
+          error,
         });
         emitter(END);
       });

@@ -8,7 +8,7 @@ import {
   parseSaveSuccess,
   writeSaveError,
   writeSaveSuccess,
-  sendProgress
+  sendProgress,
 } from "./worker-messages";
 
 addEventListener("message", handleMessage);
@@ -31,7 +31,10 @@ function parseSave(command: ParseSaveCommand) {
   const injector = progressReporter(onProgress);
 
   try {
-    const save = parseSaveGame(command.data, injector);
+    const save = parseSaveGame(command.data, {
+      versionStrictness: command.bypassVersionCheck ? "major" : "minor",
+      interceptor: injector,
+    });
     postMessage(parseSaveSuccess(save));
   } catch (e) {
     postMessage(parseSaveError(e));

@@ -5,7 +5,7 @@ export enum LoadingStatus {
   Loading = "loading",
   Saving = "saving",
   Ready = "ready",
-  Error = "error"
+  Error = "error",
 }
 
 export interface CopyPasteData {
@@ -18,6 +18,10 @@ export interface BehaviorCopyData {
 }
 
 export interface OniSaveState {
+  // Its generally a bad idea to store buffer objects like this on redux.
+  // However, we need to keep this around in case the save fails to load due to a version mismatch
+  // and the user wants to force a load.
+  loadingFile: File | null;
   loadingStatus: LoadingStatus;
   loadingProgressMessage: string | null;
   loadError: Error | null;
@@ -29,6 +33,7 @@ export interface OniSaveState {
 }
 
 export const defaultOniSaveState: Readonly<OniSaveState> = {
+  loadingFile: null,
   loadingStatus: LoadingStatus.Idle,
   loadingProgressMessage: null,
   loadError: null,
@@ -36,6 +41,6 @@ export const defaultOniSaveState: Readonly<OniSaveState> = {
   isMock: false,
   isModified: false,
   copyPasteData: null,
-  warnInputChecksum: false
+  warnInputChecksum: false,
 };
 Object.freeze(defaultOniSaveState);

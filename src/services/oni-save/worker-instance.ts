@@ -9,7 +9,7 @@ import {
   SaveParserResultEvent,
   parseSave as parseSaveCommand,
   writeSave as writeSaveCommand,
-  jsonToError
+  jsonToError,
 } from "./worker-messages";
 
 import SaveLoadWorker from "worker-loader!./save-serializer.worker";
@@ -18,6 +18,7 @@ const worker = new SaveLoadWorker();
 
 export function parseSave(
   data: ArrayBuffer,
+  bypassVersionCheck: boolean,
   onProgress?: (message: string) => void
 ): Promise<SaveGame> {
   const promise = new Promise<SaveGame>((accept, reject) => {
@@ -26,7 +27,9 @@ export function parseSave(
       worker.onmessage = null;
     };
 
-    worker.onerror = error => reject(error);
+    worker.onerror = (error) => {
+      reject(error);
+    };
     worker.onmessage = (message: SaveParserResultEvent) => {
       const { data } = message;
       switch (data.type) {
@@ -45,7 +48,7 @@ export function parseSave(
     };
   });
 
-  worker.postMessage(parseSaveCommand(data));
+  worker.postMessage(parseSaveCommand(data, bypassVersionCheck));
 
   return promise;
 }
@@ -60,7 +63,7 @@ export function writeSave(
       worker.onmessage = null;
     };
 
-    worker.onerror = error => reject(error);
+    worker.onerror = (error) => reject(error);
     worker.onmessage = (message: SaveParserResultEvent) => {
       const { data } = message;
       switch (data.type) {

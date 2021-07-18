@@ -9,10 +9,5 @@ export const loadingStatusMessageSelector = (state: AppState) =>
 export const loadingErrorSelector = (state: AppState) =>
   state.services.oniSave.loadError;
 
-export const loadingErrorMessageSelector = (state: AppState) => {
-  const error = loadingErrorSelector(state);
-  if (error) {
-    return error.message;
-  }
-  return null;
-};
+export const loadingFileSelector = (state: AppState) =>
+  state.services.oniSave.loadingFile;
