@@ -1,3 +1,8 @@
+## 3.17.0
+
+- Support save version 4.25
+- Allow bypassing version check.
+
 ## 3.16.2
 
 - Support DLC save version 4.23
