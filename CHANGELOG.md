@@ -1,3 +1,8 @@
+## 3.18.0
+
+- Make save editor DLC-aware
+- Enable planets editor for non-dlc saves.
+
 ## 3.17.0
 
 - Support save version 4.25

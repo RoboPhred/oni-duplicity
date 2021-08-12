@@ -8,7 +8,7 @@ import {
   createStyles,
   withStyles,
   WithStyles,
-  Theme
+  Theme,
 } from "@material-ui/core/styles";
 
 import SettingsButton from "./SettingsButton";
@@ -16,6 +16,7 @@ import SaveIconButton from "./SaveIconButton";
 import LoadIconButton from "./LoadIconButton";
 import BackButton from "./BackButton";
 import ModifiedChip from "./ModifiedChip";
+import DLCChip from "./DLCChip";
 import ExampleChip from "./ExampleChip";
 
 export interface AppbarProps {
@@ -26,11 +27,11 @@ export interface AppbarProps {
 const styles = (theme: Theme) =>
   createStyles({
     title: {
-      flexGrow: 1
+      flexGrow: 1,
     },
     chip: {
-      marginRight: theme.spacing()
-    }
+      marginRight: theme.spacing(),
+    },
   });
 
 type Props = AppbarProps & WithStyles<typeof styles>;
@@ -42,6 +43,7 @@ const Appbar: React.FC<Props> = ({ classes, title, back }) => (
       <Typography className={classes.title} variant="h6" color="inherit">
         {title}
       </Typography>
+      <DLCChip className={classes.chip} />
       <ModifiedChip className={classes.chip} />
       <ExampleChip className={classes.chip} />
       <SaveIconButton />

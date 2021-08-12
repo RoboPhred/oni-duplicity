@@ -1,6 +1,9 @@
+import { DLCIds } from "oni-save-parser";
+
 export interface NavItem {
   name: string;
   path: string;
+  requireDLC?: string;
   i18nKey: string;
   saveRequired?: boolean;
 }
@@ -23,13 +26,13 @@ const NavItems: NavItem[] = [
     i18nKey: "geyser.noun_titlecase_plural",
     saveRequired: true,
   },
-  // FIXME: Crashes post-dlc
-  // {
-  //   name: "Planets",
-  //   path: "/planets",
-  //   i18nKey: "planet.noun_titlecase_plural",
-  //   saveRequired: true
-  // },
+  {
+    name: "Planets",
+    path: "/planets",
+    requireDLC: DLCIds.None,
+    i18nKey: "planet.noun_titlecase_plural",
+    saveRequired: true,
+  },
   {
     name: "Materials",
     path: "/materials",
