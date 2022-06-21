@@ -1,3 +1,7 @@
+## 3.18.1
+
+- Fix crash when encountering invalid hairstyles.
+
 ## 3.18.0
 
 - Make save editor DLC-aware
