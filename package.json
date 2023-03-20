@@ -11,7 +11,7 @@
     "test": "jest",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack.config.js",
     "start:prod": "cross-env NODE_ENV=production webpack-dev-server --config ./webpack.config.js",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist -r git@github.com:RoboPhred/oni-duplicity.git"
   },
   "private": true,
   "keywords": [
