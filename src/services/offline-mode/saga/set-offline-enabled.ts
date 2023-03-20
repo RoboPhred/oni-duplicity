@@ -2,7 +2,7 @@ import { takeEvery, call, put } from "redux-saga/effects";
 
 import {
   ACTION_SET_OFFLINE_ENABLED,
-  SetOfflineEnabledAction
+  SetOfflineEnabledAction,
 } from "../actions/set-offline-enabled";
 import { offlineSwitchCompleted } from "../actions/offline-switch-completed";
 
@@ -19,7 +19,7 @@ function* handleSetOfflineEnabled(action: SetOfflineEnabledAction) {
       yield call(disableOfflineMode);
     }
     yield put(offlineSwitchCompleted(enabled));
-  } catch (e) {
+  } catch (e: any) {
     yield put(offlineSwitchCompleted(false));
     return;
   }

@@ -4,7 +4,7 @@ import {
   BehaviorName,
   GameObjectBehavior,
   GameObjectGroup,
-  getBehavior
+  getBehavior,
 } from "oni-save-parser";
 import { findIndex } from "lodash";
 
@@ -28,9 +28,9 @@ export function tryModifySaveGame(
       state = {
         ...state,
         saveGame,
-        isModified: true
+        isModified: true,
       };
-    } catch (e) {
+    } catch (e: any) {
       if (!(e instanceof ModifySaveError)) {
         throw e;
       }
@@ -46,28 +46,28 @@ export function addGameObject(
 ): SaveGame {
   let groupIndex = findIndex(
     saveGame.gameObjects,
-    x => x.name === gameObjectType
+    (x) => x.name === gameObjectType
   );
   if (groupIndex === -1) {
     const group: GameObjectGroup = {
       name: gameObjectType,
-      gameObjects: [gameObject]
+      gameObjects: [gameObject],
     };
     return {
       ...saveGame,
-      gameObjects: [...saveGame.gameObjects, group]
+      gameObjects: [...saveGame.gameObjects, group],
     };
   }
 
   const gameObjects = [...saveGame.gameObjects];
   gameObjects[groupIndex] = {
     ...gameObjects[groupIndex],
-    gameObjects: [...gameObjects[groupIndex].gameObjects, gameObject]
+    gameObjects: [...gameObjects[groupIndex].gameObjects, gameObject],
   };
 
   return {
     ...saveGame,
-    gameObjects
+    gameObjects,
   };
 }
 
@@ -90,8 +90,8 @@ export function removeGameObject(
       gameObjects: drop(
         saveGame.gameObjects[groupIndex].gameObjects,
         gameObjectIndex
-      )
-    })
+      ),
+    }),
   };
 
   return newSaveGame;
@@ -152,8 +152,8 @@ export function replaceGameObject(
         saveGame.gameObjects[groupIndex].gameObjects,
         gameObjectIndex,
         gameObject
-      )
-    })
+      ),
+    }),
   };
 
   return newSaveGame;
@@ -171,7 +171,7 @@ export function changeStateBehaviorData<
 ): GameObject {
   const behaviorIndex = findIndex(
     gameObject.behaviors,
-    x => x.name === behaviorName
+    (x) => x.name === behaviorName
   );
   if (behaviorIndex === -1) {
     throw new ModifySaveError(
@@ -186,8 +186,8 @@ export function changeStateBehaviorData<
     ...gameObject,
     behaviors: replace(gameObject.behaviors, behaviorIndex, {
       ...gameObject.behaviors[behaviorIndex],
-      [dataKey]: newData
-    })
+      [dataKey]: newData,
+    }),
   };
 }
 
@@ -213,7 +213,7 @@ export function setArrayDict<TKey, TValue>(
   key: TKey,
   value: TValue
 ): [TKey, TValue][] {
-  const index = findIndex(arrayDict, x => x[0] === key);
+  const index = findIndex(arrayDict, (x) => x[0] === key);
   if (index === -1) {
     throw new Error("Key not found.");
   }
@@ -228,7 +228,7 @@ function applyModifier<T>(data: T, modifier: DataModifier<T>): T {
   } else {
     newData = {
       ...data,
-      ...modifier
+      ...modifier,
     };
   }
   return newData;

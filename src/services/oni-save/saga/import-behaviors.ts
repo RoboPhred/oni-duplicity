@@ -5,17 +5,20 @@ import {
   ACTION_ONISAVE_IMPORT_BEHAVIORS,
   ImportBehaviorsAction,
   importWarnChecksum,
-  ACTION_ONISAVE_IMPORT_CONFIRM
+  ACTION_ONISAVE_IMPORT_CONFIRM,
 } from "../actions/import-behaviors";
 import { mergeBehaviors } from "../actions/merge-behaviors";
 
 import { gameObjectTypesByIdSelector } from "../selectors/game-objects";
+import { SagaIterator } from "redux-saga";
 
 export default function* importBehaviorsSaga() {
   yield takeEvery(ACTION_ONISAVE_IMPORT_BEHAVIORS, handleImportBehaviorsSaga);
 }
 
-function* handleImportBehaviorsSaga(action: ImportBehaviorsAction) {
+function* handleImportBehaviorsSaga(
+  action: ImportBehaviorsAction
+): SagaIterator {
   const { gameObjectId, file } = action.payload;
 
   function onError(message: string) {
@@ -28,7 +31,7 @@ function* handleImportBehaviorsSaga(action: ImportBehaviorsAction) {
   let content: any;
   try {
     content = JSON.parse(contentStr);
-  } catch (e) {
+  } catch (e: any) {
     onError("Invalid import data.");
     return;
   }
@@ -39,7 +42,9 @@ function* handleImportBehaviorsSaga(action: ImportBehaviorsAction) {
   delete content.$sha1;
   const contentSha1 = objectHash(content, { algorithm: "sha1" });
   if (sha1 !== contentSha1) {
-    const shouldContinue = yield* warnImportChecksumSaga();
+    yield put(importWarnChecksum());
+    const action = yield take(ACTION_ONISAVE_IMPORT_CONFIRM);
+    const shouldContinue = action.payload;
     if (!shouldContinue) {
       return;
     }
@@ -67,10 +72,4 @@ function readFile(file: File): Promise<string> {
     };
     reader.readAsText(file);
   });
-}
-
-function* warnImportChecksumSaga() {
-  yield put(importWarnChecksum());
-  const action = yield take(ACTION_ONISAVE_IMPORT_CONFIRM);
-  return action.payload;
 }

@@ -4,7 +4,8 @@ import {
   Theme,
   createStyles,
   withStyles,
-  WithStyles
+  WithStyles,
+  StyleRulesCallback,
 } from "@material-ui/core/styles";
 
 import Divider from "@material-ui/core/Divider";
@@ -17,19 +18,20 @@ export interface SidebarProps {
   className?: string;
 }
 
-const styles = (theme: Theme) =>
+// Note: The old dependencies are rotting away.  Using the injected theme now creates baffling typescript errors.
+const styles: StyleRulesCallback<Theme, {}> = ((theme: Theme) =>
   createStyles({
     toolbar: {
       ...theme.mixins.toolbar,
       display: "flex",
       paddingLeft: theme.spacing(3),
-      alignItems: "center"
+      alignItems: "center",
     },
     ghButton: {
       marginLeft: "auto",
-      marginRight: theme.spacing()
-    }
-  });
+      marginRight: theme.spacing(),
+    },
+  })) as any;
 
 type Props = SidebarProps & WithStyles<typeof styles>;
 

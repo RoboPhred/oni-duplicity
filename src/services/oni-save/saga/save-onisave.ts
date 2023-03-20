@@ -1,4 +1,4 @@
-import { eventChannel, END } from "redux-saga";
+import { eventChannel, END, SagaIterator } from "redux-saga";
 import { put, select, takeEvery, take } from "redux-saga/effects";
 
 import { SaveGame } from "oni-save-parser";
@@ -7,13 +7,13 @@ import { saveAs } from "file-saver";
 
 import {
   ACTION_ONISAVE_SAVE,
-  SaveOniSaveAction
+  SaveOniSaveAction,
 } from "../actions/save-onisave";
 
 import {
   receiveOniSaveBegin,
   receiveOniSaveError,
-  receiveOniSaveSuccess
+  receiveOniSaveSuccess,
 } from "../actions/receive-onisave";
 
 import { parseProgress } from "../actions/parse-progress";
@@ -27,7 +27,7 @@ export default function* saveEditorSaga() {
   yield takeEvery(ACTION_ONISAVE_SAVE, handleOniSaveWrite);
 }
 
-function* handleOniSaveWrite(action: SaveOniSaveAction) {
+function* handleOniSaveWrite(action: SaveOniSaveAction): SagaIterator {
   let saveName = action.payload;
 
   const saveGame: SaveGame | null = yield select(saveGameSelector);
@@ -58,7 +58,7 @@ function* handleOniSaveWrite(action: SaveOniSaveAction) {
           {
             name: msg.error.name,
             message: msg.error.message,
-            stack: msg.error.stack
+            stack: msg.error.stack,
           },
           LoadingStatus.Saving
         )
@@ -69,27 +69,27 @@ function* handleOniSaveWrite(action: SaveOniSaveAction) {
 }
 
 function createSaveChannel(saveGame: SaveGame) {
-  return eventChannel(emitter => {
+  return eventChannel((emitter) => {
     function onProgress(message: string) {
       emitter({
         type: "progress",
-        message
+        message,
       });
     }
 
     writeSave(saveGame, onProgress)
-      .then(data => {
+      .then((data) => {
         const blob = new Blob([data]);
         emitter({
           type: "success",
-          blob
+          blob,
         });
         emitter(END);
       })
-      .catch(error => {
+      .catch((error) => {
         emitter({
           type: "error",
-          error
+          error,
         });
         emitter(END);
       });
