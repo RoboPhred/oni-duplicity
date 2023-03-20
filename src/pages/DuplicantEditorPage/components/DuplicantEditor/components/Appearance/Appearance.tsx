@@ -5,7 +5,7 @@ import {
   Accessory,
   AccessoryType,
   getAccessoryName,
-  getIndexOfAccessoryType
+  getIndexOfAccessoryType,
 } from "oni-save-parser";
 import { merge, padStart } from "lodash";
 
@@ -13,7 +13,7 @@ import {
   Theme,
   createStyles,
   withStyles,
-  WithStyles
+  WithStyles,
 } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
@@ -34,31 +34,34 @@ const styles = (theme: Theme) =>
       display: "flex",
       flexDirection: "column",
       width: "100%",
-      height: "100%"
+      height: "100%",
     },
     tabContent: {
       width: "100%",
       height: "100%",
-      overflow: "auto"
+      overflow: "auto",
     },
     partList: {
       display: "flex",
       flexDirection: "row",
-      flexWrap: "wrap"
+      flexWrap: "wrap",
     },
     partContainer: {
-      margin: theme.spacing(0.5)
+      margin: theme.spacing(0.5),
     },
     part: {
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   });
 
 type Props = AppearanceProps & WithStyles<typeof styles>;
 
 const Appearance: React.FC<Props> = ({ classes, gameObjectId }) => {
   const [tab, setTab] = React.useState(0);
-  const { templateData: { accessories }, onTemplateDataModify } = useBehavior(gameObjectId, AccessorizerBehavior);
+  const {
+    templateData: { accessories },
+    onTemplateDataModify,
+  } = useBehavior(gameObjectId, AccessorizerBehavior);
 
   const hairOrdinal = getOrdinalOfType(accessories, "hair");
   const headOrdinal = getOrdinalOfType(accessories, "headshape");
@@ -70,7 +73,7 @@ const Appearance: React.FC<Props> = ({ classes, gameObjectId }) => {
       return;
     }
     const accessoryMod: Record<number, Accessory> = {
-      [index]: Accessory(`${type}_${padStart(String(ordinal), 3, "0")}`)
+      [index]: Accessory(`${type}_${padStart(String(ordinal), 3, "0")}`),
     };
     if (type === "hair") {
       const hatHair = getIndexOfAccessoryType(accessories, "hat_hair");
@@ -79,10 +82,7 @@ const Appearance: React.FC<Props> = ({ classes, gameObjectId }) => {
           `hat_hair_${padStart(String(ordinal), 3, "0")}`
         );
       }
-      const hairAlways = getIndexOfAccessoryType(
-        accessories,
-        "hair_always"
-      );
+      const hairAlways = getIndexOfAccessoryType(accessories, "hair_always");
       if (hairAlways !== -1) {
         accessoryMod[hairAlways] = Accessory(
           `hair_always_${padStart(String(ordinal), 3, "0")}`
@@ -91,12 +91,10 @@ const Appearance: React.FC<Props> = ({ classes, gameObjectId }) => {
     }
     if (type === "body") {
       const arm = getIndexOfAccessoryType(accessories, "arm");
-      accessoryMod[arm] = Accessory(
-        `arm_${padStart(String(ordinal), 3, "0")}`
-      );
+      accessoryMod[arm] = Accessory(`arm_${padStart(String(ordinal), 3, "0")}`);
     }
     onTemplateDataModify({
-      accessories: merge([], accessories, accessoryMod)
+      accessories: merge([], accessories, accessoryMod),
     });
   }
 
@@ -109,7 +107,6 @@ const Appearance: React.FC<Props> = ({ classes, gameObjectId }) => {
   }
 
   return (
-
     <div className={classes.root}>
       <Paper square>
         <Tabs
@@ -120,13 +117,14 @@ const Appearance: React.FC<Props> = ({ classes, gameObjectId }) => {
           <Tab label="Hair" />
           <Tab label="Head" />
           <Tab label="Eyes" />
-          <Tab label="Body" />
+          {/* Body has now been broken into more parts */}
+          {/* <Tab label="Body" /> */}
         </Tabs>
       </Paper>
       <div className={classes.tabContent}>
         {tab === 0 && (
           <div className={classes.partList}>
-            {ordinalRange(33).map(ordinal => (
+            {ordinalRange(33).map((ordinal) => (
               <HeadPortrait
                 key={ordinal}
                 className={classes.partContainer}
@@ -141,7 +139,7 @@ const Appearance: React.FC<Props> = ({ classes, gameObjectId }) => {
         )}
         {tab === 1 && (
           <div className={classes.partList}>
-            {ordinalRange(4).map(ordinal => (
+            {ordinalRange(4).map((ordinal) => (
               <HeadPortrait
                 key={ordinal}
                 className={classes.partContainer}
@@ -156,7 +154,7 @@ const Appearance: React.FC<Props> = ({ classes, gameObjectId }) => {
         )}
         {tab === 2 && (
           <div className={classes.partList}>
-            {ordinalRange(5).map(ordinal => (
+            {ordinalRange(5).map((ordinal) => (
               <HeadPortrait
                 key={ordinal}
                 className={classes.partContainer}
@@ -169,7 +167,8 @@ const Appearance: React.FC<Props> = ({ classes, gameObjectId }) => {
             ))}
           </div>
         )}
-        {tab === 3 && (
+        {/* Body has now been broken into more parts */}
+        {/* {tab === 3 && (
           <div className={classes.partList}>
             {ordinalRange(4).map(ordinal => (
               <Portrait
@@ -184,7 +183,7 @@ const Appearance: React.FC<Props> = ({ classes, gameObjectId }) => {
               />
             ))}
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

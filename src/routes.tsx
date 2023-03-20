@@ -8,8 +8,8 @@ import DuplicantEditorPage from "@/pages/DuplicantEditorPage";
 import CreaturesPage from "@/pages/CreaturesPage";
 import CreatureEditorPage from "@/pages/CreatureEditorPage";
 import GeysersPage from "@/pages/GeysersPage";
-import PlanetsPage from "@/pages/PlanetsPage";
-import MaterialsPage from "@/pages/MaterialsPage";
+// import PlanetsPage from "@/pages/PlanetsPage";
+// import MaterialsPage from "@/pages/MaterialsPage";
 import RawEditorPage from "@/pages/RawEditorPage";
 import SettingsPage from "@/pages/SettingsPage";
 import ChangelogPage from "@/pages/ChangelogPage";
@@ -30,8 +30,8 @@ const Routes: React.FC = () => (
       component={CreatureEditorPage}
     />
     <Route path="/geysers" exact component={GeysersPage} />
-    <Route path="/planets" exact component={PlanetsPage} />
-    <Route path="/materials" exact component={MaterialsPage} />
+    {/* <Route path="/planets" exact component={PlanetsPage} /> */}
+    {/* <Route path="/materials" exact component={MaterialsPage} /> */}
     <Route path="/raw" exact component={RawEditorPage} />
     <Route path="/settings" exact component={SettingsPage} />
     <Route path="/changelog" exact component={ChangelogPage} />
