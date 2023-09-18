@@ -19,7 +19,7 @@
     "OxygenNotIncluded",
     "save-editor"
   ],
-  "author": "William Matthews",
+  "author": "RoboPhred <robophred@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/classnames": "^2.2.9",
