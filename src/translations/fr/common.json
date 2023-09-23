@@ -1,0 +1,144 @@
+{
+  "duplicant": {
+    "noun_titlecase_plural": "Clones",
+    "noun_titlecase": "Clone",
+    "verbs": {
+      "edit_titlecase": "Modifier Clone"
+    },
+    "conditions": {
+      "missing_titlecase": "Clone Non Trouvé"
+    }
+  },
+  "duplicant_effect": {
+    "noun_titlecase": "Effet",
+    "verbs": {
+      "add_titlecase": "Ajouter Effet"
+    }
+  },
+  "duplicant_trait": {
+    "noun_titlecase": "Caractèristique",
+    "noun_titlecase_plural": "Caractèristiques",
+    "verbs": {
+      "add_titlecase": "Ajouter Caractèristique"
+    }
+  },
+  "duplicant_interest": {
+    "noun_titlecase": "Intérêt",
+    "verbs": {
+      "add_titlecase": "Ajouter Intérêt"
+    }
+  },
+  "duplicant_attribute": {
+    "noun_titlecase_plural": "Attributs",
+    "primary_titlecase": "Primaire",
+    "secondary_titlecase": "Secondaire"
+  },
+  "duplicant_skills": {
+    "noun_titlecase": "Compétence",
+    "noun_titlecase_plural": "Compétences",
+    "experience_titlecase": "Experience",
+    "mastery_titlecase": "Maîtrise"
+  },
+  "duplicant_appearance": {
+    "noun_titlecase": "Apparence"
+  },
+  "duplicant_health": {
+    "noun_titlecase": "Santé"
+  },
+  "creature": {
+    "noun_titlecase_plural": "Créatures",
+    "verbs": {
+      "edit_titlecase": "Modifier Créature"
+    },
+    "conditions": {
+      "missing_titlecase": "Créature Non Trouvée"
+    }
+  },
+  "geyser": {
+    "noun_titlecase_plural": "Geysers",
+    "total_lifecycle_time": "Durée Totale du Cycle de Vie (inactif + actif)",
+    "active_time": "Durée Active",
+    "emission_length": "Longueur d'émission",
+    "emission_rate": "Taux d'émission"
+  },
+  "planet": {
+    "noun_titlecase_plural": "Planètes"
+  },
+  "material": {
+    "noun_titlecase": "Ressource",
+    "noun_titlecase_plural": "Ressources",
+    "all_titlecase": "Toutes Ressources",
+    "gram": "{{count}} g",
+    "kilogram": "{{count}} kg"
+  },
+  "material_loose": {
+    "noun_titlecase": "En vrac",
+    "clump_count": "{{count}} tas",
+    "clump_count_plural": "{{count}} tas",
+    "verbs": {
+      "delete_name": "Supprimer {{name}}"
+    },
+    "prompts": {
+      "delete": "Ceci va enlever du jeu toutes les ressources en vrac. Les ressources ne pourront pas être récupérées !"
+    }
+  },
+  "material_storage": {
+    "noun_titlecase": "Stockage",
+    "container_count": "{{count}} conteneur",
+    "container_count_plural": "{{count}} conteneurs"
+  },
+  "time_cycles": {
+    "noun_titlecase": "Temps du Cycle"
+  },
+  "dialog": {
+    "queries": {
+      "continue": "Vous êtes sur que vous voulez continuer?"
+    },
+    "verbs": {
+      "cancel_titlecase": "Annuler",
+      "confirm_titlecase": "Confirmer"
+    }
+  },
+  "data": {
+    "conditions": {
+      "modified_titlecase": "Données Modifiées"
+    },
+    "prompts": {
+      "modified-description": "Les données de ce fichier ont été modifiées depuis leur exportation.\nLes données importées ne sont pas validées et l'importation de données non valides peut corrompre votre sauvegarde."
+    },
+    "verbs": {
+      "copy_titlecase": "Copier",
+      "export_titlecase": "Exporter",
+      "import_titlecase": "Importer"
+    }
+  },
+  "save-file": {
+    "verbs": {
+      "load_titlecase": "Charger",
+      "save_titlecase": "Sauvegarder"
+    },
+    "conditions": {
+      "loading": "Chargement",
+      "saving": "Sauvegarde",
+      "modified": "Modifié",
+      "modified_description": "Le fichier a été modifié depuis son dernier enregistrement.",
+      "example": "Exemple",
+      "example_description": "Ceci et un ecemple et ne peut être enregistré."
+    }
+  },
+  "overview-page": {
+    "title": "Aperçu",
+    "no-save": {
+      "title": "Choisir une Sauvegarde",
+      "prompt": "Aucun Fichier de Sauvegarde n'a été chargé.",
+      "save-location": "Les fichiers de sauvegarde se trouvent ici <1>{{path}}</1>."
+    }
+  },
+  "raw-editor-page": {
+    "title": "Éditeur brut"
+  },
+  "view-github": "Afficher le projet sur GitHub",
+  "changelog": {
+    "title": "Changelog"
+  }
+}
