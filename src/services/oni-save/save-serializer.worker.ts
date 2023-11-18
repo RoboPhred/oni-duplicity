@@ -36,7 +36,7 @@ function parseSave(command: ParseSaveCommand) {
       interceptor: injector,
     });
     postMessage(parseSaveSuccess(save));
-  } catch (e) {
+  } catch (e: any) {
     postMessage(parseSaveError(e));
   }
 }
@@ -47,7 +47,7 @@ function writeSave(command: WriteSaveCommand) {
   try {
     const data = writeSaveGame(command.saveGame, injector);
     postMessage(writeSaveSuccess(data));
-  } catch (e) {
+  } catch (e: any) {
     postMessage(writeSaveError(e));
   }
 }

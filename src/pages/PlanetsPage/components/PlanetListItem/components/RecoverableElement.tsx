@@ -13,7 +13,7 @@ export interface RecoverableElementProps {
 
 export const RecoverableElement: React.FC<RecoverableElementProps> = ({
   planetId,
-  resourceId
+  resourceId,
 }) => {
   const { planet, onModifyPlanet } = usePlanet(planetId);
 
@@ -24,18 +24,20 @@ export const RecoverableElement: React.FC<RecoverableElementProps> = ({
     },
     []
   );
-  const setMass = React.useCallback((_: any, value: number | number[]) => {
-    const newRecoverables = [...planet?.recoverableElements];
-    newRecoverables[resourceId] = [newRecoverables[resourceId][0], value as number];
-    onModifyPlanet({
-      recoverableElements: newRecoverables
-    });
-    setTransientValue(-1)
-  }, [
-    planet?.recoverableElements,
-    onModifyPlanet,
-    planetId
-  ]);
+  const setMass = React.useCallback(
+    (_: any, value: number | number[]) => {
+      const newRecoverables = [...(planet?.recoverableElements ?? [])];
+      newRecoverables[resourceId] = [
+        newRecoverables[resourceId][0],
+        value as number,
+      ];
+      onModifyPlanet({
+        recoverableElements: newRecoverables,
+      });
+      setTransientValue(-1);
+    },
+    [planet?.recoverableElements, onModifyPlanet, planetId]
+  );
 
   if (!planet) {
     return null;

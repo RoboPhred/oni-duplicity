@@ -8,7 +8,7 @@ import {
   Hair,
   Head,
   Eyes,
-  Body
+  Body,
 } from "react-oni-duplicant";
 import useBehavior from "@/services/oni-save/hooks/useBehavior";
 
@@ -19,14 +19,14 @@ export interface DuplicantPortraitProps {
 
 const styles = createStyles({
   portraitContainer: {
-    position: "relative"
+    position: "relative",
   },
   portrait: {
     position: "absolute",
     width: 0,
     height: 0,
-    transformOrigin: "top left"
-  }
+    transformOrigin: "top left",
+  },
 });
 
 type Props = DuplicantPortraitProps & WithStyles<typeof styles>;
@@ -34,7 +34,7 @@ type Props = DuplicantPortraitProps & WithStyles<typeof styles>;
 const DuplicantPortrait: React.FC<Props> = ({
   classes,
   gameObjectId,
-  scale
+  scale,
 }) => {
   const { templateData } = useBehavior(gameObjectId, AccessorizerBehavior);
   if (!templateData) {
@@ -51,39 +51,36 @@ const DuplicantPortrait: React.FC<Props> = ({
         style={{
           left: 126 * scale,
           top: 150 * scale,
-          transform: `scale(${scale})`
+          transform: `scale(${scale})`,
         }}
       >
         <DuplicantContainer>
-          <Body
+          {/* <Body
             ordinal={ordinalFromAccessory(
-              getAccessoryOfType(templateData.accessories, "body")!.guid
-                .Guid
+              getAccessoryOfType(templateData.accessories, "body")!.guid.Guid
             )}
-          />
+          /> */}
           <Head
             ordinal={ordinalFromAccessory(
-              getAccessoryOfType(templateData.accessories, "headshape")!
-                .guid.Guid
+              getAccessoryOfType(templateData.accessories, "headshape")!.guid
+                .Guid
             )}
           />
           <Eyes
             ordinal={ordinalFromAccessory(
-              getAccessoryOfType(templateData.accessories, "eyes")!.guid
-                .Guid
+              getAccessoryOfType(templateData.accessories, "eyes")!.guid.Guid
             )}
           />
           <Hair
             ordinal={ordinalFromAccessory(
-              getAccessoryOfType(templateData.accessories, "hair")!.guid
-                .Guid
+              getAccessoryOfType(templateData.accessories, "hair")!.guid.Guid
             )}
           />
         </DuplicantContainer>
       </div>
     </div>
   );
-}
+};
 export default withStyles(styles)(DuplicantPortrait);
 
 function ordinalFromAccessory(guid: string) {

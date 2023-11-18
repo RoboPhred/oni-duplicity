@@ -1,4 +1,4 @@
-import { eventChannel, END } from "redux-saga";
+import { eventChannel, END, SagaIterator } from "redux-saga";
 import { call, put, takeEvery, take } from "redux-saga/effects";
 
 import {
@@ -17,11 +17,11 @@ import { parseProgress } from "../actions/parse-progress";
 import { parseSave } from "../worker-instance";
 import { LoadingStatus } from "../state";
 
-export default function* saveEditorSaga() {
+export default function* saveEditorSaga(): SagaIterator {
   yield takeEvery(ACTION_ONISAVE_LOAD, handleOniSaveLoad);
 }
 
-function* handleOniSaveLoad(action: LoadOniSaveAction) {
+function* handleOniSaveLoad(action: LoadOniSaveAction): SagaIterator {
   const { file, bypassVersionCheck } = action.payload;
 
   yield put(receiveOniSaveBegin(LoadingStatus.Loading, true));

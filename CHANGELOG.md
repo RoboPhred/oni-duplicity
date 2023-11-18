@@ -1,3 +1,16 @@
+## 3.19.0
+
+- Hack out nonfunctional editors that no longer apply to save version 4.31
+
+## 3.18.1
+
+- Fix crash when encountering invalid hairstyles.
+
+## 3.18.0
+
+- Make save editor DLC-aware
+- Enable planets editor for non-dlc saves.
+
 ## 3.17.0
 
 - Support save version 4.25
