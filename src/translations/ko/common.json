@@ -1,0 +1,144 @@
+{
+  "duplicant": {
+    "noun_titlecase_plural": "복제체",
+    "noun_titlecase": "복제체",
+    "verbs": {
+      "edit_titlecase": "복제체 수정"
+    },
+    "conditions": {
+      "missing_titlecase": "복제체를 찾을 수 없습니다"
+    }
+  },
+  "duplicant_effect": {
+    "noun_titlecase": "효과",
+    "verbs": {
+      "add_titlecase": "효과 부여"
+    }
+  },
+  "duplicant_trait": {
+    "noun_titlecase": "특성",
+    "noun_titlecase_plural": "특성들",
+    "verbs": {
+      "add_titlecase": "특성 추가"
+    }
+  },
+  "duplicant_interest": {
+    "noun_titlecase": "흥미",
+    "verbs": {
+      "add_titlecase": "흥미 추가"
+    }
+  },
+  "duplicant_attribute": {
+    "noun_titlecase_plural": "관심",
+    "primary_titlecase": "주요 속성",
+    "secondary_titlecase": "보조 속성"
+  },
+  "duplicant_skills": {
+    "noun_titlecase": "기술",
+    "noun_titlecase_plural": "기술",
+    "experience_titlecase": "경험치",
+    "mastery_titlecase": "습득"
+  },
+  "duplicant_appearance": {
+    "noun_titlecase": "생김새"
+  },
+  "duplicant_health": {
+    "noun_titlecase": "체력"
+  },
+  "creature": {
+    "noun_titlecase_plural": "크리쳐",
+    "verbs": {
+      "edit_titlecase": "크리쳐 수정"
+    },
+    "conditions": {
+      "missing_titlecase": "크리쳐를 찾을 수 없습니다"
+    }
+  },
+  "geyser": {
+    "noun_titlecase_plural": "벤트/화산",
+    "total_lifecycle_time": "총 순환 시간",
+    "active_time": "활성화 시간",
+    "emission_length": "방출 길이",
+    "emission_rate": "방출 속도"
+  },
+  "planet": {
+    "noun_titlecase_plural": "행성"
+  },
+  "material": {
+    "noun_titlecase": "재료",
+    "noun_titlecase_plural": "재료들",
+    "all_titlecase": "모든 재료",
+    "gram": "{{count}} g",
+    "kilogram": "{{count}} kg"
+  },
+  "material_loose": {
+    "noun_titlecase": "바닥에 떨어진 재료",
+    "clump_count": "{{count}} 뭉치",
+    "clump_count_plural": "{{count}} 뭉치",
+    "verbs": {
+      "delete_name": "{{name}}을 삭제할까요?"
+    },
+    "prompts": {
+      "delete": "이 행동은 게임내의 재료들을 삭제하며 재료는 복구할 수 없습니다. 계속할까요?"
+    }
+  },
+  "material_storage": {
+    "noun_titlecase": "저장통",
+    "container_count": "{{count}} 저장통",
+    "container_count_plural": "{{count}} 저장통"
+  },
+  "time_cycles": {
+    "noun_titlecase": "Cycle Time"
+  },
+  "dialog": {
+    "queries": {
+      "continue": "정말로 계속하시겠습니까?"
+    },
+    "verbs": {
+      "cancel_titlecase": "취소",
+      "confirm_titlecase": "확인"
+    }
+  },
+  "data": {
+    "conditions": {
+      "modified_titlecase": "수정된 데이터"
+    },
+    "prompts": {
+      "modified-description": "이 세이브 파일은 내보낸 이후 수정되었습니다.\n데이터의 유효성 검사를 하지 않으며 잘못된 데이터를 불러오면 데이터가 손상될 수 있습니다."
+    },
+    "verbs": {
+      "copy_titlecase": "복사",
+      "export_titlecase": "내보내기",
+      "import_titlecase": "불러오기"
+    }
+  },
+  "save-file": {
+    "verbs": {
+      "load_titlecase": "불러오기",
+      "save_titlecase": "저장"
+    },
+    "conditions": {
+      "loading": "로딩중",
+      "saving": "저장중",
+      "modified": "수정됨",
+      "modified_description": "파일이 마지막으로 저장된이후 수정되었습니다",
+      "example": "예시",
+      "example_description": "이 예시파일은 저장할 수 없습니다"
+    }
+  },
+  "overview-page": {
+    "title": "개요",
+    "no-save": {
+      "title": "세이프파일을 고르세요",
+      "prompt": "로드된 세이브파일이 없습니다",
+      "save-location": "세이브파일은 <1>{{path}}</1> 에서 찾으실 수 있습니다"
+    }
+  },
+  "raw-editor-page": {
+    "title": "전체 편집기"
+  },
+  "view-github": "GitHub에서 프로젝트 보기",
+  "changelog": {
+    "title": "업데이트 로그"
+  }
+}
