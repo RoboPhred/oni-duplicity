@@ -1,0 +1,341 @@
+{
+  "Clones": {
+    "TRAITS": {
+      "CLAUSTROPHOBIC": {
+        "NAME": "Claustrophobe",
+        "DESC": "Ce Clone se sent suffoqué dans des espaces avec moins de quatre blocs de hauteur ou trois de largeur"
+      },
+
+      "FASHIONABLE": {
+        "NAME": "Fashionista",
+        "DESC": "Ce Clone est un peu à l'agonie quand il est forcé de porter des habits démodés"
+      },
+
+      "CLIMACOPHOBIC": {
+        "NAME": "Sujet au Vertige",
+        "DESC": "Escalader des échelles de plus de quatre blocs de haut fait que l'estomac de se clone se retourne"
+      },
+
+      "SOLITARYSLEEPER": {
+        "NAME": "Dormeur Solitaire",
+        "DESC": "Ce Clone préfère dormir seul"
+      },
+
+      "PREFERSWARMER": {
+        "NAME": "Maigre",
+        "DESC": "Ce Clone n'a pas tant que ça d'isolation, ils sont donc plus sensible à la température que d'autres"
+      },
+
+      "PREFERSCOOLER": {
+        "NAME": "Rondelet",
+        "DESC": "Ce clone a une isolation supplémentaire, la température ambiente l'affecte donc un peu moins"
+      },
+
+      "SENSITIVEFEET": {
+        "NAME": "Plante de Pieds Délicate",
+        "DESC": "Ce clone a des pieds sensibles et préfère marcher sur du carrelage que sur de la roche brute"
+      },
+
+      "WORKAHOLIC": {
+        "NAME": "Bourreau de travail",
+        "DESC": "Ce clone devient anxieux lorsqu'il est laissé inactif"
+      },
+
+      "CANTRESEARCH": {
+        "NAME": "Rustre",
+        "DESC": "Ce Clone n'est (malheureusement) pas l'étoile la plus brillante du système solaire"
+      },
+
+      "CANTBUILD": {
+        "NAME": "Non Constructif",
+        "DESC": "Ce clone est incable de construire ne serait-ce que la plus basique des structures."
+      },
+
+      "CANTCOOK": {
+        "NAME": "Gastrophobie",
+        "DESC": "Ce Clone a une profonde méfiance des arts culinaires"
+      },
+
+      "CANTDIG": {
+        "NAME": "Trypophobie",
+        "DESC": "La peur des trous de ce Clone rend impossible pour eux le fait de creuser"
+      },
+
+      "HEMOPHOBIA": {
+        "NAME": "Délicat",
+        "DESC": "Ce clone est de disposition délicate et ne peut pas soigner de maladie"
+      },
+
+      "BEDSIDEMANNER": {
+        "NAME": "Soignant",
+        "DESC": "Ce Clone est doué au chevet et a un toucher soignat"
+      },
+
+      "MOUTHBREATHER": {
+        "NAME": "Respirateur Buccal",
+        "DESC": "Ce Clone aspire bien plus que ça juste part d'oxygène"
+      },
+
+      "FUSSY": {
+        "NAME": "Maniaque",
+        "DESC": "Rien n'est jamais assez bon pour ce Clone"
+      },
+
+      "TWINKLETOES": {
+        "NAME": "Twinkletoes",
+        "DESC": "Ce Clone est léger comme une plume sur leurs pieds"
+      },
+
+      "STRONGARM": {
+        "NAME": "Costaud",
+        "DESC": "Ce clone a des muscles sur ces muscles"
+      },
+
+      "NOODLEARMS": {
+        "NAME": "Bras de Nouilles",
+        "DESC": "Les bras de ce Clone ont toute la résistance à la traction de spaghettis trop cuites"
+      },
+
+      "AGGRESSIVE": {
+        "NAME": "Destructeur",
+        "DESC": "Ce Clone gère le stress en déversant leurs frustrations sur des machines sans défense"
+      },
+
+      "UGLYCRIER": {
+        "NAME": "Pleureur Moche",
+        "DESC": "Si ce Clone devient trop stressé cela ne sera pas beau à voir"
+      },
+
+      "BINGEEATER": {
+        "NAME": "Mangeur Frénésique",
+        "DESC": "Ce Clone va dangereusement trop manger lorsqu'il est stressé"
+      },
+
+      "ANXIOUS": {
+        "NAME": "Anxieux",
+        "DESC": "Ce Clone s'effondre sous trop de pression"
+      },
+
+      "STRESSVOMITER": {
+        "NAME": "Vomisseur",
+        "DESC": "Ce Clone est susceptible de vomir partout lorsqu'il est stressé"
+      },
+
+      "IRONGUT": {
+        "NAME": "Intestin de Fer",
+        "DESC": "Ce Clone peut manger à peu près tout sans tomber malade"
+      },
+
+      "STRONGIMMUNESYSTEM": {
+        "NAME": "Résistant aux Germes",
+        "DESC": "Le système immunitaire de ce Clone rebondit plus vite que la plupart"
+      },
+
+      "SCAREDYCAT": {
+        "NAME": "Pacifiste",
+        "DESC": "Ce Clone abhorre la violence"
+      },
+
+      "ALLERGIES": {
+        "NAME": "Allergique",
+        "DESC": "Ce Clone éternuera de manière incontrôlable lorsqu'il exposé au pollen présent dans le Parfum Floral"
+      },
+
+      "WEAKIMMUNESYSTEM": {
+        "NAME": "Danger Biologique",
+        "DESC": "Toute la vitamine C dans l'espace n'a pas pu empêcher ce Clone de tomber malade"
+      },
+
+      "IRRITABLEBOWEL": {
+        "NAME": "Intestin Irritable",
+        "DESC": "Ce Clone a besoin d'un peu plus de temps pour \"faire leurs affaires\""
+      },
+
+      "CALORIEBURNER": {
+        "NAME": "Estomac sans Fond",
+        "DESC": "Ce Clone pourrait en fait être plusieurs trous noirs dans un imperméable à ceinture"
+      },
+
+      "SMALLBLADDER": {
+        "NAME": "Petite Vessie",
+        "DESC": "Ce Clone a une minuscule vessie de la taille d'un pois. Adorable!"
+      },
+
+      "ANEMIC": {
+        "NAME": "Anémique",
+        "DESC": "Ce Clone a du mal à suivre les autres"
+      },
+
+      "GREASEMONKEY": {
+        "NAME": "Mécano",
+        "DESC": "Ce Clone aime mettre une clé dans les roues de la colonie... dans le bon sens"
+      },
+
+      "MOLEHANDS": {
+        "NAME": "Mains de Taupe",
+        "DESC": "Parfaits pour creuser des tunnels, mais trouver des gants adaptés est un cauchemar"
+      },
+
+      "FASTLEARNER": {
+        "NAME": "Apprenant Rapide",
+        "DESC": "Ce Clone apprend de nouvelles compétences avec une vitesse incroyable"
+      },
+
+      "SLOWLEARNER": {
+        "NAME": "Apprenant Lent",
+        "DESC": "Ce Clone est un peu lent sur l'absorption, mais bon sang ce qu'ils essaient"
+      },
+
+      "DIVERSLUNG": {
+        "NAME": "Poumons de Plongeur",
+        "DESC": "Ce Clone aurait pu être un chanteur d'opéra talentueux dans une autre vie"
+      },
+
+      "FLATULENCE": {
+        "NAME": "Flatulent",
+        "DESC": "Certains Clones en sont juste pleins."
+      },
+
+      "SNORER": {
+        "NAME": "Dormeur Bruyant",
+        "DESC": "Dans l'espace, tout le monde peut vous entendre ronfler."
+      },
+
+      "NARCOLEPSY": {
+        "NAME": "Narcoleptique",
+        "DESC": "Ce Clone peut s'endormir et s'endormira n'importe quand, n'importe où."
+      },
+
+      "INTERIORDECORATOR": {
+        "NAME": "Decorateur D'intérieur",
+        "DESC": "\"Déplacez-le un peu vers la gauche...\""
+      },
+
+      "UNCULTURED": {
+        "NAME": "Inculte",
+        "DESC": "Ce Clone n'a simplement aucune appréciation pour les arts."
+      },
+
+      "ARCHAEOLOGIST": {
+        "NAME": "Archéologue",
+        "DESC": "Ce Clone ramènera toujours un artefact des expéditions spaciales."
+      },
+
+      "EARLYBIRD": {
+        "NAME": "Lève tôt",
+        "DESC": "Ce Clone se réveille toujours frais et efficace!"
+      },
+
+      "NIGHTOWL": {
+        "NAME": "Hibou de nuit",
+        "DESC": "Ce Clone fait de son mieux quand il est censé dormir."
+      },
+
+      "REGENERATION": {
+        "NAME": "Régénérateur",
+        "DESC": "Ce Clone régénère constamment sa santé."
+      },
+
+      "DEEPERDIVERSLUNGS": {
+        "NAME": "Poumons de plongeur profond",
+        "DESC": "Ce Clone était un chanteur d'opéra talentueux et un instructeur de plongée en apnée."
+      },
+
+      "SUNNYDISPOSITION": {
+        "NAME": "Disposition ensoleillée",
+        "DESC": "Ce Clone a une vision résolument positive de la vie."
+      },
+
+      "ROCKCRUSHER": {
+        "NAME": "Concasseur de roches",
+        "DESC": "Ce Clone est incroyablement fort."
+      },
+
+      "SIMPLETASTES": {
+        "NAME": "Goûts simples",
+        "DESC": "Ce Clone trouve du plaisir même dans les aliments les plus fades."
+      },
+
+      "FOODIE": {
+        "NAME": "Gourmant",
+        "DESC": "Ce Clone a un palais très raffiné et désire des aliments luxueux."
+      }
+    },
+    "ATTRIBUTES": {
+      "Construction": {
+        "NAME": "Construction",
+        "DESC": "Détermine la vitesse de construction d'un Clone."
+      },
+
+      "Digging": {
+        "NAME": "Extraction",
+        "DESC": "Détermine la vitesse d'extraction d'un Clone."
+      },
+
+      "Machinery": {
+        "NAME": "Bricolage",
+        "DESC": "Détermine la vitesse à laquelle un Clone utilise des machines."
+      },
+
+      "LifeSupport": {
+        "NAME": "Soutien de vie",
+        "DESC": "Détermine l'efficacité avec laquelle un Clone entretient les terrariums d'algues, les désodorisants et les tamis à eau."
+      },
+
+      "Toggle": {
+        "NAME": "Basculer",
+        "DESC": "Détermine l'efficacité d'un Clone à régler les machines, à actionner les commutateurs et à régler les capteurs."
+      },
+
+      "Athletics": {
+        "NAME": "Athlétisme",
+        "DESC": "Détermine la vitesse de déplacement initiale d'un Clone."
+      },
+
+      "Learning": {
+        "NAME": "Apprentissage",
+        "DESC": "Détermine la rapidité avec laquelle un Clone mène des recherches et acquiert des compétences."
+      },
+
+      "Cooking": {
+        "NAME": "Cuisine",
+        "DESC": "Détermine la rapidité avec laquelle un Clone prépare de la nourriture."
+      },
+
+      "Strength": {
+        "NAME": "Force",
+        "DESC": "Détermine la capacité de charge d'un Clone et sa vitesse de nettoyage."
+      },
+
+      "Caring": {
+        "NAME": "Bienveillance",
+        "DESC": "Détermine les compétences médicales et la sociabilité du Clone avec ses pairs et les bestioles."
+      },
+
+      "Immunity": {
+        "NAME": "Immunité",
+        "DESC": "Détermine la sensibilité d'un Clone à la maladie et le temps de récupération."
+      },
+
+      "Botanist": {
+        "NAME": "Agriculture",
+        "DESC": "Détermine la rapidité et l'efficacité avec lesquelles un Clone cultive les plantes."
+      },
+
+      "Ranching": {
+        "NAME": "Élevage",
+        "DESC": "Détermine la rapidité et l'efficacité avec lesquelles un Clone s'occupe des bestioles."
+      },
+
+      "Art": {
+        "NAME": "Créativité",
+        "DESC": "Détermine la rapidité avec laquelle un Clone peut produire des oeuvres d'art."
+      },
+
+      "Decor": {
+        "NAME": "Décor",
+        "DESC": "Le Décor affecte le stress du Clone et son opinion sur ses alentours."
+      }
+    }
+  }
+}
