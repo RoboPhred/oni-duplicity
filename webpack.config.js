@@ -4,8 +4,6 @@ const path = require("path");
 const webpack = require("webpack");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const WebpackPwaManifest = require("webpack-pwa-manifest");
-const WorkboxPlugin = require("workbox-webpack-plugin");
 
 const isDev = process.env["NODE_ENV"] === "development";
 
@@ -19,16 +17,21 @@ const PATHS = {
   changelog: path.resolve(root, "./CHANGELOG.md")
 };
 
-const { friendlyName, description } = require(PATHS.appPackageJson);
+const { displayVersion } = require(PATHS.appPackageJson);
 
-const PUBLIC_URL_PATH = "/oni-duplicity/";
+console.log(
+  "Webpack build",
+  isDev ? "[development]" : "[production]",
+  displayVersion
+);
 
-console.log("Webpack build", isDev ? "[development]" : "[production]");
-
+// Offline build: everything (JS, worker, fonts, images) ends up inside one
+// index.html. The inlining of the script tag itself is done afterwards by
+// scripts/inline-html.js.
 module.exports = {
   mode: isDev ? "development" : "production",
 
-  devtool: "source-map",
+  devtool: isDev ? "source-map" : false,
 
   devServer: {
     contentBase: PATHS.appDist,
@@ -41,9 +44,10 @@ module.exports = {
   },
 
   output: {
-    filename: "[name].[hash].bundle.js",
-    path: PATHS.appBuild,
-    publicPath: isDev ? "/" : PUBLIC_URL_PATH,
+    filename: "[name].bundle.js",
+    path: PATHS.appDist,
+    // Relative paths so the build works when opened straight from disk (file://)
+    publicPath: isDev ? "/" : "",
 
     // Fix hot-reload interfering with worker-loader
     globalObject: "this"
@@ -60,15 +64,6 @@ module.exports = {
 
   module: {
     rules: [
-      // Process source maps in input sources
-      //  All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-      {
-        enforce: "pre",
-        test: /\.(jsx?|tsx?)$/,
-        loader: "source-map-loader",
-        include: [/src\/.+\.tsx?/]
-      },
-
       {
         test: /\.tsx?$/,
         use: [
@@ -83,33 +78,10 @@ module.exports = {
         loader: ["style-loader", "css-loader"]
       },
 
+      // Inline every font/image as a data URI so no extra files are needed.
       {
-        test: /\.(woff|woff2)$/,
-        use: {
-          loader: "url-loader",
-          options: {
-            name: "fonts/[hash].[ext]",
-            limit: 5000,
-            mimetype: "application/font-woff"
-          }
-        }
-      },
-      {
-        test: /\.(ttf|eot|svg)$/,
-        use: {
-          loader: "file-loader",
-          options: {
-            name: "fonts/[hash].[ext]"
-          }
-        }
-      },
-
-      {
-        test: /\.png/,
-        loader: "file-loader",
-        options: {
-          name: "images/[hash].[ext]"
-        }
+        test: /\.(woff|woff2|ttf|eot|svg|png)$/,
+        loader: "url-loader"
       },
 
       {
@@ -123,47 +95,20 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify(isDev ? "development" : "production")
-      }
+      },
+      __APP_VERSION__: JSON.stringify(displayVersion)
     }),
 
     new HtmlWebpackPlugin({
       inject: true,
-      template: path.resolve(PATHS.appSrc, "index.ejs")
-    }),
-
-    new WebpackPwaManifest({
-      name: `${friendlyName}: ${description}`,
-      short_name: friendlyName,
-      description,
-      background_color: "#000000",
-      crossorigin: null,
-      display: "standalone",
-      inject: true
-    }),
-
-    new WorkboxPlugin.GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true
+      template: path.resolve(PATHS.appSrc, "index.ejs"),
+      appVersion: displayVersion
     })
   ],
 
+  // One bundle only: no code splitting, so there is a single script to inline.
   optimization: {
-    runtimeChunk: true,
-    splitChunks: {
-      chunks: "all",
-      cacheGroups: {
-        npm: {
-          test: /node_modules/,
-          name: mod => {
-            const relToModule = path.relative(PATHS.nodeModules, mod.context);
-            const moduleName = relToModule.substring(
-              0,
-              relToModule.indexOf(path.sep)
-            );
-            return `npm.${moduleName}`;
-          }
-        }
-      }
-    }
+    splitChunks: false,
+    runtimeChunk: false
   }
 };

@@ -38,9 +38,18 @@ type Props = SidebarProps & WithStyles<typeof styles>;
 const Sidebar: React.FC<Props> = ({ className, classes }) => (
   <div className={className}>
     <div className={classes.toolbar}>
-      <Typography variant="h6" color="textSecondary">
-        Duplicity
-      </Typography>
+      <div>
+        <Typography variant="h6" color="textSecondary">
+          Duplicity
+        </Typography>
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          style={{ display: "block", whiteSpace: "nowrap", lineHeight: 1 }}
+        >
+          {__APP_VERSION__}
+        </Typography>
+      </div>
       <GithubButton className={classes.ghButton} />
     </div>
     <Divider />

@@ -49,16 +49,20 @@ const NoSave: React.FC<Props> = ({ classes, t }) => (
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Typography variant="h5" color="error">
-          WARNING: This project is no longer supported. While it may load saves,
-          it has not been updated since before Spaced Out, and might corrupt or
-          otherwise mangle saves.
+          WARNING: ALWAYS BACK UP YOUR SAVE FIRST. This editor was last updated
+          by its original author before recent game updates, and might corrupt
+          or otherwise mangle saves.
         </Typography>
-        <Typography variant="h5">
-          If you are familiar with React, and want to take over mantainership or
-          fork this project, the source code is at:{" "}
-          <a href="https://github.com/RoboPhred/oni-duplicity">
-            github:RoboPhred/oni-duplicity
+        <Typography variant="h6">
+          Duplicity {__APP_VERSION__} - offline build maintained at{" "}
+          <a href="https://github.com/tosjkg-max/oni-duplicity-copy">
+            github:tosjkg-max/oni-duplicity-copy
           </a>
+          , based on{" "}
+          <a href="https://github.com/RoboPhred/oni-duplicity">
+            RoboPhred/oni-duplicity
+          </a>
+          .
         </Typography>
         <Typography variant="h5">
           If you want to create your own editor and can work in javascript, the

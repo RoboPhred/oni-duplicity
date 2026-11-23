@@ -1,3 +1,4 @@
 node_modules/
 dist/
 **/Thumbs.db
+launcher/app.html

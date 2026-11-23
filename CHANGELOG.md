@@ -1,3 +1,21 @@
+# Changelog
+
+## v3.18.1-tosjkg v0
+
+First release of the tosjkg offline build, forked from RoboPhred/oni-duplicity 3.18.1 (+ the unreleased 3.19.0 changes).
+
+- New: 100% offline single-file build. `Duplicity-v3.18.1-tosjkg-v0.html` contains everything (code, save parser, fonts, icons). Double-click to open in any browser, no internet needed.
+- New: Windows portable `Duplicity-v3.18.1-tosjkg-v0.exe`. One file, no install. It starts the editor on your own PC only (127.0.0.1) and opens it in your browser.
+- New: Version shown in the sidebar and on the Settings page.
+- Changed: Save parser updated to oni-save-parser 14.0.1 (14.0.0 is no longer available on npm). Supports save version 7.31.
+- Removed: Service-worker "Offline Mode" setting and PWA install (not needed, the app is always offline now).
+- Removed: GitHub Pages deploy script pointing at the original repo.
+- Fixed: Build works again on current Node.js (22).
+
+---
+
+Original changelog by RoboPhred below.
+
 ## 3.19.0
 
 - Hack out nonfunctional editors that no longer apply to save version 4.31

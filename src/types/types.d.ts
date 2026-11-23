@@ -17,7 +17,7 @@ interface Window {
   loadMockError?: Function;
 }
 
-declare module "worker-loader!*" {
+declare module "worker-loader*" {
   class WebpackWorker extends Worker {
     constructor();
   }
@@ -29,3 +29,6 @@ declare module "@changelog" {
   const content: string;
   export = content;
 }
+
+/** App version string injected at build time, e.g. "v3.18.1-tosjkg v0". */
+declare const __APP_VERSION__: string;

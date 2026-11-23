@@ -15,7 +15,7 @@ const GithubButton: React.FC<Props> = ({ className, t }) => (
   <IconButton
     className={className}
     component="a"
-    href="https://github.com/RoboPhred/oni-duplicity"
+    href="https://github.com/tosjkg-max/oni-duplicity-copy"
     target="_blank"
     title={t("view-github")}
   >
